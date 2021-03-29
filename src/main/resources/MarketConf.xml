@@ -1,0 +1,12 @@
+<marketConf>
+    <market>
+        <rows>3</rows>
+        <columns>4</columns>
+        <redMarbles>1</redMarbles>
+        <whiteMarbles>4</whiteMarbles>
+        <yellowMarbles>2</yellowMarbles>
+        <blueMarbles>2</blueMarbles>
+        <purpleMarbles>2</purpleMarbles>
+        <greyMarbles>2</greyMarbles>
+    </market>
+</marketConf>
