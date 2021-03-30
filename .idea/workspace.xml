@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="commit the warehouse, the depot and the strongbox">
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CardDepotTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/StrongboxTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/WarehouseDepotTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/WarehouseTest.java" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="DevelopmentCard class and testing">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/Color.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/DevelopmentCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/ProductionPower.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/DevelopmentCardTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Warehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/WarehouseDepot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/WarehouseDepot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/AppTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +25,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1pZfmi9ibDhA1teNPIXRjfSogH2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -42,7 +38,6 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/it/polimi/ingsw" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
@@ -53,7 +48,7 @@
       <recent name="it.polimi.ingsw" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.it.polimi.ingsw in ingswAM2021-DallOglio-Demasi-Curti">
+  <component name="RunManager" selected="JUnit.Gameboard">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -75,6 +70,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MarketTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarketTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MarketTest.testGetColumn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarketTest" />
+      <option name="METHOD_NAME" value="testGetColumn" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MarketTest.testNegativeColIndex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
@@ -91,82 +117,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WarehouseDepotTest.increaseResourceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ingswAM2021-DallOglio-Demasi-Curti" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.WarehouseDepotTest" />
-      <option name="METHOD_NAME" value="increaseResourceTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WarehouseTest.WarehouseCreationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ingswAM2021-DallOglio-Demasi-Curti" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.WarehouseTest" />
-      <option name="METHOD_NAME" value="WarehouseCreationTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WarehouseTest.isFullTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ingswAM2021-DallOglio-Demasi-Curti" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.WarehouseTest" />
-      <option name="METHOD_NAME" value="isFullTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="it.polimi.ingsw in ingswAM2021-DallOglio-Demasi-Curti" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ingswAM2021-DallOglio-Demasi-Curti" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="JUnit.Gameboard" />
+      <item itemvalue="JUnit.MarketTest" />
       <item itemvalue="JUnit.MarketTest.testNegativeColIndex" />
-      <item itemvalue="JUnit.WarehouseTest.WarehouseCreationTest" />
-      <item itemvalue="JUnit.WarehouseTest.isFullTest" />
-      <item itemvalue="JUnit.WarehouseDepotTest.increaseResourceTest" />
-      <item itemvalue="JUnit.it.polimi.ingsw in ingswAM2021-DallOglio-Demasi-Curti" />
+      <item itemvalue="JUnit.MarketTest.testGetColumn" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.it.polimi.ingsw in ingswAM2021-DallOglio-Demasi-Curti" />
-        <item itemvalue="JUnit.WarehouseTest.isFullTest" />
-        <item itemvalue="JUnit.WarehouseDepotTest.increaseResourceTest" />
-        <item itemvalue="JUnit.WarehouseTest.WarehouseCreationTest" />
+        <item itemvalue="JUnit.MarketTest.testGetColumn" />
+        <item itemvalue="JUnit.MarketTest" />
         <item itemvalue="JUnit.MarketTest.testNegativeColIndex" />
       </list>
     </recent_temporary>
@@ -183,17 +143,8 @@
       <workItem from="1615396525279" duration="28000" />
       <workItem from="1615467569952" duration="82000" />
       <workItem from="1617022896690" duration="1680000" />
-      <workItem from="1617044479832" duration="3128000" />
-      <workItem from="1617089452930" duration="3648000" />
+      <workItem from="1617044479832" duration="2371000" />
     </task>
-    <task id="LOCAL-00001" summary="commit the warehouse, the depot and the strongbox">
-      <created>1617047261201</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1617047261201</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,21 +163,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commit the warehouse, the depot and the strongbox" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit the warehouse, the depot and the strongbox" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/it/polimi/ingsw/WarehouseDepotTest.java</url>
-          <line>73</line>
-          <properties class="it.polimi.ingsw.WarehouseDepotTest" method="increaseResourceTest">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="DevelopmentCard class and testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="DevelopmentCard class and testing" />
   </component>
 </project>
