@@ -11,9 +11,10 @@ public class Warehouse {
 
     public Warehouse() throws ZeroCapacityException {
 
-        depots.add(new BaseDepot(1,0,null));
-        depots.add(new BaseDepot(2,0,null));
-        depots.add(new BaseDepot(3,0,null));
+        depots = new ArrayList<>();
+        depots.add(new WarehouseDepot(1,0,null));
+        depots.add(new WarehouseDepot(2,0,null));
+        depots.add(new WarehouseDepot(3,0,null));
     }
 
     public boolean isFull(){
@@ -40,7 +41,7 @@ public class Warehouse {
 
     }
 
-
-
-
+    public ArrayList<BaseDepot> getDepots() {
+        return depots;
+    }
 }

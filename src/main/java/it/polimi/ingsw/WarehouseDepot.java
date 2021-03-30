@@ -12,7 +12,7 @@ public class WarehouseDepot extends BaseDepot{
 
 
     @Override
-    public void addResources(Resource newResource) throws ZeroCapacityException, FullWarehouseException, WrongResourceException {
+    public void addResources(Resource newResource) throws ZeroCapacityException, FullWarehouseException {
         int occupied;
         //case capacity=0
         if (getCapacity() ==0) {throw new ZeroCapacityException();}
