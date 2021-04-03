@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.playerBoard;
+
+import it.polimi.ingsw.Resource;
 
 import javax.naming.InsufficientResourcesException;
 import java.util.HashMap;

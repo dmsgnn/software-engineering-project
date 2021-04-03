@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.playerBoard;
 
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.FullWarehouseException;

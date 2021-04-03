@@ -1,8 +1,10 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.playerboard;
 
+import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.EmptyWarehouseException;
 import it.polimi.ingsw.exceptions.FullWarehouseException;
 import it.polimi.ingsw.exceptions.ZeroCapacityException;
+import it.polimi.ingsw.playerBoard.WarehouseDepot;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
