@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="DevelopmentCard class and testing">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/Color.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/DevelopmentCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/ProductionPower.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/DevelopmentCardTest.java" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="FaithTrack almost finished, only one method is missing. Game and Player classes still to be completed">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/FaithTrack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/LorenzoFaithTrack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/PlayerFaithTrack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/exceptions/FullPlayerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/FaithTrackTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +41,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -48,14 +51,63 @@
       <recent name="it.polimi.ingsw" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Gameboard">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.it.polimi.ingsw in AM5">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FaithTrackTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.FaithTrackTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FaithTrackTest.endOfTrackTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.FaithTrackTest" />
+      <option name="METHOD_NAME" value="endOfTrackTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FaithTrackTest.positionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.FaithTrackTest" />
+      <option name="METHOD_NAME" value="positionTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -70,64 +122,51 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MarketTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlayerFaithTrackTest.positionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="PATTERN" value="it.polimi.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarketTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MarketTest.testGetColumn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarketTest" />
-      <option name="METHOD_NAME" value="testGetColumn" />
+      <option name="PACKAGE_NAME" value="it.polimi" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.PlayerFaithTrackTest" />
+      <option name="METHOD_NAME" value="positionTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MarketTest.testNegativeColIndex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="it.polimi.ingsw in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarketTest" />
-      <option name="METHOD_NAME" value="testNegativeColIndex" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="JUnit.Gameboard" />
-      <item itemvalue="JUnit.MarketTest" />
-      <item itemvalue="JUnit.MarketTest.testNegativeColIndex" />
-      <item itemvalue="JUnit.MarketTest.testGetColumn" />
+      <item itemvalue="JUnit.PlayerFaithTrackTest.positionTest" />
+      <item itemvalue="JUnit.FaithTrackTest" />
+      <item itemvalue="JUnit.FaithTrackTest.positionTest" />
+      <item itemvalue="JUnit.FaithTrackTest.endOfTrackTest" />
+      <item itemvalue="JUnit.it.polimi.ingsw in AM5" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MarketTest.testGetColumn" />
-        <item itemvalue="JUnit.MarketTest" />
-        <item itemvalue="JUnit.MarketTest.testNegativeColIndex" />
+        <item itemvalue="JUnit.it.polimi.ingsw in AM5" />
+        <item itemvalue="JUnit.FaithTrackTest" />
+        <item itemvalue="JUnit.FaithTrackTest.endOfTrackTest" />
+        <item itemvalue="JUnit.FaithTrackTest.positionTest" />
+        <item itemvalue="JUnit.PlayerFaithTrackTest.positionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -144,6 +183,19 @@
       <workItem from="1615467569952" duration="82000" />
       <workItem from="1617022896690" duration="1680000" />
       <workItem from="1617044479832" duration="2371000" />
+      <workItem from="1617199303567" duration="296000" />
+      <workItem from="1617226153937" duration="165000" />
+      <workItem from="1617303207301" duration="2592000" />
+      <workItem from="1617315346227" duration="412000" />
+      <workItem from="1617355728984" duration="601000" />
+      <workItem from="1617357239870" duration="208000" />
+      <workItem from="1617369789442" duration="3311000" />
+      <workItem from="1617374214629" duration="59000" />
+      <workItem from="1617381289979" duration="427000" />
+      <workItem from="1617381770481" duration="235000" />
+      <workItem from="1617390891475" duration="2661000" />
+      <workItem from="1617398221847" duration="1267000" />
+      <workItem from="1617452179938" duration="2784000" />
     </task>
     <servers />
   </component>
@@ -164,6 +216,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DevelopmentCard class and testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="DevelopmentCard class and testing" />
+    <MESSAGE value="FaithTrack almost finished, only one method is missing. Game and Player classes still to be completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="FaithTrack almost finished, only one method is missing. Game and Player classes still to be completed" />
   </component>
 </project>
