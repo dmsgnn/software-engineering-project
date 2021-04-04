@@ -5,36 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="DevelopmentCard class and testing">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/exceptions/DiscountBuffErrorException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/exceptions/ErrorActivationLeaderCardException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/exceptions/ExchangeBuffErrorException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/exceptions/InvalidInsertException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/exceptions/ProdctionBuffErrorException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderCard/LeaderCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderCard/Requirements/ColorRequirements.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderCard/Requirements/Requirements.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderCard/Requirements/ResourceRequirements.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderCard/ability/Ability.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderCard/ability/DiscountAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderCard/ability/ExchangeAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderCard/ability/ProductionAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderCard/ability/StoreAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerBoard/CardBuffs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerBoard/DevelopmentCardSlot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerBoard/PlayerBoard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/playerboard/CardBuffsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/playerboard/DevelopmentCardSlotTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/playerboard/PlayerBoardTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/exceptions/NoCardsLeftException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/exceptions/WrongLevelException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/DevelopmentCardDeck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/Gameboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/utility/DevCardsParserXML.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/DevelopmentCards.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/DevelopmentCardDeckTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/GameBoardTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/BaseDepot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerBoard/BaseDepot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CardDepot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerBoard/CardDepot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Strongbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerBoard/Strongbox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerBoard/Warehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/WarehouseDepot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerBoard/WarehouseDepot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CardDepotTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/playerboard/CardDepotTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/StrongboxTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/playerboard/StrongboxTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/WarehouseDepotTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/playerboard/WarehouseDepotTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/WarehouseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/playerboard/WarehouseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/utility/MarketParserXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/utility/MarketParserXML.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,12 +43,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="it.polimi.ingsw.exceptions" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Windows\IdeaProjects\Prova\ingswAM2021-DallOglio-Demasi-Curti\src\main\resources" />
     </key>
@@ -76,44 +53,94 @@
       <recent name="it.polimi.ingsw" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.it.polimi.ingsw.playerBoard in ingswAM2021-DallOglio-Demasi-Curti">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GameBoardTest">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DevelopmentCardDeckTest.isEmptyTrueTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.DevelopmentCardDeckTest" />
+      <option name="METHOD_NAME" value="isEmptyTrueTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameBoardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.GameBoardTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardBuffsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ingswAM2021-DallOglio-Demasi-Curti" />
+    <configuration name="GameBoardTest.buyCardLevel4orGreaterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.playerboard.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.playerboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.playerboard.CardBuffsTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.GameBoardTest" />
+      <option name="METHOD_NAME" value="buyCardLevel4orGreaterTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardBuffsTest.addDiscountBuffTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ingswAM2021-DallOglio-Demasi-Curti" />
+    <configuration name="GameBoardTest.emptyColumnFalseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.playerboard.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.playerboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.playerboard.CardBuffsTest" />
-      <option name="METHOD_NAME" value="addDiscountBuffTest" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.GameBoardTest" />
+      <option name="METHOD_NAME" value="emptyColumnFalseTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameBoardTest.emptyColumnTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.GameBoardTest" />
+      <option name="METHOD_NAME" value="emptyColumnTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -129,67 +156,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerBoardTest.addLeaderCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ingswAM2021-DallOglio-Demasi-Curti" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.playerboard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.playerboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.playerboard.PlayerBoardTest" />
-      <option name="METHOD_NAME" value="addLeaderCardTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlayerBoardTest.boardProductionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ingswAM2021-DallOglio-Demasi-Curti" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.playerboard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.playerboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.playerboard.PlayerBoardTest" />
-      <option name="METHOD_NAME" value="boardProductionTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="it.polimi.ingsw.playerBoard in ingswAM2021-DallOglio-Demasi-Curti" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ingswAM2021-DallOglio-Demasi-Curti" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.playerBoard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.playerBoard" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="JUnit.Gameboard" />
-      <item itemvalue="JUnit.CardBuffsTest" />
-      <item itemvalue="JUnit.CardBuffsTest.addDiscountBuffTest" />
-      <item itemvalue="JUnit.PlayerBoardTest.addLeaderCardTest" />
-      <item itemvalue="JUnit.PlayerBoardTest.boardProductionTest" />
-      <item itemvalue="JUnit.it.polimi.ingsw.playerBoard in ingswAM2021-DallOglio-Demasi-Curti" />
+      <item itemvalue="JUnit.GameBoardTest.buyCardLevel4orGreaterTest" />
+      <item itemvalue="JUnit.GameBoardTest.emptyColumnTest" />
+      <item itemvalue="JUnit.DevelopmentCardDeckTest.isEmptyTrueTest" />
+      <item itemvalue="JUnit.GameBoardTest.emptyColumnFalseTest" />
+      <item itemvalue="JUnit.GameBoardTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.it.polimi.ingsw.playerBoard in ingswAM2021-DallOglio-Demasi-Curti" />
-        <item itemvalue="JUnit.PlayerBoardTest.boardProductionTest" />
-        <item itemvalue="JUnit.PlayerBoardTest.addLeaderCardTest" />
-        <item itemvalue="JUnit.CardBuffsTest" />
-        <item itemvalue="JUnit.CardBuffsTest.addDiscountBuffTest" />
+        <item itemvalue="JUnit.GameBoardTest" />
+        <item itemvalue="JUnit.GameBoardTest.emptyColumnFalseTest" />
+        <item itemvalue="JUnit.GameBoardTest.emptyColumnTest" />
+        <item itemvalue="JUnit.DevelopmentCardDeckTest.isEmptyTrueTest" />
+        <item itemvalue="JUnit.GameBoardTest.buyCardLevel4orGreaterTest" />
       </list>
     </recent_temporary>
   </component>
@@ -206,19 +187,6 @@
       <workItem from="1615467569952" duration="82000" />
       <workItem from="1617022896690" duration="1680000" />
       <workItem from="1617044479832" duration="2371000" />
-      <workItem from="1617199303567" duration="296000" />
-      <workItem from="1617226153937" duration="165000" />
-      <workItem from="1617303207301" duration="2592000" />
-      <workItem from="1617315346227" duration="412000" />
-      <workItem from="1617355728984" duration="601000" />
-      <workItem from="1617357239870" duration="208000" />
-      <workItem from="1617369789442" duration="3311000" />
-      <workItem from="1617374214629" duration="59000" />
-      <workItem from="1617381289979" duration="427000" />
-      <workItem from="1617381770481" duration="235000" />
-      <workItem from="1617390891475" duration="2661000" />
-      <workItem from="1617398221847" duration="1267000" />
-      <workItem from="1617452179938" duration="2784000" />
     </task>
     <servers />
   </component>
@@ -239,7 +207,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DevelopmentCard class and testing" />
-    <MESSAGE value="FaithTrack almost finished, only one method is missing. Game and Player classes still to be completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="FaithTrack almost finished, only one method is missing. Game and Player classes still to be completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="DevelopmentCard class and testing" />
   </component>
 </project>
