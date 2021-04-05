@@ -64,5 +64,23 @@ public abstract class FaithTrack {
      * increases victory points of every player depending on his position
      */
     public void vaticanReportActivation (){
+        if(game.getNumVaticanReports() == 1){
+        for(int i=0; i<game.getPlayersNumber(); i++){
+            if(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() > 4 && game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() < 9)
+                  game.getPlayers(i).getPlayerBoard().getFaithTrack().increaseVictoryPoints(2);
+            }
+        }
+        else if(game.getNumVaticanReports() == 2){
+            for(int i=0; i<game.getPlayersNumber(); i++){
+                if(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() > 11 && game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() < 17)
+                    game.getPlayers(i).getPlayerBoard().getFaithTrack().increaseVictoryPoints(2);
+            }
+        }
+        else if(game.getNumVaticanReports() == 3){
+            for(int i=0; i<game.getPlayersNumber(); i++){
+                if(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() > 18)
+                    game.getPlayers(i).getPlayerBoard().getFaithTrack().increaseVictoryPoints(4);
+            }
+        }
     }
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.exceptions.FullPlayerException;
+import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -59,7 +61,56 @@ public class FaithTrackTest {
         assertEquals(3, game.getNumVaticanReports());
     }
 
-    // vaticanReportActivationTest to do
+    @Test
+    @DisplayName("Test the correct assignment of points depending by the player's position and check that every vatican report can be activated only once")
+    public void vaticanReportActivationTest() {
+        Game game = new Game();
+        assertEquals(0, game.getPlayersNumber());
+        try {
+            game.addPlayer("Paolo");
+        } catch (FullPlayerException | ZeroCapacityException e) {
+            e.printStackTrace();
+        }
+        try {
+            game.addPlayer("Gina");
+        } catch (FullPlayerException | ZeroCapacityException e) {
+            e.printStackTrace();
+        }
+        assertEquals(2, game.getPlayersNumber());
+        for(int i=0; i < game.getPlayersNumber(); i++) {
+            assertEquals(0, game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition());
+        }
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(7);
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().increasePosition();
+        assertEquals(1, game.getNumVaticanReports());
+        assertEquals(2, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(0, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        game.getPlayers(1).getPlayerBoard().getFaithTrack().setPosition(7);
+        game.getPlayers(1).getPlayerBoard().getFaithTrack().increasePosition();
+        assertEquals(1, game.getNumVaticanReports());
+        assertEquals(2, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(0, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(15);
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().increasePosition();
+        assertEquals(2, game.getNumVaticanReports());
+        assertEquals(4, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(0, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        game.getPlayers(1).getPlayerBoard().getFaithTrack().setPosition(15);
+        game.getPlayers(1).getPlayerBoard().getFaithTrack().increasePosition();
+        assertEquals(2, game.getNumVaticanReports());
+        assertEquals(4, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(0, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        game.getPlayers(1).getPlayerBoard().getFaithTrack().setPosition(23);
+        game.getPlayers(1).getPlayerBoard().getFaithTrack().increasePosition();
+        assertEquals(3, game.getNumVaticanReports());
+        assertEquals(4, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(4, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(23);
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().increasePosition();
+        assertEquals(3, game.getNumVaticanReports());
+        assertEquals(4, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(4, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+    }
 
     @Test
     @DisplayName("Test the correct incrementation of the victory points, even in the case of negative amount")

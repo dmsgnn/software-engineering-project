@@ -23,7 +23,7 @@ public class PlayerBoardTest {
     private DiscountAbility discountAbility = new DiscountAbility();
     private ColorRequirements colorRequirements = new ColorRequirements();
     private Game game = new Game();
-    private PlayerBoard playerBoard = new PlayerBoard(new Player("user", 0), game);
+    private PlayerBoard playerBoard = new PlayerBoard(new Player("user", 0, game), game);
     private static final List<Resource> VALUES = Collections.unmodifiableList(Arrays.asList(Resource.values()));
     private static final int SIZE = VALUES.size();
     static Random random = new Random();
