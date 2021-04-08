@@ -1,0 +1,172 @@
+<LeaderCards>
+    <card cardResource="COINS" ability="store">
+        <victoryPoints>3</victoryPoints>
+        <colorRequirements/>
+        <levelRequirements/>
+        <resourceRequirements>
+            <SHIELDS>5</SHIELDS>
+        </resourceRequirements>
+    </card>
+    <card cardResource="STONES" ability="store">
+        <victoryPoints>3</victoryPoints>
+        <colorRequirements/>
+        <levelRequirements/>
+        <resourceRequirements>
+            <COINS>5</COINS>
+        </resourceRequirements>
+    </card>
+    <card cardResource="SERVANTS" ability="store">
+        <victoryPoints>3</victoryPoints>
+        <colorRequirements/>
+        <levelRequirements/>
+        <resourceRequirements>
+            <STONES>5</STONES>
+        </resourceRequirements>
+    </card>
+    <card cardResource="SHIELDS" ability="store">
+        <victoryPoints>3</victoryPoints>
+        <colorRequirements/>
+        <levelRequirements/>
+        <resourceRequirements>
+            <SERVANTS>5</SERVANTS>
+        </resourceRequirements>
+    </card>
+    <card cardResource="STONES" ability="exchange">
+        <victoryPoints>5</victoryPoints>
+        <colorRequirements>
+            <BLUE>2</BLUE>
+            <YELLOW>1</YELLOW>
+        </colorRequirements>
+        <levelRequirements>
+            <BLUE>1</BLUE>
+            <YELLOW>1</YELLOW>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="SERVANTS" ability="exchange">
+        <victoryPoints>5</victoryPoints>
+        <colorRequirements>
+            <YELLOW>2</YELLOW>
+            <BLUE>1</BLUE>
+        </colorRequirements>
+        <levelRequirements>
+            <YELLOW>1</YELLOW>
+            <BLUE>1</BLUE>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="SHIELDS" ability="exchange">
+        <victoryPoints>5</victoryPoints>
+        <colorRequirements>
+            <GREEN>2</GREEN>
+            <PURPLE>1</PURPLE>
+        </colorRequirements>
+        <levelRequirements>
+            <GREEN>1</GREEN>
+            <PURPLE>1</PURPLE>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="COINS" ability="exchange">
+        <victoryPoints>5</victoryPoints>
+        <colorRequirements>
+            <PURPLE>2</PURPLE>
+            <GREEN>1</GREEN>
+        </colorRequirements>
+        <levelRequirements>
+            <PURPLE>1</PURPLE>
+            <GREEN>1</GREEN>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="SHIELDS" ability="discount">
+        <victoryPoints>2</victoryPoints>
+        <colorRequirements>
+            <BLUE>1</BLUE>
+            <PURPLE>1</PURPLE>
+        </colorRequirements>
+        <levelRequirements>
+            <BLUE>1</BLUE>
+            <PURPLE>1</PURPLE>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="STONES" ability="discount">
+        <victoryPoints>2</victoryPoints>
+        <colorRequirements>
+            <GREEN>1</GREEN>
+            <BLUE>1</BLUE>
+        </colorRequirements>
+        <levelRequirements>
+            <GREEN>1</GREEN>
+            <BLUE>1</BLUE>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="SERVANTS" ability="discount">
+        <victoryPoints>2</victoryPoints>
+        <colorRequirements>
+            <YELLOW>1</YELLOW>
+            <GREEN>1</GREEN>
+        </colorRequirements>
+        <levelRequirements>
+            <YELLOW>1</YELLOW>
+            <GREEN>1</GREEN>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="COINS" ability="discount">
+        <victoryPoints>2</victoryPoints>
+        <colorRequirements>
+            <YELLOW>1</YELLOW>
+            <PURPLE>1</PURPLE>
+        </colorRequirements>
+        <levelRequirements>
+            <YELLOW>1</YELLOW>
+            <PURPLE>1</PURPLE>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="SHIELDS" ability="production">
+        <victoryPoints>4</victoryPoints>
+        <colorRequirements>
+            <YELLOW>1</YELLOW>
+        </colorRequirements>
+        <levelRequirements>
+            <YELLOW>2</YELLOW>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="STONES" ability="production">
+        <victoryPoints>4</victoryPoints>
+        <colorRequirements>
+            <PURPLE>1</PURPLE>
+        </colorRequirements>
+        <levelRequirements>
+            <PURPLE>2</PURPLE>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="SERVANTS" ability="production">
+        <victoryPoints>4</victoryPoints>
+        <colorRequirements>
+            <BLUE>1</BLUE>
+        </colorRequirements>
+        <levelRequirements>
+            <BLUE>2</BLUE>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+    <card cardResource="COINS" ability="production">
+        <victoryPoints>4</victoryPoints>
+        <colorRequirements>
+            <GREEN>1</GREEN>
+        </colorRequirements>
+        <levelRequirements>
+            <GREEN>2</GREEN>
+        </levelRequirements>
+        <resourceRequirements/>
+    </card>
+
+
+</LeaderCards>

@@ -4,7 +4,7 @@ import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.FullWarehouseException;
 import it.polimi.ingsw.exceptions.WrongResourceException;
 import it.polimi.ingsw.exceptions.ZeroCapacityException;
-import it.polimi.ingsw.playerBoard.CardDepot;
+import it.polimi.ingsw.playerboard.depot.CardDepot;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

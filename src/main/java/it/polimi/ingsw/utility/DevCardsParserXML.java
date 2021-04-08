@@ -2,9 +2,9 @@ package it.polimi.ingsw.utility;
 
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.gameboard.Color;
-import it.polimi.ingsw.gameboard.DevelopmentCard;
-import it.polimi.ingsw.gameboard.DevelopmentCardDeck;
-import it.polimi.ingsw.gameboard.ProductionPower;
+import it.polimi.ingsw.gameboard.development.DevelopmentCard;
+import it.polimi.ingsw.gameboard.development.DevelopmentCardDeck;
+import it.polimi.ingsw.gameboard.development.ProductionPower;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 
 public class DevCardsParserXML {
-    private static String xmlpath = DevCardsParserXML.class.getResource("/DevelopmentCards.xml").toExternalForm();
+    private static final String xmlpath = DevCardsParserXML.class.getResource("/DevelopmentCards.xml").toExternalForm();
 
     public ArrayList<DevelopmentCardDeck> devCardsParser() {
         ArrayList<DevelopmentCard> cards = new ArrayList<>();
@@ -91,7 +91,6 @@ public class DevCardsParserXML {
         Map<Resource, Integer> cost;
         Map<Resource, Integer> gain;
         int faithGain = Integer.parseInt(production.getElementsByTagName("faithGain").item(0).getTextContent());
-
         Node costsNode = production.getElementsByTagName("resourceCost").item(0);
         NodeList costNodeList = costsNode.getChildNodes();
 

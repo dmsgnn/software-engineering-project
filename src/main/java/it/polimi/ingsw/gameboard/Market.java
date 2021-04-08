@@ -1,6 +1,7 @@
 package it.polimi.ingsw.gameboard;
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.InvalidIndexException;
+import it.polimi.ingsw.gameboard.marble.*;
 
 import java.util.ArrayList;
 import java.util.Random;

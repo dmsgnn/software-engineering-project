@@ -1,8 +1,8 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.exceptions.FullPlayerException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
+import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.gameboard.Gameboard;
+import it.polimi.ingsw.leaderAction.LeaderAction;
 
 public class Game {
     private Player[] players = new Player[4];
@@ -14,31 +14,39 @@ public class Game {
     private boolean soloMode;
     private Gameboard board = new Gameboard();
 
-
-
     public int getNumVaticanReports() {
         return numVaticanReports;
     }
-
     public void setNumVaticanReports(int numVaticanReports) {
         this.numVaticanReports = numVaticanReports;
     }
-
     public Player getActivePlayer() {
         return activePlayer;
     }
-
     public Gameboard getBoard() {
         return board;
     }
-
     public Player getPlayers(int numPlayer) {
         return players[numPlayer];
     }
-
     public int getPlayersNumber() {
         return playersNumber;
     }
+
+
+    /**
+     *
+     * @param leaderAction
+     * @throws ErrorActivationLeaderCardException
+     * @throws ExchangeBuffErrorException
+     * @throws DiscountBuffErrorException
+     * @throws ZeroCapacityException
+     * @throws ProductionBuffErrorException
+     */
+    public void doLeader(LeaderAction leaderAction) throws ErrorActivationLeaderCardException, ExchangeBuffErrorException, DiscountBuffErrorException, ZeroCapacityException, ProductionBuffErrorException {
+        leaderAction.doLeaderAction(getActivePlayer());
+    }
+
 
     /**
      * creates a new player

@@ -4,11 +4,9 @@ import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.*;
-import it.polimi.ingsw.leaderCard.LeaderCard;
-import it.polimi.ingsw.leaderCard.Requirements.ColorRequirements;
-import it.polimi.ingsw.leaderCard.Requirements.Requirements;
-import it.polimi.ingsw.leaderCard.ability.DiscountAbility;
-import it.polimi.ingsw.playerBoard.PlayerBoard;
+import it.polimi.ingsw.leadercard.LeaderCard;
+import it.polimi.ingsw.leadercard.Requirements.ColorRequirements;
+import it.polimi.ingsw.leadercard.ability.DiscountAbility;
 import org.junit.jupiter.api.Test;
 
 import javax.naming.InsufficientResourcesException;
@@ -43,7 +41,7 @@ public class PlayerBoardTest {
 
     @Test
     public void addLeaderCardTest() throws ErrorActivationLeaderCardException {
-        LeaderCard  leaderCard= new LeaderCard(1,discountAbility,colorRequirements);
+        LeaderCard  leaderCard= new LeaderCard(1,discountAbility,colorRequirements, randomResource());
         playerBoard.addLeaderCard(leaderCard);
         assertEquals(leaderCard, playerBoard.getLeaderCards().get(0));
     }
@@ -57,6 +55,7 @@ public class PlayerBoardTest {
         playerBoard.getWarehouse().getDepots().get(1).addResources(resource2);
         playerBoard.boardProduction(resource1,resource2,resource3);
         assertEquals(1,playerBoard.getStrongbox().getValue(resource3));
+        
     }
 
 

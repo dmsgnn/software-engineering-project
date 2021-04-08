@@ -3,8 +3,7 @@ package it.polimi.ingsw.playerboard;
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.DiscountBuffErrorException;
 import it.polimi.ingsw.exceptions.ExchangeBuffErrorException;
-import it.polimi.ingsw.exceptions.ProdctionBuffErrorException;
-import it.polimi.ingsw.playerBoard.CardBuffs;
+import it.polimi.ingsw.exceptions.ProductionBuffErrorException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -40,7 +39,7 @@ public class CardBuffsTest {
     }
 
     @Test
-    public void addProductionBuffTest() throws ProdctionBuffErrorException {
+    public void addProductionBuffTest() throws ProductionBuffErrorException {
         Resource resource = randomResource();
         cardBuffs.addProductionBuff(resource);
         assertEquals(resource, cardBuffs.getProductionBuff().get(0));
