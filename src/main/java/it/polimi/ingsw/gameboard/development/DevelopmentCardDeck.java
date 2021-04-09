@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class DevelopmentCardDeck {
-    private ArrayList<DevelopmentCard> deck = new ArrayList<>();
-    private int level;
-    private Color color;
+    private final ArrayList<DevelopmentCard> deck = new ArrayList<>();
+    private final int level;
+    private final Color color;
     private int size;
 
     public DevelopmentCardDeck(ArrayList<DevelopmentCard> deck, int level, Color color){

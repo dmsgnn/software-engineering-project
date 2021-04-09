@@ -5,9 +5,9 @@ import it.polimi.ingsw.Resource;
 import java.util.Map;
 
 public class ProductionPower {
-    private Map<Resource, Integer> prodCost;
-    private Map<Resource, Integer> resourceGain;
-    private int faithGain;
+    private final Map<Resource, Integer> prodCost;
+    private final Map<Resource, Integer> resourceGain;
+    private final int faithGain;
 
     public ProductionPower(Map<Resource, Integer> prodCost, Map<Resource, Integer> resourceGain, int faithGain){
         this.prodCost=prodCost;

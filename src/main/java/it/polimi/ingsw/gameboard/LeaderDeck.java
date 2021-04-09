@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class LeaderDeck {
-    private ArrayList<LeaderCard> deck = new ArrayList<>();
+    private final ArrayList<LeaderCard> deck = new ArrayList<>();
 
     public LeaderDeck(ArrayList<LeaderCard> deck) {
 
@@ -31,8 +31,7 @@ public class LeaderDeck {
     public void draw4(Player player){
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         for (int i=0; i<4; i++){
-            leaderCards.add(deck.get(i));
-            deck.remove(i);
+            leaderCards.add(deck.remove(i));
         }
         player.setStarting4(leaderCards);
     }

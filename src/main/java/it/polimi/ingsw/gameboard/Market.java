@@ -1,4 +1,5 @@
 package it.polimi.ingsw.gameboard;
+import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.InvalidIndexException;
 import it.polimi.ingsw.gameboard.marble.*;
@@ -7,19 +8,19 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Market {
-    private Marbles[][] marbleGrid;
+    private final Marbles[][] marbleGrid;
     private Marbles freeMarble;
-    private int rows, columns;
+    private final int rows, columns;
 
-    public Market(int rows, int columns, int red, int white, int blue, int yellow, int purple, int grey) {
+    public Market(Game game, int rows, int columns, int red, int white, int blue, int yellow, int purple, int grey) {
         this.rows = rows;
         this.columns = columns;
         Random rand = new Random();
         marbleGrid = new Marbles[rows][columns];
         ArrayList<Marbles> list = new ArrayList<>();
 
-        for(int i=0; i<red; i++) list.add(new RedMarble());
-        for(int i=0; i<white; i++) list.add(new WhiteMarble());
+        for(int i=0; i<red; i++) list.add(new RedMarble(game));
+        for(int i=0; i<white; i++) list.add(new WhiteMarble(game));
         for(int i=0; i<blue; i++) list.add(new BlueMarble());
         for(int i=0; i<yellow; i++) list.add(new YellowMarble());
         for(int i=0; i<purple; i++) list.add(new PurpleMarble());

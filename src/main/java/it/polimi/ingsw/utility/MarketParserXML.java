@@ -1,5 +1,6 @@
 package it.polimi.ingsw.utility;
 
+import it.polimi.ingsw.Game;
 import it.polimi.ingsw.gameboard.Market;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,25 +16,27 @@ import java.io.IOException;
 public class MarketParserXML {
     private static String xmlpath = MarketParserXML.class.getResource("/MarketConf.xml").toExternalForm();
 
-    public Market marketParser(){
+    public Market marketParser(Game game){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         Document doc = null;
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             doc = builder.parse(xmlpath);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e){
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }
 
-        NodeList market = doc.getElementsByTagName("market");
+        NodeList market = null;
+        if (doc != null) {
+            market = doc.getElementsByTagName("market");
+        }
 
         int rows, columns, red, white, blue, yellow, purple, grey;
 
-        Node marketNode = market.item(0);
+        Node marketNode = null;
+        if (market != null) {
+            marketNode = market.item(0);
+        }
         Element elem = (Element) marketNode;
 
         Node node = elem.getElementsByTagName("rows").item(0);
@@ -60,7 +63,7 @@ public class MarketParserXML {
         node = elem.getElementsByTagName("greyMarbles").item(0);
         grey = Integer.parseInt(node.getTextContent());
 
-        return new Market(rows, columns, red, white, blue, yellow, purple, grey);
+        return new Market(game, rows, columns, red, white, blue, yellow, purple, grey);
     }
 }
 

@@ -6,11 +6,11 @@ import it.polimi.ingsw.gameboard.Color;
 import java.util.Map;
 
 public class DevelopmentCard {
-    private Map<Resource, Integer> cardRequirements;
-    private Color color;
-    private int level;
-    private int victoryPoints;
-    private ProductionPower production;
+    private final Map<Resource, Integer> cardRequirements;
+    private final Color color;
+    private final int level;
+    private final int victoryPoints;
+    private final ProductionPower production;
 
     public DevelopmentCard(Map<Resource, Integer> cardRequirements, Color color, int level, int victoryPoints, ProductionPower production){
         this.cardRequirements=cardRequirements;

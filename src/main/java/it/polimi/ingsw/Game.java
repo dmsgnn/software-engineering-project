@@ -12,7 +12,7 @@ public class Game {
     private boolean lastRound;
     private boolean terminator;
     private boolean soloMode;
-    private Gameboard board = new Gameboard();
+    private Gameboard board = new Gameboard(this);
 
     public int getNumVaticanReports() {
         return numVaticanReports;
@@ -33,6 +33,9 @@ public class Game {
         return playersNumber;
     }
 
+    public void setActivePlayer(Player activePlayer) {
+        this.activePlayer = activePlayer;
+    }
 
     /**
      *

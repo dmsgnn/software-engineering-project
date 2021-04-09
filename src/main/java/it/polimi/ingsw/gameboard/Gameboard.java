@@ -1,5 +1,6 @@
 package it.polimi.ingsw.gameboard;
 
+import it.polimi.ingsw.Game;
 import it.polimi.ingsw.exceptions.NoCardsLeftException;
 import it.polimi.ingsw.exceptions.WrongLevelException;
 import it.polimi.ingsw.gameboard.development.DevelopmentCard;
@@ -11,14 +12,14 @@ import it.polimi.ingsw.utility.MarketParserXML;
 import java.util.ArrayList;
 
 public class Gameboard {
-    private Market marketBoard;
-    private DevelopmentCardDeck[][] cardGrid;
-    private int cardColumns;
-    private int cardRows;
-    private LeaderDeck leaderDeck;
+    private final Market marketBoard;
+    private final DevelopmentCardDeck[][] cardGrid;
+    private final int cardColumns;
+    private final int cardRows;
+    private final LeaderDeck leaderDeck;
 
-    public Gameboard(){
-        marketBoard = new MarketParserXML().marketParser();
+    public Gameboard(Game game){
+        marketBoard = new MarketParserXML().marketParser(game);
         ArrayList<DevelopmentCardDeck> deckList = new DevCardsParserXML().devCardsParser();
         leaderDeck = new LeaderDeck(new LeaderCardsParserXML().leaderCardsParser());
         cardColumns = Color.values().length;

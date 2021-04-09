@@ -13,6 +13,7 @@ public class Player {
     private PlayerBoard playerBoard;
     private ArrayList<LeaderCard> starting4;
     private ArrayList<LeaderCard> cardsHand;
+    private PlayerFaithTrack faithTrack;
 
     public Player(String nickname, int turnOrder, Game game) throws ZeroCapacityException {
         this.game = game;
@@ -20,8 +21,13 @@ public class Player {
         this.nickname = nickname;
         this.victoryPoints = 0;
         this.playerBoard = new PlayerBoard(this, game);
-        this.cardsHand = new ArrayList<LeaderCard>();
-        this.starting4 = new ArrayList<LeaderCard>();
+        this.cardsHand = new ArrayList<>();
+        this.starting4 = new ArrayList<>();
+        this.faithTrack = new PlayerFaithTrack(game);
+    }
+
+    public PlayerFaithTrack getFaithTrack() {
+        return faithTrack;
     }
 
     public int getVictoryPoints() {
