@@ -96,4 +96,18 @@ public class Gameboard {
         }
         return false;
     }
+
+    public void removeLowestLevel(Color color, int amount){
+        int level = 1;
+        int removed = 0;
+        while(removed<amount){
+            try {
+                cardGrid[cardRows - level][color.ordinal()].removeFirst();
+                removed++;
+            } catch (NoCardsLeftException e) {
+                level++;
+                if(level==4) return;
+            }
+        }
+    }
 }

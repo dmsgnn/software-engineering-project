@@ -91,4 +91,35 @@ public class GameBoardTest {
 
         assertFalse(gameboard.isOneColumnEmpty());
     }
+
+    @Test
+    public void removeLowestLevelTest(){
+        Gameboard gameboard = new Gameboard(game);
+        gameboard.removeLowestLevel(Color.BLUE, 2);
+        assertEquals(gameboard.getCardGrid()[2][Color.BLUE.ordinal()].getSize(), 2);
+    }
+    @Test
+    public void removeLowestLevelTestFromDifferentLevels(){
+        Gameboard gameboard = new Gameboard(game);
+        try {
+            gameboard.getCardGrid()[2][Color.BLUE.ordinal()].removeFirst();
+            gameboard.getCardGrid()[2][Color.BLUE.ordinal()].removeFirst();
+            gameboard.getCardGrid()[2][Color.BLUE.ordinal()].removeFirst();
+        } catch (NoCardsLeftException e) {
+            e.printStackTrace();
+        }
+        gameboard.removeLowestLevel(Color.BLUE, 2);
+        assertTrue(gameboard.getCardGrid()[2][Color.BLUE.ordinal()].isEmpty());
+        assertEquals(gameboard.getCardGrid()[1][Color.BLUE.ordinal()].getSize(), 3);
+    }
+    @Test
+    public void removeLowestLevelTestOneCardLeft(){
+        Gameboard gameboard = new Gameboard(game);
+
+        gameboard.removeLowestLevel(Color.BLUE, 11); //removes all BLUE cards but 1
+
+        gameboard.removeLowestLevel(Color.BLUE, 2); //test
+        assertTrue(gameboard.getCardGrid()[0][Color.BLUE.ordinal()].isEmpty());
+
+    }
 }
