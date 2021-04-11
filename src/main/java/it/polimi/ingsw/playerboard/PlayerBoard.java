@@ -2,7 +2,7 @@ package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
-import it.polimi.ingsw.PlayerFaithTrack;
+import it.polimi.ingsw.playerboard.faithTrack.PlayerFaithTrack;
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.gameboard.Color;

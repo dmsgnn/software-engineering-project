@@ -1,6 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.playerboard.faithTrack;
 
-public class PlayerFaithTrack extends FaithTrack{
+import it.polimi.ingsw.Game;
+
+public class PlayerFaithTrack extends FaithTrack {
     private int victoryPoints;
 
     public PlayerFaithTrack(Game game) {

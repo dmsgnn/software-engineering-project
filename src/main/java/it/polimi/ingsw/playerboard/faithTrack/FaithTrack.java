@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.playerboard.faithTrack;
+
+import it.polimi.ingsw.Game;
 
 public abstract class FaithTrack {
     private int position;

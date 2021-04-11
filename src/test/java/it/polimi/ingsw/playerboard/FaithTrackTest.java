@@ -1,7 +1,10 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.playerboard;
 
+import it.polimi.ingsw.Game;
 import it.polimi.ingsw.exceptions.FullPlayerException;
 import it.polimi.ingsw.exceptions.ZeroCapacityException;
+import it.polimi.ingsw.playerboard.faithTrack.FaithTrack;
+import it.polimi.ingsw.playerboard.faithTrack.PlayerFaithTrack;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.leadercard.LeaderCard;
 import it.polimi.ingsw.playerboard.PlayerBoard;
+import it.polimi.ingsw.playerboard.faithTrack.PlayerFaithTrack;
 
 import java.util.ArrayList;
 

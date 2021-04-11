@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.gameboard.Gameboard;
 import it.polimi.ingsw.leaderAction.LeaderAction;
+import it.polimi.ingsw.singleplayer.LorenzoAI;
 
 public class Game {
     private Player[] players = new Player[4];
@@ -12,6 +13,7 @@ public class Game {
     private boolean lastRound;
     private boolean terminator;
     private boolean soloMode;
+    private LorenzoAI lorenzo;
     private Gameboard board = new Gameboard(this);
 
     public int getNumVaticanReports() {
@@ -31,6 +33,9 @@ public class Game {
     }
     public int getPlayersNumber() {
         return playersNumber;
+    }
+    public LorenzoAI getLorenzo() {
+        return lorenzo;
     }
 
     public void setActivePlayer(Player activePlayer) {
