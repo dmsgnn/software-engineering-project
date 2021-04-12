@@ -13,7 +13,6 @@ public class CardBuffs {
     private final ArrayList<Resource> productionBuff;
     private Resource activeDiscountBuff;
     private Resource activeExchangeBuff;
-    private Resource activeProductionBuff;
 
     public CardBuffs() {
         this.exchangeBuff = new ArrayList<Resource>();
@@ -32,9 +31,6 @@ public class CardBuffs {
     public Resource getActiveExchangeBuff() {
         return activeExchangeBuff;
     }
-    public Resource getActiveProductionBuff() {
-        return activeProductionBuff;
-    }
 
 
     public void setActiveDiscountBuff(Resource activeDiscountBuff) {
@@ -42,9 +38,6 @@ public class CardBuffs {
     }
     public void setActiveExchangeBuff(Resource activeExchangeBuff) {
         this.activeExchangeBuff = activeExchangeBuff;
-    }
-    public void setActiveProductionBuff(Resource activeProductionBuff) {
-        this.activeProductionBuff = activeProductionBuff;
     }
 
     /**
@@ -70,12 +63,8 @@ public class CardBuffs {
         if (first==1) activeDiscountBuff = discountBuff.get(0);
     }
     public void addProductionBuff(Resource resource) throws ProductionBuffErrorException {
-        int first =0;
-        if (exchangeBuff.isEmpty()) {
-            first = 1;
-        }
         if (!productionBuff.add(resource)) throw new ProductionBuffErrorException();
-        if(first==1) activeProductionBuff= productionBuff.get(0);
+
     }
 
     public ArrayList<Resource> getExchangeBuff() {

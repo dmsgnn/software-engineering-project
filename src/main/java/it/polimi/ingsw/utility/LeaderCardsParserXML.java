@@ -98,8 +98,11 @@ public class LeaderCardsParserXML {
                 ability = new DiscountAbility();
                 break;
         }
-
-        if (!colorRequirements.isEmpty()){
+        boolean value=false;
+        for (Color color: colorRequirements.keySet()){
+          if (colorRequirements.get(color)!=0) value=true;
+        }
+        if (value){
             ColorRequirements colored = new ColorRequirements();
             colored.setLevelCardRequirements(levelColorRequirements);
             colored.setColorCardRequirements(colorRequirements);
@@ -150,7 +153,6 @@ public class LeaderCardsParserXML {
 
                 Color key = Color.valueOf(color.getTagName());
                 int value = Integer.parseInt(color.getTextContent());
-
                 colorMap.replace(key, value);
             }
         }

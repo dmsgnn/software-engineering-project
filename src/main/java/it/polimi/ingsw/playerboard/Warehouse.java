@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Warehouse {
-    private ArrayList<BaseDepot> depots;
+    private final ArrayList<BaseDepot> depots;
+    private int depotsNum;
 
     public Warehouse() throws ZeroCapacityException {
 
@@ -18,6 +19,7 @@ public class Warehouse {
         depots.add(new WarehouseDepot(1,0,null));
         depots.add(new WarehouseDepot(2,0,null));
         depots.add(new WarehouseDepot(3,0,null));
+        depotsNum= depots.size();
     }
 
     public boolean isFull(){
@@ -50,6 +52,14 @@ public class Warehouse {
         }
         return map;
 
+    }
+
+    public int getDepotsNum() {
+        return depotsNum;
+    }
+
+    public void setDepotsNum(int depotsNum) {
+        this.depotsNum = depotsNum;
     }
 
     public ArrayList<BaseDepot> getDepots() {

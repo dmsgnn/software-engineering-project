@@ -37,11 +37,9 @@ public class Game {
     public LorenzoAI getLorenzo() {
         return lorenzo;
     }
-
     public void setActivePlayer(Player activePlayer) {
         this.activePlayer = activePlayer;
     }
-
     /**
      *
      * @param leaderAction
@@ -55,7 +53,6 @@ public class Game {
         leaderAction.doLeaderAction(getActivePlayer());
     }
 
-
     /**
      * creates a new player
      * @param nickname is the nickname of the new player, it is unique and it can't be changed during the game
@@ -67,4 +64,6 @@ public class Game {
         }
         else throw new FullPlayerException();
     }
+
+
 }

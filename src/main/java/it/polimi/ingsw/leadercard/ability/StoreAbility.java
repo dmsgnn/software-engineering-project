@@ -21,6 +21,7 @@ public class StoreAbility implements Ability {
     @Override
     public void useAbility(PlayerBoard playerBoard) throws ZeroCapacityException {
         playerBoard.getWarehouse().getDepots().add(new CardDepot(2,0,resource));
+        playerBoard.getWarehouse().setDepotsNum(playerBoard.getWarehouse().getDepotsNum()+1);
 
     }
 }

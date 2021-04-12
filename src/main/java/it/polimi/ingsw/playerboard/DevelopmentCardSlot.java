@@ -1,32 +1,52 @@
 package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.exceptions.InvalidInsertException;
+import it.polimi.ingsw.gameboard.Color;
 import it.polimi.ingsw.gameboard.development.DevelopmentCard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DevelopmentCardSlot {
     private ArrayList<DevelopmentCard> slots = new ArrayList<>();
     private int cardCounter=0;
+    HashMap<Color,Integer> map;
+    int count;
 
     /**
      * adding a card to the slot
      * @param card to add
      * @throws InvalidInsertException if it is impossible to add the card to the slot
      */
-    public void addCardOnTop(DevelopmentCard card) throws InvalidInsertException {
-        if (slots.get(this.cardCounter).getLevel() < card.getLevel()){
+    public void addCardOnTop(DevelopmentCard card, PlayerBoard playerBoard) throws InvalidInsertException {
+        if (isEmpty()) {
             this.slots.add(card);
             this.cardCounter++;
+            map = playerBoard.getColorRequirements().get(card.getLevel());
+            count = map.get(card.getColor());
+            map.put(card.getColor(),count+1);
+            playerBoard.getColorRequirements().put(card.getLevel(),map);
+        } else {
+            if (slots.get(cardCounter-1).getLevel() < card.getLevel()) {
+                this.slots.add(card);
+                this.cardCounter++;
+                map = playerBoard.getColorRequirements().get(card.getLevel());
+                count = map.get(card.getColor());
+                map.put(card.getColor(),count+1);
+                playerBoard.getColorRequirements().put(card.getLevel(),map);
+            } else throw new InvalidInsertException();
         }
-        else throw new InvalidInsertException();
+
     }
 
     /**
      * @return of the currently active card
      */
-    public DevelopmentCard lookTop(){
-        return slots.get(this.cardCounter);
+    public DevelopmentCard lookTop() {
+        if (isEmpty()) return null;
+        else {
+            return slots.get(cardCounter - 1);
+        }
     }
 
     /**
@@ -41,7 +61,17 @@ public class DevelopmentCardSlot {
      * @return true if the slot is full
      */
     public boolean isFull(){
-        if (slots.get(this.cardCounter).getLevel()==3) return true;
+        if (cardCounter==0) return false;
+        if (slots.get(cardCounter-1).getLevel()==3) return true;
+        else return false;
+    }
+
+    /**
+     *
+     * @return true if the slot is empty
+     */
+    public boolean isEmpty(){
+        if (cardCounter==0) return true;
         else return false;
     }
 

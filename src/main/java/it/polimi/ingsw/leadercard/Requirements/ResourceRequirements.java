@@ -18,7 +18,7 @@ public class ResourceRequirements implements Requirements{
     @Override
     public boolean checkRequirements(PlayerBoard playerBoard) {
         for (Resource resource: cardRequirements.keySet()){
-            if (cardRequirements.get(resource)>(playerBoard.getWarehouse().storedResources().get(resource))) return false;
+            if (cardRequirements.get(resource)>((playerBoard.getWarehouse().storedResources().get(resource))+(playerBoard.getStrongbox().getValue(resource)))) return false;
         }
         return true;
     }

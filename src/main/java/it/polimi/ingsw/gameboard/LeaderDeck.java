@@ -13,7 +13,8 @@ public class LeaderDeck {
 
         Random rand = new Random();
         int randomIndex;
-        for (int i=0; i < this.deck.size(); i++ ){
+        int b= deck.size();
+        for (int i=0; i < b; i++ ){
             randomIndex = rand.nextInt(deck.size());
             this.deck.add(deck.get(randomIndex));
             deck.remove(randomIndex);
@@ -35,5 +36,7 @@ public class LeaderDeck {
         }
         player.setStarting4(leaderCards);
     }
+
+
 }
 
