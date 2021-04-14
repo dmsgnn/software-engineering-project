@@ -8,9 +8,10 @@ public class BlueMarble extends Marbles {
     /**
      * @param resources
      * adds SHIELDS when picked
+     * @param exchangeResources
      */
     @Override
-    public void drawEffect(ArrayList<Resource> resources) {
+    public void drawEffect(ArrayList<Resource> resources, ArrayList<Resource> exchangeResources) {
         resources.add(Resource.SHIELDS);
     }
 }

@@ -3,7 +3,6 @@ package it.polimi.ingsw.gameboard;
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.exceptions.InvalidIndexException;
-import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.gameboard.marble.Marbles;
 import it.polimi.ingsw.utility.MarketParserXML;
@@ -14,8 +13,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MarketTest {
+
     Game game = new Game();
     Market market = new MarketParserXML().marketParser(game);
+
 
     @Test
     @DisplayName("Check negative index for pickColumn")
@@ -69,19 +70,19 @@ public class MarketTest {
         } catch (ZeroCapacityException e) {
             e.printStackTrace();
         }
-        ArrayList<Resource> tempResources = new ArrayList<>();
-        ArrayList<Resource> resources = null;
+        ArrayList<Marbles> tempMarbles = new ArrayList<>();
+        ArrayList<Marbles> marbles = null;
         for(int i = 0; i < market.getColumns(); i++) { //testo ogni colonna
-            tempResources.removeAll(tempResources);
+            tempMarbles.removeAll(tempMarbles);
             for(int k = 0; k < market.getRows(); k++) { //attivo effetto per ogni elem della colonna
-                market.getMarbleGrid()[k][i].drawEffect(tempResources);
+                tempMarbles.add(market.getMarbleGrid()[k][i]);
             }
             try {
-                resources = market.pickColumn(i);
+                marbles = market.pickColumn(i);
             } catch (InvalidIndexException e){
                 e.printStackTrace();
             }
-            assertEquals(resources, tempResources);
+            assertEquals(marbles, tempMarbles);
         }
     }
 
@@ -93,19 +94,19 @@ public class MarketTest {
         } catch (ZeroCapacityException e) {
             e.printStackTrace();
         }
-        ArrayList<Resource> tempResources = new ArrayList<>();
-        ArrayList<Resource> resources = null;
+        ArrayList<Marbles> tempMarbles = new ArrayList<>();
+        ArrayList<Marbles> marbles = null;
         for(int i=0; i < market.getRows(); i++) {
-            tempResources.removeAll(tempResources);
+            tempMarbles.removeAll(tempMarbles);
             for(int k = 0; k < market.getColumns(); k++) {
-                market.getMarbleGrid()[i][k].drawEffect(tempResources);
+                tempMarbles.add(market.getMarbleGrid()[i][k]);
             }
             try{
-                resources = market.pickRow(i);
+                marbles = market.pickRow(i);
             } catch (InvalidIndexException e){
                 e.printStackTrace();
             }
-            assertEquals(resources, tempResources);
+            assertEquals(marbles, tempMarbles);
         }
     }
 

@@ -12,7 +12,7 @@ public class RedMarble extends Marbles {
     }
 
     @Override
-    public void drawEffect(ArrayList<Resource> resources) {
+    public void drawEffect(ArrayList<Resource> resources, ArrayList<Resource> exchangeResources) {
         game.getActivePlayer().getFaithTrack().increasePosition();
     }
 }

@@ -19,40 +19,44 @@ public class MarbleTest {
     @DisplayName("Test blue marble with empty and not empty ArrayList")
     public void testDrawBlue(){
         ArrayList<Resource> resources = new ArrayList<>();
+        ArrayList<Resource> exchangeResources = new ArrayList<>();
         Marbles marble = new BlueMarble();
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(0),Resource.SHIELDS);
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(1),Resource.SHIELDS);
     }
     @Test
     @DisplayName("Test grey marble with empty and not empty ArrayList")
     public void testDrawGrey(){
         ArrayList<Resource> resources = new ArrayList<>();
+        ArrayList<Resource> exchangeResources = new ArrayList<>();
         Marbles marble = new GreyMarble();
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(0),Resource.STONES);
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(1),Resource.STONES);
     }
     @Test
     @DisplayName("Test yellow marble with empty and not empty ArrayList")
     public void testDrawYellow(){
         ArrayList<Resource> resources = new ArrayList<>();
+        ArrayList<Resource> exchangeResources = new ArrayList<>();
         Marbles marble = new YellowMarble();
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(0),Resource.COINS);
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(1),Resource.COINS);
     }
     @Test
     @DisplayName("Test purple marble with empty and not empty ArrayList")
     public void testDrawPurple(){
         ArrayList<Resource> resources = new ArrayList<>();
+        ArrayList<Resource> exchangeResources = new ArrayList<>();
         Marbles marble = new PurpleMarble();
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(0),Resource.SERVANTS);
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(1),Resource.SERVANTS);
     }
     @Test
@@ -65,8 +69,9 @@ public class MarbleTest {
             e.printStackTrace();
         }
         ArrayList<Resource> resources = new ArrayList<>();
+        ArrayList<Resource> exchangeResources = new ArrayList<>();
         Marbles marble = new RedMarble(game);
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(game.getActivePlayer().getFaithTrack().getPosition(),1);
     }
 
@@ -81,8 +86,9 @@ public class MarbleTest {
         }
 
         ArrayList<Resource> resources = new ArrayList<>();
+        ArrayList<Resource> exchangeResources = new ArrayList<>();
         Marbles marble = new WhiteMarble(game);
-        marble.drawEffect(resources);
+        marble.drawEffect(resources, exchangeResources);
         assertTrue(resources.isEmpty());
     }
 
@@ -97,16 +103,15 @@ public class MarbleTest {
         }
 
         ArrayList<Resource> resources = new ArrayList<>();
+        ArrayList<Resource> exchangeResources = new ArrayList<>();
         Marbles marble = new WhiteMarble(game);
         try {
             game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().addExchangeBuff(Resource.COINS);
         } catch (ExchangeBuffErrorException e) {
             e.printStackTrace();
         }
-        marble.drawEffect(resources);
+        exchangeResources.add(Resource.COINS);
+        marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(0),Resource.COINS);
-        game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().setActiveExchangeBuff(Resource.SHIELDS);
-        marble.drawEffect(resources);
-        assertEquals(resources.get(1),Resource.SHIELDS);
     }
 }

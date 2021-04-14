@@ -1,6 +1,5 @@
 package it.polimi.ingsw.gameboard;
 import it.polimi.ingsw.Game;
-import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.InvalidIndexException;
 import it.polimi.ingsw.gameboard.marble.*;
 
@@ -60,7 +59,7 @@ public class Market {
      * @param col it's the column chosen by the player
      * @return array containing the resources gained from the market
      */
-    public ArrayList<Resource> pickColumn(int col) throws InvalidIndexException {
+    public ArrayList<Marbles> pickColumn(int col) throws InvalidIndexException {
         if(col < 0 || col >= this.columns) throw new InvalidIndexException();
         else return pickRowOrColumn(col, false);
     }
@@ -70,23 +69,23 @@ public class Market {
      * @param row it's the row chosen by the player
      * @return array containing the resources gained from the market
      */
-    public ArrayList<Resource> pickRow(int row) throws InvalidIndexException{
+    public ArrayList<Marbles> pickRow(int row) throws InvalidIndexException{
         if(row < 0 || row >= this.rows) throw new InvalidIndexException();
         else return pickRowOrColumn(row, true);
     }
 
-    private ArrayList<Resource> pickRowOrColumn(int pos, boolean pickRow){
-        ArrayList<Resource> resources = new ArrayList<>();
+    private ArrayList<Marbles> pickRowOrColumn(int pos, boolean pickRow){
+        ArrayList<Marbles> output = new ArrayList<>();
         ArrayList<Marbles> temp = new ArrayList<>();
 
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 4; col++) {
                 if(pickRow && row == pos) {
-                    marbleGrid[row][col].drawEffect(resources);
+                    output.add(marbleGrid[row][col]);
                     temp.add(marbleGrid[row][col]);
                 }
                 else if(!pickRow && col == pos) {
-                    marbleGrid[row][col].drawEffect(resources);
+                    output.add(marbleGrid[row][col]);
                     temp.add(marbleGrid[row][col]);
                 }
             }
@@ -101,7 +100,7 @@ public class Market {
                 marbleGrid[i][pos] = temp.get(i+1);
         }
         this.freeMarble = temp.get(0);
-        return resources;
+        return output;
     }
 
 }

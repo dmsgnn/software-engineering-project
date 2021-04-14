@@ -4,13 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Action Interface and NormalActions Abstract Class, Gameboard removeLowestLevel method and testing">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="payResources method">
       <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/UseProduction.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/ActionsTest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/UseProductionTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/Actions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/Actions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/PickColumn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/PickColumn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/PickRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/PickRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/Market.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/BlueMarble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/BlueMarble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/GreyMarble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/GreyMarble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/Marbles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/Marbles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/PurpleMarble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/PurpleMarble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/RedMarble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/RedMarble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/WhiteMarble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/WhiteMarble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/YellowMarble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/marble/YellowMarble.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderAction/PlayLeaderCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderAction/PlayLeaderCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/Warehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/MarbleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/MarbleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/MarketTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/MarketTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,62 +67,7 @@
       <recent name="it.polimi.ingsw" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ActionsTest.payResourcesWrongTest">
-    <configuration name="ActionsTest.payResourcesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.ActionsTest" />
-      <option name="METHOD_NAME" value="payResourcesTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ActionsTest.payResourcesWrongTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.ActionsTest" />
-      <option name="METHOD_NAME" value="payResourcesWrongTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameBoardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.GameBoardTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.MarketTest">
     <configuration name="Gameboard" type="JUnit" factoryName="JUnit">
       <module name="AM5" />
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
@@ -120,35 +78,100 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="it.polimi.ingsw in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MarbleTest.testDrawPurple" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.singleplayer.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarbleTest" />
+      <option name="METHOD_NAME" value="testDrawPurple" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MarbleTest.testDrawWhiteWithBuff" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarbleTest" />
+      <option name="METHOD_NAME" value="testDrawWhiteWithBuff" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MarketTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarketTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MarketTest.testGetRow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarketTest" />
+      <option name="METHOD_NAME" value="testGetRow" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UseProductionTest.validActionTestNotEnoughRes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.UseProductionTest" />
+      <option name="METHOD_NAME" value="validActionTestNotEnoughRes" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="JUnit.Gameboard" />
-      <item itemvalue="JUnit.GameBoardTest" />
-      <item itemvalue="JUnit.it.polimi.ingsw in AM5" />
-      <item itemvalue="JUnit.All in AM5" />
-      <item itemvalue="JUnit.ActionsTest.payResourcesTest" />
-      <item itemvalue="JUnit.ActionsTest.payResourcesWrongTest" />
+      <item itemvalue="JUnit.UseProductionTest.validActionTestNotEnoughRes" />
+      <item itemvalue="JUnit.MarketTest.testGetRow" />
+      <item itemvalue="JUnit.MarketTest" />
+      <item itemvalue="JUnit.MarbleTest.testDrawPurple" />
+      <item itemvalue="JUnit.MarbleTest.testDrawWhiteWithBuff" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ActionsTest.payResourcesWrongTest" />
-        <item itemvalue="JUnit.ActionsTest.payResourcesTest" />
-        <item itemvalue="JUnit.All in AM5" />
-        <item itemvalue="JUnit.it.polimi.ingsw in AM5" />
-        <item itemvalue="JUnit.GameBoardTest" />
+        <item itemvalue="JUnit.MarketTest" />
+        <item itemvalue="JUnit.MarbleTest.testDrawWhiteWithBuff" />
+        <item itemvalue="JUnit.MarbleTest.testDrawPurple" />
+        <item itemvalue="JUnit.MarketTest.testGetRow" />
+        <item itemvalue="JUnit.UseProductionTest.validActionTestNotEnoughRes" />
       </list>
     </recent_temporary>
   </component>
@@ -170,6 +193,11 @@
       <workItem from="1617968790470" duration="29000" />
       <workItem from="1617969378939" duration="44000" />
       <workItem from="1618056597270" duration="2842000" />
+      <workItem from="1618308008145" duration="195000" />
+      <workItem from="1618315668988" duration="3141000" />
+      <workItem from="1618320058750" duration="25000" />
+      <workItem from="1618322648746" duration="7083000" />
+      <workItem from="1618384535586" duration="1486000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -192,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618144405224</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="payResources method">
+      <created>1618308187133</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618308187133</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,6 +251,7 @@
     <MESSAGE value="Gameboard class and testing with xml and parser" />
     <MESSAGE value="RedMarble and WhiteMarble update with testing, small updates to other classes" />
     <MESSAGE value="LorenzoAI and Tokens implemented with tests, some refactoring done" />
-    <option name="LAST_COMMIT_MESSAGE" value="LorenzoAI and Tokens implemented with tests, some refactoring done" />
+    <MESSAGE value="payResources method" />
+    <option name="LAST_COMMIT_MESSAGE" value="payResources method" />
   </component>
 </project>
