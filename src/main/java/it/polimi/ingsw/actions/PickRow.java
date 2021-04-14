@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class PickRow extends MarketAction{
     @Override
     public ArrayList<Resource> pickRowOrColumn(Market market,int row) throws InvalidIndexException {
-        return market.pickRow(row);
+        return null;//market.pickRow(row);
     }
 
     @Override

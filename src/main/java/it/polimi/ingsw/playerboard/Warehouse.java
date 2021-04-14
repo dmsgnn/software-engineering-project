@@ -12,6 +12,7 @@ import java.util.Map;
 public class Warehouse {
     private final ArrayList<BaseDepot> depots;
     private int depotsNum;
+    private final int baseDepotsNum;
 
     public Warehouse() throws ZeroCapacityException {
 
@@ -19,7 +20,8 @@ public class Warehouse {
         depots.add(new WarehouseDepot(1,0,null));
         depots.add(new WarehouseDepot(2,0,null));
         depots.add(new WarehouseDepot(3,0,null));
-        depotsNum= depots.size();
+        depotsNum = depots.size();
+        baseDepotsNum = depots.size();
     }
 
     public boolean isFull(){
@@ -43,8 +45,6 @@ public class Warehouse {
         return counter;
     }
 
-    //public boolean areResourceDifferent(){}
-
     public Map<Resource,Integer> storedResources(){
         Map<Resource,Integer> map = new HashMap<>();
         for (BaseDepot depot : this.depots) {
@@ -53,6 +53,8 @@ public class Warehouse {
         return map;
 
     }
+
+    public int getBaseDepotsNum() {return baseDepotsNum;}
 
     public int getDepotsNum() {
         return depotsNum;
