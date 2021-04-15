@@ -5,6 +5,8 @@ import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.CantPayException;
 import it.polimi.ingsw.exceptions.EmptyWarehouseException;
 import it.polimi.ingsw.exceptions.InvalidActionException;
+import it.polimi.ingsw.exceptions.NoCardsLeftException;
+import it.polimi.ingsw.exceptions.WrongLevelException;
 import it.polimi.ingsw.playerboard.PlayerBoard;
 import it.polimi.ingsw.playerboard.depot.BaseDepot;
 
@@ -15,10 +17,10 @@ import java.util.Map;
 public abstract class Actions {
 
 
-    public void doAction(PlayerBoard playerBoard) throws InvalidActionException {
+    public void doAction(PlayerBoard playerBoard) throws InvalidActionException, InsufficientResourcesException, EmptyWarehouseException, WrongLevelException, NoCardsLeftException {
     }
 
-    public boolean validAction(PlayerBoard playerBoard){
+    public boolean validAction(PlayerBoard playerBoard) throws NoCardsLeftException, WrongLevelException {
         return true;
     }
 

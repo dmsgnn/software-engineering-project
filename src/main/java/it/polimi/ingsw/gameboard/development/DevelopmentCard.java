@@ -43,14 +43,14 @@ public class DevelopmentCard {
     /**
      *
      * @param playerResources total resources owned by the player
-     * @return true if the player has enough resources to buy the card, false otherwise
+     * @return true if the player has selected the right resources to buy the card, false otherwise
      */
     public boolean checkCardRequirements(Map<Resource, Integer> playerResources){
 
         for (Map.Entry<Resource, Integer> entry : cardRequirements.entrySet()) {
             Resource key = entry.getKey();
             Integer value = entry.getValue();
-            if(!(playerResources.containsKey(key) && playerResources.get(key)>=value)){
+            if(!(playerResources.containsKey(key) && playerResources.get(key)==value)){
                 return false;
             }
         }
