@@ -1,10 +1,6 @@
 package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.DiscountBuffErrorException;
-import it.polimi.ingsw.exceptions.ExchangeBuffErrorException;
-import it.polimi.ingsw.exceptions.ProductionBuffErrorException;
-
 import java.util.ArrayList;
 
 public class CardBuffs {
@@ -43,27 +39,24 @@ public class CardBuffs {
     /**
      * these methods add the resource parameter to the specific buff
      */
-    public void addExchangeBuff(Resource resource) throws ExchangeBuffErrorException {
+    public void addExchangeBuff(Resource resource)  {
         int first =0;
         if (exchangeBuff.isEmpty()) {
-            first = 1;
-        }
-        if (!exchangeBuff.add(resource)) {
-            throw new ExchangeBuffErrorException();
-        }
-        if (first==1) activeExchangeBuff = exchangeBuff.get(0);
+            first = 1;}
 
+       exchangeBuff.add(resource);
+        if (first==1) activeExchangeBuff = exchangeBuff.get(0);
     }
-    public void addDiscountBuff(Resource resource) throws DiscountBuffErrorException {
+    public void addDiscountBuff(Resource resource) {
         int first =0;
         if (exchangeBuff.isEmpty()) {
             first = 1;
         }
-        if (!discountBuff.add(resource)) throw new DiscountBuffErrorException();
+        discountBuff.add(resource);
         if (first==1) activeDiscountBuff = discountBuff.get(0);
     }
-    public void addProductionBuff(Resource resource) throws ProductionBuffErrorException {
-        if (!productionBuff.add(resource)) throw new ProductionBuffErrorException();
+    public void addProductionBuff(Resource resource) {
+        productionBuff.add(resource);
 
     }
 

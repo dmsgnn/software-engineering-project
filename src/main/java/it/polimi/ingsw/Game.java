@@ -1,9 +1,11 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.actions.Actions;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.gameboard.Gameboard;
-import it.polimi.ingsw.leaderAction.LeaderAction;
 import it.polimi.ingsw.singleplayer.LorenzoAI;
+
+import javax.naming.InsufficientResourcesException;
 
 public class Game {
     private Player[] players = new Player[4];
@@ -40,17 +42,14 @@ public class Game {
     public void setActivePlayer(Player activePlayer) {
         this.activePlayer = activePlayer;
     }
+
+
     /**
-     *
-     * @param leaderAction
-     * @throws ErrorActivationLeaderCardException
-     * @throws ExchangeBuffErrorException
-     * @throws DiscountBuffErrorException
-     * @throws ZeroCapacityException
-     * @throws ProductionBuffErrorException
+     * the player takes an action
+     * @param action selected to do
      */
-    public void doLeader(LeaderAction leaderAction) throws ErrorActivationLeaderCardException, ExchangeBuffErrorException, DiscountBuffErrorException, ZeroCapacityException, ProductionBuffErrorException {
-        leaderAction.doLeaderAction(getActivePlayer());
+    public void doAction(Actions action) throws InvalidActionException, InsufficientResourcesException, WrongLevelException, EmptyWarehouseException, NoCardsLeftException {
+        action.doAction(activePlayer.getPlayerBoard());
     }
 
     /**

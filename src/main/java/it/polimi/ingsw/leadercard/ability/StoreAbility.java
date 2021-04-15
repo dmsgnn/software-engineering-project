@@ -15,8 +15,7 @@ public class StoreAbility implements Ability {
 
     /**
      * add the new depot
-     * @param playerBoard
-     * @throws ZeroCapacityException
+     * @param playerBoard of the player
      */
     @Override
     public void useAbility(PlayerBoard playerBoard) throws ZeroCapacityException {

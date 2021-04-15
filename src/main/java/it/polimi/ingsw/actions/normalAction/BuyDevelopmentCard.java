@@ -1,6 +1,7 @@
-package it.polimi.ingsw.actions;
+package it.polimi.ingsw.actions.normalAction;
 
 import it.polimi.ingsw.Resource;
+import it.polimi.ingsw.actions.Actions;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.gameboard.Color;
 import it.polimi.ingsw.gameboard.Gameboard;

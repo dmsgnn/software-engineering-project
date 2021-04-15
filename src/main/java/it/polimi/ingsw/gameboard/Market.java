@@ -60,8 +60,7 @@ public class Market {
      * @return array containing the resources gained from the market
      */
     public ArrayList<Marbles> pickColumn(int col) throws InvalidIndexException {
-        if(col < 0 || col >= this.columns) throw new InvalidIndexException();
-        else return pickRowOrColumn(col, false);
+        return pickRowOrColumn(col, false);
     }
 
     /**
@@ -103,5 +102,12 @@ public class Market {
         return output;
     }
 
+    public boolean validColumn(int col) {
+        return col >= 0 && col < this.columns;
+    }
+
+    public boolean validRow(int row) {
+        return row >= 0 && row < this.rows;
+    }
 }
 

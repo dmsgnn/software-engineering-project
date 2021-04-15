@@ -15,11 +15,10 @@ public class ProductionAbility implements Ability {
 
     /**
      * add the resource to the buff
-     * @param playerBoard
-     * @throws ProductionBuffErrorException
+     * @param playerBoard of the player
      */
     @Override
-    public void useAbility(PlayerBoard playerBoard) throws ProductionBuffErrorException {
+    public void useAbility(PlayerBoard playerBoard) {
         playerBoard.getLeaderCardBuffs().addProductionBuff(cost);
 
     }

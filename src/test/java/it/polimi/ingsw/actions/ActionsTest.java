@@ -4,7 +4,7 @@ import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.*;
-import it.polimi.ingsw.leaderAction.PlayLeaderCard;
+import it.polimi.ingsw.actions.leaderAction.PlayLeaderCard;
 import it.polimi.ingsw.leadercard.LeaderCard;
 import it.polimi.ingsw.leadercard.Requirements.ColorRequirements;
 import it.polimi.ingsw.leadercard.ability.StoreAbility;
@@ -25,7 +25,7 @@ public class ActionsTest {
     public class ActionTest extends Actions{
 
     }
-
+/*
     @Test
     public void payResourcesTest() {
         Game game = new Game();
@@ -92,6 +92,7 @@ public class ActionsTest {
         Strongbox strongbox = game.getActivePlayer().getPlayerBoard().getStrongbox();
         assertEquals(strongbox.getResources(), map);
     }
+    */
 
     @Test
     public void payResourcesWrongStrongboxTest() {
@@ -152,6 +153,7 @@ public class ActionsTest {
         Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
 
     }
+    /*
     @Test
     public void payResourcesWrongLeaderDepotTest() {
         Game game = new Game();
@@ -187,5 +189,6 @@ public class ActionsTest {
         Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
 
     }
+    */
 
 }

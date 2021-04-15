@@ -59,9 +59,8 @@ public class PlayerBoard {
      * activates a card and adds it to the playerboard
      * @param card that must be activated
      */
-    public void addLeaderCard(LeaderCard card) throws ErrorActivationLeaderCardException {
-
-        if (!leaderCards.add(card)) throw new ErrorActivationLeaderCardException();
+    public void addLeaderCard(LeaderCard card){
+        leaderCards.add(card);
     }
 
     /**

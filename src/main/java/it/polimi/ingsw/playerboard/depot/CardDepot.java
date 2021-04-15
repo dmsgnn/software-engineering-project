@@ -15,7 +15,7 @@ public class CardDepot extends BaseDepot {
     /**
      * takes in a resource and if it is of the right type,
      * increases the amount of the depot by one
-     * @param newResource
+     * @param newResource to add
      */
     public void addResources(Resource newResource) throws ZeroCapacityException, FullWarehouseException, WrongResourceException {
         //case capacity=0

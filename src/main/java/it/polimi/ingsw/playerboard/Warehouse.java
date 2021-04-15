@@ -4,13 +4,12 @@ import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.playerboard.depot.BaseDepot;
 import it.polimi.ingsw.playerboard.depot.WarehouseDepot;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Warehouse {
-    private final ArrayList<BaseDepot> depots;
+    private ArrayList<BaseDepot> depots;
     private int depotsNum;
     private final int baseDepotsNum;
 
@@ -24,6 +23,10 @@ public class Warehouse {
         baseDepotsNum = depots.size();
     }
 
+    /**
+     *
+     * @return true if the warehouse is full
+     */
     public boolean isFull(){
         boolean value=true;
         for (BaseDepot depot : this.depots){
@@ -37,6 +40,10 @@ public class Warehouse {
         return value;
     }
 
+    /**
+     *
+     * @return the amount of resources in the warehouse
+     */
     public int resourceCounter(){
         int counter=0;
         for (BaseDepot depot : depots) {
@@ -67,4 +74,5 @@ public class Warehouse {
     public ArrayList<BaseDepot> getDepots() {
         return depots;
     }
+
 }

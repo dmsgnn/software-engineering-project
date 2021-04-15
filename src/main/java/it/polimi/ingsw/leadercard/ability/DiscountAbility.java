@@ -14,11 +14,10 @@ public class DiscountAbility implements Ability{
 
     /**
      * add the resource to the buff
-     * @param playerBoard
-     * @throws DiscountBuffErrorException
+     * @param playerBoard of the player
      */
     @Override
-    public void useAbility(PlayerBoard playerBoard) throws DiscountBuffErrorException {
+    public void useAbility(PlayerBoard playerBoard) {
         playerBoard.getLeaderCardBuffs().addDiscountBuff(this.resource);
 
 

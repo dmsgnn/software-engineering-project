@@ -34,7 +34,7 @@ public class LeaderCard {
     /**
      * activate the leader card
      */
-    public void activateCard(PlayerBoard playerBoard) throws DiscountBuffErrorException, ProductionBuffErrorException, ZeroCapacityException, ExchangeBuffErrorException {
+    public void activateCard(PlayerBoard playerBoard) throws ZeroCapacityException {
         ability.useAbility(playerBoard);
     }
 

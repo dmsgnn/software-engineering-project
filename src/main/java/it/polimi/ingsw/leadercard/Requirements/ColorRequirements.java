@@ -1,8 +1,8 @@
 package it.polimi.ingsw.leadercard.Requirements;
 
+import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.gameboard.Color;
 import it.polimi.ingsw.playerboard.PlayerBoard;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +24,16 @@ public class ColorRequirements implements Requirements {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean IsColor() {
+        return true;
+    }
+
+    @Override
+    public Map<Resource, Integer> getRequirements(PlayerBoard playerBoard) {
+        return null;
     }
 
     public Map<Color, Integer> getColorCardRequirements() {

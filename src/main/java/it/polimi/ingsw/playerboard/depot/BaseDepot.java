@@ -23,28 +23,25 @@ public class BaseDepot {
     }
 
     /**   Add/change resource in the depot
-     * Problema: dove vanno le risorse che sostituisco? Problema gia risolto piu in alto?
      */
     public void addResources(Resource newResource) throws ZeroCapacityException, FullWarehouseException, WrongResourceException {}
 
     /**
      * remove an amount from the depot
-     * @param amount
-     * @return
+     * @param amount to remove
      */
-    public int removeResource(int amount) throws EmptyWarehouseException, InsufficientResourcesException {
+    public void removeResource(int amount) throws EmptyWarehouseException, InsufficientResourcesException {
         if (isEmpty()) throw new EmptyWarehouseException();
         if ((this.occupied - amount) >= 0) {
             this.occupied -= amount;
             if (this.occupied==0) this.resource=null;
-            return (this.occupied);
         }
         else throw new InsufficientResourcesException();
     }
 
     /**
      *  depot full or not
-     * @return
+     * @return true if the depot is full
      */
     public boolean isFull(){
         if(this.occupied == this.capacity){
@@ -56,7 +53,7 @@ public class BaseDepot {
 
     /**
      *  depot empty or not
-     * @return
+     * @return true if the depot is empty
      */
     public boolean isEmpty() {
         if (this.occupied == 0) {
@@ -66,7 +63,7 @@ public class BaseDepot {
 
     /**
      * available space  in depot
-     * @return
+     * @return the space left in the depot
      */
     public int spaceLeft(){
         return  (capacity - occupied);

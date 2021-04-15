@@ -25,8 +25,8 @@ public class Strongbox {
 
     /**
      * enters a certain amount of a resource
-     * @param resource
-     * @param amount
+     * @param resource to add in the strongbox
+     * @param amount of the resource
      */
     public void addResource(Resource resource, int amount) {
         this.resources.replace(resource, this.resources.get(resource), amount + this.resources.get(resource));
@@ -34,8 +34,8 @@ public class Strongbox {
 
     /**
      * removes a certain amount of a resource
-     * @param resource
-     * @param amount
+     * @param resource to remove
+     * @param amount of the resource
      */
     public void removeResource(Resource resource, int amount) throws InsufficientResourcesException {
         if (this.resources.get(resource)< amount){
@@ -47,8 +47,7 @@ public class Strongbox {
     }
 
     /**
-     * returns the map
-     * @return
+     * @return a map containing all the resources
      */
     public Map<Resource, Integer> getResources() {
         return this.resources;
@@ -56,8 +55,8 @@ public class Strongbox {
 
     /**
      *
-     * @param resource
-     * @return
+     * @param resource affected
+     * @return amount of the resource in the strongbox
      */
     public int getValue(Resource resource){
         return resources.get(resource);

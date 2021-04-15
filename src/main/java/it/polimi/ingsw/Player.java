@@ -63,14 +63,6 @@ public class Player {
         cardsHand.add(leaderCards.get(1));
     }
 
-    public void discardLeaderCard(LeaderCard leaderCard){
-        for (int i=0; i<cardsHand.size(); i++) {
-            if (cardsHand.get(i).equals(leaderCard)) {
-                cardsHand.remove(i);
-            }
-        }
-    }
-
     public void calcVictoryPoints(){
         int counter=0;
         counter +=playerBoard.getWarehouse().resourceCounter();

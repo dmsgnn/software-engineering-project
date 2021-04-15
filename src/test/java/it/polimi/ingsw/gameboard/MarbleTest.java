@@ -105,11 +105,7 @@ public class MarbleTest {
         ArrayList<Resource> resources = new ArrayList<>();
         ArrayList<Resource> exchangeResources = new ArrayList<>();
         Marbles marble = new WhiteMarble(game);
-        try {
-            game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().addExchangeBuff(Resource.COINS);
-        } catch (ExchangeBuffErrorException e) {
-            e.printStackTrace();
-        }
+        game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().addExchangeBuff(Resource.COINS);
         exchangeResources.add(Resource.COINS);
         marble.drawEffect(resources, exchangeResources);
         assertEquals(resources.get(0),Resource.COINS);

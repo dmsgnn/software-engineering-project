@@ -1,6 +1,7 @@
-package it.polimi.ingsw.actions;
+package it.polimi.ingsw.actions.normalAction;
 
 import it.polimi.ingsw.Resource;
+import it.polimi.ingsw.actions.Actions;
 import it.polimi.ingsw.exceptions.CantPayException;
 import it.polimi.ingsw.exceptions.EmptyWarehouseException;
 import it.polimi.ingsw.exceptions.InvalidActionException;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class UseProduction extends Actions{
+public class UseProduction extends Actions {
     private final ArrayList<Integer> developmentCardSlotIndex;
     private final ArrayList<Integer> leaderCardProdIndex;
     private final ArrayList<Resource> leaderCardProdGain;
