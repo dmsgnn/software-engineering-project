@@ -4,42 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="update the latest actions and fix the leader actions">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/normalAction/marketAction/ManageResources.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/normalAction/marketAction/MarketAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/normalAction/marketAction/PickColumn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/normalAction/marketAction/PickRow.java" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="UseProductionAction with testing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/Actions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/Actions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/BuyDevelopmentCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/normalAction/BuyDevelopmentCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/MarketAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/PickColumn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/PickRow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/UseProduction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/normalAction/UseProduction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/gameboard/Market.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderAction/DiscardLeaderCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/leaderAction/DiscardLeaderCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderAction/LeaderAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leaderAction/PlayLeaderCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/actions/leaderAction/PlayLeaderCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/LeaderCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/LeaderCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/Requirements/ColorRequirements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/Requirements/ColorRequirements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/Requirements/Requirements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/Requirements/Requirements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/Requirements/ResourceRequirements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/Requirements/ResourceRequirements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/Ability.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/Ability.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/DiscountAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/DiscountAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/ExchangeAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/ExchangeAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/ProductionAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/ProductionAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/StoreAbility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/leadercard/ability/StoreAbility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/CardBuffs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/CardBuffs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/PlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/PlayerBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/Strongbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/Strongbox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/Warehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/depot/BaseDepot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/depot/BaseDepot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/depot/CardDepot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/depot/CardDepot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/ActionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/ActionsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/UseProductionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/UseProductionTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/MarbleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/gameboard/MarbleTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +51,7 @@
       <recent name="it.polimi.ingsw" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.it.polimi.ingsw in AM5">
+  <component name="RunManager" selected="JUnit.ActionsTest.payResourcesWrongLeaderDepotTest">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -95,64 +63,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BuyDevelopmentCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ActionsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.BuyDevelopmentCardTest" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.ActionsTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BuyDevelopmentCardTest.doActionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ActionsTest.payResourcesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.BuyDevelopmentCardTest" />
-      <option name="METHOD_NAME" value="doActionTest" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.ActionsTest" />
+      <option name="METHOD_NAME" value="payResourcesTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BuyDevelopmentCardTest.validActionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ActionsTest.payResourcesWrongLeaderDepotTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.BuyDevelopmentCardTest" />
-      <option name="METHOD_NAME" value="validActionTest" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.ActionsTest" />
+      <option name="METHOD_NAME" value="payResourcesWrongLeaderDepotTest" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DevelopmentCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.gameboard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.DevelopmentCardTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -167,35 +120,52 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="it.polimi.ingsw in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UseProductionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.UseProductionTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UseProductionTest.correctActionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.UseProductionTest" />
+      <option name="METHOD_NAME" value="correctActionTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="JUnit.Gameboard" />
-      <item itemvalue="JUnit.BuyDevelopmentCardTest.doActionTest" />
-      <item itemvalue="JUnit.BuyDevelopmentCardTest.validActionTest" />
-      <item itemvalue="JUnit.DevelopmentCardTest" />
-      <item itemvalue="JUnit.BuyDevelopmentCardTest" />
-      <item itemvalue="JUnit.it.polimi.ingsw in AM5" />
+      <item itemvalue="JUnit.ActionsTest.payResourcesWrongLeaderDepotTest" />
+      <item itemvalue="JUnit.UseProductionTest.correctActionTest" />
+      <item itemvalue="JUnit.UseProductionTest" />
+      <item itemvalue="JUnit.ActionsTest.payResourcesTest" />
+      <item itemvalue="JUnit.ActionsTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.it.polimi.ingsw in AM5" />
-        <item itemvalue="JUnit.BuyDevelopmentCardTest.validActionTest" />
-        <item itemvalue="JUnit.BuyDevelopmentCardTest" />
-        <item itemvalue="JUnit.DevelopmentCardTest" />
-        <item itemvalue="JUnit.BuyDevelopmentCardTest.doActionTest" />
+        <item itemvalue="JUnit.ActionsTest.payResourcesWrongLeaderDepotTest" />
+        <item itemvalue="JUnit.ActionsTest.payResourcesTest" />
+        <item itemvalue="JUnit.ActionsTest" />
+        <item itemvalue="JUnit.UseProductionTest" />
+        <item itemvalue="JUnit.UseProductionTest.correctActionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -225,9 +195,6 @@
       <workItem from="1618387648680" duration="137000" />
       <workItem from="1618404148473" duration="1502000" />
       <workItem from="1618410537704" duration="5081000" />
-      <workItem from="1618435272755" duration="120000" />
-      <workItem from="1618515128000" duration="726000" />
-      <workItem from="1618517463588" duration="7887000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -298,15 +265,6 @@
     <MESSAGE value="payResources method" />
     <MESSAGE value="Market and marbles update" />
     <MESSAGE value="Actions update with testing" />
-    <MESSAGE value="update the latest actions and fix the leader actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="update the latest actions and fix the leader actions" />
-  </component>
-  <component name="XDebuggerManager">
-    <pin-to-top-manager>
-      <pinned-members>
-        <PinnedItemInfo parentTag="it.polimi.ingsw.gameboard.LeaderDeck" memberName="deck" />
-        <PinnedItemInfo parentTag="it.polimi.ingsw.actions.BuyDevelopmentCard" memberName="totalPayment" />
-      </pinned-members>
-    </pin-to-top-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="Actions update with testing" />
   </component>
 </project>

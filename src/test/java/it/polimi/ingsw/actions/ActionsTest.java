@@ -25,7 +25,7 @@ public class ActionsTest {
     public class ActionTest extends Actions{
 
     }
-/*
+
     @Test
     public void payResourcesTest() {
         Game game = new Game();
@@ -35,12 +35,15 @@ public class ActionsTest {
         } catch (ZeroCapacityException e) {
             e.printStackTrace();
         }
-        PlayLeaderCard play = new PlayLeaderCard(new LeaderCard(2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS));
+        //cost doesn't matter for this test
+        PlayLeaderCard play = new PlayLeaderCard(new LeaderCard(2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS),
+                new HashMap<>(), new HashMap<>(), new HashMap<>());
         try {
-            play.doLeaderAction(game.getActivePlayer());
-        } catch (ErrorActivationLeaderCardException | ExchangeBuffErrorException | DiscountBuffErrorException | ZeroCapacityException | ProductionBuffErrorException e) {
+            play.doAction(game.getActivePlayer().getPlayerBoard());
+        } catch (InvalidActionException e) {
             e.printStackTrace();
         }
+
 
         ArrayList<BaseDepot> depots = game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots();
         try {
@@ -92,7 +95,7 @@ public class ActionsTest {
         Strongbox strongbox = game.getActivePlayer().getPlayerBoard().getStrongbox();
         assertEquals(strongbox.getResources(), map);
     }
-    */
+
 
     @Test
     public void payResourcesWrongStrongboxTest() {
@@ -153,7 +156,7 @@ public class ActionsTest {
         Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
 
     }
-    /*
+
     @Test
     public void payResourcesWrongLeaderDepotTest() {
         Game game = new Game();
@@ -163,10 +166,11 @@ public class ActionsTest {
         } catch (ZeroCapacityException e) {
             e.printStackTrace();
         }
-        PlayLeaderCard play = new PlayLeaderCard(new LeaderCard(2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS));
+        PlayLeaderCard play = new PlayLeaderCard(new LeaderCard(2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS),
+                new HashMap<>(), new HashMap<>(), new HashMap<>());
         try {
-            play.doLeaderAction(game.getActivePlayer());
-        } catch (ErrorActivationLeaderCardException | ExchangeBuffErrorException | DiscountBuffErrorException | ZeroCapacityException | ProductionBuffErrorException e) {
+            play.doAction(game.getActivePlayer().getPlayerBoard());
+        } catch (InvalidActionException e) {
             e.printStackTrace();
         }
 
@@ -189,6 +193,6 @@ public class ActionsTest {
         Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
 
     }
-    */
+
 
 }
