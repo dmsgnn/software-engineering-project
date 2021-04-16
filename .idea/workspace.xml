@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="UseProductionAction with testing">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="BuyDevelopmentCard action and one change to DevelopmentCard class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/ActionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/ActionsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/UseProductionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/actions/UseProductionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/faithTrack/FaithTrack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/playerboard/faithTrack/FaithTrack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/playerboard/FaithTrackTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/playerboard/FaithTrackTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,28 +51,13 @@
       <recent name="it.polimi.ingsw" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ActionsTest.payResourcesWrongLeaderDepotTest">
+  <component name="RunManager" selected="JUnit.FaithTrackTest.increaseAllPositionTest">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ActionsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.ActionsTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -110,6 +95,46 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FaithTrackTest.increaseAllPositionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.playerboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.playerboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.playerboard.FaithTrackTest" />
+      <option name="METHOD_NAME" value="increaseAllPositionTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FaithTrackTest.positionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.playerboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.playerboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.playerboard.FaithTrackTest" />
+      <option name="METHOD_NAME" value="positionTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Gameboard" type="JUnit" factoryName="JUnit">
       <module name="AM5" />
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.gameboard" />
@@ -120,52 +145,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UseProductionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.UseProductionTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UseProductionTest.correctActionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.actions.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.actions.UseProductionTest" />
-      <option name="METHOD_NAME" value="correctActionTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="JUnit.Gameboard" />
       <item itemvalue="JUnit.ActionsTest.payResourcesWrongLeaderDepotTest" />
-      <item itemvalue="JUnit.UseProductionTest.correctActionTest" />
-      <item itemvalue="JUnit.UseProductionTest" />
       <item itemvalue="JUnit.ActionsTest.payResourcesTest" />
-      <item itemvalue="JUnit.ActionsTest" />
+      <item itemvalue="JUnit.All in AM5" />
+      <item itemvalue="JUnit.FaithTrackTest.positionTest" />
+      <item itemvalue="JUnit.FaithTrackTest.increaseAllPositionTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.FaithTrackTest.increaseAllPositionTest" />
+        <item itemvalue="JUnit.FaithTrackTest.positionTest" />
+        <item itemvalue="JUnit.All in AM5" />
         <item itemvalue="JUnit.ActionsTest.payResourcesWrongLeaderDepotTest" />
         <item itemvalue="JUnit.ActionsTest.payResourcesTest" />
-        <item itemvalue="JUnit.ActionsTest" />
-        <item itemvalue="JUnit.UseProductionTest" />
-        <item itemvalue="JUnit.UseProductionTest.correctActionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -195,6 +189,8 @@
       <workItem from="1618387648680" duration="137000" />
       <workItem from="1618404148473" duration="1502000" />
       <workItem from="1618410537704" duration="5081000" />
+      <workItem from="1618599924430" duration="60000" />
+      <workItem from="1618600515980" duration="2947000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -266,5 +262,16 @@
     <MESSAGE value="Market and marbles update" />
     <MESSAGE value="Actions update with testing" />
     <option name="LAST_COMMIT_MESSAGE" value="Actions update with testing" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="it.polimi.ingsw.gameboard.LeaderDeck" memberName="deck" />
+        <PinnedItemInfo parentTag="it.polimi.ingsw.actions.BuyDevelopmentCard" memberName="totalPayment" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AM5$All_in_AM5.ic" NAME="All in AM5 Coverage Results" MODIFIED="1618578189102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -15,13 +15,33 @@ public abstract class FaithTrack {
         return position;
     }
 
-    // only used for testing
+    // only used for testing and for single incrementation
     public void setPosition(int position) {
         this.position = position;
     }
 
     /**
-     * increases the position
+     * this method is used only when the player discards some resources.
+     * it increases the position of every player (active player is not included)
+     * and at every incrementation checks if someone can activates the vatican report.
+     */
+    public void increaseAllPositions() {
+        for(int i=0; i < game.getPlayersNumber(); i++){
+            if(!game.getPlayers(i).equals(game.getActivePlayer())) {
+                game.getPlayers(i).getPlayerBoard().getFaithTrack().setPosition(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() + 1);
+            }
+        }
+        for(int i=0; i < game.getPlayersNumber(); i++){
+            if(!game.getPlayers(i).equals(game.getActivePlayer())) {
+                if (game.getPlayers(i).getPlayerBoard().getFaithTrack().vaticanReportCheck()) {
+                    game.getPlayers(i).getPlayerBoard().getFaithTrack().vaticanReportActivation();
+                }
+            }
+        }
+    }
+
+    /**
+     * increases the position and check if the varican report can be activated, in case activates it
      */
     public void increasePosition(){
         if(!endOfTrack()) {

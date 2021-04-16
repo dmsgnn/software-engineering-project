@@ -27,6 +27,61 @@ public class FaithTrackTest {
     }
 
     @Test
+    @DisplayName("Test three cases and checks that in case every position get incremented, the vatican report check is correctly done")
+    public void increaseAllPositionTest() throws FullPlayerException, ZeroCapacityException {
+        Game game = new Game();
+        game.addPlayer("First");
+        game.addPlayer("Second");
+        game.addPlayer("Third");
+        game.setActivePlayer(game.getPlayers(0));
+        assertEquals(0, game.getNumVaticanReports());
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().increaseAllPositions();
+        // checks every positions
+        assertEquals(0, game.getPlayers(0).getPlayerBoard().getFaithTrack().getPosition());
+        assertEquals(1, game.getPlayers(1).getPlayerBoard().getFaithTrack().getPosition());
+        assertEquals(1, game.getPlayers(2).getPlayerBoard().getFaithTrack().getPosition());
+        // checks every victory points, no changes
+        assertEquals(0, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(0, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(0, game.getPlayers(2).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        // checks num of vatican report, no changes
+        assertEquals(0, game.getNumVaticanReports());
+
+        // position changing
+        game.getPlayers(1).getPlayerBoard().getFaithTrack().setPosition(7);
+        game.getPlayers(2).getPlayerBoard().getFaithTrack().setPosition(3);
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().increaseAllPositions();
+
+        // checks every positions
+        assertEquals(0, game.getPlayers(0).getPlayerBoard().getFaithTrack().getPosition());
+        assertEquals(8, game.getPlayers(1).getPlayerBoard().getFaithTrack().getPosition());
+        assertEquals(4, game.getPlayers(2).getPlayerBoard().getFaithTrack().getPosition());
+        // checks every victory points, only player number 1 gained some victory points
+        assertEquals(0, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(2, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(0, game.getPlayers(2).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        // checks num of vatican report, one vatican reports activated
+        assertEquals(1, game.getNumVaticanReports());
+
+        // position changing
+        game.getPlayers(1).getPlayerBoard().getFaithTrack().setPosition(15);
+        game.getPlayers(2).getPlayerBoard().getFaithTrack().setPosition(11);
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().increaseAllPositions();
+
+        // checks every positions
+        assertEquals(0, game.getPlayers(0).getPlayerBoard().getFaithTrack().getPosition());
+        assertEquals(16, game.getPlayers(1).getPlayerBoard().getFaithTrack().getPosition());
+        assertEquals(12, game.getPlayers(2).getPlayerBoard().getFaithTrack().getPosition());
+        // checks every victory points, players number 1 and 2 gained some victory points
+        assertEquals(0, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(4, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(2, game.getPlayers(2).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        // checks num of vatican report, two vatican reports activated
+        assertEquals(2, game.getNumVaticanReports());
+
+    }
+
+    @Test
     @DisplayName("Test the correct evaluation of the method's condition")
     public void endOfTrackTest() {
         Game game = new Game();
