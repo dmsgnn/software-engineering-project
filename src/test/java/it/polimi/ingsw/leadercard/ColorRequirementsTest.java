@@ -49,7 +49,7 @@ public class ColorRequirementsTest {
         colorRequirements.setLevelCardRequirements(level);
         colorRequirements.setColorCardRequirements(qua);
         for (int i=0; i<levelCard;i++){
-            playerBoard.getSlots().get(i).addCardOnTop(new DevelopmentCard(null,color,levelCard,levelCard,null),playerBoard);
+            playerBoard.getSlots().get(i).addCardOnTop(new DevelopmentCard(null,color,"",levelCard,levelCard,null),playerBoard);
         }
         assertTrue(colorRequirements.checkRequirements(playerBoard));
     }

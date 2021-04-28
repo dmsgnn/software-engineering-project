@@ -1,5 +1,6 @@
 <developmentCards>
     <card color="GREEN">
+        <id>D001</id>
         <level>1</level>
         <victoryPoints>1</victoryPoints>
         <requirements>
@@ -16,6 +17,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D002</id>
         <level>1</level>
         <victoryPoints>1</victoryPoints>
         <requirements>
@@ -32,6 +34,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D003</id>
         <level>1</level>
         <victoryPoints>1</victoryPoints>
         <requirements>
@@ -48,6 +51,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D004</id>
         <level>1</level>
         <victoryPoints>1</victoryPoints>
         <requirements>
@@ -64,6 +68,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D005</id>
         <level>1</level>
         <victoryPoints>2</victoryPoints>
         <requirements>
@@ -84,6 +89,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D006</id>
         <level>1</level>
         <victoryPoints>2</victoryPoints>
         <requirements>
@@ -104,6 +110,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D007</id>
         <level>1</level>
         <victoryPoints>2</victoryPoints>
         <requirements>
@@ -124,6 +131,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D008</id>
         <level>1</level>
         <victoryPoints>2</victoryPoints>
         <requirements>
@@ -144,6 +152,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D009</id>
         <level>1</level>
         <victoryPoints>3</victoryPoints>
         <requirements>
@@ -164,6 +173,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D010</id>
         <level>1</level>
         <victoryPoints>3</victoryPoints>
         <requirements>
@@ -184,6 +194,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D011</id>
         <level>1</level>
         <victoryPoints>3</victoryPoints>
         <requirements>
@@ -204,6 +215,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D012</id>
         <level>1</level>
         <victoryPoints>3</victoryPoints>
         <requirements>
@@ -224,6 +236,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D013</id>
         <level>1</level>
         <victoryPoints>4</victoryPoints>
         <requirements>
@@ -244,6 +257,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D014</id>
         <level>1</level>
         <victoryPoints>4</victoryPoints>
         <requirements>
@@ -264,6 +278,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D015</id>
         <level>1</level>
         <victoryPoints>4</victoryPoints>
         <requirements>
@@ -284,6 +299,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D016</id>
         <level>1</level>
         <victoryPoints>4</victoryPoints>
         <requirements>
@@ -304,6 +320,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D017</id>
         <level>2</level>
         <victoryPoints>5</victoryPoints>
         <requirements>
@@ -320,6 +337,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D018</id>
         <level>2</level>
         <victoryPoints>5</victoryPoints>
         <requirements>
@@ -336,6 +354,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D019</id>
         <level>2</level>
         <victoryPoints>5</victoryPoints>
         <requirements>
@@ -352,6 +371,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D020</id>
         <level>2</level>
         <victoryPoints>5</victoryPoints>
         <requirements>
@@ -368,6 +388,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D021</id>
         <level>2</level>
         <victoryPoints>6</victoryPoints>
         <requirements>
@@ -388,6 +409,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D022</id>
         <level>2</level>
         <victoryPoints>6</victoryPoints>
         <requirements>
@@ -408,6 +430,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D023</id>
         <level>2</level>
         <victoryPoints>6</victoryPoints>
         <requirements>
@@ -428,6 +451,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D024</id>
         <level>2</level>
         <victoryPoints>6</victoryPoints>
         <requirements>
@@ -448,6 +472,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D025</id>
         <level>2</level>
         <victoryPoints>7</victoryPoints>
         <requirements>
@@ -466,6 +491,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D026</id>
         <level>2</level>
         <victoryPoints>7</victoryPoints>
         <requirements>
@@ -484,6 +510,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D027</id>
         <level>2</level>
         <victoryPoints>7</victoryPoints>
         <requirements>
@@ -502,6 +529,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D028</id>
         <level>2</level>
         <victoryPoints>7</victoryPoints>
         <requirements>
@@ -520,6 +548,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D029</id>
         <level>2</level>
         <victoryPoints>8</victoryPoints>
         <requirements>
@@ -539,6 +568,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D030</id>
         <level>2</level>
         <victoryPoints>8</victoryPoints>
         <requirements>
@@ -558,6 +588,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D031</id>
         <level>2</level>
         <victoryPoints>8</victoryPoints>
         <requirements>
@@ -577,6 +608,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D032</id>
         <level>2</level>
         <victoryPoints>8</victoryPoints>
         <requirements>
@@ -596,6 +628,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D033</id>
         <level>3</level>
         <victoryPoints>9</victoryPoints>
         <requirements>
@@ -614,6 +647,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D034</id>
         <level>3</level>
         <victoryPoints>9</victoryPoints>
         <requirements>
@@ -632,6 +666,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D035</id>
         <level>3</level>
         <victoryPoints>9</victoryPoints>
         <requirements>
@@ -650,6 +685,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D036</id>
         <level>3</level>
         <victoryPoints>9</victoryPoints>
         <requirements>
@@ -668,6 +704,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D037</id>
         <level>3</level>
         <victoryPoints>10</victoryPoints>
         <requirements>
@@ -689,6 +726,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D038</id>
         <level>3</level>
         <victoryPoints>10</victoryPoints>
         <requirements>
@@ -710,6 +748,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D039</id>
         <level>3</level>
         <victoryPoints>10</victoryPoints>
         <requirements>
@@ -731,6 +770,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D040</id>
         <level>3</level>
         <victoryPoints>10</victoryPoints>
         <requirements>
@@ -752,6 +792,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D041</id>
         <level>3</level>
         <victoryPoints>11</victoryPoints>
         <requirements>
@@ -770,6 +811,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D042</id>
         <level>3</level>
         <victoryPoints>11</victoryPoints>
         <requirements>
@@ -788,6 +830,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D043</id>
         <level>3</level>
         <victoryPoints>11</victoryPoints>
         <requirements>
@@ -806,6 +849,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D044</id>
         <level>3</level>
         <victoryPoints>11</victoryPoints>
         <requirements>
@@ -824,6 +868,7 @@
         </cardProduction>
     </card>
     <card color="GREEN">
+        <id>D045</id>
         <level>3</level>
         <victoryPoints>12</victoryPoints>
         <requirements>
@@ -844,6 +889,7 @@
         </cardProduction>
     </card>
     <card color="PURPLE">
+        <id>D046</id>
         <level>3</level>
         <victoryPoints>12</victoryPoints>
         <requirements>
@@ -864,6 +910,7 @@
         </cardProduction>
     </card>
     <card color="BLUE">
+        <id>D047</id>
         <level>3</level>
         <victoryPoints>12</victoryPoints>
         <requirements>
@@ -884,6 +931,7 @@
         </cardProduction>
     </card>
     <card color="YELLOW">
+        <id>D048</id>
         <level>3</level>
         <victoryPoints>12</victoryPoints>
         <requirements>

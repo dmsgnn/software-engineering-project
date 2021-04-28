@@ -81,8 +81,8 @@ public class UseProductionTest {
         resGain.put(Resource.STONES, 1);
         ProductionPower power = new ProductionPower(prodCost, resGain, 2);
         ProductionPower power2 = new ProductionPower(prodCost2, resGain, 2);
-        DevelopmentCard card = new DevelopmentCard(new HashMap<>(), Color.GREEN,1, 1, power);
-        DevelopmentCard card2 = new DevelopmentCard(new HashMap<>(), Color.GREEN,1, 1, power2);
+        DevelopmentCard card = new DevelopmentCard(new HashMap<>(), Color.GREEN,"",1, 1, power);
+        DevelopmentCard card2 = new DevelopmentCard(new HashMap<>(), Color.GREEN,"",1, 1, power2);
 
         ArrayList<DevelopmentCardSlot> playerSlot = game.getActivePlayer().getPlayerBoard().getSlots();
         try {

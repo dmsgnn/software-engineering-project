@@ -63,6 +63,7 @@ public class DevCardsParserXML {
     private DevelopmentCard cardBuilder(Element card){
         //reads all the attributes of the card
         Color color = Color.valueOf(card.getAttribute("color"));
+        String id = card.getElementsByTagName("id").item(0).getTextContent();
         int level = Integer.parseInt(card.getElementsByTagName("level").item(0).getTextContent());
         int victoryPoints = Integer.parseInt(card.getElementsByTagName("victoryPoints").item(0).getTextContent());
         ProductionPower production = null;
@@ -83,7 +84,7 @@ public class DevCardsParserXML {
             }
         }
 
-        return new DevelopmentCard(requirements, color, level, victoryPoints, production);
+        return new DevelopmentCard(requirements, color, id, level, victoryPoints, production);
     }
 
     private ProductionPower productionPowerBuilder(Element production){

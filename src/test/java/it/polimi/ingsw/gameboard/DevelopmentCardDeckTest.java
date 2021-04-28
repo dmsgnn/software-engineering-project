@@ -24,7 +24,7 @@ public class DevelopmentCardDeckTest {
         requirements.put(Resource.COINS, 1);
         requirements.put(Resource.STONES, 1);
 
-        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,1, 1, power);
+        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
 
         ArrayList<DevelopmentCard> list = new ArrayList<>();
         list.add(card);
@@ -48,7 +48,7 @@ public class DevelopmentCardDeckTest {
         requirements.put(Resource.COINS, 1);
         requirements.put(Resource.STONES, 1);
 
-        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,1, 1, power);
+        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
 
         ArrayList<DevelopmentCard> list = new ArrayList<>();
         list.add(card);
@@ -90,7 +90,7 @@ public class DevelopmentCardDeckTest {
         requirements.put(Resource.COINS, 1);
         requirements.put(Resource.STONES, 1);
 
-        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,1, 1, power);
+        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
 
         ArrayList<DevelopmentCard> list = new ArrayList<>();
         list.add(card);
@@ -115,19 +115,19 @@ public class DevelopmentCardDeckTest {
         requirements.put(Resource.COINS, 1);
         requirements.put(Resource.STONES, 1);
 
-        DevelopmentCard card1 = new DevelopmentCard(requirements, Color.GREEN,1, 1, power);
+        DevelopmentCard card1 = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
 
         Map<Resource, Integer> requirements2 = new HashMap<>();
         requirements.put(Resource.COINS, 1);
         requirements.put(Resource.SHIELDS, 1);
 
-        DevelopmentCard card2 = new DevelopmentCard(requirements2, Color.YELLOW,1, 1, power);
+        DevelopmentCard card2 = new DevelopmentCard(requirements2, Color.YELLOW,"",1, 1, power);
 
         Map<Resource, Integer> requirements3 = new HashMap<>();
         requirements.put(Resource.SERVANTS, 3);
         requirements.put(Resource.SHIELDS, 1);
 
-        DevelopmentCard card3 = new DevelopmentCard(requirements3, Color.YELLOW,1, 1, power);
+        DevelopmentCard card3 = new DevelopmentCard(requirements3, Color.YELLOW,"",1, 1, power);
 
         ArrayList<DevelopmentCard> list = new ArrayList<>();
         ArrayList<DevelopmentCard> copy = new ArrayList<>();

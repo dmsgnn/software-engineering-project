@@ -27,14 +27,13 @@ public class LeaderDeck {
 
     /**
      * removes 4 cards from the deck and gives them to the player
-     * @param player
      */
-    public void draw4(Player player){
+    public ArrayList<LeaderCard> draw4(){
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         for (int i=0; i<4; i++){
             leaderCards.add(deck.remove(i));
         }
-        player.setStarting4(leaderCards);
+        return leaderCards;
     }
 
 

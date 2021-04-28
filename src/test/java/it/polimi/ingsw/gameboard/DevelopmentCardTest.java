@@ -23,7 +23,7 @@ public class DevelopmentCardTest {
         requirements.put(Resource.COINS, 1);
         requirements.put(Resource.STONES, 1);
 
-        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,1, 1, power);
+        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
 
         Map<Resource, Integer> playerRes = new HashMap<>();
         playerRes.put(Resource.STONES, 1);
@@ -42,7 +42,7 @@ public class DevelopmentCardTest {
         requirements.put(Resource.SERVANTS, 2);
         requirements.put(Resource.STONES, 1);
 
-        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,1, 1, power);
+        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
 
         Map<Resource, Integer> playerRes = new HashMap<>();
         playerRes.put(Resource.STONES, 1);
@@ -63,7 +63,7 @@ public class DevelopmentCardTest {
         requirements.put(Resource.SERVANTS, 2);
         requirements.put(Resource.COINS, 1);
 
-        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,1, 1, power);
+        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
 
         Map<Resource, Integer> playerRes = new HashMap<>();
         playerRes.put(Resource.SHIELDS, 1);
@@ -85,7 +85,7 @@ public class DevelopmentCardTest {
         requirements.put(Resource.SERVANTS, 2);
         requirements.put(Resource.COINS, 1);
 
-        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,1, 1, power);
+        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
 
         Map<Resource, Integer> playerRes = new HashMap<>();
         playerRes.put(Resource.SHIELDS, 1);

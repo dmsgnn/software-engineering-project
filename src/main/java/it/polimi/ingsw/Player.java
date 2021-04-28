@@ -12,7 +12,6 @@ public class Player {
     private int victoryPoints;
     private int turnOrder;
     private PlayerBoard playerBoard;
-    private ArrayList<LeaderCard> starting4;
     private ArrayList<LeaderCard> cardsHand;
     private PlayerFaithTrack faithTrack;
 
@@ -23,7 +22,6 @@ public class Player {
         this.victoryPoints = 0;
         this.playerBoard = new PlayerBoard(this, game);
         this.cardsHand = new ArrayList<>();
-        this.starting4 = new ArrayList<>();
         this.faithTrack = new PlayerFaithTrack(game);
     }
 
@@ -51,13 +49,10 @@ public class Player {
         return turnOrder == 0;
     }
 
-    public void take4cards(){
-        game.getBoard().getLeaderDeck().draw4(game.getActivePlayer());
+    public ArrayList<LeaderCard> take4cards(){
+        return game.getBoard().getLeaderDeck().draw4();
+    }
 
-    }
-    public void setStarting4(ArrayList<LeaderCard> starting4) {
-        this.starting4 = starting4;
-    }
     public void pickStartingLeaderCards(ArrayList<LeaderCard> leaderCards) {
         cardsHand.add(leaderCards.get(0));
         cardsHand.add(leaderCards.get(1));
@@ -79,9 +74,6 @@ public class Player {
                 increaseVictoryPoints(playerBoard.getSlots().get(i).getCard(j).getVictoryPoints());
             }
         }
-
-
-
     }
 
     public PlayerBoard getPlayerBoard() {
@@ -89,9 +81,6 @@ public class Player {
     }
     public int getTurnOrder() {
         return turnOrder;
-    }
-    public ArrayList<LeaderCard> getStarting4() {
-        return starting4;
     }
     public ArrayList<LeaderCard> getCardsHand() {
         return cardsHand;

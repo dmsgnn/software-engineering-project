@@ -8,13 +8,16 @@ import java.util.Map;
 public class DevelopmentCard {
     private final Map<Resource, Integer> cardRequirements;
     private final Color color;
+    private final String id;
     private final int level;
     private final int victoryPoints;
     private final ProductionPower production;
 
-    public DevelopmentCard(Map<Resource, Integer> cardRequirements, Color color, int level, int victoryPoints, ProductionPower production){
+
+    public DevelopmentCard(Map<Resource, Integer> cardRequirements, Color color, String id, int level, int victoryPoints, ProductionPower production){
         this.cardRequirements=cardRequirements;
         this.color=color;
+        this.id = id;
         this.level=level;
         this.victoryPoints=victoryPoints;
         this.production=production;
