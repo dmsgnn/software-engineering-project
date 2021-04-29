@@ -1,5 +1,4 @@
 package it.polimi.ingsw;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.leadercard.LeaderCard;
 import it.polimi.ingsw.playerboard.PlayerBoard;
 import it.polimi.ingsw.playerboard.faithTrack.PlayerFaithTrack;
@@ -15,7 +14,7 @@ public class Player {
     private ArrayList<LeaderCard> cardsHand;
     private PlayerFaithTrack faithTrack;
 
-    public Player(String nickname, int turnOrder, Game game) throws ZeroCapacityException {
+    public Player(String nickname, int turnOrder, Game game) {
         this.game = game;
         this.turnOrder = turnOrder;
         this.nickname = nickname;
@@ -86,4 +85,7 @@ public class Player {
         return cardsHand;
     }
 
+    public void setCardsHand(ArrayList<LeaderCard> cardsHand) {
+        this.cardsHand = cardsHand;
+    }
 }

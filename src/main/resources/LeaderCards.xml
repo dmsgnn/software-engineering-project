@@ -1,5 +1,6 @@
 <LeaderCards>
     <card cardResource="COINS" ability="store">
+        <id>L008</id>
         <victoryPoints>3</victoryPoints>
         <colorRequirements/>
         <levelRequirements/>
@@ -8,6 +9,7 @@
         </resourceRequirements>
     </card>
     <card cardResource="STONES" ability="store">
+        <id>L005</id>
         <victoryPoints>3</victoryPoints>
         <colorRequirements/>
         <levelRequirements/>
@@ -16,6 +18,7 @@
         </resourceRequirements>
     </card>
     <card cardResource="SERVANTS" ability="store">
+        <id>L006</id>
         <victoryPoints>3</victoryPoints>
         <colorRequirements/>
         <levelRequirements/>
@@ -24,6 +27,7 @@
         </resourceRequirements>
     </card>
     <card cardResource="SHIELDS" ability="store">
+        <id>L007</id>
         <victoryPoints>3</victoryPoints>
         <colorRequirements/>
         <levelRequirements/>
@@ -32,6 +36,7 @@
         </resourceRequirements>
     </card>
     <card cardResource="STONES" ability="exchange">
+        <id>L011</id>
         <victoryPoints>5</victoryPoints>
         <colorRequirements>
             <BLUE>2</BLUE>
@@ -44,6 +49,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="SERVANTS" ability="exchange">
+        <id>L009</id>
         <victoryPoints>5</victoryPoints>
         <colorRequirements>
             <YELLOW>2</YELLOW>
@@ -56,6 +62,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="SHIELDS" ability="exchange">
+        <id>L010</id>
         <victoryPoints>5</victoryPoints>
         <colorRequirements>
             <GREEN>2</GREEN>
@@ -68,6 +75,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="COINS" ability="exchange">
+        <id>L012</id>
         <victoryPoints>5</victoryPoints>
         <colorRequirements>
             <PURPLE>2</PURPLE>
@@ -80,6 +88,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="SHIELDS" ability="discount">
+        <id>L002</id>
         <victoryPoints>2</victoryPoints>
         <colorRequirements>
             <BLUE>1</BLUE>
@@ -92,6 +101,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="STONES" ability="discount">
+        <id>L003</id>
         <victoryPoints>2</victoryPoints>
         <colorRequirements>
             <GREEN>1</GREEN>
@@ -104,6 +114,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="SERVANTS" ability="discount">
+        <id>L001</id>
         <victoryPoints>2</victoryPoints>
         <colorRequirements>
             <YELLOW>1</YELLOW>
@@ -116,6 +127,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="COINS" ability="discount">
+        <id>L004</id>
         <victoryPoints>2</victoryPoints>
         <colorRequirements>
             <YELLOW>1</YELLOW>
@@ -128,6 +140,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="SHIELDS" ability="production">
+        <id>L013</id>
         <victoryPoints>4</victoryPoints>
         <colorRequirements>
             <YELLOW>1</YELLOW>
@@ -138,6 +151,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="STONES" ability="production">
+        <id>L015</id>
         <victoryPoints>4</victoryPoints>
         <colorRequirements>
             <PURPLE>1</PURPLE>
@@ -148,6 +162,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="SERVANTS" ability="production">
+        <id>L014</id>
         <victoryPoints>4</victoryPoints>
         <colorRequirements>
             <BLUE>1</BLUE>
@@ -158,6 +173,7 @@
         <resourceRequirements/>
     </card>
     <card cardResource="COINS" ability="production">
+        <id>L016</id>
         <victoryPoints>4</victoryPoints>
         <colorRequirements>
             <GREEN>1</GREEN>

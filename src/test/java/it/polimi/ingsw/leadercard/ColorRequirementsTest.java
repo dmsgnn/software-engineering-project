@@ -2,15 +2,10 @@ package it.polimi.ingsw.leadercard;
 
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
-import it.polimi.ingsw.exceptions.InvalidInsertException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.gameboard.Color;
-import it.polimi.ingsw.gameboard.LeaderDeck;
 import it.polimi.ingsw.gameboard.development.DevelopmentCard;
 import it.polimi.ingsw.leadercard.Requirements.ColorRequirements;
-import it.polimi.ingsw.leadercard.Requirements.Requirements;
 import it.polimi.ingsw.playerboard.PlayerBoard;
-import it.polimi.ingsw.utility.LeaderCardsParserXML;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -25,8 +20,7 @@ public class ColorRequirementsTest {
     private static final int SIZE = VALUES.size();
     static Random random = new Random();
 
-    public ColorRequirementsTest() throws ZeroCapacityException {
-    }
+    public ColorRequirementsTest() {}
 
     /**
      * Generate a random Color
@@ -36,7 +30,7 @@ public class ColorRequirementsTest {
         return VALUES.get(random.nextInt(SIZE));
     }
     @Test
-    public void reqTest() throws InvalidInsertException {
+    public void reqTest() {
         Color color = randomColor();
         int levelCard=0;
         while (levelCard==0){

@@ -3,9 +3,6 @@ package it.polimi.ingsw.leadercard;
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.FullWarehouseException;
-import it.polimi.ingsw.exceptions.WrongResourceException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.leadercard.Requirements.ResourceRequirements;
 import it.polimi.ingsw.playerboard.PlayerBoard;
 import org.junit.jupiter.api.Test;
@@ -24,8 +21,7 @@ public class ResourceRequirementsTest {
     private static final int SIZE = VALUES.size();
     static Random random = new Random();
 
-    public ResourceRequirementsTest() throws ZeroCapacityException {
-    }
+    public ResourceRequirementsTest()  {}
 
 
     /**
@@ -37,17 +33,21 @@ public class ResourceRequirementsTest {
     }
 
     @Test
-    public void reqTest() throws FullWarehouseException, ZeroCapacityException, WrongResourceException {
+    public void reqTest() {
         Resource resource = randomResource();
-        int quantity = random.nextInt(10);
+        int quantity = 0;
+        while (quantity==0){
+            quantity = random.nextInt(10);
+        }
         for (int i=0;i<quantity;i++) {
             if (!playerBoard.getWarehouse().getDepots().get(2).isFull()) playerBoard.getWarehouse().getDepots().get(2).addResources(resource);
             else{
                 playerBoard.getStrongbox().addResource(resource,quantity-i);
             }
         }
+        int finalQuantity = quantity;
         HashMap<Resource,Integer> req = new HashMap<Resource,Integer>(){{
-            put(resource,quantity);
+            put(resource, finalQuantity);
         }};
         requirements.setCardRequirements(req);
         assertTrue(requirements.checkRequirements(playerBoard));

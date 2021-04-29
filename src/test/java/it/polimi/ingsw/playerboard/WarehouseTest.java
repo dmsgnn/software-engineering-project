@@ -1,9 +1,6 @@
 package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.FullWarehouseException;
-import it.polimi.ingsw.exceptions.WrongResourceException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +30,7 @@ public class WarehouseTest {
 
     @Test
     @DisplayName("WrongCapacityTest")
-    public void WarehouseCreationTest() throws ZeroCapacityException {
+    public void WarehouseCreationTest() {
         warehouse= new Warehouse();
         assertEquals(1,warehouse.getDepots().get(0).getCapacity());
         assertEquals(2,warehouse.getDepots().get(1).getCapacity());
@@ -45,7 +42,7 @@ public class WarehouseTest {
 
     @Test
     @DisplayName("isFullTest")
-    public void isFullTest() throws ZeroCapacityException {
+    public void isFullTest() {
         warehouse = new Warehouse();
         Resource resource = null;
         Resource resource1 = null;
@@ -54,13 +51,7 @@ public class WarehouseTest {
         for (int i=0; i<3;i++) {
             while (!warehouse.getDepots().get(i).isFull()) {
                 resource = randomResource();
-                try {
-                    warehouse.getDepots().get(i).addResources(resource);
-                } catch (ZeroCapacityException | FullWarehouseException | WrongResourceException e) {
-                    e.printStackTrace();
-                }
-
-
+                warehouse.getDepots().get(i).addResources(resource);
             }
             if (i==0) resource1 = resource;
             if (i==1) resource2 = resource;

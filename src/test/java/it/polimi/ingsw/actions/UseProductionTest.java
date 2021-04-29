@@ -27,47 +27,47 @@ public class UseProductionTest {
    @Test
     public void correctActionTest() {
         Game game = new Game();
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
        //cost doesn't matter for this test
-       PlayLeaderCard play = new PlayLeaderCard(new LeaderCard(2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS),
-               new HashMap<>(), new HashMap<>(), new HashMap<>());
+       ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
+        LeaderCard card11 = new LeaderCard("1",2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS);
+       LeaderCard card22 = new LeaderCard("2",2, new ProductionAbility(), new ColorRequirements(), Resource.SERVANTS);
+
+       cards.add(0,card11);
+       cards.add(1,card22);
+
+       PlayLeaderCard play = new PlayLeaderCard(cards, card11, new HashMap<>(), new HashMap<>(), new HashMap<>());
        try {
            play.doAction(game.getActivePlayer().getPlayerBoard());
        } catch (InvalidActionException e) {
            e.printStackTrace();
        }
 
-       PlayLeaderCard play2 = new PlayLeaderCard(new LeaderCard(2, new ProductionAbility(), new ColorRequirements(), Resource.SERVANTS),
-               new HashMap<>(), new HashMap<>(), new HashMap<>());
+       PlayLeaderCard play2 = new PlayLeaderCard(cards , card22, new HashMap<>(), new HashMap<>(), new HashMap<>());
+       game.getActivePlayer().setCardsHand(cards);
        try {
+
            play2.doAction(game.getActivePlayer().getPlayerBoard());
        } catch (InvalidActionException e) {
            e.printStackTrace();
        }
 
         ArrayList<BaseDepot> depots = game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots();
-        try {
 
-            depots.get(0).addResources(Resource.COINS);
-            depots.get(1).addResources(Resource.STONES);
-            depots.get(1).addResources(Resource.STONES);
-            depots.get(2).addResources(Resource.SERVANTS);
-            depots.get(2).addResources(Resource.SERVANTS);
-            depots.get(2).addResources(Resource.SERVANTS);
-            //card depot
-            depots.get(3).addResources(Resource.SERVANTS);
-            depots.get(3).addResources(Resource.SERVANTS);
-            for(Resource resource : Resource.values()){
-                //strongbox con 4 di ogni risorsa
-                game.getActivePlayer().getPlayerBoard().getStrongbox().addResource(resource, 4);
-            }
-        } catch (ZeroCapacityException | FullWarehouseException | WrongResourceException e) {
-            e.printStackTrace();
-        }
+       depots.get(0).addResources(Resource.COINS);
+       depots.get(1).addResources(Resource.STONES);
+       depots.get(1).addResources(Resource.STONES);
+       depots.get(2).addResources(Resource.SERVANTS);
+       depots.get(2).addResources(Resource.SERVANTS);
+       depots.get(2).addResources(Resource.SERVANTS);
+       //card depot
+       depots.get(3).addResources(Resource.SERVANTS);
+       depots.get(3).addResources(Resource.SERVANTS);
+       for(Resource resource : Resource.values()){
+           //strongbox con 4 di ogni risorsa
+           game.getActivePlayer().getPlayerBoard().getStrongbox().addResource(resource, 4);
+       }
 
         //create devCards to use as test
         Map<Resource, Integer> prodCost = new HashMap<>();
@@ -85,12 +85,10 @@ public class UseProductionTest {
         DevelopmentCard card2 = new DevelopmentCard(new HashMap<>(), Color.GREEN,"",1, 1, power2);
 
         ArrayList<DevelopmentCardSlot> playerSlot = game.getActivePlayer().getPlayerBoard().getSlots();
-        try {
-            playerSlot.get(0).addCardOnTop(card, game.getActivePlayer().getPlayerBoard());
-            playerSlot.get(1).addCardOnTop(card2, game.getActivePlayer().getPlayerBoard());
-        } catch (InvalidInsertException e) {
-            e.printStackTrace();
-        }
+
+        playerSlot.get(0).addCardOnTop(card, game.getActivePlayer().getPlayerBoard());
+        playerSlot.get(1).addCardOnTop(card2, game.getActivePlayer().getPlayerBoard());
+
 
         Map<Resource, Integer> wareHouse = new HashMap<>();
         wareHouse.put(Resource.COINS, 1);
@@ -140,22 +138,17 @@ public class UseProductionTest {
     @Test
     public void validActionTestWrongPayment(){
         Game game = new Game();
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
-        try {
-            ArrayList<BaseDepot> depots = game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots();
-            depots.get(0).addResources(Resource.COINS);
-            depots.get(1).addResources(Resource.STONES);
-            depots.get(2).addResources(Resource.SERVANTS);
-            for(Resource resource : Resource.values()){
-                //strongbox con 2 di ogni risorsa
-                game.getActivePlayer().getPlayerBoard().getStrongbox().addResource(resource, 2);
-            }
-        } catch (ZeroCapacityException | FullWarehouseException | WrongResourceException e) {
-            e.printStackTrace();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+
+        ArrayList<BaseDepot> depots = game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots();
+        depots.get(0).addResources(Resource.COINS);
+        depots.get(1).addResources(Resource.STONES);
+        depots.get(2).addResources(Resource.SERVANTS);
+        for(Resource resource : Resource.values()){
+            //strongbox con 2 di ogni risorsa
+            game.getActivePlayer().getPlayerBoard().getStrongbox().addResource(resource, 2);
         }
         Map<Resource, Integer> wareHouse = new HashMap<>();
         Map<Resource, Integer> leaderDepotResources = new HashMap<>();

@@ -7,6 +7,7 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.actions.leaderAction.PlayLeaderCard;
 import it.polimi.ingsw.leadercard.LeaderCard;
 import it.polimi.ingsw.leadercard.Requirements.ColorRequirements;
+import it.polimi.ingsw.leadercard.ability.ProductionAbility;
 import it.polimi.ingsw.leadercard.ability.StoreAbility;
 import it.polimi.ingsw.playerboard.Strongbox;
 import it.polimi.ingsw.playerboard.depot.BaseDepot;
@@ -30,14 +31,18 @@ public class ActionsTest {
     public void payResourcesTest() {
         Game game = new Game();
         Actions action = new ActionTest();
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
         //cost doesn't matter for this test
-        PlayLeaderCard play = new PlayLeaderCard(new LeaderCard(2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS),
-                new HashMap<>(), new HashMap<>(), new HashMap<>());
+        ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
+        LeaderCard card11 = new LeaderCard("1",2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS);
+        LeaderCard card22 = new LeaderCard("2",2, new ProductionAbility(), new ColorRequirements(), Resource.SERVANTS);
+
+        cards.add(0,card11);
+        cards.add(1,card22);
+        PlayLeaderCard play = new PlayLeaderCard(cards, card11, new HashMap<>(), new HashMap<>(), new HashMap<>());
+        game.getActivePlayer().setCardsHand(cards);
         try {
             play.doAction(game.getActivePlayer().getPlayerBoard());
         } catch (InvalidActionException e) {
@@ -46,23 +51,19 @@ public class ActionsTest {
 
 
         ArrayList<BaseDepot> depots = game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots();
-        try {
-            depots.get(0).addResources(Resource.COINS);
-            depots.get(1).addResources(Resource.STONES);
-            depots.get(1).addResources(Resource.STONES);
-            depots.get(2).addResources(Resource.SERVANTS);
-            depots.get(2).addResources(Resource.SERVANTS);
-            depots.get(2).addResources(Resource.SERVANTS);
-            //card depot
-            depots.get(3).addResources(Resource.SERVANTS);
-            depots.get(3).addResources(Resource.SERVANTS);
-            for (Resource resource : Resource.values()) {
+        depots.get(0).addResources(Resource.COINS);
+        depots.get(1).addResources(Resource.STONES);
+        depots.get(1).addResources(Resource.STONES);
+        depots.get(2).addResources(Resource.SERVANTS);
+        depots.get(2).addResources(Resource.SERVANTS);
+        depots.get(2).addResources(Resource.SERVANTS);
+        //card depot
+        depots.get(3).addResources(Resource.SERVANTS);
+        depots.get(3).addResources(Resource.SERVANTS);
+        for (Resource resource : Resource.values()) {
                 //strongbox 4 di ogni risorsa
                 game.getActivePlayer().getPlayerBoard().getStrongbox().addResource(resource, 4);
             }
-        } catch (ZeroCapacityException | FullWarehouseException | WrongResourceException e) {
-            e.printStackTrace();
-        }
         //payment to do
         Map<Resource, Integer> wareHouse = new HashMap<>();
         wareHouse.put(Resource.COINS, 1);
@@ -78,7 +79,7 @@ public class ActionsTest {
 
         try {
             action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources);
-        } catch (InsufficientResourcesException | EmptyWarehouseException | CantPayException e) {
+        } catch (InsufficientResourcesException  | CantPayException e) {
             e.printStackTrace();
         }
 
@@ -101,11 +102,8 @@ public class ActionsTest {
     public void payResourcesWrongStrongboxTest() {
         Game game = new Game();
         Actions action = new ActionTest();
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
 
         for (Resource resource : Resource.values()) {
             //strongbox 2 di ogni risorsa
@@ -128,22 +126,16 @@ public class ActionsTest {
     public void payResourcesWrongWarehouseTest() {
         Game game = new Game();
         Actions action = new ActionTest();
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
 
         ArrayList<BaseDepot> depots = game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots();
-        try {
-            depots.get(0).addResources(Resource.COINS);
-            depots.get(1).addResources(Resource.STONES);
-            depots.get(2).addResources(Resource.SERVANTS);
-            depots.get(2).addResources(Resource.SERVANTS);
+        depots.get(0).addResources(Resource.COINS);
+        depots.get(1).addResources(Resource.STONES);
+        depots.get(2).addResources(Resource.SERVANTS);
+        depots.get(2).addResources(Resource.SERVANTS);
 
-        } catch (ZeroCapacityException | FullWarehouseException | WrongResourceException e) {
-            e.printStackTrace();
-        }
         //payment to do
         Map<Resource, Integer> wareHouse = new HashMap<>();
         wareHouse.put(Resource.COINS, 1);
@@ -161,13 +153,17 @@ public class ActionsTest {
     public void payResourcesWrongLeaderDepotTest() {
         Game game = new Game();
         Actions action = new ActionTest();
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
-        PlayLeaderCard play = new PlayLeaderCard(new LeaderCard(2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS),
-                new HashMap<>(), new HashMap<>(), new HashMap<>());
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+        ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
+        LeaderCard card11 = new LeaderCard("1",2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS);
+        LeaderCard card22 = new LeaderCard("2",2, new ProductionAbility(), new ColorRequirements(), Resource.SERVANTS);
+
+        cards.add(0,card11);
+        cards.add(1,card22);
+        PlayLeaderCard play = new PlayLeaderCard(cards, card11, new HashMap<>(), new HashMap<>(), new HashMap<>());
+        game.getActivePlayer().setCardsHand(cards);
         try {
             play.doAction(game.getActivePlayer().getPlayerBoard());
         } catch (InvalidActionException e) {
@@ -175,15 +171,12 @@ public class ActionsTest {
         }
 
         ArrayList<BaseDepot> depots = game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots();
-        try {
-            depots.get(0).addResources(Resource.COINS);
-            depots.get(1).addResources(Resource.STONES);
-            depots.get(2).addResources(Resource.SERVANTS);
-            //card depot
-            depots.get(3).addResources(Resource.SERVANTS);
-        } catch (ZeroCapacityException | FullWarehouseException | WrongResourceException e) {
-            e.printStackTrace();
-        }
+        depots.get(0).addResources(Resource.COINS);
+        depots.get(1).addResources(Resource.STONES);
+        depots.get(2).addResources(Resource.SERVANTS);
+        //card depot
+        depots.get(3).addResources(Resource.SERVANTS);
+
         //payment to do
         Map<Resource, Integer> wareHouse = new HashMap<>();
         Map<Resource, Integer> leaderDepotResources = new HashMap<>();

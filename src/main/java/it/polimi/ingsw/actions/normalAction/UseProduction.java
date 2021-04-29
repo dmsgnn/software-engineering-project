@@ -3,7 +3,6 @@ package it.polimi.ingsw.actions.normalAction;
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.actions.Actions;
 import it.polimi.ingsw.exceptions.CantPayException;
-import it.polimi.ingsw.exceptions.EmptyWarehouseException;
 import it.polimi.ingsw.exceptions.InvalidActionException;
 import it.polimi.ingsw.gameboard.development.DevelopmentCard;
 import it.polimi.ingsw.playerboard.PlayerBoard;
@@ -41,7 +40,7 @@ public class UseProduction extends Actions {
         else{
             try {
                 payResources(playerBoard, warehouseResources, leaderDepotResources, strongboxResources);
-            } catch (InsufficientResourcesException | EmptyWarehouseException | CantPayException e) {
+            } catch (InsufficientResourcesException | CantPayException e) {
                 throw new InvalidActionException();
             }
             gainProduction(playerBoard);

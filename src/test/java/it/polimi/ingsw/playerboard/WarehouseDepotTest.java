@@ -1,9 +1,6 @@
 package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.EmptyWarehouseException;
-import it.polimi.ingsw.exceptions.FullWarehouseException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.playerboard.depot.WarehouseDepot;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,42 +25,17 @@ public class WarehouseDepotTest {
 
 
     @Test
-    @DisplayName("Warehouse capacity =0")
-    public void zeroCapacityTest(){
-        int a =0;
-        try {
-            WarehouseDepot warehouseDepot = new WarehouseDepot(a,0,null);
-        } catch (ZeroCapacityException e) {
-            try {
-                WarehouseDepot warehouseDepot = new WarehouseDepot(a++,0,null);
-            } catch (ZeroCapacityException zeroCapacityException) {
-                zeroCapacityException.printStackTrace();
-            }
-            e.printStackTrace();
-        }
-
-
-    }
-
-
-    @Test
     @DisplayName("Insert a new resource in the depot")
     public void changeResourceTest(){
         Resource newResource = randomResource();
         WarehouseDepot warehouseDepot = null;
-        try { warehouseDepot = new WarehouseDepot(3,3,randomResource());
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+        warehouseDepot = new WarehouseDepot(3,3,randomResource());
+
         while (newResource == warehouseDepot.getResource()){
             newResource = randomResource();
         }
 
-        try {
-            warehouseDepot.addResources(newResource);
-        } catch (ZeroCapacityException | FullWarehouseException e) {
-            e.printStackTrace();
-        }
+        warehouseDepot.addResources(newResource);
 
         assertEquals(newResource, warehouseDepot.getResource());
         assertEquals(1,warehouseDepot.getOccupied());
@@ -75,17 +47,9 @@ public class WarehouseDepotTest {
     public void increaseResourceTest() {
         Resource resource = randomResource();
         WarehouseDepot warehouseDepot = null;
-        try {
-            warehouseDepot = new WarehouseDepot(3, 1, resource);
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+        warehouseDepot = new WarehouseDepot(3, 1, resource);
 
-        try {
-            warehouseDepot.addResources(resource);
-        } catch (ZeroCapacityException | FullWarehouseException e) {
-            e.printStackTrace();
-        }
+        warehouseDepot.addResources(resource);
 
         assertEquals(resource,warehouseDepot.getResource());
         assertEquals(2,warehouseDepot.getOccupied());
@@ -97,20 +61,9 @@ public class WarehouseDepotTest {
     public void removeResourceTest(){
         Resource resource = randomResource();
         WarehouseDepot warehouseDepot = null;
-
-        try {
             warehouseDepot = new WarehouseDepot(3,3,resource);
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
 
-        try {
-            warehouseDepot.removeResource(2);
-        } catch (EmptyWarehouseException e) {
-            e.printStackTrace();
-        } catch (InsufficientResourcesException e) {
-            e.printStackTrace();
-        }
+        warehouseDepot.removeResource(2);
 
 
         assertEquals(resource,warehouseDepot.getResource());

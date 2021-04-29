@@ -2,15 +2,11 @@ package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
-import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.InvalidInsertException;
 import it.polimi.ingsw.exceptions.NoCardsLeftException;
 import it.polimi.ingsw.exceptions.WrongLevelException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.gameboard.Color;
 import it.polimi.ingsw.gameboard.Gameboard;
 import it.polimi.ingsw.gameboard.development.DevelopmentCard;
-import it.polimi.ingsw.gameboard.development.DevelopmentCardDeck;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -32,25 +28,15 @@ public class DevelopmentCardSlotTest {
     private DevelopmentCard developmentCard2 = gameboard.buyCard(randomColor(),2);
     private DevelopmentCard developmentCard3 = gameboard.buyCard(randomColor(),3);
 
-    public DevelopmentCardSlotTest() throws WrongLevelException, NoCardsLeftException, ZeroCapacityException {
+    public DevelopmentCardSlotTest() throws WrongLevelException, NoCardsLeftException {
     }
     @Test
     public void addCardOnTopTest(){
-        try {
-            developmentCardSlot.addCardOnTop(developmentCard1,playerBoard);
-        } catch (InvalidInsertException e) {
-            System.out.println("Errore inserimento prima carta");
-        }
-        try {
-            developmentCardSlot.addCardOnTop(developmentCard2,playerBoard);
-        } catch (InvalidInsertException e) {
-            System.out.println("Errore inserimento seconda carta");
-        }
-        try {
-            developmentCardSlot.addCardOnTop(developmentCard3,playerBoard);
-        } catch (InvalidInsertException e) {
-            System.out.println("Errore inserimento terza carta");
-        }
+
+        developmentCardSlot.addCardOnTop(developmentCard1,playerBoard);
+        developmentCardSlot.addCardOnTop(developmentCard2,playerBoard);
+        developmentCardSlot.addCardOnTop(developmentCard3,playerBoard);
+
         assertEquals(developmentCard1,developmentCardSlot.getCard(0));
         assertEquals(developmentCard2,developmentCardSlot.getCard(1));
         assertEquals(developmentCard3,developmentCardSlot.getCard(2));
@@ -61,28 +47,7 @@ public class DevelopmentCardSlotTest {
     }
 
     @Test
-    public void insertTest(){
-        try {
-            developmentCardSlot.addCardOnTop(developmentCard2,playerBoard);
-        } catch (InvalidInsertException e) {
-            System.out.println("Errore inserimento prima carta");
-        }
-        try {
-            developmentCardSlot.addCardOnTop(developmentCard1,playerBoard);
-        } catch (InvalidInsertException e) {
-            System.out.println("Funzionamento corretto ");
-        }
-        try {
-            developmentCardSlot.addCardOnTop(developmentCard3,playerBoard);
-        } catch (InvalidInsertException e) {
-            System.out.println("Errore inserimento seconda carta");
-        }
-        assertEquals(developmentCard2,developmentCardSlot.getCard(0));
-        assertEquals(developmentCard3,developmentCardSlot.getCard(1));
-    }
-
-    @Test
-    public void lookTopTest() throws InvalidInsertException {
+    public void lookTopTest()  {
         developmentCardSlot.addCardOnTop(developmentCard1,playerBoard);
         assertEquals(developmentCard1,developmentCardSlot.lookTop());
         developmentCardSlot.addCardOnTop(developmentCard2,playerBoard);

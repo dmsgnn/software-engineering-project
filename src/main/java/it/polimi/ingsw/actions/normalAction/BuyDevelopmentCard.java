@@ -57,7 +57,7 @@ public class BuyDevelopmentCard extends Actions {
         else {
             try {
                 payResources(playerBoard, warehouseDepotResources, cardDepotResources, strongboxResources);
-            } catch (InsufficientResourcesException | EmptyWarehouseException | CantPayException e) {
+            } catch (InsufficientResourcesException | CantPayException e) {
                 throw new InvalidActionException();
             }
             board.buyCard(color, level);

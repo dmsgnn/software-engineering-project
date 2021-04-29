@@ -59,6 +59,7 @@ public class LeaderCardsParserXML {
         Map<Color, Integer> levelColorRequirements;
         Resource cardResource = Resource.valueOf(card.getAttribute("cardResource"));
         String realAbility = String.valueOf(card.getAttribute("ability"));
+        String id = card.getElementsByTagName("id").item(0).getTextContent();
         int victoryPoints = Integer.parseInt(card.getElementsByTagName("victoryPoints").item(0).getTextContent());
 
 
@@ -114,7 +115,7 @@ public class LeaderCardsParserXML {
             requirements = reserve;
         }
 
-        return new LeaderCard(victoryPoints,ability,requirements,cardResource);
+        return new LeaderCard(id, victoryPoints,ability,requirements,cardResource);
 
     }
 

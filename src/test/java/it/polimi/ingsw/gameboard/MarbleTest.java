@@ -3,8 +3,6 @@ package it.polimi.ingsw.gameboard;
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.ExchangeBuffErrorException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.gameboard.marble.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -63,11 +61,9 @@ public class MarbleTest {
     @DisplayName("Test red marble effect")
     public void testDrawRed(){
         Game game = new Game();
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
         ArrayList<Resource> resources = new ArrayList<>();
         ArrayList<Resource> exchangeResources = new ArrayList<>();
         Marbles marble = new RedMarble(game);
@@ -79,11 +75,9 @@ public class MarbleTest {
     @DisplayName("Test white marble without active buff")
     public void testDrawWhiteWithoutBuff(){
         Game game = new Game();
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
 
         ArrayList<Resource> resources = new ArrayList<>();
         ArrayList<Resource> exchangeResources = new ArrayList<>();
@@ -96,11 +90,9 @@ public class MarbleTest {
     @DisplayName("Test white marble with active buff")
     public void testDrawWhiteWithBuff(){
         Game game = new Game();
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
 
         ArrayList<Resource> resources = new ArrayList<>();
         ArrayList<Resource> exchangeResources = new ArrayList<>();

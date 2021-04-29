@@ -1,9 +1,6 @@
 package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.DiscountBuffErrorException;
-import it.polimi.ingsw.exceptions.ExchangeBuffErrorException;
-import it.polimi.ingsw.exceptions.ProductionBuffErrorException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -31,7 +28,7 @@ public class CardBuffsTest {
 
 
     @Test
-    public void addDiscountBuffTest() throws DiscountBuffErrorException {
+    public void addDiscountBuffTest() {
         Resource resource = randomResource();
         cardBuffs.addDiscountBuff(resource);
         assertEquals(resource, cardBuffs.getDiscountBuff().get(0));
@@ -39,7 +36,7 @@ public class CardBuffsTest {
     }
 
     @Test
-    public void addProductionBuffTest() throws ProductionBuffErrorException {
+    public void addProductionBuffTest() {
         Resource resource = randomResource();
         cardBuffs.addProductionBuff(resource);
         assertEquals(resource, cardBuffs.getProductionBuff().get(0));
@@ -49,7 +46,7 @@ public class CardBuffsTest {
 
 
     @Test
-    public void addExchangeBuffTest() throws ExchangeBuffErrorException {
+    public void addExchangeBuffTest() {
         Resource resource = randomResource();
         cardBuffs.addExchangeBuff(resource);
         assertEquals(resource, cardBuffs.getExchangeBuff().get(0));

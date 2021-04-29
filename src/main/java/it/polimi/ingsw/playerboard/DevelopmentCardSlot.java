@@ -1,9 +1,7 @@
 package it.polimi.ingsw.playerboard;
 
-import it.polimi.ingsw.exceptions.InvalidInsertException;
 import it.polimi.ingsw.gameboard.Color;
 import it.polimi.ingsw.gameboard.development.DevelopmentCard;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,27 +14,21 @@ public class DevelopmentCardSlot {
     /**
      * adding a card to the slot
      * @param card to add
-     * @throws InvalidInsertException if it is impossible to add the card to the slot
      */
-    public void addCardOnTop(DevelopmentCard card, PlayerBoard playerBoard) throws InvalidInsertException {
-        if (isEmpty()) {
-            this.slots.add(card);
-            this.cardCounter++;
-            map = playerBoard.getColorRequirements().get(card.getLevel());
-            count = map.get(card.getColor());
-            map.put(card.getColor(),count+1);
-            playerBoard.getColorRequirements().put(card.getLevel(),map);
-        } else {
-            if (slots.get(cardCounter-1).getLevel() < card.getLevel()) {
-                this.slots.add(card);
-                this.cardCounter++;
-                map = playerBoard.getColorRequirements().get(card.getLevel());
-                count = map.get(card.getColor());
-                map.put(card.getColor(),count+1);
-                playerBoard.getColorRequirements().put(card.getLevel(),map);
-            } else throw new InvalidInsertException();
-        }
+    public void addCardOnTop(DevelopmentCard card, PlayerBoard playerBoard) {
+        this.slots.add(card);
+        this.cardCounter++;
+        map = playerBoard.getColorRequirements().get(card.getLevel());
+        count = map.get(card.getColor());
+        map.put(card.getColor(),count+1);
+        playerBoard.getColorRequirements().put(card.getLevel(),map);
+    }
 
+    public boolean validAction(DevelopmentCard card){
+        if(isEmpty()) return true;
+        else {
+            return slots.get(cardCounter - 1).getLevel() < card.getLevel();
+        }
     }
 
     /**

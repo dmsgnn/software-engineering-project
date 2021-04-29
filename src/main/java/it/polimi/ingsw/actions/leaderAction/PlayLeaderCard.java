@@ -5,20 +5,24 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.leadercard.LeaderCard;
 import it.polimi.ingsw.playerboard.PlayerBoard;
 import javax.naming.InsufficientResourcesException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PlayLeaderCard extends Actions {
     private final LeaderCard leaderCard;
-    private Map<Resource, Integer> warehouseDepotResources;
-    private Map<Resource, Integer> strongboxResources;
-    private Map<Resource, Integer> cardDepotResources;
+    private HashMap<Resource, Integer> warehouseDepotResources;
+    private HashMap<Resource, Integer> strongboxResources;
+    private HashMap<Resource, Integer> cardDepotResources;
+    private ArrayList<LeaderCard> cardsHand;
 
-    public PlayLeaderCard(LeaderCard leaderCard, Map<Resource, Integer> warehouseDepotResources, Map<Resource, Integer> strongboxResources, Map<Resource, Integer> cardDepotResources) {
+    public PlayLeaderCard(ArrayList<LeaderCard> cardsHand, LeaderCard leaderCard, HashMap<Resource, Integer> warehouseDepotResources, HashMap<Resource, Integer> strongboxResources, HashMap<Resource, Integer> cardDepotResources) {
+        this.cardsHand = cardsHand;
         this.leaderCard = leaderCard;
         this.warehouseDepotResources = warehouseDepotResources;
         this.strongboxResources = strongboxResources;
         this.cardDepotResources = cardDepotResources;
+
     }
 
     @Override
@@ -28,7 +32,7 @@ public class PlayLeaderCard extends Actions {
            try {
                payResources(playerBoard,warehouseDepotResources,cardDepotResources,strongboxResources);
                playLeaderCard(playerBoard);
-           } catch (CantPayException | InsufficientResourcesException | EmptyWarehouseException | ZeroCapacityException e) {
+           } catch (CantPayException | InsufficientResourcesException e) {
                throw new InvalidActionException();
            }
        }
@@ -37,6 +41,13 @@ public class PlayLeaderCard extends Actions {
 
     @Override
     public boolean validAction(PlayerBoard playerBoard) {
+        boolean check = false;
+        for (LeaderCard card : cardsHand) {
+            if (card.equals(leaderCard)) {
+                check = true;
+            }
+        }
+        if (check == false) return false;
         // checks that the received resources are the same of the cost of the card that the player wants to buy
         if (!leaderCard.getRequirements().IsColor()) {
             Map<Resource, Integer> totalPayment = new HashMap<>();
@@ -60,7 +71,14 @@ public class PlayLeaderCard extends Actions {
     /**
      * activates the selected leader card
      */
-    public void playLeaderCard(PlayerBoard playerBoard) throws ZeroCapacityException {
+    public void playLeaderCard(PlayerBoard playerBoard) {
         playerBoard.addLeaderCard(leaderCard);
-        leaderCard.activateCard(playerBoard);    }
+        leaderCard.activateCard(playerBoard);
+        for (int i = 0; i < cardsHand.size(); i++) {
+            if (cardsHand.get(i).equals(leaderCard)) {
+                cardsHand.remove(i);
+                break;
+            }
+        }
+    }
 }

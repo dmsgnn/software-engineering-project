@@ -1,7 +1,6 @@
 package it.polimi.ingsw.leadercard.ability;
 
 import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.ExchangeBuffErrorException;
 import it.polimi.ingsw.playerboard.PlayerBoard;
 
 public class ExchangeAbility implements Ability {

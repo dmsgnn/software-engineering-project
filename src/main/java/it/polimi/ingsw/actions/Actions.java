@@ -3,7 +3,6 @@ package it.polimi.ingsw.actions;
 
 import it.polimi.ingsw.Resource;
 import it.polimi.ingsw.exceptions.CantPayException;
-import it.polimi.ingsw.exceptions.EmptyWarehouseException;
 import it.polimi.ingsw.exceptions.InvalidActionException;
 import it.polimi.ingsw.exceptions.NoCardsLeftException;
 import it.polimi.ingsw.exceptions.WrongLevelException;
@@ -16,14 +15,14 @@ import java.util.Map;
 public abstract class Actions {
 
 
-    public void doAction(PlayerBoard playerBoard) throws InvalidActionException, InsufficientResourcesException, EmptyWarehouseException, WrongLevelException, NoCardsLeftException {
+    public void doAction(PlayerBoard playerBoard) throws InvalidActionException, InsufficientResourcesException, WrongLevelException, NoCardsLeftException {
     }
 
     public boolean validAction(PlayerBoard playerBoard) throws NoCardsLeftException, WrongLevelException {
         return true;
     }
 
-    public void payResources(PlayerBoard playerBoard, Map<Resource, Integer> warehouseResources, Map<Resource, Integer> leaderDepotResources, Map<Resource, Integer> strongboxResources) throws InsufficientResourcesException, EmptyWarehouseException, CantPayException {
+    public void payResources(PlayerBoard playerBoard, Map<Resource, Integer> warehouseResources, Map<Resource, Integer> leaderDepotResources, Map<Resource, Integer> strongboxResources) throws InsufficientResourcesException, CantPayException {
         if(!enoughResPossessed(playerBoard, warehouseResources, leaderDepotResources, strongboxResources)) {
             throw new CantPayException();
         }

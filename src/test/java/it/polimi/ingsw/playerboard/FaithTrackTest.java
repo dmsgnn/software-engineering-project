@@ -2,7 +2,6 @@ package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.exceptions.FullPlayerException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.playerboard.faithTrack.FaithTrack;
 import it.polimi.ingsw.playerboard.faithTrack.PlayerFaithTrack;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +27,7 @@ public class FaithTrackTest {
 
     @Test
     @DisplayName("Test three cases and checks that in case every position get incremented, the vatican report check is correctly done")
-    public void increaseAllPositionTest() throws FullPlayerException, ZeroCapacityException {
+    public void increaseAllPositionTest() throws FullPlayerException {
         Game game = new Game();
         game.addPlayer("First");
         game.addPlayer("Second");
@@ -126,12 +125,12 @@ public class FaithTrackTest {
         assertEquals(0, game.getPlayersNumber());
         try {
             game.addPlayer("Paolo");
-        } catch (FullPlayerException | ZeroCapacityException e) {
+        } catch (FullPlayerException e) {
             e.printStackTrace();
         }
         try {
             game.addPlayer("Gina");
-        } catch (FullPlayerException | ZeroCapacityException e) {
+        } catch (FullPlayerException e) {
             e.printStackTrace();
         }
         assertEquals(2, game.getPlayersNumber());

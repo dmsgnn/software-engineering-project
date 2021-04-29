@@ -3,7 +3,6 @@ package it.polimi.ingsw.gameboard;
 import it.polimi.ingsw.Game;
 import it.polimi.ingsw.Player;
 import it.polimi.ingsw.exceptions.InvalidIndexException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.gameboard.marble.Marbles;
 import it.polimi.ingsw.utility.MarketParserXML;
 import org.junit.jupiter.api.DisplayName;
@@ -65,11 +64,8 @@ public class MarketTest {
     @Test
     @DisplayName("Check correct resource output for getColumn")
     public void testGetColumn(){
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
         ArrayList<Marbles> tempMarbles = new ArrayList<>();
         ArrayList<Marbles> marbles = null;
         for(int i = 0; i < market.getColumns(); i++) { //testo ogni colonna
@@ -89,11 +85,8 @@ public class MarketTest {
     @Test
     @DisplayName("Check correct resource output for getRow")
     public void testGetRow(){
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
         ArrayList<Marbles> tempMarbles = new ArrayList<>();
         ArrayList<Marbles> marbles = null;
         for(int i=0; i < market.getRows(); i++) {
@@ -113,11 +106,9 @@ public class MarketTest {
     @Test
     @DisplayName("Check correct market update for getColumn")
     public void testShiftColumn(){
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
         Marbles[][] grid = new Marbles[market.getRows()][market.getColumns()];
         for(int i=0; i < market.getColumns(); i++) {
             Marbles tempMarble = market.getFreeMarble();
@@ -150,11 +141,9 @@ public class MarketTest {
     @Test
     @DisplayName("Check correct market update for getRow")
     public void testShiftRow() {
-        try {
-            game.setActivePlayer(new Player("Giorgio", 1, game));
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
         Marbles[][] grid = new Marbles[market.getRows()][market.getColumns()];
         for (int i = 0; i < market.getRows(); i++) {
             Marbles tempMarble = market.getFreeMarble();

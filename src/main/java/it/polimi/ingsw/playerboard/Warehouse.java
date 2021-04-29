@@ -1,7 +1,6 @@
 package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.playerboard.depot.BaseDepot;
 import it.polimi.ingsw.playerboard.depot.WarehouseDepot;
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public class Warehouse {
     private int depotsNum;
     private final int baseDepotsNum;
 
-    public Warehouse() throws ZeroCapacityException {
+    public Warehouse() {
 
         depots = new ArrayList<>();
         depots.add(new WarehouseDepot(1,0,null));

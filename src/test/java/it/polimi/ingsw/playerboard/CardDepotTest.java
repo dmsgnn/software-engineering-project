@@ -1,9 +1,6 @@
 package it.polimi.ingsw.playerboard;
 
 import it.polimi.ingsw.Resource;
-import it.polimi.ingsw.exceptions.FullWarehouseException;
-import it.polimi.ingsw.exceptions.WrongResourceException;
-import it.polimi.ingsw.exceptions.ZeroCapacityException;
 import it.polimi.ingsw.playerboard.depot.CardDepot;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CardDepotTest {
     CardDepot cardDepot = null;
@@ -36,24 +33,14 @@ public class CardDepotTest {
     public void addCardResourceTest(){
         Resource resource = randomResource();
         Resource newResource = randomResource() ;
-        try {
-            cardDepot = new CardDepot(3,1,resource);
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        }
+
+        cardDepot = new CardDepot(3,1,resource);
+
         while (newResource == cardDepot.getResource()){
             newResource = randomResource();
         }
 
-        try {
-            cardDepot.addResources(newResource);
-        } catch (ZeroCapacityException e) {
-            e.printStackTrace();
-        } catch (FullWarehouseException e) {
-            e.printStackTrace();
-        } catch (WrongResourceException e) {
-            e.printStackTrace();
-        }
+        assertFalse(cardDepot.addResources(newResource));
         assertEquals(resource, cardDepot.getResource());
         assertEquals(1,cardDepot.getOccupied());
 

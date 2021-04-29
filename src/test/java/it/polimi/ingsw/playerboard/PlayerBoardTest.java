@@ -36,18 +36,17 @@ public class PlayerBoardTest {
     }
 
 
-    public PlayerBoardTest() throws ZeroCapacityException {
-    }
+    public PlayerBoardTest()  {}
 
     @Test
-    public void addLeaderCardTest() throws ErrorActivationLeaderCardException {
-        LeaderCard  leaderCard= new LeaderCard(1,discountAbility,colorRequirements, randomResource());
+    public void addLeaderCardTest() {
+        LeaderCard  leaderCard= new LeaderCard("1",1,discountAbility,colorRequirements, randomResource());
         playerBoard.addLeaderCard(leaderCard);
         assertEquals(leaderCard, playerBoard.getLeaderCards().get(0));
     }
 
     @Test
-    public void boardProductionTest() throws EmptyWarehouseException, InsufficientResourcesException, WrongResourceException, FullWarehouseException, ZeroCapacityException {
+    public void boardProductionTest()  {
         Resource resource1 = randomResource();
         Resource resource2 = randomResource();
         Resource resource3 = randomResource();

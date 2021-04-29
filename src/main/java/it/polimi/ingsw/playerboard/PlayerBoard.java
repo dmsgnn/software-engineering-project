@@ -28,9 +28,8 @@ public class PlayerBoard {
     /**
      * creation of the playerboard
      * @param player who owns the playerboard
-     * @throws ZeroCapacityException if there is a warehouse configuration error
      */
-    public PlayerBoard(Player player, Game game) throws ZeroCapacityException {
+    public PlayerBoard(Player player, Game game)  {
         colorRequirements = new HashMap<>();
         level1 = level2= level3= new HashMap<Color,Integer>(){{
             put(Color.YELLOW,0);
@@ -68,13 +67,9 @@ public class PlayerBoard {
      * @param cost1 to activate production
      * @param cost2 to activate production
      * @param gain obtained from production
-     * @throws EmptyWarehouseException
      * @throws InsufficientResourcesException
-     * @throws ZeroCapacityException
-     * @throws WrongResourceException
-     * @throws FullWarehouseException
      */
-    public void boardProduction(Resource cost1, Resource cost2, Resource gain) throws EmptyWarehouseException, InsufficientResourcesException, ZeroCapacityException, WrongResourceException, FullWarehouseException {
+    public void boardProduction(Resource cost1, Resource cost2, Resource gain) {
         Map<Resource, Integer> resources = warehouse.storedResources();
         if ((resources.get(cost1)!=0)&&(resources.get(cost2)!=0)){
             for (int i=0; i<warehouse.getDepots().size(); i++){

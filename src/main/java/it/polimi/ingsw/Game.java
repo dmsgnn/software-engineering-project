@@ -48,7 +48,7 @@ public class Game {
      * the player takes an action
      * @param action selected to do
      */
-    public void doAction(Actions action) throws InvalidActionException, InsufficientResourcesException, WrongLevelException, EmptyWarehouseException, NoCardsLeftException {
+    public void doAction(Actions action) throws InvalidActionException, InsufficientResourcesException, WrongLevelException, NoCardsLeftException {
         action.doAction(activePlayer.getPlayerBoard());
     }
 
@@ -56,7 +56,7 @@ public class Game {
      * creates a new player
      * @param nickname is the nickname of the new player, it is unique and it can't be changed during the game
      */
-    public void addPlayer(String nickname) throws FullPlayerException, ZeroCapacityException {
+    public void addPlayer(String nickname) throws FullPlayerException {
         if(playersNumber < 4) {
             players[playersNumber] = new Player(nickname, playersNumber, this);
             playersNumber += 1;
