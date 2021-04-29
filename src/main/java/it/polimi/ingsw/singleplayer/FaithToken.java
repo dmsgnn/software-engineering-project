@@ -3,9 +3,12 @@ package it.polimi.ingsw.singleplayer;
 import it.polimi.ingsw.Game;
 
 public class FaithToken extends Token {
+    private final String id;
     private final Game game;
     private final int faithGain;
-    public FaithToken(Game game, int faithGain) {
+
+    public FaithToken(Game game, int faithGain, String id) {
+        this.id = id;
         this.game = game;
         this.faithGain = faithGain;
     }

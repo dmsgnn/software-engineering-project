@@ -4,11 +4,13 @@ import it.polimi.ingsw.Game;
 import it.polimi.ingsw.gameboard.Color;
 
 public class DiscardCardToken extends Token {
+    private final String id;
     private final Color color;
     private final Game game;
     private final int discardQuantity;
 
-    public DiscardCardToken(Game game, Color color, int discardQuantity) {
+    public DiscardCardToken(Game game, Color color, int discardQuantity, String id) {
+        this.id = id;
         this.game = game;
         this.color = color;
         this.discardQuantity = discardQuantity;

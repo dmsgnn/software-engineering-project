@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TokenDeckTest {
+
     @Test
     @DisplayName("check that the top element of deck is removed and added to usedTokens")
     public void pickTopTest() {

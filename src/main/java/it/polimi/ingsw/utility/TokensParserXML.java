@@ -53,6 +53,7 @@ public class TokensParserXML {
     private Token tokenBuilder(Element token, Game game) {
         //reads all the attributes of the token
         Color color;
+        String id = token.getElementsByTagName("id").item(0).getTextContent();
         int discardQuantity = Integer.parseInt(token.getElementsByTagName("discardQuantity").item(0).getTextContent());
         if(discardQuantity != 0) {
             color = Color.valueOf(token.getElementsByTagName("color").item(0).getTextContent());
@@ -64,11 +65,11 @@ public class TokensParserXML {
         int shuffle = Integer.parseInt(token.getElementsByTagName("shuffle").item(0).getTextContent());
 
         if (faithGain > 0 && shuffle == 0) {
-            return new FaithToken(game, faithGain);
+            return new FaithToken(game, faithGain, id);
         }
         if (faithGain > 0 && shuffle > 0) {
-            return new ShuffleToken(game, faithGain, shuffle);
+            return new ShuffleToken(game, faithGain, shuffle, id);
         }
-        return new DiscardCardToken(game, color, discardQuantity);
+        return new DiscardCardToken(game, color, discardQuantity, id);
     }
 }

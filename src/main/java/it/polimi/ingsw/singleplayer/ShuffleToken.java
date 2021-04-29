@@ -3,10 +3,13 @@ package it.polimi.ingsw.singleplayer;
 import it.polimi.ingsw.Game;
 
 public class ShuffleToken extends Token {
+    private final String id;
     private final Game game;
     private final int faithGain;
     private final int shuffle;
-    public ShuffleToken(Game game, int faithGain, int shuffle) {
+
+    public ShuffleToken(Game game, int faithGain, int shuffle, String id) {
+        this.id = id;
         this.game = game;
         this.faithGain = faithGain;
         this.shuffle = shuffle;

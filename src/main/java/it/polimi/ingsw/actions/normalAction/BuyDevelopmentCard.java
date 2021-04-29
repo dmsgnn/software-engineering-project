@@ -18,14 +18,16 @@ public class BuyDevelopmentCard extends Actions {
     private Gameboard board;
     private Color color;
     private int level;
+    private int slotNumber;
 
-    public BuyDevelopmentCard(Gameboard board, HashMap<Resource, Integer> depotResources, HashMap<Resource, Integer> strongboxResources, HashMap<Resource, Integer> cardDepotResources, Color color, int level) {
+    public BuyDevelopmentCard(Gameboard board, HashMap<Resource, Integer> depotResources, HashMap<Resource, Integer> strongboxResources, HashMap<Resource, Integer> cardDepotResources, Color color, int level, int slotNumber) {
         this.warehouseDepotResources = depotResources;
         this.strongboxResources = strongboxResources;
         this.cardDepotResources = cardDepotResources;
         this.board = board;
         this.color = color;
         this.level = level;
+        this.slotNumber = slotNumber;
     }
 
 
@@ -43,11 +45,11 @@ public class BuyDevelopmentCard extends Actions {
         warehouseDepotResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
         cardDepotResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
         strongboxResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
-        return board.viewCard(color, level).checkCardRequirements(totalPayment);
+        return (board.viewCard(color, level).checkCardRequirements(totalPayment) && playerBoard.getSlots().get(slotNumber-1).validAction(board.viewCard(color, level)));
     }
 
     /**
-     * checks if the action can be done and then make the payment and buy the card
+     * checks if the action can be done and then make the payment and buy the card and place it in the development card slot
      * @throws InvalidActionException if the action can't be done because the player hasn't make a correct selection or if he doesn't have
      * enough resources to buy the card
      */
@@ -60,7 +62,7 @@ public class BuyDevelopmentCard extends Actions {
             } catch (InsufficientResourcesException | CantPayException e) {
                 throw new InvalidActionException();
             }
-            board.buyCard(color, level);
+            playerBoard.getSlots().get(slotNumber-1).addCardOnTop(board.buyCard(color, level), playerBoard);
         }
     }
 }

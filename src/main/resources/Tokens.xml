@@ -1,41 +1,48 @@
 <tokens>
     <token>
+        <id>T001</id>
         <color>GREEN</color>
         <discardQuantity>2</discardQuantity>
         <faithGain>0</faithGain>
         <shuffle>0</shuffle>
     </token>
     <token>
+        <id>T002</id>
         <color>YELLOW</color>
         <discardQuantity>2</discardQuantity>
         <faithGain>0</faithGain>
         <shuffle>0</shuffle>
     </token>
     <token>
+        <id>T003</id>
         <color>BLUE</color>
         <discardQuantity>2</discardQuantity>
         <faithGain>0</faithGain>
         <shuffle>0</shuffle>
     </token>
     <token>
+        <id>T004</id>
         <color>PURPLE</color>
         <discardQuantity>2</discardQuantity>
         <faithGain>0</faithGain>
         <shuffle>0</shuffle>
     </token>
     <token>
+        <id>T005</id>
         <color/>
         <discardQuantity>0</discardQuantity>
         <faithGain>2</faithGain>
         <shuffle>0</shuffle>
     </token>
     <token>
+        <id>T006</id>
         <color/>
         <discardQuantity>0</discardQuantity>
         <faithGain>2</faithGain>
         <shuffle>0</shuffle>
     </token>
     <token>
+        <id>T007</id>
         <color/>
         <discardQuantity>0</discardQuantity>
         <faithGain>1</faithGain>
