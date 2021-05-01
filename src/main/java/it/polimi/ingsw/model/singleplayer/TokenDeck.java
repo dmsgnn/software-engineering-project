@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.singleplayer;
 
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.utility.TokensParserXML;
+import it.polimi.ingsw.utility.TokensParserXML;
 
 import java.util.ArrayList;
 import java.util.Collections;

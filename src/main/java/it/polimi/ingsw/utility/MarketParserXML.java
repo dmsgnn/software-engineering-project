@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.utility;
+package it.polimi.ingsw.utility;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.gameboard.Market;

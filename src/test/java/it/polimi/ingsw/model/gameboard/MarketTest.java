@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.exceptions.InvalidIndexException;
 import it.polimi.ingsw.model.gameboard.marble.Marbles;
-import it.polimi.ingsw.model.utility.MarketParserXML;
+import it.polimi.ingsw.utility.MarketParserXML;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

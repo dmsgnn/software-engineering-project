@@ -5,9 +5,9 @@ import it.polimi.ingsw.model.exceptions.NoCardsLeftException;
 import it.polimi.ingsw.model.exceptions.WrongLevelException;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCardDeck;
-import it.polimi.ingsw.model.utility.DevCardsParserXML;
-import it.polimi.ingsw.model.utility.LeaderCardsParserXML;
-import it.polimi.ingsw.model.utility.MarketParserXML;
+import it.polimi.ingsw.utility.DevCardsParserXML;
+import it.polimi.ingsw.utility.LeaderCardsParserXML;
+import it.polimi.ingsw.utility.MarketParserXML;
 
 import java.util.ArrayList;
 
