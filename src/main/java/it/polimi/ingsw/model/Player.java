@@ -12,7 +12,6 @@ public class Player {
     private int turnOrder;
     private PlayerBoard playerBoard;
     private ArrayList<LeaderCard> cardsHand;
-    private PlayerFaithTrack faithTrack;
 
     public Player(String nickname, int turnOrder, Game game) {
         this.game = game;
@@ -21,11 +20,10 @@ public class Player {
         this.victoryPoints = 0;
         this.playerBoard = new PlayerBoard(this, game);
         this.cardsHand = new ArrayList<>();
-        this.faithTrack = new PlayerFaithTrack(game);
     }
 
     public PlayerFaithTrack getFaithTrack() {
-        return faithTrack;
+        return playerBoard.getFaithTrack();
     }
 
     public int getVictoryPoints() {
@@ -83,6 +81,10 @@ public class Player {
     }
     public ArrayList<LeaderCard> getCardsHand() {
         return cardsHand;
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 
     public void setCardsHand(ArrayList<LeaderCard> cardsHand) {
