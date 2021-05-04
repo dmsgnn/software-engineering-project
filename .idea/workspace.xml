@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Game constructor update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Player fix">
       <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/MarbleColors.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/UserInterface.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientGameBoard.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/DevCardGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/DevCardGrid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/MarketMarbles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/MarketMarbles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +218,11 @@
       <workItem from="1619781535566" duration="68000" />
       <workItem from="1619781642720" duration="2406000" />
       <workItem from="1619956915626" duration="6296000" />
-      <workItem from="1620030245144" duration="232000" />
+      <workItem from="1620030245144" duration="4928000" />
+      <workItem from="1620044860960" duration="4974000" />
+      <workItem from="1620060122763" duration="16000" />
+      <workItem from="1620069026733" duration="4066000" />
+      <workItem from="1620126911855" duration="782000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -276,7 +280,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619874461101</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Player fix">
+      <created>1620030513013</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1620030513013</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +315,8 @@
     <MESSAGE value="Market and marbles update" />
     <MESSAGE value="Actions update with testing" />
     <MESSAGE value="general refactor and update of messages between client and server" />
-    <option name="LAST_COMMIT_MESSAGE" value="general refactor and update of messages between client and server" />
+    <MESSAGE value="Player fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Player fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
