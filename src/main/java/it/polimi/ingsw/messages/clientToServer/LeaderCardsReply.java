@@ -5,7 +5,7 @@ import it.polimi.ingsw.controller.Controller;
 import java.util.ArrayList;
 
 public class LeaderCardsReply implements ClientMessage{
-    private ArrayList<String> leaderCardsId;
+    private final ArrayList<String> leaderCardsId;
 
     public LeaderCardsReply(ArrayList<String> leaderCardsId) {
         this.leaderCardsId = leaderCardsId;
@@ -13,5 +13,7 @@ public class LeaderCardsReply implements ClientMessage{
 
 
     @Override
-    public void handleMessage(Controller controller) { }
+    public void handleMessage(Controller controller) {
+        controller.pickStartingLeaderCards(leaderCardsId);
+    }
 }

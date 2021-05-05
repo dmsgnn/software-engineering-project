@@ -10,5 +10,5 @@ public class PlayerNumberReply implements ClientMessage{
     }
 
     @Override
-    public void handleMessage(Controller controller) { }
+    public void handleMessage(Controller controller) { controller.setPlayerNumber(playerNum);}
 }

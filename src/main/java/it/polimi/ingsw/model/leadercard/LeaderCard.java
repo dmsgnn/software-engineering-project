@@ -28,6 +28,9 @@ public class LeaderCard {
     public int getVictoryPoints() {
         return victoryPoints;
     }
+    public String getId() {
+        return id;
+    }
 
     /**
      * activate the leader card

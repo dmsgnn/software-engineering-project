@@ -22,6 +22,6 @@ public class PlayLeaderCardParameters implements ClientMessage {
 
     @Override
     public void handleMessage(Controller controller) {
-
+        controller.playLeaderCard(id,warehouseDepotRes,cardDepotRes,strongboxRes);
     }
 }

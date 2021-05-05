@@ -1,13 +1,14 @@
 package it.polimi.ingsw.messages.clientToServer;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 
 public class RowColumnSelection implements ClientMessage {
     private int index;
+    private boolean isRow;
 
-    public RowColumnSelection(int index) {
+    public RowColumnSelection(int index, boolean isRow) {
         this.index = index;
+        this.isRow = isRow;
     }
 
     @Override

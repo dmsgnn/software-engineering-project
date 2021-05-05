@@ -4,12 +4,12 @@ import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.controller.Controller;
 
 public class ActionReply implements ClientMessage{
-    private Actions action;
+    private final Actions action;
 
     public ActionReply(Actions action) {
         this.action = action;
     }
 
     @Override
-    public void handleMessage(Controller controller) { }
+    public void handleMessage(Controller controller) { controller.selectAction(action);}
 }

@@ -4,14 +4,15 @@ import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ResourcesReply implements ClientMessage{
-    private ArrayList<ArrayList<Resource>> resources;
+    private final Map<Integer,ArrayList<Resource>> resources;
 
-    public ResourcesReply(ArrayList<ArrayList<Resource>> resources) {
+    public ResourcesReply(Map<Integer,ArrayList<Resource>> resources) {
         this.resources = resources;
     }
 
     @Override
-    public void handleMessage(Controller controller) { }
+    public void handleMessage(Controller controller) { controller.pickStartingResources(resources);}
 }
