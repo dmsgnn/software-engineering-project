@@ -29,6 +29,12 @@ public interface UserInterface {
     void loser(String nickname);
 
     /**
+     * called to display the error message to the player
+     * @param message contains the error message
+     */
+    void displayMessage(String message);
+
+    /**
      * Manages a winning player
      * @param nickname Name of winner
      */
@@ -50,7 +56,7 @@ public interface UserInterface {
     void endTurn();
 
     /**
-     * called to begin a game, it displays the necessary informations to begin a game
+     * called to begin a game, it displays the necessary information to begin a game
      */
     void startGame();
 
@@ -81,12 +87,6 @@ public interface UserInterface {
      * @return action picked from the player
      */
     Actions chooseAction(ArrayList<Actions> possibleActions);
-
-    /**
-     * called to manage a wrong action selection from the player, error message and calls chooseAction again
-     * @return action picked from the player
-     */
-    Actions manageWrongAction();
 
     /**
      * called to make the player perform the market action

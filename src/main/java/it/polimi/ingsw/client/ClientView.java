@@ -3,15 +3,14 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.representations.ClientGameBoard;
 import it.polimi.ingsw.controller.Actions;
-import it.polimi.ingsw.messages.clientToServer.BuyDevelopmentCardParameters;
-import it.polimi.ingsw.messages.clientToServer.ResourcesManageReply;
-import it.polimi.ingsw.messages.clientToServer.UsernameReply;
+import it.polimi.ingsw.messages.clientToServer.*;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ClientView implements Observer<ServerMessage> {
@@ -61,18 +60,22 @@ public class ClientView implements Observer<ServerMessage> {
         //socket.sendMessage(new UsernameReply(nickname));
     }
 
+    /**
+     * called from the server if the nickname sent with login is valid
+     * @param nickname the player set
+     */
     public void setNickname(String nickname){
         this.nickname = nickname;
     }
 
-
-    //response method, "ok" non fai nulla, altro stampa errore
-    //**************************************************************************************************
-    //**************************************************************************************************
-    //**************************************************************************************************
-    //**************************************************************************************************
-
-
+    /**
+     * called when the server sends a response message to the client, invokes UI method only if it's an error message
+     * @param message response message
+     */
+    public void responseMessage(String message){
+        message.toLowerCase(Locale.ROOT);
+        if(!message.equals("ok")) uiType.displayMessage(message);
+    }
 
     //------------------GAME SETUP------------------
 
@@ -143,13 +146,6 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
-     * called if the player picked an action that he can't perform
-     */
-    public void wrongActionChoice(){
-        Actions actions = uiType.manageWrongAction();
-    }
-
-    /**
      * called to make the player do the selected action
      * @param action what the player decided to do
      */
@@ -164,25 +160,34 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
-     * called from UI to send the action parameters to the server
+     * called from UI to send the market action parameters to the server
      * @param pos column or row picked by the player
      * @param rowOrCol true if pos is row, false if column
+     * @param exchangeBuffResources resources obtained from white marbles if possible
      */
     public void marketAction(int pos, boolean rowOrCol, ArrayList<Resource> exchangeBuffResources){
         //socket.sendMessage(new RowColumnSelection(pos, rowOrCol, exchangeBuffResources));
     }
 
     /**
-     * called from UI to send the action parameters to the server
+     * called from UI to send the production action parameters to the server
+     * @param developmentCardSlotIndex indexes of the development cards the player wants to use for the production
+     * @param leaderCardProdIndex indexes of the leader cards the player wants to use for the production
+     * @param leaderCardProdGain resource gains for the leader card production
+     * @param boardResources resource cost and gains for the board production
+     * @param warehouseResources resources inside the warehouse that the player wants to pay
+     * @param leaderDepotResources resources inside the leadercard depots that the player wants to pay
+     * @param strongboxResources resources inside the strongbox that the player wants to pay
      */
     public void useProduction(ArrayList<Integer> developmentCardSlotIndex, ArrayList<Integer> leaderCardProdIndex, ArrayList<Resource> leaderCardProdGain,
                               ArrayList<Resource> boardResources, Map<Resource, Integer> warehouseResources, Map<Resource, Integer> leaderDepotResources,
                               Map<Resource, Integer> strongboxResources){
-
+        /*socket.sendMessage(new UseProductionParameters(developmentCardSlotIndex, leaderCardProdIndex, leaderCardProdGain, boardResources,
+                warehouseResources, leaderDepotResources, strongboxResources));*/
     }
 
     /**
-     * called from UI to send the action parameters to the server
+     * called from UI to send the buy development card action parameters to the server
      * @param color of the card
      * @param level of the card
      * @param devCardSlot slot to place the card in
@@ -196,6 +201,26 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
+     * called from UI to send the play leadercard action parameters to the server
+     * @param id of the selected card
+     * @param warehouseDepotRes resources inside the warehouse that the player wants to pay
+     * @param cardDepotRes resources inside the leadercard depots that the player wants to pay
+     * @param strongboxRes resources inside the strongbox that the player wants to pay
+     */
+    public void playLeaderCard(String id, HashMap<Resource, Integer> warehouseDepotRes, HashMap<Resource,
+                                Integer> cardDepotRes, HashMap<Resource, Integer> strongboxRes){
+        //socket.sendMessage(new PlayLeaderCardParameters(id, warehouseDepotRes, cardDepotRes, strongboxRes));
+    }
+
+    /**
+     * called from UI to send the discard leadercard action parameters to the server
+     * @param id of the selected card
+     */
+    public void discardLeaderCard(String id){
+        //socket.sendMessage(new DiscardLeaderCardParameters(id));
+    }
+
+    /**
      * called to make the player position the acquired resources
      * @param resources new resources
      */
@@ -204,7 +229,7 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
-     * called from UI to send the action parameters to the server
+     * called from UI to send the manage resources action parameters to the server
      * @param newWarehouse new warehouse configuration
      * @param discard resources that the player wants to discard
      */
