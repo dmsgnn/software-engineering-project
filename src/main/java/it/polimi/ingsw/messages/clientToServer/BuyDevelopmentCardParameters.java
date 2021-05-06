@@ -1,7 +1,6 @@
 package it.polimi.ingsw.messages.clientToServer;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 
@@ -15,7 +14,8 @@ public class BuyDevelopmentCardParameters implements ClientMessage {
     private final HashMap<Resource,Integer> cardDepotRes;
     private final HashMap<Resource,Integer> strongboxRes;
 
-    public BuyDevelopmentCardParameters(Color color, int level, int devCardSlot, HashMap<Resource, Integer> warehouseDepotRes, HashMap<Resource, Integer> cardDepotRes, HashMap<Resource, Integer> strongboxRes) {
+    public BuyDevelopmentCardParameters(Color color, int level, int devCardSlot, HashMap<Resource, Integer> warehouseDepotRes,
+                                        HashMap<Resource, Integer> cardDepotRes, HashMap<Resource, Integer> strongboxRes) {
         this.color = color;
         this.level = level;
         this.devCardSlot = devCardSlot;

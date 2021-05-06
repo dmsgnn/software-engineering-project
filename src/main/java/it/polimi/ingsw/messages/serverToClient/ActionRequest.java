@@ -13,5 +13,5 @@ public class ActionRequest implements ServerMessage{
     }
 
     @Override
-    public void handleMessage(ClientView clientView) { }
+    public void handleMessage(ClientView clientView) { clientView.pickAction(possibleActions);}
 }

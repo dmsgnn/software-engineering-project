@@ -6,14 +6,12 @@ import it.polimi.ingsw.model.Resource;
 import java.util.ArrayList;
 
 public class ResourcesManageRequest implements  ServerMessage{
-    private ArrayList<Resource> newResources;
-    private ArrayList<ArrayList<Resource>> depotResources;
+    private ArrayList<Resource> resources;
 
-    public ResourcesManageRequest(ArrayList<Resource> resources, ArrayList<ArrayList<Resource>> depotResources) {
-        this.newResources = resources;
-        this.depotResources = depotResources;
+    public ResourcesManageRequest(ArrayList<Resource> resources) {
+        this.resources = resources;
     }
 
     @Override
-    public void handleMessage(ClientView clientView) { }
+    public void handleMessage(ClientView clientView) { clientView.manageResources(resources);}
 }

@@ -12,5 +12,5 @@ public class LeaderCardsRequest implements ServerMessage{
     }
 
     @Override
-    public void handleMessage(ClientView clientView) { }
+    public void handleMessage(ClientView clientView) { clientView.selectStartingCards(leaderCardsId); }
 }
