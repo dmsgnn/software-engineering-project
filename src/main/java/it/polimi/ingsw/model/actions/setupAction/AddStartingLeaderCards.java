@@ -25,9 +25,6 @@ public class AddStartingLeaderCards extends Actions {
     }
 
     public boolean validAction(PlayerBoard playerBoard){
-        if(cards.size()!=2){
-            return false;
-        }
-        else return true;
+        return cards.size() == 2;
     }
 }
