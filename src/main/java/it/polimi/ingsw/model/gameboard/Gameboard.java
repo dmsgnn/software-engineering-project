@@ -20,15 +20,27 @@ public class Gameboard {
 
     public Gameboard(Game game){
         marketBoard = new MarketParserXML().marketParser(game);
-        ArrayList<DevelopmentCardDeck> deckList = new DevCardsParserXML().devCardsParser();
         leaderDeck = new LeaderDeck(new LeaderCardsParserXML().leaderCardsParser());
+
+        ArrayList<DevelopmentCard> devCards = new DevCardsParserXML().devCardsParser();
+
+        //builds a list containing the decks for the cardGrid
+        ArrayList<DevelopmentCardDeck> devCardDeckList = new ArrayList<>();
+        for(int level = 1; level <= 3; level++){
+            for(Color color: Color.values()){
+                int finalLevel = level;
+                ArrayList<DevelopmentCard> tempDeck = devCards.stream().filter(x -> x.getColor() == color).filter(x -> x.getLevel() == finalLevel).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+                devCardDeckList.add(new DevelopmentCardDeck(tempDeck, level, color));
+            }
+        }
+
         cardColumns = Color.values().length;
-        cardRows = deckList.size()/cardColumns;
+        cardRows = devCardDeckList.size()/cardColumns;
         cardGrid = new DevelopmentCardDeck[cardRows][cardColumns];
 
         int level;
         Color color;
-        for (DevelopmentCardDeck developmentCardDeck : deckList) {
+        for (DevelopmentCardDeck developmentCardDeck : devCardDeckList) {
             level = developmentCardDeck.getLevel();
             color = developmentCardDeck.getColor();
             cardGrid[cardRows - level][color.ordinal()] = developmentCardDeck;

@@ -3,7 +3,6 @@ package it.polimi.ingsw.utility;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
-import it.polimi.ingsw.model.gameboard.development.DevelopmentCardDeck;
 import it.polimi.ingsw.model.gameboard.development.ProductionPower;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -23,8 +22,8 @@ import java.util.Map;
 public class DevCardsParserXML {
     private static final String xmlpath = DevCardsParserXML.class.getResource("/DevelopmentCards.xml").toExternalForm();
 
-    public ArrayList<DevelopmentCardDeck> devCardsParser() {
-        ArrayList<DevelopmentCard> cards = new ArrayList<>();
+    public ArrayList<DevelopmentCard> devCardsParser() {
+
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         Document doc = null;
         try {
@@ -40,6 +39,7 @@ public class DevCardsParserXML {
             cardList = doc.getDocumentElement().getChildNodes();
         }
 
+        ArrayList<DevelopmentCard> cards = new ArrayList<>();
         if (cardList != null) {
             for(int i=0; i<cardList.getLength(); i++){
                 Node cardNode = cardList.item(i);
@@ -48,16 +48,8 @@ public class DevCardsParserXML {
                 }
             }
         }
-        //builds a list containing the decks for gameboard
-        ArrayList<DevelopmentCardDeck> devCardDeckList = new ArrayList<>();
-        for(int level = 1; level <= 3; level++){
-            for(Color color: Color.values()){
-                int finalLevel = level;
-                ArrayList<DevelopmentCard> tempDeck = cards.stream().filter(x -> x.getColor() == color).filter(x -> x.getLevel() == finalLevel).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-                devCardDeckList.add(new DevelopmentCardDeck(tempDeck, level, color));
-            }
-        }
-        return devCardDeckList;
+
+        return cards;
     }
 
     private DevelopmentCard cardBuilder(Element card){
