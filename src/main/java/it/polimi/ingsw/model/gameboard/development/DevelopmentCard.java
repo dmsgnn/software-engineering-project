@@ -27,6 +27,10 @@ public class DevelopmentCard {
         return cardRequirements;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public Color getColor() {
         return color;
     }

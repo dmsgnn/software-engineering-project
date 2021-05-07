@@ -97,11 +97,13 @@ public class UseProduction extends Actions {
         }
 
         for(Integer i: developmentCardSlotIndex){
+            if(playerBoard.getSlots().get(i).isEmpty()) return false;
             DevelopmentCard card = playerBoard.getSlots().get(i).lookTop();
             Map<Resource, Integer> tempResource = card.getProduction().getProdCost();
             tempResource.forEach((key, value) -> totalCost.merge(key, value, Integer::sum));
         }
         for(Integer i: leaderCardProdIndex){
+            if(playerBoard.getLeaderCardBuffs().getProductionBuff().size() < leaderCardProdIndex.size()) return false;
             Resource key = playerBoard.getLeaderCardBuffs().getProductionBuff().get(i);
             totalCost.put(key, totalCost.get(key)+1);
         }
