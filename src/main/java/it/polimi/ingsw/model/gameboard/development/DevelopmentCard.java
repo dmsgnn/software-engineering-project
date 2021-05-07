@@ -65,7 +65,4 @@ public class DevelopmentCard {
         return true;
     }
 
-    public String getId() {
-        return id;
-    }
 }
