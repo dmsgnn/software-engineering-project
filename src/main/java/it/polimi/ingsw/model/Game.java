@@ -39,6 +39,14 @@ public class Game {
     public LorenzoAI getLorenzo() {
         return lorenzo;
     }
+    public void nextPlayer(){
+        for (int i=0; i<4;i++){
+            if (activePlayer.equals(players[i])) {
+                if (i==3) activePlayer= players[0];
+                else activePlayer= players[i+1];
+            }
+        }
+    }
     public void setActivePlayer(Player activePlayer) {
         this.activePlayer = activePlayer;
     }

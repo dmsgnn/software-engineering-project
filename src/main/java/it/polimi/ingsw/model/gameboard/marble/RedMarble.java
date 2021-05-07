@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard.marble;
 
+import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Resource;
 
@@ -14,5 +15,10 @@ public class RedMarble extends Marbles {
     @Override
     public void drawEffect(ArrayList<Resource> resources, ArrayList<Resource> exchangeResources) {
         game.getActivePlayer().getFaithTrack().increasePosition();
+    }
+
+    @Override
+    public MarbleColors getColor() {
+        return MarbleColors.RED;
     }
 }

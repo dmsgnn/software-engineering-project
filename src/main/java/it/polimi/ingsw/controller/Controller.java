@@ -1,12 +1,15 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Observer;
+import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.actions.leaderAction.DiscardLeaderCard;
 import it.polimi.ingsw.model.actions.leaderAction.PlayLeaderCard;
 import it.polimi.ingsw.model.actions.normalAction.BuyDevelopmentCard;
+import it.polimi.ingsw.model.actions.normalAction.UseProduction;
 import it.polimi.ingsw.model.actions.normalAction.marketAction.ManageResources;
 import it.polimi.ingsw.model.actions.normalAction.marketAction.PickColumn;
 import it.polimi.ingsw.model.actions.normalAction.marketAction.PickRow;
@@ -15,8 +18,10 @@ import it.polimi.ingsw.model.exceptions.InvalidActionException;
 import it.polimi.ingsw.model.exceptions.NoCardsLeftException;
 import it.polimi.ingsw.model.exceptions.WrongLevelException;
 import it.polimi.ingsw.model.gameboard.Color;
+import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
 import it.polimi.ingsw.model.gameboard.marble.Marbles;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
+import it.polimi.ingsw.server.ServerView;
 
 import javax.naming.InsufficientResourcesException;
 import java.util.ArrayList;
@@ -29,6 +34,67 @@ public class Controller implements Observer<ClientMessage> {
     private Game game;
     private int playerNumber;
     private ArrayList<String> nicknames;
+    private ArrayList<ServerView> serverViews;
+
+    public Controller(Game game, ArrayList<ServerView> serverViews) {
+        this.game = game;
+        this.serverViews = serverViews;
+        nicknames= new ArrayList<>();
+        for (int i=0;i<serverViews.size();i++){
+            nicknames.add(i,game.getPlayers(i).getNickname());
+        }
+        playerNumber=0;
+
+    }
+
+    public MarbleColors[][] getMarket(){
+        MarbleColors[][] marbleColors = new MarbleColors[game.getBoard().getMarketBoard().getRows()][game.getBoard().getMarketBoard().getColumns()];
+        Marbles[][] marbles = game.getBoard().getMarketBoard().getMarbleGrid();
+        for (int i=0; i<game.getBoard().getMarketBoard().getRows();i++){
+            for (int j=0; j<game.getBoard().getMarketBoard().getColumns();j++){
+                marbleColors[i][j]= marbles[i][j].getColor();
+            }
+
+        }
+        return marbleColors;
+    }
+    public MarbleColors getFreeMarble(){
+        return game.getBoard().getMarketBoard().getFreeMarble().getColor();
+    }
+    public String[][] getDevCardGrid(){
+        String[][] devCardGrid= new String[game.getBoard().getCardRows()][game.getBoard().getCardColumns()];
+        for (int i=0;i<game.getBoard().getCardRows();i++){
+            for (int j=0; j<game.getBoard().getCardColumns();i++){
+                try {
+                    devCardGrid[i][j] = game.getBoard().getCardGrid()[i][j].lookFirst().getId();
+                } catch (NoCardsLeftException e) {
+                    devCardGrid[i][j] = "null";
+                }
+
+            }
+        }
+        return devCardGrid;
+    }
+
+    public void startGame(){
+        Map<String,Color> colorMap = new HashMap<>();
+        Map<String,Integer> levelMap = new HashMap<>();
+        for (int i=0;i<game.getBoard().getCardRows();i++) {
+            for (int j = 0; j < game.getBoard().getCardColumns(); j++) {
+                for (int k = 0; k < game.getBoard().getCardGrid()[i][j].getDeck().size(); k++) {
+                    colorMap.put(game.getBoard().getCardGrid()[i][j].getDeck().get(k).getId(), game.getBoard().getCardGrid()[i][j].getDeck().get(k).getColor());
+                    levelMap.put(game.getBoard().getCardGrid()[i][j].getDeck().get(k).getId(), game.getBoard().getCardGrid()[i][j].getDeck().get(k).getLevel());
+                }
+            }
+        }
+        for (ServerView s: serverViews){
+            s.sendAllCards(colorMap,levelMap);
+            s.sendMarket(getMarket(),getFreeMarble());
+            s.sendDevCardGrid(getDevCardGrid());
+
+        }
+    }
+
 
 
     /**
@@ -216,6 +282,21 @@ public class Controller implements Observer<ClientMessage> {
 
     }
 
+
+    /**
+     * attempt to use the production
+     */
+    public void useProduction(HashMap<Resource,Integer> warehouseDepotRes,HashMap<Resource,Integer> cardDepotRes, HashMap<Resource,Integer> strongboxRes,
+                              ArrayList<Resource> boardGain, ArrayList<Resource> leaderGain, ArrayList<Integer> devSlotIndex, ArrayList<Integer> leaderCardProdIndex  ){
+        UseProduction useProduction = new UseProduction(devSlotIndex,leaderCardProdIndex,leaderGain,boardGain,warehouseDepotRes,cardDepotRes,strongboxRes);
+        try {
+            game.doAction(useProduction);
+        } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
+            //errore da gestire
+            e.printStackTrace();
+        }
+    }
+
     public void setPlayerNumber(int num){
         playerNumber= num;
     }
@@ -223,6 +304,10 @@ public class Controller implements Observer<ClientMessage> {
         nicknames.add(nick);
     }
 
+
+    public void setupGame(){
+
+    }
 
     /**
      * Extracts the information from the {@link ClientMessage} which will call a method on the controller.

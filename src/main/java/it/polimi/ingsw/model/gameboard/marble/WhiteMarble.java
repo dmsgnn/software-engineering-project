@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard.marble;
 
+import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Resource;
 
@@ -16,5 +17,10 @@ public class WhiteMarble extends Marbles {
         if(game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().isExchangeBuffActive()){
             resources.add(exchangeResources.remove(0));
         }
+    }
+
+    @Override
+    public MarbleColors getColor() {
+        return MarbleColors.WHITE;
     }
 }
