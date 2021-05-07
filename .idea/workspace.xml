@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Client and messages update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Development Card parser update">
       <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/Gameboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/Gameboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/utility/DevCardsParserXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/utility/DevCardsParserXML.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/UseProduction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/UseProduction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/development/DevelopmentCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/development/DevelopmentCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/actions/UseProductionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/actions/UseProductionTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,17 +84,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All in AM5">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="All in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <option name="PACKAGE_NAME" value="" />
@@ -141,49 +132,53 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="it.polimi.ingsw.leadercard in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UseProductionTest.noDevCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.leadercard.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.model.actions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.leadercard" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.actions" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.actions.UseProductionTest" />
+      <option name="METHOD_NAME" value="noDevCardTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="it.polimi.ingsw.playerboard in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UseProductionTest.noLeaderCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.playerboard.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.model.actions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.playerboard" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.actions" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.actions.UseProductionTest" />
+      <option name="METHOD_NAME" value="noLeaderCardTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="JUnit.Gameboard" />
-      <item itemvalue="JUnit.it.polimi.ingsw.leadercard in AM5" />
-      <item itemvalue="JUnit.it.polimi.ingsw.playerboard in AM5" />
       <item itemvalue="JUnit.LorenzoAITest" />
       <item itemvalue="JUnit.TokenDeckTest" />
       <item itemvalue="JUnit.All in AM5" />
+      <item itemvalue="JUnit.UseProductionTest.noDevCardTest" />
+      <item itemvalue="JUnit.UseProductionTest.noLeaderCardTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in AM5" />
+        <item itemvalue="JUnit.UseProductionTest.noLeaderCardTest" />
+        <item itemvalue="JUnit.UseProductionTest.noDevCardTest" />
         <item itemvalue="JUnit.TokenDeckTest" />
         <item itemvalue="JUnit.LorenzoAITest" />
-        <item itemvalue="JUnit.it.polimi.ingsw.playerboard in AM5" />
-        <item itemvalue="JUnit.it.polimi.ingsw.leadercard in AM5" />
       </list>
     </recent_temporary>
   </component>
@@ -232,7 +227,8 @@
       <workItem from="1620069026733" duration="4066000" />
       <workItem from="1620126911855" duration="782000" />
       <workItem from="1620291599085" duration="953000" />
-      <workItem from="1620301266798" duration="2866000" />
+      <workItem from="1620301266798" duration="3474000" />
+      <workItem from="1620392390255" duration="511000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -318,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620302858958</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Development Card parser update">
+      <created>1620304302357</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1620304302357</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +353,8 @@
     <MESSAGE value="Message and Client updates" />
     <MESSAGE value="Setup Action fix" />
     <MESSAGE value="Client and messages update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Client and messages update" />
+    <MESSAGE value="Development Card parser update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Development Card parser update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

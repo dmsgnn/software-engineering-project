@@ -168,4 +168,40 @@ public class UseProductionTest {
         assertFalse(production.validAction(game.getActivePlayer().getPlayerBoard()));
     }
 
+    @Test
+    public void noDevCardTest(){
+        Game game = new Game();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+        ArrayList<Resource> boardResources = new ArrayList<>();
+
+
+        UseProduction production = new UseProduction(new ArrayList<>(Arrays.asList(0,1)), new ArrayList<>(), new ArrayList<>(),
+                boardResources, wareHouse, leaderDepotResources, strongboxResources);
+
+        assertFalse(production.validAction(game.getActivePlayer().getPlayerBoard()));
+    }
+
+    @Test
+    public void noLeaderCardTest(){
+        Game game = new Game();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+        ArrayList<Resource> boardResources = new ArrayList<>();
+
+
+        UseProduction production = new UseProduction(new ArrayList<>(), new ArrayList<>(Arrays.asList(0,1)), new ArrayList<>(),
+                boardResources, wareHouse, leaderDepotResources, strongboxResources);
+
+        assertFalse(production.validAction(game.getActivePlayer().getPlayerBoard()));
+    }
+
 }
