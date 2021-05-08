@@ -13,16 +13,16 @@ public class ClientPlayerBoard {
 
     private ArrayList<String> playedCards = new ArrayList<>();
     private int playerPosition = 0;
+    private Map<Integer, Boolean> vaticanReports = new HashMap<>();
     private int lorenzoPosition = -1;
     private Map<Integer, String> devCardSlot = new HashMap<>();
 
     private Map<Integer, ArrayList<Resource>> warehouse = new HashMap<>();
-    private Map<Integer, Resource> strongbox = new HashMap<>();
+    private Map<Resource, Integer> strongbox = new HashMap<>();
 
     private ArrayList<Resource> exchangeBuff = new ArrayList<>();
     private ArrayList<Resource> discountBuff = new ArrayList<>();
     private ArrayList<Resource> productionBuff = new ArrayList<>();
-
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;
@@ -56,12 +56,16 @@ public class ClientPlayerBoard {
         return warehouse;
     }
 
-    public Map<Integer, Resource> getStrongbox() {
+    public Map<Resource, Integer> getStrongbox() {
         return strongbox;
     }
 
     public ArrayList<Resource> getExchangeBuff() {
         return exchangeBuff;
+    }
+
+    public int getExchangeBuffsNum(){
+        return exchangeBuff.size();
     }
 
     public ArrayList<Resource> getDiscountBuff() {
@@ -72,12 +76,17 @@ public class ClientPlayerBoard {
         return productionBuff;
     }
 
-    public void setHand(ArrayList<String> hand) {
-        this.hand = hand;
+    public void addPlayedCard(String id){
+        playedCards.add(id);
+        //metodo per aggiungere buff nel posto giusto?
     }
 
-    public void setPlayedCards(ArrayList<String> playedCards) {
-        this.playedCards = playedCards;
+    public void removeHandCard(String id){
+        hand.remove(id);
+    }
+
+    public void setHand(ArrayList<String> hand) {
+        this.hand = hand;
     }
 
     public void setPlayerPosition(int playerPosition) {
@@ -88,16 +97,24 @@ public class ClientPlayerBoard {
         this.lorenzoPosition = lorenzoPosition;
     }
 
-    public void setWarehouse(Map<Integer, ArrayList<Resource>> warehouse) {
-        this.warehouse = warehouse;
+    public void updateWarehouse(Map<Integer, ArrayList<Resource>> warehouse) {
+        for(Map.Entry<Integer, ArrayList<Resource>> entry : warehouse.entrySet()){
+            Integer key = entry.getKey();
+            ArrayList<Resource> value = entry.getValue();
+            warehouse.put(key, value);
+        }
     }
 
-    public void setStrongbox(Map<Integer, Resource> strongbox) {
-        this.strongbox = strongbox;
+    public void updateStrongbox(Map<Resource, Integer> strongbox) {
+        for(Map.Entry<Resource, Integer> entry : strongbox.entrySet()){
+            Resource key = entry.getKey();
+            Integer value = entry.getValue();
+            strongbox.put(key, value);
+        }
     }
 
-    public void setDevCardSlot(Map<Integer, String> devCardSlot) {
-        this.devCardSlot = devCardSlot;
+    public void setDevCardSlot(int slot, String id) {
+        devCardSlot.put(slot, id);
     }
 
     public void setExchangeBuff(ArrayList<Resource> exchangeBuff) {

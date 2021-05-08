@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public interface UserInterface {
 
     /**
-     * initialization of the ui
+     * initialization
      */
     void start();
 
@@ -119,4 +119,8 @@ public interface UserInterface {
      */
     void manageResources(ArrayList<Resource> resources);
 
+    /**
+     * called to print the new board
+     */
+    void updateBoard();
 }

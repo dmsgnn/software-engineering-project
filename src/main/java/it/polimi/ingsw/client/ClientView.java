@@ -2,8 +2,8 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.representations.ClientGameBoard;
+import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.controller.Actions;
-import it.polimi.ingsw.messages.clientToServer.*;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
@@ -27,6 +27,10 @@ public class ClientView implements Observer<ServerMessage> {
         this.port = port;
         this.uiType = ui;
         gameboard = new ClientGameBoard();
+    }
+
+    public ClientGameBoard getGameboard() {
+        return gameboard;
     }
 
     public UserInterface getUi() {
@@ -236,6 +240,111 @@ public class ClientView implements Observer<ServerMessage> {
     public void sendManageResourcesReply(Map<Integer, ArrayList<Resource>> newWarehouse, ArrayList<Resource> discard){
         //socket.sendMessage(new ResourcesManageReply(newWarehouse, discard))
     }
+
+    //------------------UPDATES------------------
+
+    /**
+     * called to update the board after a buy development card action
+     * @param nickname player that performed the action
+     * @param id card bought
+     * @param slot slot to place the card
+     * @param gridId new card for the grid
+     * @param row of the new card
+     * @param column of the new card
+     * @param warehouse new warehouse of the player
+     * @param strongbox new strongbox of the player
+     */
+    public void buyCardUpdate(String nickname, String id, int slot, String gridId, int row, int column,
+                              Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
+        for(ClientPlayerBoard playerBoard: gameboard.getPlayerBoards()){
+            if(playerBoard.getPlayerNickname().equals(nickname)){
+                playerBoard.setDevCardSlot(slot, id);
+                playerBoard.updateWarehouse(warehouse);
+                playerBoard.updateStrongbox(strongbox);
+            }
+        }
+        gameboard.changeGridCard(gridId, row, column);
+
+        uiType.updateBoard();
+    }
+
+    /**
+     * called to update the board after a player discords a leader card
+     * @param nickname of the player
+     * @param id discarded card
+     * @param playerFaith new player faith value
+     */
+    public void discardLeaderCardUpdate(String nickname, String id, int playerFaith){
+        for(ClientPlayerBoard playerBoard: gameboard.getPlayerBoards()){
+            if(playerBoard.getPlayerNickname().equals(nickname)){
+                playerBoard.removeHandCard(id);
+                playerBoard.setPlayerPosition(playerFaith);
+            }
+        }
+        uiType.updateBoard();
+    }
+
+    /**
+     * called to update the board after a player plays a leader card
+     * @param nickname of the player
+     * @param id of the played card
+     * @param warehouse new warehouse of the player
+     * @param strongbox new strongbox of the player
+     */
+    public void playLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
+        for(ClientPlayerBoard playerBoard: gameboard.getPlayerBoards()){
+            if(playerBoard.getPlayerNickname().equals(nickname)){
+                playerBoard.removeHandCard(id);
+                playerBoard.addPlayedCard(id);
+                playerBoard.updateWarehouse(warehouse);
+                playerBoard.updateStrongbox(strongbox);
+            }
+        }
+        uiType.updateBoard();
+    }
+
+    /**
+     * called to update the board after use production action
+     * @param nickname of the player
+     * @param playerFaith new player position
+     * @param warehouse new warehouse of the player
+     * @param strongbox new strongbox of the player
+     */
+    public void useProductionUpdate(String nickname, int playerFaith, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
+        for(ClientPlayerBoard playerBoard: gameboard.getPlayerBoards()){
+            if(playerBoard.getPlayerNickname().equals(nickname)){
+                playerBoard.updateWarehouse(warehouse);
+                playerBoard.updateStrongbox(strongbox);
+                playerBoard.setPlayerPosition(playerFaith);
+            }
+        }
+        uiType.updateBoard();
+    }
+
+    /**
+     * called to update the board after use market action
+     * @param nickname of the player
+     * @param playerFaith new player position
+     * @param warehouse new warehouse of the player
+     * @param strongbox new strongbox of the player
+     * @param newMarbles market line that has been updated
+     * @param newFreeMarble new freemarble
+     * @param pos row or column of newMarbles
+     * @param rowOrCol true if row, false if column
+     */
+    public void marketActionUpdate(String nickname, int playerFaith, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox,
+                                   ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol){
+        for(ClientPlayerBoard playerBoard: gameboard.getPlayerBoards()){
+            if(playerBoard.getPlayerNickname().equals(nickname)){
+                playerBoard.updateWarehouse(warehouse);
+                playerBoard.updateStrongbox(strongbox);
+                playerBoard.setPlayerPosition(playerFaith);
+            }
+        }
+        gameboard.updateMarket(newMarbles, newFreeMarble, pos, rowOrCol);
+        uiType.updateBoard();
+    }
+
 
 
     //------------------GAME OVER------------------

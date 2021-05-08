@@ -66,7 +66,7 @@ public class ClientGameBoard {
      * @param pos row/col that has to change
      * @param rowOrCol true if pos represents a row, false otherwise
      */
-    public void updateMarket(ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble,int pos, boolean rowOrCol){
+    public void updateMarket(ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol){
         for(int i=0; i<newMarbles.size(); i++){
             if(rowOrCol) market[pos][i] = newMarbles.get(i);
             else market[i][pos] = newMarbles.get(i);
@@ -88,5 +88,33 @@ public class ClientGameBoard {
 
     public String[][] getCards() {
         return cards;
+    }
+
+    public int getMarketRowsNum(){
+        return market.length;
+    }
+
+    public int getMarketColumnsNum(){
+        return market[0].length;
+    }
+
+    public int getWhiteCountRow(int pos){
+        int count = 0;
+        for(int i = 0; i < getMarketRowsNum(); i++){
+            for(int j = 0; j < getMarketColumnsNum(); j++){
+                if(i==pos && market[i][j]==MarbleColors.WHITE) count++;
+            }
+        }
+        return count;
+    }
+
+    public int getWhiteCountColumn(int pos){
+        int count = 0;
+        for(int i = 0; i < getMarketRowsNum(); i++){
+            for(int j = 0; j < getMarketColumnsNum(); j++){
+                if(j==pos && market[i][j]==MarbleColors.WHITE) count++;
+            }
+        }
+        return count;
     }
 }
