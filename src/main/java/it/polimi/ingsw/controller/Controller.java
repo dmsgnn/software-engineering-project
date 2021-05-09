@@ -4,7 +4,6 @@ import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.actions.leaderAction.DiscardLeaderCard;
 import it.polimi.ingsw.model.actions.leaderAction.PlayLeaderCard;
@@ -18,23 +17,26 @@ import it.polimi.ingsw.model.exceptions.InvalidActionException;
 import it.polimi.ingsw.model.exceptions.NoCardsLeftException;
 import it.polimi.ingsw.model.exceptions.WrongLevelException;
 import it.polimi.ingsw.model.gameboard.Color;
-import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
 import it.polimi.ingsw.model.gameboard.marble.Marbles;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.server.ServerView;
 
 import javax.naming.InsufficientResourcesException;
+import java.awt.font.FontRenderContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Controller implements Observer<ClientMessage> {
 
-    private ArrayList<LeaderCard> startingLeaderCards;
-    private Game game;
+    private final Game game;
+
+    private final ArrayList<String> nicknames;
+    private final ArrayList<ServerView> serverViews;
+    private Map<String,ArrayList<LeaderCard>> startingLeaderCards;
+    private Map<String,ArrayList<LeaderCard>> selectedCards;
+    private Map<String,ArrayList<String>> leaderID;
     private int playerNumber;
-    private ArrayList<String> nicknames;
-    private ArrayList<ServerView> serverViews;
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
         this.game = game;
@@ -43,6 +45,9 @@ public class Controller implements Observer<ClientMessage> {
         for (int i=0;i<serverViews.size();i++){
             nicknames.add(i,game.getPlayers(i).getNickname());
         }
+        startingLeaderCards= new HashMap<>();
+        selectedCards= new HashMap<>();
+        leaderID = new HashMap<>();
         playerNumber=0;
 
     }
@@ -77,18 +82,7 @@ public class Controller implements Observer<ClientMessage> {
     }
 
     public void startGame(){
-        Map<String,Color> colorMap = new HashMap<>();
-        Map<String,Integer> levelMap = new HashMap<>();
-        for (int i=0;i<game.getBoard().getCardRows();i++) {
-            for (int j = 0; j < game.getBoard().getCardColumns(); j++) {
-                for (int k = 0; k < game.getBoard().getCardGrid()[i][j].getDeck().size(); k++) {
-                    colorMap.put(game.getBoard().getCardGrid()[i][j].getDeck().get(k).getId(), game.getBoard().getCardGrid()[i][j].getDeck().get(k).getColor());
-                    levelMap.put(game.getBoard().getCardGrid()[i][j].getDeck().get(k).getId(), game.getBoard().getCardGrid()[i][j].getDeck().get(k).getLevel());
-                }
-            }
-        }
         for (ServerView s: serverViews){
-            s.sendAllCards(colorMap,levelMap);
             s.sendMarket(getMarket(),getFreeMarble());
             s.sendDevCardGrid(getDevCardGrid());
 
@@ -124,33 +118,65 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * assign the starting cards to the player
      */
-    public void pickStartingLeaderCards(ArrayList<String> leaderId){
+    public void pickStartingLeaderCards(ArrayList<String> leaderId, String username){
         ArrayList<LeaderCard> trueCards = new ArrayList<>();
         int counter=0;
-        for (String s : leaderId){
-            for (LeaderCard leaderCard: startingLeaderCards){
-                if (s.equals(leaderCard.getId())) {
-                    trueCards.add(counter,leaderCard);
-                    counter++;
-                }
+        int j=0;
+        for (int i=0;i<serverViews.size();i++) {
+            if (serverViews.get(i).getUsername().equals(username)) {
+                game.setActivePlayer(game.getPlayers(i));
+                j=i;
             }
+
         }
+        for (String s : leaderId){
+                    for (LeaderCard leaderCard : startingLeaderCards.get(game.getActivePlayer().getNickname())) {
+                        if (s.equals(leaderCard.getId())) {
+                            trueCards.add(counter, leaderCard);
+                            counter++;
+                        }
+                    }
+        }
+        selectedCards.put(game.getActivePlayer().getNickname(),trueCards);
         AddStartingLeaderCards addStartingLeaderCards = new AddStartingLeaderCards(trueCards,game.getActivePlayer());
         try {
             game.doAction(addStartingLeaderCards);
-        } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
+        }    catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             //solito errore
             e.printStackTrace();
         }
 
+        if (serverViews.get(j).getUsername().equals(game.getActivePlayer().getNickname())) {
+            switch (j) {
+                case 0: {
+                    serverViews.get(j).sendStartingResource(0);
+                }
+                case 1: {
+                    serverViews.get(j).sendStartingResource(1);
+                }
+                case 2: {
+                    serverViews.get(j).sendStartingResource(1);
+                    game.getActivePlayer().getFaithTrack().increaseVictoryPoints(1);
+                }
+                case 3: {
+                    serverViews.get(j).sendStartingResource(2);
+                    game.getActivePlayer().getFaithTrack().increaseVictoryPoints(1);
+                }
+            }
+        }
     }
-
 
 
     /**
      * assign the starting resources to the player
      */
-    public void pickStartingResources(Map<Integer,ArrayList<Resource>> resources) {
+    public void pickStartingResources(Map<Integer, ArrayList<Resource>> resources, String username) {
+        for (int i=0;i<serverViews.size();i++) {
+            if (serverViews.get(i).getUsername().equals(username)) {
+                game.setActivePlayer(game.getPlayers(i));
+            }
+
+        }
         //controllo sul numero esatto di risorse
         ManageResources manageResources = new ManageResources(resources, null,null,true);
         try {
@@ -159,6 +185,16 @@ public class Controller implements Observer<ClientMessage> {
             // mando errore nel fare l'azione
             e.printStackTrace();
         }
+        //layout update
+        ArrayList<String> leaderID= new ArrayList<>();
+        for (int i=0; i<selectedCards.get(game.getActivePlayer().getNickname()).size();i++){
+            leaderID.add(i,selectedCards.get(game.getActivePlayer().getNickname()).get(i).getId());
+            this.leaderID.put(game.getActivePlayer().getNickname(),leaderID);
+        }
+        for (ServerView serverView : serverViews) {
+            serverView.sendSetupGameUpdate(this.leaderID, getWarehouse(), getFaith());
+        }
+
     }
 
 
@@ -297,15 +333,122 @@ public class Controller implements Observer<ClientMessage> {
         }
     }
 
-    public void setPlayerNumber(int num){
-        playerNumber= num;
-    }
-    public void addUsername(String nick){
-        nicknames.add(nick);
+
+    public void sendVaticanReport(){
+
     }
 
+
+    public void PlayerReconnection(String username){
+        int j=0;
+        for (int i=0;i<serverViews.size(); i++){
+            if (nicknames.get(i).equals(username)) j=i;
+            else{
+                //error
+            }
+        }
+        serverViews.get(j).sendDevCardGrid(getDevCardGrid());
+        serverViews.get(j).sendMarket(getMarket(),getFreeMarble());
+        serverViews.get(j).sendReconnectionMessage(getDevCardSlots(),getFaithPositions(),getLeaderCardsPlayed(),
+                getLeaderCards(username), getStrongbox(), getWarehouse());
+
+    }
+
+
+    private Map<String,ArrayList<String>> getDevCardSlots(){
+        Map<String,ArrayList<String>> devCardSlots = new HashMap<>();
+        for (int i=0;i<serverViews.size();i++){
+            game.setActivePlayer(game.getPlayers(i));
+            ArrayList<String> playerCards = new ArrayList<>();
+            for (int j=0;j<game.getActivePlayer().getPlayerBoard().getSlots().size();j++){
+                playerCards.add(j,game.getActivePlayer().getPlayerBoard().getSlots().get(j).lookTop().getId());
+            }
+            devCardSlots.put(game.getActivePlayer().getNickname(),playerCards);
+        }
+        return devCardSlots;
+    }
+    private Map<String,Integer> getFaithPositions(){
+        Map<String,Integer> faithPositions = new HashMap<>();
+        for (int i=0;i<serverViews.size();i++) {
+            game.setActivePlayer(game.getPlayers(i));
+            faithPositions.put(game.getActivePlayer().getNickname(),game.getActivePlayer().getFaithTrack().getPosition());
+        }
+        return faithPositions;
+    }
+    private Map<String, ArrayList<String>> getLeaderCardsPlayed(){
+        Map<String, ArrayList<String>> leaderCards = new HashMap<>();
+        for (int i=0;i<serverViews.size();i++) {
+            game.setActivePlayer(game.getPlayers(i));
+            ArrayList<String> id = new ArrayList<>();
+            for (int j=0;j<game.getActivePlayer().getPlayerBoard().getLeaderCards().size();j++){
+                id.add(j,game.getActivePlayer().getPlayerBoard().getLeaderCards().get(j).getId());
+            }
+            leaderCards.put(game.getActivePlayer().getNickname(),id);
+        }
+        return leaderCards;
+    }
+    private ArrayList<String> getLeaderCards(String username){
+        ArrayList<String> leaderCards = new ArrayList<>();
+        for (int i=0;i<serverViews.size();i++){
+            if (game.getPlayers(i).getNickname().equals(username)){
+                game.setActivePlayer(game.getPlayers(i));
+                for (int j=0;j<game.getActivePlayer().getCardsHand().size();j++){
+                    leaderCards.add(j,game.getActivePlayer().getCardsHand().get(j).getId());
+                }
+            }
+        }
+        return leaderCards;
+    }
+    private Map<String, Map<Resource,Integer>> getStrongbox(){
+        Map<String, Map<Resource,Integer>> strongbox = new HashMap<>();
+        for (int i=0;i<serverViews.size();i++) {
+            game.setActivePlayer(game.getPlayers(i));
+            Map<Resource,Integer> map = game.getActivePlayer().getPlayerBoard().getStrongbox().getResources();
+            strongbox.put(game.getActivePlayer().getNickname(), map);
+        }
+        return strongbox;
+    }
+    private Map<String, Map<Integer, ArrayList<Resource>>> getWarehouse(){
+        Map<String, Map<Integer, ArrayList<Resource>>> warehouse = new HashMap<>();
+        for (int i=0;i<serverViews.size();i++) {
+            game.setActivePlayer(game.getPlayers(i));
+            Map<Integer, ArrayList<Resource>> depots = new HashMap<>();
+            for (int j=0;j<game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size();j++){
+                ArrayList<Resource> resources = new ArrayList<>();
+                for (int k=0;k<game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(j).getOccupied();k++) {
+                   resources.add(k,game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(j).getResource());
+                }
+                depots.put(j,resources);
+            }
+            warehouse.put(game.getActivePlayer().getNickname(),depots);
+        }
+        return warehouse;
+    }
+    private Map<String,Integer> getFaith(){
+        Map<String,Integer> map = new HashMap<>();
+        for (int i = 0; i < serverViews.size(); i++) {
+            game.setActivePlayer(game.getPlayers(i));
+            map.put(game.getActivePlayer().getNickname(),game.getActivePlayer().getFaithTrack().getPosition());
+
+        }
+        return map;
+    }
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
 
     public void setupGame(){
+        for (int i=0;i<serverViews.size();i++){
+            game.setActivePlayer(game.getPlayers(i));
+            ArrayList<LeaderCard> leaderCards = game.getActivePlayer().take4cards();
+            ArrayList<String> leaderId = new ArrayList<>();
+            startingLeaderCards.put(game.getActivePlayer().getNickname(),leaderCards);
+            for (LeaderCard l: leaderCards){
+                leaderId.add(l.getId());
+            }
+            serverViews.get(i).sendLeaderCards(leaderId);
+
+        }
 
     }
 

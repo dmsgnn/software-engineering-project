@@ -5,13 +5,17 @@ import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.messages.serverToClient.*;
+import it.polimi.ingsw.messages.serverToClient.layoutUpdate.ReConnectionUpdate;
+import it.polimi.ingsw.messages.serverToClient.layoutUpdate.SetupGameUpdate;
+import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.marble.Marbles;
+import it.polimi.ingsw.model.leadercard.LeaderCard;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class ServerView extends Observable<ClientMessage> implements Observer<ServerMessage> {
-
 
     private class ClientMessageReceiver implements Observer<ClientMessage>{
 
@@ -59,7 +63,6 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
     /**
      * send the market and the free marble to the client
      * @param marbles of the market
-     * @param freeMarble
      */
     public void sendMarket(MarbleColors[][] marbles, MarbleColors freeMarble) {
         sendMessage(new MarketMarbles(marbles,freeMarble));
@@ -69,12 +72,29 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage(new DevCardGrid(devCardGrid));
     }
 
-    public void sendAllCards(Map<String, Color> colorMap, Map<String, Integer> levelMap) {
-    sendMessage(new AllCardsMessage(colorMap,levelMap));
+    public void sendReconnectionMessage(Map<String, ArrayList<String>> devCardSlots, Map<String, Integer> faithPositions,
+                                        Map<String, ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards,
+                                        Map<String, Map<Resource, Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse) {
+
+
+        sendMessage(new ReConnectionUpdate(devCardSlots,faithPositions,leaderCardsPlayed,leaderCards,strongbox,warehouse));
+
+
     }
 
 
+    public void sendLeaderCards(ArrayList<String> leaderCards){
+        sendMessage(new LeaderCardsRequest(leaderCards));
+    }
 
+    public void sendStartingResource(int i) {
+        sendMessage(new ResourcesRequest(i));
+    }
+
+    public void sendSetupGameUpdate(Map<String,ArrayList<String>> leaderCards, Map<String,Map<Integer, ArrayList<Resource>>> warehouse, Map<String,Integer> position) {
+        sendMessage(new SetupGameUpdate(leaderCards,warehouse,position));
+
+    }
 
 
 

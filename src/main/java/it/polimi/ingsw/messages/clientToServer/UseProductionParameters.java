@@ -30,6 +30,7 @@ public class UseProductionParameters implements ClientMessage{
 
     @Override
     public void handleMessage(Controller controller) {
+        controller.useProduction(warehouseDepotRes,cardDepotRes,strongboxRes,boardResGain,leaderCardGain,indexDevSlot,indexLeaderSlot);
 
     }
 

@@ -9,13 +9,15 @@ import java.util.Map;
 
 public class ResourcesReply implements ClientMessage{
     private final Map<Integer,ArrayList<Resource>> resources;
+    private final String username;
 
-    public ResourcesReply(Map<Integer,ArrayList<Resource>> resources) {
+    public ResourcesReply(Map<Integer, ArrayList<Resource>> resources, String username) {
         this.resources = resources;
+        this.username = username;
     }
 
     @Override
-    public void handleMessage(Controller controller) { controller.pickStartingResources(resources);}
+    public void handleMessage(Controller controller) { controller.pickStartingResources(resources,username);}
 
     @Override
     public void handleMessage(PingManager pingSender) {

@@ -19,7 +19,9 @@ public class RowColumnSelection implements ClientMessage {
     }
 
     @Override
-    public void handleMessage(Controller controller) { }
+    public void handleMessage(Controller controller) {
+        controller.marketAction(index,rowOrCol);
+    }
 
     @Override
     public void handleMessage(PingManager pingSender) {
