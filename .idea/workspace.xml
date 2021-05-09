@@ -5,11 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Client and update">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientSocketHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/PingReceiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/Pong.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/Ping.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Lobby.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/PingManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientGameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientGameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ActionReply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ActionReply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/BuyDevelopmentCardParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/BuyDevelopmentCardParameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ClientMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ClientMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/DiscardLeaderCardParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/DiscardLeaderCardParameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/LeaderCardsReply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/LeaderCardsReply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/LoginMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/LoginMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/PlayLeaderCardParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/PlayLeaderCardParameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/PlayerNumberReply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/PlayerNumberReply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ResourcesManageReply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ResourcesManageReply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ResourcesReply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ResourcesReply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/RowColumnSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/RowColumnSelection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/UseProductionParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/UseProductionParameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/UsernameReply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/UsernameReply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ActionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ActionRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ActionResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ActionResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/AllCardsMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/AllCardsMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/DevCardGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/DevCardGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/EndGameMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/EndGameMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/LeaderCardsRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/LeaderCardsRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/MarketMarbles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/MarketMarbles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/PlayerNumberRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/PlayerNumberRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ResourcesManageRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ResourcesManageRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ResourcesRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ResourcesRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ServerMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ServerMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/StartTurn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/StartTurn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/UsernameResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/UsernameResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/BuyDevelopmentCardUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/BuyDevelopmentCardUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/DiscardLeaderCardUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/DiscardLeaderCardUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/MarketActionUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/MarketActionUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/PlayLeaderCardUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/PlayLeaderCardUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/SetupGameUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/SetupGameUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/UseProductionUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/UseProductionUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerSocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerSocketHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,20 +75,20 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/RowColumnSelection.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/PlayLeaderCardParameters.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ClientMessage.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/BuyDevelopmentCardParameters.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/LeaderCardsReply.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/DiscardLeaderCardParameters.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ActionReply.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ServerMessage.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/marketAction/ManageResources.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/UseProductionParameters.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/leadercard/LeaderCard.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/UseProduction.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/ClientMessage.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/LeaderCardsReply.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/leaderAction/PlayLeaderCard.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/UseProduction.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/UseProductionParameters.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/BuyDevelopmentCardParameters.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/PlayLeaderCardParameters.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/RowColumnSelection.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/ServerMessage.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/leadercard/LeaderCard.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Observable.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JavaAutoRunManager">
@@ -85,7 +123,7 @@
       <recent name="it.polimi.ingsw" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.it.polimi.ingsw.model.actions in AM5">
+  <component name="RunManager" selected="Application.ServerMain">
     <configuration name="CLI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.client.CLI" />
       <module name="AM5" />
@@ -99,15 +137,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerMain" />
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -126,22 +175,6 @@
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.gameboard.MarbleTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UseProductionTest.noDevCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.actions.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.actions.UseProductionTest" />
-      <option name="METHOD_NAME" value="noDevCardTest" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -180,17 +213,17 @@
       <item itemvalue="Application.CLI" />
       <item itemvalue="JUnit.Gameboard" />
       <item itemvalue="JUnit.All in AM5" />
-      <item itemvalue="JUnit.UseProductionTest.noDevCardTest" />
       <item itemvalue="JUnit.UseProductionTest.noLeaderCardTest" />
       <item itemvalue="JUnit.it.polimi.ingsw.model.actions in AM5" />
+      <item itemvalue="Application.ServerMain" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.it.polimi.ingsw.model.actions in AM5" />
+        <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.All in AM5" />
+        <item itemvalue="JUnit.it.polimi.ingsw.model.actions in AM5" />
         <item itemvalue="Application.CLI" />
         <item itemvalue="JUnit.UseProductionTest.noLeaderCardTest" />
-        <item itemvalue="JUnit.UseProductionTest.noDevCardTest" />
       </list>
     </recent_temporary>
   </component>

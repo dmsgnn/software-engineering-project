@@ -1,14 +1,26 @@
 package it.polimi.ingsw.messages.serverToClient;
 
 import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.PingReceiver;
+
+import java.util.ArrayList;
 
 public class UsernameResponse implements ServerMessage{
     private String nickname;
+    private boolean isFree;
+    private ArrayList<String> usedNicknames;
 
-    public UsernameResponse(String nickname) {
-        this.nickname = nickname;
+    public UsernameResponse(boolean isFree, String nickname, ArrayList<String> usedNicknames) {
+        this.usedNicknames = new ArrayList<>(usedNicknames);
+        this.isFree = isFree;
+
     }
 
     @Override
     public void handleMessage(ClientView clientView) { clientView.setNickname(nickname);}
+
+    @Override
+    public void handleMessage(PingReceiver pingManager) {
+
+    }
 }

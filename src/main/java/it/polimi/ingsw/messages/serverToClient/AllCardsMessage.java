@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages.serverToClient;
 
 import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.PingReceiver;
 import it.polimi.ingsw.model.gameboard.Color;
 
 import java.util.Map;
@@ -16,5 +17,10 @@ public class AllCardsMessage implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) {
+    }
+
+    @Override
+    public void handleMessage(PingReceiver pingManager) {
+
     }
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages.serverToClient;
 
 import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.PingReceiver;
 import it.polimi.ingsw.controller.Actions;
 
 import java.util.ArrayList;
@@ -14,4 +15,9 @@ public class ActionRequest implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) { clientView.pickAction(possibleActions);}
+
+    @Override
+    public void handleMessage(PingReceiver pingManager) {
+
+    }
 }

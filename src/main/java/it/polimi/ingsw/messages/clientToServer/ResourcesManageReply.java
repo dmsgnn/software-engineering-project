@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.clientToServer;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.server.PingManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,4 +21,9 @@ public class ResourcesManageReply implements ClientMessage{
 
     @Override
     public void handleMessage(Controller controller) { controller.manageResources(resources,discardRes,newRes);}
+
+    @Override
+    public void handleMessage(PingManager pingSender) {
+
+    }
 }

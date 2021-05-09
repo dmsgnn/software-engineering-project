@@ -1,11 +1,24 @@
 package it.polimi.ingsw.messages.clientToServer;
 
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.server.PingManager;
 
 public class LoginMessage implements ClientMessage{
-    private final String login = "login";
+    private String username;
 
+    public LoginMessage(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 
     @Override
     public void handleMessage(Controller controller) { }
+
+    @Override
+    public void handleMessage(PingManager pingSender){
+    }
+
 }

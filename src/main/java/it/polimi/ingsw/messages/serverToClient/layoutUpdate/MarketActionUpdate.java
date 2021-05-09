@@ -2,6 +2,7 @@ package it.polimi.ingsw.messages.serverToClient.layoutUpdate;
 
 import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.MarbleColors;
+import it.polimi.ingsw.client.PingReceiver;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 
@@ -34,5 +35,10 @@ public class MarketActionUpdate implements ServerMessage {
     @Override
     public void handleMessage(ClientView clientView) {
         clientView.marketActionUpdate(nickname, playerFaith, warehouse, strongbox, newMarbles, newFreeMarble, pos, rowOrCol);
+    }
+
+    @Override
+    public void handleMessage(PingReceiver pingManager) {
+
     }
 }

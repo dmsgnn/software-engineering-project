@@ -3,6 +3,7 @@ package it.polimi.ingsw.messages.clientToServer;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.server.PingManager;
 
 import java.util.HashMap;
 
@@ -23,5 +24,10 @@ public class PlayLeaderCardParameters implements ClientMessage {
     @Override
     public void handleMessage(Controller controller) {
         controller.playLeaderCard(id,warehouseDepotRes,cardDepotRes,strongboxRes);
+    }
+
+    @Override
+    public void handleMessage(PingManager pingSender) {
+
     }
 }

@@ -6,9 +6,10 @@ import it.polimi.ingsw.model.gameboard.Gameboard;
 import it.polimi.ingsw.model.singleplayer.LorenzoAI;
 
 import javax.naming.InsufficientResourcesException;
+import java.util.ArrayList;
 
 public class Game {
-    private Player[] players = new Player[4];
+    private Player[] players;
     private int numVaticanReports;
     private int playersNumber;
     private Player activePlayer;
@@ -39,6 +40,7 @@ public class Game {
     public LorenzoAI getLorenzo() {
         return lorenzo;
     }
+
     public void nextPlayer(){
         for (int i=0; i<4;i++){
             if (activePlayer.equals(players[i])) {
@@ -51,6 +53,28 @@ public class Game {
         this.activePlayer = activePlayer;
     }
 
+    //constructor used for testing
+    public Game() {
+        this.players = new Player[4];
+        this.lorenzo = new LorenzoAI(this);
+        this.board = new Gameboard(this);
+    }
+
+    public Game(ArrayList<String> players){
+        this.players = new Player[4];
+        this.lorenzo = new LorenzoAI(this);
+        this.board = new Gameboard(this);
+        this.playersNumber = players.size();
+        if(players.size()==1){
+            this.soloMode=true;
+        }
+        else{
+            this.soloMode = false;
+        }
+        for(int i=0; i<players.size(); i++){
+            this.players[i] = new Player(players.get(i), i, this);
+        }
+    }
 
     /**
      * the player takes an action
@@ -64,6 +88,7 @@ public class Game {
      * creates a new player
      * @param nickname is the nickname of the new player, it is unique and it can't be changed during the game
      */
+    //used for testing
     public void addPlayer(String nickname) throws FullPlayerException {
         if(playersNumber < 4) {
             players[playersNumber] = new Player(nickname, playersNumber, this);

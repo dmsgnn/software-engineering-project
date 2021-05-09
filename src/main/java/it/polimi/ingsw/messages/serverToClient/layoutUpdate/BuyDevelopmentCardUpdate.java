@@ -1,6 +1,7 @@
 package it.polimi.ingsw.messages.serverToClient.layoutUpdate;
 
 import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.PingReceiver;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 
@@ -36,5 +37,10 @@ public class BuyDevelopmentCardUpdate implements ServerMessage {
     @Override
     public void handleMessage(ClientView clientView) {
         clientView.buyCardUpdate(nickname, id, slot, gridId, row, column, warehouse, strongbox);
+    }
+
+    @Override
+    public void handleMessage(PingReceiver pingManager) {
+
     }
 }
