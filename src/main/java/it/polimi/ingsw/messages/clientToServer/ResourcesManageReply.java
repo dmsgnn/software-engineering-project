@@ -10,17 +10,15 @@ import java.util.Map;
 
 public class ResourcesManageReply implements ClientMessage{
     private final Map<Integer,ArrayList<Resource>> resources;
-    private final HashMap<Resource,Integer> discardRes;
-    private final HashMap<Resource,Integer> newRes;
+    private final Map<Resource,Integer> discardRes;
 
-    public ResourcesManageReply(Map<Integer, ArrayList<Resource>> resources, HashMap<Resource, Integer> discardRes, HashMap<Resource, Integer> newRes) {
+    public ResourcesManageReply(Map<Integer, ArrayList<Resource>> resources, Map<Resource, Integer> discardRes) {
         this.resources = resources;
         this.discardRes = discardRes;
-        this.newRes = newRes;
     }
 
     @Override
-    public void handleMessage(Controller controller) { controller.manageResources(resources,discardRes,newRes);}
+    public void handleMessage(Controller controller) { controller.manageResources(resources,discardRes);}
 
     @Override
     public void handleMessage(PingManager pingSender) {

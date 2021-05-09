@@ -33,14 +33,24 @@ public class Controller implements Observer<ClientMessage> {
 
     private final ArrayList<String> nicknames;
     private final ArrayList<ServerView> serverViews;
-    private Map<String,ArrayList<LeaderCard>> startingLeaderCards;
-    private Map<String,ArrayList<LeaderCard>> selectedCards;
-    private Map<String,ArrayList<String>> leaderID;
+    private final Map<String,ArrayList<LeaderCard>> startingLeaderCards;
+    private final Map<String,ArrayList<LeaderCard>> selectedCards;
+    private final Map<String,ArrayList<String>> leaderID;
+    private final Map<String,Map<Resource,Integer>> newResources;
+    private final Map<Resource,Integer> temp;
     private int playerNumber;
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
+        this.temp = new HashMap<Resource,Integer>(){{
+            put(Resource.COINS,0);
+            put(Resource.SERVANTS,0);
+            put(Resource.SHIELDS,0);
+            put(Resource.STONES,0);
+
+        }};
         this.game = game;
         this.serverViews = serverViews;
+        this.newResources = new HashMap<>();
         nicknames= new ArrayList<>();
         for (int i=0;i<serverViews.size();i++){
             nicknames.add(i,game.getPlayers(i).getNickname());
@@ -52,37 +62,11 @@ public class Controller implements Observer<ClientMessage> {
 
     }
 
-    public MarbleColors[][] getMarket(){
-        MarbleColors[][] marbleColors = new MarbleColors[game.getBoard().getMarketBoard().getRows()][game.getBoard().getMarketBoard().getColumns()];
-        Marbles[][] marbles = game.getBoard().getMarketBoard().getMarbleGrid();
-        for (int i=0; i<game.getBoard().getMarketBoard().getRows();i++){
-            for (int j=0; j<game.getBoard().getMarketBoard().getColumns();j++){
-                marbleColors[i][j]= marbles[i][j].getColor();
-            }
 
-        }
-        return marbleColors;
-    }
-    public MarbleColors getFreeMarble(){
-        return game.getBoard().getMarketBoard().getFreeMarble().getColor();
-    }
-    public String[][] getDevCardGrid(){
-        String[][] devCardGrid= new String[game.getBoard().getCardRows()][game.getBoard().getCardColumns()];
-        for (int i=0;i<game.getBoard().getCardRows();i++){
-            for (int j=0; j<game.getBoard().getCardColumns();i++){
-                try {
-                    devCardGrid[i][j] = game.getBoard().getCardGrid()[i][j].lookFirst().getId();
-                } catch (NoCardsLeftException e) {
-                    devCardGrid[i][j] = "null";
-                }
-
-            }
-        }
-        return devCardGrid;
-    }
 
     public void startGame(){
         for (ServerView s: serverViews){
+            newResources.put(s.getUsername(),temp);
             s.sendMarket(getMarket(),getFreeMarble());
             s.sendDevCardGrid(getDevCardGrid());
 
@@ -201,8 +185,8 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * assign the new Resources to the player
      */
-    public void manageResources(Map<Integer,ArrayList<Resource>> resources, HashMap<Resource,Integer> discRes, HashMap<Resource,Integer> newRes){
-        ManageResources manageResources = new ManageResources(resources,newRes,discRes,false);
+    public void manageResources(Map<Integer,ArrayList<Resource>> resources, Map<Resource,Integer> discRes){
+        ManageResources manageResources = new ManageResources(resources,newResources.get(game.getActivePlayer().getNickname()),discRes,false);
         try {
             game.doAction(manageResources);
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
@@ -296,7 +280,18 @@ public class Controller implements Observer<ClientMessage> {
                 for (Marbles marble : marbles) {
                     marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
                 }
-                //hai il nuovo array di resources da spedire
+                Map<Resource,Integer> temp1;
+                temp1= temp;
+                for (Resource resource : resources) {
+                    temp1.put(resource, temp1.get(resource) + 1);
+                }
+                newResources.put(game.getActivePlayer().getNickname(),temp1);
+                for (ServerView serverView : serverViews) {
+                    if (serverView.getUsername().equals(game.getActivePlayer().getNickname())) {
+                        serverView.sendResourceManageRequest(resources);
+                    }
+
+                }
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
                 //solito errore
                 e.printStackTrace();
@@ -309,7 +304,17 @@ public class Controller implements Observer<ClientMessage> {
                 for (Marbles marble : marbles) {
                     marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
                 }
-                //hai il nuovo array di resources da spedire
+                Map<Resource,Integer> temp1;
+                temp1= temp;
+                for (Resource resource : resources) {
+                    temp1.put(resource, temp1.get(resource) + 1);
+                }
+                newResources.put(game.getActivePlayer().getNickname(),temp1);
+                for (ServerView serverView : serverViews) {
+                    if (serverView.getUsername().equals(game.getActivePlayer().getNickname())) {
+                        serverView.sendResourceManageRequest(resources);
+                    }
+                }
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
                 //solito errore
                 e.printStackTrace();
@@ -435,6 +440,34 @@ public class Controller implements Observer<ClientMessage> {
     }
     public void setPlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
+    }
+    public MarbleColors[][] getMarket(){
+        MarbleColors[][] marbleColors = new MarbleColors[game.getBoard().getMarketBoard().getRows()][game.getBoard().getMarketBoard().getColumns()];
+        Marbles[][] marbles = game.getBoard().getMarketBoard().getMarbleGrid();
+        for (int i=0; i<game.getBoard().getMarketBoard().getRows();i++){
+            for (int j=0; j<game.getBoard().getMarketBoard().getColumns();j++){
+                marbleColors[i][j]= marbles[i][j].getColor();
+            }
+
+        }
+        return marbleColors;
+    }
+    public MarbleColors getFreeMarble(){
+        return game.getBoard().getMarketBoard().getFreeMarble().getColor();
+    }
+    public String[][] getDevCardGrid(){
+        String[][] devCardGrid= new String[game.getBoard().getCardRows()][game.getBoard().getCardColumns()];
+        for (int i=0;i<game.getBoard().getCardRows();i++){
+            for (int j=0; j<game.getBoard().getCardColumns();i++){
+                try {
+                    devCardGrid[i][j] = game.getBoard().getCardGrid()[i][j].lookFirst().getId();
+                } catch (NoCardsLeftException e) {
+                    devCardGrid[i][j] = "null";
+                }
+
+            }
+        }
+        return devCardGrid;
     }
 
     public void setupGame(){

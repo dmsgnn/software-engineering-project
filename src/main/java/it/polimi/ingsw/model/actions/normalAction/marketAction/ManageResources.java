@@ -12,11 +12,11 @@ import java.util.Map;
 public class ManageResources extends Actions {
 
     private final ArrayList<ArrayList<Resource>> resources;
-    private final HashMap<Resource,Integer> newResources;
-    private final HashMap<Resource,Integer> discResources;
+    private final Map<Resource,Integer> newResources;
+    private final Map<Resource,Integer> discResources;
     private final boolean initial;
 
-    public ManageResources(Map<Integer,ArrayList<Resource>> resources, HashMap<Resource, Integer> res, HashMap<Resource, Integer> discResources, boolean initial) {
+    public ManageResources(Map<Integer,ArrayList<Resource>> resources, Map<Resource, Integer> res, Map<Resource, Integer> discResources, boolean initial) {
         this.resources = new ArrayList<ArrayList<Resource>>(){{
            for (int i=0;i<resources.size();i++){
                add(i,resources.get(i));

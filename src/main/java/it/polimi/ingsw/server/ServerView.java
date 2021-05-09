@@ -83,6 +83,10 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
     }
 
 
+    public void sendResourceManageRequest(ArrayList<Resource>resources) {sendMessage(new ResourcesManageRequest(resources));
+    }
+
+
     public void sendLeaderCards(ArrayList<String> leaderCards){
         sendMessage(new LeaderCardsRequest(leaderCards));
     }
