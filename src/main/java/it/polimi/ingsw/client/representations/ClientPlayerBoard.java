@@ -28,6 +28,21 @@ public class ClientPlayerBoard {
         this.playerNickname = playerNickname;
     }
 
+    public Resource getWarehouseResource(int depot){
+        if(warehouse.containsKey(depot)){
+            return warehouse.get(depot).get(0);
+        }
+        else return null;
+    }
+
+    public ArrayList<Resource> storedWarehouseRes(){
+        ArrayList<Resource> temp = new ArrayList<>();
+        for(Integer i : warehouse.keySet()){
+            temp.addAll(warehouse.get(i));
+        }
+        return temp;
+    }
+
     public String getPlayerNickname() {
         return playerNickname;
     }
@@ -74,6 +89,10 @@ public class ClientPlayerBoard {
 
     public ArrayList<Resource> getProductionBuff() {
         return productionBuff;
+    }
+
+    public boolean isProductionBuffActive(){
+        return productionBuff.size()!=0;
     }
 
     public void addPlayedCard(String id){

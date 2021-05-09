@@ -29,6 +29,15 @@ public class ClientGameBoard {
         this.freeMarble = freeMarble;
     }
 
+    public boolean correctCardId(String id){
+        for (String[] card : cards) {
+            for (int j = 0; j < cards[0].length; j++) {
+                if (card[j].equals(id)) return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * initializes the card grid
      * @param cards first configuration

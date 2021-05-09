@@ -12,9 +12,9 @@ public class UseProductionParameters implements ClientMessage{
     private final HashMap<Resource,Integer> cardDepotRes;
     private final HashMap<Resource,Integer> strongboxRes;
     private final ArrayList<Resource> boardResGain;
+    private final ArrayList<Integer> indexLeaderSlot;
     private final ArrayList<Resource> leaderCardGain;
     private final ArrayList<Integer> indexDevSlot;
-    private final ArrayList<Integer> indexLeaderSlot;
 
     public UseProductionParameters(HashMap<Resource, Integer> warehouseDepotRes, HashMap<Resource, Integer> cardDepotRes, HashMap<Resource,
             Integer> strongboxRes, ArrayList<Resource> boardResGain, ArrayList<Resource> leaderCardGain, ArrayList<Integer> indexDevSlot, ArrayList<Integer> indexLeaderSlot) {
