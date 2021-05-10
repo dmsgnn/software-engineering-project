@@ -2,6 +2,7 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.messages.serverToClient.PlayerNumberRequest;
 import it.polimi.ingsw.messages.serverToClient.UsernameResponse;
+import it.polimi.ingsw.messages.serverToClient.Welcome;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -64,7 +65,7 @@ public class ServerMain {
                 }
                 ServerSocketHandler connection = new ServerSocketHandler(clientSocket, this);
                 executor.submit(connection);
-                //connection.sendMessage(new Welcome());
+                connection.sendMessage(new Welcome());
             }
         } catch (Exception e) {
             e.printStackTrace();

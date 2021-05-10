@@ -17,6 +17,7 @@ public class UsernameResponse implements ServerMessage{
     }
 
 
+
     @Override
     public void handleMessage(ClientView clientView) { clientView.manageUsernameResponse(isFree, nickname, usedNicknames);}
 

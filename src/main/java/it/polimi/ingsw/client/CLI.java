@@ -103,7 +103,6 @@ public class CLI implements UserInterface{
         System.out.println("8P   8.dP' 8P Y8 8  8 8 `Yb. `Yb. 8  8 8P Y8 8    8.dP'");
         System.out.println("8    `Y88P 8   8 `Y88 8 Y88P Y88P `Y88 8   8 `Y8P `Y88P");
         clientView.startConnection();
-        clientView.login();
     }
 
     @Override
