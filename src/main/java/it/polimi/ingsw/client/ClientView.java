@@ -69,11 +69,15 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
-     * called from the server if the nickname sent with login is valid
+     * manages the Username Response message
      * @param nickname the player set
      */
-    public void setNickname(String nickname){
-        this.nickname = nickname;
+    public void manageUsernameResponse(boolean isFree, String nickname, ArrayList<String> usedNicknames){
+        if(isFree) this.nickname = nickname;
+        else {
+            String newNick = uiType.failedLogin(usedNicknames);
+            socket.sendMessage(new LoginMessage(newNick));
+        }
     }
 
     /**

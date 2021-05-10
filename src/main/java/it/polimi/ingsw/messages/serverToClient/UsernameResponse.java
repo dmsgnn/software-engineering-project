@@ -16,8 +16,9 @@ public class UsernameResponse implements ServerMessage{
         this.nickname = nickname;
     }
 
+
     @Override
-    public void handleMessage(ClientView clientView) { clientView.setNickname(nickname);}
+    public void handleMessage(ClientView clientView) { clientView.manageUsernameResponse(isFree, nickname, usedNicknames);}
 
     @Override
     public void handleMessage(PingReceiver pingManager) {

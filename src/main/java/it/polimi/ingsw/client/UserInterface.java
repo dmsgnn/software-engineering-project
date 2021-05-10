@@ -21,7 +21,7 @@ public interface UserInterface {
     /**
      * handles login errors
      */
-    void failedLogin();
+    String failedLogin(ArrayList<String> usedNames);
 
     /**
      * Manages a losing player
