@@ -73,7 +73,6 @@ public class ClientView implements Observer<ServerMessage> {
      * @param nickname the player set
      */
     public void manageUsernameResponse(boolean isFree, String nickname, ArrayList<String> usedNicknames){
-        System.out.println("??");
         if(isFree) this.nickname = nickname;
         else {
             String newNick = uiType.failedLogin(usedNicknames);
@@ -90,7 +89,6 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     //------------------GAME SETUP------------------
-
 
     /**
      * adds all the players to the game
@@ -465,10 +463,6 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void disconnect() {
         socket.close();
-    }
-
-    public void manageLogin(){
-        uiType.login();
     }
 
 }

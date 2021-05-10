@@ -7,7 +7,7 @@ public class Welcome implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) {
-        clientView.manageLogin();
+        clientView.login();
     }
 
     @Override

@@ -69,7 +69,7 @@ public class Controller implements Observer<ClientMessage> {
             newResources.put(s.getUsername(),temp);
             s.sendMarket(getMarket(),getFreeMarble());
             s.sendDevCardGrid(getDevCardGrid());
-
+            setupGame();
         }
     }
 
@@ -441,6 +441,8 @@ public class Controller implements Observer<ClientMessage> {
     public void setPlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
     }
+
+
     public MarbleColors[][] getMarket(){
         MarbleColors[][] marbleColors = new MarbleColors[game.getBoard().getMarketBoard().getRows()][game.getBoard().getMarketBoard().getColumns()];
         Marbles[][] marbles = game.getBoard().getMarketBoard().getMarbleGrid();
@@ -455,10 +457,11 @@ public class Controller implements Observer<ClientMessage> {
     public MarbleColors getFreeMarble(){
         return game.getBoard().getMarketBoard().getFreeMarble().getColor();
     }
+
     public String[][] getDevCardGrid(){
         String[][] devCardGrid= new String[game.getBoard().getCardRows()][game.getBoard().getCardColumns()];
         for (int i=0;i<game.getBoard().getCardRows();i++){
-            for (int j=0; j<game.getBoard().getCardColumns();i++){
+            for (int j=0; j<game.getBoard().getCardColumns();j++){
                 try {
                     devCardGrid[i][j] = game.getBoard().getCardGrid()[i][j].lookFirst().getId();
                 } catch (NoCardsLeftException e) {

@@ -128,14 +128,14 @@ public class ServerMain {
             lob.getLoggedPlayers().put(connection, username);
             connection.setLobby(lob);
             lobbies.add(lob);
-            connection.sendMessage(new UsernameResponse(true, username, null));
+            connection.sendMessage(new UsernameResponse(true, username, new ArrayList<>()));
             connection.sendMessage(new PlayerNumberRequest());
         }
         //checks if the last created lobby has a free place
         else if (!lobbies.get(lobbies.size()-1).isFull()){
             lobbies.get(lobbies.size()-1).getLoggedPlayers().put(connection, username);
             connection.setLobby(lobbies.get(lobbies.size()-1));
-            connection.sendMessage(new UsernameResponse(true, username, null));
+            connection.sendMessage(new UsernameResponse(true, username, new ArrayList<>()));
             if(lobbies.get(lobbies.size()-1).isFull()) {
                 lobbies.get(lobbies.size()-1).startGame();
             }
@@ -147,7 +147,7 @@ public class ServerMain {
             lob.getLoggedPlayers().put(connection, username);
             connection.setLobby(lob);
             lobbies.add(lob);
-            connection.sendMessage(new UsernameResponse(true, username, null));
+            connection.sendMessage(new UsernameResponse(true, username, new ArrayList<>()));
             connection.sendMessage(new PlayerNumberRequest());
         }
         connection.startPing();

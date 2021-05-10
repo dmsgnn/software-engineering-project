@@ -67,6 +67,8 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
                 //if(event instanceof Pong) System.out.print("pong received");
                 if(message instanceof PlayerNumberReply){
                     lobby.setPlayerGameNumber(((PlayerNumberReply) message).getPlayerNum());
+                    if(lobby.getPlayerGameNumber()==1)
+                        lobby.startGame();
                 }
                 if(message instanceof LoginMessage) {
                     LoginMessage presentation = (LoginMessage) message;
