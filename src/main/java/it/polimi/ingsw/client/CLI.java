@@ -2,6 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.representations.ClientGameBoard;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
+import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
@@ -202,7 +203,7 @@ public class CLI implements UserInterface{
         String temp;
 
         do {
-            System.out.print("Choose your starting cards ");
+            System.out.print("Choose your starting cards \n");
             leaderCardID.forEach(System.out::println);
             System.out.println("Choose a card: ");
             temp = scanner.nextLine();
@@ -220,14 +221,16 @@ public class CLI implements UserInterface{
     public Map<Integer, ArrayList<Resource>> startingResources(int amount) {
         ArrayList<Resource> pickedResources = new ArrayList<>();
         String input;
+        int counter=amount;
 
         while(pickedResources.size() < amount){
-            System.out.print("Choose your starting resource, amount " + amount + ": ");
-            System.out.print("Options: COINS, STONES, SERVANTS, SHIELDS");
+            System.out.print("Choose your starting resource, amount " + counter + "\n");
+            System.out.print("Options: COINS, STONES, SERVANTS, SHIELDS: ");
             input = scanner.nextLine().toUpperCase();
             try {
                 Resource resource = Resource.valueOf(input);
                 pickedResources.add(resource);
+                counter--;
             } catch ( IllegalArgumentException e ) {
                 System.err.println( "No such resource, please try again");
             }
@@ -523,27 +526,22 @@ public class CLI implements UserInterface{
         clientView.discardLeaderCard(input);
     }
 
-    public Map<Integer, ArrayList<Resource>> placeWarehouseRes(ArrayList<Resource> resources, boolean manage){
+    private Map<Integer, ArrayList<Resource>> placeWarehouseRes(ArrayList<Resource> resources, boolean manage){
         String input;
         Resource resource = null;
         boolean done;
         int value = 0;
         Map<Integer, ArrayList<Resource>> newWarehouse = new HashMap<>();
 
+        for(int i= 1; i < 4; i++){
+            newWarehouse.put(i, new ArrayList<>());
+        }
+
+        if(resources.size()==0) return newWarehouse;
+
         System.out.print("Choose your new warehouse configuration, you have these " + (manage? "additional resources: " : "starting resources: "));
         System.out.println(resources);
         for(int i = 1; i < 4; i++){
-            done = false;
-            do{
-                System.out.println("Depot " + i + " new resource: ");
-                try {
-                    input = scanner.nextLine();
-                    resource = Resource.valueOf(input);
-                    done = true;
-                } catch (IllegalArgumentException e) {
-                    System.err.println( "No such resource, please try again");
-                }
-            }while (!done);
             done = false;
             do{
                 System.out.println("Depot " + i + " new amount: ");
@@ -556,6 +554,19 @@ public class CLI implements UserInterface{
                     System.out.println("Not a number!!");
                 }
             }while (!done);
+            if(value>0){
+                done = false;
+                do{
+                    System.out.println("Depot " + i + " new resource: ");
+                    try {
+                        input = scanner.nextLine().toUpperCase();
+                        resource = Resource.valueOf(input);
+                        done = true;
+                    } catch (IllegalArgumentException e) {
+                        System.err.println( "No such resource, please try again");
+                    }
+                }while (!done);
+            }
             ArrayList<Resource> temp = new ArrayList<>();
             for(int j = 0; j<value; j++) temp.add(resource);
             newWarehouse.put(i, temp);
@@ -566,7 +577,6 @@ public class CLI implements UserInterface{
     @Override
     public void manageResources(ArrayList<Resource> resources) {
         String input;
-        Resource resource = null;
         boolean done;
         int value = 0;
         Map<Integer, ArrayList<Resource>> newWarehouse;
@@ -625,9 +635,9 @@ public class CLI implements UserInterface{
                 try {
                     value = Integer.parseInt(input);
                     if(value < 0 || value > i) System.out.println("Invalid num!");
-                    else if(value > active.getWarehouse().get(i).size()) System.out.println("You don't have enough resources");
+                    else if(active.isDepotEmpty(i) || value > active.getWarehouse().get(i).size()) System.out.println("You don't have enough resources");
                     else {
-                        warehouse.put(active.getWarehouse().get(i).get(0), value);
+                        warehouse.put(active.getWarehouseResource(i), value);
                         done = true;
                     }
                 } catch (NumberFormatException e) {
@@ -656,7 +666,7 @@ public class CLI implements UserInterface{
                         if(value < 0 || value > i) System.out.println("Invalid num!");
                         else if(value > active.getWarehouse().get(i).size()) System.out.println("You don't have enough resources");
                         else {
-                            leaderdepot.put(active.getWarehouse().get(i).get(0), value);
+                            leaderdepot.put(active.getWarehouseResource(i), value);
                             done = true;
                         }
                     } catch (NumberFormatException e) {
@@ -693,6 +703,18 @@ public class CLI implements UserInterface{
 
     @Override
     public void updateBoard() {
-
+        String[][] cardGrid = clientView.getGameboard().getCards();
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i<3; i++){
+            for(int j=0; j< 4; j++){
+                for(int k=0; k<4; k++){ //each card is made of 4 lines
+                    if(cardGrid[i][j]!=null){
+                        DevelopmentCard card = findDevCard(cardGrid[i][j]);
+                        builder.append(card.drawID());
+                    }
+                    else builder.append("     ");
+                }
+            }
+        }
     }
 }

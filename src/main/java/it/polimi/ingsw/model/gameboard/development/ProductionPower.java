@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard.development;
 
+import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.Map;
@@ -25,5 +26,21 @@ public class ProductionPower {
 
     public int getFaithGain() {
         return faithGain;
+    }
+
+    public String drawCost(){
+        StringBuilder builder = new StringBuilder();
+        for(Resource rss: prodCost.keySet()){
+            builder.append(" ").append(ColorCLI.resourceColor(rss)).append(prodCost.get(rss));
+        }
+        return builder.toString();
+    }
+
+    public String drawGain(){
+        StringBuilder builder = new StringBuilder();
+        for(Resource rss: resourceGain.keySet()){
+            builder.append(" ").append(ColorCLI.resourceColor(rss)).append(resourceGain.get(rss));
+        }
+        return builder.toString();
     }
 }

@@ -28,6 +28,10 @@ public class ClientPlayerBoard {
         this.playerNickname = playerNickname;
     }
 
+    public boolean isDepotEmpty(int depot){
+        return warehouse.get(depot).isEmpty();
+    }
+
     public Resource getWarehouseResource(int depot){
         if(warehouse.containsKey(depot)){
             return warehouse.get(depot).get(0);

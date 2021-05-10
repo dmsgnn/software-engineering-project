@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard.development;
 
+import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 
@@ -57,12 +58,37 @@ public class DevelopmentCard {
         for (Map.Entry<Resource, Integer> entry : cardRequirements.entrySet()) {
             Resource key = entry.getKey();
             Integer value = entry.getValue();
-            if(!(playerResources.containsKey(key) && playerResources.get(key)==value)){
+            if(!(playerResources.containsKey(key) && playerResources.get(key).equals(value))){
                 return false;
             }
         }
 
         return true;
+    }
+
+    private String border(){
+        return ColorCLI.cardColor(getColor()) + "║";
+    }
+
+    public String drawID(){
+        return border() + "" + id + "" + border();
+    }
+
+    public String drawLevelAndPoints(){
+        return border() + "" + level + " " + victoryPoints + "" + border();
+    }
+
+    public String drawRequirements(){
+        StringBuilder builder = new StringBuilder();
+        for(Resource rss: cardRequirements.keySet()){
+            builder.append(" ").append(ColorCLI.resourceColor(rss));
+            builder.append(cardRequirements.get(rss));
+        }
+        return border() + "" + builder.toString() + "" + border();
+    }
+
+    public String drawProdCostAndGain(){
+        return border() + "" + production.drawCost() + "->" + production.drawGain() + "" + border();
     }
 
 }
