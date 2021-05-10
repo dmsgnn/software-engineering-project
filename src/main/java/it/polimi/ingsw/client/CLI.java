@@ -196,7 +196,7 @@ public class CLI implements UserInterface{
     }
 
     @Override
-    public ArrayList<Resource> startingResources(int amount) {
+    public Map<Integer, ArrayList<Resource>> startingResources(int amount) {
         ArrayList<Resource> pickedResources = new ArrayList<>();
         String input;
 
@@ -212,7 +212,8 @@ public class CLI implements UserInterface{
             }
         }
 
-        return pickedResources;
+        return placeWarehouseRes(pickedResources, false);
+
     }
 
     @Override
@@ -501,16 +502,14 @@ public class CLI implements UserInterface{
         clientView.discardLeaderCard(input);
     }
 
-    @Override
-    public void manageResources(ArrayList<Resource> resources) {
+    public Map<Integer, ArrayList<Resource>> placeWarehouseRes(ArrayList<Resource> resources, boolean manage){
         String input;
         Resource resource = null;
         boolean done;
         int value = 0;
         Map<Integer, ArrayList<Resource>> newWarehouse = new HashMap<>();
-        ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
-        System.out.print("Choose your new warehouse configuration, you have these additional resources: ");
+        System.out.print("Choose your new warehouse configuration, you have these " + (manage? "additional resources: " : "starting resources: "));
         System.out.println(resources);
         for(int i = 1; i < 4; i++){
             done = false;
@@ -540,6 +539,19 @@ public class CLI implements UserInterface{
             for(int j = 0; j<value; j++) temp.add(resource);
             newWarehouse.put(i, temp);
         }
+        return newWarehouse;
+    }
+
+    @Override
+    public void manageResources(ArrayList<Resource> resources) {
+        String input;
+        Resource resource = null;
+        boolean done;
+        int value = 0;
+        Map<Integer, ArrayList<Resource>> newWarehouse;
+        ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
+
+        newWarehouse = placeWarehouseRes(resources, true);
 
         for(Integer i : active.getWarehouse().keySet()){
             if(i > 3){

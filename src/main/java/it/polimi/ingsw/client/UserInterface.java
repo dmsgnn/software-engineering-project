@@ -4,6 +4,7 @@ import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public interface UserInterface {
 
@@ -79,7 +80,7 @@ public interface UserInterface {
      * @param amount num of starting resources
      * @return list of resources
      */
-    ArrayList<Resource> startingResources(int amount);
+    Map<Integer, ArrayList<Resource>> startingResources(int amount);
 
     /**
      * called to make the player choose the action to perform
