@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 public class CLI implements UserInterface{
 
@@ -66,7 +71,7 @@ public class CLI implements UserInterface{
      * @param id card that I want to find
      * @return the correct card
      */
-    public DevelopmentCard findDevCard(String id){
+    private DevelopmentCard findDevCard(String id){
         for (DevelopmentCard card: devCardList){
             if(card.getId().equals(id)) return card;
         }
@@ -78,7 +83,7 @@ public class CLI implements UserInterface{
      * @param id card that I want to find
      * @return the correct card
      */
-    public LeaderCard findLeaderCard(String id){
+    private LeaderCard findLeaderCard(String id){
         for(LeaderCard card : leaderDeck){
             if(card.getId().equals(id)) return card;
         }
@@ -566,8 +571,8 @@ public class CLI implements UserInterface{
         totalRes.addAll(active.storedWarehouseRes());
 
         totalRes.removeAll(sum);
-        ArrayList<Resource> discard;
-        discard = totalRes;
+        Map<Resource, Integer> discard;
+        discard = totalRes.stream().collect(groupingBy(Function.identity(), Collectors.reducing(0, x -> 1, Integer::sum)));
 
         clientView.sendManageResourcesReply(newWarehouse, discard);
     }

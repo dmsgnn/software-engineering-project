@@ -13,7 +13,7 @@ public class UsernameResponse implements ServerMessage{
     public UsernameResponse(boolean isFree, String nickname, ArrayList<String> usedNicknames) {
         this.usedNicknames = new ArrayList<>(usedNicknames);
         this.isFree = isFree;
-
+        this.nickname = nickname;
     }
 
     @Override

@@ -100,6 +100,14 @@ public class ClientPlayerBoard {
         //metodo per aggiungere buff nel posto giusto?
     }
 
+    public void setPlayedCards(ArrayList<String> playedCards) {
+        this.playedCards = playedCards;
+    }
+
+    public void setVaticanReports(Integer pos) {
+        this.vaticanReports.put(pos, true);
+    }
+
     public void removeHandCard(String id){
         hand.remove(id);
     }
@@ -114,6 +122,14 @@ public class ClientPlayerBoard {
 
     public void setLorenzoPosition(int lorenzoPosition) {
         this.lorenzoPosition = lorenzoPosition;
+    }
+
+    public void setWarehouse(Map<Integer, ArrayList<Resource>> warehouse) {
+        this.warehouse = warehouse;
+    }
+
+    public void setStrongbox(Map<Resource, Integer> strongbox) {
+        this.strongbox = strongbox;
     }
 
     public void updateWarehouse(Map<Integer, ArrayList<Resource>> warehouse) {
@@ -132,7 +148,13 @@ public class ClientPlayerBoard {
         }
     }
 
-    public void setDevCardSlot(int slot, String id) {
+
+
+    public void setDevCardSlot(Map<Integer, String> devCardSlot) {
+        this.devCardSlot = devCardSlot;
+    }
+
+    public void updateDevCardSlot(int slot, String id) {
         devCardSlot.put(slot, id);
     }
 

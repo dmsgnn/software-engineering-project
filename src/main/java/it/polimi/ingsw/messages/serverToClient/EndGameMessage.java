@@ -11,7 +11,7 @@ public class EndGameMessage implements ServerMessage{
     }
 
     @Override
-    public void handleMessage(ClientView clientView) { }
+    public void handleMessage(ClientView clientView) { clientView.winner(winner);}
 
     @Override
     public void handleMessage(PingReceiver pingManager) { }

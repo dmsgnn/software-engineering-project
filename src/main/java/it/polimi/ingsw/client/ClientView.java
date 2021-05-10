@@ -4,6 +4,7 @@ import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.representations.ClientGameBoard;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.controller.Actions;
+import it.polimi.ingsw.messages.clientToServer.*;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 public class ClientView implements Observer<ServerMessage> {
 
-    //private ClientSocketHandler socket;
+    private ClientSocketHandler socket;
     private UserInterface uiType;
     private String nickname; //nickname of the player owning this client
     private final String ip;
@@ -61,7 +62,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void login(){
         String nickname = uiType.login();
-        //socket.sendMessage(new UsernameReply(nickname));
+        socket.sendMessage(new LoginMessage(nickname));
     }
 
     /**
@@ -77,8 +78,7 @@ public class ClientView implements Observer<ServerMessage> {
      * @param message response message
      */
     public void responseMessage(String message){
-        message.toLowerCase(Locale.ROOT);
-        if(!message.equals("ok")) uiType.displayMessage(message);
+        if(!message.toLowerCase(Locale.ROOT).equals("ok")) uiType.displayMessage(message);
     }
 
     //------------------GAME SETUP------------------
@@ -115,7 +115,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void numOfPlayers(int maxNum){
         int num = uiType.playersNumber(maxNum);
-        //socket.sendMessage(new PlayerNumberReply(num));
+        socket.sendMessage(new PlayerNumberReply(num));
     }
 
     /**
@@ -124,7 +124,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void selectStartingCards(ArrayList<String> leaderCardID){
         ArrayList<String> cards = uiType.startingLeaderCardsSelection(leaderCardID);
-        //socket.sendMessage(new LeaderCardsReply(cards));
+        socket.sendMessage(new LeaderCardsReply(cards, nickname));
     }
 
     /**
@@ -133,7 +133,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void startingResources(int amount){
         ArrayList<Resource> resources = uiType.startingResources(amount);
-        //socket.sendMessage(new ResourcesReply(resources));
+        //socket.sendMessage(new ResourcesReply(resources, nickname));
     }
 
 
@@ -146,7 +146,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void pickAction(ArrayList<Actions> possibleActions){
         Actions action = uiType.chooseAction(possibleActions);
-        //socket.sendMessage(new ActionReply(action));
+        socket.sendMessage(new ActionReply(action));
     }
 
     /**
@@ -170,7 +170,7 @@ public class ClientView implements Observer<ServerMessage> {
      * @param exchangeBuffResources resources obtained from white marbles if possible
      */
     public void marketAction(int pos, boolean rowOrCol, ArrayList<Resource> exchangeBuffResources){
-        //socket.sendMessage(new RowColumnSelection(pos, rowOrCol, exchangeBuffResources));
+        socket.sendMessage(new RowColumnSelection(pos, rowOrCol, exchangeBuffResources));
     }
 
     /**
@@ -184,10 +184,10 @@ public class ClientView implements Observer<ServerMessage> {
      * @param strongboxResources resources inside the strongbox that the player wants to pay
      */
     public void useProduction(ArrayList<Integer> developmentCardSlotIndex, ArrayList<Integer> leaderCardProdIndex, ArrayList<Resource> leaderCardProdGain,
-                              ArrayList<Resource> boardResources, Map<Resource, Integer> warehouseResources, Map<Resource, Integer> leaderDepotResources,
-                              Map<Resource, Integer> strongboxResources){
-        /*socket.sendMessage(new UseProductionParameters(developmentCardSlotIndex, leaderCardProdIndex, leaderCardProdGain, boardResources,
-                warehouseResources, leaderDepotResources, strongboxResources));*/
+                              ArrayList<Resource> boardResources, HashMap<Resource, Integer> warehouseResources, HashMap<Resource, Integer> leaderDepotResources,
+                              HashMap<Resource, Integer> strongboxResources){
+        socket.sendMessage(new UseProductionParameters(warehouseResources, leaderDepotResources, strongboxResources,
+                boardResources, leaderCardProdGain, developmentCardSlotIndex, leaderCardProdIndex));
     }
 
     /**
@@ -201,7 +201,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void buyDevCard(Color color, int level, int devCardSlot, HashMap<Resource, Integer> warehouseDepotRes,
                            HashMap<Resource, Integer> cardDepotRes, HashMap<Resource, Integer> strongboxRes){
-        //socket.sendMessage(new BuyDevelopmentCardParameters(color, level, devCardSlot, warehouseDepotRes, cardDepotRes, strongboxRes));
+        socket.sendMessage(new BuyDevelopmentCardParameters(color, level, devCardSlot, warehouseDepotRes, cardDepotRes, strongboxRes));
     }
 
     /**
@@ -213,7 +213,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void playLeaderCard(String id, HashMap<Resource, Integer> warehouseDepotRes, HashMap<Resource,
                                 Integer> cardDepotRes, HashMap<Resource, Integer> strongboxRes){
-        //socket.sendMessage(new PlayLeaderCardParameters(id, warehouseDepotRes, cardDepotRes, strongboxRes));
+        socket.sendMessage(new PlayLeaderCardParameters(id, warehouseDepotRes, cardDepotRes, strongboxRes));
     }
 
     /**
@@ -221,7 +221,7 @@ public class ClientView implements Observer<ServerMessage> {
      * @param id of the selected card
      */
     public void discardLeaderCard(String id){
-        //socket.sendMessage(new DiscardLeaderCardParameters(id));
+        socket.sendMessage(new DiscardLeaderCardParameters(id));
     }
 
     /**
@@ -237,17 +237,85 @@ public class ClientView implements Observer<ServerMessage> {
      * @param newWarehouse new warehouse configuration
      * @param discard resources that the player wants to discard
      */
-    public void sendManageResourcesReply(Map<Integer, ArrayList<Resource>> newWarehouse, ArrayList<Resource> discard){
-        //socket.sendMessage(new ResourcesManageReply(newWarehouse, discard))
+    public void sendManageResourcesReply(Map<Integer, ArrayList<Resource>> newWarehouse, Map<Resource,Integer> discard){
+        socket.sendMessage(new ResourcesManageReply(newWarehouse, discard));
     }
 
     //------------------UPDATES------------------
 
     /**
+     * called to setup all playerboard with initial values
+     * @param leaderCards hand of each player
+     * @param resources warehouse of each player
+     * @param faithTracks faith track position of each player
+     */
+    public void setupGameUpdate(Map<String,ArrayList<String>> leaderCards, Map<String,Map<Integer, ArrayList<Resource>>> resources, Map<String,Integer> faithTracks){
+        for(String nickname : leaderCards.keySet()){
+            if(nickname.equals(this.nickname)) gameboard.getOnePlayerBoard(nickname).setHand(leaderCards.get(nickname));
+        }
+        for(String  nickname : resources.keySet()){
+            gameboard.getOnePlayerBoard(nickname).setWarehouse(resources.get(nickname));
+        }
+        for(String nickname : faithTracks.keySet()){
+            gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithTracks.get(nickname));
+        }
+        uiType.updateBoard();
+    }
+
+    /**
+     * called after a player reconnects to the game, the parameters contains all the informations regarding the game
+     * @param devCardSlots all dev cards bought by all the player
+     * @param faithPositions all player's faith track position
+     * @param leaderCardsPlayed all leader cards played by all player
+     * @param leaderCards player hand
+     * @param strongbox every strongbox
+     * @param warehouse every warehouse
+     */
+    public void reconnectionUpdate(Map<String, ArrayList<String>> devCardSlots, Map<String,Integer> faithPositions, Map<String,
+            ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource,
+            Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse){
+        for(String nickname: devCardSlots.keySet()){
+            //gameboard.getOnePlayerBoard(nickname);
+        }
+        for(String nickname: faithPositions.keySet()){
+            gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithPositions.get(nickname));
+        }
+        for(String nickname: leaderCardsPlayed.keySet()){
+            gameboard.getOnePlayerBoard(nickname).setPlayedCards(leaderCardsPlayed.get(nickname));
+        }
+        gameboard.getOnePlayerBoard(nickname).setHand(leaderCards);
+        for(String nickname: strongbox.keySet()) {
+            gameboard.getOnePlayerBoard(nickname).setStrongbox(strongbox.get(nickname));
+        }
+        for(String nickname: warehouse.keySet()){
+            gameboard.getOnePlayerBoard(nickname).setWarehouse(warehouse.get(nickname));
+        }
+        uiType.updateBoard();
+    }
+
+    /**
+     * called to update every player faithtrack
+     * @param vaticanPosition map of the players who activated the report in the specified position
+     * @param position new faith track position of each player
+     * @param report true if a vatican report has been activated, false otherwise
+     */
+    public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report){
+        if(report){
+            for(String nickname: position.keySet()){
+                gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
+            }
+        }
+        for(String nickname: vaticanPosition.keySet()){
+            gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname));
+        }
+        uiType.updateBoard();
+    }
+
+    /**
      * called to update the board after a buy development card action
      * @param nickname player that performed the action
      * @param id card bought
-     * @param slot slot to place the card
+     * @param slot where to place the dev card
      * @param gridId new card for the grid
      * @param row of the new card
      * @param column of the new card
@@ -258,9 +326,9 @@ public class ClientView implements Observer<ServerMessage> {
                               Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         for(ClientPlayerBoard playerBoard: gameboard.getPlayerBoards()){
             if(playerBoard.getPlayerNickname().equals(nickname)){
-                playerBoard.setDevCardSlot(slot, id);
-                playerBoard.updateWarehouse(warehouse);
-                playerBoard.updateStrongbox(strongbox);
+                playerBoard.updateDevCardSlot(slot, id);
+                playerBoard.setWarehouse(warehouse);
+                playerBoard.setStrongbox(strongbox);
             }
         }
         gameboard.changeGridCard(gridId, row, column);
@@ -296,8 +364,8 @@ public class ClientView implements Observer<ServerMessage> {
             if(playerBoard.getPlayerNickname().equals(nickname)){
                 playerBoard.removeHandCard(id);
                 playerBoard.addPlayedCard(id);
-                playerBoard.updateWarehouse(warehouse);
-                playerBoard.updateStrongbox(strongbox);
+                playerBoard.setWarehouse(warehouse);
+                playerBoard.setStrongbox(strongbox);
             }
         }
         uiType.updateBoard();
@@ -313,8 +381,8 @@ public class ClientView implements Observer<ServerMessage> {
     public void useProductionUpdate(String nickname, int playerFaith, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         for(ClientPlayerBoard playerBoard: gameboard.getPlayerBoards()){
             if(playerBoard.getPlayerNickname().equals(nickname)){
-                playerBoard.updateWarehouse(warehouse);
-                playerBoard.updateStrongbox(strongbox);
+                playerBoard.setWarehouse(warehouse);
+                playerBoard.setStrongbox(strongbox);
                 playerBoard.setPlayerPosition(playerFaith);
             }
         }
@@ -336,18 +404,14 @@ public class ClientView implements Observer<ServerMessage> {
                                    ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol){
         for(ClientPlayerBoard playerBoard: gameboard.getPlayerBoards()){
             if(playerBoard.getPlayerNickname().equals(nickname)){
-                playerBoard.updateWarehouse(warehouse);
-                playerBoard.updateStrongbox(strongbox);
+                playerBoard.setWarehouse(warehouse);
+                playerBoard.setStrongbox(strongbox);
                 playerBoard.setPlayerPosition(playerFaith);
             }
         }
         gameboard.updateMarket(newMarbles, newFreeMarble, pos, rowOrCol);
         uiType.updateBoard();
     }
-
-
-
-    //------------------GAME OVER------------------
 
 
     /**

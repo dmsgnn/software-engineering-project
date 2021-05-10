@@ -21,7 +21,7 @@ public class SetupGameUpdate implements ServerMessage {
 
     @Override
     public void handleMessage(ClientView clientView) {
-
+        clientView.setupGameUpdate(leaderCards, resources, newFaithTrackPosition);
     }
 
     @Override

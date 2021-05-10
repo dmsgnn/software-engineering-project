@@ -19,7 +19,7 @@ public class FaithTrackMessage implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) {
-
+        clientView.faithTrackUpdate(vaticanPosition, position, report);
 
     }
 
