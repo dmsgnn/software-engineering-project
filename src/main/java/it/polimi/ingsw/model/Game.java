@@ -62,10 +62,10 @@ public class Game {
 
     public Game(ArrayList<String> players){
         this.players = new Player[4];
-        this.lorenzo = new LorenzoAI(this);
         this.board = new Gameboard(this);
         this.playersNumber = players.size();
         if(players.size()==1){
+            this.lorenzo = new LorenzoAI(this);
             this.soloMode=true;
         }
         else{

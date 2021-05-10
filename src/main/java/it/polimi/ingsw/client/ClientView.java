@@ -9,10 +9,13 @@ import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import static java.lang.System.exit;
 
 public class ClientView implements Observer<ServerMessage> {
 
@@ -430,6 +433,33 @@ public class ClientView implements Observer<ServerMessage> {
     @Override
     public void update(ServerMessage message) {
         message.handleMessage(this);
+    }
+
+    //------------------SOCKET------------------
+
+    /**
+     * starts the connection of the client
+     */
+    public void startConnection() {
+        Socket socket = null;
+        try {
+            socket = new Socket(ip, port);
+        } catch (Exception e) {
+            System.out.println("\n\nserver not available: ip or port number might be wrong\n\n");
+            exit(0);
+        }
+
+        ClientSocketHandler proxy = new ClientSocketHandler(socket);
+        proxy.addObserver(this);
+        this.socket = proxy;
+        new Thread(proxy).start();
+    }
+
+    /**
+     * closes the socket of the client
+     */
+    public void disconnect() {
+        socket.close();
     }
 
 }

@@ -17,6 +17,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static java.lang.System.exit;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
@@ -92,7 +93,17 @@ public class CLI implements UserInterface{
 
     @Override
     public void start() {
-
+        System.out.println("\nWelcome to..." + "\n");
+        System.out.println("8b   d8            w                             d8b ");
+        System.out.println("8YbmdP8 .d88 d88b w8ww .d88b 8d8b d88b    .d8b.  8'  ");
+        System.out.println("8  \"  8 8  8 `Yb.  8   8.dP' 8P   `Yb.    8' .8 w8ww ");
+        System.out.println("8     8 `Y88 Y88P  Y8P `Y88P 8    Y88P    `Y8P'  8   \n");
+        System.out.println("                      w                                ");
+        System.out.println("8d8b .d88b 8d8b. .d88 w d88b d88b .d88 8d8b. .d8b .d88b");
+        System.out.println("8P   8.dP' 8P Y8 8  8 8 `Yb. `Yb. 8  8 8P Y8 8    8.dP'");
+        System.out.println("8    `Y88P 8   8 `Y88 8 Y88P Y88P `Y88 8   8 `Y8P `Y88P");
+        clientView.startConnection();
+        clientView.login();
     }
 
     @Override
@@ -132,6 +143,9 @@ public class CLI implements UserInterface{
     @Override
     public void winner(String nickname) {
         System.out.println(nickname + " won the game");
+
+        clientView.disconnect();
+        exit(0);
     }
 
     @Override

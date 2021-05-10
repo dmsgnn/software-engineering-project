@@ -15,7 +15,7 @@ public class LoginMessage implements ClientMessage{
     }
 
     @Override
-    public void handleMessage(Controller controller) { }
+    public void handleMessage(Controller controller) {}
 
     @Override
     public void handleMessage(PingManager pingSender){

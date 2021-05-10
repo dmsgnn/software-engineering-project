@@ -39,13 +39,13 @@ public class ServerMain {
     }
 
     /**
-     * Starts the server to listen to clients and to accept their connection (increasing their id??)
+     * Starts the server to listen to clients and to accept their connection
      * creates a ServerSocketHandler for each client
      */
     public void startServer() {
-        System.out.println("portNumber: " + portNumber);
+        System.out.println("port number: " + portNumber);
         ServerSocket serverSocket = null;
-        System.out.println("Server started!");
+        System.out.println("server started!");
         try {
             try{
                 serverSocket = new ServerSocket(portNumber);
