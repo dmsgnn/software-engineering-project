@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.representations;
 
+import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 
@@ -13,7 +14,7 @@ public enum ColorCLI {
     BLUE("\033[0;34m"),
     PURPLE("\u001B[35m"),
     CYAN("\u001B[36m"),
-    WHITE("\u001B[37m");
+    GREY("\u001B[37m");
 
     private final String code;
 
@@ -37,6 +38,15 @@ public enum ColorCLI {
         if(rss==Resource.COINS) return YELLOW.toString();
         else if(rss==Resource.SERVANTS) return PURPLE.toString();
         else if(rss==Resource.SHIELDS) return BLUE.toString();
-        else return WHITE.toString(); //STONES
+        else return GREY.toString(); //STONES
+    }
+
+    public static String marbleColor(MarbleColors marble){
+        if(marble==MarbleColors.BLUE ) return BLUE.toString();
+        else if(marble==MarbleColors.RED) return RED.toString();
+        else if(marble==MarbleColors.GREY) return GREY.toString();
+        else if(marble==MarbleColors.PURPLE) return PURPLE.toString();
+        else if(marble==MarbleColors.YELLOW) return YELLOW.toString();
+        else return RESET.toString(); //WhiteMarble
     }
 }

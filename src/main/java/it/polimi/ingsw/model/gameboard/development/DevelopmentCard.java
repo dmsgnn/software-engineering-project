@@ -70,20 +70,43 @@ public class DevelopmentCard {
         return ColorCLI.cardColor(getColor()) + "║";
     }
 
+    public String drawTop(){
+        return ColorCLI.cardColor(color) + "╔═════════╗";
+    }
+    public String drawBottom(){
+        return ColorCLI.cardColor(color) + "╚═════════╝";
+    }
+
     public String drawID(){
         return border() + "" + id + "" + border();
     }
 
     public String drawLevelAndPoints(){
-        return border() + "" + level + " " + victoryPoints + "" + border();
+        int length;
+        StringBuilder builder = new StringBuilder();
+        builder.append(ColorCLI.RESET).append("lv").append(level).append("  vp");
+        length=7;
+        builder.append(ColorCLI.RESET).append(victoryPoints);
+        if(victoryPoints<10) length++;
+        else length=length+2;
+        if(length<9) for(int i=0; i<9-length; i++) builder.append(" ");
+        return border() + "" + builder.toString() + "" + border();
     }
 
     public String drawRequirements(){
+        int length=0;
         StringBuilder builder = new StringBuilder();
         for(Resource rss: cardRequirements.keySet()){
-            builder.append(" ").append(ColorCLI.resourceColor(rss));
-            builder.append(cardRequirements.get(rss));
+            if(cardRequirements.get(rss)>0) {
+                builder.append(ColorCLI.resourceColor(rss)).append(cardRequirements.get(rss)).append(" ");
+                length = length + 2;
+            }
         }
+        if(builder.length()>0) {
+            builder.deleteCharAt(builder.length() - 1);
+            length--;
+        }
+        if(length<9) for(int i=0; i<9-length; i++) builder.append(" ");
         return border() + "" + builder.toString() + "" + border();
     }
 

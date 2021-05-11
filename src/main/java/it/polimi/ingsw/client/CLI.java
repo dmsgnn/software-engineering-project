@@ -19,7 +19,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.lang.System.exit;
-import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
 public class CLI implements UserInterface{
@@ -701,20 +700,92 @@ public class CLI implements UserInterface{
         return strongbox;
     }
 
-    @Override
-    public void updateBoard() {
+    private String strBuilderGameboard(){
         String[][] cardGrid = clientView.getGameboard().getCards();
+        MarbleColors[][] market= clientView.getGameboard().getMarket();
+        MarbleColors free = clientView.getGameboard().getFreeMarble();
         StringBuilder builder = new StringBuilder();
+        int marketRow=0;
+
         for(int i = 0; i<3; i++){
+            for(int j = 0; j < 4; j++){
+                DevelopmentCard card = findDevCard(cardGrid[i][j]);
+                if (card != null) {
+                    builder.append(card.drawTop());
+                }
+                else builder.append("           ");
+            }
+            if(marketRow>3) builder.append("\n"); //already added the market
+            else {
+                for (int j = 0; marketRow < 3 && j < 4; j++) {
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●\n");
+                }
+                marketRow++;
+            }
+
+            for(int j=0; j < 4; j++){
+                DevelopmentCard card = findDevCard(cardGrid[i][j]);
+                if (card != null) {
+                    builder.append(card.drawLevelAndPoints());
+                }
+                else builder.append("           ");
+            }
+            if(marketRow>3) builder.append("\n"); //already added the market
+            else {
+                for (int j = 0; marketRow < 3 && j < 4; j++) {
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●\n");
+                }
+                marketRow++;
+            }
+
             for(int j=0; j< 4; j++){
-               /* for(int k=0; k<4; k++){ //each card is made of 4 lines
-                    if(cardGrid[i][j]!=null){
-                        DevelopmentCard card = findDevCard(cardGrid[i][j]);
-                        builder.append(card.drawID());
-                    }
-                    else builder.append("     ");
-                }*/
+                DevelopmentCard card = findDevCard(cardGrid[i][j]);
+                if (card != null) {
+                    builder.append(card.drawRequirements());
+                }
+                else builder.append("           ");
+            }
+            if(marketRow>3) builder.append("\n"); //already added the market
+            else {
+                for (int j = 0; marketRow < 3 && j < 4; j++) {
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●\n");
+                }
+                marketRow++;
+            }
+
+            for(int j=0; j< 4; j++){
+                DevelopmentCard card = findDevCard(cardGrid[i][j]);
+                if (card != null) {
+                    builder.append(card.drawProdCostAndGain());
+                }
+                else builder.append("           ");
+            }
+            if(marketRow>3) builder.append("\n"); //already added the market
+            else {
+                for (int j = 0; marketRow < 3 && j < 4; j++) {
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●\n");
+                }
+            }
+
+            for(int j=0; j< 4; j++){
+                DevelopmentCard card = findDevCard(cardGrid[i][j]);
+                if (card != null) {
+                    builder.append(card.drawBottom());
+                }
+                else builder.append("           ");
+            }
+            if(marketRow>3) builder.append("\n"); //already added the market
+            else{
+                builder.append(ColorCLI.RESET).append("free: ").append(ColorCLI.marbleColor(free)).append(" ●\n");
+                marketRow++;
             }
         }
+        return builder.toString();
+    }
+
+    @Override
+    public void updateBoard() {
+
+        System.out.println(strBuilderGameboard());
     }
 }

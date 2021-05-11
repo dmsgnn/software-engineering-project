@@ -33,24 +33,31 @@ public class ProductionPower {
         int length=0;
         for(Resource rss: prodCost.keySet()){
             if(prodCost.get(rss)>0){
-                builder.append(ColorCLI.resourceColor(rss)).append(prodCost.get(rss)).append(" ");
+                builder.append(ColorCLI.resourceColor(rss)).append(prodCost.get(rss)).append(ColorCLI.RESET).append(",");
                 length=length+2;
             }
         }
-        builder.append(ColorCLI.RESET).append("->");
-        length=length+2;
+        if(builder.length()>0) {
+            builder.deleteCharAt(builder.length() - 1);
+            length--;
+        }
+        builder.append(ColorCLI.RESET).append("»");
+        length++;
         for(Resource rss: resourceGain.keySet()){
             if(resourceGain.get(rss)>0){
-                builder.append(ColorCLI.resourceColor(rss)).append(resourceGain.get(rss)).append(" ");
+                builder.append(ColorCLI.resourceColor(rss)).append(resourceGain.get(rss)).append(ColorCLI.RESET).append(",");
                 length=length+2;
             }
         }
         if(faithGain>0){
-            builder.append(ColorCLI.RED).append(faithGain);
-            length++;
+            builder.append(ColorCLI.RED).append(faithGain).append(" ");
+            length=length+2;
         }
-        System.out.println(length);
-        if(length<10) for(int i=0; i<10-length; i++) builder.append(" ");
+        if(builder.length()>0) {
+            builder.deleteCharAt(builder.length() - 1);
+            length--;
+        }
+        if(length<9) for(int i=0; i<9-length; i++) builder.append(" ");
         return builder.toString();
     }
 
