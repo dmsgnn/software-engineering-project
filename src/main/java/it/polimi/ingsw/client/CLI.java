@@ -717,9 +717,13 @@ public class CLI implements UserInterface{
             }
             if(marketRow>3) builder.append("\n"); //already added the market
             else {
+                builder.append("  ");
                 for (int j = 0; marketRow < 3 && j < 4; j++) {
-                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●\n");
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ⬤");
                 }
+                builder.append(ColorCLI.RESET).append("< 1");
+                builder.append("  ");
+                builder.append(ColorCLI.RESET).append("free: ").append(ColorCLI.marbleColor(free)).append(" ⬤\n");
                 marketRow++;
             }
 
@@ -732,9 +736,11 @@ public class CLI implements UserInterface{
             }
             if(marketRow>3) builder.append("\n"); //already added the market
             else {
+                builder.append("  ");
                 for (int j = 0; marketRow < 3 && j < 4; j++) {
-                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●\n");
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ⬤");
                 }
+                builder.append(ColorCLI.RESET).append("< 2\n");
                 marketRow++;
             }
 
@@ -747,9 +753,11 @@ public class CLI implements UserInterface{
             }
             if(marketRow>3) builder.append("\n"); //already added the market
             else {
+                builder.append("  ");
                 for (int j = 0; marketRow < 3 && j < 4; j++) {
-                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●\n");
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ⬤");
                 }
+                builder.append(ColorCLI.RESET).append("< 3\n");
                 marketRow++;
             }
 
@@ -762,9 +770,8 @@ public class CLI implements UserInterface{
             }
             if(marketRow>3) builder.append("\n"); //already added the market
             else {
-                for (int j = 0; marketRow < 3 && j < 4; j++) {
-                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●\n");
-                }
+                builder.append(ColorCLI.RESET).append("   ^  ^ ^  ^");
+                builder.append("\n");
             }
 
             for(int j=0; j< 4; j++){
@@ -775,8 +782,9 @@ public class CLI implements UserInterface{
                 else builder.append("           ");
             }
             if(marketRow>3) builder.append("\n"); //already added the market
-            else{
-                builder.append(ColorCLI.RESET).append("free: ").append(ColorCLI.marbleColor(free)).append(" ●\n");
+            else {
+                builder.append(ColorCLI.RESET).append("   1  2 3  4");
+                builder.append("\n");
                 marketRow++;
             }
         }

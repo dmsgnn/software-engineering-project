@@ -28,6 +28,16 @@ public class ClientView implements Observer<ServerMessage> {
 
     private final Object lock = new Object();
 
+    /**
+     * for testing
+     */
+    public ClientView(UserInterface ui){
+        this.uiType = ui;
+        gameboard = new ClientGameBoard();
+        ip = "";
+        port = 0;
+    }
+
     public ClientView(String ip, int port, UserInterface ui) {
         this.ip = ip;
         this.port = port;
