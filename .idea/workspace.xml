@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="CLI gameboard print and print methods for classes update">
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/CLITest.java" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="CLI gameboard test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/Market.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,17 +107,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -256,7 +244,8 @@
       <workItem from="1620732896023" duration="3454000" />
       <workItem from="1620736419534" duration="343000" />
       <workItem from="1620741730987" duration="1908000" />
-      <workItem from="1620756185879" duration="1673000" />
+      <workItem from="1620756185879" duration="1851000" />
+      <workItem from="1620761333777" duration="138000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -405,7 +394,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620736756101</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="CLI gameboard test">
+      <created>1620758055562</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1620758055562</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,7 +442,8 @@
     <MESSAGE value="CLI update to match controller, ColorCli class and draw methods for DevelopmentCard" />
     <MESSAGE value="card draw update" />
     <MESSAGE value="CLI gameboard print and print methods for classes update" />
-    <option name="LAST_COMMIT_MESSAGE" value="CLI gameboard print and print methods for classes update" />
+    <MESSAGE value="CLI gameboard test" />
+    <option name="LAST_COMMIT_MESSAGE" value="CLI gameboard test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

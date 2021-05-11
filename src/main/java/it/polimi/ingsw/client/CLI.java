@@ -330,7 +330,7 @@ public class CLI implements UserInterface{
         }
 
 
-        clientView.marketAction(value, rowOrCol, whiteMarblesRes);
+        clientView.marketAction(value-1, rowOrCol, whiteMarblesRes);
     }
 
     @Override
