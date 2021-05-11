@@ -147,8 +147,10 @@ public class ClientView implements Observer<ServerMessage> {
      * @param leaderCardID IDs of the cards
      */
     public void selectStartingCards(ArrayList<String> leaderCardID){
-        ArrayList<String> cards = uiType.startingLeaderCardsSelection(leaderCardID);
-        socket.sendMessage(new LeaderCardsReply(cards, nickname));
+        synchronized (lock) {
+            ArrayList<String> cards = uiType.startingLeaderCardsSelection(leaderCardID);
+            socket.sendMessage(new LeaderCardsReply(cards, nickname));
+        }
     }
 
     /**
@@ -156,8 +158,11 @@ public class ClientView implements Observer<ServerMessage> {
      * @param amount num of resources
      */
     public void startingResources(int amount){
-        Map<Integer, ArrayList<Resource>> warehouse =  uiType.startingResources(amount);
-        socket.sendMessage(new ResourcesReply(warehouse, nickname));
+        synchronized (lock) {
+            System.out.println(nickname);
+            Map<Integer, ArrayList<Resource>> warehouse = uiType.startingResources(amount);
+            socket.sendMessage(new ResourcesReply(warehouse, nickname));
+        }
     }
 
 

@@ -19,7 +19,7 @@ public class ManageResources extends Actions {
     public ManageResources(Map<Integer,ArrayList<Resource>> resources, Map<Resource, Integer> res, Map<Resource, Integer> discResources, boolean initial) {
         this.resources = new ArrayList<ArrayList<Resource>>(){{
            for (int i=0;i<resources.size();i++){
-               add(i,resources.get(i));
+               add(i,resources.get(i+1));
            }
         }};
         this.newResources = res;

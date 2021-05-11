@@ -22,7 +22,6 @@ import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.server.ServerView;
 
 import javax.naming.InsufficientResourcesException;
-import java.awt.font.FontRenderContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +38,10 @@ public class Controller implements Observer<ClientMessage> {
     private final Map<String,Map<Resource,Integer>> newResources;
     private final Map<Resource,Integer> temp;
     private int playerNumber;
+    private int playerCounter=0;
+    private int current=0;
+    private Map<Integer,Integer> numOfActions;
+    private Map<String,Integer> turnOrder;
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
         this.temp = new HashMap<Resource,Integer>(){{
@@ -49,6 +52,7 @@ public class Controller implements Observer<ClientMessage> {
 
         }};
         this.game = game;
+
         this.serverViews = serverViews;
         this.newResources = new HashMap<>();
         nicknames= new ArrayList<>();
@@ -59,67 +63,87 @@ public class Controller implements Observer<ClientMessage> {
         selectedCards= new HashMap<>();
         leaderID = new HashMap<>();
         playerNumber=0;
+        numOfActions= new HashMap<Integer,Integer>(){{
+           put(0,0);
+           put(1,0);
+           put(2,0);
+           put(3,0);
+        }};
+
 
     }
 
 
 
+
+    /**
+     * Extracts the information from the {@link ClientMessage} which will call a method on the controller.
+     * @param message message from the client.
+     */
+    @Override
+    public void update(ClientMessage message) {
+        message.handleMessage(this);
+    }
+
+
+    //------------------GAME SETUP------------------
+
+    /**
+     * 1) START: send market and devCardGrid
+     */
     public void startGame(){
         for (ServerView s: serverViews){
             newResources.put(s.getUsername(),temp);
             s.sendMarket(getMarket(),getFreeMarble());
             s.sendDevCardGrid(getDevCardGrid());
-            setupGame();
+
         }
+        setupGame();
     }
-
-
 
     /**
-     * select the action chosen by the player
+     * 2) SETUP: send to each player leadercards
      */
-    public void selectAction(Actions action){
-        switch (action){
-            case MARKETACTION:{
-
+    public void setupGame(){
+        for (int i=0;i< game.getPlayersNumber();i++){
+            game.setActivePlayer(game.getPlayers(i));
+            ArrayList<LeaderCard> leaderCards = game.getActivePlayer().take4cards();
+            ArrayList<String> leaderId = new ArrayList<>();
+            startingLeaderCards.put(game.getActivePlayer().getNickname(),leaderCards);
+            for (LeaderCard l: leaderCards){
+                leaderId.add(l.getId());
             }
-            case USEPRODUCTION:{
+            for (ServerView serverView : serverViews) {
+                if (serverView.getUsername().equals(game.getActivePlayer().getNickname())) {
+                    serverView.sendLeaderCards(leaderId);
 
-            }
-            case PLAYLEADERCARD:{
-
-            }
-            case DISCARDLEADERCARD:{
-
-            }
-            case BUYDEVELOPMENTCARD:{
-
+                }
             }
         }
     }
-
 
     /**
      * assign the starting cards to the player
      */
-    public void pickStartingLeaderCards(ArrayList<String> leaderId, String username){
+    public synchronized void pickStartingLeaderCards(ArrayList<String> leaderId, String username){
         ArrayList<LeaderCard> trueCards = new ArrayList<>();
         int counter=0;
         int j=0;
-        for (int i=0;i<serverViews.size();i++) {
-            if (serverViews.get(i).getUsername().equals(username)) {
+        for (int i = 0; i < game.getPlayersNumber(); i++) {
+            if (game.getPlayers(i).getNickname().equals(username)){
                 game.setActivePlayer(game.getPlayers(i));
-                j=i;
+                for(int k=0;k< serverViews.size();k++){
+                    if (serverViews.get(k).getUsername().equals(username)) j=k;
+                }
             }
-
         }
         for (String s : leaderId){
-                    for (LeaderCard leaderCard : startingLeaderCards.get(game.getActivePlayer().getNickname())) {
-                        if (s.equals(leaderCard.getId())) {
-                            trueCards.add(counter, leaderCard);
-                            counter++;
-                        }
-                    }
+            for (LeaderCard leaderCard : startingLeaderCards.get(game.getActivePlayer().getNickname())) {
+                if (s.equals(leaderCard.getId())) {
+                    trueCards.add(counter, leaderCard);
+                    counter++;
+                }
+            }
         }
         selectedCards.put(game.getActivePlayer().getNickname(),trueCards);
         AddStartingLeaderCards addStartingLeaderCards = new AddStartingLeaderCards(trueCards,game.getActivePlayer());
@@ -129,45 +153,72 @@ public class Controller implements Observer<ClientMessage> {
             //solito errore
             e.printStackTrace();
         }
+        sendStartingResource(username);
 
-        if (serverViews.get(j).getUsername().equals(game.getActivePlayer().getNickname())) {
-            switch (j) {
-                case 0: {
-                    serverViews.get(j).sendStartingResource(0);
-                }
-                case 1: {
-                    serverViews.get(j).sendStartingResource(1);
-                }
-                case 2: {
-                    serverViews.get(j).sendStartingResource(1);
-                    game.getActivePlayer().getFaithTrack().increaseVictoryPoints(1);
-                }
-                case 3: {
-                    serverViews.get(j).sendStartingResource(2);
-                    game.getActivePlayer().getFaithTrack().increaseVictoryPoints(1);
-                }
+
+    }
+
+    public synchronized void sendStartingResource(String username) {
+        int i;
+        for (i=0; i< game.getPlayersNumber();i++){
+            if (game.getPlayers(i).getNickname().equals(username) ) break;
+        }
+        switch (i) {
+            case 0: {
+                getServerView(username).startingResourceMessage(0);
+                System.out.println("0");
+                break;
+
+            }
+            case 1: {
+                getServerView(username).startingResourceMessage(1);
+                System.out.println("1");
+                break;
+            }
+            case 2: {
+                getServerView(username).startingResourceMessage(1);
+                game.getActivePlayer().getFaithTrack().increaseVictoryPoints(1);
+                System.out.println("2");
+                break;
+            }
+            case 3: {
+                getServerView(username).startingResourceMessage(2);
+                game.getActivePlayer().getFaithTrack().increaseVictoryPoints(1);
+                System.out.println("3");
+                break;
+            }
+            default:{
+                System.out.println("error");
+                break;
             }
         }
+
     }
 
 
     /**
      * assign the starting resources to the player
      */
-    public void pickStartingResources(Map<Integer, ArrayList<Resource>> resources, String username) {
+    public synchronized void pickStartingResources(Map<Integer, ArrayList<Resource>> resources, String username) {
         for (int i=0;i<serverViews.size();i++) {
             if (serverViews.get(i).getUsername().equals(username)) {
                 game.setActivePlayer(game.getPlayers(i));
             }
-
         }
-        //controllo sul numero esatto di risorse
+        manageStartingResource(resources,username);
+
+
+
+    }
+    private synchronized void manageStartingResource(Map<Integer, ArrayList<Resource>> resources,String username){
         ManageResources manageResources = new ManageResources(resources, null,null,true);
         try {
             game.doAction(manageResources);
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
-            // mando errore nel fare l'azione
-            e.printStackTrace();
+            // errore nel manage
+            System.out.println( username + " invalid manage resources ");
+            sendStartingResource(username);
+            //e.printStackTrace();
         }
         //layout update
         ArrayList<String> leaderID= new ArrayList<>();
@@ -177,8 +228,75 @@ public class Controller implements Observer<ClientMessage> {
         }
         for (ServerView serverView : serverViews) {
             serverView.sendSetupGameUpdate(this.leaderID, getWarehouse(), getFaith());
+            System.out.println("setupGameUpdate");
         }
 
+    }
+
+
+    public void begin(){
+        playerCounter++;
+        if (playerCounter==4){
+            game.setActivePlayer(game.getPlayers(0));
+            for (int i = 0; i < serverViews.size(); i++) {
+                if (serverViews.get(i).getUsername().equals(game.getActivePlayer().getNickname())){
+                    current=i;
+                }
+            }
+            serverViews.get(current).sendPossibleActions(getPossibleAction());
+        }
+    }
+
+
+    //------------------ACTIONS------------------
+
+    private void sendPossibleAction(){}
+    private ArrayList<Actions> getPossibleAction() {
+        ArrayList<Actions> actions = new ArrayList<>();
+        if (numOfActions.get(current)==0) {
+            if (game.getActivePlayer().getCardsHand().size() != 0) {
+                actions.add(0, Actions.PLAYLEADERCARD);
+                actions.add(1, Actions.DISCARDLEADERCARD);
+            }
+            actions.add(2, Actions.BUYDEVELOPMENTCARD);
+            actions.add(3, Actions.USEPRODUCTION);
+            actions.add(4, Actions.MARKETACTION);
+            numOfActions.put(current,1);
+            return actions;
+        }
+        //da sistemare
+        else if (numOfActions.get(current)==1){
+            numOfActions.put(current,2);
+            return actions;
+        }
+        return null;
+    }
+
+
+    /**
+     * select the action chosen by the player
+     */
+    public void selectAction(Actions action){
+        if (serverViews.get(current).getUsername().equals(game.getActivePlayer().getNickname())) {
+            switch (action) {
+                case MARKETACTION: {
+                    serverViews.get(current).sendActionResponse(action);
+
+                }
+                case USEPRODUCTION: {
+
+                }
+                case PLAYLEADERCARD: {
+
+                }
+                case DISCARDLEADERCARD: {
+
+                }
+                case BUYDEVELOPMENTCARD: {
+
+                }
+            }
+        }
     }
 
 
@@ -190,8 +308,8 @@ public class Controller implements Observer<ClientMessage> {
         try {
             game.doAction(manageResources);
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
-            // errore azione
-            e.printStackTrace();
+            //e.printStackTrace();
+
         }
 
     }
@@ -344,6 +462,8 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
+    //------------------TOOLS------------------
+
     public void PlayerReconnection(String username){
         int j=0;
         for (int i=0;i<serverViews.size(); i++){
@@ -472,29 +592,14 @@ public class Controller implements Observer<ClientMessage> {
         }
         return devCardGrid;
     }
-
-    public void setupGame(){
-        for (int i=0;i<serverViews.size();i++){
-            game.setActivePlayer(game.getPlayers(i));
-            ArrayList<LeaderCard> leaderCards = game.getActivePlayer().take4cards();
-            ArrayList<String> leaderId = new ArrayList<>();
-            startingLeaderCards.put(game.getActivePlayer().getNickname(),leaderCards);
-            for (LeaderCard l: leaderCards){
-                leaderId.add(l.getId());
-            }
-            serverViews.get(i).sendLeaderCards(leaderId);
-
+    public ServerView getServerView(String username){
+        for (ServerView serverView: serverViews){
+            if (serverView.getUsername().equals(username)) return serverView;
         }
-
+        return null;
     }
 
-    /**
-     * Extracts the information from the {@link ClientMessage} which will call a method on the controller.
-     * @param message message from the client.
-     */
-    @Override
-    public void update(ClientMessage message) {
-        message.handleMessage(this);
 
-    }
-}
+
+ }
+

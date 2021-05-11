@@ -3,6 +3,7 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.MarbleColors;
+import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.messages.serverToClient.*;
 import it.polimi.ingsw.messages.serverToClient.layoutUpdate.ReConnectionUpdate;
@@ -16,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class ServerView extends Observable<ClientMessage> implements Observer<ServerMessage> {
+
+
+
 
     private class ClientMessageReceiver implements Observer<ClientMessage>{
 
@@ -91,7 +95,7 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage(new LeaderCardsRequest(leaderCards));
     }
 
-    public void sendStartingResource(int i) {
+    public void startingResourceMessage(int i) {
         sendMessage(new ResourcesRequest(i));
     }
 
@@ -100,6 +104,13 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
 
     }
 
+    public void sendPossibleActions(ArrayList<Actions> possibleActions) {
+        sendMessage(new ActionRequest(possibleActions));
+    }
+
+    public void sendActionResponse(Actions action) {
+        sendMessage( new ActionResponse(action));
+    }
 
 
 
