@@ -88,7 +88,12 @@ public class DevelopmentCard {
     }
 
     public String drawProdCostAndGain(){
-        return border() + "" + production.drawCost() + "->" + production.drawGain() + "" + border();
+        return border() + "" + production.drawProduction() + "" + border();
     }
-
+    /*
+      |  D001    |
+      | 3    4   |
+      |1,2,3,4   |
+      |1,2->3,4,8|
+    */
 }

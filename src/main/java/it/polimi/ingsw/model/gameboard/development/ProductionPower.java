@@ -28,19 +28,30 @@ public class ProductionPower {
         return faithGain;
     }
 
-    public String drawCost(){
+    public String drawProduction(){
         StringBuilder builder = new StringBuilder();
+        int length=0;
         for(Resource rss: prodCost.keySet()){
-            builder.append(" ").append(ColorCLI.resourceColor(rss)).append(prodCost.get(rss));
+            if(prodCost.get(rss)>0){
+                builder.append(ColorCLI.resourceColor(rss)).append(prodCost.get(rss)).append(" ");
+                length=length+2;
+            }
         }
+        builder.append(ColorCLI.RESET).append("->");
+        length=length+2;
+        for(Resource rss: resourceGain.keySet()){
+            if(resourceGain.get(rss)>0){
+                builder.append(ColorCLI.resourceColor(rss)).append(resourceGain.get(rss)).append(" ");
+                length=length+2;
+            }
+        }
+        if(faithGain>0){
+            builder.append(ColorCLI.RED).append(faithGain);
+            length++;
+        }
+        System.out.println(length);
+        if(length<10) for(int i=0; i<10-length; i++) builder.append(" ");
         return builder.toString();
     }
 
-    public String drawGain(){
-        StringBuilder builder = new StringBuilder();
-        for(Resource rss: resourceGain.keySet()){
-            builder.append(" ").append(ColorCLI.resourceColor(rss)).append(resourceGain.get(rss));
-        }
-        return builder.toString();
-    }
 }

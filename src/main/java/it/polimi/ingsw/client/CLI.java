@@ -707,13 +707,13 @@ public class CLI implements UserInterface{
         StringBuilder builder = new StringBuilder();
         for(int i = 0; i<3; i++){
             for(int j=0; j< 4; j++){
-                for(int k=0; k<4; k++){ //each card is made of 4 lines
+               /* for(int k=0; k<4; k++){ //each card is made of 4 lines
                     if(cardGrid[i][j]!=null){
                         DevelopmentCard card = findDevCard(cardGrid[i][j]);
                         builder.append(card.drawID());
                     }
                     else builder.append("     ");
-                }
+                }*/
             }
         }
     }
