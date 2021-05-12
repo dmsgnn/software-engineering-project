@@ -17,7 +17,9 @@ public class ResourcesReply implements ClientMessage{
     }
 
     @Override
-    public void handleMessage(Controller controller) { controller.pickStartingResources(resources,username);}
+    public void handleMessage(Controller controller) {
+        controller.pickStartingResources(resources,username);
+    }
 
     @Override
     public void handleMessage(PingManager pingSender) {

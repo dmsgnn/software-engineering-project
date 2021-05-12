@@ -215,7 +215,7 @@ public class CLI implements UserInterface{
         System.out.println(builder.toString());
 
         int counter=0;
-        ArrayList<Integer> ids = new ArrayList<Integer>();
+        ArrayList<Integer> ids = new ArrayList<>();
         int num;
         System.out.println("Choose two cards, type 1, 2, 3 or 4: ");
         while(counter<2){
@@ -583,21 +583,23 @@ public class CLI implements UserInterface{
         Map<Integer, ArrayList<Resource>> newWarehouse = new HashMap<>();
 
         for(int i= 0; i < 3; i++){
-            newWarehouse.put(i, new ArrayList<Resource>());
+            newWarehouse.put(i, new ArrayList<>());
         }
 
         if(resources.size()==0 && !manage) return newWarehouse;
 
         System.out.print("Choose your new warehouse configuration, you have these " + (manage? "additional resources: " : "starting resources: "));
         System.out.println(resources);
+        int depotCont;
         for(int i = 0; i < 3; i++){
+            depotCont=i+1;
             done = false;
             do{
-                System.out.println("Depot " + i+1 + " new amount: ");
+                System.out.println("Depot " + depotCont + " new amount: ");
                 try {
                     input = scanner.nextLine();
                     value = Integer.parseInt(input);
-                    if(value<0 || value > i+1) System.out.println("Invalid number!");
+                    if(value<0 || value > depotCont) System.out.println("Invalid number!");
                     else done= true;
                 } catch (NumberFormatException e) {
                     System.out.println("Not a number!!");
@@ -606,7 +608,7 @@ public class CLI implements UserInterface{
             if(value>0){
                 done = false;
                 do{
-                    System.out.println("Depot " + i+1 + " new resource: ");
+                    System.out.println("Depot " + depotCont + " new resource: ");
                     try {
                         input = scanner.nextLine().toUpperCase();
                         resource = Resource.valueOf(input);
@@ -628,15 +630,17 @@ public class CLI implements UserInterface{
         String input;
         boolean done;
         int value = 0;
-        Map<Integer, ArrayList<Resource>> newWarehouse = new HashMap<>();
+        Map<Integer, ArrayList<Resource>> newWarehouse;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
         newWarehouse = placeWarehouseRes(resources, true);
 
+        int depotCont;
         for(Integer i : active.getWarehouse().keySet()){
             if(i > 2){
+                depotCont=i-2;
                 done = false;
-                System.out.print("Choose your new leaderdepot" + (i-2) + " resources amount: ");
+                System.out.print("Choose your new leaderdepot" + depotCont + " resources amount: ");
                 do{
                     try {
                         input = scanner.nextLine();
@@ -676,17 +680,19 @@ public class CLI implements UserInterface{
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
         System.out.println("Warehouse");
+        int depotCont;
         for(int i = 0; i < 3; i++){
+            depotCont=i+1;
             do{
                 if (active.isDepotEmpty(i)) {
                     done = true;
                 }
                 else {
-                    System.out.println("Depot " + i+1 + ": ");
+                    System.out.println("Depot " + depotCont + ": ");
                     input = scanner.nextLine();
                     try {
                         value = Integer.parseInt(input);
-                        if (value < 0 || value > i+1) System.out.println("Invalid num!");
+                        if (value < 0 || value > depotCont) System.out.println("Invalid num!");
                         else if (value > active.getWarehouse().get(i).size())
                             System.out.println("You don't have enough resources");
                         else {
@@ -709,14 +715,16 @@ public class CLI implements UserInterface{
         boolean done = false;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
+        int depotCont;
         for(Integer i : active.getWarehouse().keySet()){
             if(i > 2){
+                depotCont=i-2;
                 do{
                     if(active.isDepotEmpty(i)){
                         done=true;
                     }
                     else {
-                        System.out.println("Leaderdepot " + (i - 2) + ": ");
+                        System.out.println("Leaderdepot " + depotCont + ": ");
                         input = scanner.nextLine();
                         try {
                             value = Integer.parseInt(input);

@@ -12,7 +12,7 @@ public class ErrorMessage implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) {
-
+        clientView.responseMessage(string);
     }
 
     @Override

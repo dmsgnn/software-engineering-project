@@ -97,7 +97,9 @@ public class ClientView implements Observer<ServerMessage> {
      * @param message response message
      */
     public void responseMessage(String message){
-        if(!message.toLowerCase(Locale.ROOT).equals("ok")) uiType.displayMessage(message);
+        synchronized (lock){
+            if(!message.toLowerCase(Locale.ROOT).equals("ok")) uiType.displayMessage(message);
+        }
     }
 
     //------------------GAME SETUP------------------
@@ -308,6 +310,7 @@ public class ClientView implements Observer<ServerMessage> {
                     gameboard.getOnePlayerBoard(nickname).setHand(leaderCards.get(nickname));
             }
             for (String nickname : resources.keySet()) {
+                System.out.println("\nsetup ok\n");
                 gameboard.getOnePlayerBoard(nickname).setWarehouse(resources.get(nickname));
             }
             for (String nickname : faithTracks.keySet()) {

@@ -25,6 +25,7 @@ public class CLITest {
                 }
             }
         }
+        cardGrid[2][1]=null;
         CLI cli = new CLI();
         ClientView view = new ClientView(cli);
         cli.setClientView(view);
