@@ -26,6 +26,12 @@ public class ClientPlayerBoard {
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;
+        for(int i=1; i<4; i++){
+            warehouse.put(i, new ArrayList<>());
+        }
+        for(Resource rss: Resource.values()){
+            strongbox.put(rss, 0);
+        }
     }
 
     public boolean isDepotEmpty(int depot){

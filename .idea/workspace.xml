@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="LeaderCard drawing methods, Clientview endturn and CLI buyCardAction update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="CLI payment fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,7 +262,7 @@
       <workItem from="1620770825265" duration="922000" />
       <workItem from="1620803069977" duration="3370000" />
       <workItem from="1620810128654" duration="1692000" />
-      <workItem from="1620819135833" duration="2867000" />
+      <workItem from="1620819135833" duration="3107000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -438,7 +439,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620821942975</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="CLI payment fix">
+      <created>1620822060190</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1620822060190</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,7 +465,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="DevelopmentCardDeck class and testing" />
     <MESSAGE value="Gameboard class and testing with xml and parser" />
     <MESSAGE value="RedMarble and WhiteMarble update with testing, small updates to other classes" />
     <MESSAGE value="LorenzoAI and Tokens implemented with tests, some refactoring done" />
@@ -482,7 +489,8 @@
     <MESSAGE value="Bug fix" />
     <MESSAGE value="Market getOneColumn and getOneRow methods" />
     <MESSAGE value="LeaderCard drawing methods, Clientview endturn and CLI buyCardAction update" />
-    <option name="LAST_COMMIT_MESSAGE" value="LeaderCard drawing methods, Clientview endturn and CLI buyCardAction update" />
+    <MESSAGE value="CLI payment fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="CLI payment fix" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
