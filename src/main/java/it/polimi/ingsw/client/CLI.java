@@ -266,6 +266,7 @@ public class CLI implements UserInterface{
     @Override
     public void marketAction() {
         String input;
+        String tempColRow;
         int value = 0;
         boolean done = false;
         boolean rowOrCol = false;
@@ -277,20 +278,21 @@ public class CLI implements UserInterface{
             System.out.print("Type 'row' to pick a row, 'column' to pick a column: ");
             input = scanner.nextLine();
             if(input.matches("(row)|(column)")){
-                System.out.print("Choose the number of the " + input + ": ");
+                tempColRow =input;
+                System.out.print("Choose the number of the " + tempColRow + ": ");
                 input = scanner.nextLine();
                 try{
                     value = Integer.parseInt(input);
-                    if(input.equals("col") && value > 0 && value<gameboard.getMarketColumnsNum()){
+                    if(tempColRow.equals("col") && value > 0 && value<gameboard.getMarketColumnsNum()){
                         done = true;
                         rowOrCol = false;
                     }
-                    else if(input.equals("row") && value > 0 && value<gameboard.getMarketRowsNum()){
+                    else if(tempColRow.equals("row") && value > 0 && value<gameboard.getMarketRowsNum()){
                         done = true;
                         rowOrCol = true;
                     }
                     else{
-                        System.out.println("The selected " + input + " doesn't exist");
+                        System.out.println("The selected " + tempColRow + " doesn't exist");
                     }
                 } catch (NumberFormatException e){
                     System.out.println("Not a number!!");
@@ -629,18 +631,24 @@ public class CLI implements UserInterface{
         System.out.println("Warehouse");
         for(int i = 1; i < 4; i++){
             do{
-                System.out.println("Depot " + i + ": ");
-                input = scanner.nextLine();
-                try {
-                    value = Integer.parseInt(input);
-                    if(value < 0 || value > i) System.out.println("Invalid num!");
-                    else if(active.isDepotEmpty(i) || value > active.getWarehouse().get(i).size()) System.out.println("You don't have enough resources");
-                    else {
-                        warehouse.put(active.getWarehouseResource(i), value);
-                        done = true;
+                if (active.isDepotEmpty(i)) {
+                    done = true;
+                }
+                else {
+                    System.out.println("Depot " + i + ": ");
+                    input = scanner.nextLine();
+                    try {
+                        value = Integer.parseInt(input);
+                        if (value < 0 || value > i) System.out.println("Invalid num!");
+                        else if (value > active.getWarehouse().get(i).size())
+                            System.out.println("You don't have enough resources");
+                        else {
+                            warehouse.put(active.getWarehouseResource(i), value);
+                            done = true;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Not a number!!");
                     }
-                } catch (NumberFormatException e) {
-                    System.out.println("Not a number!!");
                 }
             }while (!done);
         }
@@ -654,22 +662,27 @@ public class CLI implements UserInterface{
         boolean done = false;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
-        System.out.println("Leaderdepots");
         for(Integer i : active.getWarehouse().keySet()){
             if(i > 3){
                 do{
-                    System.out.println("Leaderdepot " + (i-3) + ": ");
-                    input = scanner.nextLine();
-                    try {
-                        value = Integer.parseInt(input);
-                        if(value < 0 || value > i) System.out.println("Invalid num!");
-                        else if(value > active.getWarehouse().get(i).size()) System.out.println("You don't have enough resources");
-                        else {
-                            leaderdepot.put(active.getWarehouseResource(i), value);
-                            done = true;
+                    if(active.isDepotEmpty(i)){
+                        done=true;
+                    }
+                    else {
+                        System.out.println("Leaderdepot " + (i - 3) + ": ");
+                        input = scanner.nextLine();
+                        try {
+                            value = Integer.parseInt(input);
+                            if (value < 0 || value > i) System.out.println("Invalid num!");
+                            else if (value > active.getWarehouse().get(i).size())
+                                System.out.println("You don't have enough resources");
+                            else {
+                                leaderdepot.put(active.getWarehouseResource(i), value);
+                                done = true;
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Not a number!!");
                         }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Not a number!!");
                     }
                 }while (!done);
             }
@@ -788,6 +801,7 @@ public class CLI implements UserInterface{
                 marketRow++;
             }
         }
+        builder.append(ColorCLI.RESET);
         return builder.toString();
     }
 
