@@ -648,24 +648,19 @@ public class CLI implements UserInterface{
         System.out.println("Warehouse");
         for(int i = 1; i < 4; i++){
             do{
-                if (active.isDepotEmpty(i)) {
-                    done = true;
-                }
-                else {
-                    System.out.println("Depot " + i + ": ");
-                    input = scanner.nextLine();
-                    try {
-                        value = Integer.parseInt(input);
-                        if (value < 0 || value > i) System.out.println("Invalid num!");
-                        else if (value > active.getWarehouse().get(i).size())
-                            System.out.println("You don't have enough resources");
-                        else {
-                            warehouse.put(active.getWarehouseResource(i), value);
-                            done = true;
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Not a number!!");
+                System.out.println("Depot " + i + ": ");
+                input = scanner.nextLine();
+                try {
+                    value = Integer.parseInt(input);
+                    if (value < 0 || value > i) System.out.println("Invalid num!");
+                    else if (value > active.getWarehouse().get(i).size())
+                        System.out.println("You don't have enough resources");
+                    else {
+                        warehouse.put(active.getWarehouseResource(i), value);
+                        done = true;
                     }
+                } catch (NumberFormatException e) {
+                    System.out.println("Not a number!!");
                 }
             }while (!done);
         }
@@ -682,25 +677,21 @@ public class CLI implements UserInterface{
         for(Integer i : active.getWarehouse().keySet()){
             if(i > 3){
                 do{
-                    if(active.isDepotEmpty(i)){
-                        done=true;
-                    }
-                    else {
-                        System.out.println("Leaderdepot " + (i - 3) + ": ");
-                        input = scanner.nextLine();
-                        try {
-                            value = Integer.parseInt(input);
-                            if (value < 0 || value > i) System.out.println("Invalid num!");
-                            else if (value > active.getWarehouse().get(i).size())
-                                System.out.println("You don't have enough resources");
-                            else {
-                                leaderdepot.put(active.getWarehouseResource(i), value);
-                                done = true;
-                            }
-                        } catch (NumberFormatException e) {
-                            System.out.println("Not a number!!");
+                    System.out.println("Leaderdepot " + (i - 3) + ": ");
+                    input = scanner.nextLine();
+                    try {
+                        value = Integer.parseInt(input);
+                        if (value < 0 || value > i) System.out.println("Invalid num!");
+                        else if (value > active.getWarehouse().get(i).size())
+                            System.out.println("You don't have enough resources");
+                        else {
+                            leaderdepot.put(active.getWarehouseResource(i), value);
+                            done = true;
                         }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Not a number!!");
                     }
+
                 }while (!done);
             }
         }
