@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ClientGameBoard {
 
-    private ArrayList<ClientPlayerBoard> playerBoards;
+    private ArrayList<ClientPlayerBoard> playerBoards = new ArrayList<>();
     private MarbleColors[][] market;
     private MarbleColors freeMarble;
     private String[][] cards;

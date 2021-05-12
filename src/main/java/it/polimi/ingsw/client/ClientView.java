@@ -187,14 +187,19 @@ public class ClientView implements Observer<ServerMessage> {
             switch (action) {
                 case MARKETACTION:
                     uiType.marketAction();
+                    break;
                 case USEPRODUCTION:
                     uiType.useProductionAction();
+                    break;
                 case BUYDEVELOPMENTCARD:
                     uiType.buyCardAction();
+                    break;
                 case PLAYLEADERCARD:
                     uiType.playLeaderCardAction();
+                    break;
                 case DISCARDLEADERCARD:
                     uiType.discardLeaderCardAction();
+                    break;
             }
         }
     }
