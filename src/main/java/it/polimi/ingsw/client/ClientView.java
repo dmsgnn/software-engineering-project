@@ -159,7 +159,6 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void startingResources(int amount){
         synchronized (lock) {
-            System.out.println(nickname);
             Map<Integer, ArrayList<Resource>> warehouse = uiType.startingResources(amount);
             socket.sendMessage(new ResourcesReply(warehouse, nickname));
         }

@@ -26,7 +26,7 @@ public class ClientPlayerBoard {
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;
-        for(int i=1; i<4; i++){
+        for(int i=0; i<3; i++){
             warehouse.put(i, new ArrayList<>());
         }
         for(Resource rss: Resource.values()){
@@ -146,7 +146,7 @@ public class ClientPlayerBoard {
         for(Map.Entry<Integer, ArrayList<Resource>> entry : warehouse.entrySet()){
             Integer key = entry.getKey();
             ArrayList<Resource> value = entry.getValue();
-            warehouse.put(key, value);
+            this.warehouse.put(key, value);
         }
     }
 
@@ -154,7 +154,7 @@ public class ClientPlayerBoard {
         for(Map.Entry<Resource, Integer> entry : strongbox.entrySet()){
             Resource key = entry.getKey();
             Integer value = entry.getValue();
-            strongbox.put(key, value);
+            this.strongbox.put(key, value);
         }
     }
 

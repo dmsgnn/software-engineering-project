@@ -11,10 +11,7 @@ import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.utility.DevCardsParserXML;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -74,7 +71,9 @@ public class CLI implements UserInterface{
      */
     private DevelopmentCard findDevCard(String id){
         for (DevelopmentCard card: devCardList){
-            if(card.getId().equals(id)) return card;
+            if(card.getId().equals(id)) {
+                return card;
+            }
         }
         return null;
     }
@@ -199,20 +198,44 @@ public class CLI implements UserInterface{
     @Override
     public ArrayList<String> startingLeaderCardsSelection(ArrayList<String> leaderCardID) {
         ArrayList<String> pickedCards = new ArrayList<>();
-        String temp;
+        String input;
+        StringBuilder builder = new StringBuilder();
+        System.out.print("Choose your starting cards \n");
 
-        do {
-            System.out.print("Choose your starting cards \n");
-            leaderCardID.forEach(System.out::println);
-            System.out.println("Choose a card: ");
-            temp = scanner.nextLine();
-            if(!leaderCardID.contains(temp)) System.out.println("INVALID ID");
-            else{
-                pickedCards.add(temp);
-                leaderCardID.remove(temp);
+        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawTop()).forEach(builder::append);
+        builder.append("\n");
+        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawRequirements()).forEach(builder::append);
+        builder.append("\n");
+        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawVictoryPoints()).forEach(builder::append);
+        builder.append("\n");
+        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawAbility()).forEach(builder::append);
+        builder.append("\n");
+        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawBottom()).forEach(builder::append);
+        builder.append("\n");
+        System.out.println(builder.toString());
+
+        int counter=0;
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        int num;
+        System.out.println("Choose two cards, type 1, 2, 3 or 4: ");
+        while(counter<2){
+            input = scanner.nextLine();
+            try{
+                num = Integer.parseInt(input);
+                if(num<0 || num >4) System.out.println("This card doesn't exist");
+                else if(ids.contains(num-1)) System.out.println("Choose a different number");
+                else {
+                    ids.add(num-1);
+                    counter++;
+                }
+            } catch (NumberFormatException e){
+                System.out.println("Not a number!!");
             }
+        }
 
-        } while(pickedCards.size()<2);
+        pickedCards.add(leaderCardID.get(ids.get(0)));
+        pickedCards.add(leaderCardID.get(ids.get(1)));
+
         return pickedCards;
     }
 
@@ -466,6 +489,7 @@ public class CLI implements UserInterface{
         done = false;
         do{
             System.out.println("Choose the level of the card that you want to buy: ");
+            input = scanner.nextLine();
             try{
                 cardLevel = Integer.parseInt(input);
                 if(cardLevel < 1 || cardLevel > 3) System.out.println("Wrong level");
@@ -478,6 +502,7 @@ public class CLI implements UserInterface{
         done = false;
         do{
             System.out.println("Select what slot you want to place your card in: ");
+            input = scanner.nextLine();
             try{
                 slot = Integer.parseInt(input);
                 if(slot < 1 || slot > 3) System.out.println("Wrong slot number");
@@ -544,6 +569,12 @@ public class CLI implements UserInterface{
         clientView.discardLeaderCard(input);
     }
 
+    /**
+     * method to arrange the resources inside the warehouse
+     * @param resources new resources to place
+     * @param manage true if manage resources action, false if starting resources action
+     * @return new warehouse configuration
+     */
     private Map<Integer, ArrayList<Resource>> placeWarehouseRes(ArrayList<Resource> resources, boolean manage){
         String input;
         Resource resource = null;
@@ -551,22 +582,22 @@ public class CLI implements UserInterface{
         int value = 0;
         Map<Integer, ArrayList<Resource>> newWarehouse = new HashMap<>();
 
-        for(int i= 1; i < 4; i++){
-            newWarehouse.put(i, new ArrayList<>());
+        for(int i= 0; i < 3; i++){
+            newWarehouse.put(i, new ArrayList<Resource>());
         }
 
-        if(resources.size()==0) return newWarehouse;
+        if(resources.size()==0 && !manage) return newWarehouse;
 
         System.out.print("Choose your new warehouse configuration, you have these " + (manage? "additional resources: " : "starting resources: "));
         System.out.println(resources);
-        for(int i = 1; i < 4; i++){
+        for(int i = 0; i < 3; i++){
             done = false;
             do{
-                System.out.println("Depot " + i + " new amount: ");
+                System.out.println("Depot " + i+1 + " new amount: ");
                 try {
                     input = scanner.nextLine();
                     value = Integer.parseInt(input);
-                    if(value<0 || value > i) System.out.println("Invalid number!");
+                    if(value<0 || value > i+1) System.out.println("Invalid number!");
                     else done= true;
                 } catch (NumberFormatException e) {
                     System.out.println("Not a number!!");
@@ -575,7 +606,7 @@ public class CLI implements UserInterface{
             if(value>0){
                 done = false;
                 do{
-                    System.out.println("Depot " + i + " new resource: ");
+                    System.out.println("Depot " + i+1 + " new resource: ");
                     try {
                         input = scanner.nextLine().toUpperCase();
                         resource = Resource.valueOf(input);
@@ -597,17 +628,16 @@ public class CLI implements UserInterface{
         String input;
         boolean done;
         int value = 0;
-        Map<Integer, ArrayList<Resource>> newWarehouse;
+        Map<Integer, ArrayList<Resource>> newWarehouse = new HashMap<>();
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
         newWarehouse = placeWarehouseRes(resources, true);
 
         for(Integer i : active.getWarehouse().keySet()){
-            if(i > 3){
+            if(i > 2){
                 done = false;
-                System.out.print("Choose your new leaderdepot" + (i-3) + " resources amount: ");
+                System.out.print("Choose your new leaderdepot" + (i-2) + " resources amount: ");
                 do{
-                    System.out.println("Depot " + i + " new amount: ");
                     try {
                         input = scanner.nextLine();
                         value = Integer.parseInt(input);
@@ -646,17 +676,17 @@ public class CLI implements UserInterface{
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
         System.out.println("Warehouse");
-        for(int i = 1; i < 4; i++){
+        for(int i = 0; i < 3; i++){
             do{
                 if (active.isDepotEmpty(i)) {
                     done = true;
                 }
                 else {
-                    System.out.println("Depot " + i + ": ");
+                    System.out.println("Depot " + i+1 + ": ");
                     input = scanner.nextLine();
                     try {
                         value = Integer.parseInt(input);
-                        if (value < 0 || value > i) System.out.println("Invalid num!");
+                        if (value < 0 || value > i+1) System.out.println("Invalid num!");
                         else if (value > active.getWarehouse().get(i).size())
                             System.out.println("You don't have enough resources");
                         else {
@@ -680,17 +710,17 @@ public class CLI implements UserInterface{
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
         for(Integer i : active.getWarehouse().keySet()){
-            if(i > 3){
+            if(i > 2){
                 do{
                     if(active.isDepotEmpty(i)){
                         done=true;
                     }
                     else {
-                        System.out.println("Leaderdepot " + (i - 3) + ": ");
+                        System.out.println("Leaderdepot " + (i - 2) + ": ");
                         input = scanner.nextLine();
                         try {
                             value = Integer.parseInt(input);
-                            if (value < 0 || value > i) System.out.println("Invalid num!");
+                            if (value < 0 || value > 2) System.out.println("Invalid num!");
                             else if (value > active.getWarehouse().get(i).size())
                                 System.out.println("You don't have enough resources");
                             else {
