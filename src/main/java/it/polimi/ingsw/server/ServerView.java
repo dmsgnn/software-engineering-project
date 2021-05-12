@@ -6,6 +6,8 @@ import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.messages.serverToClient.*;
+import it.polimi.ingsw.messages.serverToClient.layoutUpdate.DiscardLeaderCardUpdate;
+import it.polimi.ingsw.messages.serverToClient.layoutUpdate.PlayLeaderCardUpdate;
 import it.polimi.ingsw.messages.serverToClient.layoutUpdate.ReConnectionUpdate;
 import it.polimi.ingsw.messages.serverToClient.layoutUpdate.SetupGameUpdate;
 import it.polimi.ingsw.model.Resource;
@@ -19,8 +21,12 @@ import java.util.Map;
 public class ServerView extends Observable<ClientMessage> implements Observer<ServerMessage> {
 
 
-    public void sendPlayers(ArrayList<String> players) {
-        sendMessage(new Players(players));
+    public void sendPlayLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox) {
+        sendMessage(new PlayLeaderCardUpdate(nickname,id,warehouse,strongbox));
+    }
+
+    public void sendDiscardLeaderCardUpdate(String nickname, String id, int position) {
+        sendMessage(new DiscardLeaderCardUpdate(nickname,id,position));
     }
 
     private class ClientMessageReceiver implements Observer<ClientMessage>{
@@ -114,7 +120,13 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage( new ActionResponse(action));
     }
 
+    public void sendPlayers(ArrayList<String> players) {
+        sendMessage(new Players(players));
+    }
 
+    public void sendError(String invalid_starting_resources) {
+        sendMessage(new ErrorMessage(invalid_starting_resources));
+    }
 
 
 

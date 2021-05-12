@@ -3,13 +3,15 @@ package it.polimi.ingsw.messages.serverToClient;
 import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.PingReceiver;
 
-public class StartTurn implements ServerMessage{
-    private final String turn = "START TURN!";
+public class ErrorMessage implements ServerMessage{
+    private final String string;
 
+    public ErrorMessage(String string) {
+        this.string = string;
+    }
 
     @Override
     public void handleMessage(ClientView clientView) {
-
 
     }
 
