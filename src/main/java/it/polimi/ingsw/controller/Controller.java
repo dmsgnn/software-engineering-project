@@ -44,6 +44,10 @@ public class Controller implements Observer<ClientMessage> {
     private Map<Integer,ArrayList<Boolean>> numOfActions;
     private Map<Integer,Actions> currentAction;
     private ArrayList<Resource> resourceArrayList;
+    private ArrayList<MarbleColors> marbleColorsArrayList;
+    private int marketIndex;
+    private boolean isRowOrColumn;
+
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
         this.temp = new HashMap<Resource,Integer>(){{
@@ -78,9 +82,9 @@ public class Controller implements Observer<ClientMessage> {
                 put(i,null);
             }
         }};
+        // PARAMETERS FOR MARKET ACTION
         resourceArrayList = new ArrayList<>();
-
-
+        marbleColorsArrayList = new ArrayList<>();
     }
 
 
@@ -306,44 +310,35 @@ public class Controller implements Observer<ClientMessage> {
     private ArrayList<Actions> getPossibleAction() {
         ArrayList<Actions> actions = new ArrayList<>();
         //SE NON E' STATA COMPIUTA ANCORA NESSUNA AZIONE
-        if ((!numOfActions.get(currentActivePlayer).get(0))&&(!numOfActions.get(currentActivePlayer).get(1))){
+        if ((!numOfActions.get(currentActivePlayer).get(0))){
             //SE IL GIOCATORE HA DELLE LEADERCARDS ATTIVABILI
             if (game.getActivePlayer().getCardsHand().size() != 0) {
                 actions.add(0, Actions.PLAYLEADERCARD);
                 actions.add(1, Actions.DISCARDLEADERCARD);
+                actions.add(2, Actions.BUYDEVELOPMENTCARD);
+                actions.add(3, Actions.USEPRODUCTION);
+                actions.add(4, Actions.MARKETACTION);
             }
-            actions.add(2, Actions.BUYDEVELOPMENTCARD);
-            actions.add(3, Actions.USEPRODUCTION);
-            actions.add(4, Actions.MARKETACTION);
-            return actions;
+            else {
+                actions.add(0, Actions.BUYDEVELOPMENTCARD);
+                actions.add(1, Actions.USEPRODUCTION);
+                actions.add(2, Actions.MARKETACTION);
+            }
         }
         //SE IL GIOCATORE HA FATTO UNA NORMAL ACTION
-        else if ((numOfActions.get(currentActivePlayer).get(0))&&(!numOfActions.get(currentActivePlayer).get(1))){
+        else {
             //SE IL GIOCATORE HA DELLE LEADERCARDS ATTIVABILI
             if (game.getActivePlayer().getCardsHand().size() != 0) {
                 actions.add(0, Actions.PLAYLEADERCARD);
                 actions.add(1, Actions.DISCARDLEADERCARD);
+                actions.add(2,Actions.ENDTURN);
             }
-            actions.add(2,Actions.ENDTURN);
-            return actions;
+            else{
+                actions.add(0,Actions.ENDTURN);
+            }
+
         }
-        //SE IL GIOCATORE HA FATTO UNA LEADER ACTION
-        else if ((!numOfActions.get(currentActivePlayer).get(0))&&(numOfActions.get(currentActivePlayer).get(1))){
-            actions.add(0,Actions.BUYDEVELOPMENTCARD);
-            actions.add(1,Actions.USEPRODUCTION);
-            actions.add(2,Actions.MARKETACTION);
-            return actions;
-        }
-        // SE IL GIOCATORE HA FATTO SIA UNA LEADER CHE UNA NORMAL ACTION
-        else{
-            actions.add(0,Actions.ENDTURN);
-            ArrayList<Boolean> booleans = new ArrayList<Boolean>(){{
-                add(0,false);
-                add(1,false);
-            }};
-            numOfActions.put(currentActivePlayer,booleans);
-            return actions;
-        }
+        return actions;
     }
 
 
@@ -376,6 +371,11 @@ public class Controller implements Observer<ClientMessage> {
 
 
     public void endTurn(){
+        ArrayList<Boolean> booleans = new ArrayList<Boolean>(){{
+            add(0,false);
+            add(1,false);
+        }};
+        numOfActions.put(currentActivePlayer,booleans);
         currentActivePlayer++;
         if (currentActivePlayer>=playersNumber) currentActivePlayer=0;
         game.setActivePlayer(game.getPlayers(currentActivePlayer));
@@ -493,7 +493,9 @@ public class Controller implements Observer<ClientMessage> {
             if (isRow) {
                 PickRow pickRow = new PickRow(index, marbles, game.getBoard().getMarketBoard());
                 try {
+                    //DO ACTION
                     game.doAction(pickRow);
+                    //TAKE THE ARRAY OF MARBLES COLORS
                     for (Marbles marble : marbles) {
                         marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
                     }
@@ -503,8 +505,13 @@ public class Controller implements Observer<ClientMessage> {
                         temp1.put(resource, temp1.get(resource) + 1);
                     }
                     newResources.put(game.getActivePlayer().getNickname(), temp1);
+                    // SEND THE MANAGE RESOURCES
                     serverViews.get(currentServerView).sendResourceManageRequest(resources);
+                    //SAVE PARAMETERS FOR MANAGE RESOURCES
                     resourceArrayList = resources;
+                    marbleColorsArrayList = getRowOrColumn(index, true);
+                    marketIndex= index;
+                    isRowOrColumn= true;
                 } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
                     serverViews.get(currentServerView).sendError("INVALID MARKET ACTION");
                     serverViews.get(currentServerView).sendActionResponse(Actions.MARKETACTION);
@@ -512,7 +519,9 @@ public class Controller implements Observer<ClientMessage> {
             } else {
                 PickColumn pickColumn = new PickColumn(index, marbles, game.getBoard().getMarketBoard());
                 try {
+                    //DO ACTION
                     game.doAction(pickColumn);
+                    //TAKE THE ARRAY OF MARBLES COLORS
                     for (Marbles marble : marbles) {
                         marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
                     }
@@ -522,9 +531,13 @@ public class Controller implements Observer<ClientMessage> {
                         temp1.put(resource, temp1.get(resource) + 1);
                     }
                     newResources.put(game.getActivePlayer().getNickname(), temp1);
+                    // SEND THE MANAGE RESOURCES
                     serverViews.get(currentServerView).sendResourceManageRequest(resources);
+                    //SAVE PARAMETERS FOR MANAGE RESOURCES
                     resourceArrayList = resources;
-
+                    marbleColorsArrayList = getRowOrColumn(index, false);
+                    marketIndex= index;
+                    isRowOrColumn= false;
                 } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
                     serverViews.get(currentServerView).sendError("INVALID MARKET ACTION");
                     serverViews.get(currentServerView).sendActionResponse(Actions.MARKETACTION);
@@ -550,7 +563,8 @@ public class Controller implements Observer<ClientMessage> {
                 currentAction.put(currentActivePlayer,null);
                 resourceArrayList= null;
                 //UPDATE
-                //serverViews.get(currentServerView).sendMarketActionUpdate(game.getActivePlayer().getNickname(),game.getActivePlayer().getFaithTrack().getPosition(),getWarehouse().get(game.getActivePlayer().getNickname(),getStrongbox().get(game.getActivePlayer().getNickname(),)))
+                serverViews.get(currentServerView).sendMarketActionUpdate(game.getActivePlayer().getNickname(),game.getActivePlayer().getFaithTrack().getPosition(),getWarehouse().get(game.getActivePlayer().getNickname()),getStrongbox().get(game.getActivePlayer().getNickname()),marbleColorsArrayList,getFreeMarble(),marketIndex,isRowOrColumn);
+                marbleColorsArrayList=null;
                 //SEND POSSIBLE ACTIONS
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
 
@@ -772,6 +786,16 @@ public class Controller implements Observer<ClientMessage> {
             players.add(0,game.getPlayers(i).getNickname());
         }
         return players;
+    }
+    public ArrayList<MarbleColors> getRowOrColumn(int index, boolean isRow){
+        ArrayList<Marbles> marbles= new ArrayList<>();
+        ArrayList<MarbleColors> resources = new ArrayList<>();
+        if (isRow)
+        marbles= game.getBoard().getMarketBoard().getOneRow(index);
+        for (int i = 0; i < marbles.size(); i++) {
+            resources.add(i,marbles.get(i).getColor());
+        }
+        return resources;
     }
 
 

@@ -6,10 +6,7 @@ import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.messages.serverToClient.*;
-import it.polimi.ingsw.messages.serverToClient.layoutUpdate.DiscardLeaderCardUpdate;
-import it.polimi.ingsw.messages.serverToClient.layoutUpdate.PlayLeaderCardUpdate;
-import it.polimi.ingsw.messages.serverToClient.layoutUpdate.ReConnectionUpdate;
-import it.polimi.ingsw.messages.serverToClient.layoutUpdate.SetupGameUpdate;
+import it.polimi.ingsw.messages.serverToClient.layoutUpdate.*;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.marble.Marbles;
@@ -27,6 +24,10 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
 
     public void sendDiscardLeaderCardUpdate(String nickname, String id, int position) {
         sendMessage(new DiscardLeaderCardUpdate(nickname,id,position));
+    }
+
+    public void sendMarketActionUpdate(String nickname, int position, Map<Integer, ArrayList<Resource>> integerArrayListMap, Map<Resource, Integer> resourceIntegerMap, ArrayList<MarbleColors> marbleColorsArrayList, MarbleColors freeMarble, int marketIndex, boolean isRowOrColumn) {
+        sendMessage(new MarketActionUpdate(nickname,position,integerArrayListMap,resourceIntegerMap,marbleColorsArrayList,freeMarble,marketIndex,isRowOrColumn));
     }
 
     private class ClientMessageReceiver implements Observer<ClientMessage>{

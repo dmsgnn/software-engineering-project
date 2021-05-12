@@ -6,6 +6,7 @@ import it.polimi.ingsw.server.PingManager;
 public class EndTurn implements ClientMessage{
     @Override
     public void handleMessage(Controller controller) {
+        controller.endTurn();
 
     }
 
