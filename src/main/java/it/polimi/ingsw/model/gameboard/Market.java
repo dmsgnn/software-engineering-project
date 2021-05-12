@@ -38,6 +38,29 @@ public class Market {
         }
     }
 
+    private ArrayList<Marbles> getRowOrCol(int pos, boolean pickRow){
+        ArrayList<Marbles> temp = new ArrayList<>();
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if(pickRow && row == pos) {
+                    temp.add(marbleGrid[row][col]);
+                }
+                else if(!pickRow && col == pos) {
+                    temp.add(marbleGrid[row][col]);
+                }
+            }
+        }
+        return temp;
+    }
+
+    public ArrayList<Marbles> getOneColumn(int col){
+        return getRowOrCol(col, false);
+    }
+    public ArrayList<Marbles> getOneRow(int col){
+        return getRowOrCol(col, true);
+    }
+
     public int getRows() {
         return rows;
     }
