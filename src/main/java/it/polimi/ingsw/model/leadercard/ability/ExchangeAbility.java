@@ -16,8 +16,8 @@ public class ExchangeAbility implements Ability {
     @Override
     public String drawAbility() {
         StringBuilder builder = new StringBuilder();
-        builder.append(ColorCLI.RESET).append("⬤ = ").append(ColorCLI.resourceColor(gain)).append("⬤");
-        return "  " + builder.toString() + " ";
+        builder.append(ColorCLI.RESET).append("● = ").append(ColorCLI.resourceColor(gain)).append("●");
+        return "  " + builder.toString() + "  ";
     }
 
     /**

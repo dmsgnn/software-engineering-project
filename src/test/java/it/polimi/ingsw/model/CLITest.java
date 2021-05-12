@@ -15,6 +15,9 @@ public class CLITest {
         String[][] cardGrid = new String[3][4];
         MarbleColors freemarble = gameboard.getMarketBoard().getFreeMarble().getColor();
         MarbleColors[][] market = new MarbleColors[3][4];
+        System.out.println(gameboard.getLeaderDeck().draw4().get(0).drawRequirements());
+        System.out.println(gameboard.getLeaderDeck().draw4().get(0).drawAbility());
+        System.out.println(gameboard.getLeaderDeck().draw4().get(0).drawBottom());
         for(int i=0; i<3; i++){
             for(int j=0; j<4; j++){
                 market[i][j] = gameboard.getMarketBoard().getMarbleGrid()[i][j].getColor();

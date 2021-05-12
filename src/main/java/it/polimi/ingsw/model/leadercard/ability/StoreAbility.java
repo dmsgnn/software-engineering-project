@@ -16,8 +16,8 @@ public class StoreAbility implements Ability {
     @Override
     public String drawAbility() {
         StringBuilder builder = new StringBuilder();
-        builder.append(ColorCLI.resourceColor(resource)).append("□ □");
-        return "   " + builder.toString() + "  ";
+        builder.append(ColorCLI.resourceColor(resource)).append("■ ■");
+        return "   " + builder.toString() + "   ";
     }
 
     /**

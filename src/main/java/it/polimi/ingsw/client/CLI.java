@@ -16,6 +16,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.lang.System.exit;
+import static java.lang.System.in;
 import static java.util.stream.Collectors.groupingBy;
 
 public class CLI implements UserInterface{
@@ -432,14 +433,15 @@ public class CLI implements UserInterface{
         }
 
         int picked = 0;
-
+        String yesOrNo="no";
         do{
             System.out.print("Do you want to use the your board production? (type 'yes' or 'no'): ");
             input = scanner.nextLine();
             if(input.matches("(yes)")){
+                yesOrNo = "yes";
                 do {
-                    System.out.print((picked<2) ? "Choose the resources you want to pay: ": "Choose what resource you want to gain: ");
-                    System.out.print("Options: COINS, STONES, SERVANTS, SHIELDS");
+                    System.out.print((picked<2) ? "Choose the resources you want to pay ": "Choose what resource you want to gain ");
+                    System.out.print("\nOptions: COINS, STONES, SERVANTS, SHIELDS: ");
                     input = scanner.nextLine().toUpperCase();
                     try {
                         Resource resource = Resource.valueOf(input);
@@ -453,7 +455,7 @@ public class CLI implements UserInterface{
             else if(!input.matches("(yes)|(no)")){
                 System.out.println("WRONG INPUT, type 'yes' or 'no'");
             }
-        }while (!input.matches("(yes)|(no)"));
+        }while (!yesOrNo.matches("(yes)|(no)"));
 
         System.out.println("Select what resources you want to pay: ");
 

@@ -65,7 +65,7 @@ public class ColorRequirements implements Requirements {
                     builder.append(ColorCLI.cardColor(color)).append("■ ");
                 }
                 else {
-                    builder.append(ColorCLI.cardColor(color)).append("▣ ");
+                    builder.append(ColorCLI.cardColor(color)).append("■■");
                 }
 
                 length = length + 3;
