@@ -35,7 +35,7 @@ public class ManageResources extends Actions {
     public void doAction(PlayerBoard playerBoard) throws InvalidActionException {
         if(!validAction(playerBoard)) throw new InvalidActionException();
         else{
-            manageRes(playerBoard);
+            manageResources(playerBoard);
         }
     }
 
@@ -84,7 +84,7 @@ public class ManageResources extends Actions {
      * clears the depots and fills them with the new organization
      * @param playerBoard of the current player
      */
-    public void manageRes(PlayerBoard playerBoard) {
+    public void manageResources(PlayerBoard playerBoard) {
         //empty depots
         if (!initial){
             for (int i=0;i<playerBoard.getWarehouse().getDepots().size();i++) {
@@ -93,7 +93,7 @@ public class ManageResources extends Actions {
         }
         //add resources
         for (int i=0;i< resources.size();i++){
-            for (int j=0;i<resources.get(i).size();j++) {
+            for (int j=0;j<resources.get(i).size();j++) {
                 playerBoard.getWarehouse().getDepots().get(i).addResources(resources.get(i).get(j));
             }
         }

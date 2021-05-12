@@ -94,6 +94,7 @@ public class Controller implements Observer<ClientMessage> {
     public void startGame(){
         for (ServerView s: serverViews){
             newResources.put(s.getUsername(),temp);
+
             s.sendMarket(getMarket(),getFreeMarble());
             s.sendDevCardGrid(getDevCardGrid());
 
@@ -115,6 +116,7 @@ public class Controller implements Observer<ClientMessage> {
             }
             for (ServerView serverView : serverViews) {
                 if (serverView.getUsername().equals(game.getActivePlayer().getNickname())) {
+                    serverView.sendPlayers(getPlayers());
                     serverView.sendLeaderCards(leaderId);
 
                 }
@@ -200,12 +202,46 @@ public class Controller implements Observer<ClientMessage> {
      * assign the starting resources to the player
      */
     public synchronized void pickStartingResources(Map<Integer, ArrayList<Resource>> resources, String username) {
-        for (int i=0;i<serverViews.size();i++) {
-            if (serverViews.get(i).getUsername().equals(username)) {
+        int i;
+        for (i=0;i<game.getPlayersNumber();i++) {
+            if (game.getPlayers(i).getNickname().equals(username)) {
                 game.setActivePlayer(game.getPlayers(i));
+                break;
             }
         }
-        manageStartingResource(resources,username);
+        switch (i){
+            case 0: {
+                if ((resources.get(1).size())+(resources.get(2).size())+(resources.get(3).size())!=0) {
+                    sendStartingResource(username);
+                }
+                else{
+                    manageStartingResource(resources,username);
+                }
+                break;
+            }
+            case 1:
+            case 2: {
+                if ((resources.get(1).size())+(resources.get(2).size())+(resources.get(3).size())!=1) {
+                    sendStartingResource(username);
+                }
+                else{
+                manageStartingResource(resources,username);
+                }
+                break;
+            }
+            case 3:{
+                if ((resources.get(1).size())+(resources.get(2).size())+(resources.get(3).size())!=2) {
+                    sendStartingResource(username);
+                }
+                else{
+                    manageStartingResource(resources,username);
+                }
+                break;
+            }
+
+        }
+
+
 
 
 
@@ -597,6 +633,14 @@ public class Controller implements Observer<ClientMessage> {
             if (serverView.getUsername().equals(username)) return serverView;
         }
         return null;
+    }
+
+    public ArrayList<String> getPlayers(){
+        ArrayList<String> players = new ArrayList<>();
+        for (int i = 0; i < game.getPlayersNumber(); i++) {
+            players.add(0,game.getPlayers(i).getNickname());
+        }
+        return players;
     }
 
 

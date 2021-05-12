@@ -19,7 +19,9 @@ import java.util.Map;
 public class ServerView extends Observable<ClientMessage> implements Observer<ServerMessage> {
 
 
-
+    public void sendPlayers(ArrayList<String> players) {
+        sendMessage(new Players(players));
+    }
 
     private class ClientMessageReceiver implements Observer<ClientMessage>{
 
