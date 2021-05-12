@@ -45,6 +45,9 @@ public abstract class MarketAction extends Actions {
 
     }
 
+    public ArrayList<Marbles> getMarbles() {
+        return marbles;
+    }
 }
 
 

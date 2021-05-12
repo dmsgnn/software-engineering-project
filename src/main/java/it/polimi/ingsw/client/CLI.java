@@ -666,9 +666,13 @@ public class CLI implements UserInterface{
         totalRes.addAll(active.storedWarehouseRes());
 
         totalRes.removeAll(sum);
-        Map<Resource, Integer> discard;
-        discard = totalRes.stream().collect(groupingBy(Function.identity(), Collectors.reducing(0, x -> 1, Integer::sum)));
-
+        Map<Resource, Integer> discard = new HashMap<>();
+        for(Resource rss: Resource.values()){
+            int freq = Collections.frequency(totalRes, rss);
+            discard.put(rss, freq);
+        }
+        System.out.println(newWarehouse);
+        System.out.println(discard);
         clientView.sendManageResourcesReply(newWarehouse, discard);
     }
 

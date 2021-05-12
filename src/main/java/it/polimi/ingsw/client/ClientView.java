@@ -310,7 +310,6 @@ public class ClientView implements Observer<ServerMessage> {
                     gameboard.getOnePlayerBoard(nickname).setHand(leaderCards.get(nickname));
             }
             for (String nickname : resources.keySet()) {
-                System.out.println("\nsetup ok\n");
                 gameboard.getOnePlayerBoard(nickname).setWarehouse(resources.get(nickname));
             }
             for (String nickname : faithTracks.keySet()) {

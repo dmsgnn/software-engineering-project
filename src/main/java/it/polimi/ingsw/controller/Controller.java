@@ -213,47 +213,51 @@ public class Controller implements Observer<ClientMessage> {
      */
     public synchronized void pickStartingResources(Map<Integer, ArrayList<Resource>> resources, String username) {
         int i;
+        int size=0;
         for (i=0;i<game.getPlayersNumber();i++) {
             if (game.getPlayers(i).getNickname().equals(username)) {
                 game.setActivePlayer(game.getPlayers(i));
                 break;
             }
         }
+        for (int j = 0; j < resources.size(); j++) {
+            size+= resources.get(i).size();
+        }
         switch (i){
             case 0: {
-                if ((resources.get(1).size())+(resources.get(2).size())+(resources.get(3).size())!=0) {
+                if (size!=0){
                     sendStartingResource(username);
+                    getServerView(username).sendError("INVALID STARTING RESOURCES");
                 }
                 else{
-                    getServerView(username).sendError("INVALID STARTING RESOURCES");
                     manageStartingResource(resources,username);
                 }
                 break;
             }
             case 1:
             case 2: {
-                if ((resources.get(1).size())+(resources.get(2).size())+(resources.get(3).size())!=1) {
+                if (((resources.get(0).size())+(resources.get(1).size())+(resources.get(2).size()))!=1) {
                     sendStartingResource(username);
+                    getServerView(username).sendError("INVALID STARTING RESOURCES");
                 }
                 else{
-                    getServerView(username).sendError("INVALID STARTING RESOURCES");
                     manageStartingResource(resources,username);
                 }
                 break;
             }
             case 3:{
-                if ((resources.get(1).size())+(resources.get(2).size())+(resources.get(3).size())!=2) {
+                if ((resources.get(0).size())+(resources.get(1).size())+(resources.get(2).size())!=2) {
                     sendStartingResource(username);
+                    getServerView(username).sendError("INVALID STARTING RESOURCES");
                 }
                 else{
-                    getServerView(username).sendError("INVALID STARTING RESOURCES");
                     manageStartingResource(resources,username);
                 }
                 break;
             }
             default: {
                 getServerView(username).sendError("INVALID STARTING RESOURCES");
-                manageStartingResource(resources,username);
+                sendStartingResource(username);
                 break;
             }
 
@@ -495,6 +499,7 @@ public class Controller implements Observer<ClientMessage> {
                 try {
                     //DO ACTION
                     game.doAction(pickRow);
+                    marbles=pickRow.getMarbles();
                     //TAKE THE ARRAY OF MARBLES COLORS
                     for (Marbles marble : marbles) {
                         marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
@@ -566,8 +571,6 @@ public class Controller implements Observer<ClientMessage> {
                 serverViews.get(currentServerView).sendMarketActionUpdate(game.getActivePlayer().getNickname(),game.getActivePlayer().getFaithTrack().getPosition(),getWarehouse().get(game.getActivePlayer().getNickname()),getStrongbox().get(game.getActivePlayer().getNickname()),marbleColorsArrayList,getFreeMarble(),marketIndex,isRowOrColumn);
                 marbleColorsArrayList=null;
                 //SEND POSSIBLE ACTIONS
-                serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
-
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
                 serverViews.get(currentServerView).sendError("INVALID MANAGE RESOURCES ACTION");
