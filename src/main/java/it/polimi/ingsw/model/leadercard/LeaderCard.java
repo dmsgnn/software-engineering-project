@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.leadercard;
 
+import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.leadercard.Requirements.Requirements;
 import it.polimi.ingsw.model.leadercard.ability.Ability;
@@ -40,6 +41,25 @@ public class LeaderCard {
     }
 
 
+    private String border(){
+        return ColorCLI.RESET + "║";
+    }
 
+    public String drawTop(){
+        return ColorCLI.RESET + "╔═════════╗";
+    }
+    public String drawBottom(){
+        return ColorCLI.RESET + "╚═════════╝";
+    }
+
+    public String drawVictoryPoints(){
+        return border() + "    " + victoryPoints + "    " + border();
+    }
+
+    public String drawRequirements(){
+        return  border() + "" + requirements.drawRequirements() + "" + border();
+    }
+
+    public String drawAbility(){ return border() + "" + ability.drawAbility() + "" + border();}
 
 }

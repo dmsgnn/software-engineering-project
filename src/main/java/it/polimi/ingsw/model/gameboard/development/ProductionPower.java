@@ -28,6 +28,10 @@ public class ProductionPower {
         return faithGain;
     }
 
+    /**
+     * CLI method
+     * @return production of the card
+     */
     public String drawProduction(){
         StringBuilder builder = new StringBuilder();
         int length=0;

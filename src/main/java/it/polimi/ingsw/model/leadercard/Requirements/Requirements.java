@@ -25,4 +25,10 @@ public interface Requirements {
      * @return true if the card has color requirements, false if has resource requirements
      */
     public boolean IsColor();
+
+    /**
+     * method to draw the card's requirements
+     * @return string containing the requirements to print
+     */
+    public String drawRequirements();
 }

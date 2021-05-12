@@ -200,8 +200,18 @@ public class ClientView implements Observer<ServerMessage> {
                 case DISCARDLEADERCARD:
                     uiType.discardLeaderCardAction();
                     break;
+                case ENDTURN:
+                    endTurn();
+                    break;
             }
         }
+    }
+
+    /**
+     * called when the player ends his turn
+     */
+    public void endTurn(){
+        socket.sendMessage(new EndTurn());
     }
 
     /**

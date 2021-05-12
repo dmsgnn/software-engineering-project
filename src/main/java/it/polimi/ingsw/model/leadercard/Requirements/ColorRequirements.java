@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.leadercard.Requirements;
 
+import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
@@ -48,5 +49,33 @@ public class ColorRequirements implements Requirements {
     }
     public void setLevelCardRequirements(Map<Color, Integer> levelCardRequirements) {
         this.levelCardRequirements = levelCardRequirements;
+    }
+
+    @Override
+    public String drawRequirements() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("  ");
+        int length=2;
+        // ■ ▣ ❒
+        for(Color color: colorCardRequirements.keySet()){
+            if(colorCardRequirements.get(color)>0) {
+                int level = levelCardRequirements.get(color);
+                builder.append(ColorCLI.RESET).append(colorCardRequirements.get(color));
+                if(level==1){
+                    builder.append(ColorCLI.cardColor(color)).append("■ ");
+                }
+                else {
+                    builder.append(ColorCLI.cardColor(color)).append("▣ ");
+                }
+
+                length = length + 3;
+            }
+        }
+        if(builder.length()>0) {
+            builder.deleteCharAt(builder.length() - 1);
+            length--;
+        }
+        if(length<9) for(int i=0; i<9-length; i++) builder.append(" ");
+        return builder.toString();
     }
 }

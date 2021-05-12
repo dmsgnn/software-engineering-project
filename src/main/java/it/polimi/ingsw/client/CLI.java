@@ -245,8 +245,10 @@ public class CLI implements UserInterface{
         String input;
         boolean done = false;
 
+        if(possibleActions.size()==1 && possibleActions.contains(Actions.ENDTURN)) return Actions.ENDTURN;
+
         do{
-            System.out.print("Choose the action you want to do: ");
+            System.out.print("Choose the action you want to do: \n");
             for (Actions action : possibleActions) {
                 System.out.println(action);
             }
@@ -442,7 +444,8 @@ public class CLI implements UserInterface{
     @Override
     public void buyCardAction() {
         String input;
-        String cardId = null;
+        Color cardColor = null;
+        int cardLevel = 0;
         int slot = 0;
         boolean done = false;
         HashMap<Resource, Integer> warehouse;
@@ -450,17 +453,31 @@ public class CLI implements UserInterface{
         HashMap<Resource, Integer> strongbox;
 
         do {
-            System.out.print("Choose the ID of the card that you want to buy: ");
-            input = scanner.nextLine();
-            if(!gameboard.correctCardId(input)) System.out.println("Wrong ID");
-            else{
-                cardId = input;
+            System.out.print("Choose the color of the card that you want to buy: ");
+            input = scanner.nextLine().toUpperCase();
+            try {
+                cardColor = Color.valueOf(input);
                 done = true;
+            } catch ( IllegalArgumentException e ) {
+                System.out.println( "No such color, please try again");
             }
         } while(!done);
 
         done = false;
         do{
+            System.out.println("Choose the level of the card that you want to buy: ");
+            try{
+                cardLevel = Integer.parseInt(input);
+                if(cardLevel < 1 || cardLevel > 3) System.out.println("Wrong level");
+                else done=true;
+            } catch (NumberFormatException e){
+                System.out.println("Not a number!!");
+            }
+        }while (!done);
+
+        done = false;
+        do{
+            System.out.println("Select what slot you want to place your card in: ");
             try{
                 slot = Integer.parseInt(input);
                 if(slot < 1 || slot > 3) System.out.println("Wrong slot number");
@@ -478,7 +495,7 @@ public class CLI implements UserInterface{
 
         
 
-        clientView.buyDevCard(getDevCardColor(cardId), getDevCardLevel(cardId), slot, warehouse, leaderDepot, strongbox);
+        clientView.buyDevCard(cardColor, cardLevel, slot, warehouse, leaderDepot, strongbox);
     }
 
     @Override

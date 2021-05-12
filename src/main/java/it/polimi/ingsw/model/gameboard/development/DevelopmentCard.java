@@ -66,13 +66,26 @@ public class DevelopmentCard {
         return true;
     }
 
+    /**
+     * CLI method
+     * @return string of the card border
+     */
     private String border(){
         return ColorCLI.cardColor(getColor()) + "║";
     }
 
+    /**
+     * CLI method
+     * @return top border of the card
+     */
     public String drawTop(){
         return ColorCLI.cardColor(color) + "╔═════════╗";
     }
+
+    /**
+     * CLI method
+     * @return bottom border of the card
+     */
     public String drawBottom(){
         return ColorCLI.cardColor(color) + "╚═════════╝";
     }
@@ -81,6 +94,10 @@ public class DevelopmentCard {
         return border() + "" + id + "" + border();
     }
 
+    /**
+     * CLI method
+     * @return level and victory points of the card
+     */
     public String drawLevelAndPoints(){
         int length;
         StringBuilder builder = new StringBuilder();
@@ -93,6 +110,10 @@ public class DevelopmentCard {
         return border() + "" + builder.toString() + "" + border();
     }
 
+    /**
+     * CLI method
+     * @return requirements of the card
+     */
     public String drawRequirements(){
         int length=0;
         StringBuilder builder = new StringBuilder();
@@ -110,13 +131,11 @@ public class DevelopmentCard {
         return border() + "" + builder.toString() + "" + border();
     }
 
+    /**
+     * CLI method
+     * @return production cost and gains of the card
+     */
     public String drawProdCostAndGain(){
         return border() + "" + production.drawProduction() + "" + border();
     }
-    /*
-      |  D001    |
-      | 3    4   |
-      |1,2,3,4   |
-      |1,2->3,4,8|
-    */
 }
