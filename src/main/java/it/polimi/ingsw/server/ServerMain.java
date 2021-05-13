@@ -44,9 +44,9 @@ public class ServerMain {
      * creates a ServerSocketHandler for each client
      */
     public void startServer() {
-        System.out.println("port number: " + portNumber);
+        System.out.println("Port number: " + portNumber);
         ServerSocket serverSocket = null;
-        System.out.println("server started!");
+        System.out.println("Server started!");
         try {
             try{
                 serverSocket = new ServerSocket(portNumber);
@@ -72,13 +72,16 @@ public class ServerMain {
         }
     }
 
+    public ArrayList<Lobby> getLobbies() {
+        return lobbies;
+    }
 
     /**
      * called when there is a winner, stops to ping the clients of the lobby and delete it
      * @param l is the lobby of the ending game
      */
+    //used also when all the players of the game disconnects (to modify if persistence FA)
     public void endGame (Lobby l){
-        System.out.println("there is a winner, game will end soon\n");
         l.getLoggedPlayers().forEach((k,v)-> k.stopPing());
 
         for(String nick : l.getLoggedPlayers().values()){
@@ -90,10 +93,12 @@ public class ServerMain {
         l.getLoggedPlayers().clear();
         for(int i=0; i<lobbies.size(); i++){
             if(lobbies.get(i).equals(l)){
-                System.out.println("game number " + i + " is ended\n");
+                System.out.println("Active game number " + i + " is ended");
                 break;
             }
         }
+        lobbies.remove(l);
+        System.out.println("Number of active games: " + lobbies.size());;
     }
 
 
@@ -171,15 +176,6 @@ public class ServerMain {
      */
     public void disconnect(ServerSocketHandler connection, Lobby lobby){
         lobby.getLoggedPlayers().remove(connection);
-    }
-
-    /**
-     * delete the desired lobby in case all the players have been disconnected
-     * @param l is the lobby to be deleted
-     */
-    //(not needed if persistence FA)
-    public void deleteLobby(Lobby l){
-        lobbies.remove(l);
     }
 
 
