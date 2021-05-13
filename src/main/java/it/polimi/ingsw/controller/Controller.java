@@ -592,8 +592,11 @@ public class Controller implements Observer<ClientMessage> {
                 currentAction.put(currentActivePlayer,null);
                 resourceArrayList= null;
                 //UPDATE
+                String nickname = game.getActivePlayer().getNickname();
+                int faithPosition = game.getActivePlayer().getFaithTrack().getPosition();
+                Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(nickname);
                 for (ServerView serverView: serverViews) {
-                    serverView.sendMarketActionUpdate(game.getActivePlayer().getNickname(), game.getActivePlayer().getFaithTrack().getPosition(), getWarehouse().get(game.getActivePlayer().getNickname()), getStrongbox().get(game.getActivePlayer().getNickname()), marbleColorsArrayList, getFreeMarble(), marketIndex, isRowOrColumn);
+                    serverView.sendMarketActionUpdate(nickname, faithPosition, warehouse, getStrongbox().get(game.getActivePlayer().getNickname()), marbleColorsArrayList, getFreeMarble(), marketIndex, isRowOrColumn);
                 }
                 marbleColorsArrayList=null;
                 TimeUnit.SECONDS.sleep(1);
