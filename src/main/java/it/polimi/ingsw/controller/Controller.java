@@ -125,13 +125,10 @@ public class Controller implements Observer<ClientMessage> {
             for (LeaderCard l: leaderCards){
                 leaderId.add(l.getId());
             }
-            int h=1;
             for (ServerView serverView : serverViews) {
                 if (serverView.getUsername().equals(game.getActivePlayer().getNickname())) {
                     serverView.sendPlayers(getPlayers());
                     serverView.sendLeaderCards(leaderId);
-                    System.out.println(h++);
-
                 }
             }
         }
@@ -384,6 +381,16 @@ public class Controller implements Observer<ClientMessage> {
                 currentServerView=i;
             }
         }
+        if(playersNumber==1){
+            lorenzoAction();
+        }
+        else {
+            startTurn();
+        }
+    }
+
+    public void lorenzoAction(){
+        game.getLorenzo().drawToken();
         startTurn();
     }
 
@@ -454,7 +461,9 @@ public class Controller implements Observer<ClientMessage> {
                     //RESET CURRENT ACTION TO NULL
                     currentAction.put(currentActivePlayer, null);
                     // SEND UPDATE
-                    serverViews.get(currentServerView).sendPlayLeaderCardUpdate(game.getActivePlayer().getNickname(),id,getWarehouse().get(game.getActivePlayer().getNickname()),getStrongbox().get(game.getActivePlayer().getNickname()));
+                    for (ServerView serverView: serverViews) {
+                        serverView.sendPlayLeaderCardUpdate(game.getActivePlayer().getNickname(), id, getWarehouse().get(game.getActivePlayer().getNickname()), getStrongbox().get(game.getActivePlayer().getNickname()));
+                    }
                     TimeUnit.SECONDS.sleep(1);
                     // SEND POSSIBLE ACTIONS
                     serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
@@ -471,7 +480,9 @@ public class Controller implements Observer<ClientMessage> {
                     //RESET CURRENT ACTION TO DO TO NULL
                     currentAction.put(currentActivePlayer, null);
                     // SEND UPDATE
-                    serverViews.get(currentServerView).sendPlayLeaderCardUpdate(game.getActivePlayer().getNickname(),id,getWarehouse().get(game.getActivePlayer().getNickname()),getStrongbox().get(game.getActivePlayer().getNickname()));
+                    for (ServerView serverView: serverViews) {
+                        serverView.sendPlayLeaderCardUpdate(game.getActivePlayer().getNickname(), id, getWarehouse().get(game.getActivePlayer().getNickname()), getStrongbox().get(game.getActivePlayer().getNickname()));
+                    }
                     TimeUnit.SECONDS.sleep(1);
                     // SEND POSSIBLE ACTIONS
                     serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
@@ -505,8 +516,8 @@ public class Controller implements Observer<ClientMessage> {
                 PickRow pickRow = new PickRow(index, marbles, game.getBoard().getMarketBoard());
                 try {
                     //DO ACTION
-                    game.doAction(pickRow);
                     marbles=pickRow.getMarbles();
+                    game.doAction(pickRow);
                     //TAKE THE ARRAY OF MARBLES COLORS
                     for (Marbles marble : marbles) {
                         marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
@@ -534,8 +545,8 @@ public class Controller implements Observer<ClientMessage> {
                 PickColumn pickColumn = new PickColumn(index, marbles, game.getBoard().getMarketBoard());
                 try {
                     //DO ACTION
-                    game.doAction(pickColumn);
                     marbles=pickColumn.getMarbles();
+                    game.doAction(pickColumn);
                     //TAKE THE ARRAY OF MARBLES COLORS
                     for (Marbles marble : marbles) {
                         marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
@@ -581,7 +592,9 @@ public class Controller implements Observer<ClientMessage> {
                 currentAction.put(currentActivePlayer,null);
                 resourceArrayList= null;
                 //UPDATE
-                serverViews.get(currentServerView).sendMarketActionUpdate(game.getActivePlayer().getNickname(),game.getActivePlayer().getFaithTrack().getPosition(),getWarehouse().get(game.getActivePlayer().getNickname()),getStrongbox().get(game.getActivePlayer().getNickname()),marbleColorsArrayList,getFreeMarble(),marketIndex,isRowOrColumn);
+                for (ServerView serverView: serverViews) {
+                    serverView.sendMarketActionUpdate(game.getActivePlayer().getNickname(), game.getActivePlayer().getFaithTrack().getPosition(), getWarehouse().get(game.getActivePlayer().getNickname()), getStrongbox().get(game.getActivePlayer().getNickname()), marbleColorsArrayList, getFreeMarble(), marketIndex, isRowOrColumn);
+                }
                 marbleColorsArrayList=null;
                 TimeUnit.SECONDS.sleep(1);
                 //SEND POSSIBLE ACTIONS
@@ -612,7 +625,7 @@ public class Controller implements Observer<ClientMessage> {
                 game.doAction(buyDevelopmentCard);
                 //RESET CURRENT ACTION TO NULL
                 currentAction.put(currentActivePlayer,null);
-                //UPDATE
+                //UPDATE FOR DA FARE
                 //serverViews.get(currentServerView).sendBuyDevelopmentCardUpdate(game.getActivePlayer().getNickname(),);
                 TimeUnit.SECONDS.sleep(1);
                 // SEND POSSIBLE ACTIONS
@@ -643,7 +656,7 @@ public class Controller implements Observer<ClientMessage> {
                 game.doAction(useProduction);
                 //RESET CURRENT ACTION TO NULL
                 currentAction.put(currentActivePlayer,null);
-                //UPDATE
+                //UPDATE FOR DA FARE
 
                 TimeUnit.SECONDS.sleep(1);
                 //SEND POSSIBLE ACTION

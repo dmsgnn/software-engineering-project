@@ -23,4 +23,9 @@ public class PickColumn extends MarketAction {
     public boolean validAction(PlayerBoard playerBoard) {
         return market.validColumn(index);
     }
+
+    @Override
+    public ArrayList<Marbles> getMarbles() {
+         return market.getOneColumn(index);
+    }
 }

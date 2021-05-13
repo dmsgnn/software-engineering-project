@@ -22,4 +22,10 @@ public class PickRow extends MarketAction {
     public boolean validAction(PlayerBoard playerBoard) {
         return market.validRow(index);
     }
+
+
+    @Override
+    public ArrayList<Marbles> getMarbles() {
+        return market.getOneRow(index);
+    }
 }
