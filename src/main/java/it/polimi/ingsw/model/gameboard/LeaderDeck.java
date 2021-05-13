@@ -30,7 +30,7 @@ public class LeaderDeck {
     public ArrayList<LeaderCard> draw4(){
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         for (int i=0; i<4; i++){
-            leaderCards.add(deck.remove(i));
+            leaderCards.add(deck.remove(0));
         }
         return leaderCards;
     }
