@@ -25,6 +25,7 @@ public class Lobby {
         this.playerGameNumber = playerGameNumber;
     }
 
+
     public int getPlayerGameNumber() {
         return playerGameNumber;
     }
@@ -54,15 +55,17 @@ public class Lobby {
             users.add(newUser);
         }
 
+
+
         Game game = new Game(players);
         Controller controller = new Controller(game, users);
 
         for(ServerView s : users) {
             s.addObserver(controller);
         }
-
         //connections.stream().forEach(x -> x.sendEvent(new GameStartEvent()));
         controller.startGame();
+        printUsers();
 
     }
 
@@ -70,9 +73,9 @@ public class Lobby {
      * Prints the list of logged players
      */
     private void printUsers() {
-        System.out.println("\nLogged players: ");
+        System.out.println("number of players: " + loggedPlayers.size());
+        System.out.println("Logged players: ");
         loggedPlayers.values().forEach(System.out::println);
-        System.out.println("\n");
     }
 
 }

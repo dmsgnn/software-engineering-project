@@ -13,6 +13,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import static java.lang.System.exit;
+
 public class ServerSocketHandler extends Observable<ClientMessage> implements Runnable{
     private static final Object lock = new Object();
 
@@ -69,6 +71,9 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
                     lobby.setPlayerGameNumber(((PlayerNumberReply) message).getPlayerNum());
                     if(lobby.getPlayerGameNumber()==1)
                         lobby.startGame();
+                    synchronized (lock){
+                        lock.notifyAll();
+                    }
                 }
                 if(message instanceof LoginMessage) {
                     LoginMessage presentation = (LoginMessage) message;
@@ -99,8 +104,10 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
             out.flush();
             if(message instanceof EndGameMessage)
                 messageCounter++;
-            if(messageCounter>=lobby.getLoggedPlayers().size())
+            if(messageCounter>=lobby.getLoggedPlayers().size()) {
+                System.out.println("there is a winner, game will end soon\n");
                 server.endGame(lobby);
+            }
         } catch (Exception e) {
             e.getMessage();
             //e.printStackTrace();
@@ -113,7 +120,14 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
      */
     private void login(LoginMessage message) {
         synchronized (lock) {
-            server.loginUser(message.getUsername(),this);
+            try {
+                if(server.getLobbies().size() > 0 && server.getLobbies().get(server.getLobbies().size()-1).getPlayerGameNumber() == 0)
+                    lock.wait();
+                server.loginUser(message.getUsername(), this);
+            } catch (InterruptedException e){
+                e.getMessage();
+                exit(0);
+            }
         }
     }
 
@@ -129,7 +143,8 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
             if(lobby.isGameStarted()) {
                 //this part must be modified if persistence FA
                 if(lobby.getPlayerGameNumber()==1 || lobby.getLoggedPlayers().size() == 1){
-                    server.deleteLobby(lob);
+                    System.out.println("Game canceled");
+                    server.endGame(lob);
                     return;
                 }
                 server.disconnectAndSave(this, lob);
