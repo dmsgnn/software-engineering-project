@@ -8,12 +8,11 @@ import it.polimi.ingsw.messages.clientToServer.*;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
+import it.polimi.ingsw.model.leadercard.LeaderCard;
+import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.System.exit;
 
@@ -27,6 +26,8 @@ public class ClientView implements Observer<ServerMessage> {
     private final ClientGameBoard gameboard;
 
     private final Object lock = new Object();
+
+    ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
 
     /**
      * for testing
@@ -43,6 +44,18 @@ public class ClientView implements Observer<ServerMessage> {
         this.port = port;
         this.uiType = ui;
         gameboard = new ClientGameBoard();
+    }
+
+    /**
+     * utility method to find a leadercard
+     * @param id card that I want to find
+     * @return the correct card
+     */
+    private LeaderCard findLeaderCard(String id){
+        for(LeaderCard card : leaderDeck){
+            if(card.getId().equals(id)) return card;
+        }
+        return null;
     }
 
     public ClientGameBoard getGameboard() {
@@ -429,7 +442,7 @@ public class ClientView implements Observer<ServerMessage> {
             for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
                 if (playerBoard.getPlayerNickname().equals(nickname)) {
                     playerBoard.removeHandCard(id);
-                    playerBoard.addPlayedCard(id);
+                    playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
                     playerBoard.setWarehouse(warehouse);
                     playerBoard.setStrongbox(strongbox);
                 }

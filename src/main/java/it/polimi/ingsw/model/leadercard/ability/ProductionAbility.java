@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.leadercard.ability;
 
+import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
@@ -21,6 +22,11 @@ public class ProductionAbility implements Ability {
         builder.append(ColorCLI.RESET).append(" ?");
         builder.append(ColorCLI.RED).append(" 1");
         return " " + builder.toString() + " ";
+    }
+
+    @Override
+    public void clientAbility(ClientPlayerBoard playerBoard) {
+        playerBoard.addProductionBuff(cost);
     }
 
     /**

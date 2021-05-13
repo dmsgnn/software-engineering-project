@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.leadercard.ability;
 
+import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
@@ -17,6 +18,11 @@ public class DiscountAbility implements Ability{
         StringBuilder builder = new StringBuilder();
         builder.append(ColorCLI.resourceColor(resource)).append("-1");
         return "   " + builder.toString() + "    ";
+    }
+
+    @Override
+    public void clientAbility(ClientPlayerBoard playerBoard) {
+        playerBoard.addDiscountBuff(resource);
     }
 
     /**

@@ -263,6 +263,7 @@ public class CLI implements UserInterface{
     @Override
     public Actions chooseAction(ArrayList<Actions> possibleActions) {
         Actions choice = null;
+        int actionIndex = 0;
         String input;
         boolean done = false;
 
@@ -270,18 +271,23 @@ public class CLI implements UserInterface{
 
         do{
             System.out.print("Choose the action you want to do: \n");
+            int i =0;
             for (Actions action : possibleActions) {
-                System.out.println(action);
+                i++;
+                System.out.println(i + ")" + action);
             }
-            input = scanner.nextLine().toUpperCase();
-            try {
-                choice = Actions.valueOf(input);
-                done = true;
-            } catch ( IllegalArgumentException e ) {
-                System.err.println("No such action, please try again");
+            input = scanner.nextLine();
+            try{
+                actionIndex = Integer.parseInt(input);
+                if(actionIndex < 0 || actionIndex > possibleActions.size()) System.out.println("Invalid number");
+                else {
+                    choice = possibleActions.get(actionIndex -1);
+                    done = true;
+                }
+            } catch (NumberFormatException e){
+                System.out.println("Not a number!!");
             }
         } while (!done);
-
 
         return choice;
     }
@@ -340,8 +346,11 @@ public class CLI implements UserInterface{
                 input = scanner.nextLine().toUpperCase();
                 try {
                     Resource resource = Resource.valueOf(input);
-                    whiteMarblesRes.add(resource);
-                    value--;
+                    if(!activePlayerboard.getExchangeBuff().contains(resource)) System.out.println("You can't choose this resource");
+                    else{
+                       whiteMarblesRes.add(resource);
+                       value--;
+                    }
                 } catch ( IllegalArgumentException e ) {
                     System.err.println( "No such resource, please try again");
                 }
@@ -393,44 +402,71 @@ public class CLI implements UserInterface{
         } while(!done);
 
         done = false;
+        String yesOrNo="no";
 
         if(active.isProductionBuffActive()){
             do {
-                System.out.print("Select the leader production card slot you want to use for production, type 'quit' to end the selection: ");
+                System.out.println("Do you want to use your leader cards production? (type 'yes' or 'no'): ");
                 input = scanner.nextLine();
-                if(input.equals("quit")){
-                    done = true;
-                }
-                else {
-                    try{
-                        value = Integer.parseInt(input);
-                        if(value > active.getPlayedCards().size() || value < 1) System.out.println("Invalid number");
-                        else if(leaderCardSlots.contains(value-1)) System.out.println("Slot already selected");
-                        else {
-                            Resource resource = null;
-                            while(resource==null){
-                                System.out.print("Choose what resource you want to obtain: ");
-                                System.out.print("Options: COINS, STONES, SERVANTS, SHIELDS");
-                                input = scanner.nextLine().toUpperCase();
-                                try {
-                                    resource = Resource.valueOf(input);
-                                    leaderGain.add(resource);
-                                } catch ( IllegalArgumentException e ) {
-                                    System.err.println( "No such resource, please try again");
+                if (input.matches("(yes)")) {
+                    yesOrNo = "yes";
+                    if (active.getProductionBuff().size() == 1) {
+                        Resource resource = null;
+                        while (resource == null) {
+                            System.out.print("Choose what resource you want to obtain");
+                            System.out.print("Options: COINS, STONES, SERVANTS, SHIELDS: ");
+                            input = scanner.nextLine().toUpperCase();
+                            try {
+                                resource = Resource.valueOf(input);
+                                leaderGain.add(resource);
+                            } catch (IllegalArgumentException e) {
+                                System.err.println("No such resource, please try again");
+                            }
+                        }
+                        leaderCardSlots.add(0);
+                    }
+                    else{
+                        do {
+                            System.out.print("Select the leader card slot you want to use for production, type 'quit' to end the selection: ");
+                            input = scanner.nextLine();
+                            if(input.equals("quit")){
+                                done = true;
+                            }
+                            else {
+                                try{
+                                    value = Integer.parseInt(input);
+                                    if(value > active.getPlayedCards().size() || value < 1) System.out.println("Invalid number");
+                                    else if(leaderCardSlots.contains(value-1)) System.out.println("Slot already selected");
+                                    else {
+                                        Resource resource = null;
+                                        while(resource==null){
+                                            System.out.print("Choose what resource you want to obtain: ");
+                                            System.out.print("Options: COINS, STONES, SERVANTS, SHIELDS");
+                                            input = scanner.nextLine().toUpperCase();
+                                            try {
+                                                resource = Resource.valueOf(input);
+                                                leaderGain.add(resource);
+                                            } catch ( IllegalArgumentException e ) {
+                                                System.err.println("No such resource, please try again");
+                                            }
+                                        }
+                                        leaderCardSlots.add(value-1);
+                                    }
+                                } catch (NumberFormatException e){
+                                    System.out.println("Not a number!!");
                                 }
                             }
-                            leaderCardSlots.add(value-1);
-                        }
-                    } catch (NumberFormatException e){
-                        System.out.println("Not a number!!");
+                        } while(!done || leaderCardSlots.size()<2);
                     }
                 }
-            } while(!done);
-            if(leaderCardSlots.size()==1) leaderCardSlots.set(0, 0);
+                else if(!input.matches("(yes)|(no)")){
+                    System.out.println("WRONG INPUT, type 'yes' or 'no'");
+                }
+            }while (!yesOrNo.matches("(yes)|(no)"));
         }
 
         int picked = 0;
-        String yesOrNo="no";
+        yesOrNo="no";
         do{
             System.out.print("Do you want to use the your board production? (type 'yes' or 'no'): ");
             input = scanner.nextLine();
@@ -795,11 +831,11 @@ public class CLI implements UserInterface{
             else {
                 builder.append("  ");
                 for (int j = 0; marketRow < 3 && j < 4; j++) {
-                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ⬤");
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●");
                 }
-                builder.append(ColorCLI.RESET).append("< 1");
+                builder.append(ColorCLI.RESET).append(" < 1");
                 builder.append("  ");
-                builder.append(ColorCLI.RESET).append("free: ").append(ColorCLI.marbleColor(free)).append(" ⬤\n");
+                builder.append(ColorCLI.RESET).append("free: ").append(ColorCLI.marbleColor(free)).append(" ●\n");
                 marketRow++;
             }
 
@@ -814,9 +850,9 @@ public class CLI implements UserInterface{
             else {
                 builder.append("  ");
                 for (int j = 0; marketRow < 3 && j < 4; j++) {
-                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ⬤");
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●");
                 }
-                builder.append(ColorCLI.RESET).append("< 2\n");
+                builder.append(ColorCLI.RESET).append(" < 2\n");
                 marketRow++;
             }
 
@@ -831,9 +867,9 @@ public class CLI implements UserInterface{
             else {
                 builder.append("  ");
                 for (int j = 0; marketRow < 3 && j < 4; j++) {
-                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ⬤");
+                    builder.append(ColorCLI.marbleColor(market[marketRow][j])).append(" ●");
                 }
-                builder.append(ColorCLI.RESET).append("< 3\n");
+                builder.append(ColorCLI.RESET).append(" < 3\n");
                 marketRow++;
             }
 
@@ -846,7 +882,7 @@ public class CLI implements UserInterface{
             }
             if(marketRow>3) builder.append("\n"); //already added the market
             else {
-                builder.append(ColorCLI.RESET).append("   ^  ^ ^  ^");
+                builder.append(ColorCLI.RESET).append("   ^ ^ ^ ^");
                 builder.append("\n");
             }
 
@@ -859,7 +895,7 @@ public class CLI implements UserInterface{
             }
             if(marketRow>3) builder.append("\n"); //already added the market
             else {
-                builder.append(ColorCLI.RESET).append("   1  2 3  4");
+                builder.append(ColorCLI.RESET).append("   1 2 3 4");
                 builder.append("\n");
                 marketRow++;
             }

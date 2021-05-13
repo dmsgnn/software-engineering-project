@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.representations;
 
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.leadercard.LeaderCard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -105,9 +106,9 @@ public class ClientPlayerBoard {
         return productionBuff.size()!=0;
     }
 
-    public void addPlayedCard(String id){
+    public void addPlayedCard(String id, LeaderCard card){
         playedCards.add(id);
-        //metodo per aggiungere buff nel posto giusto?
+        if(card!=null) card.getAbility().clientAbility(this);
     }
 
     public void setPlayedCards(ArrayList<String> playedCards) {
@@ -168,15 +169,15 @@ public class ClientPlayerBoard {
         devCardSlot.put(slot, id);
     }
 
-    public void setExchangeBuff(ArrayList<Resource> exchangeBuff) {
-        this.exchangeBuff = exchangeBuff;
+    public void addExchangeBuff(Resource buff){
+        exchangeBuff.add(buff);
     }
 
-    public void setDiscountBuff(ArrayList<Resource> discountBuff) {
-        this.discountBuff = discountBuff;
+    public void addDiscountBuff(Resource buff){
+        exchangeBuff.add(buff);
     }
 
-    public void setProductionBuff(ArrayList<Resource> productionBuff) {
-        this.productionBuff = productionBuff;
+    public void addProductionBuff(Resource buff){
+        exchangeBuff.add(buff);
     }
 }
