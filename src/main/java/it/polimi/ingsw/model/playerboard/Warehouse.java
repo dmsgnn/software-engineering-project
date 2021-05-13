@@ -52,9 +52,15 @@ public class Warehouse {
     }
 
     public Map<Resource,Integer> storedResources(){
-        Map<Resource,Integer> map = new HashMap<>();
+        Map<Resource,Integer> map = new HashMap<Resource,Integer>(){{
+            for (Resource resource: Resource.values()){
+                put(resource,0);
+            }
+        }};
         for (BaseDepot depot : this.depots) {
-            map.put(depot.getResource(), depot.getOccupied());
+            if (depot.getResource()!=null) {
+                map.put(depot.getResource(), depot.getOccupied());
+            }
         }
         return map;
 
