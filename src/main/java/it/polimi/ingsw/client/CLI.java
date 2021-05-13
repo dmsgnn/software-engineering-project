@@ -12,11 +12,8 @@ import it.polimi.ingsw.utility.DevCardsParserXML;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static java.lang.System.exit;
-import static java.lang.System.in;
 import static java.util.stream.Collectors.groupingBy;
 
 public class CLI implements UserInterface{
@@ -309,7 +306,7 @@ public class CLI implements UserInterface{
                 input = scanner.nextLine();
                 try{
                     value = Integer.parseInt(input);
-                    if(tempColRow.equals("col") && value > 0 && value<gameboard.getMarketColumnsNum()){
+                    if(tempColRow.equals("column") && value > 0 && value<gameboard.getMarketColumnsNum()){
                         done = true;
                         rowOrCol = false;
                     }
@@ -658,23 +655,26 @@ public class CLI implements UserInterface{
                 newWarehouse.put(i, temp);
             }
         }
-
         ArrayList<Resource> sum = new ArrayList<>();
         for(Integer i : newWarehouse.keySet()){
             sum.addAll(newWarehouse.get(i));
         }
+
         ArrayList<Resource> totalRes = new ArrayList<>();
         totalRes.addAll(resources);
         totalRes.addAll(active.storedWarehouseRes());
+        for (Resource resource : sum) {
+            totalRes.remove(resource);
+        }
 
-        totalRes.removeAll(sum);
         Map<Resource, Integer> discard = new HashMap<>();
         for(Resource rss: Resource.values()){
-            int freq = Collections.frequency(totalRes, rss);
-            discard.put(rss, freq);
+            discard.put(rss, 0);
         }
-        System.out.println(newWarehouse);
-        System.out.println(discard);
+        for (Resource rss : totalRes) {
+            discard.put(rss, discard.get(rss) + 1);
+        }
+
         clientView.sendManageResourcesReply(newWarehouse, discard);
     }
 
@@ -685,7 +685,7 @@ public class CLI implements UserInterface{
         boolean done = false;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
-        System.out.println("Warehouse");
+        System.out.println("Warehouse: ");
         int depotCont;
         for(int i = 0; i < 3; i++){
             depotCont=i+1;
@@ -757,19 +757,21 @@ public class CLI implements UserInterface{
         int value = 0;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
-        System.out.println("Strongbox");
+        System.out.println("Strongbox: ");
         for(Resource rss : active.getStrongbox().keySet()){
-            do{
-                System.out.println(rss + ", amount: ");
-                input = scanner.nextLine();
-                try{
-                    value = Integer.parseInt(input);
-                    if(value < 0 || value > active.getStrongbox().get(rss)) System.out.println("Wrong amount!");
-                    else strongbox.put(rss, value);
-                } catch (NumberFormatException e){
-                    System.out.println("Not a number!!");
-                }
-            } while (value < 0 || value > active.getStrongbox().get(rss));
+            if(active.getStrongbox().get(rss)>0){
+                do{
+                    System.out.println(rss + ", amount: ");
+                    input = scanner.nextLine();
+                    try{
+                        value = Integer.parseInt(input);
+                        if(value < 0 || value > active.getStrongbox().get(rss)) System.out.println("Wrong amount!");
+                        else strongbox.put(rss, value);
+                    } catch (NumberFormatException e){
+                        System.out.println("Not a number!!");
+                    }
+                } while (value < 0 || value > active.getStrongbox().get(rss));
+            }
         }
         return strongbox;
     }
