@@ -42,7 +42,7 @@ public class Controller implements Observer<ClientMessage> {
     private int playerCounter=0;
     private int currentServerView =0;
     private int currentActivePlayer =0;
-    private final Map<Integer,ArrayList<Boolean>> numOfActions;
+    private final Map<Integer,Boolean> numOfActions;
     private final Map<Integer,Actions> currentAction;
     private ArrayList<Resource> resourceArrayList;
     private ArrayList<MarbleColors> marbleColorsArrayList;
@@ -70,12 +70,9 @@ public class Controller implements Observer<ClientMessage> {
         selectedCards= new HashMap<>();
         leaderID = new HashMap<>();
         playersNumber = game.getPlayersNumber();
-        ArrayList<Boolean> booleans = new ArrayList<>();
-        booleans.add(0,false);
-        booleans.add(1,false);
-        numOfActions= new HashMap<Integer,ArrayList<Boolean>>(){{
+        numOfActions= new HashMap<Integer,Boolean>(){{
             for (int i = 0; i < playersNumber; i++) {
-                put(i,booleans);
+                put(i,false);
             }
         }};
         currentAction = new HashMap<Integer,Actions>(){{
@@ -312,7 +309,7 @@ public class Controller implements Observer<ClientMessage> {
     private ArrayList<Actions> getPossibleAction() {
         ArrayList<Actions> actions = new ArrayList<>();
         //SE NON E' STATA COMPIUTA ANCORA NESSUNA AZIONE
-        if ((!numOfActions.get(currentActivePlayer).get(0))){
+        if ((!numOfActions.get(currentActivePlayer))){
             //SE IL GIOCATORE HA DELLE LEADERCARDS ATTIVABILI
             if (game.getActivePlayer().getCardsHand().size() != 0) {
                 actions.add(0, Actions.PLAYLEADERCARD);
@@ -354,12 +351,11 @@ public class Controller implements Observer<ClientMessage> {
             case MARKETACTION:
             case USEPRODUCTION:
             case BUYDEVELOPMENTCARD: {
-                numOfActions.get(currentActivePlayer).add(0, true);
+                numOfActions.put(currentActivePlayer,true);
                 break;
             }
             case DISCARDLEADERCARD:
             case PLAYLEADERCARD:{
-                numOfActions.get(currentActivePlayer).add(1, true);
                 break;
             }
         }
@@ -378,11 +374,8 @@ public class Controller implements Observer<ClientMessage> {
 
 
     public void endTurn(){
-        ArrayList<Boolean> booleans = new ArrayList<Boolean>(){{
-            add(0,false);
-            add(1,false);
-        }};
-        numOfActions.put(currentActivePlayer,booleans);
+        numOfActions.put(currentActivePlayer,false);
+        newResources.put(serverViews.get(currentServerView).getUsername(),temp);
         currentActivePlayer++;
         if (currentActivePlayer>=playersNumber) currentActivePlayer=0;
         game.setActivePlayer(game.getPlayers(currentActivePlayer));
@@ -518,10 +511,11 @@ public class Controller implements Observer<ClientMessage> {
                     for (Marbles marble : marbles) {
                         marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
                     }
-                    Map<Resource, Integer> temp1;
-                    temp1 = temp;
+                    Map<Resource, Integer> temp1 = new HashMap<>(temp);
+                    int count;
                     for (Resource resource : resources) {
-                        temp1.put(resource, temp1.get(resource) + 1);
+                        count = temp1.get(resource);
+                        temp1.put(resource, count + 1);
                     }
                     newResources.put(game.getActivePlayer().getNickname(), temp1);
                     // SEND THE MANAGE RESOURCES
@@ -541,14 +535,16 @@ public class Controller implements Observer<ClientMessage> {
                 try {
                     //DO ACTION
                     game.doAction(pickColumn);
+                    marbles=pickColumn.getMarbles();
                     //TAKE THE ARRAY OF MARBLES COLORS
                     for (Marbles marble : marbles) {
                         marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
                     }
-                    Map<Resource, Integer> temp1;
-                    temp1 = temp;
+                    Map<Resource, Integer> temp1 = new HashMap<>(temp);
+                    int count;
                     for (Resource resource : resources) {
-                        temp1.put(resource, temp1.get(resource) + 1);
+                        count = temp1.get(resource);
+                        temp1.put(resource, count + 1);
                     }
                     newResources.put(game.getActivePlayer().getNickname(), temp1);
                     // SEND THE MANAGE RESOURCES
@@ -794,7 +790,7 @@ public class Controller implements Observer<ClientMessage> {
                 try {
                     devCardGrid[i][j] = game.getBoard().getCardGrid()[i][j].lookFirst().getId();
                 } catch (NoCardsLeftException e) {
-                    devCardGrid[i][j] = "null";
+                    devCardGrid[i][j] = "empty";
                 }
 
             }

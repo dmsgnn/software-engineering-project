@@ -47,9 +47,11 @@ public class ManageResources extends Actions {
     @Override
     public boolean validAction(PlayerBoard playerBoard) {
         if (!initial) {
-            HashMap<Resource, Integer> totalRes = new HashMap<>();
+            Map<Resource, Integer> totalRes = new HashMap<Resource,Integer>();
+            Map<Resource,Integer> stored = new HashMap<>();
+            stored = playerBoard.getWarehouse().storedResources();
             for (Resource resource : Resource.values()) {
-                totalRes.put(resource, playerBoard.getWarehouse().storedResources().get(resource) + newResources.get(resource));
+                totalRes.put(resource, stored.get(resource) + newResources.get(resource));
             }
 
             //if the array.size is wrong
@@ -57,20 +59,24 @@ public class ManageResources extends Actions {
             for (int i = 0; i < resources.size(); i++) {
 
                 //no cheat
-                if ((resources.get(i).size() + discResources.get(resources.get(i).get(0))) != totalRes.get(resources.get(i).get(0)))
-                    return false;
+                if (resources.get(i).size()!=0){
+                    if ((resources.get(i).size() + discResources.get(resources.get(i).get(0))) != totalRes.get(resources.get(i).get(0)))
+                        return false;
+                }
 
                 //if the depots have the same resources
                 if (i != 0) {
-                    if (resources.get(0).get(0) == resources.get(i).get(0)) return false;
+                    if (resources.get(0).size() != 0 && resources.get(i).size() != 0) {
+                        if (resources.get(0).get(0).equals(resources.get(i).get(0))) return false;
+                    }
                 }
 
                 //if the capacity is wrong
                 if (playerBoard.getWarehouse().getDepots().get(i).getCapacity() < resources.get(i).size()) return false;
 
                 //if the resources of the depot are wrong
-                for (int j = 0; j < resources.size(); j++) {
-                    if (resources.get(i).get(0) != resources.get(i).get(j)) return false;
+                for (int j = 0; j < resources.get(i).size(); j++) {
+                    if (!(resources.get(i).get(0).equals(resources.get(i).get(j)))) return false;
                 }
 
             }
