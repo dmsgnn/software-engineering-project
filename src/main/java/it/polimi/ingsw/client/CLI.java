@@ -570,6 +570,7 @@ public class CLI implements UserInterface{
 
         do {
             System.out.print("Choose what card you want to play: ");
+            System.out.println(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand());
             input = scanner.nextLine();
             if(hand.contains(input)){
                 done = true;
@@ -596,6 +597,7 @@ public class CLI implements UserInterface{
 
         do {
             System.out.print("Choose what card you want to discard: ");
+            System.out.println(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand());
             input = scanner.nextLine();
             if(hand.contains(input)) done = true;
             else System.out.println("Wrong ID");
@@ -904,9 +906,198 @@ public class CLI implements UserInterface{
         return builder.toString();
     }
 
+    private String strBuilderLorenzo(){
+        int position = clientView.getGameboard().getPlayerBoards().get(0).getLorenzoPosition();
+        StringBuilder lorenzo = new StringBuilder();
+        lorenzo.append("|");
+        for(int i=0; i<25; i++){
+            if(i == position)
+                lorenzo.append("x");
+            else
+                lorenzo.append(" ");
+            lorenzo.append("|");
+        }
+        return lorenzo.toString();
+    }
+
+    private String strBuilderPlayerboard(ClientPlayerBoard board){
+        StringBuilder playerboard = new StringBuilder();
+        playerboard.append("Playerboard of ").append(board.getPlayerNickname()).append("\n");
+        //faith track
+        playerboard.append("       1     2     4     6     9    12    16    20\n");
+        playerboard.append("|");
+        for(int i=0; i<25; i++){
+            if(i == board.getPlayerPosition())
+                playerboard.append("x");
+            else
+                playerboard.append(" ");
+            if(i == 7 || i == 8 || i == 15 || i == 16 || i == 23 || i == 24)
+                playerboard.append(ColorCLI.RED).append("|");
+            else if(i >= 4 && i < 7 || i >= 11 && i < 15 || i >= 18)
+                playerboard.append(ColorCLI.YELLOW).append("|");
+            else
+                playerboard.append(ColorCLI.RESET).append("|");
+        }
+        playerboard.append(ColorCLI.RESET).append("\n");
+        playerboard.append("            |");
+        if(board.getPlayerPosition() >= 5 && board.getVaticanReports().get(8))
+            playerboard.append(ColorCLI.GREEN).append("2");
+        else if(board.getPlayerPosition() >= 5 && !board.getVaticanReports().get(8))
+            playerboard.append(ColorCLI.RED).append("2");
+        else
+            playerboard.append(ColorCLI.RESET).append("2");
+        playerboard.append("|           |");
+        if(board.getPlayerPosition() >= 12 && board.getVaticanReports().get(16))
+            playerboard.append(ColorCLI.GREEN).append("2");
+        else if(board.getPlayerPosition() >= 12 && !board.getVaticanReports().get(8))
+            playerboard.append(ColorCLI.RED).append("2");
+        else
+            playerboard.append(ColorCLI.RESET).append("2");
+        playerboard.append(ColorCLI.RESET).append("|             |");
+        if(board.getPlayerPosition() >= 19 && board.getVaticanReports().get(16))
+            playerboard.append(ColorCLI.GREEN).append("4");
+        else if(board.getPlayerPosition() >= 19 && !board.getVaticanReports().get(8))
+            playerboard.append(ColorCLI.RED).append("4");
+        else
+            playerboard.append(ColorCLI.RESET).append("4");
+        playerboard.append(ColorCLI.RESET).append("|\n");
+        playerboard.append(" 1?+1? -> 1?   ");
+        if(board.getDevCardSlot().get(0)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawTop());
+        if(board.getDevCardSlot().get(1)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawTop());
+        if(board.getDevCardSlot().get(2)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawTop());
+        playerboard.append("\n");
+
+        //depot and dev cards, first line
+        playerboard.append("  |");
+        if(board.isDepotEmpty(0))
+            playerboard.append(" |          ");
+        else
+            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(0))).append("■").append(ColorCLI.RESET).append("|          ");
+        if(board.getDevCardSlot().get(0)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawLevelAndPoints());
+        if(board.getDevCardSlot().get(1)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawLevelAndPoints());
+        if(board.getDevCardSlot().get(2)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawLevelAndPoints());
+        playerboard.append("\n");
+        //depot and dev cards, second line
+        playerboard.append(" |");
+        int secondDepotSize = board.getWarehouse().get(1).size();
+        if(secondDepotSize == 0)
+            playerboard.append(" | |         ");
+        else if(secondDepotSize==1)
+            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("| |         ");
+        else
+            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("|         ");
+        if(board.getDevCardSlot().get(0)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawRequirements());
+        if(board.getDevCardSlot().get(1)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawRequirements());
+        if(board.getDevCardSlot().get(2)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawRequirements());
+        playerboard.append("\n");
+        //depot and dev cards, third line
+        playerboard.append("|");
+        int thirdDepotSize = board.getWarehouse().get(2).size();
+        if(thirdDepotSize == 0)
+            playerboard.append(" | | |        ");
+        else if(thirdDepotSize==1)
+            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("| | |        ");
+        else if(thirdDepotSize==2)
+            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("| |        ");
+        else
+            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|        ");
+        if(board.getDevCardSlot().get(0)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawProdCostAndGain());
+        if(board.getDevCardSlot().get(1)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawProdCostAndGain());
+        if(board.getDevCardSlot().get(2)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawProdCostAndGain());
+        playerboard.append("\n");
+
+        //last line
+        playerboard.append(" ").append(ColorCLI.resourceColor(Resource.COINS)).append("■  ");
+        playerboard.append(" ").append(ColorCLI.resourceColor(Resource.SHIELDS)).append("■  ");
+        playerboard.append(" ").append(ColorCLI.resourceColor(Resource.SERVANTS)).append("■  ");
+        playerboard.append(" ").append(ColorCLI.resourceColor(Resource.STONES)).append("■ ");
+        if(board.getDevCardSlot().get(0)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawBottom());
+        if(board.getDevCardSlot().get(1)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawBottom());
+        if(board.getDevCardSlot().get(2)==null)
+            playerboard.append("          ");
+        else
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawBottom());
+        playerboard.append("\n");
+        playerboard.append(" ");
+        playerboard.append(ColorCLI.RESET).append(board.getStrongbox().get(Resource.COINS));
+        if(board.getStrongbox().get(Resource.COINS)>9)
+            playerboard.append("  ");
+        else
+            playerboard.append("   ");
+        playerboard.append(board.getStrongbox().get(Resource.STONES));
+        if(board.getStrongbox().get(Resource.STONES)>9)
+            playerboard.append("  ");
+        else
+            playerboard.append("   ");
+        playerboard.append(board.getStrongbox().get(Resource.SHIELDS));
+        if(board.getStrongbox().get(Resource.SHIELDS)>9)
+            playerboard.append("  ");
+        else
+            playerboard.append("   ");
+        playerboard.append(board.getStrongbox().get(Resource.SERVANTS));
+        if(board.getStrongbox().get(Resource.SERVANTS)>9)
+            playerboard.append("  ");
+        else
+            playerboard.append("   ");
+
+        return playerboard.toString();
+    }
+
+    private void clearScreen(){
+        for(int i=0; i<30; i++)
+            System.out.println("\n");
+    }
+
     @Override
     public void updateBoard() {
-
+        clearScreen();
         System.out.println(strBuilderGameboard());
+        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getLorenzoPosition() >= 0 ){
+            System.out.println(strBuilderLorenzo());
+        }
+        for(ClientPlayerBoard board : gameboard.getPlayerBoards())
+            System.out.println(strBuilderPlayerboard(board));
     }
 }

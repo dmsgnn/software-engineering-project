@@ -161,12 +161,12 @@ public class FaithTrackTest {
         game.getPlayers(1).getPlayerBoard().getFaithTrack().increasePosition();
         assertEquals(3, game.getNumVaticanReports());
         assertEquals(4, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
-        assertEquals(4, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(24, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
         game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(23);
         game.getPlayers(0).getPlayerBoard().getFaithTrack().increasePosition();
         assertEquals(3, game.getNumVaticanReports());
-        assertEquals(4, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
-        assertEquals(4, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(24, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(24, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
     }
 
     @Test
@@ -179,5 +179,61 @@ public class FaithTrackTest {
         assertEquals(0, playerFaithTrack.getVictoryPoints());
         playerFaithTrack.increaseVictoryPoints(5);
         assertEquals(5, playerFaithTrack.getVictoryPoints());
+    }
+
+    @Test
+    @DisplayName("Test the correct incrementation of the victory points, depending by position")
+    public void victoryPointsPositionTest() {
+        Game game = new Game();
+        PlayerFaithTrack playerFaithTrack = new PlayerFaithTrack(game);
+        assertEquals(0,playerFaithTrack.getPosition());
+        for (int i = 0; i < 2; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(0,playerFaithTrack.getVictoryPoints());
+        assertEquals(2,playerFaithTrack.getPosition());
+        for (int i = 0; i < 1; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(1,playerFaithTrack.getVictoryPoints());
+        assertEquals(3,playerFaithTrack.getPosition());
+        for (int i = 0; i < 2; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(1,playerFaithTrack.getVictoryPoints());
+        for (int i = 0; i < 3; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(3,playerFaithTrack.getVictoryPoints());
+        for (int i = 0; i < 3; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(7,playerFaithTrack.getVictoryPoints());
+        for (int i = 0; i < 3; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(13,playerFaithTrack.getVictoryPoints());
+        for (int i = 0; i < 3; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(22,playerFaithTrack.getVictoryPoints());
+        for (int i = 0; i < 3; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(34,playerFaithTrack.getVictoryPoints());
+        for (int i = 0; i < 3; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(50,playerFaithTrack.getVictoryPoints());
+        for (int i = 0; i < 3; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(70,playerFaithTrack.getVictoryPoints());
+
+        PlayerFaithTrack track = new PlayerFaithTrack(game);
+        for (int i = 0; i < 25; i++) {
+            playerFaithTrack.increasePosition();
+        }
+        assertEquals(70,playerFaithTrack.getVictoryPoints());
     }
 }

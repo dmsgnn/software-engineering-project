@@ -98,6 +98,10 @@ public class ClientPlayerBoard {
         return discountBuff;
     }
 
+    public Map<Integer, Boolean> getVaticanReports() {
+        return vaticanReports;
+    }
+
     public ArrayList<Resource> getProductionBuff() {
         return productionBuff;
     }

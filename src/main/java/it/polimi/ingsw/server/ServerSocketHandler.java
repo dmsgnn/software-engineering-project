@@ -118,16 +118,15 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
      * Makes the login of the user on the server
      * @param message
      */
-    private void login(LoginMessage message) {
+    private void login(LoginMessage message) throws InterruptedException {
         synchronized (lock) {
-            try {
-                if(server.getLobbies().size() > 0 && server.getLobbies().get(server.getLobbies().size()-1).getPlayerGameNumber() == 0)
-                    lock.wait();
+                while(server.getLobbies().size() > 0 && server.getLobbies().get(server.getLobbies().size()-1).getPlayerGameNumber() == 0)
+                    try {
+                        lock.wait();
+                    }catch (InterruptedException e){
+                        exit(0);
+                    }
                 server.loginUser(message.getUsername(), this);
-            } catch (InterruptedException e){
-                e.getMessage();
-                exit(0);
-            }
         }
     }
 

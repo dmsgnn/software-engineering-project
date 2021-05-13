@@ -31,6 +31,6 @@ public class CLITest {
         cli.setClientView(view);
         view.marketSetup(market, freemarble);
         view.developmentCardGridSetup(cardGrid);
-        cli.updateBoard();
+        //cli.updateBoard();
     }
 }

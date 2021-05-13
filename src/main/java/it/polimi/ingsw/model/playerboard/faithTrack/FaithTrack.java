@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.playerboard.faithTrack;
 import it.polimi.ingsw.model.Game;
 
 public abstract class FaithTrack {
-    private int position;
+    protected int position;
     private final Game game;
 
     public FaithTrack(Game game){
@@ -41,7 +41,7 @@ public abstract class FaithTrack {
     }
 
     /**
-     * increases the position and check if the varican report can be activated, in case activates it
+     * increases the position and check if the vatican report can be activated, in case activates it
      */
     public void increasePosition(){
         if(!endOfTrack()) {
