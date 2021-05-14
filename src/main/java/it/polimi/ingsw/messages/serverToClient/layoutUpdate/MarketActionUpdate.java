@@ -11,21 +11,17 @@ import java.util.Map;
 
 public class MarketActionUpdate implements ServerMessage {
 
-    private String nickname;
-    private int playerFaith;
-    private Map<Integer, ArrayList<Resource>> warehouse;
-    private Map<Resource, Integer> strongbox;
-    private ArrayList<MarbleColors> newMarbles;
-    private MarbleColors newFreeMarble;
-    private int pos;
-    private boolean rowOrCol;
+    private final String nickname;
+    private final Map<Integer, ArrayList<Resource>> warehouse;
+    private final ArrayList<MarbleColors> newMarbles;
+    private final MarbleColors newFreeMarble;
+    private final int pos;
+    private final boolean rowOrCol;
 
-    public MarketActionUpdate(String nickname, int playerFaith, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox,
+    public MarketActionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse,
                               ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol) {
         this.nickname = nickname;
-        this.playerFaith = playerFaith;
         this.warehouse = warehouse;
-        this.strongbox = strongbox;
         this.newMarbles = newMarbles;
         this.newFreeMarble = newFreeMarble;
         this.pos = pos;
@@ -34,7 +30,8 @@ public class MarketActionUpdate implements ServerMessage {
 
     @Override
     public void handleMessage(ClientView clientView) {
-        clientView.marketActionUpdate(nickname, playerFaith, warehouse, strongbox, newMarbles, newFreeMarble, pos, rowOrCol);
+        //vai direttamente alla dichiarazione nella clientview
+        clientView.marketActionUpdate(nickname, warehouse,newMarbles, newFreeMarble, pos, rowOrCol);
     }
 
     @Override

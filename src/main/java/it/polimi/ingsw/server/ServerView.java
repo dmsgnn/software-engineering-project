@@ -9,26 +9,11 @@ import it.polimi.ingsw.messages.serverToClient.*;
 import it.polimi.ingsw.messages.serverToClient.layoutUpdate.*;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
-import it.polimi.ingsw.model.gameboard.marble.Marbles;
-import it.polimi.ingsw.model.leadercard.LeaderCard;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class ServerView extends Observable<ClientMessage> implements Observer<ServerMessage> {
-
-
-    public void sendPlayLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox) {
-        sendMessage(new PlayLeaderCardUpdate(nickname,id,warehouse,strongbox));
-    }
-
-    public void sendDiscardLeaderCardUpdate(String nickname, String id, int position) {
-        sendMessage(new DiscardLeaderCardUpdate(nickname,id,position));
-    }
-
-    public void sendMarketActionUpdate(String nickname, int position, Map<Integer, ArrayList<Resource>> integerArrayListMap, Map<Resource, Integer> resourceIntegerMap, ArrayList<MarbleColors> marbleColorsArrayList, MarbleColors freeMarble, int marketIndex, boolean isRowOrColumn) {
-        sendMessage(new MarketActionUpdate(nickname,position,integerArrayListMap,resourceIntegerMap,marbleColorsArrayList,freeMarble,marketIndex,isRowOrColumn));
-    }
 
     private class ClientMessageReceiver implements Observer<ClientMessage>{
 
@@ -41,7 +26,6 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
     private final String playerName;
     private ServerSocketHandler proxy;
 
-    public ServerView(){playerName=null;}
     public ServerView(String name, ServerSocketHandler proxy){
         this.playerName= name;
         this.proxy= proxy;
@@ -129,6 +113,25 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage(new ErrorMessage(invalid_starting_resources));
     }
 
+    public void sendPlayLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox) {
+        sendMessage(new PlayLeaderCardUpdate(nickname,id,warehouse,strongbox));
+    }
+
+    public void sendDiscardLeaderCardUpdate(String nickname, String id) {
+        sendMessage(new DiscardLeaderCardUpdate(nickname,id));
+    }
+
+    public void sendMarketActionUpdate(String nickname, Map<Integer, ArrayList<Resource>> integerArrayListMap, ArrayList<MarbleColors> marbleColorsArrayList, MarbleColors freeMarble, int marketIndex, boolean isRowOrColumn) {
+        sendMessage(new MarketActionUpdate(nickname, integerArrayListMap, marbleColorsArrayList,freeMarble,marketIndex,isRowOrColumn));
+    }
+
+    public void sendBuyDevelopmentCardUpdate(String username, String id, int slotNumber, String newId, Color color, int level, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox) {
+        sendMessage(new BuyDevelopmentCardUpdate(username,id,slotNumber,newId,color,level,warehouse,strongbox));
+    }
+
+    public void sendUseProductionUpdate(String username, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox) {
+        sendMessage(new UseProductionUpdate(username,warehouse,strongbox));
+    }
 
 
     public String getUsername() {

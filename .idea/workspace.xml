@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="market action works and modified some methods of the model">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="modified layout update messages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/BuyDevelopmentCardUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/BuyDevelopmentCardUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/DiscardLeaderCardUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/DiscardLeaderCardUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/MarketActionUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/MarketActionUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/UseProductionUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/UseProductionUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,9 +75,10 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Nuova cartella/ing-sw-2020-AmbrosiniBarzaghi-Bonalumi-Cattaneo-master" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -259,6 +266,7 @@
       <workItem from="1620887897535" duration="3700000" />
       <workItem from="1620900449206" duration="5523000" />
       <workItem from="1620933671560" duration="1318000" />
+      <workItem from="1620975009706" duration="7601000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -463,7 +471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620900478508</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="modified some methods of the Controller.java">
+      <created>1620939805902</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1620939805902</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -482,8 +497,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="payResources method" />
-    <MESSAGE value="Market and marbles update" />
     <MESSAGE value="Actions update with testing" />
     <MESSAGE value="general refactor and update of messages between client and server" />
     <MESSAGE value="Player fix" />
@@ -507,33 +520,11 @@
     <MESSAGE value="ClientPlayerBoard fix" />
     <MESSAGE value="fixes" />
     <MESSAGE value="market action works and modified some methods of the model" />
-    <option name="LAST_COMMIT_MESSAGE" value="market action works and modified some methods of the model" />
+    <MESSAGE value="modified some methods of the Controller.java" />
+    <MESSAGE value="modified layout update messages" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified layout update messages" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java</url>
-          <line>706</line>
-          <option name="timeStamp" value="176" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java</url>
-          <line>598</line>
-          <option name="timeStamp" value="245" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java</url>
-          <line>597</line>
-          <option name="timeStamp" value="246" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java</url>
-          <line>599</line>
-          <option name="timeStamp" value="247" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="it.polimi.ingsw.gameboard.LeaderDeck" memberName="deck" />

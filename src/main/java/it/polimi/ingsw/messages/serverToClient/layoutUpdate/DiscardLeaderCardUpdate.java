@@ -8,17 +8,17 @@ public class DiscardLeaderCardUpdate implements ServerMessage {
 
      private String nickname;
      private String id;
-     private int playerFaith;
 
-    public DiscardLeaderCardUpdate(String nickname, String id, int playerFaith) {
+
+    public DiscardLeaderCardUpdate(String nickname, String id) {
         this.nickname = nickname;
         this.id = id;
-        this.playerFaith = playerFaith;
     }
 
     @Override
     public void handleMessage(ClientView clientView) {
-        clientView.discardLeaderCardUpdate(nickname, id, playerFaith);
+
+        //clientView.discardLeaderCardUpdate(nickname, id);
     }
 
     @Override

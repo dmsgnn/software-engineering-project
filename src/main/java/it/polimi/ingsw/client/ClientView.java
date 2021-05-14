@@ -474,22 +474,20 @@ public class ClientView implements Observer<ServerMessage> {
     /**
      * called to update the board after use market action
      * @param nickname of the player
-     * @param playerFaith new player position
      * @param warehouse new warehouse of the player
-     * @param strongbox new strongbox of the player
      * @param newMarbles market line that has been updated
      * @param newFreeMarble new freemarble
      * @param pos row or column of newMarbles
      * @param rowOrCol true if row, false if column
      */
-    public void marketActionUpdate(String nickname, int playerFaith, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox,
+    public void marketActionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse,
                                    ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol){
         synchronized (lock) {
             for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
                 if (playerBoard.getPlayerNickname().equals(nickname)) {
                     playerBoard.setWarehouse(warehouse);
-                    playerBoard.setStrongbox(strongbox);
-                    playerBoard.setPlayerPosition(playerFaith);
+                    //playerBoard.setStrongbox(strongbox);
+                    //playerBoard.setPlayerPosition(playerFaith);
                 }
             }
             gameboard.updateMarket(newMarbles, newFreeMarble, pos, rowOrCol);
