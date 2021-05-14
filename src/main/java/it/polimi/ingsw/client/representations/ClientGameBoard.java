@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.representations;
 
 import it.polimi.ingsw.client.MarbleColors;
+import it.polimi.ingsw.model.gameboard.Color;
 
 import java.util.ArrayList;
 
@@ -61,11 +62,11 @@ public class ClientGameBoard {
     /**
      * changes one card inside the card grid
      * @param newId new card id
-     * @param row row of the card to change
-     * @param col column of the card to change
+     * @param color of the card to change
+     * @param level column of the card to change
      */
-    public void changeGridCard(String newId, int row, int col){
-        cards[row][col] = newId;
+    public void changeGridCard(String newId, Color color, int level){
+        cards[3-level][color.ordinal()] = newId;
     }
 
     /**

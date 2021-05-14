@@ -346,7 +346,7 @@ public class ClientView implements Observer<ServerMessage> {
             Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse){
         synchronized (lock) {
             for (String nickname : devCardSlots.keySet()) {
-                //gameboard.getOnePlayerBoard(nickname);
+                gameboard.getOnePlayerBoard(nickname).setDevCardSlot(devCardSlots.get(nickname));
             }
             for (String nickname : faithPositions.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithPositions.get(nickname));
@@ -373,13 +373,13 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report){
         synchronized (lock) {
-            if (report) {
-                for (String nickname : position.keySet()) {
-                    gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
-                }
+            for (String nickname : position.keySet()) {
+                gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
             }
-            for (String nickname : vaticanPosition.keySet()) {
-                gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname));
+            if (report) {
+                for (String nickname : vaticanPosition.keySet()) {
+                   gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname));
+                }
             }
             uiType.updateBoard();
         }
@@ -391,12 +391,12 @@ public class ClientView implements Observer<ServerMessage> {
      * @param id card bought
      * @param slot where to place the dev card
      * @param gridId new card for the grid
-     * @param row of the new card
-     * @param column of the new card
+     * @param color of the new card
+     * @param level of the new card
      * @param warehouse new warehouse of the player
      * @param strongbox new strongbox of the player
      */
-    public void buyCardUpdate(String nickname, String id, int slot, String gridId, int row, int column,
+    public void buyCardUpdate(String nickname, String id, int slot, String gridId, Color color, int level,
                               Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
             for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
@@ -406,7 +406,7 @@ public class ClientView implements Observer<ServerMessage> {
                     playerBoard.setStrongbox(strongbox);
                 }
             }
-            gameboard.changeGridCard(gridId, row, column);
+            gameboard.changeGridCard(gridId, color, level);
 
             uiType.updateBoard();
         }
@@ -416,14 +416,12 @@ public class ClientView implements Observer<ServerMessage> {
      * called to update the board after a player discords a leader card
      * @param nickname of the player
      * @param id discarded card
-     * @param playerFaith new player faith value
      */
-    public void discardLeaderCardUpdate(String nickname, String id, int playerFaith){
+    public void discardLeaderCardUpdate(String nickname, String id){
         synchronized (lock) {
             for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
                 if (playerBoard.getPlayerNickname().equals(nickname)) {
                     playerBoard.removeHandCard(id);
-                    playerBoard.setPlayerPosition(playerFaith);
                 }
             }
             uiType.updateBoard();
@@ -454,17 +452,15 @@ public class ClientView implements Observer<ServerMessage> {
     /**
      * called to update the board after use production action
      * @param nickname of the player
-     * @param playerFaith new player position
      * @param warehouse new warehouse of the player
      * @param strongbox new strongbox of the player
      */
-    public void useProductionUpdate(String nickname, int playerFaith, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
+    public void useProductionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
             for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
                 if (playerBoard.getPlayerNickname().equals(nickname)) {
                     playerBoard.setWarehouse(warehouse);
                     playerBoard.setStrongbox(strongbox);
-                    playerBoard.setPlayerPosition(playerFaith);
                 }
             }
             uiType.updateBoard();
@@ -486,8 +482,6 @@ public class ClientView implements Observer<ServerMessage> {
             for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
                 if (playerBoard.getPlayerNickname().equals(nickname)) {
                     playerBoard.setWarehouse(warehouse);
-                    //playerBoard.setStrongbox(strongbox);
-                    //playerBoard.setPlayerPosition(playerFaith);
                 }
             }
             gameboard.updateMarket(newMarbles, newFreeMarble, pos, rowOrCol);

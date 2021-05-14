@@ -37,7 +37,7 @@ public class BuyDevelopmentCardUpdate implements ServerMessage {
 
     @Override
     public void handleMessage(ClientView clientView) {
-        //clientView.buyCardUpdate(nickname, id, slot, gridId, row, column, warehouse, strongbox);
+        clientView.buyCardUpdate(nickname, id, slot, gridId, color, level, warehouse, strongbox);
     }
 
     @Override

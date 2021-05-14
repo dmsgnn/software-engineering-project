@@ -22,7 +22,7 @@ public class UseProductionUpdate implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) {
-       // clientView.useProductionUpdate(nickname, warehouse, strongbox);
+       clientView.useProductionUpdate(nickname, warehouse, strongbox);
     }
 
     @Override

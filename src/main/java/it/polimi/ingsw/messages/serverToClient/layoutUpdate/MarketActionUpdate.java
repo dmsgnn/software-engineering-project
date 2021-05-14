@@ -30,7 +30,6 @@ public class MarketActionUpdate implements ServerMessage {
 
     @Override
     public void handleMessage(ClientView clientView) {
-        //vai direttamente alla dichiarazione nella clientview
         clientView.marketActionUpdate(nickname, warehouse,newMarbles, newFreeMarble, pos, rowOrCol);
     }
 

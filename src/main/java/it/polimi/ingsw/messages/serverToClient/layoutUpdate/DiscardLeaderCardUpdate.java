@@ -18,7 +18,7 @@ public class DiscardLeaderCardUpdate implements ServerMessage {
     @Override
     public void handleMessage(ClientView clientView) {
 
-        //clientView.discardLeaderCardUpdate(nickname, id);
+        clientView.discardLeaderCardUpdate(nickname, id);
     }
 
     @Override
