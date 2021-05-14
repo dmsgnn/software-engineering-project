@@ -220,7 +220,7 @@ public class CLI implements UserInterface{
             input = scanner.nextLine();
             try{
                 num = Integer.parseInt(input);
-                if(num<0 || num >4) System.out.println("This card doesn't exist");
+                if(num <= 0 || num >4) System.out.println("This card doesn't exist");
                 else if(ids.contains(num-1)) System.out.println("Choose a different number");
                 else {
                     ids.add(num-1);
@@ -263,23 +263,23 @@ public class CLI implements UserInterface{
     @Override
     public Actions chooseAction(ArrayList<Actions> possibleActions) {
         Actions choice = null;
-        int actionIndex = 0;
+        int actionIndex;
         String input;
         boolean done = false;
 
         if(possibleActions.size()==1 && possibleActions.contains(Actions.ENDTURN)) return Actions.ENDTURN;
 
+        System.out.print("Choose the action you want to do: \n");
+        int i =0;
+        for (Actions action : possibleActions) {
+            i++;
+            System.out.println(i + ")" + action);
+        }
         do{
-            System.out.print("Choose the action you want to do: \n");
-            int i =0;
-            for (Actions action : possibleActions) {
-                i++;
-                System.out.println(i + ")" + action);
-            }
             input = scanner.nextLine();
             try{
                 actionIndex = Integer.parseInt(input);
-                if(actionIndex < 0 || actionIndex > possibleActions.size()) System.out.println("Invalid number");
+                if(actionIndex <= 0 || actionIndex > possibleActions.size()) System.out.println("Invalid number");
                 else {
                     choice = possibleActions.get(actionIndex -1);
                     done = true;
@@ -303,8 +303,8 @@ public class CLI implements UserInterface{
 
         ArrayList<Resource> whiteMarblesRes = new ArrayList<>();
 
+        System.out.print("Type 'row' to pick a row, 'column' to pick a column: ");
         do{
-            System.out.print("Type 'row' to pick a row, 'column' to pick a column: ");
             input = scanner.nextLine();
             if(input.matches("(row)|(column)")){
                 tempColRow =input;
@@ -390,7 +390,7 @@ public class CLI implements UserInterface{
             else {
                 try{
                     value = Integer.parseInt(input);
-                    if(!active.getDevCardSlot().containsKey(value)) System.out.println("Invalid number");
+                    if(!active.getDevCardSlot().containsKey(value-1)) System.out.println("Invalid number");
                     else if(devCardSlots.contains(value-1)) System.out.println("Slot already selected");
                     else {
                         devCardSlots.add(value-1);
@@ -963,17 +963,17 @@ public class CLI implements UserInterface{
         playerboard.append(ColorCLI.RESET).append("|\n");
         playerboard.append(" 1?+1? -> 1?   ");
         if(board.getDevCardSlot().get(0)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawTop());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawTop()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(1)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawTop());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(1)).drawTop()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(2)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawTop());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(2)).drawTop()).append(ColorCLI.RESET);
         playerboard.append("\n");
 
         //depot and dev cards, first line
@@ -983,17 +983,17 @@ public class CLI implements UserInterface{
         else
             playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(0))).append("■").append(ColorCLI.RESET).append("|          ");
         if(board.getDevCardSlot().get(0)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawLevelAndPoints());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawLevelAndPoints()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(1)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawLevelAndPoints());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(1)).drawLevelAndPoints()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(2)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawLevelAndPoints());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(2)).drawLevelAndPoints()).append(ColorCLI.RESET);
         playerboard.append("\n");
         //depot and dev cards, second line
         playerboard.append(" |");
@@ -1005,17 +1005,17 @@ public class CLI implements UserInterface{
         else
             playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("|         ");
         if(board.getDevCardSlot().get(0)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawRequirements());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawRequirements()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(1)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawRequirements());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(1)).drawRequirements()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(2)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawRequirements());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(2)).drawRequirements()).append(ColorCLI.RESET);
         playerboard.append("\n");
         //depot and dev cards, third line
         playerboard.append("|");
@@ -1029,17 +1029,17 @@ public class CLI implements UserInterface{
         else
             playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|        ");
         if(board.getDevCardSlot().get(0)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawProdCostAndGain());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawProdCostAndGain()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(1)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawProdCostAndGain());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(1)).drawProdCostAndGain()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(2)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawProdCostAndGain());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(2)).drawProdCostAndGain()).append(ColorCLI.RESET);
         playerboard.append("\n");
 
         //last line
@@ -1048,17 +1048,17 @@ public class CLI implements UserInterface{
         playerboard.append(" ").append(ColorCLI.resourceColor(Resource.SERVANTS)).append("■  ");
         playerboard.append(" ").append(ColorCLI.resourceColor(Resource.STONES)).append("■ ");
         if(board.getDevCardSlot().get(0)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawBottom());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawBottom()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(1)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawBottom());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(1)).drawBottom()).append(ColorCLI.RESET);
         if(board.getDevCardSlot().get(2)==null)
-            playerboard.append("          ");
+            playerboard.append("          ").append(ColorCLI.RESET);
         else
-            playerboard.append(findDevCard(board.getDevCardSlot().get(0)).drawBottom());
+            playerboard.append(findDevCard(board.getDevCardSlot().get(2)).drawBottom()).append(ColorCLI.RESET);
         playerboard.append("\n");
         playerboard.append(" ");
         playerboard.append(ColorCLI.RESET).append(board.getStrongbox().get(Resource.COINS));
