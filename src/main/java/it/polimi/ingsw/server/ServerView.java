@@ -15,6 +15,10 @@ import java.util.Map;
 
 public class ServerView extends Observable<ClientMessage> implements Observer<ServerMessage> {
 
+    public void sendFaithMessage(Map<String, Integer> update, Map<String, Integer> faithPositions, boolean isActive) {
+        sendMessage(new FaithTrackMessage(update,faithPositions,isActive));
+    }
+
     private class ClientMessageReceiver implements Observer<ClientMessage>{
 
         @Override

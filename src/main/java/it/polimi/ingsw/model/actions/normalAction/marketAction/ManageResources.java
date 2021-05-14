@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.actions.Actions;
 import it.polimi.ingsw.model.exceptions.*;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
+import it.polimi.ingsw.model.playerboard.faithTrack.FaithTrack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,8 +16,9 @@ public class ManageResources extends Actions {
     private final Map<Resource,Integer> newResources;
     private final Map<Resource,Integer> discResources;
     private final boolean initial;
+    private final FaithTrack faithTrack;
 
-    public ManageResources(Map<Integer,ArrayList<Resource>> resources, Map<Resource, Integer> res, Map<Resource, Integer> discResources, boolean initial) {
+    public ManageResources(Map<Integer, ArrayList<Resource>> resources, Map<Resource, Integer> res, Map<Resource, Integer> discResources, boolean initial, FaithTrack faithTrack) {
         this.resources = new ArrayList<ArrayList<Resource>>(){{
            for (int i=0;i<resources.size();i++){
                add(i,resources.get(i));
@@ -25,6 +27,7 @@ public class ManageResources extends Actions {
         this.newResources = res;
         this.discResources = discResources;
         this.initial = initial;
+        this.faithTrack = faithTrack;
     }
 
     /**
@@ -103,5 +106,15 @@ public class ManageResources extends Actions {
                 playerBoard.getWarehouse().getDepots().get(i).addResources(resources.get(i).get(j));
             }
         }
+        if (discResources!=null) {
+            int size = 0;
+            for (Resource resource : Resource.values()) {
+                size += discResources.get(resource);
+            }
+            for (int i = 0; i < size; i++) {
+                faithTrack.increaseAllPositions();
+            }
+        }
+
     }
 }

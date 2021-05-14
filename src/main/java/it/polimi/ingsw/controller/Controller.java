@@ -21,12 +21,14 @@ import it.polimi.ingsw.model.exceptions.WrongLevelException;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.marble.Marbles;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
+import it.polimi.ingsw.model.playerboard.faithTrack.FaithTrack;
 import it.polimi.ingsw.server.ServerView;
 
 import javax.naming.InsufficientResourcesException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class Controller implements Observer<ClientMessage> {
@@ -51,6 +53,7 @@ public class Controller implements Observer<ClientMessage> {
     private int marketIndex;
     private boolean isRowOrColumn;
     private int numOfVaticanReport;
+    private Map<String,Integer> faithPositions;
 
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
@@ -86,7 +89,15 @@ public class Controller implements Observer<ClientMessage> {
         // PARAMETERS FOR MARKET ACTION
         resourceArrayList = new ArrayList<>();
         marbleColorsArrayList = new ArrayList<>();
+
+        //PARAMETERS FOR FAITHTRACK
         numOfVaticanReport = game.getNumVaticanReports();
+        faithPositions = new HashMap<String,Integer>(){{
+            for (int i = 0; i < playersNumber; i++) {
+              put(game.getPlayers(i).getNickname(),0);
+            }
+        }};
+
     }
 
 
@@ -179,22 +190,24 @@ public class Controller implements Observer<ClientMessage> {
         }
         switch (i) {
             case 0: {
-                getServerView(username).startingResourceMessage(0);
+                Objects.requireNonNull(getServerView(username)).startingResourceMessage(0);
                 break;
 
             }
             case 1: {
-                getServerView(username).startingResourceMessage(1);
+                Objects.requireNonNull(getServerView(username)).startingResourceMessage(1);
                 break;
             }
             case 2: {
-                getServerView(username).startingResourceMessage(1);
+                Objects.requireNonNull(getServerView(username)).startingResourceMessage(1);
                 game.getActivePlayer().getFaithTrack().increaseVictoryPoints(1);
+                faithPositions.put(game.getActivePlayer().getNickname(),1);
                 break;
             }
             case 3: {
-                getServerView(username).startingResourceMessage(2);
+                Objects.requireNonNull(getServerView(username)).startingResourceMessage(2);
                 game.getActivePlayer().getFaithTrack().increaseVictoryPoints(1);
+                faithPositions.put(game.getActivePlayer().getNickname(),1);
                 break;
             }
             default:{
@@ -226,7 +239,7 @@ public class Controller implements Observer<ClientMessage> {
             case 0: {
                 if (size!=0){
                     sendStartingResource(username);
-                    getServerView(username).sendError("INVALID STARTING RESOURCES");
+                    Objects.requireNonNull(getServerView(username)).sendError("INVALID STARTING RESOURCES");
                 }
                 else{
                     manageStartingResource(resources,username);
@@ -237,7 +250,7 @@ public class Controller implements Observer<ClientMessage> {
             case 2: {
                 if (((resources.get(0).size())+(resources.get(1).size())+(resources.get(2).size()))!=1) {
                     sendStartingResource(username);
-                    getServerView(username).sendError("INVALID STARTING RESOURCES");
+                    Objects.requireNonNull(getServerView(username)).sendError("INVALID STARTING RESOURCES");
                 }
                 else{
                     manageStartingResource(resources,username);
@@ -247,7 +260,7 @@ public class Controller implements Observer<ClientMessage> {
             case 3:{
                 if ((resources.get(0).size())+(resources.get(1).size())+(resources.get(2).size())!=2) {
                     sendStartingResource(username);
-                    getServerView(username).sendError("INVALID STARTING RESOURCES");
+                    Objects.requireNonNull(getServerView(username)).sendError("INVALID STARTING RESOURCES");
                 }
                 else{
                     manageStartingResource(resources,username);
@@ -255,7 +268,7 @@ public class Controller implements Observer<ClientMessage> {
                 break;
             }
             default: {
-                getServerView(username).sendError("INVALID STARTING RESOURCES");
+                Objects.requireNonNull(getServerView(username)).sendError("INVALID STARTING RESOURCES");
                 sendStartingResource(username);
                 break;
             }
@@ -270,16 +283,15 @@ public class Controller implements Observer<ClientMessage> {
 
 
     private synchronized void manageStartingResource(Map<Integer, ArrayList<Resource>> resources,String username){
-        ManageResources manageResources = new ManageResources(resources, null,null,true);
+        ManageResources manageResources = new ManageResources(resources, null,null,true, null);
         try {
             game.doAction(manageResources);
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
-            // errore nel manage
+            // MANAGE ERROR
             System.out.println( username + " invalid manage resources ");
             sendStartingResource(username);
-            //e.printStackTrace();
         }
-        //layout update
+        // LAYOUT UPDATE
         ArrayList<String> leaderID= new ArrayList<>();
         for (int i=0; i<selectedCards.get(game.getActivePlayer().getNickname()).size();i++){
             leaderID.add(i,selectedCards.get(game.getActivePlayer().getNickname()).get(i).getId());
@@ -312,9 +324,9 @@ public class Controller implements Observer<ClientMessage> {
 
     private ArrayList<Actions> getPossibleAction() {
         ArrayList<Actions> actions = new ArrayList<>();
-        //SE NON E' STATA COMPIUTA ANCORA NESSUNA AZIONE
+        //IF NO ACTION HAS BEEN TAKEN YET
         if ((!numOfActions.get(currentActivePlayer))){
-            //SE IL GIOCATORE HA DELLE LEADERCARDS ATTIVABILI
+            //IF THE PLAYER HAS ACTIVABLE LEADERCARDS
             if (game.getActivePlayer().getCardsHand().size() != 0) {
                 actions.add(0, Actions.PLAYLEADERCARD);
                 actions.add(1, Actions.DISCARDLEADERCARD);
@@ -328,9 +340,9 @@ public class Controller implements Observer<ClientMessage> {
                 actions.add(2, Actions.MARKETACTION);
             }
         }
-        //SE IL GIOCATORE HA FATTO UNA NORMAL ACTION
+        //IF THE PLAYER HAS MADE A NORMAL ACTION
         else {
-            //SE IL GIOCATORE HA DELLE LEADERCARDS ATTIVABILI
+            //IF THE PLAYER HAS ACTIVABLE LEADERCARDS
             if (game.getActivePlayer().getCardsHand().size() != 0) {
                 actions.add(0, Actions.PLAYLEADERCARD);
                 actions.add(1, Actions.DISCARDLEADERCARD);
@@ -411,9 +423,11 @@ public class Controller implements Observer<ClientMessage> {
             if (game.getActivePlayer().getCardsHand().get(0).getId().equals(id)) {
                 DiscardLeaderCard discardLeaderCard = new DiscardLeaderCard(game.getActivePlayer().getCardsHand().get(0), game.getActivePlayer().getCardsHand(), game.getActivePlayer().getFaithTrack());
                 doActionDiscardLeader(id,discardLeaderCard);
+
             } else if (game.getActivePlayer().getCardsHand().get(1).getId().equals(id)) {
                 DiscardLeaderCard discardLeaderCard = new DiscardLeaderCard(game.getActivePlayer().getCardsHand().get(1), game.getActivePlayer().getCardsHand(), game.getActivePlayer().getFaithTrack());
                 doActionDiscardLeader(id,discardLeaderCard);
+
             } else {
                 serverViews.get(currentServerView).sendError("INVALID CARD ID");
                 currentAction.put(currentActivePlayer, null);
@@ -427,6 +441,8 @@ public class Controller implements Observer<ClientMessage> {
         }
     }
 
+
+
     private void doActionDiscardLeader(String id, DiscardLeaderCard discardLeaderCard){
         try {
             //DO ACTION
@@ -435,6 +451,9 @@ public class Controller implements Observer<ClientMessage> {
             currentAction.put(currentActivePlayer, null);
             //UPDATE
             String username = game.getActivePlayer().getNickname();
+            int points = faithPositions.get(username);
+            faithPositions.put(username,points +1);
+            faithTrackMessage();
             for (ServerView serverView : serverViews) {
                 serverView.sendDiscardLeaderCardUpdate(username, id);
                 TimeUnit.SECONDS.sleep(1);
@@ -556,17 +575,32 @@ public class Controller implements Observer<ClientMessage> {
      */
     public void manageResources(Map<Integer,ArrayList<Resource>> resources, Map<Resource,Integer> discRes){
         if (currentAction.get(currentActivePlayer)==Actions.MARKETACTION) {
-            ManageResources manageResources = new ManageResources(resources, newResources.get(game.getActivePlayer().getNickname()), discRes, false);
+            String username = game.getActivePlayer().getNickname();
+            FaithTrack faithTrack= game.getActivePlayer().getFaithTrack();
+            ManageResources manageResources = new ManageResources(resources, newResources.get(username), discRes, false,faithTrack);
             try {
                 //DO ACTION
                 game.doAction(manageResources);
+                if (discRes!=null) {
+                    int size = 0;
+                    for (Resource resource : Resource.values()) {
+                        size += discRes.get(resource);
+                    }
+                    for (int i = 0; i < playersNumber; i++) {
+                        if (i != currentActivePlayer) {
+                            String user= game.getPlayers(i).getNickname();
+                            int increase = faithPositions.get(user) + size;
+                            faithPositions.put(user, increase);
+                        }
+                    }
+                }
                 //RESET CURRENT ACTION TO NULL
                 currentAction.put(currentActivePlayer,null);
                 resourceArrayList= null;
                 //UPDATE
                 String nickname = game.getActivePlayer().getNickname();
-                int faithPosition = game.getActivePlayer().getFaithTrack().getPosition();
                 Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(nickname);
+                faithTrackMessage();
                 for (ServerView serverView: serverViews) {
                     serverView.sendMarketActionUpdate(nickname, warehouse, marbleColorsArrayList, getFreeMarble(), marketIndex, isRowOrColumn);
                 }
@@ -598,7 +632,7 @@ public class Controller implements Observer<ClientMessage> {
             try {
                 id = game.getBoard().viewCard(color, level).getId();
             } catch (NoCardsLeftException | WrongLevelException e) {
-                id = "null";
+                id = null;
             }
             BuyDevelopmentCard buyDevelopmentCard = new BuyDevelopmentCard(game.getBoard(), depotResources, strongboxResources, cardDepotResources, color, level, slotNumber);
             try {
@@ -612,7 +646,7 @@ public class Controller implements Observer<ClientMessage> {
                 try {
                     newId = game.getBoard().viewCard(color, level).getId();
                 } catch (NoCardsLeftException | WrongLevelException e) {
-                    newId = "null";
+                    newId = null;
                 }
                 Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(username);
                 Map<Resource,Integer> strongbox = getStrongbox().get(username);
@@ -648,11 +682,13 @@ public class Controller implements Observer<ClientMessage> {
                 //DO ACTION
                 game.doAction(useProduction);
                 //RESET CURRENT ACTION TO NULL
+                faithTrackMessage();
                 currentAction.put(currentActivePlayer,null);
-                //UPDATE FOR DA FARE
+                //UPDATE
                 String username  = game.getActivePlayer().getNickname();
                 Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(username);
                 Map<Resource,Integer> strongbox = getStrongbox().get(username);
+
                 for (ServerView serverView: serverViews){
                     serverView.sendUseProductionUpdate(username,warehouse,strongbox);
                 }
@@ -672,9 +708,28 @@ public class Controller implements Observer<ClientMessage> {
         }
     }
 
+    private void faithTrackMessage() {
+        boolean isActive = game.getNumVaticanReports() != numOfVaticanReport;
+        Map<String,Integer> update = new HashMap<>();
+        if (isActive){
+            numOfVaticanReport = game.getNumVaticanReports();
+            for (int i = 0; i < playersNumber; i++) {
+                Player player = game.getPlayers(i);
+                game.setActivePlayer(player);
+                int position = game.getActivePlayer().getFaithTrack().getPosition();
+                String username = game.getActivePlayer().getNickname();
+                if (position!=faithPositions.get(username)){
+                    update.put(username,position);
+                    faithPositions.put(username,position);
+                }
+            }
 
-    public void sendVaticanAction(){
-
+        }
+        for (ServerView serverView: serverViews){
+            serverView.sendFaithMessage(update,faithPositions,isActive);
+        }
+        Player player = game.getPlayers(currentActivePlayer);
+        game.setActivePlayer(player);
 
     }
 
@@ -830,7 +885,7 @@ public class Controller implements Observer<ClientMessage> {
                 try {
                     devCardGrid[i][j] = game.getBoard().getCardGrid()[i][j].lookFirst().getId();
                 } catch (NoCardsLeftException e) {
-                    devCardGrid[i][j] = "empty";
+                    devCardGrid[i][j] = null;
                 }
 
             }
