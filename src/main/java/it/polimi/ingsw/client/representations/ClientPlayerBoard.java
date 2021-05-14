@@ -163,10 +163,10 @@ public class ClientPlayerBoard {
         }
     }
 
-
-
-    public void setDevCardSlot(Map<Integer, String> devCardSlot) {
-        this.devCardSlot = devCardSlot;
+    public void setDevCardSlot(ArrayList<String> devCardSlot) {
+       for(int i = 0; i< devCardSlot.size(); i++){
+           this.devCardSlot.put(i, devCardSlot.get(i));
+       }
     }
 
     public void updateDevCardSlot(int slot, String id) {

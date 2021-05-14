@@ -62,7 +62,7 @@ public class MarketTest {
     }
 
     @Test
-    @DisplayName("Check correct resource output for getColumn")
+    @DisplayName("Check correct marbles output for getColumn")
     public void testGetColumn(){
         game.setActivePlayer(new Player("Giorgio", 1, game));
 
@@ -83,7 +83,7 @@ public class MarketTest {
     }
 
     @Test
-    @DisplayName("Check correct resource output for getRow")
+    @DisplayName("Check correct marbles output for getRow")
     public void testGetRow(){
         game.setActivePlayer(new Player("Giorgio", 1, game));
 

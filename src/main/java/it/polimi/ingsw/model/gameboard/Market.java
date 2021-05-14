@@ -57,8 +57,8 @@ public class Market {
     public ArrayList<Marbles> getOneColumn(int col){
         return getRowOrCol(col, false);
     }
-    public ArrayList<Marbles> getOneRow(int col){
-        return getRowOrCol(col, true);
+    public ArrayList<Marbles> getOneRow(int row){
+        return getRowOrCol(row, true);
     }
 
     public int getRows() {
@@ -112,7 +112,6 @@ public class Market {
                 }
             }
         }
-
         temp.add(this.freeMarble);
 
         for (int i=0; i<temp.size()-1; i++){
