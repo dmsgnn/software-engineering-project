@@ -327,7 +327,7 @@ public class Controller implements Observer<ClientMessage> {
         //IF NO ACTION HAS BEEN TAKEN YET
         if ((!numOfActions.get(currentActivePlayer))){
             //IF THE PLAYER HAS ACTIVABLE LEADERCARDS
-            if (game.getActivePlayer().getCardsHand().size() != 0) {
+            if (!game.getActivePlayer().getCardsHand().isEmpty()) {
                 actions.add(0, Actions.PLAYLEADERCARD);
                 actions.add(1, Actions.DISCARDLEADERCARD);
                 actions.add(2, Actions.BUYDEVELOPMENTCARD);
@@ -343,7 +343,7 @@ public class Controller implements Observer<ClientMessage> {
         //IF THE PLAYER HAS MADE A NORMAL ACTION
         else {
             //IF THE PLAYER HAS ACTIVABLE LEADERCARDS
-            if (game.getActivePlayer().getCardsHand().size() != 0) {
+            if (!game.getActivePlayer().getCardsHand().isEmpty()) {
                 actions.add(0, Actions.PLAYLEADERCARD);
                 actions.add(1, Actions.DISCARDLEADERCARD);
                 actions.add(2,Actions.ENDTURN);
@@ -453,11 +453,11 @@ public class Controller implements Observer<ClientMessage> {
             String username = game.getActivePlayer().getNickname();
             int points = faithPositions.get(username);
             faithPositions.put(username,points +1);
-            faithTrackMessage();
             for (ServerView serverView : serverViews) {
                 serverView.sendDiscardLeaderCardUpdate(username, id);
                 TimeUnit.SECONDS.sleep(1);
             }
+            faithTrackMessage();
             // SEND POSSIBLE ACTIONS
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException | InterruptedException e) {
@@ -600,10 +600,11 @@ public class Controller implements Observer<ClientMessage> {
                 //UPDATE
                 String nickname = game.getActivePlayer().getNickname();
                 Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(nickname);
-                faithTrackMessage();
+
                 for (ServerView serverView: serverViews) {
                     serverView.sendMarketActionUpdate(nickname, warehouse, marbleColorsArrayList, getFreeMarble(), marketIndex, isRowOrColumn);
                 }
+                faithTrackMessage();
                 marbleColorsArrayList=null;
                 TimeUnit.SECONDS.sleep(1);
                 //SEND POSSIBLE ACTIONS
@@ -725,8 +726,10 @@ public class Controller implements Observer<ClientMessage> {
             }
 
         }
+        Map<String,Integer> faith = new HashMap<>(faithPositions);
         for (ServerView serverView: serverViews){
-            serverView.sendFaithMessage(update,faithPositions,isActive);
+
+            serverView.sendFaithMessage(update,faith,isActive);
         }
         Player player = game.getPlayers(currentActivePlayer);
         game.setActivePlayer(player);

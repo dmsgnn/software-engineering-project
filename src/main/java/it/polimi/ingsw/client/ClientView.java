@@ -374,7 +374,6 @@ public class ClientView implements Observer<ServerMessage> {
     public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report){
         synchronized (lock) {
             for (String nickname : position.keySet()) {
-                System.out.println("ciao");
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
             }
             if (report) {

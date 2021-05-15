@@ -15,10 +15,6 @@ import java.util.Map;
 
 public class ServerView extends Observable<ClientMessage> implements Observer<ServerMessage> {
 
-    public void sendFaithMessage(Map<String, Integer> update, Map<String, Integer> faithPositions, boolean isActive) {
-        sendMessage(new FaithTrackMessage(update,faithPositions,isActive));
-    }
-
     private class ClientMessageReceiver implements Observer<ClientMessage>{
 
         @Override
@@ -28,7 +24,7 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
     }
 
     private final String playerName;
-    private ServerSocketHandler proxy;
+    private final ServerSocketHandler proxy;
 
     public ServerView(String name, ServerSocketHandler proxy){
         this.playerName= name;
@@ -137,6 +133,9 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage(new UseProductionUpdate(username,warehouse,strongbox));
     }
 
+    public void sendFaithMessage(Map<String, Integer> update, Map<String, Integer> faithPositions, boolean isActive) {
+        sendMessage(new FaithTrackMessage(update,faithPositions,isActive));
+    }
 
     public String getUsername() {
         return playerName;
