@@ -66,7 +66,6 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
         try {
             while(true) {
                 ClientMessage message = (ClientMessage) in.readObject();
-                //if(event instanceof Pong) System.out.print("pong received");
                 if(message instanceof PlayerNumberReply){
                     lobby.setPlayerGameNumber(((PlayerNumberReply) message).getPlayerNum());
                     if(lobby.getPlayerGameNumber()==1)
@@ -118,14 +117,15 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
      * Makes the login of the user on the server
      * @param message
      */
-    private void login(LoginMessage message) throws InterruptedException {
+    private void login(LoginMessage message) throws InterruptedException, IOException {
         synchronized (lock) {
-                while(server.getLobbies().size() > 0 && server.getLobbies().get(server.getLobbies().size()-1).getPlayerGameNumber() == 0)
+                while(server.getLobbies().size() > 0 && server.getLobbies().get(server.getLobbies().size()-1).getPlayerGameNumber() == 0) {
                     try {
                         lock.wait();
-                    }catch (InterruptedException e){
-                        exit(0);
+                    } catch (InterruptedException e) {
+                        socket.shutdownInput();
                     }
+                }
                 server.loginUser(message.getUsername(), this);
         }
     }

@@ -11,6 +11,6 @@ public class Pong implements ClientMessage{
 
     @Override
     public void handleMessage(PingManager pingSender){
-        pingSender.receivePing();
+        pingSender.setPing(true);
     }
 }

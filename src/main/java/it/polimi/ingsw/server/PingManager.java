@@ -8,24 +8,21 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class PingManager implements Observer<ClientMessage>{
-    private ServerSocketHandler connection;
+    private final ServerSocketHandler connection;
     private boolean ping;
     private Timer pinger;
-    private TimerTask task;
-    private boolean stopPing=false;
+    private boolean stopPing;
 
     //constructor
     public PingManager(ServerSocketHandler connection) {
         this.connection = connection;
         connection.addObserver(this);
         ping = true;
+        stopPing = false;
     }
 
-    /**
-     * sets true the boolean ping variable
-     */
-    public void receivePing() {
-        ping = true;
+    public void setPing(boolean ping) {
+        this.ping = ping;
     }
 
     /**
@@ -35,26 +32,20 @@ public class PingManager implements Observer<ClientMessage>{
      */
     public void startPing() {
         pinger = new Timer();
-        task = new TimerTask() {
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                if(!ping) {
-                    //System.out.println("timer");
-                    pinger.cancel();
-                    stopPing=true;
-                    connection.disconnect(connection.getLobby());
-                }
-                else {
+                if (ping) {
                     ping = false;
                     connection.sendMessage(new Ping());
-                    //System.out.print("ping");
+                } else {
+                    pinger.cancel();
+                    stopPing = true;
+                    connection.disconnect(connection.getLobby());
                 }
             }
         };
-
-        //2 sec to receive pong
         pinger.schedule(task,0,2000);
-
     }
 
     /**

@@ -164,6 +164,7 @@ public class ServerMain {
      * @param connection is the socket connection of the disconnecting client
      */
     public void disconnectAndSave(ServerSocketHandler connection, Lobby lobby){
+        System.out.println("User " + lobby.getLoggedPlayers().get(connection) + " disconnected from game");
         disconnectedUsers.put(lobby.getLoggedPlayers().get(connection), lobby);
         takenUsernames.remove(lobby.getLoggedPlayers().get(connection));
         lobby.getLoggedPlayers().remove(connection);
@@ -175,7 +176,10 @@ public class ServerMain {
      * @param connection is the socket connection of the disconnecting client
      */
     public void disconnect(ServerSocketHandler connection, Lobby lobby){
+        System.out.println("User " + lobby.getLoggedPlayers().get(connection) + " disconnected from lobby");
         lobby.getLoggedPlayers().remove(connection);
+        if(lobby.getLoggedPlayers().size()==0)
+            lobbies.remove(lobby);
     }
 
 

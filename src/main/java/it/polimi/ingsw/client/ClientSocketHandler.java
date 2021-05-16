@@ -3,7 +3,6 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
-import it.polimi.ingsw.server.ServerMain;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -29,7 +28,7 @@ public class ClientSocketHandler extends Observable<ServerMessage> implements Ru
             tempout = new ObjectOutputStream(socket.getOutputStream());
             tempin = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
         this.in = tempin;
