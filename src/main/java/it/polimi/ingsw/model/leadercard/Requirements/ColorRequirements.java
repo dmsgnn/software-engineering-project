@@ -56,19 +56,19 @@ public class ColorRequirements implements Requirements {
         StringBuilder builder = new StringBuilder();
         builder.append("  ");
         int length=2;
-        // ■ ▣ ❒
+
         for(Color color: colorCardRequirements.keySet()){
             if(colorCardRequirements.get(color)>0) {
                 int level = levelCardRequirements.get(color);
                 builder.append(ColorCLI.RESET).append(colorCardRequirements.get(color));
                 if(level==1){
                     builder.append(ColorCLI.cardColor(color)).append("■ ");
+                    length = length + 3;
                 }
                 else {
-                    builder.append(ColorCLI.cardColor(color)).append("■■");
+                    builder.append(ColorCLI.cardColor(color)).append("■■ ");
+                    length = length + 4;
                 }
-
-                length = length + 3;
             }
         }
         if(builder.length()>0) {

@@ -31,6 +31,6 @@ public class ClientMain {
         CLI cli = new CLI();
         ClientView clientView = new ClientView(ip, port, cli);
         cli.setClientView(clientView);
-        cli.start();
+        cli.begin();
     }
 }

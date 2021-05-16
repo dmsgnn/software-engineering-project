@@ -11,6 +11,7 @@ public class ClientPlayerBoard {
 
     private final String playerNickname;
     private ArrayList<String> hand = new ArrayList<>();
+    private int handSize = 2;
 
     private ArrayList<String> playedCards = new ArrayList<>();
     private int playerPosition = 0;
@@ -77,6 +78,10 @@ public class ClientPlayerBoard {
         return lorenzoPosition;
     }
 
+    public int getHandSize() {
+        return handSize;
+    }
+
     public Map<Integer, String> getDevCardSlot() {
         return devCardSlot;
     }
@@ -127,6 +132,7 @@ public class ClientPlayerBoard {
     }
 
     public void removeHandCard(String id){
+        handSize--;
         hand.remove(id);
     }
 

@@ -11,7 +11,7 @@ public interface UserInterface {
     /**
      * initialization
      */
-    void start();
+    void begin();
 
     /**
      * login into a match

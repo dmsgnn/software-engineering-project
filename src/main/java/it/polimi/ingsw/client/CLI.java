@@ -11,10 +11,12 @@ import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.utility.DevCardsParserXML;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 import static java.lang.System.exit;
-import static java.util.stream.Collectors.groupingBy;
 
 public class CLI implements UserInterface{
 
@@ -22,6 +24,7 @@ public class CLI implements UserInterface{
     ClientGameBoard gameboard;
     ArrayList<DevelopmentCard> devCardList = new DevCardsParserXML().devCardsParser();
     ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
+    private boolean myTurn=false;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -89,7 +92,7 @@ public class CLI implements UserInterface{
     }
 
     @Override
-    public void start() {
+    public void begin() {
         System.out.println("\nWelcome to..." + "\n");
         System.out.println("8b   d8            w                             d8b ");
         System.out.println("8YbmdP8 .d88 d88b w8ww .d88b 8d8b d88b    .d8b.  8'  ");
@@ -164,7 +167,20 @@ public class CLI implements UserInterface{
 
     @Override
     public void endTurn() {
-
+        myTurn=false;
+        Thread t = new Thread(() -> {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String input = null;
+            while (!myTurn){
+                try {
+                    input = reader.readLine();
+                } catch (IOException e) {
+                    //e.printStackTrace();
+                }
+                System.out.println(input);
+            }
+        });
+        t.start();
     }
 
     @Override
@@ -262,6 +278,7 @@ public class CLI implements UserInterface{
 
     @Override
     public Actions chooseAction(ArrayList<Actions> possibleActions) {
+        myTurn=true;
         Actions choice = null;
         int actionIndex;
         String input;
@@ -312,11 +329,11 @@ public class CLI implements UserInterface{
                 input = scanner.nextLine();
                 try{
                     value = Integer.parseInt(input);
-                    if(tempColRow.equals("column") && value > 0 && value<gameboard.getMarketColumnsNum()){
+                    if(tempColRow.equals("column") && value > 0 && value<=gameboard.getMarketColumnsNum()){
                         done = true;
                         rowOrCol = false;
                     }
-                    else if(tempColRow.equals("row") && value > 0 && value<gameboard.getMarketRowsNum()){
+                    else if(tempColRow.equals("row") && value > 0 && value<=gameboard.getMarketRowsNum()){
                         done = true;
                         rowOrCol = true;
                     }
@@ -553,9 +570,7 @@ public class CLI implements UserInterface{
         leaderDepot = leaderdepotPayment();
         strongbox = strongboxPayment();
 
-        
-
-        clientView.buyDevCard(cardColor, cardLevel, slot, warehouse, leaderDepot, strongbox);
+        clientView.buyDevCard(cardColor, cardLevel, slot-1, warehouse, leaderDepot, strongbox);
     }
 
     @Override

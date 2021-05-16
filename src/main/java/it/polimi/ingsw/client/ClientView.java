@@ -25,6 +25,10 @@ public class ClientView implements Observer<ServerMessage> {
     private final int port;
     private final ClientGameBoard gameboard;
 
+    private boolean myTurn;
+    private String currentPlayer;
+    private ArrayList<Actions> possibleActions = new ArrayList<>();
+
     private final Object lock = new Object();
 
     ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
@@ -44,6 +48,10 @@ public class ClientView implements Observer<ServerMessage> {
         this.port = port;
         this.uiType = ui;
         gameboard = new ClientGameBoard();
+    }
+
+    public ArrayList<Actions> getPossibleActions() {
+        return possibleActions;
     }
 
     /**
@@ -225,6 +233,8 @@ public class ClientView implements Observer<ServerMessage> {
      * called when the player ends his turn
      */
     public void endTurn(){
+        System.out.println("Waiting for other players...");
+        //uiType.endTurn();
         socket.sendMessage(new EndTurn());
     }
 
@@ -381,7 +391,6 @@ public class ClientView implements Observer<ServerMessage> {
                    gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname));
                 }
             }
-            uiType.updateBoard();
         }
     }
 
