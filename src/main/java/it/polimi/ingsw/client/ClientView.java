@@ -450,6 +450,8 @@ public class ClientView implements Observer<ServerMessage> {
                 if (playerBoard.getPlayerNickname().equals(nickname)) {
                     playerBoard.removeHandCard(id);
                     playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
+                    System.out.println(playerBoard.getHand());
+                    System.out.println(playerBoard.getPlayedCards());
                     playerBoard.setWarehouse(warehouse);
                     playerBoard.setStrongbox(strongbox);
                 }

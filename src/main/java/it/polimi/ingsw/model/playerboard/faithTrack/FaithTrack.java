@@ -26,15 +26,20 @@ public abstract class FaithTrack {
      * and at every incrementation checks if someone can activates the vatican report.
      */
     public void increaseAllPositions() {
-        for(int i=0; i < game.getPlayersNumber(); i++){
-            if(!game.getPlayers(i).equals(game.getActivePlayer())) {
-                game.getPlayers(i).getPlayerBoard().getFaithTrack().setPosition(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() + 1);
-            }
+        if(game.isSoloMode()){
+            game.getLorenzo().getTrack().increasePosition();
         }
-        for(int i=0; i < game.getPlayersNumber(); i++){
-            if(!game.getPlayers(i).equals(game.getActivePlayer())) {
-                if (game.getPlayers(i).getPlayerBoard().getFaithTrack().vaticanReportCheck()) {
-                    game.getPlayers(i).getPlayerBoard().getFaithTrack().vaticanReportActivation();
+        else {
+            for (int i = 0; i < game.getPlayersNumber(); i++) {
+                if (!game.getPlayers(i).equals(game.getActivePlayer())) {
+                    game.getPlayers(i).getPlayerBoard().getFaithTrack().setPosition(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() + 1);
+                }
+            }
+            for (int i = 0; i < game.getPlayersNumber(); i++) {
+                if (!game.getPlayers(i).equals(game.getActivePlayer())) {
+                    if (game.getPlayers(i).getPlayerBoard().getFaithTrack().vaticanReportCheck()) {
+                        game.getPlayers(i).getPlayerBoard().getFaithTrack().vaticanReportActivation();
+                    }
                 }
             }
         }

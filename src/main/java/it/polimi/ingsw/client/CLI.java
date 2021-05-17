@@ -958,26 +958,35 @@ public class CLI implements UserInterface{
         }
         playerboard.append(ColorCLI.RESET).append("\n");
         playerboard.append("            |");
-        if(board.getPlayerPosition() >= 5 && board.getVaticanReports().get(8))
-            playerboard.append(ColorCLI.GREEN).append("2").append(ColorCLI.RESET);
-        else if(board.getPlayerPosition() >= 5 && !board.getVaticanReports().get(8))
-            playerboard.append(ColorCLI.RED).append("2").append(ColorCLI.RESET);
-        else
+        if(board.getVaticanReports().containsKey(8)) {
+            if (board.getVaticanReports().get(8))
+                playerboard.append(ColorCLI.GREEN).append("2").append(ColorCLI.RESET);
+            else
+                playerboard.append(ColorCLI.RED).append("2").append(ColorCLI.RESET);
+        }
+        else {
             playerboard.append(ColorCLI.RESET).append("2");
+        }
         playerboard.append("|           |");
-        if(board.getPlayerPosition() >= 12 && board.getVaticanReports().get(16))
-            playerboard.append(ColorCLI.GREEN).append("2").append(ColorCLI.RESET);
-        else if(board.getPlayerPosition() >= 12 && !board.getVaticanReports().get(16))
-            playerboard.append(ColorCLI.RED).append("2").append(ColorCLI.RESET);
-        else
+        if(board.getVaticanReports().containsKey(16)) {
+            if (board.getVaticanReports().get(16))
+                playerboard.append(ColorCLI.GREEN).append("2").append(ColorCLI.RESET);
+            else
+                playerboard.append(ColorCLI.RED).append("2").append(ColorCLI.RESET);
+        }
+        else {
             playerboard.append(ColorCLI.RESET).append("2");
+        }
         playerboard.append(ColorCLI.RESET).append("|             |");
-        if(board.getPlayerPosition() >= 19 && board.getVaticanReports().get(24))
-            playerboard.append(ColorCLI.GREEN).append("4").append(ColorCLI.RESET);
-        else if(board.getPlayerPosition() >= 19 && !board.getVaticanReports().get(24))
-            playerboard.append(ColorCLI.RED).append("4");
-        else
+        if(board.getVaticanReports().containsKey(24)) {
+            if (board.getVaticanReports().get(24))
+                playerboard.append(ColorCLI.GREEN).append("4").append(ColorCLI.RESET);
+            else
+                playerboard.append(ColorCLI.RED).append("4");
+        }
+        else {
             playerboard.append(ColorCLI.RESET).append("4").append(ColorCLI.RESET);
+        }
         playerboard.append(ColorCLI.RESET).append("|\n");
         //playerBoard production and top of cards
         playerboard.append(" 1?+1? -> 1?   ");
@@ -997,13 +1006,33 @@ public class CLI implements UserInterface{
                 playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawTop());
             }
         }
+        else{
+            for(int i=0; i<board.getHandSize(); i++){
+                playerboard.append("╔═════════╗");
+            }
+        }
         playerboard.append("\n");
         //depot and dev cards, first line
         playerboard.append("  |");
         if(board.isDepotEmpty(0))
-            playerboard.append(" |          ");
+            playerboard.append(" |");
         else
-            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(0))).append("■").append(ColorCLI.RESET).append("|          ");
+            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(0))).append("■").append(ColorCLI.RESET).append("|");
+        playerboard.append("   ");
+        if(board.getWarehouse().size()==4){
+            if(board.getWarehouse().get(3).isEmpty()){
+                playerboard.append("| | |  ");
+            }
+            else if(board.getWarehouse().get(3).size() == 1){
+                playerboard.append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("■").append(ColorCLI.RESET).append("|").append(" |  ");
+            }
+            else{
+                playerboard.append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("■").append(ColorCLI.RESET).append("|  ");
+            }
+        }
+        else{
+            playerboard.append("       ");
+        }
         for(int i=0; i<3; i++){
             if(board.getDevCardSlot().get(i)!=null)
             playerboard.append(Objects.requireNonNull(findDevCard(board.getDevCardSlot().get(i))).drawLevelAndPoints()).append(ColorCLI.RESET);
@@ -1020,16 +1049,36 @@ public class CLI implements UserInterface{
                 playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawRequirements());
             }
         }
+        else{
+            for(int i=0; i<board.getHandSize(); i++){
+                playerboard.append("║         ║");
+            }
+        }
         playerboard.append("\n");
         //depot and dev cards, second line
         playerboard.append(" |");
         int secondDepotSize = board.getWarehouse().get(1).size();
         if(secondDepotSize == 0)
-            playerboard.append(" | |         ");
+            playerboard.append(" | |");
         else if(secondDepotSize==1)
-            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("| |         ");
+            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("| |");
         else
-            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("|         ");
+            playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(1))).append("■").append(ColorCLI.RESET).append("|");
+        playerboard.append("  ");
+        if(board.getWarehouse().size()==5){
+            if(board.getWarehouse().get(4).isEmpty()){
+                playerboard.append("| | |  ");
+            }
+            else if(board.getWarehouse().get(4).size() == 1){
+                playerboard.append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(4))).append("■").append(ColorCLI.RESET).append("|").append(" |  ");
+            }
+            else{
+                playerboard.append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(4))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(4))).append("■").append(ColorCLI.RESET).append("|  ");
+            }
+        }
+        else {
+            playerboard.append("       ");
+        }
         for(int i=0; i<3; i++){
             if(board.getDevCardSlot().get(i)!=null)
                 playerboard.append(Objects.requireNonNull(findDevCard(board.getDevCardSlot().get(i))).drawRequirements()).append(ColorCLI.RESET);
@@ -1044,6 +1093,11 @@ public class CLI implements UserInterface{
         if(board.getPlayerNickname().equals(clientView.getNickname())){
             for (int i = 0; i < board.getHand().size(); i++) {
                 playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawVictoryPoints());
+            }
+        }
+        else{
+            for(int i=0; i<board.getHandSize(); i++){
+                playerboard.append("║         ║");
             }
         }
         playerboard.append("\n");
@@ -1065,13 +1119,18 @@ public class CLI implements UserInterface{
                 playerboard.append("          ").append(ColorCLI.RESET);
         }
         playerboard.append("   ");
-        //leader card third line
+        //leader card fourth line
         for(int i=0; i<board.getPlayedCards().size(); i++) {
             playerboard.append(" ").append(Objects.requireNonNull(findLeaderCard(board.getPlayedCards().get(i))).drawAbility());
         }
         if(board.getPlayerNickname().equals(clientView.getNickname())){
             for (int i = 0; i < board.getHand().size(); i++) {
                 playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawAbility());
+            }
+        }
+        else{
+            for(int i=0; i<board.getHandSize(); i++){
+                playerboard.append("║         ║");
             }
         }
         playerboard.append("\n");
@@ -1095,6 +1154,11 @@ public class CLI implements UserInterface{
         if(board.getPlayerNickname().equals(clientView.getNickname())){
             for (int i = 0; i < board.getHand().size(); i++) {
                 playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawBottom());
+            }
+        }
+        else{
+            for(int i=0; i<board.getHandSize(); i++){
+                playerboard.append("╚═════════╝");
             }
         }
         playerboard.append("\n");
@@ -1124,7 +1188,7 @@ public class CLI implements UserInterface{
         return playerboard.toString();
     }
 
-    private void clearScreen(){
+    private void clearScreen() {
         for(int i=0; i<30; i++)
             System.out.println("\n");
     }

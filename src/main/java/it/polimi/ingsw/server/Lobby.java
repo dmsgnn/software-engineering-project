@@ -16,6 +16,14 @@ public class Lobby {
     private int playerGameNumber;
     //true if the game is started
     private boolean isGameStarted;
+    //number of disconnected users
+    private int disconnectedUsers;
+
+    private Controller controller;
+
+    public int getDisconnectedUsers() {
+        return disconnectedUsers;
+    }
 
     public Map<ServerSocketHandler, String> getLoggedPlayers() {
         return loggedPlayers;
@@ -30,12 +38,32 @@ public class Lobby {
         return playerGameNumber;
     }
 
-    public synchronized boolean isFull(){
-        return(loggedPlayers.size() == playerGameNumber);
-    }
 
     public boolean isGameStarted() {
         return isGameStarted;
+    }
+
+    /**
+     * decreases the number of disconnected users
+     * used when a player reconnects to the game
+     */
+    public synchronized void decreaseDisconnectedUsers(){
+        disconnectedUsers--;
+    }
+
+    /**
+     * increases the number of disconnected users
+     * used when a player leaves a game
+     */
+    public synchronized void increaseDisconnectedUsers(){
+        disconnectedUsers++;
+    }
+
+    /**
+     * return true if the number of disconnected users plus the logged users is equals to the total player number
+     */
+    public synchronized boolean isFull(){
+        return(loggedPlayers.size() + disconnectedUsers == playerGameNumber);
     }
 
     /**
@@ -58,7 +86,7 @@ public class Lobby {
 
 
         Game game = new Game(players);
-        Controller controller = new Controller(game, users);
+        controller = new Controller(game, users);
 
         for(ServerView s : users) {
             s.addObserver(controller);
@@ -70,11 +98,26 @@ public class Lobby {
     }
 
     /**
+     * calls the reconnection method of the controller
+     * used when a player reconnects to the game
+     */
+    public void reConnection(String username, ServerSocketHandler connection){
+        ServerView reconnectedUser = new ServerView(username, connection);
+        controller.playerReconnection(reconnectedUser);
+    }
+
+    /**
+     * used when to communicate to the controller that a player has been disconnected from the game
+     */
+    public void disconnectedPlayer(String username){
+        //controller.playerDisconnection(username);
+    }
+
+    /**
      * Prints the list of logged players
      */
     private void printUsers() {
-        System.out.println("number of players: " + loggedPlayers.size());
-        System.out.println("Logged players: ");
+        System.out.println(loggedPlayers.size() + " Logged players: ");
         loggedPlayers.values().forEach(System.out::println);
     }
 

@@ -41,6 +41,10 @@ public class Game {
         return lorenzo;
     }
 
+    public boolean isSoloMode() {
+        return soloMode;
+    }
+
     public void nextPlayer(){
         for (int i=0; i<4;i++){
             if (activePlayer.equals(players[i])) {

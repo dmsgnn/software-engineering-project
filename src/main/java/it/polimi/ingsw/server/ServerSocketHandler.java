@@ -24,6 +24,10 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
     private ObjectOutputStream out;
     private Lobby lobby;
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     private int messageCounter;
 
     private PingManager sender;
@@ -88,6 +92,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
                 in.close();
                 out.close();
             } catch (IOException ioException) {
+                System.out.println("prendo questo catch");
                 //ioException.printStackTrace();
             }
         }
@@ -123,7 +128,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
-                        socket.shutdownInput();
+                        e.getMessage();
                     }
                 }
                 server.loginUser(message.getUsername(), this);

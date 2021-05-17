@@ -91,12 +91,6 @@ public class ServerMain {
             disconnectedUsers.values().remove(l);
         }
         l.getLoggedPlayers().clear();
-        for(int i=0; i<lobbies.size(); i++){
-            if(lobbies.get(i).equals(l)){
-                System.out.println("Active game number " + i + " is ended");
-                break;
-            }
-        }
         lobbies.remove(l);
         System.out.println("Number of active games: " + lobbies.size());;
     }
@@ -112,16 +106,20 @@ public class ServerMain {
      */
     public synchronized void loginUser(String username, ServerSocketHandler connection) {
         if(takenUsernames.contains(username)){
-            System.out.print("Username already taken");
+            System.out.print("Username " + username + " already taken");
             connection.sendMessage(new UsernameResponse(false, null, takenUsernames));
             return;
         }
 
         if(disconnectedUsers.containsKey(username)){
+            System.out.println("user "+ username+" reconnected to the game");
+            Lobby lob = disconnectedUsers.get(username);
+            lob.decreaseDisconnectedUsers();
             takenUsernames.add(username);
-            disconnectedUsers.get(username).getLoggedPlayers().put(connection, username);
+            lob.getLoggedPlayers().put(connection, username);
             disconnectedUsers.remove(username);
-            //re-connection messages
+            lob.reConnection(username, connection);
+            return;
         }
 
         takenUsernames.add(username);
@@ -135,6 +133,7 @@ public class ServerMain {
             lobbies.add(lob);
             connection.sendMessage(new UsernameResponse(true, username, new ArrayList<>()));
             connection.sendMessage(new PlayerNumberRequest());
+            System.out.println(username+" creo la prima lobby");
         }
         //checks if the last created lobby has a free place
         else if (!lobbies.get(lobbies.size()-1).isFull()){
@@ -144,6 +143,8 @@ public class ServerMain {
             if(lobbies.get(lobbies.size()-1).isFull()) {
                 lobbies.get(lobbies.size()-1).startGame();
             }
+            System.out.println(username + " l'ultima lobby non è piena");
+
         }
         // if all lobbies are full a new one is created
         else{
@@ -154,6 +155,8 @@ public class ServerMain {
             lobbies.add(lob);
             connection.sendMessage(new UsernameResponse(true, username, new ArrayList<>()));
             connection.sendMessage(new PlayerNumberRequest());
+            System.out.println(username+" l'ultima lobby era piena e ne creo una nuova");
+
         }
         connection.startPing();
     }
@@ -164,10 +167,13 @@ public class ServerMain {
      * @param connection is the socket connection of the disconnecting client
      */
     public void disconnectAndSave(ServerSocketHandler connection, Lobby lobby){
-        System.out.println("User " + lobby.getLoggedPlayers().get(connection) + " disconnected from game");
-        disconnectedUsers.put(lobby.getLoggedPlayers().get(connection), lobby);
-        takenUsernames.remove(lobby.getLoggedPlayers().get(connection));
+        String username = lobby.getLoggedPlayers().get(connection);
+        lobby.increaseDisconnectedUsers();
+        System.out.println("User " + username + " disconnected from game");
+        disconnectedUsers.put(username, lobby);
+        takenUsernames.remove(username);
         lobby.getLoggedPlayers().remove(connection);
+        lobby.disconnectedPlayer(username);
     }
 
     /**
