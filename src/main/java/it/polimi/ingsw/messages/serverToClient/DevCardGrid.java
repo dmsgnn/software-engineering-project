@@ -4,7 +4,7 @@ import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.PingReceiver;
 
 public class DevCardGrid implements ServerMessage{
-    private String[][] devCardId;
+    private final String[][] devCardId;
 
     public DevCardGrid(String[][] devCardId) {
         this.devCardId = devCardId;

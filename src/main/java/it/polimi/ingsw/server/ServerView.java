@@ -4,6 +4,7 @@ import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
+import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.messages.serverToClient.*;
 import it.polimi.ingsw.messages.serverToClient.layoutUpdate.*;
@@ -109,7 +110,7 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage(new Players(players));
     }
 
-    public void sendError(String invalid_starting_resources) {
+    public void sendError(Error invalid_starting_resources) {
         sendMessage(new ErrorMessage(invalid_starting_resources));
     }
 

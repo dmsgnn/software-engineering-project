@@ -45,7 +45,7 @@ public class BuyDevelopmentCard extends Actions {
         warehouseDepotResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
         cardDepotResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
         strongboxResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
-        return (board.viewCard(color, level).checkCardRequirements(totalPayment) && playerBoard.getSlots().get(slotNumber-1).validAction(board.viewCard(color, level)));
+        return (board.viewCard(color, level).checkCardRequirements(totalPayment) && playerBoard.getSlots().get(slotNumber).validAction(board.viewCard(color, level)));
     }
 
     /**
@@ -62,7 +62,7 @@ public class BuyDevelopmentCard extends Actions {
             } catch (InsufficientResourcesException | CantPayException e) {
                 throw new InvalidActionException();
             }
-            playerBoard.getSlots().get(slotNumber-1).addCardOnTop(board.buyCard(color, level), playerBoard);
+            playerBoard.getSlots().get(slotNumber).addCardOnTop(board.buyCard(color, level), playerBoard);
         }
     }
 }

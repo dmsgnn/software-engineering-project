@@ -4,17 +4,16 @@ import it.polimi.ingsw.model.actions.Actions;
 import it.polimi.ingsw.model.exceptions.*;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
-import javax.naming.InsufficientResourcesException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PlayLeaderCard extends Actions {
     private final LeaderCard leaderCard;
-    private HashMap<Resource, Integer> warehouseDepotResources;
-    private HashMap<Resource, Integer> strongboxResources;
-    private HashMap<Resource, Integer> cardDepotResources;
-    private ArrayList<LeaderCard> cardsHand;
+    private final HashMap<Resource, Integer> warehouseDepotResources;
+    private final HashMap<Resource, Integer> strongboxResources;
+    private final HashMap<Resource, Integer> cardDepotResources;
+    private final ArrayList<LeaderCard> cardsHand;
 
     public PlayLeaderCard(ArrayList<LeaderCard> cardsHand, LeaderCard leaderCard, HashMap<Resource, Integer> warehouseDepotResources, HashMap<Resource, Integer> strongboxResources, HashMap<Resource, Integer> cardDepotResources) {
         this.cardsHand = cardsHand;
@@ -29,12 +28,9 @@ public class PlayLeaderCard extends Actions {
     public void doAction(PlayerBoard playerBoard) throws InvalidActionException {
        if (!validAction(playerBoard)) throw new InvalidActionException();
        else{
-           try {
-               payResources(playerBoard,warehouseDepotResources,cardDepotResources,strongboxResources);
-               playLeaderCard(playerBoard);
-           } catch (CantPayException | InsufficientResourcesException e) {
-               throw new InvalidActionException();
-           }
+           //payResources(playerBoard,warehouseDepotResources,cardDepotResources,strongboxResources);
+           playLeaderCard(playerBoard);
+
        }
 
     }
@@ -45,9 +41,10 @@ public class PlayLeaderCard extends Actions {
         for (LeaderCard card : cardsHand) {
             if (card.equals(leaderCard)) {
                 check = true;
+                break;
             }
         }
-        if (check == false) return false;
+        if (!check) return false;
         // checks that the received resources are the same of the cost of the card that the player wants to buy
         if (!leaderCard.getRequirements().IsColor()) {
             Map<Resource, Integer> totalPayment = new HashMap<>();
