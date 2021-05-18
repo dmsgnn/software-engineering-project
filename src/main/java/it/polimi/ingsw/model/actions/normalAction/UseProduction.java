@@ -82,6 +82,8 @@ public class UseProduction extends Actions {
 
     @Override
     public boolean validAction(PlayerBoard playerBoard){
+        if(leaderCardProdIndex.isEmpty() && developmentCardSlotIndex.isEmpty() && boardResources.isEmpty()) return false;
+        if(!boardResources.isEmpty() && boardResources.size()<3) return false;
         //checks if the the player gave the correct resources
         Map<Resource, Integer> totalPayment = new HashMap<>();
         for(Resource resource: Resource.values()){

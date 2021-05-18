@@ -4,6 +4,7 @@ import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.representations.ClientGameBoard;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.controller.Actions;
+import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.messages.clientToServer.*;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
@@ -114,12 +115,12 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
-     * called when the server sends a response message to the client, invokes UI method only if it's an error message
-     * @param message response message
+     * called when the server sends an error message to the client
+     * @param errorType error to manage
      */
-    public void responseMessage(String message){
+    public void errorManagement(Error errorType){
         synchronized (lock){
-            if(!message.toLowerCase(Locale.ROOT).equals("ok")) uiType.displayMessage(message);
+            uiType.manageError(errorType);
         }
     }
 
@@ -190,15 +191,25 @@ public class ClientView implements Observer<ServerMessage> {
 
     //------------------ACTIONS------------------
 
-
     /**
      * called to make the player decide what action he wants to perform
      * @param possibleActions list of the actions the player can choose from
      */
     public void pickAction(ArrayList<Actions> possibleActions){
-        Actions action = uiType.chooseAction(possibleActions);
-        socket.sendMessage(new ActionReply(action));
+        synchronized (lock){
+            Actions action = uiType.chooseAction(possibleActions);
+            socket.sendMessage(new ActionReply(action));
+        }
     }
+
+    /*public void setPossibleActions(ArrayList<Actions> possibleActions){
+        this.possibleActions=possibleActions;
+    }
+
+    public void selectAction(){
+        Actions action = uiType.chooseAction(this.possibleActions);
+        doAction(action);
+    }*/
 
     /**
      * called to make the player do the selected action
@@ -233,7 +244,6 @@ public class ClientView implements Observer<ServerMessage> {
      * called when the player ends his turn
      */
     public void endTurn(){
-        System.out.println("Waiting for other players...");
         //uiType.endTurn();
         socket.sendMessage(new EndTurn());
     }
@@ -450,8 +460,6 @@ public class ClientView implements Observer<ServerMessage> {
                 if (playerBoard.getPlayerNickname().equals(nickname)) {
                     playerBoard.removeHandCard(id);
                     playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
-                    System.out.println(playerBoard.getHand());
-                    System.out.println(playerBoard.getPlayedCards());
                     playerBoard.setWarehouse(warehouse);
                     playerBoard.setStrongbox(strongbox);
                 }

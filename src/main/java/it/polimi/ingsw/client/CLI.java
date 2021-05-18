@@ -4,16 +4,15 @@ import it.polimi.ingsw.client.representations.ClientGameBoard;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.controller.Actions;
+import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
+import it.polimi.ingsw.model.leadercard.Requirements.ResourceRequirements;
 import it.polimi.ingsw.utility.DevCardsParserXML;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
 import static java.lang.System.exit;
@@ -143,8 +142,25 @@ public class CLI implements UserInterface{
     }
 
     @Override
-    public void displayMessage(String message) {
-        System.out.println(message);
+    public void manageError(Error errorType) {
+        switch (errorType){
+            case STARTING_RESOURCES:
+                System.out.println("Wrong amount of starting resources!!!\n");
+                break;
+            case STARTING_LEADER_CARD:
+                System.out.println("Wrong cards selected!!!\n");
+                break;
+            case STARTING_MANAGE_RESOURCES:
+                System.out.println("Wrong starting resources placement!!!\n");
+                break;
+            case INVALID_ACTION:
+                System.out.println("Invalid action!!\n");
+                //clientView.selectAction();
+                break;
+            case MANAGE_RESOURCES:
+                System.out.println("Wrong resources management!!!\n");
+                break;
+        }
     }
 
     @Override
@@ -167,17 +183,20 @@ public class CLI implements UserInterface{
 
     @Override
     public void endTurn() {
+        System.out.println("Waiting for other players...");
         myTurn=false;
         Thread t = new Thread(() -> {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            String input = null;
-            while (!myTurn){
-                try {
-                    input = reader.readLine();
-                } catch (IOException e) {
-                    //e.printStackTrace();
+            //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            Scanner reader = new Scanner(System.in);
+            String input;
+            while (true){
+                input = reader.nextLine();
+                if(!myTurn){
+                    System.out.println(input);
                 }
-                System.out.println(input);
+                else{
+                    chooseAction(clientView.getPossibleActions());
+                }
             }
         });
         t.start();
@@ -579,9 +598,9 @@ public class CLI implements UserInterface{
         String cardId = null;
         boolean done = false;
         ArrayList<String> hand = gameboard.getOnePlayerBoard(clientView.getNickname()).getHand();
-        HashMap<Resource, Integer> warehouse;
-        HashMap<Resource, Integer> leaderDepot;
-        HashMap<Resource, Integer> strongbox;
+        HashMap<Resource, Integer> warehouse = new HashMap<>();
+        HashMap<Resource, Integer> leaderDepot = new HashMap<>();
+        HashMap<Resource, Integer> strongbox = new HashMap<>();
 
         do {
             System.out.print("Choose what card you want to play: ");
@@ -594,12 +613,12 @@ public class CLI implements UserInterface{
             else System.out.println("Wrong ID");
         } while(!done);
 
-        System.out.println("Select what resources you want to pay: ");
-
-        warehouse = warehousePayment();
-        leaderDepot = leaderdepotPayment();
-        strongbox = strongboxPayment();
-
+        if(Objects.requireNonNull(findLeaderCard(cardId)).getRequirements() instanceof ResourceRequirements){
+            System.out.println("Select what resources you want to pay: ");
+            warehouse = warehousePayment();
+            leaderDepot = leaderdepotPayment();
+            strongbox = strongboxPayment();
+        }
 
         clientView.playLeaderCard(cardId, warehouse, leaderDepot, strongbox);
     }

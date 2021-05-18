@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.controller.Actions;
+import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.ArrayList;
@@ -31,9 +32,9 @@ public interface UserInterface {
 
     /**
      * called to display the error message to the player
-     * @param message contains the error message
+     * @param errorType contains the error message
      */
-    void displayMessage(String message);
+    void manageError(Error errorType);
 
     /**
      * Manages a winning player
