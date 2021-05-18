@@ -34,7 +34,6 @@ import java.util.concurrent.TimeUnit;
 public class Controller implements Observer<ClientMessage> {
 
     private final Game game;
-
     private final ArrayList<String> nicknames;
     private final ArrayList<ServerView> serverViews;
     private final Map<String,ArrayList<LeaderCard>> startingLeaderCards;
@@ -46,14 +45,19 @@ public class Controller implements Observer<ClientMessage> {
     private int playerCounter=0;
     private int currentServerView =0;
     private int currentActivePlayer =0;
+    // ACTION TOOLS
     private final Map<Integer,Boolean> numOfActions;
     private final Map<Integer,Actions> currentAction;
+    // MARKET ACTION TOOLS
     private ArrayList<Resource> resourceArrayList;
     private ArrayList<MarbleColors> marbleColorsArrayList;
     private int marketIndex;
     private boolean isRowOrColumn;
+    // FAITH TOOLS
     private int numOfVaticanReport;
     private final Map<String,Integer> faithPositions;
+    private final Map<String,Integer> startingResources;
+    private int resourceCounter;
 
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
@@ -94,9 +98,19 @@ public class Controller implements Observer<ClientMessage> {
         numOfVaticanReport = game.getNumVaticanReports();
         faithPositions = new HashMap<String,Integer>(){{
             for (int i = 0; i < playersNumber; i++) {
-              put(game.getPlayers(i).getNickname(),0);
+                String name = game.getPlayers(i).getNickname();
+              put(name,0);
             }
         }};
+
+        //PARAMETERS FOR STARTING RESOURCES
+        this.startingResources = new HashMap<String,Integer>(){{
+            for (int i = 0; i < playersNumber; i++) {
+                String name = game.getPlayers(i).getNickname();
+                put(name,0);
+            }
+        }};
+        this.resourceCounter=0;
 
     }
 
@@ -193,31 +207,35 @@ public class Controller implements Observer<ClientMessage> {
      */
     public synchronized void sendStartingResource(String username) {
         int i;
-        for (i=0; i< game.getPlayersNumber();i++){
-            if (game.getPlayers(i).getNickname().equals(username) ) break;
+        int number = game.getPlayersNumber();
+        for (i=0; i< number;i++){
+            String name = game.getPlayers(i).getNickname();
+            if (name.equals(username) ) break;
         }
         switch (i) {
             case 0: {
-                Objects.requireNonNull(getServerView(username)).startingResourceMessage(0);
+                startingResources.put(username,0);
+                sendStartingCounter();
                 break;
 
             }
             case 1: {
-                Objects.requireNonNull(getServerView(username)).startingResourceMessage(1);
+                startingResources.put(username,1);
+                sendStartingCounter();
                 break;
             }
             case 2: {
                 game.getActivePlayer().getFaithTrack().increasePosition();
                 faithPositions.put(game.getActivePlayer().getNickname(),1);
-                faithTrackMessage();
-                Objects.requireNonNull(getServerView(username)).startingResourceMessage(1);
+                startingResources.put(username,1);
+                sendStartingCounter();
                 break;
             }
             case 3: {
                 game.getActivePlayer().getFaithTrack().increasePosition();
                 faithPositions.put(game.getActivePlayer().getNickname(),1);
-                faithTrackMessage();
-                Objects.requireNonNull(getServerView(username)).startingResourceMessage(2);
+                startingResources.put(username,2);
+                sendStartingCounter();
                 break;
             }
             default:{
@@ -226,6 +244,20 @@ public class Controller implements Observer<ClientMessage> {
             }
         }
 
+    }
+
+    private void sendStartingCounter(){
+        resourceCounter++;
+        if (resourceCounter==playersNumber){
+            faithTrackMessage();
+            for (int i = 0; i < startingResources.size(); i++) {
+                String name = game.getPlayers(i).getNickname();
+                ServerView serverView = getServerView(name);
+                assert serverView != null;
+                int number= startingResources.get(name);
+                Objects.requireNonNull(serverView).startingResourceMessage(number);
+            }
+        }
     }
 
 
@@ -573,11 +605,17 @@ public class Controller implements Observer<ClientMessage> {
     private void doActionMarketAction(MarketAction marketAction, ArrayList<Resource> resources, int index, boolean isRow){
         try {
             //DO ACTION
+            int currentPoints = game.getActivePlayer().getFaithTrack().getPosition();
+            String name = game.getActivePlayer().getNickname();
             ArrayList<Marbles> marbles = marketAction.getMarbles();
             game.doAction(marketAction);
             //TAKE THE ARRAY OF MARBLES COLORS
             for (Marbles marble : marbles) {
                 marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
+            }
+            if (currentPoints != game.getActivePlayer().getFaithTrack().getPosition()){
+                currentPoints = game.getActivePlayer().getFaithTrack().getPosition();
+                faithPositions.put(name,currentPoints);
             }
             Map<Resource, Integer> temp1 = new HashMap<>(temp);
             int count;
@@ -630,11 +668,10 @@ public class Controller implements Observer<ClientMessage> {
                 //UPDATE
                 String nickname = game.getActivePlayer().getNickname();
                 Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(nickname);
-
+                faithTrackMessage();
                 for (ServerView serverView: serverViews) {
                     serverView.sendMarketActionUpdate(nickname, warehouse, marbleColorsArrayList, getFreeMarble(), marketIndex, isRowOrColumn);
                 }
-                faithTrackMessage();
                 marbleColorsArrayList=null;
                 TimeUnit.SECONDS.sleep(1);
                 //SEND POSSIBLE ACTIONS
@@ -708,19 +745,24 @@ public class Controller implements Observer<ClientMessage> {
                               ArrayList<Resource> boardGain, ArrayList<Resource> leaderGain, ArrayList<Integer> devSlotIndex, ArrayList<Integer> leaderCardProdIndex  ){
         if (currentAction.get(currentActivePlayer)==Actions.USEPRODUCTION) {
             UseProduction useProduction = new UseProduction(devSlotIndex, leaderCardProdIndex, leaderGain, boardGain, warehouseDepotRes, cardDepotRes, strongboxRes);
+            int currentPoints = game.getActivePlayer().getFaithTrack().getPosition();
+            String name = game.getActivePlayer().getNickname();
             try {
                 //DO ACTION
                 game.doAction(useProduction);
                 //RESET CURRENT ACTION TO NULL
-                faithTrackMessage();
                 currentAction.put(currentActivePlayer,null);
                 //UPDATE
-                String username  = game.getActivePlayer().getNickname();
-                Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(username);
-                Map<Resource,Integer> strongbox = getStrongbox().get(username);
+                if (currentPoints != game.getActivePlayer().getFaithTrack().getPosition()){
+                    currentPoints = game.getActivePlayer().getFaithTrack().getPosition();
+                    faithPositions.put(name,currentPoints);
+                }
+                faithTrackMessage();
+                Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(name);
+                Map<Resource,Integer> strongbox = getStrongbox().get(name);
                 faithTrackMessage();
                 for (ServerView serverView: serverViews){
-                    serverView.sendUseProductionUpdate(username,warehouse,strongbox);
+                    serverView.sendUseProductionUpdate(name,warehouse,strongbox);
                 }
                 TimeUnit.SECONDS.sleep(1);
                 //SEND POSSIBLE ACTION
