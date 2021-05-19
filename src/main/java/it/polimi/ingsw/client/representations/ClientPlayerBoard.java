@@ -34,9 +34,6 @@ public class ClientPlayerBoard {
         for(Resource rss: Resource.values()){
             strongbox.put(rss, 0);
         }
-        vaticanReports.put(8, false);
-        vaticanReports.put(16, false);
-        vaticanReports.put(24, false);
     }
 
     public boolean isDepotEmpty(int depot){
@@ -127,8 +124,8 @@ public class ClientPlayerBoard {
         this.playedCards = playedCards;
     }
 
-    public void setVaticanReports(Integer pos) {
-        this.vaticanReports.put(pos, true);
+    public void setVaticanReports(Integer pos, Boolean activated) {
+        this.vaticanReports.put(pos, activated);
     }
 
     public void removeHandCard(String id){

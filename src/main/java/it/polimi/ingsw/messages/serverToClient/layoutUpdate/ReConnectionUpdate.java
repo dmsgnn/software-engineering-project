@@ -13,7 +13,7 @@ public class ReConnectionUpdate implements ServerMessage {
     private final Map<String, ArrayList<String>> devCardSlots;
     private final Map<String,Integer> faithPositions;
     private final Map<String,ArrayList<String>> leaderCardsPlayed;
-    private final ArrayList<String> LeaderCards;
+    private final ArrayList<String> leaderCards;
     private final Map<String,Map<Resource, Integer>> strongbox;
     private final Map<String,Map<Integer,ArrayList<Resource>>> warehouse;
 
@@ -25,14 +25,14 @@ public class ReConnectionUpdate implements ServerMessage {
         this.devCardSlots = devCardSlots;
         this.faithPositions = faithPositions;
         this.leaderCardsPlayed = leaderCardsPlayed;
-        LeaderCards = leaderCards;
+        this.leaderCards = leaderCards;
         this.strongbox = strongbox;
         this.warehouse = warehouse;
     }
 
     @Override
     public void handleMessage(ClientView clientView) {
-
+        clientView.reconnectionUpdate(devCardSlots, faithPositions, leaderCardsPlayed, leaderCards, strongbox, warehouse);
     }
 
     @Override

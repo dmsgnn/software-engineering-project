@@ -13,6 +13,9 @@ import it.polimi.ingsw.model.leadercard.Requirements.ResourceRequirements;
 import it.polimi.ingsw.utility.DevCardsParserXML;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 import static java.lang.System.exit;
@@ -26,8 +29,6 @@ public class CLI implements UserInterface{
     private boolean myTurn=false;
 
     Scanner scanner = new Scanner(System.in);
-
-    private final Object lock = new Object();
 
     /**
      * utility method to get the selected card level
@@ -186,16 +187,18 @@ public class CLI implements UserInterface{
         System.out.println("Waiting for other players...");
         myTurn=false;
         Thread t = new Thread(() -> {
-            //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            Scanner reader = new Scanner(System.in);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String input;
-            while (true){
-                input = reader.nextLine();
-                if(!myTurn){
-                    System.out.println(input);
-                }
-                else{
-                    chooseAction(clientView.getPossibleActions());
+            
+            while (!myTurn){
+                try {
+                    if(reader.ready()){
+                        input = reader.readLine();
+                        System.out.println(input);
+                    }
+                    else Thread.sleep(1000);
+                } catch (IOException | InterruptedException e) {
+                    //e.printStackTrace();
                 }
             }
         });
@@ -618,6 +621,13 @@ public class CLI implements UserInterface{
             warehouse = warehousePayment();
             leaderDepot = leaderdepotPayment();
             strongbox = strongboxPayment();
+        }
+        else{
+            for(Resource rss : Resource.values()){
+                warehouse.put(rss, 0);
+                leaderDepot.put(rss, 0);
+                strongbox.put(rss, 0);
+            }
         }
 
         clientView.playLeaderCard(cardId, warehouse, leaderDepot, strongbox);

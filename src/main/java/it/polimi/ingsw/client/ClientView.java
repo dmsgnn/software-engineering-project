@@ -27,7 +27,6 @@ public class ClientView implements Observer<ServerMessage> {
     private final ClientGameBoard gameboard;
 
     private boolean myTurn;
-    private String currentPlayer;
     private ArrayList<Actions> possibleActions = new ArrayList<>();
 
     private final Object lock = new Object();
@@ -244,7 +243,7 @@ public class ClientView implements Observer<ServerMessage> {
      * called when the player ends his turn
      */
     public void endTurn(){
-        //uiType.endTurn();
+        uiType.endTurn();
         socket.sendMessage(new EndTurn());
     }
 
@@ -365,6 +364,8 @@ public class ClientView implements Observer<ServerMessage> {
             ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource,
             Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse){
         synchronized (lock) {
+            ArrayList<String> players = new ArrayList<>(devCardSlots.keySet());
+            gameboard.addPlayers(players);
             for (String nickname : devCardSlots.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setDevCardSlot(devCardSlots.get(nickname));
             }
@@ -395,10 +396,8 @@ public class ClientView implements Observer<ServerMessage> {
         synchronized (lock) {
             for (String nickname : position.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
-            }
-            if (report) {
-                for (String nickname : vaticanPosition.keySet()) {
-                   gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname));
+                if (report) {
+                    gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname), vaticanPosition.containsKey(nickname));
                 }
             }
         }

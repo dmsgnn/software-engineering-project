@@ -838,7 +838,7 @@ public class Controller implements Observer<ClientMessage> {
             ArrayList<String> playerCards = new ArrayList<>();
             for (int j=0;j<game.getActivePlayer().getPlayerBoard().getSlots().size();j++){
                 if (game.getActivePlayer().getPlayerBoard().getSlots().get(j).lookTop()==null){
-                    playerCards.add(j,"null");
+                    playerCards.add(j,null);
                 }
                 else{
                     playerCards.add(j,game.getActivePlayer().getPlayerBoard().getSlots().get(j).lookTop().getId());
