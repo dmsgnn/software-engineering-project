@@ -1009,7 +1009,7 @@ public class CLI implements UserInterface{
             if (board.getVaticanReports().get(8))
                 playerboard.append(ColorCLI.GREEN).append("2").append(ColorCLI.RESET);
             else
-                playerboard.append(ColorCLI.RED).append("2").append(ColorCLI.RESET);
+                playerboard.append(ColorCLI.RED).append("3").append(ColorCLI.RESET);
         }
         else {
             playerboard.append(ColorCLI.RESET).append("2");
@@ -1017,12 +1017,12 @@ public class CLI implements UserInterface{
         playerboard.append("|           |");
         if(board.getVaticanReports().containsKey(16)) {
             if (board.getVaticanReports().get(16))
-                playerboard.append(ColorCLI.GREEN).append("2").append(ColorCLI.RESET);
+                playerboard.append(ColorCLI.GREEN).append("3").append(ColorCLI.RESET);
             else
                 playerboard.append(ColorCLI.RED).append("2").append(ColorCLI.RESET);
         }
         else {
-            playerboard.append(ColorCLI.RESET).append("2");
+            playerboard.append(ColorCLI.RESET).append("3");
         }
         playerboard.append(ColorCLI.RESET).append("|             |");
         if(board.getVaticanReports().containsKey(24)) {
@@ -1216,11 +1216,6 @@ public class CLI implements UserInterface{
             playerboard.append("  ");
         else
             playerboard.append("   ");
-        playerboard.append(board.getStrongbox().get(Resource.STONES));
-        if(board.getStrongbox().get(Resource.STONES)>9)
-            playerboard.append("  ");
-        else
-            playerboard.append("   ");
         playerboard.append(board.getStrongbox().get(Resource.SHIELDS));
         if(board.getStrongbox().get(Resource.SHIELDS)>9)
             playerboard.append("  ");
@@ -1228,6 +1223,11 @@ public class CLI implements UserInterface{
             playerboard.append("   ");
         playerboard.append(board.getStrongbox().get(Resource.SERVANTS));
         if(board.getStrongbox().get(Resource.SERVANTS)>9)
+            playerboard.append("  ");
+        else
+            playerboard.append("   ");
+        playerboard.append(board.getStrongbox().get(Resource.STONES));
+        if(board.getStrongbox().get(Resource.STONES)>9)
             playerboard.append("  ");
         else
             playerboard.append("   ");

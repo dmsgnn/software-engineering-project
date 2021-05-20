@@ -12,8 +12,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-
-import static java.lang.System.exit;
+import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ServerSocketHandler extends Observable<ClientMessage> implements Runnable{
     private static final Object lock = new Object();
@@ -31,6 +33,10 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
     private int messageCounter;
 
     private PingManager sender;
+
+    public PingManager getSender() {
+        return sender;
+    }
 
     public Lobby getLobby() {
         return lobby;
@@ -124,14 +130,19 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
      */
     private void login(LoginMessage message) throws InterruptedException, IOException {
         synchronized (lock) {
-                while(server.getLobbies().size() > 0 && server.getLobbies().get(server.getLobbies().size()-1).getPlayerGameNumber() == 0) {
-                    try {
-                        lock.wait();
-                    } catch (InterruptedException e) {
-                        e.getMessage();
-                    }
+            while(server.getLobbies().size() > 0 && server.getLobbies().get(server.getLobbies().size()-1).getPlayerGameNumber() == 0) {
+                try {
+                    System.out.println(message.getUsername() + "va in wait");
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.getMessage();
                 }
-                server.loginUser(message.getUsername(), this);
+            }
+            if(getSender().isStopPing()){
+                this.sender = new PingManager(this);
+                startPing();
+            }
+            server.loginUser(message.getUsername(), this);
         }
     }
 
@@ -143,6 +154,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
      * @param lob is the lobby from the client is disconnected
      */
     protected void disconnect(Lobby lob) {
+
         synchronized (lock) {
             if(lobby.isGameStarted()) {
                 //this part must be modified if persistence FA
@@ -156,6 +168,8 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
             else {
                 server.disconnect(this, lob);
             }
+            if(server.getLobbies().size() == 0 || server.getLobbies().get(server.getLobbies().size()-1).isFull())
+                lock.notifyAll();
         }
     }
 

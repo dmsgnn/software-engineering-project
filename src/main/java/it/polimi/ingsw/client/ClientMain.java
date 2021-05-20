@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.gui.GUI;
+
 public class ClientMain {
     public static void main(String []args) {
         //needed to know if the user wants to play with the cli or gui interface
@@ -27,10 +29,18 @@ public class ClientMain {
         System.out.println("port number: " + port);
 
         //ui initialization
-        System.out.println("You're going to play with the CLI interface");
-        CLI cli = new CLI();
-        ClientView clientView = new ClientView(ip, port, cli);
-        cli.setClientView(clientView);
-        cli.begin();
+        //if(ui.equals("cli")) {
+            System.out.println("You're going to play with the CLI interface");
+            CLI cli = new CLI();
+            ClientView clientView = new ClientView(ip, port, cli);
+            cli.setClientView(clientView);
+            cli.begin();
+        //}
+        /*else{
+            System.out.println("You're going to play with the GUI interface");
+            GUI gui = new GUI();
+            ClientView clientView = new ClientView(ip, port, gui);
+
+        }*/
     }
 }

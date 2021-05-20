@@ -848,7 +848,6 @@ public class Controller implements Observer<ClientMessage> {
             currentAction.put(currentActivePlayer,null);
             endTurn();
         }
-        playersDisconnected.add(0,username);
     }
 
     /**
@@ -857,6 +856,7 @@ public class Controller implements Observer<ClientMessage> {
      */
     public synchronized void playerReconnection(ServerView serverView){
         int i;
+        playersDisconnected.remove(serverView.getUsername());
         String username = serverView.getUsername();
         for (i = 0; i < serverViews.size(); i++) {
             if (serverViews.get(i).getUsername().equals(username)){

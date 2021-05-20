@@ -100,7 +100,7 @@ public abstract class FaithTrack {
         else if(game.getNumVaticanReports() == 2){
             for(int i=0; i<game.getPlayersNumber(); i++){
                 if(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() > 11 && game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() < 17)
-                    game.getPlayers(i).getPlayerBoard().getFaithTrack().increaseVictoryPoints(2);
+                    game.getPlayers(i).getPlayerBoard().getFaithTrack().increaseVictoryPoints(3);
             }
         }
         else if(game.getNumVaticanReports() == 3){

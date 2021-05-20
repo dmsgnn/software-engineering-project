@@ -66,6 +66,7 @@ public class ServerMain {
                 assert clientSocket != null;
                 ServerSocketHandler connection = new ServerSocketHandler(clientSocket, this);
                 executor.submit(connection);
+                connection.startPing();
                 connection.sendMessage(new Welcome());
             }
         } catch (Exception e) {
@@ -106,6 +107,10 @@ public class ServerMain {
      * @param connection is the socket connection
      */
     public synchronized void loginUser(String username, ServerSocketHandler connection) {
+        if(connection.getSender().isStopPing()){
+            System.out.print("User " + username + " can't do the login because he left");
+            return;
+        }
         if(takenUsernames.contains(username)){
             System.out.print("Username " + username + " already taken");
             connection.sendMessage(new UsernameResponse(false, null, takenUsernames));
@@ -120,6 +125,7 @@ public class ServerMain {
             lob.getLoggedPlayers().put(connection, username);
             disconnectedUsers.remove(username);
             lob.reConnection(username, connection);
+            connection.setLobby(lob);
             return;
         }
 
@@ -159,7 +165,8 @@ public class ServerMain {
             System.out.println(username+" l'ultima lobby era piena e ne creo una nuova");
 
         }
-        connection.startPing();
+        //spostato a riga 67
+        //connection.startPing();
     }
 
     /**

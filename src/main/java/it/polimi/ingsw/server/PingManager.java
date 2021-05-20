@@ -21,6 +21,10 @@ public class PingManager implements Observer<ClientMessage>{
         stopPing = false;
     }
 
+    public boolean isStopPing() {
+        return stopPing;
+    }
+
     public void setPing(boolean ping) {
         this.ping = ping;
     }
@@ -41,7 +45,9 @@ public class PingManager implements Observer<ClientMessage>{
                 } else {
                     pinger.cancel();
                     stopPing = true;
-                    connection.disconnect(connection.getLobby());
+                    if(connection.getLobby()!=null) {
+                        connection.disconnect(connection.getLobby());
+                    }
                 }
             }
         };
