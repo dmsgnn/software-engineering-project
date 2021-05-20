@@ -313,6 +313,8 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
+                    Objects.requireNonNull(serverView).startingResourceOk();
+
                 }
                 break;
             }
@@ -323,6 +325,7 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
+                    Objects.requireNonNull(serverView).startingResourceOk();
                 }
                 break;
             }
@@ -659,6 +662,7 @@ public class Controller implements Observer<ClientMessage> {
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
             currentAction.put(currentActivePlayer, null);
+            numOfActions.put(currentActivePlayer,false);
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
         }
     }
@@ -752,6 +756,7 @@ public class Controller implements Observer<ClientMessage> {
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException | InterruptedException e) {
                 serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
                 currentAction.put(currentActivePlayer, null);
+                numOfActions.put(currentActivePlayer,false);
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
             }
         }
@@ -795,6 +800,7 @@ public class Controller implements Observer<ClientMessage> {
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException | InterruptedException e) {
                 serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
                 currentAction.put(currentActivePlayer, null);
+                numOfActions.put(currentActivePlayer,false);
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
             }
         }
