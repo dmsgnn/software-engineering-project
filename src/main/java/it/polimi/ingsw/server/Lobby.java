@@ -110,7 +110,7 @@ public class Lobby {
      * used when to communicate to the controller that a player has been disconnected from the game
      */
     public void disconnectedPlayer(String username){
-        //controller.playerDisconnection(username);
+        controller.playerDisconnection(username);
     }
 
     /**

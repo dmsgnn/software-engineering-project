@@ -70,12 +70,12 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage(new DevCardGrid(devCardGrid));
     }
 
-    public void sendReconnectionMessage(Map<String, ArrayList<String>> devCardSlots, Map<String, Integer> faithPositions,
+    public void sendReconnectionMessage(String username, Map<String, ArrayList<String>> devCardSlots, Map<String, Integer> faithPositions,
                                         Map<String, ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards,
                                         Map<String, Map<Resource, Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse) {
 
 
-        sendMessage(new ReConnectionUpdate(devCardSlots,faithPositions,leaderCardsPlayed,leaderCards,strongbox,warehouse));
+        sendMessage(new ReConnectionUpdate(username, devCardSlots,faithPositions,leaderCardsPlayed,leaderCards,strongbox,warehouse));
 
 
     }
@@ -140,6 +140,15 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
 
     public String getUsername() {
         return playerName;
+    }
+
+    public void leaderCardSetupOk() {
+        sendMessage(new LeaderCardSetupDone());
+    }
+
+
+    public void startingResourceOk() {
+        sendMessage(new StartingResourceDone());
     }
 
 

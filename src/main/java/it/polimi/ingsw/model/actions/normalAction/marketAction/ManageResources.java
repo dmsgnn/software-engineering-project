@@ -50,8 +50,8 @@ public class ManageResources extends Actions {
     @Override
     public boolean validAction(PlayerBoard playerBoard) {
         if (!initial) {
-            Map<Resource, Integer> totalRes = new HashMap<Resource,Integer>();
-            Map<Resource,Integer> stored = new HashMap<>();
+            Map<Resource, Integer> totalRes = new HashMap<>();
+            Map<Resource,Integer> stored;
             stored = playerBoard.getWarehouse().storedResources();
             for (Resource resource : Resource.values()) {
                 totalRes.put(resource, stored.get(resource) + newResources.get(resource));

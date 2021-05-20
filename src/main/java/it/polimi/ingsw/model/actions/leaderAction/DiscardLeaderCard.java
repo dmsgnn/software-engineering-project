@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class DiscardLeaderCard extends Actions {
     private final LeaderCard leaderCard;
-    private ArrayList<LeaderCard> cardsHand;
-    private FaithTrack faithTrack;
+    private final ArrayList<LeaderCard> cardsHand;
+    private final FaithTrack faithTrack;
 
     public DiscardLeaderCard(LeaderCard leaderCard, ArrayList<LeaderCard> cards,FaithTrack faithTrack) {
         this.leaderCard = leaderCard;

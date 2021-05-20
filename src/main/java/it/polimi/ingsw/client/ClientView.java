@@ -353,6 +353,7 @@ public class ClientView implements Observer<ServerMessage> {
 
     /**
      * called after a player reconnects to the game, the parameters contains all the informations regarding the game
+     * @param username
      * @param devCardSlots all dev cards bought by all the player
      * @param faithPositions all player's faith track position
      * @param leaderCardsPlayed all leader cards played by all player
@@ -360,7 +361,7 @@ public class ClientView implements Observer<ServerMessage> {
      * @param strongbox every strongbox
      * @param warehouse every warehouse
      */
-    public void reconnectionUpdate(Map<String, ArrayList<String>> devCardSlots, Map<String,Integer> faithPositions, Map<String,
+    public void reconnectionUpdate(String username, Map<String, ArrayList<String>> devCardSlots, Map<String, Integer> faithPositions, Map<String,
             ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource,
             Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse){
         synchronized (lock) {

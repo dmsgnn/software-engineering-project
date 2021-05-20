@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class ReConnectionUpdate implements ServerMessage {
 
+    private final String username;
     private final Map<String, ArrayList<String>> devCardSlots;
     private final Map<String,Integer> faithPositions;
     private final Map<String,ArrayList<String>> leaderCardsPlayed;
@@ -18,10 +19,11 @@ public class ReConnectionUpdate implements ServerMessage {
     private final Map<String,Map<Integer,ArrayList<Resource>>> warehouse;
 
 
-    public ReConnectionUpdate(Map<String, ArrayList<String>> devCardSlots, Map<String,
+    public ReConnectionUpdate(String username, Map<String, ArrayList<String>> devCardSlots, Map<String,
             Integer> faithPositions, Map<String, ArrayList<String>> leaderCardsPlayed,
                               ArrayList<String> leaderCards, Map<String, Map<Resource,
             Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse) {
+        this.username = username;
         this.devCardSlots = devCardSlots;
         this.faithPositions = faithPositions;
         this.leaderCardsPlayed = leaderCardsPlayed;
@@ -32,7 +34,7 @@ public class ReConnectionUpdate implements ServerMessage {
 
     @Override
     public void handleMessage(ClientView clientView) {
-        clientView.reconnectionUpdate(devCardSlots, faithPositions, leaderCardsPlayed, leaderCards, strongbox, warehouse);
+        clientView.reconnectionUpdate(username, devCardSlots, faithPositions, leaderCardsPlayed, leaderCards, strongbox, warehouse);
     }
 
     @Override

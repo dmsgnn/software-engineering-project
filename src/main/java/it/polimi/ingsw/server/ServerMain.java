@@ -63,6 +63,7 @@ public class ServerMain {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                assert clientSocket != null;
                 ServerSocketHandler connection = new ServerSocketHandler(clientSocket, this);
                 executor.submit(connection);
                 connection.sendMessage(new Welcome());
@@ -92,7 +93,7 @@ public class ServerMain {
         }
         l.getLoggedPlayers().clear();
         lobbies.remove(l);
-        System.out.println("Number of active games: " + lobbies.size());;
+        System.out.println("Number of active games: " + lobbies.size());
     }
 
 
