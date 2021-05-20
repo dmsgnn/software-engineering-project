@@ -26,7 +26,6 @@ public class ClientView implements Observer<ServerMessage> {
     private final int port;
     private final ClientGameBoard gameboard;
 
-    private boolean myTurn;
     private ArrayList<Actions> possibleActions = new ArrayList<>();
 
     private final Object lock = new Object();
@@ -177,6 +176,15 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
+     * called if the leadercard selection was correct
+     */
+    public void leaderCardsDone(){
+        synchronized (lock) {
+            uiType.endLeadercardSetup();
+        }
+    }
+
+    /**
      * called to make the player chose the starting resources
      * @param amount num of resources
      */
@@ -184,6 +192,15 @@ public class ClientView implements Observer<ServerMessage> {
         synchronized (lock) {
             Map<Integer, ArrayList<Resource>> warehouse = uiType.startingResources(amount);
             socket.sendMessage(new ResourcesReply(warehouse, nickname));
+        }
+    }
+
+    /**
+     * called if the starting resources selection was correct
+     */
+    public void startingResDone(){
+        synchronized (lock) {
+            uiType.endStartingResourcesSetup();
         }
     }
 
@@ -348,6 +365,7 @@ public class ClientView implements Observer<ServerMessage> {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithTracks.get(nickname));
             }
             uiType.updateBoard();
+            uiType.endTurn();
         }
     }
 
@@ -365,6 +383,7 @@ public class ClientView implements Observer<ServerMessage> {
             ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource,
             Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse){
         synchronized (lock) {
+            this.nickname=username;
             ArrayList<String> players = new ArrayList<>(devCardSlots.keySet());
             gameboard.addPlayers(players);
             for (String nickname : devCardSlots.keySet()) {
@@ -384,6 +403,7 @@ public class ClientView implements Observer<ServerMessage> {
                 gameboard.getOnePlayerBoard(nickname).setWarehouse(warehouse.get(nickname));
             }
             uiType.updateBoard();
+            uiType.endTurn();
         }
     }
 

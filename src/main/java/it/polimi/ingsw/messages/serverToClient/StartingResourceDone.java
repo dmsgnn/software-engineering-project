@@ -6,7 +6,7 @@ import it.polimi.ingsw.client.PingReceiver;
 public class StartingResourceDone implements ServerMessage{
     @Override
     public void handleMessage(ClientView clientView) {
-
+        clientView.startingResDone();
     }
 
     @Override

@@ -58,6 +58,16 @@ public interface UserInterface {
     void endTurn();
 
     /**
+     * called when the player has correctly selected his starting cards
+     */
+    void endLeadercardSetup();
+
+    /**
+     * called when the player has correctly selected his starting resources
+     */
+    void endStartingResourcesSetup();
+
+    /**
      * called to begin a game, it displays the necessary information to begin a game
      */
     void startGame();

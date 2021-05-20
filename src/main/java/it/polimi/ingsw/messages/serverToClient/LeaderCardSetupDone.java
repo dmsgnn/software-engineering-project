@@ -7,7 +7,7 @@ public class LeaderCardSetupDone implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) {
-
+        clientView.leaderCardsDone();
     }
 
     @Override

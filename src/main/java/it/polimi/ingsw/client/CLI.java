@@ -183,21 +183,37 @@ public class CLI implements UserInterface{
     }
 
     @Override
+    public void endLeadercardSetup() {
+        System.out.println("Correct leader card selection, waiting for other players...");
+        inputThread();
+    }
+
+    @Override
+    public void endStartingResourcesSetup() {
+        System.out.println("Correct starting resources selection, waiting for other players...");
+        inputThread();
+    }
+
+    @Override
     public void endTurn() {
         System.out.println("Waiting for other players...");
+        inputThread();
+    }
+
+    private void inputThread(){
         myTurn=false;
         Thread t = new Thread(() -> {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String input;
-            
+
             while (!myTurn){
                 try {
                     if(reader.ready()){
                         input = reader.readLine();
-                        System.out.println(input);
+                        System.out.println("Not your turn!");
                     }
-                    else Thread.sleep(1000);
-                } catch (IOException | InterruptedException e) {
+                    //else Thread.sleep(1000);
+                } catch (IOException e) {
                     //e.printStackTrace();
                 }
             }
@@ -233,6 +249,7 @@ public class CLI implements UserInterface{
 
     @Override
     public ArrayList<String> startingLeaderCardsSelection(ArrayList<String> leaderCardID) {
+        myTurn=true;
         ArrayList<String> pickedCards = new ArrayList<>();
         String input;
         StringBuilder builder = new StringBuilder();
@@ -277,6 +294,7 @@ public class CLI implements UserInterface{
 
     @Override
     public Map<Integer, ArrayList<Resource>> startingResources(int amount) {
+        myTurn=true;
         ArrayList<Resource> pickedResources = new ArrayList<>();
         String input;
         int counter=amount;
