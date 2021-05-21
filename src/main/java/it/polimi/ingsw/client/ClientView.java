@@ -487,7 +487,6 @@ public class ClientView implements Observer<ServerMessage> {
     public void useProductionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
-            System.out.println(strongbox);
             playerBoard.setWarehouse(warehouse);
             playerBoard.setStrongbox(strongbox);
             uiType.updateBoard();
