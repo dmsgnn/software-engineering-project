@@ -24,11 +24,18 @@ public class CLI implements UserInterface{
 
     ClientView clientView;
     ClientGameBoard gameboard;
-    ArrayList<DevelopmentCard> devCardList = new DevCardsParserXML().devCardsParser();
-    ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
-    private boolean myTurn=false;
+    ArrayList<DevelopmentCard> devCardList;
+    ArrayList<LeaderCard> leaderDeck;
+    private boolean myTurn;
 
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner;
+
+    public CLI(){
+        scanner = new Scanner(System.in);
+        devCardList = new DevCardsParserXML().devCardsParser();
+        leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
+        myTurn=false;
+    }
 
     /**
      * utility method to get the selected card level
@@ -498,7 +505,6 @@ public class CLI implements UserInterface{
                                         Resource resource = null;
                                         while(resource==null){
                                             System.out.print("Choose what resource you want to obtain: ");
-                                            System.out.print("Options: COINS, STONES, SERVANTS, SHIELDS");
                                             input = scanner.nextLine().toUpperCase();
                                             try {
                                                 resource = Resource.valueOf(input);
@@ -531,7 +537,6 @@ public class CLI implements UserInterface{
                 yesOrNo = "yes";
                 do {
                     System.out.print((picked<2) ? "Choose the resources you want to pay ": "Choose what resource you want to gain ");
-                    System.out.print("\nOptions: COINS, STONES, SERVANTS, SHIELDS: ");
                     input = scanner.nextLine().toUpperCase();
                     try {
                         Resource resource = Resource.valueOf(input);

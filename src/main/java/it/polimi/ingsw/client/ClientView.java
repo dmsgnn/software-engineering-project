@@ -371,7 +371,7 @@ public class ClientView implements Observer<ServerMessage> {
 
     /**
      * called after a player reconnects to the game, the parameters contains all the informations regarding the game
-     * @param username
+     * @param username of this client
      * @param devCardSlots all dev cards bought by all the player
      * @param faithPositions all player's faith track position
      * @param leaderCardsPlayed all leader cards played by all player
@@ -438,15 +438,11 @@ public class ClientView implements Observer<ServerMessage> {
     public void buyCardUpdate(String nickname, String id, int slot, String gridId, Color color, int level,
                               Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
-            for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
-                if (playerBoard.getPlayerNickname().equals(nickname)) {
-                    playerBoard.updateDevCardSlot(slot, id);
-                    playerBoard.setWarehouse(warehouse);
-                    playerBoard.setStrongbox(strongbox);
-                }
-            }
+            ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+            playerBoard.updateDevCardSlot(slot, id);
+            playerBoard.setWarehouse(warehouse);
+            playerBoard.setStrongbox(strongbox);
             gameboard.changeGridCard(gridId, color, level);
-
             uiType.updateBoard();
         }
     }
@@ -458,11 +454,8 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void discardLeaderCardUpdate(String nickname, String id){
         synchronized (lock) {
-            for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
-                if (playerBoard.getPlayerNickname().equals(nickname)) {
-                    playerBoard.removeHandCard(id);
-                }
-            }
+            ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+            playerBoard.removeHandCard(id);
             uiType.updateBoard();
         }
     }
@@ -476,14 +469,11 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void playLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
-            for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
-                if (playerBoard.getPlayerNickname().equals(nickname)) {
-                    playerBoard.removeHandCard(id);
-                    playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
-                    playerBoard.setWarehouse(warehouse);
-                    playerBoard.setStrongbox(strongbox);
-                }
-            }
+            ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+            playerBoard.removeHandCard(id);
+            playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
+            playerBoard.setWarehouse(warehouse);
+            playerBoard.setStrongbox(strongbox);
             uiType.updateBoard();
         }
     }
@@ -496,12 +486,9 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void useProductionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
-            for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
-                if (playerBoard.getPlayerNickname().equals(nickname)) {
-                    playerBoard.setWarehouse(warehouse);
-                    playerBoard.setStrongbox(strongbox);
-                }
-            }
+            ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+            playerBoard.setWarehouse(warehouse);
+            playerBoard.setStrongbox(strongbox);
             uiType.updateBoard();
         }
     }
@@ -518,11 +505,8 @@ public class ClientView implements Observer<ServerMessage> {
     public void marketActionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse,
                                    ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol){
         synchronized (lock) {
-            for (ClientPlayerBoard playerBoard : gameboard.getPlayerBoards()) {
-                if (playerBoard.getPlayerNickname().equals(nickname)) {
-                    playerBoard.setWarehouse(warehouse);
-                }
-            }
+            ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+            playerBoard.setWarehouse(warehouse);
             gameboard.updateMarket(newMarbles, newFreeMarble, pos, rowOrCol);
             uiType.updateBoard();
         }
