@@ -788,8 +788,8 @@ public class Controller implements Observer<ClientMessage> {
                     faithPositions.put(name,currentPoints);
                 }
                 faithTrackMessage();
-                Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(name);
-                Map<Resource,Integer> strongbox = getStrongbox().get(name);
+                Map<Integer,ArrayList<Resource>> warehouse = new HashMap<>(getWarehouse().get(name));
+                Map<Resource,Integer> strongbox = new HashMap<>(getStrongbox().get(name));
                 faithTrackMessage();
                 for (ServerView serverView: serverViews){
                     serverView.sendUseProductionUpdate(name,warehouse,strongbox);
