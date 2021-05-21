@@ -12,10 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Date;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class ServerSocketHandler extends Observable<ClientMessage> implements Runnable{
     private static final Object lock = new Object();
@@ -98,7 +94,6 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
                 in.close();
                 out.close();
             } catch (IOException ioException) {
-                System.out.println("prendo questo catch");
                 //ioException.printStackTrace();
             }
         }
@@ -132,7 +127,6 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
         synchronized (lock) {
             while(server.getLobbies().size() > 0 && server.getLobbies().get(server.getLobbies().size()-1).getPlayerGameNumber() == 0) {
                 try {
-                    System.out.println(message.getUsername() + "va in wait");
                     lock.wait();
                 } catch (InterruptedException e) {
                     e.getMessage();
@@ -142,6 +136,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
                 this.sender = new PingManager(this);
                 startPing();
             }
+
             server.loginUser(message.getUsername(), this);
         }
     }

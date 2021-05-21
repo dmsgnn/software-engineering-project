@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="CLI leader card and depot print implemented and server re-connection method">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/GUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/Login.fxml" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Multiple game start fix">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/graphics/loginBackground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/graphics/logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/faithTrack/FaithTrack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/faithTrack/FaithTrack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/PingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/PingManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerSocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerSocketHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/playerboard/FaithTrackTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/playerboard/FaithTrackTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +24,7 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -82,11 +79,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Nuova cartella/ing-sw-2020-AmbrosiniBarzaghi-Bonalumi-Cattaneo-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/graphics" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/graphics" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Windows\IdeaProjects\Prova\ingswAM2021-DallOglio-Demasi-Curti\src\main\resources" />
     </key>
@@ -123,6 +123,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <option name="PACKAGE_NAME" value="" />
@@ -131,32 +142,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CLITest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FaithTrackTest.increaseAllPositionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.model.playerboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.CLITest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.playerboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.playerboard.FaithTrackTest" />
+      <option name="METHOD_NAME" value="increaseAllPositionTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CLITest.CLITest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FaithTrackTest.vaticanReportActivationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.model.playerboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.CLITest" />
-      <option name="METHOD_NAME" value="CLITest" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.playerboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.playerboard.FaithTrackTest" />
+      <option name="METHOD_NAME" value="vaticanReportActivationTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -177,16 +189,16 @@
       <item itemvalue="Application.ClientMain" />
       <item itemvalue="JUnit.Gameboard" />
       <item itemvalue="JUnit.All in AM5" />
-      <item itemvalue="JUnit.CLITest.CLITest" />
-      <item itemvalue="JUnit.CLITest" />
+      <item itemvalue="JUnit.FaithTrackTest.increaseAllPositionTest" />
+      <item itemvalue="JUnit.FaithTrackTest.vaticanReportActivationTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.ClientMain" />
         <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.All in AM5" />
-        <item itemvalue="JUnit.CLITest" />
-        <item itemvalue="JUnit.CLITest.CLITest" />
+        <item itemvalue="JUnit.FaithTrackTest.vaticanReportActivationTest" />
+        <item itemvalue="JUnit.FaithTrackTest.increaseAllPositionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -288,6 +300,8 @@
       <workItem from="1621434693707" duration="3314000" />
       <workItem from="1621512859914" duration="4803000" />
       <workItem from="1621537568097" duration="2579000" />
+      <workItem from="1621541447212" duration="3623000" />
+      <workItem from="1621582239793" duration="2224000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -534,7 +548,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621516192768</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Multiple game start fix">
+      <created>1621541555492</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1621541555492</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -553,7 +574,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Development Card parser update" />
     <MESSAGE value="Update of the controller and messages" />
     <MESSAGE value="Client and messages update" />
     <MESSAGE value="Client and update" />
@@ -578,7 +598,8 @@
     <MESSAGE value="update FaithMessage" />
     <MESSAGE value="UseProduction additional condition, Client update and Error management" />
     <MESSAGE value="faithmessage update&#10;&#10;upload all images to use&#10;&#10;modified the controller and reconnecting" />
-    <option name="LAST_COMMIT_MESSAGE" value="faithmessage update&#10;&#10;upload all images to use&#10;&#10;modified the controller and reconnecting" />
+    <MESSAGE value="Multiple game start fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Multiple game start fix" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

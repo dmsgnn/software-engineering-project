@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -8,17 +9,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #171717;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="220.0" layoutY="187.0" promptText="Username" />
-            <Button layoutX="276.0" layoutY="256.0" mnemonicParsing="false" text="Login" />
-            <Label layoutX="272.0" layoutY="103.0" text="Login" textFill="WHITE">
+            <ImageView>
+               <image>
+                  <Image url="@../graphics/loginBackground.png" />
+               </image>
+            </ImageView>
+            <TextField alignment="CENTER" layoutX="560.0" layoutY="500.0" prefHeight="50.0" prefWidth="280.0" promptText="Username" style="-fx-background-radius: 30;">
                <font>
-                  <Font size="24.0" />
+                  <Font name="SansSerif Regular" size="20.0" />
+               </font></TextField>
+            <Button layoutX="625.0" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Login">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
                </font>
-            </Label>
+               <effect>
+                  <ColorAdjust contrast="1.0" />
+               </effect></Button>
+            <ImageView fitHeight="630.0" fitWidth="810.0" layoutX="295.0" layoutY="-60.0">
+               <image>
+                  <Image url="@../graphics/logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </center>

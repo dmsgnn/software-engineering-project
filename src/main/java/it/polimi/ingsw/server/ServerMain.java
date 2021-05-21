@@ -165,8 +165,6 @@ public class ServerMain {
             System.out.println(username+" l'ultima lobby era piena e ne creo una nuova");
 
         }
-        //spostato a riga 67
-        //connection.startPing();
     }
 
     /**

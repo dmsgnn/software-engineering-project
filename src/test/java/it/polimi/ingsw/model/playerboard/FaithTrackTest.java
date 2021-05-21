@@ -73,8 +73,8 @@ public class FaithTrackTest {
         assertEquals(12, game.getPlayers(2).getPlayerBoard().getFaithTrack().getPosition());
         // checks every victory points, players number 1 and 2 gained some victory points
         assertEquals(0, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
-        assertEquals(4, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
-        assertEquals(2, game.getPlayers(2).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(5, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(3, game.getPlayers(2).getPlayerBoard().getFaithTrack().getVictoryPoints());
         // checks num of vatican report, two vatican reports activated
         assertEquals(2, game.getNumVaticanReports());
 
@@ -150,22 +150,22 @@ public class FaithTrackTest {
         game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(15);
         game.getPlayers(0).getPlayerBoard().getFaithTrack().increasePosition();
         assertEquals(2, game.getNumVaticanReports());
-        assertEquals(4, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(5, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
         assertEquals(0, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
         game.getPlayers(1).getPlayerBoard().getFaithTrack().setPosition(15);
         game.getPlayers(1).getPlayerBoard().getFaithTrack().increasePosition();
         assertEquals(2, game.getNumVaticanReports());
-        assertEquals(4, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(5, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
         assertEquals(0, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
         game.getPlayers(1).getPlayerBoard().getFaithTrack().setPosition(23);
         game.getPlayers(1).getPlayerBoard().getFaithTrack().increasePosition();
         assertEquals(3, game.getNumVaticanReports());
-        assertEquals(4, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(5, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
         assertEquals(24, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
         game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(23);
         game.getPlayers(0).getPlayerBoard().getFaithTrack().increasePosition();
         assertEquals(3, game.getNumVaticanReports());
-        assertEquals(24, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(25, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
         assertEquals(24, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
     }
 
