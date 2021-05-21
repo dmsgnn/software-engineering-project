@@ -1069,10 +1069,10 @@ public class Controller implements Observer<ClientMessage> {
 
 
     private ArrayList<MarbleColors> getRowOrColumn(int index, boolean isRow){
-        ArrayList<Marbles> marbles= new ArrayList<>();
+        ArrayList<Marbles> marbles;
         ArrayList<MarbleColors> resources = new ArrayList<>();
-        if (isRow)
-        marbles= game.getBoard().getMarketBoard().getOneRow(index);
+        if (isRow) marbles= game.getBoard().getMarketBoard().getOneRow(index);
+        else marbles= game.getBoard().getMarketBoard().getOneColumn(index);
         for (int i = 0; i < marbles.size(); i++) {
             resources.add(i,marbles.get(i).getColor());
         }
