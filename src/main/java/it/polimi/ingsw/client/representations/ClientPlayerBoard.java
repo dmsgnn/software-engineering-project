@@ -10,6 +10,7 @@ import java.util.Map;
 public class ClientPlayerBoard {
 
     private final String playerNickname;
+    private boolean connected;
     private ArrayList<String> hand = new ArrayList<>();
     private int handSize = 2;
 
@@ -28,6 +29,7 @@ public class ClientPlayerBoard {
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;
+        this.connected=true;
         for(int i=0; i<3; i++){
             warehouse.put(i, new ArrayList<>());
         }
@@ -53,6 +55,14 @@ public class ClientPlayerBoard {
             temp.addAll(warehouse.get(i));
         }
         return temp;
+    }
+
+    public boolean isConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
     }
 
     public String getPlayerNickname() {

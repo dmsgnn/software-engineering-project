@@ -25,6 +25,12 @@ public interface UserInterface {
     String failedLogin(ArrayList<String> usedNames);
 
     /**
+     * handles the disconnection of one player
+     * @param nickname of the player that disconnected
+     */
+    void handleDisconnection(String nickname);
+
+    /**
      * Manages a losing player
      * @param nickname Name of loser
      */

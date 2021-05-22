@@ -122,6 +122,14 @@ public class ClientView implements Observer<ServerMessage> {
         }
     }
 
+    /**
+     * called when one player disconnects from the game
+     * @param nickname of who is disconnected
+     */
+    public void playerDisconnection(String nickname){
+        gameboard.getOnePlayerBoard(nickname).setConnected(false);
+    }
+
     //------------------GAME SETUP------------------
 
     /**

@@ -28,6 +28,11 @@ public class GUI implements UserInterface {
     }
 
     @Override
+    public void handleDisconnection(String nickname) {
+
+    }
+
+    @Override
     public void loser(String nickname) {
 
     }

@@ -207,6 +207,14 @@ public class CLI implements UserInterface{
         inputThread();
     }
 
+    @Override
+    public void handleDisconnection(String nickname) {
+        System.out.println(nickname + " has disconnected from the game!");
+    }
+
+    /**
+     * reads player's input when it's not his turn
+     */
     private void inputThread(){
         myTurn=false;
         Thread t = new Thread(() -> {
@@ -219,8 +227,8 @@ public class CLI implements UserInterface{
                         input = reader.readLine();
                         System.out.println("Not your turn!");
                     }
-                    //else Thread.sleep(1000);
-                } catch (IOException e) {
+                    else Thread.sleep(500);
+                } catch (IOException | InterruptedException e) {
                     //e.printStackTrace();
                 }
             }
@@ -573,7 +581,7 @@ public class CLI implements UserInterface{
         HashMap<Resource, Integer> strongbox;
 
         do {
-            System.out.print("Choose the color of the card that you want to buy: ");
+            System.out.print("Choose the color of the card that you want to buy: \n");
             input = scanner.nextLine().toUpperCase();
             try {
                 cardColor = Color.valueOf(input);
@@ -621,7 +629,7 @@ public class CLI implements UserInterface{
     @Override
     public void playLeaderCardAction() {
         String input;
-        String cardId = null;
+        int cardSlot = 0;
         boolean done = false;
         ArrayList<String> hand = gameboard.getOnePlayerBoard(clientView.getNickname()).getHand();
         HashMap<Resource, Integer> warehouse = new HashMap<>();
@@ -629,17 +637,21 @@ public class CLI implements UserInterface{
         HashMap<Resource, Integer> strongbox = new HashMap<>();
 
         do {
-            System.out.print("Choose what card you want to play: ");
-            System.out.println(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand());
+            System.out.print("Choose the number of the card that you want to play: ");
             input = scanner.nextLine();
-            if(hand.contains(input)){
-                done = true;
-                cardId = input;
+            try{
+                cardSlot = Integer.parseInt(input);
+                if(cardSlot < 1 || cardSlot > hand.size()) System.out.println("Wrong level");
+                else{
+                    cardSlot = cardSlot -1;
+                    done=true;
+                }
+            } catch (NumberFormatException e){
+                System.out.println("Not a number!!");
             }
-            else System.out.println("Wrong ID");
         } while(!done);
 
-        if(Objects.requireNonNull(findLeaderCard(cardId)).getRequirements() instanceof ResourceRequirements){
+        if(Objects.requireNonNull(findLeaderCard(hand.get(cardSlot))).getRequirements() instanceof ResourceRequirements){
             System.out.println("Select what resources you want to pay: ");
             warehouse = warehousePayment();
             leaderDepot = leaderdepotPayment();
@@ -653,24 +665,32 @@ public class CLI implements UserInterface{
             }
         }
 
-        clientView.playLeaderCard(cardId, warehouse, leaderDepot, strongbox);
+        clientView.playLeaderCard(hand.get(cardSlot), warehouse, leaderDepot, strongbox);
     }
 
     @Override
     public void discardLeaderCardAction() {
         String input;
+        int cardSlot = 0;
         boolean done = false;
         ArrayList<String> hand = gameboard.getOnePlayerBoard(clientView.getNickname()).getHand();
 
         do {
-            System.out.print("Choose what card you want to discard: ");
-            System.out.println(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand());
+            System.out.print("Choose the number of the card that you want to discard: ");
             input = scanner.nextLine();
-            if(hand.contains(input)) done = true;
-            else System.out.println("Wrong ID");
+            try{
+                cardSlot = Integer.parseInt(input);
+                if(cardSlot < 1 || cardSlot > hand.size()) System.out.println("Wrong level");
+                else{
+                    cardSlot = cardSlot -1;
+                    done=true;
+                }
+            } catch (NumberFormatException e){
+                System.out.println("Not a number!!");
+            }
         } while(!done);
 
-        clientView.discardLeaderCard(input);
+        clientView.discardLeaderCard(hand.get(cardSlot));
     }
 
     /**
@@ -991,8 +1011,12 @@ public class CLI implements UserInterface{
         StringBuilder playerboard = new StringBuilder();
         if(board.getPlayerNickname().equals(clientView.getNickname()))
             playerboard.append(ColorCLI.GREEN).append("Playerboard of ").append(board.getPlayerNickname()).append(ColorCLI.RESET).append("\n");
-        else
-            playerboard.append("Playerboard of ").append(board.getPlayerNickname()).append("\n");
+        else{
+            if(!board.isConnected()){
+                playerboard.append(ColorCLI.RED);
+            }
+            playerboard.append("Playerboard of ").append(board.getPlayerNickname()).append("\n").append(ColorCLI.RESET);
+        }
         //faith track
         playerboard.append("       1     2     4     6     9    12    16    20\n");
         playerboard.append("|");
