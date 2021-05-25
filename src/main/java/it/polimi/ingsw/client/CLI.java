@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.System.exit;
 
@@ -110,6 +111,12 @@ public class CLI implements UserInterface{
         System.out.println("8P   8.dP' 8P Y8 8  8 8 `Yb. `Yb. 8  8 8P Y8 8    8.dP'");
         System.out.println("8    `Y88P 8   8 `Y88 8 Y88P Y88P `Y88 8   8 `Y8P `Y88P");
         clientView.startConnection();
+        try {
+            TimeUnit.MILLISECONDS.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        clientView.login(); //chiamo quello della cli che poi mi chiama il login della client view passandogli il nickname come parametro
     }
 
     @Override
@@ -1022,7 +1029,7 @@ public class CLI implements UserInterface{
         playerboard.append("|");
         for(int i=0; i<25; i++){
             if(i == board.getPlayerPosition())
-                playerboard.append("x");
+                playerboard.append(ColorCLI.RESET).append("x");
             else
                 playerboard.append(" ");
             if(i == 7 || i == 8 || i == 15 || i == 16 || i == 23 || i == 24)

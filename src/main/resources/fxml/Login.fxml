@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.Login">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -18,11 +18,11 @@
                   <Image url="@../graphics/loginBackground.png" />
                </image>
             </ImageView>
-            <TextField alignment="CENTER" layoutX="560.0" layoutY="500.0" prefHeight="50.0" prefWidth="280.0" promptText="Username" style="-fx-background-radius: 30;">
+            <TextField fx:id="username" alignment="CENTER" layoutX="560.0" layoutY="500.0" prefHeight="50.0" prefWidth="280.0" promptText="Username" style="-fx-background-radius: 30;">
                <font>
                   <Font name="SansSerif Regular" size="20.0" />
                </font></TextField>
-            <Button layoutX="625.0" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Login">
+            <Button fx:id="button" layoutX="625.0" layoutY="600.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 20;" text="Login">
                <font>
                   <Font name="SansSerif Bold" size="18.0" />
                </font>
@@ -34,6 +34,11 @@
                   <Image url="@../graphics/logo.png" />
                </image>
             </ImageView>
+            <Label fx:id="invalidUsername" alignment="CENTER" contentDisplay="RIGHT" layoutX="400.0" layoutY="455.0" prefHeight="20.0" prefWidth="600.0" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

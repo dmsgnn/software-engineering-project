@@ -1,9 +1,11 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.Observable;
+import it.polimi.ingsw.messages.clientToServer.ActionReply;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.messages.clientToServer.LoginMessage;
 import it.polimi.ingsw.messages.clientToServer.PlayerNumberReply;
+import it.polimi.ingsw.messages.serverToClient.ActionResponse;
 import it.polimi.ingsw.messages.serverToClient.EndGameMessage;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 
@@ -80,7 +82,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
                         lock.notifyAll();
                     }
                 }
-                if(message instanceof LoginMessage) {
+                else if(message instanceof LoginMessage) {
                     LoginMessage presentation = (LoginMessage) message;
                     login(presentation);
                 }
@@ -151,6 +153,14 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
     protected void disconnect(Lobby lob) {
 
         synchronized (lock) {
+            // this part must be used because when all the player leave a game it mustn't be deleted
+            /*if(lobby.isGameStarted()) {
+                server.disconnectAndSave(this, lob);
+            }
+            else {
+                server.disconnect(this, lob);
+            }*/
+            //this part was used because when all the player disconneted from the game, the game was canceled
             if(lobby.isGameStarted()) {
                 //this part must be modified if persistence FA
                 if(lobby.getPlayerGameNumber()==1 || lobby.getLoggedPlayers().size() == 1){

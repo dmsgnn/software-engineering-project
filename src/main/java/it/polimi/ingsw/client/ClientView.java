@@ -25,6 +25,7 @@ public class ClientView implements Observer<ServerMessage> {
     private final String ip;
     private final int port;
     private final ClientGameBoard gameboard;
+    
 
     private ArrayList<Actions> possibleActions = new ArrayList<>();
 
@@ -96,7 +97,7 @@ public class ClientView implements Observer<ServerMessage> {
      * called to do the login
      */
     public void login(){
-        String nickname = uiType.login();
+        String nickname = uiType.login(); //tolgo
         socket.sendMessage(new LoginMessage(nickname));
     }
 

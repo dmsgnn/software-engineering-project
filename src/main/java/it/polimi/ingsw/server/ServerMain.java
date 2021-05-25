@@ -67,7 +67,7 @@ public class ServerMain {
                 ServerSocketHandler connection = new ServerSocketHandler(clientSocket, this);
                 executor.submit(connection);
                 connection.startPing();
-                connection.sendMessage(new Welcome());
+                //connection.sendMessage(new Welcome());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,8 +124,8 @@ public class ServerMain {
             takenUsernames.add(username);
             lob.getLoggedPlayers().put(connection, username);
             disconnectedUsers.remove(username);
-            lob.reConnection(username, connection);
             connection.setLobby(lob);
+            lob.reConnection(username, connection);
             return;
         }
 

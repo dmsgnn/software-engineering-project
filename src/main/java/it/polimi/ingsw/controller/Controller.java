@@ -125,6 +125,11 @@ public class Controller implements Observer<ClientMessage> {
                 put(name,temp2);
             }
         }};
+
+        for(int i=0; i<playersNumber; i++) {
+            System.out.println("player number "+(i+1));
+            System.out.println(game.getPlayers(i).getNickname());
+        }
     }
 
 
@@ -847,6 +852,9 @@ public class Controller implements Observer<ClientMessage> {
             currentAction.put(currentActivePlayer,null);
             endTurn();
         }
+        System.out.println("Disconnected players");
+        for(int i=0; i<playersDisconnected.size(); i++)
+            System.out.println(playersDisconnected.get(i));
     }
 
     /**
@@ -868,11 +876,10 @@ public class Controller implements Observer<ClientMessage> {
         serverView.sendReconnectionMessage(username,getDevCardSlots(),getFaithPositions(),getLeaderCardsPlayed(),
                 getLeaderCards(username), getStrongbox(), getWarehouse());
         if (!playerStatus.get(username).get(0)){
-            ArrayList<String> starting= new ArrayList<String>(){{
-                for (int j = 0; j < startingLeaderCards.size(); j++) {
-                    add(j,startingLeaderCards.get(username).get(j).getId());
-                }
-            }};
+            ArrayList<String> starting= new ArrayList<>();
+            for (int j = 0; j < startingLeaderCards.get(serverView.getUsername()).size(); j++) {
+                starting.add(j,startingLeaderCards.get(username).get(j).getId());
+            }
             playerStatus.get(username).put(0,true);
             playerStatus.get(username).put(1,true);
             serverView.sendLeaderCards(starting);
@@ -882,7 +889,9 @@ public class Controller implements Observer<ClientMessage> {
             serverView.startingResourceMessage(number);
             playerStatus.get(username).put(1,true);
         }
-
+        System.out.println(username + "reconnected from controller");
+        for(int j=0; j<playersDisconnected.size(); j++)
+            System.out.println(playersDisconnected.get(i));
     }
 
 

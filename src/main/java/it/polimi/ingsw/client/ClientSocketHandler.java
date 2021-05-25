@@ -2,6 +2,8 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
+import it.polimi.ingsw.messages.clientToServer.Pong;
+import it.polimi.ingsw.messages.serverToClient.Ping;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 
 import java.io.BufferedInputStream;

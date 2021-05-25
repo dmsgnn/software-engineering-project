@@ -29,18 +29,19 @@ public class ClientMain {
         System.out.println("port number: " + port);
 
         //ui initialization
-        //if(ui.equals("cli")) {
+        if(ui!=null && ui.equals("cli")) {
             System.out.println("You're going to play with the CLI interface");
             CLI cli = new CLI();
             ClientView clientView = new ClientView(ip, port, cli);
             cli.setClientView(clientView);
             cli.begin();
-        //}
-        /*else{
+        }
+        else{
             System.out.println("You're going to play with the GUI interface");
             GUI gui = new GUI();
             ClientView clientView = new ClientView(ip, port, gui);
-
-        }*/
+            gui.setClientView(clientView);
+            new Thread(gui::begin).start();
+        }
     }
 }

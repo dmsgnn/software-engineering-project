@@ -103,6 +103,7 @@ public class Lobby {
      */
     public void reConnection(String username, ServerSocketHandler connection){
         ServerView reconnectedUser = new ServerView(username, connection);
+        reconnectedUser.addObserver(controller);
         controller.playerReconnection(reconnectedUser);
     }
 

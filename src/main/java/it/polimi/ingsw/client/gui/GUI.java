@@ -5,16 +5,45 @@ import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.model.Resource;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
-public class GUI implements UserInterface {
+import static java.lang.System.exit;
+
+public class GUI extends Application implements UserInterface {
     private ClientView clientView;
+
+    public void setClientView(ClientView clientView) {
+        this.clientView = clientView;
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Login.fxml")));
+        stage.setTitle("Masters of Renaissance");
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/graphics/logo.png")).toExternalForm()));
+        stage.setScene(new Scene(root, 1400, 800));
+        stage.show();
+        stage.setOnCloseRequest((WindowEvent t) -> {
+            Platform.exit();
+            exit(0);
+        });
+        clientView.startConnection();
+    }
 
     @Override
     public void begin() {
-
+        launch();
     }
 
     @Override
@@ -131,4 +160,5 @@ public class GUI implements UserInterface {
     public void updateBoard() {
 
     }
+
 }
