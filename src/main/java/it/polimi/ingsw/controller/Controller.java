@@ -42,9 +42,9 @@ public class Controller implements Observer<ClientMessage> {
     private final Map<String,Map<Resource,Integer>> newResources;
     private final Map<Resource,Integer> temp;
     private int playersNumber;
-    private int playerCounter=0;
+    private int beginCounter =0;
     private int currentServerView =0;
-    private int currentActivePlayer =0;
+    private int currentActivePlayer;
     private final ArrayList<String> playersDisconnected;
     // ACTION TOOLS
     private final Map<Integer,Boolean> numOfActions;
@@ -60,6 +60,7 @@ public class Controller implements Observer<ClientMessage> {
     private final Map<String,Integer> startingResources;
     private int resourceCounter;
     private final Map<String,Map<Integer,Boolean>> playerStatus;
+    private boolean gameStarted;
 
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
@@ -115,25 +116,26 @@ public class Controller implements Observer<ClientMessage> {
         this.resourceCounter=0;
         //PARAMETERS FOR DISCONNECTION
         playersDisconnected = new ArrayList<>();
-        Map<Integer,Boolean> temp2 = new HashMap<Integer,Boolean>(){{
-            put(0,false);
-            put(1,false);
-        }};
-        playerStatus = new HashMap<String,Map<Integer,Boolean>>(){{
-            for (int i = 0; i < playersNumber; i++) {
-                String name = game.getPlayers(i).getNickname();
-                put(name,temp2);
-            }
-        }};
-
+        Map<Integer,Boolean> temp2 = new HashMap<>();
+        temp2.put(0,false);
+        temp2.put(1,false);
+        playerStatus = new HashMap<>();
+        for (int i = 0; i < playersNumber; i++) {
+            String name = game.getPlayers(i).getNickname();
+            playerStatus.put(name,temp2);
+        }
+        System.out.println(playerStatus);
         for(int i=0; i<playersNumber; i++) {
             System.out.println("player number "+(i+1));
             System.out.println(game.getPlayers(i).getNickname());
         }
+        this.currentActivePlayer=0;
     }
 
 
-
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
 
     /**
      * Extracts the information from the {@link ClientMessage} which will call a method on the controller.
@@ -210,7 +212,12 @@ public class Controller implements Observer<ClientMessage> {
             assert serverView1 != null;
             serverView1.leaderCardSetupOk();
             sendStartingResource(username);
-            playerStatus.get(username).put(0,true);
+            Map<Integer, Boolean> map = new HashMap<>();
+            map.put(0,true);
+            map.put(1,false);
+            playerStatus.put(username, map);
+            System.out.println(playerStatus);
+
         }    catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             assert serverView1 != null;
             serverView1.sendError(Error.STARTING_LEADER_CARD);
@@ -228,6 +235,7 @@ public class Controller implements Observer<ClientMessage> {
      */
     public synchronized void sendStartingResource(String username) {
         int i;
+        int j=0;
         int number = game.getPlayersNumber();
         for (i=0; i< number;i++){
             String name = game.getPlayers(i).getNickname();
@@ -236,26 +244,26 @@ public class Controller implements Observer<ClientMessage> {
         switch (i) {
             case 0: {
                 startingResources.put(username,0);
-                sendStartingCounter();
+                j=0;
                 break;
             }
             case 1: {
                 startingResources.put(username,1);
-                sendStartingCounter();
+                j=1;
                 break;
             }
             case 2: {
                 game.getActivePlayer().getFaithTrack().increasePosition();
                 faithPositions.put(game.getActivePlayer().getNickname(),1);
                 startingResources.put(username,1);
-                sendStartingCounter();
+                j=1;
                 break;
             }
             case 3: {
                 game.getActivePlayer().getFaithTrack().increasePosition();
                 faithPositions.put(game.getActivePlayer().getNickname(),1);
                 startingResources.put(username,2);
-                sendStartingCounter();
+                j=2;
                 break;
             }
             default:{
@@ -263,19 +271,29 @@ public class Controller implements Observer<ClientMessage> {
                 break;
             }
         }
-
+        if(!isGameStarted()) {
+            resourceCounter++;
+            sendStartingCounter();
+        }
+        else{
+            ServerView serverView = getServerView(username);
+            assert serverView != null;
+            serverView.startingResourceMessage(j);
+        }
     }
 
     private void sendStartingCounter(){
-        resourceCounter++;
-        if (resourceCounter==playersNumber){
+        if (resourceCounter + playersDisconnected.size() ==playersNumber){
             faithTrackMessage();
-            for (int i = 0; i < startingResources.size(); i++) {
+            for (int i = 0; i < playersNumber; i++) {
                 String name = game.getPlayers(i).getNickname();
-                ServerView serverView = getServerView(name);
-                assert serverView != null;
-                int number= startingResources.get(name);
-                Objects.requireNonNull(serverView).startingResourceMessage(number);
+                //if(playerStatus.get(name).get(0)) {
+                    ServerView serverView = getServerView(name);
+                    assert serverView != null;
+                    System.out.println(serverView.getUsername());
+                    int number = startingResources.get(name);
+                    Objects.requireNonNull(serverView).startingResourceMessage(number);
+                //}
             }
         }
     }
@@ -364,8 +382,21 @@ public class Controller implements Observer<ClientMessage> {
                 leaderID.add(i, selectedCards.get(game.getActivePlayer().getNickname()).get(i).getId());
                 this.leaderID.put(game.getActivePlayer().getNickname(), leaderID);
             }
-            playerStatus.get(username).put(1,true);
-            begin();
+            Map<Integer, Boolean> map = new HashMap<>();
+            map.put(0,true);
+            map.put(1,true);
+            playerStatus.put(username, map);
+            System.out.println(playerStatus);
+
+            beginCounter++;
+            if(!isGameStarted()) {
+                begin();
+            }
+            else{
+                ServerView serverView = getServerView(username);
+                assert serverView != null;
+                serverView.sendSetupGameUpdate(this.leaderID, getWarehouse(), getFaith());
+            }
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             // MANAGE ERROR
             ServerView serverView= getServerView(username);
@@ -381,12 +412,13 @@ public class Controller implements Observer<ClientMessage> {
      * starts the first player's turn and sends him the possible actions to perform
      */
     public void begin(){
-        playerCounter++;
-        if (playerCounter==game.getPlayersNumber()){
+        if (beginCounter + playersDisconnected.size() == playersNumber){
+            gameStarted = true;
             for (ServerView serverView : serverViews) {
                 serverView.sendSetupGameUpdate(this.leaderID, getWarehouse(), getFaith());
             }
-            game.setActivePlayer(game.getPlayers(0));
+            Player player = game.getPlayers(currentActivePlayer);
+            game.setActivePlayer(player);
             for (int i = 0; i < serverViews.size(); i++) {
                 if (serverViews.get(i).getUsername().equals(game.getActivePlayer().getNickname())){
                     currentServerView =i;
@@ -480,16 +512,8 @@ public class Controller implements Observer<ClientMessage> {
     public void endTurn(){
         numOfActions.put(currentActivePlayer,false);
         newResources.put(serverViews.get(currentServerView).getUsername(),temp);
-        currentActivePlayer++;
-        if (currentActivePlayer>=playersNumber) currentActivePlayer=0;
+        increaseActivePlayer(1);
         Player player = game.getPlayers(currentActivePlayer);
-        if (!playersDisconnected.isEmpty()) {
-            for (String s : playersDisconnected) {
-                if (s.equals(player.getNickname())) {
-                    endTurn();
-                }
-            }
-        }
         game.setActivePlayer(player);
         for (int i = 0; i < playersNumber; i++) {
             if (serverViews.get(i).getUsername().equals(game.getActivePlayer().getNickname())){
@@ -847,14 +871,37 @@ public class Controller implements Observer<ClientMessage> {
 
     public synchronized void playerDisconnection(String username){
         playersDisconnected.add(0,username);
-        String name = game.getActivePlayer().getNickname();
-        if (name.equals(username)){
-            currentAction.put(currentActivePlayer,null);
-            endTurn();
+        String name = game.getPlayers(currentActivePlayer).getNickname();
+        if(playerStatus.get(username).get(0) && playerStatus.get(username).get(1)) {
+            beginCounter--;
         }
+
+        if(!isGameStarted()) {
+            System.out.println("sono dentro");
+            if (name.equals(username)) {
+                currentAction.put(currentActivePlayer, null);
+                increaseActivePlayer(1);
+                System.out.println(currentActivePlayer);
+            }
+            if(resourceCounter+playersDisconnected.size()==playersNumber)
+                sendStartingCounter();
+        }
+        // disconnection message
         System.out.println("Disconnected players");
         for(int i=0; i<playersDisconnected.size(); i++)
             System.out.println(playersDisconnected.get(i));
+    }
+
+    private void increaseActivePlayer(int callNum){
+        currentActivePlayer++;
+        if (currentActivePlayer>=playersNumber)
+            currentActivePlayer=0;
+        if(callNum==playersNumber)
+            return;
+        Player player = game.getPlayers(currentActivePlayer);
+        if (playersDisconnected.contains(player.getNickname())) {
+            increaseActivePlayer(callNum+1);
+        }
     }
 
     /**
@@ -863,6 +910,7 @@ public class Controller implements Observer<ClientMessage> {
      */
     public synchronized void playerReconnection(ServerView serverView){
         int i;
+
         playersDisconnected.remove(serverView.getUsername());
         String username = serverView.getUsername();
         for (i = 0; i < serverViews.size(); i++) {
@@ -871,24 +919,28 @@ public class Controller implements Observer<ClientMessage> {
                 break;
             }
         }
+        //??? chiedere a vittorio come vuole i messaggi, il problema è in queste 4 righe successive
         serverView.sendDevCardGrid(getDevCardGrid());
         serverView.sendMarket(getMarket(),getFreeMarble());
         serverView.sendReconnectionMessage(username,getDevCardSlots(),getFaithPositions(),getLeaderCardsPlayed(),
                 getLeaderCards(username), getStrongbox(), getWarehouse());
+
         if (!playerStatus.get(username).get(0)){
+            System.out.println("sono dentro le leader card");
             ArrayList<String> starting= new ArrayList<>();
             for (int j = 0; j < startingLeaderCards.get(serverView.getUsername()).size(); j++) {
                 starting.add(j,startingLeaderCards.get(username).get(j).getId());
             }
-            playerStatus.get(username).put(0,true);
-            playerStatus.get(username).put(1,true);
+            System.out.println(starting);
             serverView.sendLeaderCards(starting);
+            return;
         }
-        if (!playerStatus.get(username).get(1)){
+        else if (!playerStatus.get(username).get(1)){
             int number= startingResources.get(username);
             serverView.startingResourceMessage(number);
-            playerStatus.get(username).put(1,true);
+            return;
         }
+        //reconnection message
         System.out.println(username + "reconnected from controller");
         for(int j=0; j<playersDisconnected.size(); j++)
             System.out.println(playersDisconnected.get(i));
