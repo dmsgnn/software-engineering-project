@@ -1,9 +1,8 @@
 package it.polimi.ingsw.messages.serverToClient;
 
 import it.polimi.ingsw.client.ClientView;
-import it.polimi.ingsw.client.MarbleColors;
+import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.client.PingReceiver;
-import it.polimi.ingsw.model.gameboard.marble.Marbles;
 
 public class MarketMarbles implements ServerMessage{
     private MarbleColors[][] marbles;

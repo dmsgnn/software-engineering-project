@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.representations;
 
-import it.polimi.ingsw.client.MarbleColors;
 import it.polimi.ingsw.model.gameboard.Color;
 
 import java.util.ArrayList;

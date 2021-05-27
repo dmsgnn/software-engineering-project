@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.leadercard.Requirements;
 
-import it.polimi.ingsw.client.representations.ColorCLI;
+import it.polimi.ingsw.client.CLI.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
 import java.util.HashMap;

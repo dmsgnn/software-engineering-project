@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.leadercard;
 
-import it.polimi.ingsw.client.representations.ColorCLI;
+
+import it.polimi.ingsw.client.CLI.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.leadercard.Requirements.Requirements;
 import it.polimi.ingsw.model.leadercard.ability.Ability;

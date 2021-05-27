@@ -1,8 +1,10 @@
-package it.polimi.ingsw.client;
+package it.polimi.ingsw.client.CLI;
 
+import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.representations.MarbleColors;
+import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.client.representations.ClientGameBoard;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
-import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.model.Resource;
@@ -21,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.System.exit;
 
-public class CLI implements UserInterface{
+public class CLI implements UserInterface {
 
     ClientView clientView;
     ClientGameBoard gameboard;
@@ -120,7 +122,7 @@ public class CLI implements UserInterface{
     }
 
     @Override
-    public String login() {
+    public void login() {
         String nickname;
         boolean done=false;
 
@@ -135,20 +137,20 @@ public class CLI implements UserInterface{
         } while(!done);
 
 
-        return nickname;
+        clientView.sendLogin(nickname);
     }
 
     @Override
-    public String failedLogin(ArrayList<String> usedNames) {
+    public void failedLogin(ArrayList<String> usedNames) {
         boolean done = false;
         String newNick;
         System.out.println("Nickname already taken");
-        do{
-            newNick = this.login();
-            if(usedNames.contains(newNick)) System.out.println("Nickname already taken");
-            else done = true;
-        }while(!done);
-        return newNick;
+        //do{
+        this.login();
+            //if(usedNames.contains(newNick)) System.out.println("Nickname already taken");
+            //else done = true;
+        //}while(!done);
+
     }
 
     @Override
@@ -249,7 +251,7 @@ public class CLI implements UserInterface{
     }
 
     @Override
-    public int playersNumber(int max) {
+    public void playersNumber(int max) {
         String input;
         int value = 0;
         boolean done = false;
@@ -265,12 +267,11 @@ public class CLI implements UserInterface{
                 System.out.println("Not a number!!");
             }
         } while(!done);
-
-        return value;
+        clientView.sendNumOfPlayers(value);
     }
 
     @Override
-    public ArrayList<String> startingLeaderCardsSelection(ArrayList<String> leaderCardID) {
+    public void startingLeaderCardsSelection(ArrayList<String> leaderCardID) {
         myTurn=true;
         ArrayList<String> pickedCards = new ArrayList<>();
         String input;
@@ -310,12 +311,12 @@ public class CLI implements UserInterface{
 
         pickedCards.add(leaderCardID.get(ids.get(0)));
         pickedCards.add(leaderCardID.get(ids.get(1)));
+        clientView.sendStartingCards(pickedCards);
 
-        return pickedCards;
     }
 
     @Override
-    public Map<Integer, ArrayList<Resource>> startingResources(int amount) {
+    public void startingResources(int amount) {
         myTurn=true;
         ArrayList<Resource> pickedResources = new ArrayList<>();
         String input;
@@ -334,19 +335,19 @@ public class CLI implements UserInterface{
             }
         }
 
-        return placeWarehouseRes(pickedResources, false);
+        clientView.sendStartingResources(placeWarehouseRes(pickedResources, false));
 
     }
 
     @Override
-    public Actions chooseAction(ArrayList<Actions> possibleActions) {
+    public void chooseAction(ArrayList<Actions> possibleActions) {
         myTurn=true;
         Actions choice = null;
         int actionIndex;
         String input;
         boolean done = false;
 
-        if(possibleActions.size()==1 && possibleActions.contains(Actions.ENDTURN)) return Actions.ENDTURN;
+        if(possibleActions.size()==1 && possibleActions.contains(Actions.ENDTURN)) return;
 
         System.out.print("Choose the action you want to do: \n");
         int i =0;
@@ -368,7 +369,8 @@ public class CLI implements UserInterface{
             }
         } while (!done);
 
-        return choice;
+        clientView.sendAction(choice);
+
     }
 
     @Override

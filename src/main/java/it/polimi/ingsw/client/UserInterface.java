@@ -5,7 +5,6 @@ import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public interface UserInterface {
 
@@ -17,12 +16,12 @@ public interface UserInterface {
     /**
      * login into a match
      */
-    String login();
+    void login();
 
     /**
      * handles login errors
      */
-    String failedLogin(ArrayList<String> usedNames);
+    void failedLogin(ArrayList<String> usedNames);
 
     /**
      * handles the disconnection of one player
@@ -81,30 +80,26 @@ public interface UserInterface {
     /**
      * called only for the first player to make him choose the number of players
      * @param max possible number of players
-     * @return chosen number
      */
-    int playersNumber(int max);
+    void playersNumber(int max);
 
     /**
      * called to allow the players to choose their starting leadercards
      * @param leaderCardID list of the cards ID that the player can choose from
-     * @return the ID of the chosen leadercards
      */
-    ArrayList<String> startingLeaderCardsSelection(ArrayList<String> leaderCardID);
+    void startingLeaderCardsSelection(ArrayList<String> leaderCardID);
 
     /**
      * called to make the players chose their starting resources
      * @param amount num of starting resources
-     * @return list of resources
      */
-    Map<Integer, ArrayList<Resource>> startingResources(int amount);
+    void startingResources(int amount);
 
     /**
      * called to make the player choose the action to perform
      * @param possibleActions list of possible actions
-     * @return action picked from the player
      */
-    Actions chooseAction(ArrayList<Actions> possibleActions);
+    void chooseAction(ArrayList<Actions> possibleActions);
 
     /**
      * called to make the player perform the market action

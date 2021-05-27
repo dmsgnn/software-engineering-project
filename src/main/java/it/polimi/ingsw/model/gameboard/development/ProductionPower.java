@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.gameboard.development;
 
-import it.polimi.ingsw.client.representations.ColorCLI;
+import it.polimi.ingsw.client.CLI.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.Map;

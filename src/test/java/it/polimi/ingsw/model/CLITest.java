@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.client.CLI;
+import it.polimi.ingsw.client.CLI.CLI;
 import it.polimi.ingsw.client.ClientView;
-import it.polimi.ingsw.client.MarbleColors;
+import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.model.exceptions.NoCardsLeftException;
 import it.polimi.ingsw.model.gameboard.Gameboard;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
-package it.polimi.ingsw.client.representations;
+package it.polimi.ingsw.client.CLI;
 
-import it.polimi.ingsw.client.MarbleColors;
+import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 

@@ -2,7 +2,7 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
-import it.polimi.ingsw.client.MarbleColors;
+import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;

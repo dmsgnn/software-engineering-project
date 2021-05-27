@@ -1,7 +1,7 @@
 package it.polimi.ingsw.messages.serverToClient.layoutUpdate;
 
 import it.polimi.ingsw.client.ClientView;
-import it.polimi.ingsw.client.MarbleColors;
+import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.client.PingReceiver;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;

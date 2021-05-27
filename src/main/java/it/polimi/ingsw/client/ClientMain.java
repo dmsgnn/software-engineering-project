@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.CLI.CLI;
 import it.polimi.ingsw.client.gui.GUI;
 
 public class ClientMain {

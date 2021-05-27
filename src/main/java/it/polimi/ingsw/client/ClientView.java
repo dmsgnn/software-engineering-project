@@ -3,6 +3,7 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.representations.ClientGameBoard;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
+import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.messages.clientToServer.*;
@@ -97,7 +98,14 @@ public class ClientView implements Observer<ServerMessage> {
      * called to do the login
      */
     public void login(){
-        String nickname = uiType.login(); //tolgo
+        uiType.login();
+    }
+
+    /**
+     * called to send the login nickname
+     * @param nickname
+     */
+    public void sendLogin(String nickname){
         socket.sendMessage(new LoginMessage(nickname));
     }
 
@@ -108,8 +116,7 @@ public class ClientView implements Observer<ServerMessage> {
     public void manageUsernameResponse(boolean isFree, String nickname, ArrayList<String> usedNicknames){
         if(isFree) this.nickname = nickname;
         else {
-            String newNick = uiType.failedLogin(usedNicknames);
-            socket.sendMessage(new LoginMessage(newNick));
+            uiType.failedLogin(usedNicknames);
         }
     }
 
@@ -169,7 +176,14 @@ public class ClientView implements Observer<ServerMessage> {
      * @param maxNum maximum number of players
      */
     public void numOfPlayers(int maxNum){
-        int num = uiType.playersNumber(maxNum);
+        uiType.playersNumber(maxNum);
+    }
+
+    /**
+     * called to send the selected game size to the server
+     * @param num number of players
+     */
+    public void sendNumOfPlayers(int num){
         socket.sendMessage(new PlayerNumberReply(num));
     }
 
@@ -179,9 +193,16 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void selectStartingCards(ArrayList<String> leaderCardID){
         synchronized (lock) {
-            ArrayList<String> cards = uiType.startingLeaderCardsSelection(leaderCardID);
-            socket.sendMessage(new LeaderCardsReply(cards, nickname));
+            uiType.startingLeaderCardsSelection(leaderCardID);
         }
+    }
+
+    /**
+     * called to send the starting leadercards to the server
+     * @param cards selected from the player
+     */
+    public void sendStartingCards(ArrayList<String> cards){
+        socket.sendMessage(new LeaderCardsReply(cards, nickname));
     }
 
     /**
@@ -199,9 +220,16 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void startingResources(int amount){
         synchronized (lock) {
-            Map<Integer, ArrayList<Resource>> warehouse = uiType.startingResources(amount);
-            socket.sendMessage(new ResourcesReply(warehouse, nickname));
+             uiType.startingResources(amount);
         }
+    }
+
+    /**
+     * called to send the starting resources to the server
+     * @param warehouse configuration
+     */
+    public void sendStartingResources(Map<Integer, ArrayList<Resource>> warehouse){
+        socket.sendMessage(new ResourcesReply(warehouse, nickname));
     }
 
     /**
@@ -222,9 +250,16 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void pickAction(ArrayList<Actions> possibleActions){
         synchronized (lock){
-            Actions action = uiType.chooseAction(possibleActions);
-            socket.sendMessage(new ActionReply(action));
+            uiType.chooseAction(possibleActions);
         }
+    }
+
+    /**
+     * called to send to the server the action the player decided to do this turn
+     * @param action
+     */
+    public void sendAction(Actions action){
+        socket.sendMessage(new ActionReply(action));
     }
 
     /*public void setPossibleActions(ArrayList<Actions> possibleActions){

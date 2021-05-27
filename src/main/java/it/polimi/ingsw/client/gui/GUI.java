@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Objects;
 
 import static java.lang.System.exit;
@@ -47,13 +46,11 @@ public class GUI extends Application implements UserInterface {
     }
 
     @Override
-    public String login() {
-        return null;
+    public void login() {
     }
 
     @Override
-    public String failedLogin(ArrayList<String> usedNames) {
-        return null;
+    public void failedLogin(ArrayList<String> usedNames) {
     }
 
     @Override
@@ -107,23 +104,19 @@ public class GUI extends Application implements UserInterface {
     }
 
     @Override
-    public int playersNumber(int max) {
-        return 0;
+    public void playersNumber(int max) {
     }
 
     @Override
-    public ArrayList<String> startingLeaderCardsSelection(ArrayList<String> leaderCardID) {
-        return null;
+    public void startingLeaderCardsSelection(ArrayList<String> leaderCardID) {
     }
 
     @Override
-    public Map<Integer, ArrayList<Resource>> startingResources(int amount) {
-        return null;
+    public void startingResources(int amount) {
     }
 
     @Override
-    public Actions chooseAction(ArrayList<Actions> possibleActions) {
-        return null;
+    public void chooseAction(ArrayList<Actions> possibleActions) {
     }
 
     @Override

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.leadercard.ability;
 
+import it.polimi.ingsw.client.CLI.ColorCLI;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
-import it.polimi.ingsw.client.representations.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.playerboard.depot.CardDepot;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
