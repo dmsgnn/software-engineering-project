@@ -8,8 +8,8 @@ import javafx.scene.control.TextField;
 
 public class Login {
 
-    private ClientView clientView;
-    private GUI gui;
+    private static ClientView clientView;
+    private static GUI gui;
 
     @FXML
     private Button button;
@@ -17,6 +17,11 @@ public class Login {
     private TextField username;
     @FXML
     private Label invalidUsername;
+
+    public static void setGui(GUI gui) {
+        Login.gui = gui;
+        Login.clientView = gui.getClientView();
+    }
 
     public void userLogin(){
         String user = username.getText();
@@ -28,6 +33,11 @@ public class Login {
         else if (user.contains(" "))
             invalidUsername.setText("Username can't contains blank spaces");
         else
-            invalidUsername.setText("ok");
+            clientView.sendLogin(user);
+    }
+
+    public void takenUsername(){
+        invalidUsername.setText("Username already taken");
+
     }
 }

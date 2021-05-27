@@ -118,7 +118,7 @@ public class CLI implements UserInterface {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        clientView.login(); //chiamo quello della cli che poi mi chiama il login della client view passandogli il nickname come parametro
+        clientView.login(); // the login method below could directly be called
     }
 
     @Override

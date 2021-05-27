@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.PlayersNumber">
+   <children>
+      <ImageView>
+         <image>
+            <Image url="@../graphics/loginBackground.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="buttonOne" layoutX="300.0" layoutY="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onePlayer" prefHeight="300.0" prefWidth="300.0">
+         <graphic>
+            <ImageView fitHeight="300.0" fitWidth="300.0">
+               <image>
+                  <Image url="@../graphics/onePlayer.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="buttonTwo" layoutX="800.0" layoutY="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#twoPlayers" prefHeight="300.0" prefWidth="300.0">
+         <graphic>
+            <ImageView fitHeight="300.0" fitWidth="300.0">
+               <image>
+                  <Image url="@../graphics/twoPlayers.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="buttonThree" layoutX="300.0" layoutY="470.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#threePlayers" prefHeight="300.0" prefWidth="300.0">
+         <graphic>
+            <ImageView fitHeight="300.0" fitWidth="300.0">
+               <image>
+                  <Image url="@../graphics/threePlayers.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="buttonFour" layoutX="800.0" layoutY="470.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#fourPlayers" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="300.0" fitWidth="300.0">
+               <image>
+                  <Image url="@../graphics/fourPlayers.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="350.0" layoutY="45.0" minHeight="-Infinity" prefHeight="42.0" prefWidth="700.0" text="Choose the player number of the game">
+         <font>
+            <Font name="SansSerif Regular" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

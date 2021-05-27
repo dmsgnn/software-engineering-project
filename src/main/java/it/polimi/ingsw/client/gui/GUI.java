@@ -11,51 +11,112 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import static java.lang.System.exit;
 
 public class GUI extends Application implements UserInterface {
-    private ClientView clientView;
+    private static ClientView clientView;
+
+    private static Login logger;
+    private static PlayersNumber players;
+    private static Waiting waiting;
+
+
+    private static Stage mainStage;
+    private static Parent loginRoot;
+    private static Parent playersRoot;
+    private static Parent waitingRoot;
+
+    public GUI() {
+    }
 
     public void setClientView(ClientView clientView) {
         this.clientView = clientView;
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/Login.fxml")));
-        stage.setTitle("Masters of Renaissance");
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/graphics/logo.png")).toExternalForm()));
-        stage.setScene(new Scene(root, 1400, 800));
-        stage.show();
-        stage.setOnCloseRequest((WindowEvent t) -> {
-            Platform.exit();
-            exit(0);
-        });
-        clientView.startConnection();
+    public ClientView getClientView() {
+        return clientView;
     }
 
-    @Override
+
     public void begin() {
         launch();
     }
 
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        /*this.mainStage = stage;
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/fxml/Login.fxml")));
+        Parent root = loader.load();
+        mainStage.setTitle("Masters of Renaissance");
+        mainStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/graphics/logo.png")).toExternalForm()));
+        mainStage.setScene(new Scene(root, 1400, 800));
+        mainStage.setResizable(false);
+
+        mainStage.setOnCloseRequest((WindowEvent t) -> {
+            Platform.exit();
+            exit(0);
+        });
+
+        startGui();
+        mainStage.show();*/
+
+        this.mainStage = stage;
+
+        mainStage.setTitle("Masters of Renaissance");
+        mainStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/graphics/logo.png")).toExternalForm()));
+        mainStage.setResizable(false);
+        mainStage.setOnCloseRequest((WindowEvent t) -> {
+            Platform.exit();
+            exit(0);
+        });
+
+        Login.setGui(this);
+        PlayersNumber.setGui(this);
+        Waiting.setGui(this);
+
+        startGui();
+
+        clientView.startConnection();
+
+        login();
+
+    }
+
+
+
+
     @Override
     public void login() {
+        Platform.runLater(()->{
+            mainStage.setScene(new Scene(loginRoot, 1400,800));
+            mainStage.show();
+        });
     }
 
     @Override
     public void failedLogin(ArrayList<String> usedNames) {
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(loginRoot);
+            logger.takenUsername();
+        });
     }
 
     @Override
     public void loginDone() {
-
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(waitingRoot);
+            waiting.setWaitingMessage("other players are joining...");
+        });
     }
 
     @Override
@@ -110,6 +171,9 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void playersNumber(int max) {
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(playersRoot);
+        });
     }
 
     @Override
@@ -159,4 +223,23 @@ public class GUI extends Application implements UserInterface {
 
     }
 
+    public void startGui() throws IOException {
+        //login
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+        Parent loginPane = loginLoader.load();
+        this.loginRoot = loginPane;
+        this.logger = loginLoader.getController();
+
+        //players number selection
+        FXMLLoader playersNumberLoader = new FXMLLoader(getClass().getResource("/fxml/PlayerNumber.fxml"));
+        Parent playersPane = playersNumberLoader.load();
+        this.playersRoot = playersPane;
+        this.players = playersNumberLoader.getController();
+
+        //waiting
+        FXMLLoader waitingLoader = new FXMLLoader(getClass().getResource("/fxml/Waiting.fxml"));
+        Parent waitingPane = waitingLoader.load();
+        this.waitingRoot = waitingPane;
+        this.waiting = waitingLoader.getController();
+    }
 }

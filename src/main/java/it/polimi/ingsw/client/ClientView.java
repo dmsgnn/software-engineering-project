@@ -97,7 +97,7 @@ public class ClientView implements Observer<ServerMessage> {
     /**
      * called to do the login
      */
-    public void login(){
+    public void login(){ // needed?
         uiType.login();
     }
 
