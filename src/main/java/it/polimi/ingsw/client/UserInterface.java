@@ -24,6 +24,11 @@ public interface UserInterface {
     void failedLogin(ArrayList<String> usedNames);
 
     /**
+     * called when the login is done
+     */
+    void loginDone();
+
+    /**
      * handles the disconnection of one player
      * @param nickname of the player that disconnected
      */

@@ -154,6 +154,12 @@ public class CLI implements UserInterface {
     }
 
     @Override
+    public void loginDone() {
+        System.out.println("Correct nickname");
+        inputThread();
+    }
+
+    @Override
     public void loser(String nickname) {
 
     }
@@ -252,6 +258,7 @@ public class CLI implements UserInterface {
 
     @Override
     public void playersNumber(int max) {
+        myTurn=true;
         String input;
         int value = 0;
         boolean done = false;

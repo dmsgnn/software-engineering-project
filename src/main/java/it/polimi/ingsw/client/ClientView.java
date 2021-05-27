@@ -114,7 +114,10 @@ public class ClientView implements Observer<ServerMessage> {
      * @param nickname the player set
      */
     public void manageUsernameResponse(boolean isFree, String nickname, ArrayList<String> usedNicknames){
-        if(isFree) this.nickname = nickname;
+        if(isFree){
+            this.nickname = nickname;
+            uiType.loginDone();
+        }
         else {
             uiType.failedLogin(usedNicknames);
         }

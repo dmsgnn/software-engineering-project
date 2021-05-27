@@ -54,6 +54,11 @@ public class GUI extends Application implements UserInterface {
     }
 
     @Override
+    public void loginDone() {
+
+    }
+
+    @Override
     public void handleDisconnection(String nickname) {
 
     }
