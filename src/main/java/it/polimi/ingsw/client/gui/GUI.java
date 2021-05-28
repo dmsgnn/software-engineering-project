@@ -29,6 +29,7 @@ public class GUI extends Application implements UserInterface {
     private static PlayersNumber players;
     private static Waiting waiting;
     private static StartingResourcesScene startingResources;
+    private static LeaderCardSelection leaderCardSelection;
 
 
     private static Stage mainStage;
@@ -36,6 +37,7 @@ public class GUI extends Application implements UserInterface {
     private static Parent playersRoot;
     private static Parent waitingRoot;
     private static Parent startingResourcesRoot;
+    private static Parent leaderCardRoot;
 
     public GUI() {
     }
@@ -86,6 +88,7 @@ public class GUI extends Application implements UserInterface {
         PlayersNumber.setGui(this);
         Waiting.setGui(this);
         StartingResourcesScene.setGui(this);
+        LeaderCardSelection.setGui(this);
 
         startGui();
 
@@ -159,7 +162,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void endLeadercardSetup() {
-
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(waitingRoot);
+            waiting.setWaitingMessage("Correct leadercards selection, waiting for other players...");
+        });
     }
 
     @Override
@@ -184,6 +190,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void startingLeaderCardsSelection(ArrayList<String> leaderCardID) {
+        Platform.runLater(()-> {
+            leaderCardSelection.selectLeaderCards(leaderCardID);
+            mainStage.getScene().setRoot(leaderCardRoot);
+        });
     }
 
     @Override
@@ -253,5 +263,10 @@ public class GUI extends Application implements UserInterface {
         FXMLLoader startingResLoader = new FXMLLoader(getClass().getResource("/fxml/StartingResources.fxml"));
         startingResourcesRoot = startingResLoader.load();
         startingResources = startingResLoader.getController();
+
+        //leaderCard Selection
+        FXMLLoader leaderLoader = new FXMLLoader(getClass().getResource("/fxml/LeaderCards.fxml"));
+        leaderCardRoot = leaderLoader.load();
+        leaderCardSelection = leaderLoader.getController();
     }
 }
