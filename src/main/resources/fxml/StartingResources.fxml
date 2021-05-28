@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.StartingResourcesScene">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1400.0" layoutX="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../graphics/loginBackground.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="servants" layoutX="200.0" layoutY="250.0" mnemonicParsing="false" onAction="#addServants" prefHeight="130.0" prefWidth="142.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../resources/punchboard/servant.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="shields" layoutX="500.0" layoutY="250.0" mnemonicParsing="false" onAction="#addShields" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../resources/punchboard/shield.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="stones" layoutX="800.0" layoutY="250.0" mnemonicParsing="false" onAction="#addStones" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../resources/punchboard/stone.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="coins" layoutX="1100.0" layoutY="250.0" mnemonicParsing="false" onAction="#addCoins" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../resources/punchboard/coin.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="amount" layoutX="556.0" layoutY="130.0" prefHeight="23.0" prefWidth="300.0">
+         <font>
+            <Font name="SansSerif Bold" size="20.0" />
+         </font></Label>
+      <Button fx:id="depot1" layoutX="556.0" layoutY="420.0" mnemonicParsing="false" onAction="#addResToDepot1" prefHeight="135.0" prefWidth="300.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="137.0" fitWidth="300.0">
+               <image>
+                  <Image url="@../resources/board/depot1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="depot2" layoutX="556.0" layoutY="557.0" mnemonicParsing="false" onAction="#addResToDepot2" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="103.0" fitWidth="300.0">
+               <image>
+                  <Image url="@../resources/board/depot2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="depot3" layoutX="556.0" layoutY="659.0" mnemonicParsing="false" onAction="#addResToDepot3" prefHeight="88.0" prefWidth="300.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="89.0" fitWidth="300.0">
+               <image>
+                  <Image url="@../resources/board/depot3.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

@@ -28,18 +28,20 @@ public class GUI extends Application implements UserInterface {
     private static Login logger;
     private static PlayersNumber players;
     private static Waiting waiting;
+    private static StartingResourcesScene startingResources;
 
 
     private static Stage mainStage;
     private static Parent loginRoot;
     private static Parent playersRoot;
     private static Parent waitingRoot;
+    private static Parent startingResourcesRoot;
 
     public GUI() {
     }
 
     public void setClientView(ClientView clientView) {
-        this.clientView = clientView;
+        GUI.clientView = clientView;
     }
 
     public ClientView getClientView() {
@@ -70,7 +72,7 @@ public class GUI extends Application implements UserInterface {
         startGui();
         mainStage.show();*/
 
-        this.mainStage = stage;
+        mainStage = stage;
 
         mainStage.setTitle("Masters of Renaissance");
         mainStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/graphics/logo.png")).toExternalForm()));
@@ -83,6 +85,7 @@ public class GUI extends Application implements UserInterface {
         Login.setGui(this);
         PlayersNumber.setGui(this);
         Waiting.setGui(this);
+        StartingResourcesScene.setGui(this);
 
         startGui();
 
@@ -115,7 +118,7 @@ public class GUI extends Application implements UserInterface {
     public void loginDone() {
         Platform.runLater(()-> {
             mainStage.getScene().setRoot(waitingRoot);
-            waiting.setWaitingMessage("other players are joining...");
+            waiting.setWaitingMessage("Correct nickname, other players are joining...");
         });
     }
 
@@ -161,7 +164,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void endStartingResourcesSetup() {
-
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(waitingRoot);
+            waiting.setWaitingMessage("Correct starting resources selection, waiting for other players...");
+        });
     }
 
     @Override
@@ -182,6 +188,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void startingResources(int amount) {
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(startingResourcesRoot);
+            startingResources.setAmount(amount);
+        });
     }
 
     @Override
@@ -226,20 +236,22 @@ public class GUI extends Application implements UserInterface {
     public void startGui() throws IOException {
         //login
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
-        Parent loginPane = loginLoader.load();
-        this.loginRoot = loginPane;
-        this.logger = loginLoader.getController();
+        loginRoot = loginLoader.load();
+        logger = loginLoader.getController();
 
         //players number selection
         FXMLLoader playersNumberLoader = new FXMLLoader(getClass().getResource("/fxml/PlayerNumber.fxml"));
-        Parent playersPane = playersNumberLoader.load();
-        this.playersRoot = playersPane;
-        this.players = playersNumberLoader.getController();
+        playersRoot = playersNumberLoader.load();
+        players = playersNumberLoader.getController();
 
         //waiting
         FXMLLoader waitingLoader = new FXMLLoader(getClass().getResource("/fxml/Waiting.fxml"));
-        Parent waitingPane = waitingLoader.load();
-        this.waitingRoot = waitingPane;
-        this.waiting = waitingLoader.getController();
+        waitingRoot = waitingLoader.load();
+        waiting = waitingLoader.getController();
+
+        //starting Resources
+        FXMLLoader startingResLoader = new FXMLLoader(getClass().getResource("/fxml/StartingResources.fxml"));
+        startingResourcesRoot = startingResLoader.load();
+        startingResources = startingResLoader.getController();
     }
 }

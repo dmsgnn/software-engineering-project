@@ -155,7 +155,7 @@ public class CLI implements UserInterface {
 
     @Override
     public void loginDone() {
-        System.out.println("Correct nickname");
+        System.out.println("Correct nickname, other players are joining...");
         inputThread();
     }
 
@@ -234,12 +234,11 @@ public class CLI implements UserInterface {
         myTurn=false;
         Thread t = new Thread(() -> {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            String input;
 
             while (!myTurn){
                 try {
                     if(reader.ready()){
-                        input = reader.readLine();
+                        reader.readLine();
                         System.out.println("Not your turn!");
                     }
                     else Thread.sleep(500);

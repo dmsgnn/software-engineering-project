@@ -103,7 +103,7 @@ public class ClientView implements Observer<ServerMessage> {
 
     /**
      * called to send the login nickname
-     * @param nickname
+     * @param nickname selected from the player
      */
     public void sendLogin(String nickname){
         socket.sendMessage(new LoginMessage(nickname));
@@ -259,7 +259,7 @@ public class ClientView implements Observer<ServerMessage> {
 
     /**
      * called to send to the server the action the player decided to do this turn
-     * @param action
+     * @param action selected from the player
      */
     public void sendAction(Actions action){
         socket.sendMessage(new ActionReply(action));
@@ -469,6 +469,10 @@ public class ClientView implements Observer<ServerMessage> {
                 }
             }
         }
+    }
+
+    public void lorenzoUpdate(int vaticanPosition, int position, boolean report, int lorPos, Map<String, String> cardChange){
+
     }
 
     /**
