@@ -44,6 +44,7 @@ public class StartingResourcesScene {
 
     public void setAmount(int amount){
         numOfRes=amount;
+        if(amount==0) send();
         depotButtonUpdate(true);
         this.amount.setText("You must choose " + numOfRes + " resources");
     }
