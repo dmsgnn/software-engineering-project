@@ -324,7 +324,9 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
-                    Objects.requireNonNull(serverView).startingResourceOk();
+                    if(!gameStarted) {
+                        Objects.requireNonNull(serverView).startingResourceOk();
+                    }
                 }
                 break;
             }
@@ -336,7 +338,9 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
-                    Objects.requireNonNull(serverView).startingResourceOk();
+                    if(!gameStarted) {
+                        Objects.requireNonNull(serverView).startingResourceOk();
+                    }
 
                 }
                 break;
@@ -348,7 +352,9 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
-                    Objects.requireNonNull(serverView).startingResourceOk();
+                    if(!gameStarted) {
+                        Objects.requireNonNull(serverView).startingResourceOk();
+                    }
                 }
                 break;
             }
@@ -572,11 +578,12 @@ public class Controller implements Observer<ClientMessage> {
             String username = game.getActivePlayer().getNickname();
             int points = faithPositions.get(username);
             faithPositions.put(username,points +1);
+            faithTrackMessage();
+            TimeUnit.SECONDS.sleep(1);
             for (ServerView serverView : serverViews) {
                 serverView.sendDiscardLeaderCardUpdate(username, id);
                 TimeUnit.SECONDS.sleep(1);
             }
-            faithTrackMessage();
             // SEND POSSIBLE ACTIONS
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException | InterruptedException e) {
@@ -849,14 +856,21 @@ public class Controller implements Observer<ClientMessage> {
                 game.setActivePlayer(player);
                 int position = game.getActivePlayer().getFaithTrack().getPosition();
                 String username = game.getActivePlayer().getNickname();
-                int pos = faithPositions.get(username);
-                if (position!=pos){
-                    update.put(username,pos);
-                    faithPositions.put(username,position);
+                if (position>=19){
+                    update.put(username,24);
                 }
+                else if (position>=12){
+                    update.put(username,16);
+                }
+                else if (position>=5){
+                    update.put(username,8);
+                }
+                faithPositions.put(username,position);
             }
 
         }
+        System.out.println(update);
+        System.out.println(faithPositions);
         Map<String,Integer> faith = new HashMap<>(faithPositions);
         for (ServerView serverView: serverViews){
             serverView.sendFaithMessage(update,faith,isActive);
@@ -865,7 +879,6 @@ public class Controller implements Observer<ClientMessage> {
         game.setActivePlayer(player);
 
     }
-
 
     //------------------TOOLS------------------
 
