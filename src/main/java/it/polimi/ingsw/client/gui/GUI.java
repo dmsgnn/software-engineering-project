@@ -58,24 +58,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void start(Stage stage) throws Exception {
-        /*this.mainStage = stage;
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/fxml/Login.fxml")));
-        Parent root = loader.load();
-        mainStage.setTitle("Masters of Renaissance");
-        mainStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/graphics/logo.png")).toExternalForm()));
-        mainStage.setScene(new Scene(root, 1400, 800));
-        mainStage.setResizable(false);
-
-        mainStage.setOnCloseRequest((WindowEvent t) -> {
-            Platform.exit();
-            exit(0);
-        });
-
-        startGui();
-        mainStage.show();*/
-
         mainStage = stage;
-
         mainStage.setTitle("Masters of Renaissance");
         mainStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/graphics/logo.png")).toExternalForm()));
         mainStage.setResizable(false);
