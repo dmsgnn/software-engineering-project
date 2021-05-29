@@ -168,7 +168,7 @@ public class CLI implements UserInterface {
     public void manageError(Error errorType) {
         switch (errorType){
             case STARTING_RESOURCES:
-                System.out.println("Wrong amount of starting resources!!!\n");
+                System.out.println("Wrong placement of starting resources!!!\n");
                 break;
             case STARTING_LEADER_CARD:
                 System.out.println("Wrong cards selected!!!\n");

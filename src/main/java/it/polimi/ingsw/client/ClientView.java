@@ -21,7 +21,7 @@ import static java.lang.System.exit;
 public class ClientView implements Observer<ServerMessage> {
 
     private ClientSocketHandler socket;
-    private UserInterface uiType;
+    private final UserInterface uiType;
     private String nickname; //nickname of the player owning this client
     private final String ip;
     private final int port;
