@@ -143,7 +143,7 @@
             <Font name="SansSerif Bold" size="11.0" />
          </font>
       </Label>
-      <Button fx:id="strongboxShields" layoutX="680.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="strongboxShields" layoutX="680.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#strShieldsAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -152,7 +152,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="strongboxCoins" layoutX="680.0" layoutY="670.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="strongboxCoins" layoutX="680.0" layoutY="670.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#strCoinsAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -166,7 +166,7 @@
             <Font name="SansSerif Bold" size="11.0" />
          </font>
       </Label>
-      <Button fx:id="strongboxServants" layoutX="736.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="strongboxServants" layoutX="736.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#strServantsAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -180,7 +180,7 @@
             <Font name="SansSerif Bold" size="11.0" />
          </font>
       </Label>
-      <Button fx:id="strongboxStones" layoutX="736.0" layoutY="670.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="strongboxStones" layoutX="736.0" layoutY="670.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#strStonesAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -194,32 +194,32 @@
             <Font name="SansSerif Bold" size="11.0" />
          </font>
       </Label>
-      <Button fx:id="depotOneResourceOne" layoutX="733.0" layoutY="470.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="depotOneResourceOne" layoutX="733.0" layoutY="470.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotOneResourceOneAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fx:id="depot1Resource1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="depotTwoResourceOne" layoutX="718.0" layoutY="515.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="depotTwoResourceOne" layoutX="718.0" layoutY="515.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotTwoResourceOneAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fx:id="depot2Resource1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="depotTwoResourceTwo" layoutX="745.0" layoutY="515.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="depotTwoResourceTwo" layoutX="745.0" layoutY="515.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotTwoResourceTwoAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fx:id="depot2Resource2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="depotThreeResourceOne" layoutX="705.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="depotThreeResourceOne" layoutX="705.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotThreeResourceOneAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fx:id="depot3Resource1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="depotThreeResourceTwo" layoutX="732.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="depotThreeResourceTwo" layoutX="732.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotThreeResourceTwoAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fx:id="depot3Resource2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="depotThreeResourceThree" layoutX="756.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+      <Button fx:id="depotThreeResourceThree" layoutX="756.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotThreeResourceThreeAction" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fx:id="depot3Resource3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>

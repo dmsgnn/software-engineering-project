@@ -191,8 +191,8 @@ public class MainBoard {
     private Actions currentAction;
 
     //Production attributes
-    private ArrayList<Integer> prodDevSlots = new ArrayList<>();
-    private ArrayList<Integer> prodLeaderSlots = new ArrayList<>();
+    private final ArrayList<Integer> prodDevSlots = new ArrayList<>();
+    private final ArrayList<Integer> prodLeaderSlots = new ArrayList<>();
 
     public static void setGui(GUI gui) {
         MainBoard.gui = gui;
@@ -433,5 +433,35 @@ public class MainBoard {
             if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getProductionBuff().size()==1) prodLeaderSlots.add(0);
             else prodLeaderSlots.add(1);
         }
+    }
+
+    public void strShieldsAction() {
+    }
+
+    public void strCoinsAction() {
+    }
+
+    public void strServantsAction() {
+    }
+
+    public void strStonesAction() {
+    }
+
+    public void depotOneResourceOneAction() {
+    }
+
+    public void depotTwoResourceOneAction() {
+    }
+
+    public void depotTwoResourceTwoAction() {
+    }
+
+    public void depotThreeResourceOneAction() {
+    }
+
+    public void depotThreeResourceTwoAction() {
+    }
+
+    public void depotThreeResourceThreeAction() {
     }
 }
