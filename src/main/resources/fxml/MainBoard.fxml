@@ -239,5 +239,6 @@
             <ImageView fx:id="devSlot3Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
+      <Button fx:id="boardProduction" layoutX="821.0" layoutY="587.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="79.0" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>

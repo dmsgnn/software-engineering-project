@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="devCards refactor">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/ProductionScene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/Production.fxml" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Dev card slots GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
@@ -336,7 +334,7 @@
       <workItem from="1622288885778" duration="4276000" />
       <workItem from="1622324933869" duration="713000" />
       <workItem from="1622360275574" duration="2613000" />
-      <workItem from="1622373891495" duration="554000" />
+      <workItem from="1622373891495" duration="1021000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -639,7 +637,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622297844164</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Dev card slots GUI">
+      <created>1622374532829</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1622374532829</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -658,7 +663,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="CLI gameboard print and print methods for classes update" />
     <MESSAGE value="CLI gameboard test" />
     <MESSAGE value="Bug fix" />
     <MESSAGE value="Market getOneColumn and getOneRow methods" />
@@ -683,7 +687,8 @@
     <MESSAGE value="StartingResourcesScene fix" />
     <MESSAGE value="gui update, leaderCards selection bug fixed" />
     <MESSAGE value="Controller fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Controller fix" />
+    <MESSAGE value="Dev card slots GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dev card slots GUI" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

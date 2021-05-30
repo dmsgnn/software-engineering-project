@@ -122,6 +122,10 @@ public class MainBoard {
     @FXML
     private Button changeView;
 
+    //board production
+    @FXML
+    public Button boardProduction;
+
     //strongbox
     @FXML
     private Button strongboxShields;
