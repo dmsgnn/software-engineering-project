@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="ClientPlayerBoard Map for production buff and methods for leadercards and develompent card slots GUI">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="depot and strongbox button's methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
     </list>
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
     <option name="SHOW_DIALOG" value="false" />
@@ -138,15 +140,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -332,7 +332,8 @@
       <workItem from="1622288885778" duration="4276000" />
       <workItem from="1622324933869" duration="713000" />
       <workItem from="1622360275574" duration="2613000" />
-      <workItem from="1622373891495" duration="4305000" />
+      <workItem from="1622373891495" duration="5036000" />
+      <workItem from="1622401494852" duration="2314000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -656,7 +657,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622376870392</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="depot and strongbox button's methods">
+      <created>1622378422409</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1622378422409</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,7 +683,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Market getOneColumn and getOneRow methods" />
     <MESSAGE value="LeaderCard drawing methods, Clientview endturn and CLI buyCardAction update" />
     <MESSAGE value="CLI payment fix" />
     <MESSAGE value="ClientPlayerBoard fix" />
@@ -700,7 +707,8 @@
     <MESSAGE value="Dev card slots GUI" />
     <MESSAGE value="boardProduction button" />
     <MESSAGE value="ClientPlayerBoard Map for production buff and methods for leadercards and develompent card slots GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="ClientPlayerBoard Map for production buff and methods for leadercards and develompent card slots GUI" />
+    <MESSAGE value="depot and strongbox button's methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="depot and strongbox button's methods" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

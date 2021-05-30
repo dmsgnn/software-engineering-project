@@ -193,6 +193,13 @@ public class MainBoard {
     //Production attributes
     private final ArrayList<Integer> prodDevSlots = new ArrayList<>();
     private final ArrayList<Integer> prodLeaderSlots = new ArrayList<>();
+    private final ArrayList<Resource> leaderCardGains = new ArrayList<>();
+    private final ArrayList<Resource> boardResProd = new ArrayList<>();
+
+    //Payments
+    private final ArrayList<Resource> warehousePayment = new ArrayList<>();
+    private final ArrayList<Resource> leaderDepotPayment = new ArrayList<>();
+    private final ArrayList<Resource> strongboxPayment = new ArrayList<>();
 
     public static void setGui(GUI gui) {
         MainBoard.gui = gui;
@@ -400,6 +407,41 @@ public class MainBoard {
         }
     }
 
+    public void startPayment(){
+        //disattivo tutto
+        ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
+        if(!board.getWarehouse().get(0).isEmpty()){
+            depotOneResourceOne.setDisable(false);
+        }
+
+        if(board.getWarehouse().get(1).size()==1){
+            depotTwoResourceOne.setDisable(false);
+        }
+        else if(board.getWarehouse().get(1).size()==2){
+            depotTwoResourceOne.setDisable(false);
+            depotTwoResourceTwo.setDisable(false);
+        }
+
+        if(board.getWarehouse().get(2).size()==1){
+            depotThreeResourceOne.setDisable(false);
+        }
+        else if(board.getWarehouse().get(2).size()==2){
+            depotThreeResourceOne.setDisable(false);
+            depotThreeResourceTwo.setDisable(false);
+        }
+        else if(board.getWarehouse().get(2).size()==3){
+            depotThreeResourceOne.setDisable(false);
+            depotThreeResourceTwo.setDisable(false);
+            depotThreeResourceThree.setDisable(false);
+        }
+
+        if(board.getStrongbox().get(Resource.COINS) > 0) strongboxCoins.setDisable(false);
+        if(board.getStrongbox().get(Resource.SERVANTS) > 0) strongboxServants.setDisable(false);
+        if(board.getStrongbox().get(Resource.STONES) > 0) strongboxStones.setDisable(false);
+        if(board.getStrongbox().get(Resource.SHIELDS) > 0) strongboxShields.setDisable(false);
+
+    }
+
     public void slot1Action() {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(0);
@@ -436,6 +478,8 @@ public class MainBoard {
     }
 
     public void strShieldsAction() {
+        strongboxPayment.add(Resource.SHIELDS);
+        if(clientView.getMyStrongbox().get(Resource.SHIELDS)==0) strongboxShields.setDisable(true);
     }
 
     public void strCoinsAction() {

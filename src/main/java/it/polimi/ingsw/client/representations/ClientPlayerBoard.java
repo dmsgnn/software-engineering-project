@@ -16,16 +16,16 @@ public class ClientPlayerBoard {
 
     private ArrayList<String> playedCards = new ArrayList<>();
     private int playerPosition = 0;
-    private Map<Integer, Boolean> vaticanReports = new HashMap<>();
+    private final Map<Integer, Boolean> vaticanReports = new HashMap<>();
     private int lorenzoPosition = -1;
-    private Map<Integer, String> devCardSlot = new HashMap<>();
+    private final Map<Integer, String> devCardSlot = new HashMap<>();
 
     private Map<Integer, ArrayList<Resource>> warehouse = new HashMap<>();
     private Map<Resource, Integer> strongbox = new HashMap<>();
 
-    private ArrayList<Resource> exchangeBuff = new ArrayList<>();
-    private ArrayList<Resource> discountBuff = new ArrayList<>();
-    private Map<String, Resource> productionBuff = new HashMap<>();
+    private final ArrayList<Resource> exchangeBuff = new ArrayList<>();
+    private final ArrayList<Resource> discountBuff = new ArrayList<>();
+    private final Map<String, Resource> productionBuff = new HashMap<>();
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;

@@ -55,6 +55,14 @@ public class ClientView implements Observer<ServerMessage> {
         return possibleActions;
     }
 
+    public Map<Resource, Integer> getMyStrongbox(){
+        return gameboard.getOnePlayerBoard(nickname).getStrongbox();
+    }
+
+    public Map<Integer, ArrayList<Resource>> getMyWarehouse(){
+        return gameboard.getOnePlayerBoard(nickname).getWarehouse();
+    }
+
     /**
      * utility method to find a leadercard
      * @param id card that I want to find
