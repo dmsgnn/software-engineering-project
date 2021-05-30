@@ -899,10 +899,15 @@ public class Controller implements Observer<ClientMessage> {
             if(resourceCounter+playersDisconnected.size()==playersNumber)
                 sendStartingCounter();
         }
+        else{
+            if (name.equals(username)){
+                endTurn();
+            }
+        }
+
         // disconnection message
         System.out.println("Disconnected players");
-        for(int i=0; i<playersDisconnected.size(); i++)
-            System.out.println(playersDisconnected.get(i));
+        for (String s : playersDisconnected) System.out.println(s);
     }
 
     private void increaseActivePlayer(int callNum){
