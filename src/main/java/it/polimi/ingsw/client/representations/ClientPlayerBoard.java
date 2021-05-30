@@ -25,7 +25,7 @@ public class ClientPlayerBoard {
 
     private ArrayList<Resource> exchangeBuff = new ArrayList<>();
     private ArrayList<Resource> discountBuff = new ArrayList<>();
-    private ArrayList<Resource> productionBuff = new ArrayList<>();
+    private Map<String, Resource> productionBuff = new HashMap<>();
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;
@@ -117,7 +117,7 @@ public class ClientPlayerBoard {
         return vaticanReports;
     }
 
-    public ArrayList<Resource> getProductionBuff() {
+    public Map<String, Resource> getProductionBuff() {
         return productionBuff;
     }
 
@@ -194,10 +194,10 @@ public class ClientPlayerBoard {
     }
 
     public void addDiscountBuff(Resource buff){
-        exchangeBuff.add(buff);
+        discountBuff.add(buff);
     }
 
     public void addProductionBuff(Resource buff){
-        exchangeBuff.add(buff);
+        productionBuff.put(playedCards.get(playedCards.size()-1), buff);
     }
 }

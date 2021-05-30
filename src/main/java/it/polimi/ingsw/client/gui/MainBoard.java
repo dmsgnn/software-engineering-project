@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.model.Resource;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -186,6 +187,12 @@ public class MainBoard {
 
     @FXML
     private Label message;
+
+    private Actions currentAction;
+
+    //Production attributes
+    private ArrayList<Integer> prodDevSlots = new ArrayList<>();
+    private ArrayList<Integer> prodLeaderSlots = new ArrayList<>();
 
     public static void setGui(GUI gui) {
         MainBoard.gui = gui;
@@ -375,4 +382,56 @@ public class MainBoard {
         }
     }
 
+    /**
+     * called to update the buttons when performing the production action
+     */
+    public void productionAction(){
+        currentAction = Actions.USEPRODUCTION;
+        ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
+        if(!board.getDevCardSlot().get(0).isEmpty()) devSlot1.setDisable(false);
+        if(!board.getDevCardSlot().get(1).isEmpty()) devSlot2.setDisable(false);
+        if(!board.getDevCardSlot().get(2).isEmpty()) devSlot3.setDisable(false);
+        boardProduction.setDisable(false);
+        if(board.getProductionBuff().containsKey(board.getPlayedCards().get(0))){
+            leaderCardOne.setDisable(false);
+        }
+        if(board.getProductionBuff().containsKey(board.getPlayedCards().get(1))){
+            leaderCardTwo.setDisable(false);
+        }
+    }
+
+    public void slot1Action() {
+        if(currentAction == Actions.USEPRODUCTION){
+            prodDevSlots.add(0);
+        }
+    }
+
+    public void slot2Action() {
+        if(currentAction == Actions.USEPRODUCTION){
+            prodDevSlots.add(1);
+        }
+    }
+
+    public void slot3Action() {
+        if(currentAction == Actions.USEPRODUCTION){
+            prodDevSlots.add(2);
+        }
+    }
+
+    public void useBoardProd() {
+
+    }
+
+    public void leaderOneAction() {
+        if(currentAction == Actions.USEPRODUCTION){
+            prodLeaderSlots.add(0);
+        }
+    }
+
+    public void leaderTwoAction() {
+        if(currentAction == Actions.USEPRODUCTION){
+            if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getProductionBuff().size()==1) prodLeaderSlots.add(0);
+            else prodLeaderSlots.add(1);
+        }
+    }
 }
