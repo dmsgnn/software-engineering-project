@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainBoard">
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainBoard">
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true">
          <image>
@@ -224,6 +222,21 @@
       <Button fx:id="depotThreeResourceThree" layoutX="756.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fx:id="depot3Resource3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="devSlot1" layoutX="915.0" layoutY="485.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devSlot1Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="devSlot2" layoutX="1050.0" layoutY="485.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devSlot2Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="devSlot3" layoutX="1190.0" layoutY="485.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devSlot3Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
    </children>

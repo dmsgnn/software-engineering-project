@@ -166,6 +166,19 @@ public class MainBoard {
     @FXML
     private ImageView depot3Resource3;
 
+    //card slots
+    @FXML
+    public Button devSlot1;
+    @FXML
+    public ImageView devSlot1Im;
+    @FXML
+    public Button devSlot2;
+    @FXML
+    public ImageView devSlot2Im;
+    @FXML
+    public Button devSlot3;
+    @FXML
+    public ImageView devSlot3Im;
 
     @FXML
     private Label message;
