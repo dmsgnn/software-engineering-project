@@ -32,12 +32,14 @@ public class Login {
             invalidUsername.setText("Username must have at most 15 characters");
         else if (user.contains(" "))
             invalidUsername.setText("Username can't contains blank spaces");
-        else
+        else {
             clientView.sendLogin(user);
+            button.setDisable(true);
+        }
     }
 
     public void takenUsername(){
         invalidUsername.setText("Username already taken");
-
+        button.setDisable(false);
     }
 }

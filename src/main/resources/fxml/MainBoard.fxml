@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainBoard">
+   <children>
+      <ImageView pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/boardBackground.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="250.0" layoutX="820.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/market.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="500.0" fitWidth="700.0" layoutX="650.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/board/Playerboard.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="440.0" layoutY="30.0" maxHeight="120.0" maxWidth="160.0" minHeight="40.0" minWidth="160.0" prefHeight="120.0" prefWidth="160.0" style="-fx-background-color: WHITE; -fx-background-radius: 20;" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="SansSerif Bold" size="11.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="marble1" fitHeight="20.0" fitWidth="20.0" layoutX="880.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble5" fitHeight="20.0" fitWidth="20.0" layoutX="880.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble9" fitHeight="20.0" fitWidth="20.0" layoutX="880.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble2" fitHeight="20.0" fitWidth="20.0" layoutX="902.5" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble6" fitHeight="20.0" fitWidth="20.0" layoutX="902.5" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble10" fitHeight="20.0" fitWidth="20.0" layoutX="902.5" layoutY="141.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble11" fitHeight="20.0" fitWidth="20.0" layoutX="924.75" layoutY="141.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble12" fitHeight="20.0" fitWidth="20.0" layoutX="948.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble7" fitHeight="20.0" fitWidth="20.0" layoutX="924.75" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble8" fitHeight="20.0" fitWidth="20.0" layoutX="948.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble3" fitHeight="20.0" fitWidth="20.0" layoutX="924.75" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble4" fitHeight="20.0" fitWidth="20.0" layoutX="948.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marble0" fitHeight="20.0" fitWidth="20.0" layoutX="955.0" layoutY="74.5" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="650.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/marketRules.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="devCardOne" layoutX="60.0" layoutY="180.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard1" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardTwo" layoutX="200.0" layoutY="180.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard2" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardThree" layoutX="340.0" layoutY="180.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard3" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardFour" layoutX="480.0" layoutY="180.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard4" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardFive" layoutX="60.0" layoutY="380.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard5" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardSix" layoutX="200.0" layoutY="380.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard6" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardSeven" layoutX="340.0" layoutY="380.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard7" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardEight" layoutX="480.0" layoutY="380.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard8" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardNine" layoutX="60.0" layoutY="580.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard9" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardTen" layoutX="200.0" layoutY="580.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard10" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardEleven" layoutX="340.0" layoutY="580.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard11" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="devCardTwelve" layoutX="480.0" layoutY="580.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devCard12" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="leaderCardOne" layoutX="1050.0" layoutY="40.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="leaderCard1" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="leaderCardTwo" layoutX="1190.0" layoutY="40.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="leaderCard2" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic></Button>
+      <Button fx:id="marketAction" alignment="CENTER" layoutX="60.0" layoutY="75.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="85.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="MARKET">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="productionAction" alignment="CENTER" layoutX="160.0" layoutY="75.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="PRODUCTION">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="buyCardAction" alignment="CENTER" layoutX="280.0" layoutY="75.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="BUY CARD">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="playCardAction" alignment="CENTER" layoutX="60.0" layoutY="120.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="PLAY CARD">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="discardCardAction" alignment="CENTER" layoutX="220.0" layoutY="120.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="DISCARD CARD">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="endTurn" alignment="CENTER" layoutX="280.0" layoutY="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="END TURN" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="changeView" alignment="CENTER" layoutX="60.0" layoutY="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="210.0" style="-fx-background-color: black; -fx-background-radius: 20;" text="CHANGE VIEW" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="strongboxShieldsCounter" alignment="CENTER" layoutX="708.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: lightblue; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="11.0" />
+         </font>
+      </Label>
+      <Button fx:id="strongboxShields" layoutX="680.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/punchboard/shields.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="strongboxCoins" layoutX="680.0" layoutY="670.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/punchboard/coins.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="strongboxCoinsCounter" alignment="CENTER" layoutX="708.0" layoutY="670.0" minHeight="2.0" minWidth="2.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: yellow; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="11.0" />
+         </font>
+      </Label>
+      <Button fx:id="strongboxServants" layoutX="736.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/punchboard/servants.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="strongboxServantsCounter" alignment="CENTER" layoutX="762.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="11.0" />
+         </font>
+      </Label>
+      <Button fx:id="strongboxStones" layoutX="736.0" layoutY="670.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/punchboard/stones.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="strongboxStonesCounter" alignment="CENTER" layoutX="762.0" layoutY="670.0" minHeight="2.0" minWidth="2.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: grey; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="11.0" />
+         </font>
+      </Label>
+      <Button fx:id="depotOneResourceOne" layoutX="733.0" layoutY="470.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot1Resource1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="depotTwoResourceOne" layoutX="718.0" layoutY="515.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot2Resource1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="depotTwoResourceTwo" layoutX="745.0" layoutY="515.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot2Resource2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="depotThreeResourceOne" layoutX="705.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot3Resource1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="depotThreeResourceTwo" layoutX="732.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot3Resource2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="depotThreeResourceThree" layoutX="756.0" layoutY="558.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot3Resource3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

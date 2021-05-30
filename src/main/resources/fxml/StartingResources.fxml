@@ -18,7 +18,7 @@
          <graphic>
             <ImageView>
                <image>
-                  <Image url="@../resources/punchboard/servant.png" />
+                  <Image url="@../resources/punchboard/servants.png" />
                </image>
             </ImageView>
          </graphic>
@@ -27,7 +27,7 @@
          <graphic>
             <ImageView>
                <image>
-                  <Image url="@../resources/punchboard/shield.png" />
+                  <Image url="@../resources/punchboard/shields.png" />
                </image>
             </ImageView>
          </graphic>
@@ -36,7 +36,7 @@
          <graphic>
             <ImageView>
                <image>
-                  <Image url="@../resources/punchboard/stone.png" />
+                  <Image url="@../resources/punchboard/stones.png" />
                </image>
             </ImageView>
          </graphic>
@@ -45,7 +45,7 @@
          <graphic>
             <ImageView>
                <image>
-                  <Image url="@../resources/punchboard/coin.png" />
+                  <Image url="@../resources/punchboard/coins.png" />
                </image>
             </ImageView>
          </graphic>

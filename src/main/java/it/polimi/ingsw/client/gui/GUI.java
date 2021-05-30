@@ -30,6 +30,7 @@ public class GUI extends Application implements UserInterface {
     private static Waiting waiting;
     private static StartingResourcesScene startingResources;
     private static LeaderCardSelection leaderCardSelection;
+    private static MainBoard playerBoard;
 
 
     private static Stage mainStage;
@@ -38,6 +39,7 @@ public class GUI extends Application implements UserInterface {
     private static Parent waitingRoot;
     private static Parent startingResourcesRoot;
     private static Parent leaderCardRoot;
+    private static Parent playerBoardRoot;
 
     public GUI() {
     }
@@ -72,6 +74,7 @@ public class GUI extends Application implements UserInterface {
         Waiting.setGui(this);
         StartingResourcesScene.setGui(this);
         LeaderCardSelection.setGui(this);
+        MainBoard.setGui(this);
 
         startGui();
 
@@ -110,7 +113,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void handleDisconnection(String nickname) {
-
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(playerBoardRoot);
+            playerBoard.setMessage("User " + nickname + " disconnected from the game");
+        });
     }
 
     @Override
@@ -120,7 +126,30 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void manageError(Error errorType) {
-
+        String error;
+        switch (errorType){
+            case STARTING_RESOURCES:
+                error = "Wrong placement of starting resources!!!";
+                break;
+            case STARTING_LEADER_CARD:
+                error = "Wrong cards selected!!!";
+                break;
+            case STARTING_MANAGE_RESOURCES:
+                error = "Wrong starting resources placement!!!";
+                break;
+            case INVALID_ACTION:
+                error = "Invalid action!!";
+                break;
+            case MANAGE_RESOURCES:
+                error = "Wrong resources management!!!";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + errorType);
+        }
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(playerBoardRoot);
+            playerBoard.setMessage(error);
+        });
     }
 
     @Override
@@ -189,6 +218,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void chooseAction(ArrayList<Actions> possibleActions) {
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(playerBoardRoot);
+            playerBoard.showActions(possibleActions);
+        });
     }
 
     @Override
@@ -223,7 +256,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void updateBoard() {
-
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(playerBoardRoot);
+            playerBoard.update();
+        });
     }
 
     public void startGui() throws IOException {
@@ -251,5 +287,10 @@ public class GUI extends Application implements UserInterface {
         FXMLLoader leaderLoader = new FXMLLoader(getClass().getResource("/fxml/LeaderCards.fxml"));
         leaderCardRoot = leaderLoader.load();
         leaderCardSelection = leaderLoader.getController();
+
+        // playerBoard
+        FXMLLoader playerBoardLoader = new FXMLLoader(getClass().getResource("/fxml/MainBoard.fxml"));
+        playerBoardRoot = playerBoardLoader.load();
+        playerBoard = playerBoardLoader.getController();
     }
 }
