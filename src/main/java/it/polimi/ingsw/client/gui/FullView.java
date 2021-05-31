@@ -235,6 +235,16 @@ public class FullView {
     @FXML
     private ImageView player4Leader2;
 
+    // cross
+    @FXML
+    private ImageView cross1;
+    @FXML
+    private ImageView cross2;
+    @FXML
+    private ImageView cross3;
+    @FXML
+    private ImageView cross4;
+
     private ArrayList<ImageView> resource1Depot1;
     private ArrayList<ImageView> resource1Depot2;
     private ArrayList<ImageView> resource2Depot2;
@@ -254,6 +264,7 @@ public class FullView {
     private ArrayList<ImageView> slot1;
     private ArrayList<ImageView> slot2;
     private ArrayList<ImageView> slot3;
+    private ArrayList<ImageView> cross;
 
 
 
@@ -286,6 +297,8 @@ public class FullView {
         slot1 = new ArrayList<>(Arrays.asList(player1Slot1, player2Slot1, player3Slot1, player4Slot1));
         slot2 = new ArrayList<>(Arrays.asList(player1Slot2, player2Slot2, player3Slot2, player4Slot2));
         slot3 = new ArrayList<>(Arrays.asList(player1Slot3, player2Slot3, player3Slot3, player4Slot3));
+        cross = new ArrayList<>(Arrays.asList(cross1, cross2, cross3, cross4));
+
     }
 
     public void showView(){
@@ -310,6 +323,8 @@ public class FullView {
             playerName.get(playerNum).setStyle("-fx-background-color: green; -fx-background-radius: 20;");
         else
             playerName.get(playerNum).setStyle("-fx-background-color: red; -fx-background-radius: 20;");
+        //
+
         // set strongbox counter
         strongboxShieldsCounter.get(playerNum).setText(String.valueOf(board.getStrongbox().get(Resource.SHIELDS)));
         strongboxServantsCounter.get(playerNum).setText(String.valueOf(board.getStrongbox().get(Resource.SERVANTS)));
@@ -422,9 +437,112 @@ public class FullView {
             slot3.get(playerNum).setVisible(false);
         else
             slot3.get(playerNum).setImage(new Image("graphics/devCards/" + board.getDevCardSlot().get(2) + ".png"));
+        // cross
+        double[] newPosition = getCrossPosition(board.getPlayerPosition());
+        if(playerNum==0) {
+            cross.get(playerNum).setLayoutX(newPosition[0]);
+            cross.get(playerNum).setLayoutY(newPosition[1]);
+        }
+        else if(playerNum==1){
+            cross.get(playerNum).setLayoutX(newPosition[0]+680);
+            cross.get(playerNum).setLayoutY(newPosition[1]);
+        }
+        else if(playerNum==2){
+            cross.get(playerNum).setLayoutX(newPosition[0]);
+            cross.get(playerNum).setLayoutY(newPosition[1]+380);
+        }
+        else if(playerNum==3){
+            cross.get(playerNum).setLayoutX(newPosition[0]+680);
+            cross.get(playerNum).setLayoutY(newPosition[1]+380);
+        }
+
     }
 
+    private double[] getCrossPosition(int position){
+        if(position == 1){
+            return new double[] {95,121};
+        }
+        else if(position == 2){
+            return new double[] {120,121};
+
+        }
+        else if(position == 3){
+            return new double[] {120,96};
+        }
+        else if(position == 4){
+            return new double[] {118,71};
+        }
+        else if(position == 5){
+            return new double[] {143,71};
+        }
+        else if(position == 6){
+            return new double[] {168,71};
+        }
+        else if(position == 7){
+            return new double[] {193,71};
+        }
+        else if(position == 8){
+            return new double[] {218,71};
+        }
+        else if(position == 9){
+            return new double[] {242,71};
+        }
+        else if(position == 10){
+            return new double[] {242,96};
+        }
+        else if(position == 11){
+            return new double[] {242,121};
+        }
+        else if(position == 12){
+            return new double[] {267,121};
+        }
+        else if(position == 13){
+            return new double[] {292,121};
+        }
+        else if(position == 14){
+            return new double[] {316,121};
+        }
+        else if(position == 15){
+            return new double[] {340,121};
+        }
+        else if(position == 16){
+            return new double[] {365,121};
+        }
+        else if(position == 17){
+            return new double[] {365,96};
+        }
+        else if(position == 18){
+            return new double[] {364,71};
+        }
+        else if(position == 19){
+            return new double[] {389,71};
+        }
+        else if(position == 20){
+            return new double[] {414,71};
+        }
+        else if(position == 21){
+            return new double[] {438,71};
+        }
+        else if(position == 22){
+            return new double[] {462,71};
+        }
+        else if(position == 23){
+            return new double[] {487,71};
+        }
+        else if(position == 24){
+            return new double[] {512,71};
+        }
+
+        else{
+            return new double[] {70,121};
+
+        }
+
+    }
+
+
     private void hideThirdPlayer(){
+        cross3.setVisible(false);
         board3.setVisible(false);
         player3Name.setVisible(false);
         shields3.setVisible(false);
@@ -440,6 +558,7 @@ public class FullView {
 
 
     private void hideFourthPlayer(){
+        cross4.setVisible(false);
         board4.setVisible(false);
         player4Name.setVisible(false);
         shields4.setVisible(false);

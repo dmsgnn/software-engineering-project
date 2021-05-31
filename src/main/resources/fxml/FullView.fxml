@@ -283,5 +283,25 @@
       <ImageView fx:id="vatican3Player4" fitHeight="30.0" fitWidth="30.0" layoutX="1125.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="vatican2Player3" fitHeight="30.0" fitWidth="30.0" layoutX="298.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="vatican2Player4" fitHeight="30.0" fitWidth="30.0" layoutX="978.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cross1" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/redCross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross2" fitHeight="20.0" fitWidth="20.0" layoutX="750.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/redCross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross4" fitHeight="20.0" fitWidth="20.0" layoutX="750.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/redCross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross3" fitHeight="20.0" fitWidth="20.0" layoutX="70.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/redCross.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

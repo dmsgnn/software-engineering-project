@@ -4,23 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="GUI: main playerboard page, action buttons, images initialization and messages manager">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/FullView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/graphics/arrow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/punchboard/blackCross.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/punchboard/redCross.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/punchboard/vatican1Active.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/punchboard/vatican2Active.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/punchboard/vatican3Active.png" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="GUI: full view implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/FullView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/FullView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainBoard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainBoard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/resources/back/Masters of Renaissance__Cards_BACK_3mmBleed-49-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/resources/back/leaderBack.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/resources/punchboard/quadrato arancione.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/resources/punchboard/vatican2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/resources/punchboard/quadrato giallo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/resources/punchboard/vatican1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/resources/punchboard/quadrato rosso.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/resources/punchboard/vatican3.png" afterDir="false" />
     </list>
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +101,7 @@
       <recent name="it.polimi.ingsw" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in AM5">
+  <component name="RunManager" selected="Application.ClientMain">
     <configuration name="ClientMain" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.client.ClientMain" />
       <module name="AM5" />
@@ -208,9 +197,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in AM5" />
         <item itemvalue="Application.ClientMain" />
         <item itemvalue="Application.ServerMain" />
+        <item itemvalue="JUnit.All in AM5" />
         <item itemvalue="Application.GUI" />
         <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
       </list>
@@ -353,7 +342,7 @@
       <workItem from="1622453519397" duration="1794000" />
       <workItem from="1622459427293" duration="8896000" />
       <workItem from="1622470643066" duration="65000" />
-      <workItem from="1622471356827" duration="1838000" />
+      <workItem from="1622471356827" duration="5514000" />
     </task>
     <task id="LOCAL-00001" summary="DevelopmentCardDeck class and testing">
       <created>1617525576136</created>
@@ -691,7 +680,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622404494677</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="GUI: full view implemented">
+      <created>1622473289367</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1622473289368</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -710,7 +706,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="CLI payment fix" />
     <MESSAGE value="ClientPlayerBoard fix" />
     <MESSAGE value="fixes" />
     <MESSAGE value="market action works and modified some methods of the model" />
@@ -735,7 +730,8 @@
     <MESSAGE value="ClientPlayerBoard Map for production buff and methods for leadercards and develompent card slots GUI" />
     <MESSAGE value="depot and strongbox button's methods" />
     <MESSAGE value="GUI button actions update" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI button actions update" />
+    <MESSAGE value="GUI: full view implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI: full view implemented" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

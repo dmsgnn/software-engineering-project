@@ -186,6 +186,17 @@ public class MainBoard {
     public ImageView devSlot3Im;
 
     @FXML
+    public ImageView vatican1;
+    @FXML
+    public ImageView vatican2;
+    @FXML
+    public ImageView vatican3;
+    @FXML
+    public ImageView redCross;
+    @FXML
+    public ImageView blackCross;
+
+    @FXML
     private Label message;
 
     private Actions currentAction;
@@ -211,9 +222,21 @@ public class MainBoard {
     }
 
     public void update(){
+        ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
         buttonStatus();
         setStrongboxCounters();
         showDepots();
+        // cross
+        double[] newPosition = getCrossPosition(board.getPlayerPosition());
+        redCross.setLayoutX(newPosition[0]);
+        redCross.setLayoutY(newPosition[1]);
+        if(clientView.getGameboard().getPlayerBoards().size()==1){
+            double[] newBlackPosition = getCrossPosition(board.getPlayerPosition());
+            if(board.getPlayerPosition()==board.getLorenzoPosition())
+                blackCross.setLayoutX(newPosition[0]-10);
+            blackCross.setLayoutY(newPosition[1]);
+        }
+        showVatican(board);
         MarbleColors[][] market = clientView.getGameboard().getMarket();
         String[][] grid = clientView.getGameboard().getCards();
 
@@ -284,6 +307,91 @@ public class MainBoard {
             leaderCardTwo.setVisible(false);
     }
 
+    private double[] getCrossPosition(int position) {
+        if (position == 1) {
+            return new double[]{715, 350};
+        } else if (position == 2) {
+            return new double[]{750, 350};
+        } else if (position == 3) {
+            return new double[]{750, 316};
+        } else if (position == 4) {
+            return new double[]{748, 283};
+        } else if (position == 5) {
+            return new double[]{783, 283};
+        } else if (position == 6) {
+            return new double[]{818, 283};
+        } else if (position == 7) {
+            return new double[]{850, 283};
+        } else if (position == 8) {
+            return new double[]{885, 283};
+        } else if (position == 9) {
+            return new double[]{920, 283};
+        } else if (position == 10) {
+            return new double[]{920, 316};
+        } else if (position == 11) {
+            return new double[]{920, 350};
+        } else if (position == 12) {
+            return new double[]{955, 350};
+        } else if (position == 13) {
+            return new double[]{990, 350};
+        } else if (position == 14) {
+            return new double[]{1023, 350};
+        } else if (position == 15) {
+            return new double[]{1058, 350};
+        } else if (position == 16) {
+            return new double[]{1092,350 };
+        } else if (position == 17) {
+            return new double[]{1092,316 };
+        } else if (position == 18) {
+            return new double[]{1092, 283};
+        } else if (position == 19) {
+            return new double[]{1126, 283};
+        } else if (position == 20) {
+            return new double[]{1161, 283};
+        } else if (position == 21) {
+            return new double[]{1196, 283};
+        } else if (position == 22) {
+            return new double[]{1228, 283};
+        } else if (position == 23) {
+            return new double[]{1262, 283};
+        } else if (position == 24) {
+            return new double[]{1296, 283};
+        } else {
+            return new double[]{680, 350};
+
+        }
+    }
+
+    private void showVatican(ClientPlayerBoard board){
+        if(board.getVaticanReports().containsKey(8)) {
+            if (board.getVaticanReports().get(8))
+                vatican1.setImage(new Image("resources/punchboard/vatican1Active.png"));
+            else
+                vatican1.setVisible(false);
+        }
+        else {
+            vatican1.setImage(new Image("resources/punchboard/vatican1.png"));
+        }
+        if(board.getVaticanReports().containsKey(16)) {
+            if (board.getVaticanReports().get(16))
+                vatican2.setImage(new Image("resources/punchboard/vatican2Active.png"));
+            else
+                vatican2.setVisible(false);
+        }
+        else {
+            vatican2.setImage(new Image("resources/punchboard/vatican2.png"));
+        }
+        if(board.getVaticanReports().containsKey(24)) {
+            if (board.getVaticanReports().get(24))
+                vatican3.setImage(new Image("resources/punchboard/vatican3Active.png"));
+            else
+                vatican3.setVisible(false);
+        }
+        else {
+            vatican3.setImage(new Image("resources/punchboard/vatican3.png"));
+        }
+    }
+
     private void showDepots(){
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
         if(board.isDepotEmpty(0))
@@ -340,10 +448,14 @@ public class MainBoard {
         // message label
         message.setVisible(false);
         //change view
-        if(clientView.getGameboard().getPlayerBoards().size()>1)
+        if(clientView.getGameboard().getPlayerBoards().size()>1) {
             changeView.setVisible(true);
-        else
+            blackCross.setVisible(false);
+        }
+        else {
             changeView.setVisible(false);
+            blackCross.setVisible(true);
+        }
         // actions button
         marketAction.setVisible(false);
         marketAction.setDisable(true);
