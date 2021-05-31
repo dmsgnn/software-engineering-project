@@ -35,6 +35,12 @@ public interface UserInterface {
     void handleDisconnection(String nickname);
 
     /**
+     * handles the reconnection of one player
+     * @param nickname of the player that reconnected
+     */
+    void handleReconnection(String nickname);
+
+    /**
      * Manages a losing player
      * @param nickname Name of loser
      */

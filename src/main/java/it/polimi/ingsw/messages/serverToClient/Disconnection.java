@@ -12,7 +12,7 @@ public class Disconnection implements ServerMessage {
 
     @Override
     public void handleMessage(ClientView clientView) {
-
+        clientView.playerDisconnected(username);
     }
 
     @Override

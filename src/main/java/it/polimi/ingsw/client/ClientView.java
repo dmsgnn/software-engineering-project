@@ -425,6 +425,28 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
+     * called when a player disconnects from the game
+     * @param nickname
+     */
+    public void playerDisconnected(String nickname){
+        synchronized (lock){
+            gameboard.getOnePlayerBoard(nickname).setConnected(false);
+            uiType.handleDisconnection(nickname);
+        }
+    }
+
+    /**
+     * called when a player reconnects to the game
+     * @param nickname
+     */
+    public void playerReconnected(String nickname){
+        synchronized (lock){
+            gameboard.getOnePlayerBoard(nickname).setConnected(true);
+            uiType.handleReconnection(nickname);
+        }
+    }
+
+    /**
      * called after a player reconnects to the game, the parameters contains all the informations regarding the game
      * @param username of this client
      * @param devCardSlots all dev cards bought by all the player
@@ -463,6 +485,21 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
+     * called to update the board after Lorenzo's move
+     * @param position
+     * @param lorenzoPosition new Lorenzo's position
+     * @param firstGrid
+     * @param newCardGrid new development card grid
+     */
+    public void lorenzoUpdate(int position, int lorenzoPosition, String[][] firstGrid, String[][] newCardGrid){
+        synchronized (lock) {
+            gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(lorenzoPosition);
+            getGameboard().initializeCards(newCardGrid);
+            uiType.updateBoard();
+        }
+    }
+
+    /**
      * called to update every player faithtrack
      * @param vaticanPosition map of the players who activated the report in the specified position
      * @param position new faith track position of each player
@@ -477,10 +514,6 @@ public class ClientView implements Observer<ServerMessage> {
                 }
             }
         }
-    }
-
-    public void lorenzoUpdate(int vaticanPosition, int position, boolean report, int lorPos, Map<String, String> cardChange){
-
     }
 
     /**

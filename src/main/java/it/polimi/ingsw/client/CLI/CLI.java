@@ -224,7 +224,12 @@ public class CLI implements UserInterface {
 
     @Override
     public void handleDisconnection(String nickname) {
-        System.out.println(nickname + " has disconnected from the game!");
+        System.out.println(ColorCLI.RED + nickname + " disconnected from the game!" + ColorCLI.RESET);
+    }
+
+    @Override
+    public void handleReconnection(String nickname) {
+        System.out.println(ColorCLI.GREEN + nickname + " reconnected to the game!" + ColorCLI.RESET);
     }
 
     /**

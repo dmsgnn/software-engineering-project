@@ -14,7 +14,7 @@ public class Reconnection implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) {
-
+        clientView.playerReconnected(username);
     }
 
     @Override

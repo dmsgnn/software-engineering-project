@@ -120,6 +120,11 @@ public class GUI extends Application implements UserInterface {
     }
 
     @Override
+    public void handleReconnection(String nickname) {
+
+    }
+
+    @Override
     public void loser(String nickname) {
 
     }

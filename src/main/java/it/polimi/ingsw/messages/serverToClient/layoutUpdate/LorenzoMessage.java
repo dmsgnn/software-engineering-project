@@ -8,19 +8,18 @@ public class LorenzoMessage implements ServerMessage {
     private int position;
     private int lorenzoPosition;
     private String[][] firstGrid;
-    private String[][] secondGrid;
+    private String[][] newCardGrid;
 
     public LorenzoMessage(int position, int lorenzoPosition, String[][] firstGrid, String[][] secondGrid) {
         this.position = position;
         this.lorenzoPosition = lorenzoPosition;
         this.firstGrid = firstGrid;
-        this.secondGrid = secondGrid;
+        this.newCardGrid = secondGrid;
     }
 
     @Override
     public void handleMessage(ClientView clientView) {
-
-
+        clientView.lorenzoUpdate(position, lorenzoPosition, firstGrid, newCardGrid);
     }
 
     @Override
