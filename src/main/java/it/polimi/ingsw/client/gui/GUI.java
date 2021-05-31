@@ -239,7 +239,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void useProductionAction() {
-
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(playerBoardRoot);
+            playerBoard.productionAction();
+        });
     }
 
     @Override

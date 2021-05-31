@@ -65,6 +65,8 @@ public class ClientPlayerBoard {
         this.connected = connected;
     }
 
+    //Getters
+
     public String getPlayerNickname() {
         return playerNickname;
     }
@@ -124,6 +126,8 @@ public class ClientPlayerBoard {
     public boolean isProductionBuffActive(){
         return productionBuff.size()!=0;
     }
+
+    //Setters or updates
 
     public void addPlayedCard(String id, LeaderCard card){
         playedCards.add(id);

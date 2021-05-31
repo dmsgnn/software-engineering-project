@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainBoard {
     private static ClientView clientView;
@@ -208,9 +210,10 @@ public class MainBoard {
     private final ArrayList<Resource> boardResProd = new ArrayList<>();
 
     //Payments
-    private final ArrayList<Resource> warehousePayment = new ArrayList<>();
-    private final ArrayList<Resource> leaderDepotPayment = new ArrayList<>();
-    private final ArrayList<Resource> strongboxPayment = new ArrayList<>();
+    private final HashMap<Resource, Integer> warehousePayment = new HashMap<>();
+    private final HashMap<Resource, Integer> leaderDepotPayment = new HashMap<>();
+    private final HashMap<Resource, Integer> strongboxPayment = new HashMap<>();
+    private boolean actionDone=false;
 
     public static void setGui(GUI gui) {
         MainBoard.gui = gui;
@@ -520,20 +523,30 @@ public class MainBoard {
     public void productionAction(){
         currentAction = Actions.USEPRODUCTION;
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
-        if(!board.getDevCardSlot().get(0).isEmpty()) devSlot1.setDisable(false);
-        if(!board.getDevCardSlot().get(1).isEmpty()) devSlot2.setDisable(false);
-        if(!board.getDevCardSlot().get(2).isEmpty()) devSlot3.setDisable(false);
+        if(board.getDevCardSlot().get(0)!=null) devSlot1.setDisable(false);
+        if(board.getDevCardSlot().get(1)!=null) devSlot2.setDisable(false);
+        if(board.getDevCardSlot().get(2)!=null) devSlot3.setDisable(false);
         boardProduction.setDisable(false);
-        if(board.getProductionBuff().containsKey(board.getPlayedCards().get(0))){
+        if(!board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(0))){
             leaderCardOne.setDisable(false);
         }
-        if(board.getProductionBuff().containsKey(board.getPlayedCards().get(1))){
+        if(!board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(1))){
             leaderCardTwo.setDisable(false);
         }
     }
 
+    /**
+     * called to update the button status to start the payment phase
+     */
     public void startPayment(){
+        for(Resource rss : Resource.values()){
+            warehousePayment.put(rss, 0);
+            leaderDepotPayment.put(rss, 0);
+            strongboxPayment.put(rss, 0);
+        }
+
         //disattivo tutto
+
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
         if(!board.getWarehouse().get(0).isEmpty()){
             depotOneResourceOne.setDisable(false);
@@ -586,7 +599,7 @@ public class MainBoard {
     }
 
     public void useBoardProd() {
-
+        //disattivo tutto e attivo pulsanti che chiedono cosa vuole produrre e guadagnare
     }
 
     public void leaderOneAction() {
@@ -603,34 +616,78 @@ public class MainBoard {
     }
 
     public void strShieldsAction() {
-        strongboxPayment.add(Resource.SHIELDS);
+        strongboxPayment.put(Resource.SHIELDS, strongboxPayment.get(Resource.SHIELDS)+1);
         if(clientView.getMyStrongbox().get(Resource.SHIELDS)==0) strongboxShields.setDisable(true);
     }
 
     public void strCoinsAction() {
+        strongboxPayment.put(Resource.COINS, strongboxPayment.get(Resource.COINS)+1);
+        if(clientView.getMyStrongbox().get(Resource.COINS)==0) strongboxCoins.setDisable(true);
     }
 
     public void strServantsAction() {
+        strongboxPayment.put(Resource.SERVANTS, strongboxPayment.get(Resource.SERVANTS)+1);
+        if(clientView.getMyStrongbox().get(Resource.SERVANTS)==0) strongboxServants.setDisable(true);
     }
 
     public void strStonesAction() {
+        strongboxPayment.put(Resource.STONES, strongboxPayment.get(Resource.STONES)+1);
+        if(clientView.getMyStrongbox().get(Resource.STONES)==0) strongboxStones.setDisable(true);
     }
 
     public void depotOneResourceOneAction() {
+        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(0);
+        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+
+        depotOneResourceOne.setDisable(true);
     }
 
     public void depotTwoResourceOneAction() {
+        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
+        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+
+        depotTwoResourceOne.setDisable(true);
     }
 
     public void depotTwoResourceTwoAction() {
+        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
+        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+
+        depotTwoResourceTwo.setDisable(true);
     }
 
     public void depotThreeResourceOneAction() {
+        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
+        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+
+        depotThreeResourceOne.setDisable(true);
     }
 
     public void depotThreeResourceTwoAction() {
+        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
+        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+
+        depotThreeResourceTwo.setDisable(true);
     }
 
     public void depotThreeResourceThreeAction() {
+        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
+        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+
+        depotThreeResourceThree.setDisable(true);
+    }
+
+    public void endOrDoneButtonAction() {
+        if(currentAction == Actions.USEPRODUCTION && !actionDone){
+            actionDone = true;
+            startPayment();
+        }
+        else if(currentAction == Actions.USEPRODUCTION){
+            clientView.useProduction(prodDevSlots, prodLeaderSlots, leaderCardGains, boardResProd, warehousePayment, leaderDepotPayment, strongboxPayment);
+        }
+    }
+
+    public void sendProduction() {
+        clientView.sendAction(Actions.USEPRODUCTION);
     }
 }

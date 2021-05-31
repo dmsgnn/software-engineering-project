@@ -287,7 +287,7 @@ public class CLI implements UserInterface {
         ArrayList<String> pickedCards = new ArrayList<>();
         String input;
         StringBuilder builder = new StringBuilder();
-        System.out.print("Choose your starting cards \n");
+        System.out.print("\nSelect two starting cards, type 1, 2, 3 or 4: \n");
 
         leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawTop()).forEach(builder::append);
         builder.append("\n");
@@ -298,13 +298,11 @@ public class CLI implements UserInterface {
         leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawAbility()).forEach(builder::append);
         builder.append("\n");
         leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawBottom()).forEach(builder::append);
-        builder.append("\n");
-        System.out.println(builder.toString());
+        System.out.println(builder);
 
         int counter=0;
         ArrayList<Integer> ids = new ArrayList<>();
         int num;
-        System.out.println("Choose two cards, type 1, 2, 3 or 4: ");
         while(counter<2){
             input = scanner.nextLine();
             try{
