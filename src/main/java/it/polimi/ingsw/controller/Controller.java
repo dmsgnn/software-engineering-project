@@ -22,6 +22,7 @@ import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.marble.Marbles;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.model.playerboard.faithTrack.FaithTrack;
+import it.polimi.ingsw.model.singleplayer.LorenzoAI;
 import it.polimi.ingsw.server.ServerView;
 
 import javax.naming.InsufficientResourcesException;
@@ -535,7 +536,18 @@ public class Controller implements Observer<ClientMessage> {
     }
 
     public void lorenzoAction(){
+        String[][] firstGrid = getDevCardGrid();
         game.getLorenzo().drawToken();
+        String[][] secondGrid = getDevCardGrid();
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            System.out.println("sleep error controller row 543");
+        }
+        faithTrackMessage();
+        Player player = game.getPlayers(0);
+        LorenzoAI lorenzo = game.getLorenzo();
+        serverViews.get(0).lorenzoUpdate(player.getFaithTrack().getPosition(),lorenzo.getTrack().getPosition(),firstGrid,secondGrid);
         startTurn();
     }
 
@@ -883,6 +895,9 @@ public class Controller implements Observer<ClientMessage> {
     //------------------TOOLS------------------
 
     public synchronized void playerDisconnection(String username){
+        for (ServerView s: serverViews){
+            s.disconnectionMessage(username);
+        }
         playersDisconnected.add(0,username);
         String name = game.getPlayers(currentActivePlayer).getNickname();
         if(playerStatus.get(username).get(0) && playerStatus.get(username).get(1)) {
@@ -931,6 +946,9 @@ public class Controller implements Observer<ClientMessage> {
 
         playersDisconnected.remove(serverView.getUsername());
         String username = serverView.getUsername();
+        for (ServerView s: serverViews){
+            s.reconnectionMessage(username);
+        }
         for (i = 0; i < serverViews.size(); i++) {
             if (serverViews.get(i).getUsername().equals(username)){
                 serverViews.set(i,serverView);
