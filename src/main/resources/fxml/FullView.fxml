@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="main" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.FullView">
+   <children>
+      <ImageView pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/boardBackground.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="500.0" fitWidth="500.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/board/Playerboard.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="500.0" fitWidth="500.0" layoutX="730.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/board/Playerboard.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="player1Leader1" fitHeight="150.0" fitWidth="110.0" layoutX="580.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player1Leader2" fitHeight="150.0" fitWidth="110.0" layoutX="580.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="changeView" alignment="CENTER" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#back" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: white; -fx-background-radius: 20;" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="10.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../graphics/arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="player1Name" alignment="CENTER" contentDisplay="CENTER" layoutX="580.0" layoutY="50.0" maxHeight="40.0" maxWidth="110.0" minHeight="40.0" minWidth="100.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: WHITE; -fx-background-radius: 20;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="SansSerif Bold" size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="player2Name" alignment="CENTER" contentDisplay="CENTER" layoutX="1260.0" layoutY="50.0" maxHeight="40.0" maxWidth="110.0" minHeight="40.0" minWidth="100.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: WHITE; -fx-background-radius: 20;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="SansSerif Bold" size="9.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="player2Leader2" fitHeight="150.0" fitWidth="110.0" layoutX="1260.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player2Leader1" fitHeight="150.0" fitWidth="110.0" layoutX="1260.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="board3" fitHeight="500.0" fitWidth="500.0" layoutX="50.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/board/Playerboard.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="board4" fitHeight="500.0" fitWidth="500.0" layoutX="730.0" layoutY="430.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/board/Playerboard.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="player3Name" alignment="CENTER" contentDisplay="CENTER" layoutX="580.0" layoutY="430.0" maxHeight="40.0" maxWidth="110.0" minHeight="40.0" minWidth="100.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: WHITE; -fx-background-radius: 20;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="SansSerif Bold" size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="player4Name" alignment="CENTER" contentDisplay="CENTER" layoutX="1260.0" layoutY="430.0" maxHeight="40.0" maxWidth="110.0" minHeight="40.0" minWidth="100.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: WHITE; -fx-background-radius: 20;" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="SansSerif Bold" size="9.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="player3Leader2" fitHeight="150.0" fitWidth="110.0" layoutX="580.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player3Leader1" fitHeight="150.0" fitWidth="110.0" layoutX="580.0" layoutY="638.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player4Leader2" fitHeight="150.0" fitWidth="110.0" layoutX="1260.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player4Leader1" fitHeight="150.0" fitWidth="110.0" layoutX="1260.0" layoutY="638.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="strongboxStonesCounterPlayer1" alignment="CENTER" layoutX="135.0" layoutY="350.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: grey; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="115.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/stones.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxServantsCounterPlayer1" alignment="CENTER" layoutX="135.0" layoutY="330.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="115.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/servants.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxCoinsCounterPlayer1" alignment="CENTER" layoutX="88.0" layoutY="350.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: yellow; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="68.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/coins.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="68.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/shields.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxShieldsCounterPlayer1" alignment="CENTER" layoutX="88.0" layoutY="330.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: lightblue; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="748.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/shields.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxShieldsCounterPlayer2" alignment="CENTER" layoutX="768.0" layoutY="330.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: lightblue; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="795.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/servants.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxServantsCounterPlayer2" alignment="CENTER" layoutX="815.0" layoutY="330.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="748.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/coins.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxCoinsCounterPlayer2" alignment="CENTER" layoutX="768.0" layoutY="350.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: yellow; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="795.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/stones.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxStonesCounterPlayer2" alignment="CENTER" layoutX="815.0" layoutY="350.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: grey; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="shields3" fitHeight="16.0" fitWidth="16.0" layoutX="68.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/shields.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxShieldsCounterPlayer3" alignment="CENTER" layoutX="88.0" layoutY="710.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: lightblue; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="servants3" fitHeight="16.0" fitWidth="16.0" layoutX="115.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/servants.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxServantsCounterPlayer3" alignment="CENTER" layoutX="135.0" layoutY="710.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="coins3" fitHeight="16.0" fitWidth="16.0" layoutX="68.0" layoutY="730.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/coins.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxCoinsCounterPlayer3" alignment="CENTER" layoutX="88.0" layoutY="730.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: yellow; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="stones3" fitHeight="16.0" fitWidth="16.0" layoutX="115.0" layoutY="730.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/stones.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxStonesCounterPlayer3" alignment="CENTER" layoutX="135.0" layoutY="730.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: grey; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="shields4" fitHeight="16.0" fitWidth="16.0" layoutX="748.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/shields.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxShieldsCounterPlayer4" alignment="CENTER" layoutX="768.0" layoutY="710.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: lightblue; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="servants4" fitHeight="16.0" fitWidth="16.0" layoutX="795.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/servants.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxServantsCounterPlayer4" alignment="CENTER" layoutX="815.0" layoutY="710.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="coins4" fitHeight="16.0" fitWidth="16.0" layoutX="748.0" layoutY="730.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/coins.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxCoinsCounterPlayer4" alignment="CENTER" layoutX="768.0" layoutY="730.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: yellow; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="stones4" fitHeight="16.0" fitWidth="16.0" layoutX="795.0" layoutY="730.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/punchboard/stones.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="strongboxStonesCounterPlayer4" alignment="CENTER" layoutX="815.0" layoutY="730.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: grey; -fx-background-radius: 6;" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold" size="8.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="player1Slot1" fitHeight="130.0" fitWidth="110.0" layoutX="245.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player1Slot2" fitHeight="130.0" fitWidth="110.0" layoutX="340.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player1Slot3" fitHeight="130.0" fitWidth="110.0" layoutX="438.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player2Slot1" fitHeight="130.0" fitWidth="110.0" layoutX="925.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player2Slot2" fitHeight="130.0" fitWidth="110.0" layoutX="1020.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player2Slot3" fitHeight="130.0" fitWidth="110.0" layoutX="1118.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player3Slot1" fitHeight="130.0" fitWidth="110.0" layoutX="245.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player3Slot2" fitHeight="130.0" fitWidth="110.0" layoutX="340.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player3Slot3" fitHeight="130.0" fitWidth="110.0" layoutX="438.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player4Slot1" fitHeight="130.0" fitWidth="110.0" layoutX="925.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player4Slot2" fitHeight="130.0" fitWidth="110.0" layoutX="1020.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player4Slot3" fitHeight="130.0" fitWidth="110.0" layoutX="1118.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot1Player1" fitHeight="16.0" fitWidth="16.0" layoutX="110.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot2Player1" fitHeight="16.0" fitWidth="16.0" layoutX="98.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2Depot2Player1" fitHeight="16.0" fitWidth="16.0" layoutX="118.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot3Player1" fitHeight="16.0" fitWidth="16.0" layoutX="88.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2Depot3Player1" fitHeight="16.0" fitWidth="16.0" layoutX="108.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource3Depot3Player1" fitHeight="16.0" fitWidth="16.0" layoutX="128.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot1Player2" fitHeight="16.0" fitWidth="16.0" layoutX="790.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot2Player2" fitHeight="16.0" fitWidth="16.0" layoutX="778.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2Depot2Player2" fitHeight="16.0" fitWidth="16.0" layoutX="798.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot3Player2" fitHeight="16.0" fitWidth="16.0" layoutX="768.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2Depot3Player2" fitHeight="16.0" fitWidth="16.0" layoutX="788.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource3Depot3Player2" fitHeight="16.0" fitWidth="16.0" layoutX="808.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot1Player3" fitHeight="16.0" fitWidth="16.0" layoutX="110.0" layoutY="585.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot2Player3" fitHeight="16.0" fitWidth="16.0" layoutX="98.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2Depot2Player3" fitHeight="16.0" fitWidth="16.0" layoutX="118.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot3Player3" fitHeight="16.0" fitWidth="16.0" layoutX="88.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2Depot3Player3" fitHeight="16.0" fitWidth="16.0" layoutX="108.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource3Depot3Player3" fitHeight="16.0" fitWidth="16.0" layoutX="128.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot1Player4" fitHeight="16.0" fitWidth="16.0" layoutX="790.0" layoutY="585.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot2Player4" fitHeight="16.0" fitWidth="16.0" layoutX="778.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2Depot2Player4" fitHeight="16.0" fitWidth="16.0" layoutX="798.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1Depot3Player4" fitHeight="16.0" fitWidth="16.0" layoutX="768.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2Depot3Player4" fitHeight="16.0" fitWidth="16.0" layoutX="788.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource3Depot3Player4" fitHeight="16.0" fitWidth="16.0" layoutX="808.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican1Player1" fitHeight="30.0" fitWidth="30.0" layoutX="176.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican2Player1" fitHeight="30.0" fitWidth="30.0" layoutX="298.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican3Player1" fitHeight="30.0" fitWidth="30.0" layoutX="445.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican1Player2" fitHeight="30.0" fitWidth="30.0" layoutX="856.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican2Player2" fitHeight="30.0" fitWidth="30.0" layoutX="978.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican3Player2" fitHeight="30.0" fitWidth="30.0" layoutX="1125.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican1Player3" fitHeight="30.0" fitWidth="30.0" layoutX="176.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican3Player3" fitHeight="30.0" fitWidth="30.0" layoutX="445.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican1Player4" fitHeight="30.0" fitWidth="30.0" layoutX="856.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican3Player4" fitHeight="30.0" fitWidth="30.0" layoutX="1125.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican2Player3" fitHeight="30.0" fitWidth="30.0" layoutX="298.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vatican2Player4" fitHeight="30.0" fitWidth="30.0" layoutX="978.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

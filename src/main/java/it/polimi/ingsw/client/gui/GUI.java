@@ -11,8 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -31,6 +29,7 @@ public class GUI extends Application implements UserInterface {
     private static StartingResourcesScene startingResources;
     private static LeaderCardSelection leaderCardSelection;
     private static MainBoard playerBoard;
+    private static FullView fullView;
 
 
     private static Stage mainStage;
@@ -40,6 +39,8 @@ public class GUI extends Application implements UserInterface {
     private static Parent startingResourcesRoot;
     private static Parent leaderCardRoot;
     private static Parent playerBoardRoot;
+    private static Parent fullViewRoot;
+
 
     public GUI() {
     }
@@ -75,8 +76,10 @@ public class GUI extends Application implements UserInterface {
         StartingResourcesScene.setGui(this);
         LeaderCardSelection.setGui(this);
         MainBoard.setGui(this);
+        FullView.setGui(this);
 
         startGui();
+        fullView.initArray();
 
         clientView.startConnection();
 
@@ -267,6 +270,20 @@ public class GUI extends Application implements UserInterface {
         });
     }
 
+    public void switchView(){
+        if(mainStage.getScene().getRoot().equals(playerBoardRoot)){
+            Platform.runLater(()-> {
+                mainStage.getScene().setRoot(fullViewRoot);
+                fullView.showView();
+            });
+        }
+        else{
+            Platform.runLater(()-> {
+                mainStage.getScene().setRoot(playerBoardRoot);
+            });
+        }
+    }
+
     public void startGui() throws IOException {
         //login
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
@@ -297,5 +314,10 @@ public class GUI extends Application implements UserInterface {
         FXMLLoader playerBoardLoader = new FXMLLoader(getClass().getResource("/fxml/MainBoard.fxml"));
         playerBoardRoot = playerBoardLoader.load();
         playerBoard = playerBoardLoader.getController();
+
+        // full view
+        FXMLLoader fullViewLoader = new FXMLLoader(getClass().getResource("/fxml/FullView.fxml"));
+        fullViewRoot = fullViewLoader.load();
+        fullView = fullViewLoader.getController();
     }
 }

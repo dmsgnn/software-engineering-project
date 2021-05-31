@@ -206,6 +206,10 @@ public class MainBoard {
         MainBoard.clientView = gui.getClientView();
     }
 
+    public void changeView(){
+        gui.switchView();
+    }
+
     public void update(){
         buttonStatus();
         setStrongboxCounters();
@@ -297,6 +301,7 @@ public class MainBoard {
             }
             else{
                 depot2Resource1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(1).toString().toLowerCase() + ".png"));
+                depotTwoResourceTwo.setVisible(false);
             }
         }
         if(board.isDepotEmpty(2)){
@@ -313,9 +318,12 @@ public class MainBoard {
             else if(board.getWarehouse().get(2).size() == 2){
                 depot3Resource1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
                 depot3Resource2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
+                depotThreeResourceThree.setVisible(false);
             }
             else
                 depot3Resource1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
+                depotThreeResourceTwo.setVisible(false);
+                depotThreeResourceThree.setVisible(false);
         }
         //disable all
     }
@@ -331,6 +339,11 @@ public class MainBoard {
     private void buttonStatus(){
         // message label
         message.setVisible(false);
+        //change view
+        if(clientView.getGameboard().getPlayerBoards().size()>1)
+            changeView.setVisible(true);
+        else
+            changeView.setVisible(false);
         // actions button
         marketAction.setVisible(false);
         marketAction.setDisable(true);
