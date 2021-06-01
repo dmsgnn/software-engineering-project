@@ -42,11 +42,6 @@
       <ImageView fx:id="marble3" fitHeight="20.0" fitWidth="20.0" layoutX="924.75" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="marble4" fitHeight="20.0" fitWidth="20.0" layoutX="948.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="marble0" fitHeight="20.0" fitWidth="20.0" layoutX="955.0" layoutY="74.5" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="650.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../resources/punchboard/marketRules.png" />
-         </image>
-      </ImageView>
       <Button fx:id="devCardOne" layoutX="60.0" layoutY="180.0" mnemonicParsing="false" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fx:id="devCard1" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
@@ -253,5 +248,41 @@
             <Image url="@../resources/punchboard/redCross.png" />
          </image>
       </ImageView>
+      <Button fx:id="coinChoice" layoutX="604.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickCoin" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0">
+               <image>
+                  <Image url="@../resources/punchboard/coins.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="servantChoice" layoutX="647.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickServant" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0">
+               <image>
+                  <Image url="@../resources/punchboard/servants.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="shieldChoice" layoutX="702.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickShield" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0">
+               <image>
+                  <Image url="@../resources/punchboard/shields.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="stoneChoice" layoutX="759.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickStone" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0">
+               <image>
+                  <Image url="@../resources/punchboard/stones.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

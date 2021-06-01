@@ -26,6 +26,7 @@ public class ClientPlayerBoard {
     private final ArrayList<Resource> exchangeBuff = new ArrayList<>();
     private final ArrayList<Resource> discountBuff = new ArrayList<>();
     private final Map<String, Resource> productionBuff = new HashMap<>();
+    private final Map<Resource, String> depotBuff = new HashMap<>();
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;

@@ -48,6 +48,16 @@ public class MainBoard {
     @FXML
     private ImageView marble0;
 
+    //generic resources
+    @FXML
+    public Button coinChoice;
+    @FXML
+    public Button servantChoice;
+    @FXML
+    public Button shieldChoice;
+    @FXML
+    public Button stoneChoice;
+
     //leader cards
     @FXML
     private ImageView leaderCard1;
@@ -208,6 +218,7 @@ public class MainBoard {
     private final ArrayList<Integer> prodLeaderSlots = new ArrayList<>();
     private final ArrayList<Resource> leaderCardGains = new ArrayList<>();
     private final ArrayList<Resource> boardResProd = new ArrayList<>();
+    private boolean boardOrLeaderChoice;
 
     //Payments
     private final HashMap<Resource, Integer> warehousePayment = new HashMap<>();
@@ -447,6 +458,16 @@ public class MainBoard {
         strongboxCoinsCounter.setText(String.valueOf(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getStrongbox().get(Resource.COINS)));
     }
 
+    /**
+     * utility method to disable and make invisible a button
+     * @param b button to disable/enable
+     * @param status true to disable the button, false to enable it
+     */
+    private void disableButton(Button b, boolean status){
+        b.setVisible(!status);
+        b.setDisable(status);
+    }
+
     private void buttonStatus(){
         // message label
         message.setVisible(false);
@@ -472,16 +493,35 @@ public class MainBoard {
         discardCardAction.setDisable(true);
         endTurn.setVisible(false);
         endTurn.setDisable(true);
+        // generic resource button
+        disableButton(coinChoice, true);
+        disableButton(stoneChoice, true);
+        disableButton(servantChoice, true);
+        disableButton(shieldChoice, true);
         // leader buttons
-
+        leaderCardOne.setMouseTransparent(true);
+        leaderCardTwo.setMouseTransparent(true);
         // dev grid buttons
 
+        //
+        // board production button
+        disableButton(boardProduction, true);
         // dev slots buttons
-
+        disableButton(devSlot1, true);
+        disableButton(devSlot2, true);
+        disableButton(devSlot3, true);
         // depot buttons
-
+        depotOneResourceOne.setMouseTransparent(true);
+        depotTwoResourceOne.setMouseTransparent(true);
+        depotTwoResourceTwo.setMouseTransparent(true);;
+        depotThreeResourceOne.setMouseTransparent(true);
+        depotThreeResourceTwo.setMouseTransparent(true);
+        depotThreeResourceThree.setMouseTransparent(true);
         // strongbox buttons
-
+        strongboxCoins.setMouseTransparent(true);
+        strongboxServants.setMouseTransparent(true);
+        strongboxShields.setMouseTransparent(true);
+        strongboxStones.setMouseTransparent(true);
         //market buttons
     }
 
@@ -523,15 +563,16 @@ public class MainBoard {
     public void productionAction(){
         currentAction = Actions.USEPRODUCTION;
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
-        if(board.getDevCardSlot().get(0)!=null) devSlot1.setDisable(false);
-        if(board.getDevCardSlot().get(1)!=null) devSlot2.setDisable(false);
-        if(board.getDevCardSlot().get(2)!=null) devSlot3.setDisable(false);
-        boardProduction.setDisable(false);
-        if(!board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(0))){
-            leaderCardOne.setDisable(false);
+
+        if(board.getDevCardSlot().get(0)!=null && !prodDevSlots.contains(0)) devSlot1.setMouseTransparent(false);
+        if(board.getDevCardSlot().get(1)!=null && !prodDevSlots.contains(1)) devSlot2.setMouseTransparent(false);
+        if(board.getDevCardSlot().get(2)!=null && !prodDevSlots.contains(2)) devSlot3.setMouseTransparent(false);
+        if(boardResProd.isEmpty()) boardProduction.setMouseTransparent(false);
+        if(!prodLeaderSlots.contains(0) && !board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(0))){
+            leaderCardOne.setMouseTransparent(false);
         }
-        if(!board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(1))){
-            leaderCardTwo.setDisable(false);
+        if(!prodLeaderSlots.contains(1) && !board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(1))){
+            leaderCardTwo.setMouseTransparent(false);
         }
     }
 
@@ -545,38 +586,38 @@ public class MainBoard {
             strongboxPayment.put(rss, 0);
         }
 
-        //disattivo tutto
+        buttonStatus();
 
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
         if(!board.getWarehouse().get(0).isEmpty()){
-            depotOneResourceOne.setDisable(false);
+            depotOneResourceOne.setMouseTransparent(false);
         }
 
         if(board.getWarehouse().get(1).size()==1){
-            depotTwoResourceOne.setDisable(false);
+            depotTwoResourceOne.setMouseTransparent(false);
         }
         else if(board.getWarehouse().get(1).size()==2){
-            depotTwoResourceOne.setDisable(false);
-            depotTwoResourceTwo.setDisable(false);
+            depotTwoResourceOne.setMouseTransparent(false);
+            depotTwoResourceTwo.setMouseTransparent(false);
         }
 
         if(board.getWarehouse().get(2).size()==1){
-            depotThreeResourceOne.setDisable(false);
+            depotThreeResourceOne.setMouseTransparent(false);
         }
         else if(board.getWarehouse().get(2).size()==2){
-            depotThreeResourceOne.setDisable(false);
-            depotThreeResourceTwo.setDisable(false);
+            depotThreeResourceOne.setMouseTransparent(false);
+            depotThreeResourceTwo.setMouseTransparent(false);
         }
         else if(board.getWarehouse().get(2).size()==3){
-            depotThreeResourceOne.setDisable(false);
-            depotThreeResourceTwo.setDisable(false);
-            depotThreeResourceThree.setDisable(false);
+            depotThreeResourceOne.setMouseTransparent(false);
+            depotThreeResourceTwo.setMouseTransparent(false);
+            depotThreeResourceThree.setMouseTransparent(false);
         }
 
-        if(board.getStrongbox().get(Resource.COINS) > 0) strongboxCoins.setDisable(false);
-        if(board.getStrongbox().get(Resource.SERVANTS) > 0) strongboxServants.setDisable(false);
-        if(board.getStrongbox().get(Resource.STONES) > 0) strongboxStones.setDisable(false);
-        if(board.getStrongbox().get(Resource.SHIELDS) > 0) strongboxShields.setDisable(false);
+        if(board.getStrongbox().get(Resource.COINS) > 0) strongboxCoins.setMouseTransparent(false);
+        if(board.getStrongbox().get(Resource.SERVANTS) > 0) strongboxServants.setMouseTransparent(false);
+        if(board.getStrongbox().get(Resource.STONES) > 0) strongboxStones.setMouseTransparent(false);
+        if(board.getStrongbox().get(Resource.SHIELDS) > 0) strongboxShields.setMouseTransparent(false);
 
     }
 
@@ -600,81 +641,97 @@ public class MainBoard {
 
     public void useBoardProd() {
         //disattivo tutto e attivo pulsanti che chiedono cosa vuole produrre e guadagnare
+        boardOrLeaderChoice=true;
+        disableButton(coinChoice, false);
+        disableButton(stoneChoice, false);
+        disableButton(servantChoice, false);
+        disableButton(shieldChoice, false);
     }
 
     public void leaderOneAction() {
         if(currentAction == Actions.USEPRODUCTION){
             prodLeaderSlots.add(0);
+            //disable all
+            disableButton(coinChoice, false);
+            disableButton(stoneChoice, false);
+            disableButton(servantChoice, false);
+            disableButton(shieldChoice, false);
         }
+
     }
 
     public void leaderTwoAction() {
         if(currentAction == Actions.USEPRODUCTION){
             if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getProductionBuff().size()==1) prodLeaderSlots.add(0);
             else prodLeaderSlots.add(1);
+            //disable all
+            disableButton(coinChoice, false);
+            disableButton(stoneChoice, false);
+            disableButton(servantChoice, false);
+            disableButton(shieldChoice, false);
         }
     }
 
     public void strShieldsAction() {
         strongboxPayment.put(Resource.SHIELDS, strongboxPayment.get(Resource.SHIELDS)+1);
-        if(clientView.getMyStrongbox().get(Resource.SHIELDS)==0) strongboxShields.setDisable(true);
+        if(clientView.getMyStrongbox().get(Resource.SHIELDS)==0) strongboxShields.setMouseTransparent(true);
     }
 
     public void strCoinsAction() {
         strongboxPayment.put(Resource.COINS, strongboxPayment.get(Resource.COINS)+1);
-        if(clientView.getMyStrongbox().get(Resource.COINS)==0) strongboxCoins.setDisable(true);
+        if(clientView.getMyStrongbox().get(Resource.COINS)==0) strongboxCoins.setMouseTransparent(true);
     }
 
     public void strServantsAction() {
         strongboxPayment.put(Resource.SERVANTS, strongboxPayment.get(Resource.SERVANTS)+1);
-        if(clientView.getMyStrongbox().get(Resource.SERVANTS)==0) strongboxServants.setDisable(true);
+        if(clientView.getMyStrongbox().get(Resource.SERVANTS)==0) strongboxServants.setMouseTransparent(true);
     }
 
     public void strStonesAction() {
         strongboxPayment.put(Resource.STONES, strongboxPayment.get(Resource.STONES)+1);
-        if(clientView.getMyStrongbox().get(Resource.STONES)==0) strongboxStones.setDisable(true);
+        if(clientView.getMyStrongbox().get(Resource.STONES)==0) strongboxStones.setMouseTransparent(true);
     }
 
     public void depotOneResourceOneAction() {
         Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(0);
         warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
 
-        depotOneResourceOne.setDisable(true);
+        depotOneResourceOne.setMouseTransparent(true);
     }
 
     public void depotTwoResourceOneAction() {
         Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
         warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
 
-        depotTwoResourceOne.setDisable(true);
+        depotTwoResourceOne.setMouseTransparent(true);
     }
 
     public void depotTwoResourceTwoAction() {
         Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
         warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
 
-        depotTwoResourceTwo.setDisable(true);
+        depotTwoResourceTwo.setMouseTransparent(true);
     }
 
     public void depotThreeResourceOneAction() {
         Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
         warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
 
-        depotThreeResourceOne.setDisable(true);
+        depotThreeResourceOne.setMouseTransparent(true);
     }
 
     public void depotThreeResourceTwoAction() {
         Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
         warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
 
-        depotThreeResourceTwo.setDisable(true);
+        depotThreeResourceTwo.setMouseTransparent(true);
     }
 
     public void depotThreeResourceThreeAction() {
         Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
         warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
 
-        depotThreeResourceThree.setDisable(true);
+        depotThreeResourceThree.setMouseTransparent(true);
     }
 
     public void endOrDoneButtonAction() {
@@ -687,7 +744,56 @@ public class MainBoard {
         }
     }
 
+    /**
+     * calls the client view method to inform the server that the player wants to perform the production action
+     */
     public void sendProduction() {
         clientView.sendAction(Actions.USEPRODUCTION);
+    }
+
+    /**
+     * ends the selection of a "?" resource
+     */
+    private void endSelection(){
+        if(!boardOrLeaderChoice || boardResProd.size() == 3){
+            buttonStatus();
+            productionAction();
+        }
+    }
+
+    /**
+     * adds 1 coin to the corresponding production list
+     */
+    public void pickCoin() {
+        if(boardOrLeaderChoice) boardResProd.add(Resource.COINS);
+        else leaderCardGains.add(Resource.COINS);
+        endSelection();
+    }
+
+    /**
+     * adds 1 servant to the corresponding production list
+     */
+    public void pickServant() {
+        if(boardOrLeaderChoice) boardResProd.add(Resource.SERVANTS);
+        else leaderCardGains.add(Resource.SERVANTS);
+        endSelection();
+    }
+
+    /**
+     * adds 1 shield to the corresponding production list
+     */
+    public void pickShield() {
+        if(boardOrLeaderChoice) boardResProd.add(Resource.SHIELDS);
+        else leaderCardGains.add(Resource.SHIELDS);
+        endSelection();
+    }
+
+    /**
+     * adds 1 stone to the corresponding production list
+     */
+    public void pickStone() {
+        if(boardOrLeaderChoice) boardResProd.add(Resource.STONES);
+        else leaderCardGains.add(Resource.STONES);
+        endSelection();
     }
 }
