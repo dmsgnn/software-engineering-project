@@ -158,6 +158,7 @@ public class ClientView implements Observer<ServerMessage> {
     public void addPlayersToGameboard(ArrayList<String> players){
         synchronized (lock){
             gameboard.addPlayers(players);
+            if(players.size()==1) gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(0);
         }
     }
 

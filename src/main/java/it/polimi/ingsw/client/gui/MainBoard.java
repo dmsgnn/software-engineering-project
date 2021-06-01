@@ -212,20 +212,22 @@ public class MainBoard {
     @FXML
     private Label message;
 
+
+
     private Actions currentAction;
 
     //Production attributes
-    private final ArrayList<Integer> prodDevSlots = new ArrayList<>();
-    private final ArrayList<Integer> prodLeaderSlots = new ArrayList<>();
-    private final ArrayList<Resource> leaderCardGains = new ArrayList<>();
-    private final ArrayList<Resource> boardResProd = new ArrayList<>();
+    private ArrayList<Integer> prodDevSlots;
+    private ArrayList<Integer> prodLeaderSlots;
+    private ArrayList<Resource> leaderCardGains;
+    private ArrayList<Resource> boardResProd;
     private boolean boardOrLeaderChoice;
 
     //Payments
-    private final HashMap<Resource, Integer> warehousePayment = new HashMap<>();
-    private final HashMap<Resource, Integer> leaderDepotPayment = new HashMap<>();
-    private final HashMap<Resource, Integer> strongboxPayment = new HashMap<>();
-    private boolean actionDone=false;
+    private HashMap<Resource, Integer> warehousePayment;
+    private HashMap<Resource, Integer> leaderDepotPayment;
+    private HashMap<Resource, Integer> strongboxPayment;
+    private boolean actionDone;
 
     //buy dev card attributes
     private Color color;
@@ -614,7 +616,7 @@ public class MainBoard {
         // depot buttons
         depotOneResourceOne.setMouseTransparent(true);
         depotTwoResourceOne.setMouseTransparent(true);
-        depotTwoResourceTwo.setMouseTransparent(true);;
+        depotTwoResourceTwo.setMouseTransparent(true);
         depotThreeResourceOne.setMouseTransparent(true);
         depotThreeResourceTwo.setMouseTransparent(true);
         depotThreeResourceThree.setMouseTransparent(true);
@@ -626,6 +628,10 @@ public class MainBoard {
         //market buttons
     }
 
+    /**
+     * updates the message
+     * @param text new message
+     */
     public void setMessage(String text){
         message.setText(text);
         message.setVisible(true);
@@ -653,7 +659,6 @@ public class MainBoard {
             discardCardAction.setDisable(false);
         }
         if(actions.contains(Actions.ENDTURN)) {
-            endTurn.setText("ENDTURN");
             endTurn.setVisible(true);
             endTurn.setDisable(false);
         }
@@ -663,12 +668,17 @@ public class MainBoard {
      * called to update the buttons when performing the production action
      */
     public void productionAction(){
+        prodDevSlots = new ArrayList<>();
+        prodLeaderSlots = new ArrayList<>();
+        leaderCardGains = new ArrayList<>();
+        boardResProd = new ArrayList<>();
+        actionDone=false;
         currentAction = Actions.USEPRODUCTION;
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
         buttonStatus();
         setMessage("Select what you want to use for the production action");
         disableButton(endTurn, false);
-        endTurn.setText("DONE");
+        changeButton();
 
         if(board.getDevCardSlot().get(0)!=null && !prodDevSlots.contains(0)) devSlot1.setMouseTransparent(false);
         if(board.getDevCardSlot().get(1)!=null && !prodDevSlots.contains(1)) devSlot2.setMouseTransparent(false);
@@ -687,6 +697,9 @@ public class MainBoard {
      * called to update the button status to start the payment phase
      */
     public void startPayment(){
+        warehousePayment = new HashMap<>();
+        leaderDepotPayment = new HashMap<>();
+        strongboxPayment = new HashMap<>();
         for(Resource rss : Resource.values()){
             warehousePayment.put(rss, 0);
             leaderDepotPayment.put(rss, 0);
@@ -926,6 +939,8 @@ public class MainBoard {
         }
         else if(currentAction == Actions.USEPRODUCTION){
             clientView.useProduction(prodDevSlots, prodLeaderSlots, leaderCardGains, boardResProd, warehousePayment, leaderDepotPayment, strongboxPayment);
+            resetButton();
+            buttonStatus();
         }
         else if(currentAction == Actions.BUYDEVELOPMENTCARD){
             clientView.buyDevCard(color, level, slot, warehousePayment, leaderDepotPayment, strongboxPayment);
@@ -1212,6 +1227,4 @@ public class MainBoard {
             leaderCardTwo.setMouseTransparent(false);
         }
     }
-
-
 }
