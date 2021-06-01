@@ -613,6 +613,7 @@ public class MainBoard {
             discardCardAction.setDisable(false);
         }
         if(actions.contains(Actions.ENDTURN)) {
+            endTurn.setText("ENDTURN");
             endTurn.setVisible(true);
             endTurn.setDisable(false);
         }
@@ -624,11 +625,16 @@ public class MainBoard {
     public void productionAction(){
         currentAction = Actions.USEPRODUCTION;
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
+        buttonStatus();
+        setMessage("Select what you want to use for the production action");
+        disableButton(endTurn, false);
+        endTurn.setText("DONE");
 
         if(board.getDevCardSlot().get(0)!=null && !prodDevSlots.contains(0)) devSlot1.setMouseTransparent(false);
         if(board.getDevCardSlot().get(1)!=null && !prodDevSlots.contains(1)) devSlot2.setMouseTransparent(false);
         if(board.getDevCardSlot().get(2)!=null && !prodDevSlots.contains(2)) devSlot3.setMouseTransparent(false);
-        if(boardResProd.isEmpty()) boardProduction.setMouseTransparent(false);
+        if(boardResProd.isEmpty())
+            disableButton(boardProduction, false);
         if(!prodLeaderSlots.contains(0) && !board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(0))){
             leaderCardOne.setMouseTransparent(false);
         }
@@ -641,8 +647,6 @@ public class MainBoard {
      * called to update the button status to start the payment phase
      */
     public void startPayment(){
-
-
         for(Resource rss : Resource.values()){
             warehousePayment.put(rss, 0);
             leaderDepotPayment.put(rss, 0);
@@ -650,9 +654,12 @@ public class MainBoard {
         }
 
         buttonStatus();
-
+        disableButton(endTurn, false);
+        endTurn.setText("DONE");
         if(currentAction == Actions.BUYDEVELOPMENTCARD)
-            setMessage("You have selected the slot number "+slot+". Now choose the resources you want to use to pay from the depot.");
+            setMessage("You have selected the slot number "+slot+". Now choose the resources you want to use to pay.");
+        else if(currentAction == Actions.USEPRODUCTION)
+            setMessage("Choose the resources you want to use to pay.");
 
 
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
@@ -736,8 +743,12 @@ public class MainBoard {
         }
     }
 
+    /**
+     * begins the selection of what resources the players wants to pay/obtain for the board production
+     */
     public void useBoardProd() {
-        //disattivo tutto e attivo pulsanti che chiedono cosa vuole produrre e guadagnare
+        buttonStatus();
+        setMessage("Select 2 resources that you want to pay and 1 resource that you want to gain");
         boardOrLeaderChoice=true;
         disableButton(coinChoice, false);
         disableButton(stoneChoice, false);
@@ -745,10 +756,15 @@ public class MainBoard {
         disableButton(shieldChoice, false);
     }
 
+    /**
+     * if USEPRODUCTION adds the card to the production leader card index and begins the selection of what resources the players wants to obtain
+     */
     public void leaderOneAction() {
         if(currentAction == Actions.USEPRODUCTION){
+            boardOrLeaderChoice=false;
             prodLeaderSlots.add(0);
-            //disable all
+            buttonStatus();
+            setMessage("Select what resource you want to gain");
             disableButton(coinChoice, false);
             disableButton(stoneChoice, false);
             disableButton(servantChoice, false);
@@ -757,11 +773,16 @@ public class MainBoard {
 
     }
 
+    /**
+     * if USEPRODUCTION adds the card to the production leader card slots and begins the selection of what resources the players wants to obtain
+     */
     public void leaderTwoAction() {
         if(currentAction == Actions.USEPRODUCTION){
+            boardOrLeaderChoice=false;
             if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getProductionBuff().size()==1) prodLeaderSlots.add(0);
             else prodLeaderSlots.add(1);
-            //disable all
+            buttonStatus();
+            setMessage("Select what resource you want to gain");
             disableButton(coinChoice, false);
             disableButton(stoneChoice, false);
             disableButton(servantChoice, false);
@@ -769,21 +790,33 @@ public class MainBoard {
         }
     }
 
+    /**
+     * adds one shield to strongboxPayment
+     */
     public void strShieldsAction() {
         strongboxPayment.put(Resource.SHIELDS, strongboxPayment.get(Resource.SHIELDS)+1);
         if(clientView.getMyStrongbox().get(Resource.SHIELDS)==0) strongboxShields.setMouseTransparent(true);
     }
 
+    /**
+     * adds one coin to strongboxPayment
+     */
     public void strCoinsAction() {
         strongboxPayment.put(Resource.COINS, strongboxPayment.get(Resource.COINS)+1);
         if(clientView.getMyStrongbox().get(Resource.COINS)==0) strongboxCoins.setMouseTransparent(true);
     }
 
+    /**
+     * adds one servant to strongboxPayment
+     */
     public void strServantsAction() {
         strongboxPayment.put(Resource.SERVANTS, strongboxPayment.get(Resource.SERVANTS)+1);
         if(clientView.getMyStrongbox().get(Resource.SERVANTS)==0) strongboxServants.setMouseTransparent(true);
     }
 
+    /**
+     * adds one stone to strongboxPayment
+     */
     public void strStonesAction() {
         strongboxPayment.put(Resource.STONES, strongboxPayment.get(Resource.STONES)+1);
         if(clientView.getMyStrongbox().get(Resource.STONES)==0) strongboxStones.setMouseTransparent(true);
@@ -831,6 +864,9 @@ public class MainBoard {
         depotThreeResourceThree.setMouseTransparent(true);
     }
 
+    /**
+     * does the the correct methods base on what is the current action
+     */
     public void endOrDoneButtonAction() {
         if(currentAction == Actions.USEPRODUCTION && !actionDone){
             actionDone = true;
