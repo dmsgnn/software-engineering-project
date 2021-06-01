@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.gameboard.Color;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -225,6 +226,11 @@ public class MainBoard {
     private final HashMap<Resource, Integer> leaderDepotPayment = new HashMap<>();
     private final HashMap<Resource, Integer> strongboxPayment = new HashMap<>();
     private boolean actionDone=false;
+
+    //buy dev card attributes
+    private Color color;
+    private int level;
+    private int slot;
 
     public static void setGui(GUI gui) {
         MainBoard.gui = gui;
@@ -468,6 +474,10 @@ public class MainBoard {
         b.setDisable(status);
     }
 
+    /**
+     * used whenever needed to reset all the button in a disabled state
+     * to make a new action
+     */
     private void buttonStatus(){
         // message label
         message.setVisible(false);
@@ -502,14 +512,65 @@ public class MainBoard {
         leaderCardOne.setMouseTransparent(true);
         leaderCardTwo.setMouseTransparent(true);
         // dev grid buttons
+        devCardOne.setMouseTransparent(true);
+        devCardTwo.setMouseTransparent(true);
+        devCardThree.setMouseTransparent(true);
+        devCardFour.setMouseTransparent(true);
+        devCardFive.setMouseTransparent(true);
+        devCardSix.setMouseTransparent(true);
+        devCardSeven.setMouseTransparent(true);
+        devCardEight.setMouseTransparent(true);
+        devCardNine.setMouseTransparent(true);
+        devCardTen.setMouseTransparent(true);
+        devCardEleven.setMouseTransparent(true);
+        devCardTwelve.setMouseTransparent(true);
+
+        String[][] grid = clientView.getGameboard().getCards();
+        if(grid[0][0] == null){
+            devCardOne.setMouseTransparent(false);
+        }
+        if(grid[0][1] == null){
+            devCardTwo.setVisible(false);
+        }
+        if(grid[0][2] == null){
+            devCardThree.setVisible(false);
+        }
+        if(grid[0][3] == null){
+            devCardFour.setVisible(false);
+        }
+        if(grid[1][0] == null){
+            devCardFive.setVisible(false);
+        }
+        if(grid[1][1] == null){
+            devCardSix.setVisible(false);
+        }
+        if(grid[1][2] == null){
+            devCardSeven.setVisible(false);
+        }
+        if(grid[1][3] == null){
+            devCardEight.setVisible(false);
+        }
+        if(grid[2][0] == null){
+            devCardNine.setVisible(false);
+        }
+        if(grid[2][1] == null){
+            devCardTen.setVisible(false);
+        }
+        if(grid[2][2] == null){
+            devCardEleven.setVisible(false);
+        }
+        if(grid[2][3] == null){
+            devCardTwelve.setVisible(false);
+        }
+
 
         //
         // board production button
         disableButton(boardProduction, true);
         // dev slots buttons
-        disableButton(devSlot1, true);
-        disableButton(devSlot2, true);
-        disableButton(devSlot3, true);
+        devSlot1.setMouseTransparent(true);
+        devSlot2.setMouseTransparent(true);
+        devSlot3.setMouseTransparent(true);
         // depot buttons
         depotOneResourceOne.setMouseTransparent(true);
         depotTwoResourceOne.setMouseTransparent(true);
@@ -580,6 +641,8 @@ public class MainBoard {
      * called to update the button status to start the payment phase
      */
     public void startPayment(){
+
+
         for(Resource rss : Resource.values()){
             warehousePayment.put(rss, 0);
             leaderDepotPayment.put(rss, 0);
@@ -587,6 +650,10 @@ public class MainBoard {
         }
 
         buttonStatus();
+
+        if(currentAction == Actions.BUYDEVELOPMENTCARD)
+            setMessage("You have selected the slot number "+slot+". Now choose the resources you want to use to pay from the depot.");
+
 
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
         if(!board.getWarehouse().get(0).isEmpty()){
@@ -621,21 +688,51 @@ public class MainBoard {
 
     }
 
+    /**
+     * if the action is a Use Production the slot is added to the array of the slot production.
+     * Otherwise the action must be a buy development card and the slot is saved,
+     * the button status and the start payment methods are called
+     */
     public void slot1Action() {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(0);
         }
+        else{
+            slot = 1;
+            buttonStatus();
+            startPayment();
+        }
     }
 
+    /**
+     * if the action is a Use Production the slot is added to the array of the slot production.
+     * Otherwise the action must be a buy development card and the slot is saved,
+     * the button status and the start payment methods are called
+     */
     public void slot2Action() {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(1);
         }
+        else{
+            slot = 2;
+            buttonStatus();
+            startPayment();
+        }
     }
 
+    /**
+     * if the action is a Use Production the slot is added to the array of the slot production.
+     * Otherwise the action must be a buy development card and the slot is saved,
+     * the button status and the start payment methods are called
+     */
     public void slot3Action() {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(2);
+        }
+        else{
+            slot = 3;
+            buttonStatus();
+            startPayment();
         }
     }
 
@@ -796,4 +893,203 @@ public class MainBoard {
         else leaderCardGains.add(Resource.STONES);
         endSelection();
     }
+
+
+    /**
+     * called when the user click the buy development card action from GUI
+     * it sends the message to the servers and tells the users its choice
+     */
+    public void buyDevCardSelection(){
+        clientView.sendAction(Actions.BUYDEVELOPMENTCARD);
+        setMessage("You have choosen the buy development card action, please select one card");
+        //disable other action buttons
+    }
+
+    /**
+     * used to enable only the allowed button.
+     * if a deck of the grid is empty the button won't be enabled
+     */
+    public void buyDevCardAction(){
+        currentAction = Actions.BUYDEVELOPMENTCARD;
+        String[][] grid = clientView.getGameboard().getCards();
+        if(grid[0][0] != null){
+            devCardOne.setMouseTransparent(false);
+        }
+        if(grid[0][1] != null){
+            devCardTwo.setMouseTransparent(false);
+        }
+        if(grid[0][2] != null){
+            devCardThree.setMouseTransparent(false);
+        }
+        if(grid[0][3] != null){
+            devCardFour.setMouseTransparent(false);
+        }
+        if(grid[1][0] != null){
+            devCardFive.setMouseTransparent(false);
+        }
+        if(grid[1][1] != null){
+            devCardSix.setMouseTransparent(false);
+        }
+        if(grid[1][2] != null){
+            devCardSeven.setMouseTransparent(false);
+        }
+        if(grid[1][3] != null){
+            devCardEight.setMouseTransparent(false);
+        }
+        if(grid[2][0] != null){
+            devCardNine.setMouseTransparent(false);
+        }
+        if(grid[2][1] != null){
+            devCardTen.setMouseTransparent(false);
+        }
+        if(grid[2][2] != null){
+            devCardEleven.setMouseTransparent(false);
+        }
+        if(grid[2][3] != null){
+            devCardTwelve.setMouseTransparent(false);
+        }
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev1Action(){
+        color = Color.PURPLE;
+        level = 3;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev2Action(){
+        color = Color.YELLOW;
+        level = 3;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev3Action(){
+        color = Color.GREEN;
+        level = 3;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev4Action(){
+        color = Color.BLUE;
+        level = 3;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev5Action(){
+        color = Color.PURPLE;
+        level = 2;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev6Action(){
+        color = Color.YELLOW;
+        level = 2;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev7Action(){
+        color = Color.GREEN;
+        level = 2;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev8Action(){
+        color = Color.BLUE;
+        level = 2;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev9Action(){
+        color = Color.PURPLE;
+        level = 1;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev10Action(){
+        color = Color.YELLOW;
+        level = 1;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev11Action(){
+        color = Color.BLUE;
+        level = 1;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * set the color and level of the card the user wants to buy, related to its position
+     * it also resets the button status and call the method for the next phase
+     */
+    public void dev12Action(){
+        color = Color.BLUE;
+        level = 1;
+        buttonStatus();
+        enableSlot();
+    }
+
+    /**
+     * used to enable the buttons of the development card slots
+     */
+    public void enableSlot(){
+        setMessage("You have selected the " + color.toString().toLowerCase() + " card of level "+ level+". Now please select one slot.");
+        devSlot1.setMouseTransparent(false);
+        devSlot2.setMouseTransparent(false);
+        devSlot3.setMouseTransparent(false);
+    }
+
 }

@@ -245,6 +245,7 @@ public class FullView {
     @FXML
     private ImageView cross4;
 
+    //array of buttons
     private ArrayList<ImageView> resource1Depot1;
     private ArrayList<ImageView> resource1Depot2;
     private ArrayList<ImageView> resource2Depot2;
@@ -269,7 +270,9 @@ public class FullView {
 
 
 
-
+    /**
+     * initializes the buttons array
+     */
     public void initArray() {
         //depot
         resource1Depot1 = new ArrayList<>(Arrays.asList(resource1Depot1Player1, resource1Depot1Player2, resource1Depot1Player3, resource1Depot1Player4));
@@ -301,6 +304,9 @@ public class FullView {
 
     }
 
+    /**
+     * show the boards of the players
+     */
     public void showView(){
         allVisible();
         for(int i=0; i<clientView.getGameboard().getPlayerBoards().size(); i++)
@@ -311,11 +317,17 @@ public class FullView {
             hideFourthPlayer();
     }
 
+    /**
+     * called from the back arrow button to go back to the main board scene
+     */
     public void back(){
         gui.switchView();
     }
 
-
+    /**
+     * it shows all the things related to the player number
+     * @param playerNum is the number of the player
+     */
     private void showPlayer(int playerNum){
         ClientPlayerBoard board = clientView.getGameboard().getPlayerBoards().get(playerNum);
         playerName.get(playerNum).setText("Playerboard of "+ board.getPlayerNickname());
@@ -458,6 +470,11 @@ public class FullView {
 
     }
 
+    /**
+     * used to know the X and Y positions of the redCross related to the player position
+     * @param position is the position of the player
+     * @return a double array with, respectively, the X and Y position of the cross
+     */
     private double[] getCrossPosition(int position){
         if(position == 1){
             return new double[] {95,121};
@@ -540,7 +557,9 @@ public class FullView {
 
     }
 
-
+    /**
+     * used to hide the image views related to the third player if the game is of two players
+     */
     private void hideThirdPlayer(){
         cross3.setVisible(false);
         board3.setVisible(false);
@@ -556,7 +575,9 @@ public class FullView {
     }
 
 
-
+    /**
+     * used to hide the image views related to the third player if the game is of three players
+     */
     private void hideFourthPlayer(){
         cross4.setVisible(false);
         board4.setVisible(false);
@@ -571,6 +592,10 @@ public class FullView {
         strongboxCoinsCounterPlayer4.setVisible(false);
     }
 
+    /**
+     * used to make the depot and leader cards image views all visible.
+     * they will be modified in the show player method if needed.
+     */
     private void allVisible(){
         for (ImageView image : resource1Depot1) {
             image.setVisible(true);
