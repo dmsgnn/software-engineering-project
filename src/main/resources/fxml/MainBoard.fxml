@@ -123,7 +123,7 @@
             <Font name="SansSerif Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="discardCardAction" alignment="CENTER" layoutX="220.0" layoutY="120.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="DISCARD CARD">
+      <Button fx:id="discardCardAction" alignment="CENTER" layoutX="220.0" layoutY="120.0" mnemonicParsing="false" onAction="#discardLeaderAction" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="DISCARD CARD">
          <font>
             <Font name="SansSerif Bold" size="13.0" />
          </font>

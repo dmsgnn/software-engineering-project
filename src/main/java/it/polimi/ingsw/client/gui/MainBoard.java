@@ -251,10 +251,11 @@ public class MainBoard {
         redCross.setLayoutX(newPosition[0]);
         redCross.setLayoutY(newPosition[1]);
         if(clientView.getGameboard().getPlayerBoards().size()==1){
-            double[] newBlackPosition = getCrossPosition(board.getPlayerPosition());
-            if(board.getPlayerPosition()==board.getLorenzoPosition())
-                blackCross.setLayoutX(newPosition[0]-10);
-            blackCross.setLayoutY(newPosition[1]);
+            double[] newBlackPosition = getCrossPosition(board.getLorenzoPosition());
+            if(board.getPlayerPosition()==board.getLorenzoPosition()) {
+                blackCross.setLayoutX(newPosition[0] - 10);
+                blackCross.setLayoutY(newPosition[1]);
+            }
         }
         showVatican(board);
         MarbleColors[][] market = clientView.getGameboard().getMarket();
@@ -317,16 +318,49 @@ public class MainBoard {
         String color = null;
         Image marbleImage = new Image("/graphics/Marble/" + clientView.getGameboard().getFreeMarble().toString().toLowerCase() + ".png");
         marble0.setImage(marbleImage);
-        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().size() >0)
-            leaderCard1.setImage(new Image("/graphics/leaderCards/" + clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(0) + ".png"));
-        else
-            leaderCardOne.setVisible(false);
-        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().size() >1)
-            leaderCard2.setImage(new Image("/graphics/leaderCards/" + clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(1) + ".png"));
-        else
-            leaderCardTwo.setVisible(false);
+        if(board.getPlayedCards().size()==0) {
+            if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().size() > 0)
+                leaderCard1.setImage(new Image("/graphics/leaderCards/" + board.getHand().get(0) + ".png"));
+            else
+                leaderCardOne.setVisible(false);
+            if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().size() > 1)
+                leaderCard2.setImage(new Image("/graphics/leaderCards/" + board.getHand().get(1) + ".png"));
+            else
+                leaderCardTwo.setVisible(false);
+        }
+        else if(board.getPlayedCards().size()==1){
+            leaderCard1.setImage(new Image("/graphics/leaderCards/" + board.getPlayedCards().get(0) + ".png"));
+            if(board.getHandSize()==2)
+                leaderCard2.setImage(new Image("/graphics/leaderCards/" + board.getHand().get(0) + ".png"));
+        }
+        else{
+            leaderCard1.setImage(new Image("/graphics/leaderCards/" + board.getPlayedCards().get(0) + ".png"));
+            leaderCard2.setImage(new Image("/graphics/leaderCards/" + board.getPlayedCards().get(1) + ".png"));
+        }
     }
 
+    /**
+     * reset the button to End Turn style
+     */
+    public void resetButton(){
+        endTurn.setStyle("-fx-background-color: red; -fx-background-radius: 20;");
+        endTurn.setText("END TURN");
+    }
+    /**
+     * change the button to Done style
+     */
+    public void changeButton(){
+        if(endTurn.getText().equals("END TURN")){
+            endTurn.setStyle("-fx-background-color: green; -fx-background-radius: 20;");
+            endTurn.setText("DONE");
+        }
+    }
+
+    /**
+     * used to know the X and Y positions of the redCross related to the player position
+     * @param position is the position of the player
+     * @return a double array with, respectively, the X and Y position of the cross
+     */
     private double[] getCrossPosition(int position) {
         if (position == 1) {
             return new double[]{715, 350};
@@ -511,6 +545,12 @@ public class MainBoard {
         // leader buttons
         leaderCardOne.setMouseTransparent(true);
         leaderCardTwo.setMouseTransparent(true);
+        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHandSize()==1)
+            leaderCardTwo.setVisible(false);
+        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHandSize()==0) {
+            leaderCardOne.setVisible(false);
+            leaderCardTwo.setVisible(false);
+        }
         // dev grid buttons
         devCardOne.setMouseTransparent(true);
         devCardTwo.setMouseTransparent(true);
@@ -655,7 +695,7 @@ public class MainBoard {
 
         buttonStatus();
         disableButton(endTurn, false);
-        endTurn.setText("DONE");
+        changeButton();
         if(currentAction == Actions.BUYDEVELOPMENTCARD)
             setMessage("You have selected the slot number "+slot+". Now choose the resources you want to use to pay.");
         else if(currentAction == Actions.USEPRODUCTION)
@@ -758,6 +798,7 @@ public class MainBoard {
 
     /**
      * if USEPRODUCTION adds the card to the production leader card index and begins the selection of what resources the players wants to obtain
+     * if Discard Leader Card action the message with the leader card that the user wants to discard is sent.
      */
     public void leaderOneAction() {
         if(currentAction == Actions.USEPRODUCTION){
@@ -770,11 +811,15 @@ public class MainBoard {
             disableButton(servantChoice, false);
             disableButton(shieldChoice, false);
         }
-
+        else if(currentAction == Actions.DISCARDLEADERCARD){
+            clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(0));
+            buttonStatus();
+        }
     }
 
     /**
      * if USEPRODUCTION adds the card to the production leader card slots and begins the selection of what resources the players wants to obtain
+     * if Discard Leader Card action the message with the leader card that the user wants to discard is sent.
      */
     public void leaderTwoAction() {
         if(currentAction == Actions.USEPRODUCTION){
@@ -787,6 +832,13 @@ public class MainBoard {
             disableButton(stoneChoice, false);
             disableButton(servantChoice, false);
             disableButton(shieldChoice, false);
+        }
+        else if(currentAction == Actions.DISCARDLEADERCARD){
+            if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHandSize()==2)
+                clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(1));
+            else
+                clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(0));
+            buttonStatus();
         }
     }
 
@@ -875,6 +927,11 @@ public class MainBoard {
         else if(currentAction == Actions.USEPRODUCTION){
             clientView.useProduction(prodDevSlots, prodLeaderSlots, leaderCardGains, boardResProd, warehousePayment, leaderDepotPayment, strongboxPayment);
         }
+        else if(currentAction == Actions.BUYDEVELOPMENTCARD){
+            clientView.buyDevCard(color, level, slot, warehousePayment, leaderDepotPayment, strongboxPayment);
+            resetButton();
+            buttonStatus();
+        }
     }
 
     /**
@@ -930,6 +987,7 @@ public class MainBoard {
         endSelection();
     }
 
+    // ---------- BUY DEV CARD ACTION ----------
 
     /**
      * called when the user click the buy development card action from GUI
@@ -937,6 +995,7 @@ public class MainBoard {
      */
     public void buyDevCardSelection(){
         clientView.sendAction(Actions.BUYDEVELOPMENTCARD);
+        buttonStatus();
         setMessage("You have choosen the buy development card action, please select one card");
         //disable other action buttons
     }
@@ -1127,5 +1186,32 @@ public class MainBoard {
         devSlot2.setMouseTransparent(false);
         devSlot3.setMouseTransparent(false);
     }
+
+    // ---------- DISCARD LEADER CARD ACTION ----------
+
+
+    /**
+     * used to send the message to the server about the selected action
+     */
+    public void discardLeaderAction(){
+        clientView.sendAction(Actions.DISCARDLEADERCARD);
+        buttonStatus();
+        setMessage("You have choosen the discard leader card action, please select one card");
+        //disable other action buttons
+    }
+
+    /**
+     * used to enable the needed button for the discard leader card action
+     */
+    public void discardAction(){
+        currentAction=Actions.DISCARDLEADERCARD;
+        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().size()==1)
+            leaderCardTwo.setMouseTransparent(false);
+        else{
+            leaderCardOne.setMouseTransparent(false);
+            leaderCardTwo.setMouseTransparent(false);
+        }
+    }
+
 
 }

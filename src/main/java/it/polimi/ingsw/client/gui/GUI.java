@@ -260,7 +260,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void discardLeaderCardAction() {
-
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(playerBoardRoot);
+            playerBoard.discardAction();
+        });
     }
 
     @Override
