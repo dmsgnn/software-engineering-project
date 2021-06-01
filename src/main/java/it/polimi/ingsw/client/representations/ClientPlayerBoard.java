@@ -26,7 +26,7 @@ public class ClientPlayerBoard {
     private final ArrayList<Resource> exchangeBuff = new ArrayList<>();
     private final ArrayList<Resource> discountBuff = new ArrayList<>();
     private final Map<String, Resource> productionBuff = new HashMap<>();
-    private final Map<Resource, String> depotBuff = new HashMap<>();
+    private final Map<String, Resource> depotBuff = new HashMap<>();
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;
@@ -37,6 +37,14 @@ public class ClientPlayerBoard {
         for(Resource rss: Resource.values()){
             strongbox.put(rss, 0);
         }
+    }
+
+    public Map<String, Resource> getDepotBuff() {
+        return depotBuff;
+    }
+
+    public void addDepotBuff(Resource res){
+        depotBuff.put(playedCards.get(playedCards.size()-1), res);
     }
 
     public boolean isDepotEmpty(int depot){

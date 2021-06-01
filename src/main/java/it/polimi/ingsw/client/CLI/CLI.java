@@ -218,7 +218,7 @@ public class CLI implements UserInterface {
 
     @Override
     public void endTurn() {
-        System.out.println("Waiting for other players...");
+        if(clientView.getGameboard().getNumOfPlayers()>1)System.out.println("Waiting for other players...");
         inputThread();
     }
 
@@ -340,7 +340,7 @@ public class CLI implements UserInterface {
                 pickedResources.add(resource);
                 counter--;
             } catch ( IllegalArgumentException e ) {
-                System.err.println( "No such resource, please try again");
+                System.err.println("No such resource, please try again");
             }
         }
 
@@ -1014,6 +1014,7 @@ public class CLI implements UserInterface {
     private String strBuilderLorenzo(){
         int position = clientView.getGameboard().getPlayerBoards().get(0).getLorenzoPosition();
         StringBuilder lorenzo = new StringBuilder();
+        lorenzo.append("Lorenzo's faith track\n");
         lorenzo.append("|");
         for(int i=0; i<25; i++){
             if(i == position)

@@ -3,10 +3,11 @@ package it.polimi.ingsw.client.representations;
 import it.polimi.ingsw.model.gameboard.Color;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class ClientGameBoard {
 
-    private ArrayList<ClientPlayerBoard> playerBoards = new ArrayList<>();
+    private final ArrayList<ClientPlayerBoard> playerBoards = new ArrayList<>();
     private MarbleColors[][] market;
     private MarbleColors freeMarble;
     private String[][] cards;
@@ -36,6 +37,13 @@ public class ClientGameBoard {
             }
         }
         return false;
+    }
+
+    /**
+     * @return number of players
+     */
+    public int getNumOfPlayers(){
+        return playerBoards.size();
     }
 
     /**

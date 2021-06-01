@@ -6,7 +6,6 @@ import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +14,6 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class MainBoard {
     private static ClientView clientView;
@@ -344,14 +342,14 @@ public class MainBoard {
     /**
      * reset the button to End Turn style
      */
-    public void resetButton(){
+    public void resetEndButton(){
         endTurn.setStyle("-fx-background-color: red; -fx-background-radius: 20;");
         endTurn.setText("END TURN");
     }
     /**
      * change the button to Done style
      */
-    public void changeButton(){
+    public void changeEndButton(){
         if(endTurn.getText().equals("END TURN")){
             endTurn.setStyle("-fx-background-color: green; -fx-background-radius: 20;");
             endTurn.setText("DONE");
@@ -494,10 +492,10 @@ public class MainBoard {
 
     private void setStrongboxCounters(){
         // to do -> disable the buttons
-        strongboxShieldsCounter.setText(String.valueOf(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getStrongbox().get(Resource.SHIELDS)));
-        strongboxServantsCounter.setText(String.valueOf(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getStrongbox().get(Resource.SERVANTS)));
-        strongboxStonesCounter.setText(String.valueOf(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getStrongbox().get(Resource.STONES)));
-        strongboxCoinsCounter.setText(String.valueOf(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getStrongbox().get(Resource.COINS)));
+        strongboxShieldsCounter.setText(String.valueOf(clientView.getMyStrongbox().get(Resource.SHIELDS)));
+        strongboxServantsCounter.setText(String.valueOf(clientView.getMyStrongbox().get(Resource.SERVANTS)));
+        strongboxStonesCounter.setText(String.valueOf(clientView.getMyStrongbox().get(Resource.STONES)));
+        strongboxCoinsCounter.setText(String.valueOf(clientView.getMyStrongbox().get(Resource.COINS)));
     }
 
     /**
@@ -675,10 +673,11 @@ public class MainBoard {
         actionDone=false;
         currentAction = Actions.USEPRODUCTION;
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
+
         buttonStatus();
         setMessage("Select what you want to use for the production action");
         disableButton(endTurn, false);
-        changeButton();
+        changeEndButton();
 
         if(board.getDevCardSlot().get(0)!=null && !prodDevSlots.contains(0)) devSlot1.setMouseTransparent(false);
         if(board.getDevCardSlot().get(1)!=null && !prodDevSlots.contains(1)) devSlot2.setMouseTransparent(false);
@@ -708,7 +707,7 @@ public class MainBoard {
 
         buttonStatus();
         disableButton(endTurn, false);
-        changeButton();
+        changeEndButton();
         if(currentAction == Actions.BUYDEVELOPMENTCARD)
             setMessage("You have selected the slot number "+slot+". Now choose the resources you want to use to pay.");
         else if(currentAction == Actions.USEPRODUCTION)
@@ -939,12 +938,12 @@ public class MainBoard {
         }
         else if(currentAction == Actions.USEPRODUCTION){
             clientView.useProduction(prodDevSlots, prodLeaderSlots, leaderCardGains, boardResProd, warehousePayment, leaderDepotPayment, strongboxPayment);
-            resetButton();
+            resetEndButton();
             buttonStatus();
         }
         else if(currentAction == Actions.BUYDEVELOPMENTCARD){
             clientView.buyDevCard(color, level, slot, warehousePayment, leaderDepotPayment, strongboxPayment);
-            resetButton();
+            resetEndButton();
             buttonStatus();
         }
     }

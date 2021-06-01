@@ -23,7 +23,7 @@ public class StoreAbility implements Ability {
 
     @Override
     public void clientAbility(ClientPlayerBoard playerBoard) {
-
+        playerBoard.addDepotBuff(resource);
     }
 
     /**

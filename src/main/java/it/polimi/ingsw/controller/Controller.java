@@ -211,7 +211,7 @@ public class Controller implements Observer<ClientMessage> {
         try {
             game.doAction(addStartingLeaderCards);
             assert serverView1 != null;
-            serverView1.leaderCardSetupOk();
+            if(playersNumber>1) serverView1.leaderCardSetupOk();
             sendStartingResource(username);
             Map<Integer, Boolean> map = new HashMap<>();
             map.put(0,true);
@@ -325,7 +325,7 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
-                    if(!gameStarted) {
+                    if(!gameStarted && playersNumber>1) {
                         Objects.requireNonNull(serverView).startingResourceOk();
                     }
                 }
@@ -339,7 +339,7 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
-                    if(!gameStarted) {
+                    if(!gameStarted && playersNumber>1) {
                         Objects.requireNonNull(serverView).startingResourceOk();
                     }
 
@@ -353,7 +353,7 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
-                    if(!gameStarted) {
+                    if(!gameStarted && playersNumber>1) {
                         Objects.requireNonNull(serverView).startingResourceOk();
                     }
                 }
@@ -366,11 +366,6 @@ public class Controller implements Observer<ClientMessage> {
             }
 
         }
-
-
-
-
-
     }
 
 
