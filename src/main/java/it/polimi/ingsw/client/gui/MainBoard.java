@@ -859,7 +859,9 @@ public class MainBoard {
      */
     public void strShieldsAction() {
         strongboxPayment.put(Resource.SHIELDS, strongboxPayment.get(Resource.SHIELDS)+1);
-        if(clientView.getMyStrongbox().get(Resource.SHIELDS)==0) strongboxShields.setMouseTransparent(true);
+        int diff = clientView.getMyStrongbox().get(Resource.SHIELDS)-strongboxPayment.get(Resource.SHIELDS);
+        strongboxStonesCounter.setText(String.valueOf(diff));
+        if(diff==0) strongboxShields.setMouseTransparent(true);
     }
 
     /**
@@ -867,7 +869,9 @@ public class MainBoard {
      */
     public void strCoinsAction() {
         strongboxPayment.put(Resource.COINS, strongboxPayment.get(Resource.COINS)+1);
-        if(clientView.getMyStrongbox().get(Resource.COINS)==0) strongboxCoins.setMouseTransparent(true);
+        int diff = clientView.getMyStrongbox().get(Resource.COINS)-strongboxPayment.get(Resource.COINS);
+        strongboxStonesCounter.setText(String.valueOf(diff));
+        if(diff==0) strongboxCoins.setMouseTransparent(true);
     }
 
     /**
@@ -875,7 +879,9 @@ public class MainBoard {
      */
     public void strServantsAction() {
         strongboxPayment.put(Resource.SERVANTS, strongboxPayment.get(Resource.SERVANTS)+1);
-        if(clientView.getMyStrongbox().get(Resource.SERVANTS)==0) strongboxServants.setMouseTransparent(true);
+        int diff = clientView.getMyStrongbox().get(Resource.SERVANTS)-strongboxPayment.get(Resource.SERVANTS);
+        strongboxStonesCounter.setText(String.valueOf(diff));
+        if(diff==0) strongboxServants.setMouseTransparent(true);
     }
 
     /**
@@ -883,7 +889,9 @@ public class MainBoard {
      */
     public void strStonesAction() {
         strongboxPayment.put(Resource.STONES, strongboxPayment.get(Resource.STONES)+1);
-        if(clientView.getMyStrongbox().get(Resource.STONES)==0) strongboxStones.setMouseTransparent(true);
+        int diff = clientView.getMyStrongbox().get(Resource.STONES)-strongboxPayment.get(Resource.STONES);
+        strongboxStonesCounter.setText(String.valueOf(diff));
+        if(diff==0) strongboxStones.setMouseTransparent(true);
     }
 
     public void depotOneResourceOneAction() {
