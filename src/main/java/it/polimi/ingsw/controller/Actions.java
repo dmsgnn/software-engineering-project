@@ -6,7 +6,8 @@ public enum Actions {
     BUYDEVELOPMENTCARD("Buy one Development Card"),
     USEPRODUCTION("Activate the Production"),
     MARKETACTION("Take Resources from the Market"),
-    ENDTURN("End turn");
+    ENDTURN("End turn"),
+    MANAGE("Manage resources");
 
     private final String label;
 

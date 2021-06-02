@@ -98,7 +98,7 @@
          <graphic>
             <ImageView fx:id="leaderCard2" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
          </graphic></Button>
-      <Button fx:id="marketAction" alignment="CENTER" layoutX="60.0" layoutY="75.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="85.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="MARKET">
+      <Button fx:id="marketAction" alignment="CENTER" layoutX="60.0" layoutY="75.0" mnemonicParsing="false" onAction="#marketAction" prefHeight="35.0" prefWidth="85.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="MARKET">
          <font>
             <Font name="SansSerif Bold" size="13.0" />
          </font>
@@ -282,6 +282,33 @@
                   <Image url="@../resources/punchboard/stones.png" />
                </image>
             </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="row3MarketButton" layoutX="992.0" layoutY="142.0" mnemonicParsing="false" onAction="#row3MarketButton" opacity="0.5" prefHeight="23.0" prefWidth="30.0" style="-fx-background-color: yellow;" />
+      <Button fx:id="row2MarketButton" layoutX="991.0" layoutY="117.0" mnemonicParsing="false" onAction="#row2MarketButton" opacity="0.5" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: yellow;" />
+      <Button fx:id="row1MarketButton" layoutX="991.0" layoutY="93.0" mnemonicParsing="false" onAction="#row1MarketButton" opacity="0.5" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: yellow;" />
+      <Button fx:id="column3MarketButton" layoutX="927.0" layoutY="188.0" mnemonicParsing="false" onAction="#column3MarketButton" opacity="0.5" prefHeight="37.0" prefWidth="16.0" style="-fx-background-color: yellow;" />
+      <Button fx:id="column4MarketButton" layoutX="949.0" layoutY="189.0" mnemonicParsing="false" onAction="#column4MarketButton" opacity="0.5" prefHeight="37.0" prefWidth="16.0" style="-fx-background-color: yellow;" />
+      <Button fx:id="column2MarketButton" layoutX="906.0" layoutY="188.0" mnemonicParsing="false" onAction="#column2MarketButton" opacity="0.5" prefHeight="37.0" prefWidth="16.0" style="-fx-background-color: yellow;" />
+      <Button fx:id="column1MarketButton" layoutX="882.0" layoutY="188.0" mnemonicParsing="false" onAction="#column1MarketButton" opacity="0.5" prefHeight="37.0" prefWidth="16.0" style="-fx-background-color: yellow;" />
+      <Button fx:id="manage1" layoutX="757.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage1" opacity="0.2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: brown;">
+         <graphic>
+            <ImageView fx:id="manageImage1" fitHeight="30.0" fitWidth="30.0" />
+         </graphic>
+      </Button>
+      <Button fx:id="manage2" layoutX="703.0" layoutY="91.0" mnemonicParsing="false" onAction="#manage2" opacity="0.2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: brown;">
+         <graphic>
+            <ImageView fx:id="manageImage2" fitHeight="30.0" fitWidth="30.0" />
+         </graphic>
+      </Button>
+      <Button fx:id="manage4" layoutX="600.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage4" opacity="0.2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: brown;">
+         <graphic>
+            <ImageView fx:id="manageImage4" fitHeight="30.0" fitWidth="30.0" />
+         </graphic>
+      </Button>
+      <Button fx:id="manage3" layoutX="650.0" layoutY="91.0" mnemonicParsing="false" onAction="#manage3" opacity="0.2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: brown;">
+         <graphic>
+            <ImageView fx:id="manageImage3" fitHeight="30.0" fitWidth="30.0" />
          </graphic>
       </Button>
    </children>

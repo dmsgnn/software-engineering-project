@@ -234,7 +234,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void marketAction() {
-
+        playerBoard.doMarketAction();
     }
 
     @Override
@@ -268,6 +268,7 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void manageResources(ArrayList<Resource> resources) {
+        playerBoard.manageResources(resources);
 
     }
 

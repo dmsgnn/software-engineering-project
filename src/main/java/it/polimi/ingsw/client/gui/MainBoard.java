@@ -14,12 +14,48 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MainBoard {
     private static ClientView clientView;
     private static GUI gui;
 
     // market
+    private boolean marketController =false;
+    @FXML
+    private Button row1MarketButton;
+    @FXML
+    private Button row2MarketButton;
+    @FXML
+    private Button row3MarketButton;
+    @FXML
+    private Button column1MarketButton;
+    @FXML
+    private Button column2MarketButton;
+    @FXML
+    private Button column3MarketButton;
+    @FXML
+    private Button column4MarketButton;
+
+    // manage
+    @FXML
+    private Button manage1;
+    @FXML
+    private Button manage2;
+    @FXML
+    private Button manage3;
+    @FXML
+    private Button manage4;
+    @FXML
+    private ImageView manageImage1;
+    @FXML
+    private ImageView manageImage2;
+    @FXML
+    private ImageView manageImage3;
+    @FXML
+    private ImageView manageImage4;
+
+
     @FXML
     private ImageView marble1;
     @FXML
@@ -565,6 +601,8 @@ public class MainBoard {
         devCardEleven.setMouseTransparent(true);
         devCardTwelve.setMouseTransparent(true);
 
+
+
         String[][] grid = clientView.getGameboard().getCards();
         if(grid[0][0] == null){
             devCardOne.setMouseTransparent(false);
@@ -624,6 +662,15 @@ public class MainBoard {
         strongboxShields.setMouseTransparent(true);
         strongboxStones.setMouseTransparent(true);
         //market buttons
+        manage1.setDisable(true);
+        manage2.setDisable(true);
+        manage3.setDisable(true);
+        manage4.setDisable(true);
+        manage1.setVisible(false);
+        manage2.setVisible(false);
+        manage3.setVisible(false);
+        manage4.setVisible(false);
+        disableMarketButtons();
     }
 
     /**
@@ -907,45 +954,197 @@ public class MainBoard {
     }
 
     public void depotOneResourceOneAction() {
+        if (currentAction==Actions.MANAGE){
+            if (first==null) {
+                if (!isNullVolunteer){
+                    first = depot1;
+                    num = 5;
+                    if (first==null) isNullVolunteer = true;
+                }
+                else{
+                    second = depot1;
+                    depot1Resource1.setImage(null);
+                    depot1=null;
+                    isNullVolunteer=false;
+                    setSecondResource();
+                }
+            }
+            else {
+                second = depot1;
+                depot1Resource1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot1 = first;
+                first = null;
+                setSecondResource();
+            }
+        }
+        else{
         Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(0);
         warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
 
         depotOneResourceOne.setMouseTransparent(true);
+        }
     }
 
     public void depotTwoResourceOneAction() {
-        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
-        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+        if (currentAction==Actions.MANAGE){
+            if (first==null) {
+                if (!isNullVolunteer){
+                    first = depot2[0];
+                    num = 6;
+                    if (first==null) isNullVolunteer = true;
+                }
+               else{
+                   second = depot2[0];
+                   depot2Resource1.setImage(null);
+                   depot2[0] = null;
+                   isNullVolunteer = false;
+                   setSecondResource();
+                }
+            }
+            else {
+                second = depot2[0];
+                depot2Resource1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot2[0] = first;
+                first = null;
+                setSecondResource();
+            }
 
-        depotTwoResourceOne.setMouseTransparent(true);
+        }
+        else{
+            Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
+            warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+
+            depotTwoResourceOne.setMouseTransparent(true);
+        }
     }
 
     public void depotTwoResourceTwoAction() {
-        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
-        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+        if (currentAction==Actions.MANAGE){
+            if (first==null) {
+                if (!isNullVolunteer){
+                    first = depot2[1];
+                    num = 7;
+                    if (first==null) isNullVolunteer = true;
+                }
+                else{
+                    second = depot2[1];
+                    depot2Resource2.setImage(null);
+                    depot2[1] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            }
+            else {
+                second = depot2[1];
+                depot2Resource2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot2[1] = first;
+                first = null;
+                setSecondResource();
+            }
 
-        depotTwoResourceTwo.setMouseTransparent(true);
+        }
+        else {
+            Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
+            warehousePayment.put(depotRss, warehousePayment.get(depotRss) + 1);
+
+            depotTwoResourceTwo.setMouseTransparent(true);
+        }
     }
 
     public void depotThreeResourceOneAction() {
-        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
-        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+        if (currentAction==Actions.MANAGE){
+            if (first==null) {
+                if (!isNullVolunteer){
+                    first = depot3[0];
+                    num = 8;
+                    if (first==null) isNullVolunteer = true;
+                }
+                else{
+                    second = depot3[0];
+                    depot3Resource1.setImage(null);
+                    depot3[0] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            }
+            else {
+                second = depot3[0];
+                depot3Resource1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot3[0] = first;
+                first = null;
+                setSecondResource();
+            }
+        }
+        else {
+            Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
+            warehousePayment.put(depotRss, warehousePayment.get(depotRss) + 1);
 
-        depotThreeResourceOne.setMouseTransparent(true);
+            depotThreeResourceOne.setMouseTransparent(true);
+        }
     }
 
     public void depotThreeResourceTwoAction() {
-        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
-        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+        if (currentAction==Actions.MANAGE){
+            if (first==null) {
+                if (!isNullVolunteer){
+                    first = depot3[1];
+                    num = 9;
+                    if (first==null) isNullVolunteer = true;
+                }
+                else{
+                    second = depot3[1];
+                    depot3Resource2.setImage(null);
+                    depot3[1] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            }
+            else {
+                second = depot3[1];
+                depot3Resource2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot3[1] = first;
+                first = null;
+                setSecondResource();
+            }
+        }
+        else {
+            Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
+            warehousePayment.put(depotRss, warehousePayment.get(depotRss) + 1);
 
-        depotThreeResourceTwo.setMouseTransparent(true);
+            depotThreeResourceTwo.setMouseTransparent(true);
+        }
     }
 
     public void depotThreeResourceThreeAction() {
-        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
-        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+        if (currentAction==Actions.MANAGE){
+            if (first==null) {
+                if (!isNullVolunteer){
+                    first = depot3[2];
+                    num = 10;
+                    if (first==null) isNullVolunteer = true;
+                }
+                else{
+                    second = depot3[2];
+                    depot3Resource3.setImage(null);
+                    depot3[2] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            }
+            else {
+                second = depot3[2];
+                depot3Resource3.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot3[2] = first;
+                first = null;
+                setSecondResource();
+            }
+        }
+        else {
+            Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
+            warehousePayment.put(depotRss, warehousePayment.get(depotRss) + 1);
 
-        depotThreeResourceThree.setMouseTransparent(true);
+            depotThreeResourceThree.setMouseTransparent(true);
+        }
     }
 
     /**
@@ -966,6 +1165,17 @@ public class MainBoard {
             resetEndButton();
             buttonStatus();
         }
+        else if (currentAction == Actions.MANAGE){
+            manageActionDone();
+            resetEndButton();
+            buttonStatus();
+            currentAction = null;
+
+        }
+        else{
+            clientView.sendAction(Actions.ENDTURN);
+        }
+
     }
 
     /**
@@ -1244,5 +1454,585 @@ public class MainBoard {
             leaderCardOne.setMouseTransparent(false);
             leaderCardTwo.setMouseTransparent(false);
         }
+    }
+
+    //market action
+
+    public void marketAction(){
+        clientView.sendAction(Actions.MARKETACTION);
+        disableActions();
+    }
+
+    public void doMarketAction(){
+        activeMarketButtons();
+
+    }
+
+    private void activeMarketButtons(){
+        row1MarketButton.setDisable(false);
+        row2MarketButton.setDisable(false);
+        row3MarketButton.setDisable(false);
+        column1MarketButton.setDisable(false);
+        column2MarketButton.setDisable(false);
+        column3MarketButton.setDisable(false);
+        column4MarketButton.setDisable(false);
+        row1MarketButton.setVisible(true);
+        row2MarketButton.setVisible(true);
+        row3MarketButton.setVisible(true);
+        column1MarketButton.setVisible(true);
+        column2MarketButton.setVisible(true);
+        column3MarketButton.setVisible(true);
+        column4MarketButton.setVisible(true);
+    }
+
+    private void disableMarketButtons(){
+        row1MarketButton.setDisable(true);
+        row2MarketButton.setDisable(true);
+        row3MarketButton.setDisable(true);
+        column1MarketButton.setDisable(true);
+        column2MarketButton.setDisable(true);
+        column3MarketButton.setDisable(true);
+        column4MarketButton.setDisable(true);
+        row1MarketButton.setVisible(false);
+        row2MarketButton.setVisible(false);
+        row3MarketButton.setVisible(false);
+        column1MarketButton.setVisible(false);
+        column2MarketButton.setVisible(false);
+        column3MarketButton.setVisible(false);
+        column4MarketButton.setVisible(false);
+
+    }
+
+    public void row1MarketButton(){
+        ArrayList<Resource> resource = new ArrayList<>();
+        clientView.marketAction(0, true,resource);
+        disableMarketButtons();
+    }
+    public void row2MarketButton(){
+        ArrayList<Resource> resource = new ArrayList<>();
+        clientView.marketAction(1, true,resource);
+        disableMarketButtons();
+    }
+    public void row3MarketButton(){
+        ArrayList<Resource> resource = new ArrayList<>();
+        clientView.marketAction(2, true,resource);
+        disableMarketButtons();
+    }
+    public void column1MarketButton(){
+        ArrayList<Resource> resource = new ArrayList<>();
+        clientView.marketAction(0, false,resource);
+        disableMarketButtons();
+    }
+    public void column2MarketButton() {
+        ArrayList<Resource> resource = new ArrayList<>();
+        clientView.marketAction(1, false, resource);
+        disableMarketButtons();
+        marketAction.setDisable(true);
+        marketAction.setVisible(false);
+    }
+    public void column3MarketButton(){
+        ArrayList<Resource> resource = new ArrayList<>();
+        clientView.marketAction(2, false,resource);
+        disableMarketButtons();
+    }
+    public void column4MarketButton(){
+        ArrayList<Resource> resource = new ArrayList<>();
+        clientView.marketAction(3, false,resource);
+        disableMarketButtons();
+    }
+
+    public void disableActions(){
+        marketAction.setDisable(true);
+        marketAction.setVisible(false);
+        buyCardAction.setDisable(true);
+        buyCardAction.setVisible(false);
+        discardCardAction.setVisible(false);
+        discardCardAction.setDisable(true);
+        productionAction.setDisable(true);
+        productionAction.setVisible(false);
+        playCardAction.setDisable(true);
+        playCardAction.setVisible(false);
+        endTurn.setVisible(false);
+        endTurn.setDisable(true);
+    }
+
+    public void manageResources(ArrayList<Resource> resources) {
+        currentAction = Actions.MANAGE;
+        changeEndButton();
+        warehouse= clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouse();
+        res= resources;
+
+        if (warehouse.get(0).isEmpty()){
+            depot1 = null;
+        }
+        else{
+            depot1 = warehouse.get(0).get(0);
+        }
+
+
+        if (warehouse.get(1).isEmpty()){
+            depot2[0] = null;
+            depot2[1] = null;
+        }
+        else if(warehouse.get(1).size()==1){
+            depot2[0] = warehouse.get(1).get(0);
+            depot2[1]= null;
+        }
+        else{
+            depot2[0] = warehouse.get(1).get(0);
+            depot2[1] = warehouse.get(1).get(1);
+        }
+
+
+
+        if (warehouse.get(2).isEmpty()){
+            depot3[0] = null;
+            depot3[1] = null;
+            depot3[2] = null;
+        }
+        else if(warehouse.get(2).size()==1){
+            depot3[0] =warehouse.get(2).get(0);
+            depot3[1] = null;
+            depot3[2] = null;
+        }
+        else if (warehouse.get(2).size() == 2){
+            depot3[0] = warehouse.get(2).get(0);
+            depot3[1] = warehouse.get(2).get(1);
+            depot3[2] = null;
+        }
+        else{
+            depot3[0] = warehouse.get(2).get(0);
+            depot3[1] = warehouse.get(2).get(1);
+            depot3[2] = warehouse.get(2).get(2);
+        }
+
+        if (res.isEmpty()){
+            newResources[0] = null;
+            newResources[1] = null;
+            newResources[2] = null;
+            newResources[3] = null;
+        }
+        else{
+            if (res.size()==4){
+                newResources[0] =res.get(0);
+                newResources[1] =res.get(1);
+                newResources[2] =res.get(2);
+                newResources[3] =res.get(3);
+            }
+            else if (res.size() ==3){
+                newResources[0] = res.get(0);
+                newResources[1] = res.get(1);
+                newResources[2] = res.get(2);
+                newResources[3] = null;
+            }
+            else if (res.size() == 2){
+                newResources[0] = res.get(0);
+                newResources[1] = res.get(1);
+                newResources[2] = null;
+                newResources[3] = null;
+            }
+            else{
+                newResources[0]= res.get(0);
+                newResources[1]= null;
+                newResources[2]= null;
+                newResources[3]= null;
+            }
+
+        }
+
+
+        buttonStatus();
+
+
+
+
+        if(newResources[0] == null){
+            //fine manage resources;
+        }
+        else {
+            final String s = "resources/punchboard/" + newResources[0].toString().toLowerCase() + ".png";
+            if (newResources[1]== null){
+                manageImage1.setImage(new Image(s));
+                manage1.setVisible(true);
+                manage1.setDisable(false);
+            }
+            else {
+                String s1 = "resources/punchboard/" + newResources[1].toString().toLowerCase() + ".png";
+                if (newResources[2] == null) {
+                    manageImage1.setImage(new Image(s));
+                    manageImage2.setImage(new Image(s1));
+
+                }
+                else {
+                    String s2 = "resources/punchboard/" + newResources[2].toString().toLowerCase() + ".png";
+                    manageImage1.setImage(new Image(s));
+                    manageImage2.setImage(new Image(s1));
+                    manageImage3.setImage(new Image(s2));
+                    if (newResources[3] == null){
+                        manage3.setVisible(true);
+                        manage3.setDisable(false);
+                    }
+                    else{
+                        manageImage4.setImage(new Image("resources/punchboard/" + newResources[3].toString().toLowerCase() + ".png"));
+                        manage3.setVisible(true);
+                        manage3.setDisable(false);
+                        manage4.setVisible(true);
+                        manage4.setDisable(false);
+                    }
+
+                }
+                manage1.setVisible(true);
+                manage1.setDisable(false);
+                manage2.setVisible(true);
+                manage2.setDisable(false);
+            }
+        }
+
+
+        activateWarehouseButton();
+        endTurn.setVisible(true);
+        endTurn.setDisable(false);
+        endTurn.setMouseTransparent(false);
+
+
+
+    }
+
+    private void activateWarehouseButton() {
+        depotOneResourceOne.setMouseTransparent(false);
+        depotOneResourceOne.setDisable(false);
+        depotTwoResourceOne.setDisable(false);
+        depotTwoResourceTwo.setDisable(false);
+        depotThreeResourceOne.setDisable(false);
+        depotThreeResourceTwo.setDisable(false);
+        depotThreeResourceThree.setDisable(false);
+        depotTwoResourceOne.setMouseTransparent(false);
+        depotTwoResourceTwo.setMouseTransparent(false);
+        depotThreeResourceOne.setMouseTransparent(false);
+        depotThreeResourceTwo.setMouseTransparent(false);
+        depotThreeResourceThree.setMouseTransparent(false);
+        depotOneResourceOne.setVisible(true);
+        depotTwoResourceOne.setVisible(true);
+        depotTwoResourceTwo.setVisible(true);
+        depotThreeResourceOne.setVisible(true);
+        depotThreeResourceTwo.setVisible(true);
+        depotThreeResourceThree.setVisible(true);
+        depot1Resource1.setVisible(true);
+        depot2Resource1.setVisible(true);
+        depot2Resource2.setVisible(true);
+        depot3Resource1.setVisible(true);
+        depot3Resource2.setVisible(true);
+        depot3Resource3.setVisible(true);
+    }
+
+    private Map<Integer, ArrayList<Resource>> warehouse = new HashMap<>();
+    ArrayList<Resource> res;
+    private Resource first= null;
+    private int num= -1;
+    private Resource second= null;
+    Resource depot1;
+    Resource[] depot2 = new Resource[2];
+    Resource[] depot3 = new Resource[3];
+    Resource[] newResources = new Resource[4];
+    Boolean isNullVolunteer = false;
+
+
+
+
+
+
+    public void manage1(){
+        if (first==null) {
+            if (!isNullVolunteer) {
+                first = newResources[0];
+                num = 1;
+                if (first== null) isNullVolunteer= true;
+            }
+            else{
+                second = newResources[0] ;
+                manageImage1.setImage(null);
+                newResources[0] = null;
+                isNullVolunteer = false;
+                setSecondResource();
+            }
+        }
+        else {
+            second = newResources[0];
+            manageImage1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+            newResources[0] = first;
+            first = null;
+            setSecondResource();
+
+        }
+    }
+
+
+
+    public void manage2(){
+        if (first==null) {
+            if (!isNullVolunteer) {
+                first = newResources[1];
+                num = 2;
+                if (first == null) isNullVolunteer = true;
+            }
+            else{
+                second = newResources[1] ;
+                manageImage2.setImage(null);
+                newResources[1] = null;
+                isNullVolunteer = false;
+                setSecondResource();
+            }
+        }
+        else {
+            second = newResources[1];
+            manageImage2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+            newResources[1] = first;
+            first = null;
+            setSecondResource();
+
+        }
+    }
+    public void manage3(){
+        if (first==null) {
+            if (!isNullVolunteer) {
+                first = newResources[2];
+                num = 3;
+                if (first == null) isNullVolunteer = true;
+            }
+            else{
+                second = newResources[2] ;
+                manageImage3.setImage(null);
+                newResources[2] = null;
+                isNullVolunteer = false;
+                setSecondResource();
+            }
+        }
+        else {
+            second = newResources[2];
+            manageImage3.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+            newResources[2] = first;
+            first = null;
+            setSecondResource();
+
+        }
+    }
+    public void manage4(){
+        if (first==null) {
+            if (!isNullVolunteer) {
+                first = newResources[3];
+                num = 4;
+                if (first == null) isNullVolunteer = true;
+            }
+            else{
+                second = newResources[3] ;
+                manageImage4.setImage(null);
+                newResources[3] = null;
+                isNullVolunteer = false;
+                setSecondResource();
+            }
+        }
+        else {
+            second = newResources[3];
+            manageImage4.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+            newResources[3]= first;
+            first = null;
+            setSecondResource();
+
+        }
+    }
+    private void setSecondResource(){
+        switch (num){
+            case 1:{
+                if (second ==null){
+                    manageImage1.setImage(null);
+                }
+                else {
+                    manageImage1.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                newResources[0] = second;
+                second = null;
+                break;
+            }
+            case 2:{
+                if (second == null){
+                    manageImage2.setImage(null);
+                }
+                else {
+                    manageImage2.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                newResources[1]= second;
+                second = null;
+                break;
+            }
+            case 3:{
+                if (second == null){
+                    manageImage3.setImage(null);
+                }
+                else {
+                    manageImage3.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                newResources[2]= second;
+                second = null;
+                break;
+            }
+            case 4:{
+                if (second ==null){
+                    manageImage4.setImage(null);
+                }
+                else {
+                    manageImage4.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                newResources[3]= second;
+                second = null;
+                break;
+            }
+            case 5:{
+                if (second==null){
+                    depot1Resource1.setImage(null);
+                }
+                else {
+                    depot1Resource1.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                //da sistemare, sono arrivato qui -> poi mi mancano i bottoni ed infine anche il done per chiudere l'azione -> ricordati anche dei depot delle leader card
+                ArrayList<Resource> temp = new ArrayList<>();
+                depot1 = second;
+                second = null;
+                break;
+            }
+            case 6:{
+                if(second==null){
+                    depot2Resource1.setImage(null);
+                }
+                else {
+                    depot2Resource1.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                depot2[0] = second;
+                second = null;
+                break;
+            }
+            case 7:{
+                if (second==null){
+                    depot2Resource2.setImage(null);
+                }
+                else {
+                    depot2Resource2.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                depot2[1] = second;
+                second = null;
+                break;
+            }
+            case 8:{
+                if (second==null){
+                    depot3Resource1.setImage(null);
+                }
+                else {
+                    depot3Resource1.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                depot3[0] = second;
+                second = null;
+                break;
+            }
+            case 9:{
+                if (second==null){
+                    depot3Resource2.setImage(null);
+                }
+                else {
+                    depot3Resource2.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                depot3[1] = second;
+                second = null;
+                break;
+            }
+            case 10:{
+                if (second==null){
+                    depot3Resource3.setImage(null);
+                }
+                else {
+                    depot3Resource3.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                depot3[2] = second;
+                second = null;
+                break;
+            }
+        }
+    }
+
+    private void manageActionDone(){
+        ArrayList<Resource> first = new ArrayList<>();
+        ArrayList<Resource> second = new ArrayList<>();
+        ArrayList<Resource> third = new ArrayList<>();
+        Map<Resource,Integer> discardRes = new HashMap<>();
+        int coins=0;
+        int stones=0;
+        int shields = 0;
+        int servants =0;
+        Map<Integer,ArrayList<Resource>> ware = new HashMap<>();
+        int counter=0;
+
+        if (depot1!= null) first.add(0,depot1);
+
+        for (Resource resource : depot2) {
+            if (resource != null) {
+                second.add(counter, resource);
+                counter++;
+            }
+        }
+        counter =0;
+        for (Resource resource: depot3){
+            if (resource!=null){
+                third.add(counter,resource);
+                counter++;
+            }
+        }
+
+        for (Resource resource: newResources){
+            if (resource!=null){
+                if (resource==Resource.COINS) coins++;
+                else if (resource== Resource.SERVANTS) servants++;
+                else if (resource == Resource.STONES) stones++;
+                else shields++;
+            }
+        }
+        discardRes.put(Resource.COINS,coins);
+        discardRes.put(Resource.SHIELDS,shields);
+        discardRes.put(Resource.SERVANTS,servants);
+        discardRes.put(Resource.STONES,stones);
+
+        ware.put(0,first);
+        ware.put(1,second);
+        ware.put(2,third);
+        buttonStatus();
+        disableWarehouseButtons();
+        warehouse=null;
+        res=null;
+        this.first=null;
+        num = -1;
+        this.second = null;
+        depot1=null;
+        depot2 = null;
+        depot3 = null;
+        newResources = null;
+        isNullVolunteer = false;
+        clientView.sendManageResourcesReply(ware,discardRes);
+
+    }
+    private void disableWarehouseButtons(){
+        depotOneResourceOne.setMouseTransparent(true);
+        depotTwoResourceOne.setMouseTransparent(true);
+        depotTwoResourceTwo.setMouseTransparent(true);
+        depotThreeResourceOne.setMouseTransparent(true);
+        depotThreeResourceTwo.setMouseTransparent(true);
+        depotThreeResourceThree.setMouseTransparent(true);
+        manage4.setDisable(true);
+        manage3.setDisable(true);
+        manage2.setDisable(true);
+        manage1.setDisable(true);
+        manage4.setVisible(false);
+        manage3.setVisible(false);
+        manage2.setVisible(false);
+        manage1.setVisible(false);
+
+
+
     }
 }
