@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -12,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainBoard">
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.MainBoard">
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true">
          <image>
@@ -253,7 +248,7 @@
             <Image url="@../resources/punchboard/redCross.png" />
          </image>
       </ImageView>
-      <Button fx:id="coinChoice" layoutX="604.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickCoin" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+      <Button fx:id="coinChoice" layoutX="610.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickCoin" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0">
                <image>
@@ -262,7 +257,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="servantChoice" layoutX="647.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickServant" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+      <Button fx:id="servantChoice" layoutX="660.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickServant" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0">
                <image>
@@ -271,7 +266,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="shieldChoice" layoutX="702.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickShield" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+      <Button fx:id="shieldChoice" layoutX="710.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickShield" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0">
                <image>
@@ -280,7 +275,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="stoneChoice" layoutX="759.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickStone" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+      <Button fx:id="stoneChoice" layoutX="760.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickStone" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0">
                <image>

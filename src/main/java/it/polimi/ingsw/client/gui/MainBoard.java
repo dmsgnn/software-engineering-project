@@ -665,13 +665,7 @@ public class MainBoard {
     /**
      * called to update the buttons when performing the production action
      */
-    public void productionAction(){
-        prodDevSlots = new ArrayList<>();
-        prodLeaderSlots = new ArrayList<>();
-        leaderCardGains = new ArrayList<>();
-        boardResProd = new ArrayList<>();
-        actionDone=false;
-        currentAction = Actions.USEPRODUCTION;
+    private void productionButtonsUpdate(){
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
 
         buttonStatus();
@@ -682,14 +676,28 @@ public class MainBoard {
         if(board.getDevCardSlot().get(0)!=null && !prodDevSlots.contains(0)) devSlot1.setMouseTransparent(false);
         if(board.getDevCardSlot().get(1)!=null && !prodDevSlots.contains(1)) devSlot2.setMouseTransparent(false);
         if(board.getDevCardSlot().get(2)!=null && !prodDevSlots.contains(2)) devSlot3.setMouseTransparent(false);
-        if(boardResProd.isEmpty())
+        if(boardResProd.isEmpty()){
             disableButton(boardProduction, false);
+        }
         if(!prodLeaderSlots.contains(0) && !board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(0))){
             leaderCardOne.setMouseTransparent(false);
         }
         if(!prodLeaderSlots.contains(1) && !board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(1))){
             leaderCardTwo.setMouseTransparent(false);
         }
+    }
+
+    /**
+     * called to prepare attributes and button when starting the action
+     */
+    public void productionAction(){
+        prodDevSlots = new ArrayList<>();
+        prodLeaderSlots = new ArrayList<>();
+        leaderCardGains = new ArrayList<>();
+        boardResProd = new ArrayList<>();
+        actionDone=false;
+        currentAction = Actions.USEPRODUCTION;
+        productionButtonsUpdate();
     }
 
     /**
@@ -803,9 +811,13 @@ public class MainBoard {
         setMessage("Select 2 resources that you want to pay and 1 resource that you want to gain");
         boardOrLeaderChoice=true;
         disableButton(coinChoice, false);
+        coinChoice.setStyle("-fx-background-color: #C8C5C5; ");
         disableButton(stoneChoice, false);
+        stoneChoice.setStyle("-fx-background-color: #C8C5C5; ");
         disableButton(servantChoice, false);
+        servantChoice.setStyle("-fx-background-color: #C8C5C5; ");
         disableButton(shieldChoice, false);
+        shieldChoice.setStyle("-fx-background-color: #C8C5C5; ");
     }
 
     /**
@@ -968,8 +980,7 @@ public class MainBoard {
      */
     private void endSelection(){
         if(!boardOrLeaderChoice || boardResProd.size() == 3){
-            buttonStatus();
-            productionAction();
+            productionButtonsUpdate();
         }
     }
 
