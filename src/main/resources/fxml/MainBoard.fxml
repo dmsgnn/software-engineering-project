@@ -24,7 +24,7 @@
             <Image url="@../resources/board/Playerboard.png" />
          </image>
       </ImageView>
-      <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="440.0" layoutY="30.0" maxHeight="120.0" maxWidth="160.0" minHeight="40.0" minWidth="160.0" prefHeight="120.0" prefWidth="160.0" style="-fx-background-color: WHITE; -fx-background-radius: 20;" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="420.0" layoutY="30.0" maxHeight="120.0" maxWidth="160.0" minHeight="40.0" minWidth="160.0" prefHeight="120.0" prefWidth="160.0" style="-fx-background-color: WHITE; -fx-background-radius: 20;" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="SansSerif Bold" size="11.0" />
          </font>
@@ -250,7 +250,7 @@
       </ImageView>
       <Button fx:id="coinChoice" layoutX="610.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickCoin" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0">
+            <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
                <image>
                   <Image url="@../resources/punchboard/coins.png" />
                </image>
@@ -259,7 +259,7 @@
       </Button>
       <Button fx:id="servantChoice" layoutX="660.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickServant" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0">
+            <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
                <image>
                   <Image url="@../resources/punchboard/servants.png" />
                </image>
@@ -268,7 +268,7 @@
       </Button>
       <Button fx:id="shieldChoice" layoutX="710.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickShield" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0">
+            <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
                <image>
                   <Image url="@../resources/punchboard/shields.png" />
                </image>
@@ -277,7 +277,7 @@
       </Button>
       <Button fx:id="stoneChoice" layoutX="760.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickStone" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0">
+            <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
                <image>
                   <Image url="@../resources/punchboard/stones.png" />
                </image>
@@ -291,24 +291,24 @@
       <Button fx:id="column4MarketButton" layoutX="949.0" layoutY="189.0" mnemonicParsing="false" onAction="#column4MarketButton" opacity="0.5" prefHeight="37.0" prefWidth="16.0" style="-fx-background-color: yellow;" />
       <Button fx:id="column2MarketButton" layoutX="906.0" layoutY="188.0" mnemonicParsing="false" onAction="#column2MarketButton" opacity="0.5" prefHeight="37.0" prefWidth="16.0" style="-fx-background-color: yellow;" />
       <Button fx:id="column1MarketButton" layoutX="882.0" layoutY="188.0" mnemonicParsing="false" onAction="#column1MarketButton" opacity="0.5" prefHeight="37.0" prefWidth="16.0" style="-fx-background-color: yellow;" />
-      <Button fx:id="manage1" layoutX="757.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage1" opacity="0.2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: brown;">
+      <Button fx:id="manage1" layoutX="760.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage1" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
-            <ImageView fx:id="manageImage1" fitHeight="30.0" fitWidth="30.0" />
+            <ImageView fx:id="manageImage1" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="manage2" layoutX="703.0" layoutY="91.0" mnemonicParsing="false" onAction="#manage2" opacity="0.2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: brown;">
+      <Button fx:id="manage2" layoutX="703.0" layoutY="91.0" mnemonicParsing="false" onAction="#manage2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
-            <ImageView fx:id="manageImage2" fitHeight="30.0" fitWidth="30.0" />
+            <ImageView fx:id="manageImage2" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="manage4" layoutX="600.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage4" opacity="0.2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: brown;">
+      <Button fx:id="manage4" layoutX="600.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage4" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
-            <ImageView fx:id="manageImage4" fitHeight="30.0" fitWidth="30.0" />
+            <ImageView fx:id="manageImage4" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="manage3" layoutX="650.0" layoutY="91.0" mnemonicParsing="false" onAction="#manage3" opacity="0.2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: brown;">
+      <Button fx:id="manage3" layoutX="650.0" layoutY="91.0" mnemonicParsing="false" onAction="#manage3" opacity="0.97" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
-            <ImageView fx:id="manageImage3" fitHeight="30.0" fitWidth="30.0" />
+            <ImageView fx:id="manageImage3" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
          </graphic>
       </Button>
    </children>

@@ -154,20 +154,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
 
         synchronized (lock) {
             // this part must be used because when all the player leave a game it mustn't be deleted
-            /*if(lobby.isGameStarted()) {
-                server.disconnectAndSave(this, lob);
-            }
-            else {
-                server.disconnect(this, lob);
-            }*/
-            //this part was used because when all the player disconneted from the game, the game was canceled
             if(lobby.isGameStarted()) {
-                //this part must be modified if persistence FA
-                if(lobby.getPlayerGameNumber()==1 || lobby.getLoggedPlayers().size() == 1){
-                    System.out.println("Game canceled");
-                    server.endGame(lob);
-                    return;
-                }
                 server.disconnectAndSave(this, lob);
             }
             else {

@@ -267,6 +267,7 @@ public class MainBoard {
     private Color color;
     private int level;
     private int slot;
+    Image devCardImage;
 
     public static void setGui(GUI gui) {
         MainBoard.gui = gui;
@@ -289,9 +290,12 @@ public class MainBoard {
         if(clientView.getGameboard().getPlayerBoards().size()==1){
             double[] newBlackPosition = getCrossPosition(board.getLorenzoPosition());
             if(board.getPlayerPosition()==board.getLorenzoPosition()) {
-                blackCross.setLayoutX(newPosition[0] - 10);
-                blackCross.setLayoutY(newPosition[1]);
+                blackCross.setLayoutX(newBlackPosition[0] - 10);
             }
+            else{
+                blackCross.setLayoutX(newBlackPosition[0]);
+            }
+            blackCross.setLayoutY(newBlackPosition[1]);
         }
         showVatican(board);
         MarbleColors[][] market = clientView.getGameboard().getMarket();
@@ -309,7 +313,9 @@ public class MainBoard {
         for(int i=0; i<3; i++) {
             for (int j = 0; j < 4; j++) {
                 Image marbleImage = new Image("/graphics/Marble/" + market[i][j].toString().toLowerCase() + ".png");
-                Image devCardImage = new Image("/graphics/devCards/" + grid[i][j] + ".png");
+                if (grid[i][j]!=null) {
+                    devCardImage = new Image("/graphics/devCards/" + grid[i][j] + ".png");
+                }
                 if(i==0 && j==0) {
                     marble1.setImage(marbleImage);
                     devCard1.setImage(devCardImage);
@@ -492,14 +498,20 @@ public class MainBoard {
     }
 
     private void showDepots(){
+        depot1Resource1.setVisible(true);
+        depot2Resource1.setVisible(true);
+        depot2Resource2.setVisible(true);
+        depot3Resource1.setVisible(true);
+        depot3Resource2.setVisible(true);
+        depot3Resource3.setVisible(true);
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
         if(board.isDepotEmpty(0))
-            depotOneResourceOne.setVisible(false);
+            depot1Resource1.setVisible(false);
         else
             depot1Resource1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(0).toString().toLowerCase() + ".png"));
         if(board.isDepotEmpty(1)){
-            depotTwoResourceOne.setVisible(false);
-            depotTwoResourceTwo.setVisible(false);
+            depot2Resource1.setVisible(false);
+            depot2Resource2.setVisible(false);
         }
         else{
             if (board.getWarehouse().get(1).size() == 2) {
@@ -508,13 +520,13 @@ public class MainBoard {
             }
             else{
                 depot2Resource1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(1).toString().toLowerCase() + ".png"));
-                depotTwoResourceTwo.setVisible(false);
+                depot2Resource2.setVisible(false);
             }
         }
         if(board.isDepotEmpty(2)){
-            depotThreeResourceOne.setVisible(false);
-            depotThreeResourceTwo.setVisible(false);
-            depotThreeResourceThree.setVisible(false);
+            depot3Resource1.setVisible(false);
+            depot3Resource2.setVisible(false);
+            depot3Resource3.setVisible(false);
         }
         else{
             if (board.getWarehouse().get(2).size() == 3) {
@@ -525,12 +537,13 @@ public class MainBoard {
             else if(board.getWarehouse().get(2).size() == 2){
                 depot3Resource1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
                 depot3Resource2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
-                depotThreeResourceThree.setVisible(false);
+                depot3Resource3.setVisible(false);
             }
-            else
-                depot3Resource1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
-                depotThreeResourceTwo.setVisible(false);
-                depotThreeResourceThree.setVisible(false);
+            else {
+                depot3Resource1.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
+                depot3Resource2.setVisible(false);
+                depot3Resource3.setVisible(false);
+            }
         }
         //disable all
     }
@@ -972,6 +985,7 @@ public class MainBoard {
                 else{
                     second = depot1;
                     depot1Resource1.setImage(null);
+                    depot1Resource1.setVisible(false);
                     depot1=null;
                     isNullVolunteer=false;
                     setSecondResource();
@@ -980,6 +994,7 @@ public class MainBoard {
             else {
                 second = depot1;
                 depot1Resource1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot1Resource1.setVisible(true);
                 depot1 = first;
                 first = null;
                 setSecondResource();
@@ -1014,6 +1029,7 @@ public class MainBoard {
             else {
                 second = depot2[0];
                 depot2Resource1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot2Resource1.setVisible(true);
                 depot2[0] = first;
                 first = null;
                 setSecondResource();
@@ -1049,6 +1065,7 @@ public class MainBoard {
             else {
                 second = depot2[1];
                 depot2Resource2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot2Resource2.setVisible(true);
                 depot2[1] = first;
                 first = null;
                 setSecondResource();
@@ -1084,6 +1101,7 @@ public class MainBoard {
             else {
                 second = depot3[0];
                 depot3Resource1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot3Resource1.setVisible(true);
                 depot3[0] = first;
                 first = null;
                 setSecondResource();
@@ -1118,6 +1136,7 @@ public class MainBoard {
             else {
                 second = depot3[1];
                 depot3Resource2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot3Resource2.setVisible(true);
                 depot3[1] = first;
                 first = null;
                 setSecondResource();
@@ -1152,6 +1171,7 @@ public class MainBoard {
             else {
                 second = depot3[2];
                 depot3Resource3.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot3Resource3.setVisible(true);
                 depot3[2] = first;
                 first = null;
                 setSecondResource();
@@ -1580,6 +1600,9 @@ public class MainBoard {
     }
 
     public void manageResources(ArrayList<Resource> resources) {
+        buttonStatus();
+        setMessage("choose your new warehouse configuration");
+        showDepots();
         currentAction = Actions.MANAGE;
         changeEndButton();
         warehouse= clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouse();
@@ -1664,7 +1687,7 @@ public class MainBoard {
         }
 
 
-        buttonStatus();
+
 
 
 
@@ -1740,12 +1763,14 @@ public class MainBoard {
         depotThreeResourceOne.setVisible(true);
         depotThreeResourceTwo.setVisible(true);
         depotThreeResourceThree.setVisible(true);
-        depot1Resource1.setVisible(true);
+        /*depot1Resource1.setVisible(true);
         depot2Resource1.setVisible(true);
         depot2Resource2.setVisible(true);
         depot3Resource1.setVisible(true);
         depot3Resource2.setVisible(true);
         depot3Resource3.setVisible(true);
+
+         */
     }
 
     private Map<Integer, ArrayList<Resource>> warehouse = new HashMap<>();
@@ -2032,9 +2057,15 @@ public class MainBoard {
         num = -1;
         this.second = null;
         depot1=null;
-        depot2 = null;
-        depot3 = null;
-        newResources = null;
+        depot2[0] = null;
+        depot2[1] = null;
+        depot3[0] = null;
+        depot3[1] = null;
+        depot3[2] = null;
+        newResources[0] = null;
+        newResources[1] = null;
+        newResources[2] = null;
+        newResources[3] = null;
         isNullVolunteer = false;
         clientView.sendManageResourcesReply(ware,discardRes);
 

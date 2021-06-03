@@ -894,13 +894,15 @@ public class Controller implements Observer<ClientMessage> {
             s.disconnectionMessage(username);
         }
         playersDisconnected.add(0,username);
+        if (playersDisconnected.size()==playersNumber){
+            return;
+        }
         String name = game.getPlayers(currentActivePlayer).getNickname();
         if(playerStatus.get(username).get(0) && playerStatus.get(username).get(1)) {
             beginCounter--;
         }
 
         if(!isGameStarted()) {
-            System.out.println("sono dentro");
             if (name.equals(username)) {
                 currentAction.put(currentActivePlayer, null);
                 increaseActivePlayer(1);
@@ -939,7 +941,9 @@ public class Controller implements Observer<ClientMessage> {
     public synchronized void playerReconnection(ServerView serverView){
         int i;
 
+
         playersDisconnected.remove(serverView.getUsername());
+
         String username = serverView.getUsername();
         for (ServerView s: serverViews){
             s.reconnectionMessage(username);
@@ -957,12 +961,10 @@ public class Controller implements Observer<ClientMessage> {
                 getLeaderCards(username), getStrongbox(), getWarehouse());
 
         if (!playerStatus.get(username).get(0)){
-            System.out.println("sono dentro le leader card");
             ArrayList<String> starting= new ArrayList<>();
             for (int j = 0; j < startingLeaderCards.get(serverView.getUsername()).size(); j++) {
                 starting.add(j,startingLeaderCards.get(username).get(j).getId());
             }
-            System.out.println(starting);
             serverView.sendLeaderCards(starting);
             return;
         }
@@ -971,11 +973,20 @@ public class Controller implements Observer<ClientMessage> {
             serverView.startingResourceMessage(number);
             return;
         }
+        else if (playersDisconnected.size()+1 == playersNumber){
+            increaseActivePlayer(1);
+            Player player = game.getPlayers(currentActivePlayer);
+            for (int k = 0; k < serverViews.size(); k++) {
+                if (serverViews.get(k).getUsername().equals(username)) currentServerView =k;
+            }
+            startTurn();
+        }
         //reconnection message
         System.out.println(username + "reconnected from controller");
         for(int j=0; j<playersDisconnected.size(); j++)
             System.out.println(playersDisconnected.get(i));
     }
+
 
 
     private Map<String,ArrayList<String>> getDevCardSlots(){
