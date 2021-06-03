@@ -297,6 +297,15 @@ public class MainBoard {
         MarbleColors[][] market = clientView.getGameboard().getMarket();
         String[][] grid = clientView.getGameboard().getCards();
 
+        for(int i = 0; i<3; i++){
+            if(board.getDevCardSlot().get(i)!=null) {
+                Image devCardImage = new Image("/graphics/devCards/" + board.getDevCardSlot().get(i) + ".png");
+                if (i == 0) devSlot1Im.setImage(devCardImage);
+                if (i == 1) devSlot2Im.setImage(devCardImage);
+                if (i == 2) devSlot3Im.setImage(devCardImage);
+            }
+        }
+
         for(int i=0; i<3; i++) {
             for (int j = 0; j < 4; j++) {
                 Image marbleImage = new Image("/graphics/Marble/" + market[i][j].toString().toLowerCase() + ".png");
@@ -807,7 +816,7 @@ public class MainBoard {
             prodDevSlots.add(0);
         }
         else{
-            slot = 1;
+            slot = 0;
             buttonStatus();
             startPayment();
         }
@@ -823,7 +832,7 @@ public class MainBoard {
             prodDevSlots.add(1);
         }
         else{
-            slot = 2;
+            slot = 1;
             buttonStatus();
             startPayment();
         }
@@ -839,7 +848,7 @@ public class MainBoard {
             prodDevSlots.add(2);
         }
         else{
-            slot = 3;
+            slot = 2;
             buttonStatus();
             startPayment();
         }
@@ -1183,6 +1192,7 @@ public class MainBoard {
         }
         else{
             clientView.sendAction(Actions.ENDTURN);
+            buttonStatus();
         }
 
     }
@@ -1412,7 +1422,7 @@ public class MainBoard {
      * it also resets the button status and call the method for the next phase
      */
     public void dev11Action(){
-        color = Color.BLUE;
+        color = Color.GREEN;
         level = 1;
         buttonStatus();
         enableSlot();
