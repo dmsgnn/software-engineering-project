@@ -61,22 +61,14 @@ public class DevelopmentCardDeckTest {
     public void lookFirstEmptyTest(){
         ArrayList<DevelopmentCard> list = new ArrayList<>();
         DevelopmentCardDeck deck = new DevelopmentCardDeck(list, 1, Color.GREEN);
-        try {
-            deck.lookFirst();
-        } catch (NoCardsLeftException e) {
-            e.printStackTrace();
-        }
+        assertThrows(NoCardsLeftException.class, deck::lookFirst);
     }
 
     @Test
     public void removeFirstEmptyTest(){
         ArrayList<DevelopmentCard> list = new ArrayList<>();
         DevelopmentCardDeck deck = new DevelopmentCardDeck(list, 1, Color.GREEN);
-        try {
-            deck.removeFirst();
-        } catch (NoCardsLeftException e) {
-            e.printStackTrace();
-        }
+        assertThrows(NoCardsLeftException.class, deck::removeFirst);
 
     }
 

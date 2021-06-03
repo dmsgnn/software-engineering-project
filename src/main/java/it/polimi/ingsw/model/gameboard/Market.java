@@ -83,6 +83,7 @@ public class Market {
      * @return array containing the resources gained from the market
      */
     public ArrayList<Marbles> pickColumn(int col) throws InvalidIndexException {
+        if(col < 0 || col >= this.columns) throw new InvalidIndexException();
         return pickRowOrColumn(col, false);
     }
 
