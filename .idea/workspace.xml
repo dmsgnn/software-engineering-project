@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="GUI production fix">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/GUI.java" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="GUI payment fix">
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
     </list>
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -350,14 +348,7 @@
       <workItem from="1622531620421" duration="6642000" />
       <workItem from="1622660587912" duration="600000" />
       <workItem from="1622668403279" duration="1256000" />
-      <workItem from="1622701986364" duration="2833000" />
-    </task>
-    <task id="LOCAL-00002" summary="RedMarble and WhiteMarble update with testing, small updates to other classes">
-      <created>1617956491442</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1617956491442</updated>
+      <workItem from="1622701986364" duration="2909000" />
     </task>
     <task id="LOCAL-00003" summary="LorenzoAI and Tokens implemented with tests, some refactoring done">
       <created>1618144405224</created>
@@ -695,7 +686,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622477754982</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="GUI payment fix">
+      <created>1622704877609</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1622704877609</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -714,7 +712,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixes" />
     <MESSAGE value="market action works and modified some methods of the model" />
     <MESSAGE value="modified some methods of the Controller.java" />
     <MESSAGE value="modified layout update messages" />
@@ -739,7 +736,8 @@
     <MESSAGE value="GUI button actions update" />
     <MESSAGE value="GUI: full view implemented" />
     <MESSAGE value="CLI print fix, Actions toString method, production &amp; payment Mainboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="CLI print fix, Actions toString method, production &amp; payment Mainboard" />
+    <MESSAGE value="GUI payment fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI payment fix" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

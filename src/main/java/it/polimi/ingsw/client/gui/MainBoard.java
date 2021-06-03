@@ -1166,11 +1166,13 @@ public class MainBoard {
             clientView.useProduction(prodDevSlots, prodLeaderSlots, leaderCardGains, boardResProd, warehousePayment, leaderDepotPayment, strongboxPayment);
             resetEndButton();
             buttonStatus();
+            currentAction = null;
         }
         else if(currentAction == Actions.BUYDEVELOPMENTCARD){
             clientView.buyDevCard(color, level, slot, warehousePayment, leaderDepotPayment, strongboxPayment);
             resetEndButton();
             buttonStatus();
+            currentAction = null;
         }
         else if (currentAction == Actions.MANAGE){
             manageActionDone();
