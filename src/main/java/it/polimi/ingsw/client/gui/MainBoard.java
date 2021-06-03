@@ -754,11 +754,6 @@ public class MainBoard {
         warehousePayment = new HashMap<>();
         leaderDepotPayment = new HashMap<>();
         strongboxPayment = new HashMap<>();
-        for(Resource rss : Resource.values()){
-            warehousePayment.put(rss, 0);
-            leaderDepotPayment.put(rss, 0);
-            strongboxPayment.put(rss, 0);
-        }
 
         buttonStatus();
         disableButton(endTurn, false);
@@ -979,7 +974,9 @@ public class MainBoard {
         }
         else{
         Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(0);
-        warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+        if(warehousePayment.containsKey(depotRss))
+            warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+        else warehousePayment.put(depotRss, 1);
 
         depotOneResourceOne.setMouseTransparent(true);
         }
@@ -1012,7 +1009,9 @@ public class MainBoard {
         }
         else{
             Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
-            warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+            if(warehousePayment.containsKey(depotRss))
+                warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+            else warehousePayment.put(depotRss, 1);
 
             depotTwoResourceOne.setMouseTransparent(true);
         }
@@ -1045,7 +1044,9 @@ public class MainBoard {
         }
         else {
             Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(1);
-            warehousePayment.put(depotRss, warehousePayment.get(depotRss) + 1);
+            if(warehousePayment.containsKey(depotRss))
+                warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+            else warehousePayment.put(depotRss, 1);
 
             depotTwoResourceTwo.setMouseTransparent(true);
         }
@@ -1077,7 +1078,9 @@ public class MainBoard {
         }
         else {
             Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
-            warehousePayment.put(depotRss, warehousePayment.get(depotRss) + 1);
+            if(warehousePayment.containsKey(depotRss))
+                warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+            else warehousePayment.put(depotRss, 1);
 
             depotThreeResourceOne.setMouseTransparent(true);
         }
@@ -1109,7 +1112,9 @@ public class MainBoard {
         }
         else {
             Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
-            warehousePayment.put(depotRss, warehousePayment.get(depotRss) + 1);
+            if(warehousePayment.containsKey(depotRss))
+                warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+            else warehousePayment.put(depotRss, 1);
 
             depotThreeResourceTwo.setMouseTransparent(true);
         }
@@ -1141,7 +1146,9 @@ public class MainBoard {
         }
         else {
             Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(2);
-            warehousePayment.put(depotRss, warehousePayment.get(depotRss) + 1);
+            if(warehousePayment.containsKey(depotRss))
+                warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+            else warehousePayment.put(depotRss, 1);
 
             depotThreeResourceThree.setMouseTransparent(true);
         }
