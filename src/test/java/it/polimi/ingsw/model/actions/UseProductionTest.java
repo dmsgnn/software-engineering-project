@@ -37,14 +37,14 @@ public class UseProductionTest {
        cards.add(0,card11);
        cards.add(1,card22);
 
-       PlayLeaderCard play = new PlayLeaderCard(cards, card11, new HashMap<>(), new HashMap<>(), new HashMap<>());
+       PlayLeaderCard play = new PlayLeaderCard(cards, card11);
        try {
            play.doAction(game.getActivePlayer().getPlayerBoard());
        } catch (InvalidActionException e) {
            e.printStackTrace();
        }
 
-       PlayLeaderCard play2 = new PlayLeaderCard(cards , card22, new HashMap<>(), new HashMap<>(), new HashMap<>());
+       PlayLeaderCard play2 = new PlayLeaderCard(cards , card22);
        game.getActivePlayer().setCardsHand(cards);
        try {
 

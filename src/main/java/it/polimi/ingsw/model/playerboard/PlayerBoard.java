@@ -99,6 +99,10 @@ public class PlayerBoard {
         return colorRequirements;
     }
 
+    public void setColorRequirements(HashMap<Integer, HashMap<Color, Integer>> colorRequirements) {
+        this.colorRequirements = colorRequirements;
+    }
+
     public Warehouse getWarehouse() {
         return warehouse;
     }

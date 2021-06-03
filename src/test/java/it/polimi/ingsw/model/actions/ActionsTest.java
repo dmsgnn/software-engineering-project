@@ -41,7 +41,7 @@ public class ActionsTest {
 
         cards.add(0,card11);
         cards.add(1,card22);
-        PlayLeaderCard play = new PlayLeaderCard(cards, card11, new HashMap<>(), new HashMap<>(), new HashMap<>());
+        PlayLeaderCard play = new PlayLeaderCard(cards, card11);
         game.getActivePlayer().setCardsHand(cards);
         try {
             play.doAction(game.getActivePlayer().getPlayerBoard());
@@ -162,7 +162,7 @@ public class ActionsTest {
 
         cards.add(0,card11);
         cards.add(1,card22);
-        PlayLeaderCard play = new PlayLeaderCard(cards, card11, new HashMap<>(), new HashMap<>(), new HashMap<>());
+        PlayLeaderCard play = new PlayLeaderCard(cards, card11);
         game.getActivePlayer().setCardsHand(cards);
         try {
             play.doAction(game.getActivePlayer().getPlayerBoard());

@@ -258,6 +258,10 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void playLeaderCardAction() {
+        Platform.runLater(()-> {
+            mainStage.getScene().setRoot(playerBoardRoot);
+            playerBoard.playLeaderAction();
+        });
 
     }
 

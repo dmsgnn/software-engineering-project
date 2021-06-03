@@ -4,6 +4,8 @@ import it.polimi.ingsw.model.actions.Actions;
 import it.polimi.ingsw.model.exceptions.*;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
+import it.polimi.ingsw.model.playerboard.depot.BaseDepot;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,7 @@ public class PlayLeaderCard extends Actions {
     private final HashMap<Resource, Integer> cardDepotResources;
     private final ArrayList<LeaderCard> cardsHand;
 
-    public PlayLeaderCard(ArrayList<LeaderCard> cardsHand, LeaderCard leaderCard, HashMap<Resource, Integer> warehouseDepotResources, HashMap<Resource, Integer> strongboxResources, HashMap<Resource, Integer> cardDepotResources) {
+    public PlayLeaderCard(ArrayList<LeaderCard> cardsHand, LeaderCard leaderCard) {
         this.cardsHand = cardsHand;
         this.leaderCard = leaderCard;
         this.warehouseDepotResources = warehouseDepotResources;
@@ -46,23 +48,30 @@ public class PlayLeaderCard extends Actions {
         }
         if (!check) return false;
         // checks that the received resources are the same of the cost of the card that the player wants to buy
-        if (!leaderCard.getRequirements().IsColor()) {
+        /*if (!leaderCard.getRequirements().IsColor()) {
             Map<Resource, Integer> totalPayment = new HashMap<>();
             for (Resource resource : Resource.values()) {
                 totalPayment.put(resource, 0);
             }
-            warehouseDepotResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
-            cardDepotResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
-            strongboxResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
+            for (int i = 0; i < playerBoard.getWarehouse().getDepots().size(); i++) {
+                totalPayment.put(playerBoard.getWarehouse().getDepots().get(i).getResource(),playerBoard.getWarehouse().getDepots().get(i).getOccupied());
+
+            }
+            playerBoard.getStrongbox().getResources().forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
             for (Resource resource : Resource.values()) {
-                if (!totalPayment.get(resource).equals(leaderCard.getRequirements().getRequirements(playerBoard).get(resource)))
+                if (totalPayment.get(resource)<(leaderCard.getRequirements().getRequirements(playerBoard).get(resource)))
                     return false;
             }
             return true;
+
+
         }
         else {
             return leaderCard.getRequirements().checkRequirements(playerBoard);
         }
+
+         */
+        return leaderCard.getRequirements().checkRequirements(playerBoard);
     }
 
     /**

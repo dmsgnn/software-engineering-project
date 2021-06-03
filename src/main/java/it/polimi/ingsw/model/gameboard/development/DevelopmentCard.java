@@ -90,9 +90,6 @@ public class DevelopmentCard {
         return ColorCLI.cardColor(color) + "╚═════════╝";
     }
 
-    public String drawID(){
-        return border() + "" + id + "" + border();
-    }
 
     /**
      * CLI method

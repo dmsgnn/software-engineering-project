@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class DevelopmentCardSlot {
     private ArrayList<DevelopmentCard> slots = new ArrayList<>();
@@ -18,10 +19,13 @@ public class DevelopmentCardSlot {
     public void addCardOnTop(DevelopmentCard card, PlayerBoard playerBoard) {
         this.slots.add(card);
         this.cardCounter++;
-        map = playerBoard.getColorRequirements().get(card.getLevel());
+        HashMap<Integer, HashMap<Color, Integer>>  colorRequirements =  playerBoard.getColorRequirements();
+        map = colorRequirements.get(card.getLevel());
         count = map.get(card.getColor());
         map.put(card.getColor(),count+1);
-        playerBoard.getColorRequirements().put(card.getLevel(),map);
+        colorRequirements.put(card.getLevel(),map);
+        playerBoard.setColorRequirements(colorRequirements);
+
     }
 
     public boolean validAction(DevelopmentCard card){

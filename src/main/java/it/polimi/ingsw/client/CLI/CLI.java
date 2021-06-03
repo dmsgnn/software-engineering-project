@@ -30,7 +30,6 @@ public class CLI implements UserInterface {
     ArrayList<DevelopmentCard> devCardList;
     ArrayList<LeaderCard> leaderDeck;
     private boolean myTurn;
-
     Scanner scanner;
 
     public CLI(){

@@ -6,6 +6,9 @@ import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
+import it.polimi.ingsw.model.leadercard.LeaderCard;
+import it.polimi.ingsw.model.leadercard.Requirements.ResourceRequirements;
+import it.polimi.ingsw.utility.LeaderCardsParserXML;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +18,7 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainBoard {
     private static ClientView clientView;
@@ -61,7 +65,7 @@ public class MainBoard {
     @FXML
     private ImageView manageImage4;
 
-
+    //marbles
     @FXML
     private ImageView marble1;
     @FXML
@@ -108,6 +112,10 @@ public class MainBoard {
     private Button leaderCardOne;
     @FXML
     private Button leaderCardTwo;
+    @FXML
+    private Label PlayLeaderActive1;
+    @FXML
+    private Label PlayLeaderActive2;
 
     //development cards
     @FXML
@@ -238,6 +246,7 @@ public class MainBoard {
     @FXML
     public ImageView devSlot3Im;
 
+    //vatican
     @FXML
     public ImageView vatican1;
     @FXML
@@ -255,6 +264,7 @@ public class MainBoard {
 
 
     private Actions currentAction;
+     private ArrayList<LeaderCard>leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
 
     //Production attributes
     private ArrayList<Integer> prodDevSlots;
@@ -274,6 +284,19 @@ public class MainBoard {
     private int level;
     private int slot;
     Image devCardImage;
+
+    //MARKET attributes
+    private Map<Integer, ArrayList<Resource>> warehouse = new HashMap<>();
+    ArrayList<Resource> res;
+    private Resource first= null;
+    private int num= -1;
+    private Resource second= null;
+    Resource depot1;
+    Resource[] depot2 = new Resource[2];
+    Resource[] depot3 = new Resource[3];
+    Resource[] newResources = new Resource[4];
+    Boolean isNullVolunteer = false;
+
 
     public static void setGui(GUI gui) {
         MainBoard.gui = gui;
@@ -387,12 +410,19 @@ public class MainBoard {
         }
         else if(board.getPlayedCards().size()==1){
             leaderCard1.setImage(new Image("/graphics/leaderCards/" + board.getPlayedCards().get(0) + ".png"));
+            PlayLeaderActive1.setStyle("-fx-background-color: green; -fx-background-radius: 20;");
+            PlayLeaderActive1.setText("ACTIVE");
+
             if(board.getHandSize()==2)
                 leaderCard2.setImage(new Image("/graphics/leaderCards/" + board.getHand().get(0) + ".png"));
         }
         else{
             leaderCard1.setImage(new Image("/graphics/leaderCards/" + board.getPlayedCards().get(0) + ".png"));
             leaderCard2.setImage(new Image("/graphics/leaderCards/" + board.getPlayedCards().get(1) + ".png"));
+            PlayLeaderActive1.setStyle("-fx-background-color: green; -fx-background-radius: 20;");
+            PlayLeaderActive2.setStyle("-fx-background-color: green; -fx-background-radius: 20;");
+            PlayLeaderActive1.setText("ACTIVE");
+            PlayLeaderActive2.setText("ACTIVE");
         }
     }
 
@@ -923,6 +953,9 @@ public class MainBoard {
             clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(0));
             buttonStatus();
         }
+        else if (currentAction == Actions.PLAYLEADERCARD){
+            doPlayCard(0);
+        }
     }
 
     /**
@@ -947,6 +980,9 @@ public class MainBoard {
             else
                 clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(0));
             buttonStatus();
+        }
+        else if (currentAction == Actions.PLAYLEADERCARD){
+            doPlayCard(1);
         }
     }
 
@@ -1554,7 +1590,7 @@ public class MainBoard {
     public void discardLeaderAction(){
         clientView.sendAction(Actions.DISCARDLEADERCARD);
         buttonStatus();
-        setMessage("You have choosen the discard leader card action, please select one card");
+        setMessage("You have chosen the discard leader card action, please select one card");
         //disable other action buttons
     }
 
@@ -1571,7 +1607,51 @@ public class MainBoard {
         }
     }
 
-    //market action
+    // ---------- PLAY LEADER CARD ACTION ----------
+
+    /**
+     * used to send the message to the server about the selected action
+     */
+    public void playLeaderCard(){
+        clientView.sendAction(Actions.PLAYLEADERCARD);
+        buttonStatus();
+        setMessage("\"You have chosen the play leader card action, please select one card\"");
+    }
+
+    /**
+     * used to enable the needed button for the play leader card action
+     */
+    public void playLeaderAction(){
+        currentAction = Actions.PLAYLEADERCARD;
+        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().size()==1)
+            leaderCardTwo.setMouseTransparent(false);
+        else{
+            leaderCardOne.setMouseTransparent(false);
+            leaderCardTwo.setMouseTransparent(false);
+        }
+    }
+
+    private void doPlayCard(int cardSlot) {
+        String id = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(cardSlot);
+        buttonStatus();
+        clientView.playLeaderCard(id);
+
+
+    }
+
+    /**
+     * utility method to find a leadercard
+     * @param id card that I want to find
+     * @return the correct card
+     */
+    private LeaderCard findLeaderCard(String id){
+        for(LeaderCard card : leaderDeck){
+            if(card.getId().equals(id)) return card;
+        }
+        return null;
+    }
+
+    // ---------- MARKET ACTION ----------
 
     public void marketAction(){
         clientView.sendAction(Actions.MARKETACTION);
@@ -1835,26 +1915,9 @@ public class MainBoard {
         depotThreeResourceOne.setVisible(true);
         depotThreeResourceTwo.setVisible(true);
         depotThreeResourceThree.setVisible(true);
-        /*depot1Resource1.setVisible(true);
-        depot2Resource1.setVisible(true);
-        depot2Resource2.setVisible(true);
-        depot3Resource1.setVisible(true);
-        depot3Resource2.setVisible(true);
-        depot3Resource3.setVisible(true);
 
-         */
     }
 
-    private Map<Integer, ArrayList<Resource>> warehouse = new HashMap<>();
-    ArrayList<Resource> res;
-    private Resource first= null;
-    private int num= -1;
-    private Resource second= null;
-    Resource depot1;
-    Resource[] depot2 = new Resource[2];
-    Resource[] depot3 = new Resource[3];
-    Resource[] newResources = new Resource[4];
-    Boolean isNullVolunteer = false;
 
 
 

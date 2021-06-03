@@ -113,7 +113,7 @@
             <Font name="SansSerif Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="playCardAction" alignment="CENTER" layoutX="60.0" layoutY="120.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="PLAY CARD">
+      <Button fx:id="playCardAction" alignment="CENTER" layoutX="60.0" layoutY="120.0" mnemonicParsing="false" onAction="#playLeaderCard" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="PLAY CARD">
          <font>
             <Font name="SansSerif Bold" size="13.0" />
          </font>
@@ -314,5 +314,15 @@
       <ImageView fx:id="boardRes1" fitHeight="25.0" fitWidth="25.0" layoutX="834.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="boardRes2" fitHeight="25.0" fitWidth="25.0" layoutX="834.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="boardRes3" fitHeight="25.0" fitWidth="25.0" layoutX="879.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="PlayLeaderActive1" alignment="CENTER" layoutX="1220.0" layoutY="18.0" prefHeight="15.0" prefWidth="50.0" style="-fx-background-color: transparent;" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="9.0" />
+         </font>
+      </Label>
+      <Label fx:id="PlayLeaderActive1" alignment="CENTER" layoutX="1080.0" layoutY="18.0" prefHeight="15.0" prefWidth="50.0" style="-fx-background-color: transparent;" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import static java.lang.System.exit;
 
 public class ClientSocketHandler extends Observable<ServerMessage> implements Runnable {
     Socket socket;
@@ -59,6 +60,9 @@ public class ClientSocketHandler extends Observable<ServerMessage> implements Ru
             }
         } catch(IOException | ClassNotFoundException e) {
             e.getMessage();
+            System.out.println("\n Server shut down \n ");
+            exit(0);
+
             //e.printStackTrace();
         }
     }

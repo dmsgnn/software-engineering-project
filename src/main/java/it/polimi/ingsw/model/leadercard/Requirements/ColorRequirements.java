@@ -20,7 +20,8 @@ public class ColorRequirements implements Requirements {
     @Override
     public boolean checkRequirements(PlayerBoard playerBoard) {
         for (Color color: colorCardRequirements.keySet()){
-            if (playerBoard.getColorRequirements().get(levelCardRequirements.get(color)).get(color)<colorCardRequirements.get(color)) return false;
+
+            if (  (levelCardRequirements.get(color)!=0)  &&  (playerBoard.getColorRequirements().get(levelCardRequirements.get(color)).get(color)<colorCardRequirements.get(color))) return false;
 
         }
 
