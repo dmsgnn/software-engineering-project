@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.playerboard;
 
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.exceptions.WrongLevelException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import javax.naming.InsufficientResourcesException;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StrongboxTest {
     private Strongbox strongbox;
@@ -39,30 +39,34 @@ public class StrongboxTest {
             min = rand.nextInt(50000);
             max = rand.nextInt(50000);
             current += max;
+            int finalMin = min;
             if ((current -min)>=0)  { current -= min;}
             strongbox.addResource(Resource.SHIELDS, max);
             try {
                 strongbox.removeResource(Resource.SHIELDS, min);
             } catch (InsufficientResourcesException e) {
-                e.printStackTrace();
+                assertTrue(true);
             }
             strongbox.addResource(Resource.COINS, max);
             try {
                 strongbox.removeResource(Resource.COINS, min);
             } catch (InsufficientResourcesException e) {
-                e.printStackTrace();
+                assertTrue(true);
             }
             strongbox.addResource(Resource.SERVANTS, max);
             try {
                 strongbox.removeResource(Resource.SERVANTS, min);
             } catch (InsufficientResourcesException e) {
-                e.printStackTrace();
+                assertTrue(true);
             }
             strongbox.addResource(Resource.STONES, max);
+
+            //assertThrows(InsufficientResourcesException.class, () -> strongbox.removeResource(Resource.STONES, finalMin));
+
             try {
                 strongbox.removeResource(Resource.STONES, min);
             } catch (InsufficientResourcesException e) {
-                e.printStackTrace();
+                assertTrue(true);
             }
 
             assertEquals(current, strongbox.getValue(Resource.SHIELDS), "valore errato");

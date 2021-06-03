@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MarketTest {
 
@@ -20,45 +21,28 @@ public class MarketTest {
     @Test
     @DisplayName("Check negative index for pickColumn")
     public void testNegativeColIndex(){
-
-        try {
-            market.pickColumn(-1);
-        } catch (InvalidIndexException e){
-            e.printStackTrace();
-        }
+        assertThrows(InvalidIndexException.class, () -> market.pickColumn(-1));
     }
 
     @Test
     @DisplayName("Check invalid index for pickColumn")
     public void testWrongColumnIndex(){
 
-        try {
-            market.pickColumn(market.getColumns());
-        } catch (InvalidIndexException e){
-            e.printStackTrace();
-        }
+        assertThrows(InvalidIndexException.class, () -> market.pickColumn(market.getColumns()));
     }
 
     @Test
     @DisplayName("Check negative index for pickRow")
     public void testNegativeRowIndex(){
 
-        try {
-            market.pickRow(-1);
-        } catch (InvalidIndexException e){
-            e.printStackTrace();
-        }
+        assertThrows(InvalidIndexException.class, () -> market.pickRow(-1));
+
     }
 
     @Test
     @DisplayName("Check invalid index for pickColumn")
     public void testWrongRowIndex(){
-
-        try {
-            market.pickRow(market.getRows());
-        } catch (InvalidIndexException e){
-            e.printStackTrace();
-        }
+        assertThrows(InvalidIndexException.class, () -> market.pickRow(market.getRows()));
     }
 
     @Test

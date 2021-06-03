@@ -37,38 +37,22 @@ public class GameBoardTest {
     @Test
     public void viewCardLevel0Test(){
         Gameboard gameboard = new Gameboard(game);
-        try {
-            gameboard.viewCard(Color.BLUE,0);
-        } catch (NoCardsLeftException | WrongLevelException e) {
-            e.printStackTrace();
-        }
+        assertThrows(WrongLevelException.class, () -> gameboard.viewCard(Color.BLUE,0));
     }
     @Test
     public void viewCardLevel4orGreaterTest(){
         Gameboard gameboard = new Gameboard(game);
-        try {
-            gameboard.viewCard(Color.BLUE,4);
-        } catch (NoCardsLeftException | WrongLevelException e) {
-            e.printStackTrace();
-        }
+        assertThrows(WrongLevelException.class, () -> gameboard.viewCard(Color.BLUE,4));
     }
     @Test
     public void buyCardLevel0Test(){
         Gameboard gameboard = new Gameboard(game);
-        try {
-            gameboard.buyCard(Color.BLUE,0);
-        } catch (NoCardsLeftException | WrongLevelException e) {
-            e.printStackTrace();
-        }
+        assertThrows(WrongLevelException.class, () -> gameboard.buyCard(Color.BLUE,0));
     }
     @Test
     public void buyCardLevel4orGreaterTest(){
         Gameboard gameboard = new Gameboard(game);
-        try {
-            gameboard.viewCard(Color.BLUE,4);
-        } catch (NoCardsLeftException | WrongLevelException e) {
-            e.printStackTrace();
-        }
+        assertThrows(WrongLevelException.class, () -> gameboard.viewCard(Color.BLUE,4));
     }
 
     @Test
