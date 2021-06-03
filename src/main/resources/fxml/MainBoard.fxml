@@ -234,7 +234,7 @@
             <ImageView fx:id="devSlot3Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="boardProduction" layoutX="821.0" layoutY="587.0" mnemonicParsing="false" onAction="#useBoardProd" prefHeight="79.0" prefWidth="79.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="boardProduction" layoutX="824.0" layoutY="589.0" mnemonicParsing="false" onAction="#useBoardProd" prefHeight="79.0" prefWidth="79.0" style="-fx-background-color: transparent;" />
       <ImageView fx:id="vatican1" fitHeight="35.0" fitWidth="35.0" layoutX="830.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="vatican2" fitHeight="35.0" fitWidth="35.0" layoutX="1000.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="vatican3" fitHeight="35.0" fitWidth="35.0" layoutX="1207.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true" />
@@ -311,5 +311,8 @@
             <ImageView fx:id="manageImage3" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
          </graphic>
       </Button>
+      <ImageView fx:id="boardRes1" fitHeight="25.0" fitWidth="25.0" layoutX="834.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="boardRes2" fitHeight="25.0" fitWidth="25.0" layoutX="834.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="boardRes3" fitHeight="25.0" fitWidth="25.0" layoutX="879.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

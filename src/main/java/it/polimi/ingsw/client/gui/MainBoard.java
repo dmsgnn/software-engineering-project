@@ -20,8 +20,14 @@ public class MainBoard {
     private static ClientView clientView;
     private static GUI gui;
 
+    @FXML
+    public ImageView boardRes1;
+    @FXML
+    public ImageView boardRes2;
+    @FXML
+    public ImageView boardRes3;
+
     // market
-    private boolean marketController =false;
     @FXML
     private Button row1MarketButton;
     @FXML
@@ -672,16 +678,26 @@ public class MainBoard {
         devSlot2.setMouseTransparent(true);
         devSlot3.setMouseTransparent(true);
         // depot buttons
+        depotOneResourceOne.setDisable(false);
         depotOneResourceOne.setMouseTransparent(true);
+        depotTwoResourceOne.setDisable(false);
         depotTwoResourceOne.setMouseTransparent(true);
+        depotTwoResourceTwo.setDisable(false);
         depotTwoResourceTwo.setMouseTransparent(true);
+        depotThreeResourceOne.setDisable(false);
         depotThreeResourceOne.setMouseTransparent(true);
+        depotThreeResourceTwo.setDisable(false);
         depotThreeResourceTwo.setMouseTransparent(true);
+        depotThreeResourceThree.setDisable(false);
         depotThreeResourceThree.setMouseTransparent(true);
         // strongbox buttons
+        strongboxCoins.setDisable(false);
         strongboxCoins.setMouseTransparent(true);
+        strongboxServants.setDisable(false);
         strongboxServants.setMouseTransparent(true);
+        strongboxShields.setDisable(false);
         strongboxShields.setMouseTransparent(true);
+        strongboxStones.setDisable(false);
         strongboxStones.setMouseTransparent(true);
         //market buttons
         manage1.setDisable(true);
@@ -827,6 +843,7 @@ public class MainBoard {
     public void slot1Action() {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(0);
+            devSlot1.setDisable(true);
         }
         else{
             slot = 0;
@@ -843,6 +860,7 @@ public class MainBoard {
     public void slot2Action() {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(1);
+            devSlot2.setDisable(true);
         }
         else{
             slot = 1;
@@ -859,6 +877,7 @@ public class MainBoard {
     public void slot3Action() {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(2);
+            devSlot3.setDisable(true);
         }
         else{
             slot = 2;
@@ -873,6 +892,7 @@ public class MainBoard {
     public void useBoardProd() {
         buttonStatus();
         setMessage("Select 2 resources that you want to pay and 1 resource that you want to gain");
+        boardProduction.setDisable(true);
         boardOrLeaderChoice=true;
         disableButton(coinChoice, false);
         coinChoice.setStyle("-fx-background-color: #C8C5C5; ");
@@ -938,7 +958,10 @@ public class MainBoard {
         else strongboxPayment.put(Resource.SHIELDS, 1);
         int diff = clientView.getMyStrongbox().get(Resource.SHIELDS)-strongboxPayment.get(Resource.SHIELDS);
         strongboxStonesCounter.setText(String.valueOf(diff));
-        if(diff==0) strongboxShields.setMouseTransparent(true);
+        if(diff==0) {
+            strongboxShields.setDisable(true);
+            strongboxShields.setMouseTransparent(true);
+        }
     }
 
     /**
@@ -949,7 +972,10 @@ public class MainBoard {
         else strongboxPayment.put(Resource.COINS, 1);
         int diff = clientView.getMyStrongbox().get(Resource.COINS)-strongboxPayment.get(Resource.COINS);
         strongboxStonesCounter.setText(String.valueOf(diff));
-        if(diff==0) strongboxCoins.setMouseTransparent(true);
+        if(diff==0) {
+            strongboxCoins.setDisable(true);
+            strongboxCoins.setMouseTransparent(true);
+        }
     }
 
     /**
@@ -960,7 +986,10 @@ public class MainBoard {
         else strongboxPayment.put(Resource.SERVANTS, 1);
         int diff = clientView.getMyStrongbox().get(Resource.SERVANTS)-strongboxPayment.get(Resource.SERVANTS);
         strongboxStonesCounter.setText(String.valueOf(diff));
-        if(diff==0) strongboxServants.setMouseTransparent(true);
+        if(diff==0) {
+            strongboxServants.setDisable(true);
+            strongboxServants.setMouseTransparent(true);
+        }
     }
 
     /**
@@ -971,7 +1000,10 @@ public class MainBoard {
         else strongboxPayment.put(Resource.STONES, 1);
         int diff = clientView.getMyStrongbox().get(Resource.STONES)-strongboxPayment.get(Resource.STONES);
         strongboxStonesCounter.setText(String.valueOf(diff));
-        if(diff==0) strongboxStones.setMouseTransparent(true);
+        if(diff==0) {
+            strongboxStones.setDisable(true);
+            strongboxStones.setMouseTransparent(true);
+        }
     }
 
     public void depotOneResourceOneAction() {
@@ -1006,6 +1038,7 @@ public class MainBoard {
             warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
         else warehousePayment.put(depotRss, 1);
 
+        depotOneResourceOne.setDisable(true);
         depotOneResourceOne.setMouseTransparent(true);
         }
     }
@@ -1042,6 +1075,7 @@ public class MainBoard {
                 warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
             else warehousePayment.put(depotRss, 1);
 
+            depotTwoResourceOne.setDisable(true);
             depotTwoResourceOne.setMouseTransparent(true);
         }
     }
@@ -1078,6 +1112,7 @@ public class MainBoard {
                 warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
             else warehousePayment.put(depotRss, 1);
 
+            depotTwoResourceTwo.setDisable(true);
             depotTwoResourceTwo.setMouseTransparent(true);
         }
     }
@@ -1113,6 +1148,7 @@ public class MainBoard {
                 warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
             else warehousePayment.put(depotRss, 1);
 
+            depotThreeResourceOne.setDisable(true);
             depotThreeResourceOne.setMouseTransparent(true);
         }
     }
@@ -1148,6 +1184,7 @@ public class MainBoard {
                 warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
             else warehousePayment.put(depotRss, 1);
 
+            depotThreeResourceTwo.setDisable(true);
             depotThreeResourceTwo.setMouseTransparent(true);
         }
     }
@@ -1183,6 +1220,7 @@ public class MainBoard {
                 warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
             else warehousePayment.put(depotRss, 1);
 
+            depotThreeResourceThree.setDisable(true);
             depotThreeResourceThree.setMouseTransparent(true);
         }
     }
@@ -1197,6 +1235,13 @@ public class MainBoard {
         }
         else if(currentAction == Actions.USEPRODUCTION){
             clientView.useProduction(prodDevSlots, prodLeaderSlots, leaderCardGains, boardResProd, warehousePayment, leaderDepotPayment, strongboxPayment);
+            devSlot1.setDisable(false);
+            devSlot2.setDisable(false);
+            devSlot3.setDisable(false);
+            boardRes1.setVisible(false);
+            boardRes2.setVisible(false);
+            boardRes3.setVisible(false);
+            boardProduction.setDisable(false);
             resetEndButton();
             buttonStatus();
             currentAction = null;
@@ -1237,11 +1282,29 @@ public class MainBoard {
         }
     }
 
+    private void placeBoardProdRss(Resource rss){
+        if(boardResProd.size()==1) {
+            boardRes1.setImage(new Image("resources/punchboard/"+ rss.toString().toLowerCase() +".png"));
+            boardRes1.setVisible(true);
+        }
+        else if(boardResProd.size()==2) {
+            boardRes2.setImage(new Image("resources/punchboard/"+ rss.toString().toLowerCase() +".png"));
+            boardRes2.setVisible(true);
+        }
+        else if(boardResProd.size()==3) {
+            boardRes3.setImage(new Image("resources/punchboard/"+ rss.toString().toLowerCase() +".png"));
+            boardRes3.setVisible(true);
+        }
+    }
+
     /**
      * adds 1 coin to the corresponding production list
      */
     public void pickCoin() {
-        if(boardOrLeaderChoice) boardResProd.add(Resource.COINS);
+        if(boardOrLeaderChoice) {
+            boardResProd.add(Resource.COINS);
+            placeBoardProdRss(Resource.COINS);
+        }
         else leaderCardGains.add(Resource.COINS);
         endSelection();
     }
@@ -1250,7 +1313,10 @@ public class MainBoard {
      * adds 1 servant to the corresponding production list
      */
     public void pickServant() {
-        if(boardOrLeaderChoice) boardResProd.add(Resource.SERVANTS);
+        if(boardOrLeaderChoice) {
+            boardResProd.add(Resource.SERVANTS);
+            placeBoardProdRss(Resource.SERVANTS);
+        }
         else leaderCardGains.add(Resource.SERVANTS);
         endSelection();
     }
@@ -1259,7 +1325,10 @@ public class MainBoard {
      * adds 1 shield to the corresponding production list
      */
     public void pickShield() {
-        if(boardOrLeaderChoice) boardResProd.add(Resource.SHIELDS);
+        if(boardOrLeaderChoice){
+            boardResProd.add(Resource.SHIELDS);
+            placeBoardProdRss(Resource.SHIELDS);
+        }
         else leaderCardGains.add(Resource.SHIELDS);
         endSelection();
     }
@@ -1268,7 +1337,10 @@ public class MainBoard {
      * adds 1 stone to the corresponding production list
      */
     public void pickStone() {
-        if(boardOrLeaderChoice) boardResProd.add(Resource.STONES);
+        if(boardOrLeaderChoice) {
+            boardResProd.add(Resource.STONES);
+            placeBoardProdRss(Resource.STONES);
+        }
         else leaderCardGains.add(Resource.STONES);
         endSelection();
     }
