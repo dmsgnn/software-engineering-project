@@ -921,7 +921,8 @@ public class MainBoard {
      * adds one shield to strongboxPayment
      */
     public void strShieldsAction() {
-        strongboxPayment.put(Resource.SHIELDS, strongboxPayment.get(Resource.SHIELDS)+1);
+        if(strongboxPayment.containsKey(Resource.SHIELDS)) strongboxPayment.put(Resource.SHIELDS, strongboxPayment.get(Resource.SHIELDS)+1);
+        else strongboxPayment.put(Resource.SHIELDS, 1);
         int diff = clientView.getMyStrongbox().get(Resource.SHIELDS)-strongboxPayment.get(Resource.SHIELDS);
         strongboxStonesCounter.setText(String.valueOf(diff));
         if(diff==0) strongboxShields.setMouseTransparent(true);
@@ -931,7 +932,8 @@ public class MainBoard {
      * adds one coin to strongboxPayment
      */
     public void strCoinsAction() {
-        strongboxPayment.put(Resource.COINS, strongboxPayment.get(Resource.COINS)+1);
+        if(strongboxPayment.containsKey(Resource.COINS)) strongboxPayment.put(Resource.COINS, strongboxPayment.get(Resource.COINS)+1);
+        else strongboxPayment.put(Resource.COINS, 1);
         int diff = clientView.getMyStrongbox().get(Resource.COINS)-strongboxPayment.get(Resource.COINS);
         strongboxStonesCounter.setText(String.valueOf(diff));
         if(diff==0) strongboxCoins.setMouseTransparent(true);
@@ -941,7 +943,8 @@ public class MainBoard {
      * adds one servant to strongboxPayment
      */
     public void strServantsAction() {
-        strongboxPayment.put(Resource.SERVANTS, strongboxPayment.get(Resource.SERVANTS)+1);
+        if(strongboxPayment.containsKey(Resource.SERVANTS)) strongboxPayment.put(Resource.SERVANTS, strongboxPayment.get(Resource.SERVANTS)+1);
+        else strongboxPayment.put(Resource.SERVANTS, 1);
         int diff = clientView.getMyStrongbox().get(Resource.SERVANTS)-strongboxPayment.get(Resource.SERVANTS);
         strongboxStonesCounter.setText(String.valueOf(diff));
         if(diff==0) strongboxServants.setMouseTransparent(true);
@@ -951,7 +954,8 @@ public class MainBoard {
      * adds one stone to strongboxPayment
      */
     public void strStonesAction() {
-        strongboxPayment.put(Resource.STONES, strongboxPayment.get(Resource.STONES)+1);
+        if(strongboxPayment.containsKey(Resource.STONES)) strongboxPayment.put(Resource.STONES, strongboxPayment.get(Resource.STONES)+1);
+        else strongboxPayment.put(Resource.STONES, 1);
         int diff = clientView.getMyStrongbox().get(Resource.STONES)-strongboxPayment.get(Resource.STONES);
         strongboxStonesCounter.setText(String.valueOf(diff));
         if(diff==0) strongboxStones.setMouseTransparent(true);
