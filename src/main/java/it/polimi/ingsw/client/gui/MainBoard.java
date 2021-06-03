@@ -264,7 +264,7 @@ public class MainBoard {
 
 
     private Actions currentAction;
-     private ArrayList<LeaderCard>leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
+    private ArrayList<LeaderCard>leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
 
     //Production attributes
     private ArrayList<Integer> prodDevSlots;
@@ -1069,13 +1069,13 @@ public class MainBoard {
             }
         }
         else{
-        Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(0);
-        if(warehousePayment.containsKey(depotRss))
-            warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
-        else warehousePayment.put(depotRss, 1);
+            Resource depotRss = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(0);
+            if(warehousePayment.containsKey(depotRss))
+                warehousePayment.put(depotRss, warehousePayment.get(depotRss)+1);
+            else warehousePayment.put(depotRss, 1);
 
-        depotOneResourceOne.setDisable(true);
-        depotOneResourceOne.setMouseTransparent(true);
+            depotOneResourceOne.setDisable(true);
+            depotOneResourceOne.setMouseTransparent(true);
         }
     }
 
@@ -1087,12 +1087,12 @@ public class MainBoard {
                     num = 6;
                     if (first==null) isNullVolunteer = true;
                 }
-               else{
-                   second = depot2[0];
-                   depot2Resource1.setImage(null);
-                   depot2[0] = null;
-                   isNullVolunteer = false;
-                   setSecondResource();
+                else{
+                    second = depot2[0];
+                    depot2Resource1.setImage(null);
+                    depot2[0] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
                 }
             }
             else {

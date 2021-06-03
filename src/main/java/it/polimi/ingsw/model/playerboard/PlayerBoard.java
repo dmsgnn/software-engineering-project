@@ -73,7 +73,7 @@ public class PlayerBoard {
         if ((resources.get(cost1)!=0)&&(resources.get(cost2)!=0)){
             for (int i=0; i<warehouse.getDepots().size(); i++){
                 if (warehouse.getDepots().get(i).getResource()==cost1){
-                warehouse.getDepots().get(i).removeResource(1);
+                    warehouse.getDepots().get(i).removeResource(1);
                 }
                 if (warehouse.getDepots().get(i).getResource()==cost2){
                     warehouse.getDepots().get(i).removeResource(1);

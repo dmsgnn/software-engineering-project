@@ -649,9 +649,6 @@ public class CLI implements UserInterface {
         int cardSlot = 0;
         boolean done = false;
         ArrayList<String> hand = gameboard.getOnePlayerBoard(clientView.getNickname()).getHand();
-        HashMap<Resource, Integer> warehouse = new HashMap<>();
-        HashMap<Resource, Integer> leaderDepot = new HashMap<>();
-        HashMap<Resource, Integer> strongbox = new HashMap<>();
 
         do {
             System.out.print("Choose the number of the card that you want to play: ");
@@ -668,21 +665,9 @@ public class CLI implements UserInterface {
             }
         } while(!done);
 
-        if(Objects.requireNonNull(findLeaderCard(hand.get(cardSlot))).getRequirements() instanceof ResourceRequirements){
-            System.out.println("Select what resources you want to pay: ");
-            warehouse = warehousePayment();
-            leaderDepot = leaderdepotPayment();
-            strongbox = strongboxPayment();
-        }
-        else{
-            for(Resource rss : Resource.values()){
-                warehouse.put(rss, 0);
-                leaderDepot.put(rss, 0);
-                strongbox.put(rss, 0);
-            }
-        }
 
-        clientView.playLeaderCard(hand.get(cardSlot), warehouse, leaderDepot, strongbox);
+
+        clientView.playLeaderCard(hand.get(cardSlot));
     }
 
     @Override

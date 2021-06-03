@@ -12,28 +12,23 @@ import java.util.Map;
 
 public class PlayLeaderCard extends Actions {
     private final LeaderCard leaderCard;
-    private final HashMap<Resource, Integer> warehouseDepotResources;
-    private final HashMap<Resource, Integer> strongboxResources;
-    private final HashMap<Resource, Integer> cardDepotResources;
     private final ArrayList<LeaderCard> cardsHand;
 
     public PlayLeaderCard(ArrayList<LeaderCard> cardsHand, LeaderCard leaderCard) {
         this.cardsHand = cardsHand;
         this.leaderCard = leaderCard;
-        this.warehouseDepotResources = warehouseDepotResources;
-        this.strongboxResources = strongboxResources;
-        this.cardDepotResources = cardDepotResources;
+
 
     }
 
     @Override
     public void doAction(PlayerBoard playerBoard) throws InvalidActionException {
-       if (!validAction(playerBoard)) throw new InvalidActionException();
-       else{
-           //payResources(playerBoard,warehouseDepotResources,cardDepotResources,strongboxResources);
-           playLeaderCard(playerBoard);
+        if (!validAction(playerBoard)) throw new InvalidActionException();
+        else{
+            //payResources(playerBoard,warehouseDepotResources,cardDepotResources,strongboxResources);
+            playLeaderCard(playerBoard);
 
-       }
+        }
 
     }
 

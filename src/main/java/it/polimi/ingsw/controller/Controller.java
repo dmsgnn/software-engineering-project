@@ -605,13 +605,13 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * attempt to play a leaderCard
      */
-    public void playLeaderCard(String id, HashMap<Resource,Integer> warehouseDepotRes,HashMap<Resource,Integer> cardDepotRes, HashMap<Resource,Integer> strongboxRes){
+    public void playLeaderCard(String id){
         if (currentAction.get(currentActivePlayer)==Actions.PLAYLEADERCARD) {
             if (game.getActivePlayer().getCardsHand().get(0).getId().equals(id)) {
-                PlayLeaderCard playLeaderCard = new PlayLeaderCard(game.getActivePlayer().getCardsHand(), game.getActivePlayer().getCardsHand().get(0), warehouseDepotRes, strongboxRes, cardDepotRes);
+                PlayLeaderCard playLeaderCard = new PlayLeaderCard(game.getActivePlayer().getCardsHand(), game.getActivePlayer().getCardsHand().get(0));
                 doActionPlayLeader(id, playLeaderCard);
             } else if (game.getActivePlayer().getCardsHand().get(1).getId().equals(id)) {
-                PlayLeaderCard playLeaderCard = new PlayLeaderCard(game.getActivePlayer().getCardsHand(), game.getActivePlayer().getCardsHand().get(1), warehouseDepotRes, strongboxRes, cardDepotRes);
+                PlayLeaderCard playLeaderCard = new PlayLeaderCard(game.getActivePlayer().getCardsHand(), game.getActivePlayer().getCardsHand().get(1));
                 doActionPlayLeader(id, playLeaderCard);
             } else {
                 serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
