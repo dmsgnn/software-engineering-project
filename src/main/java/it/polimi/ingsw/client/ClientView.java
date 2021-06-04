@@ -364,9 +364,6 @@ public class ClientView implements Observer<ServerMessage> {
     /**
      * called from UI to send the play leadercard action parameters to the server
      * @param id of the selected card
-     * @param warehouseDepotRes resources inside the warehouse that the player wants to pay
-     * @param cardDepotRes resources inside the leadercard depots that the player wants to pay
-     * @param strongboxRes resources inside the strongbox that the player wants to pay
      */
     public void playLeaderCard(String id){
         socket.sendMessage(new PlayLeaderCardParameters(id));

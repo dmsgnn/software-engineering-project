@@ -355,30 +355,30 @@ public class CLI implements UserInterface {
         String input;
         boolean done = false;
 
-        if(possibleActions.size()==1 && possibleActions.contains(Actions.ENDTURN)) return;
-
-        System.out.print("Choose the action you want to do: \n");
-        int i =0;
-        for (Actions action : possibleActions) {
-            i++;
-            System.out.println(i + ")" + action);
-        }
-        do{
-            input = scanner.nextLine();
-            try{
-                actionIndex = Integer.parseInt(input);
-                if(actionIndex <= 0 || actionIndex > possibleActions.size()) System.out.println("Invalid number");
-                else {
-                    choice = possibleActions.get(actionIndex -1);
-                    done = true;
-                }
-            } catch (NumberFormatException e){
-                System.out.println("Not a number!!");
+        if(possibleActions.size()==1 && possibleActions.contains(Actions.ENDTURN)) clientView.sendAction(Actions.ENDTURN);
+        else{
+            System.out.print("Choose the action you want to do: \n");
+            int i =0;
+            for (Actions action : possibleActions) {
+                i++;
+                System.out.println(i + ")" + action);
             }
-        } while (!done);
+            do{
+                input = scanner.nextLine();
+                try{
+                    actionIndex = Integer.parseInt(input);
+                    if(actionIndex <= 0 || actionIndex > possibleActions.size()) System.out.println("Invalid number");
+                    else {
+                        choice = possibleActions.get(actionIndex -1);
+                        done = true;
+                    }
+                } catch (NumberFormatException e){
+                    System.out.println("Not a number!!");
+                }
+            } while (!done);
 
-        clientView.sendAction(choice);
-
+            clientView.sendAction(choice);
+        }
     }
 
     @Override
@@ -677,22 +677,25 @@ public class CLI implements UserInterface {
         boolean done = false;
         ArrayList<String> hand = gameboard.getOnePlayerBoard(clientView.getNickname()).getHand();
 
-        do {
-            System.out.print("Choose the number of the card that you want to discard: ");
-            input = scanner.nextLine();
-            try{
-                cardSlot = Integer.parseInt(input);
-                if(cardSlot < 1 || cardSlot > hand.size()) System.out.println("Wrong level");
-                else{
-                    cardSlot = cardSlot -1;
-                    done=true;
+        if(gameboard.getOnePlayerBoard(clientView.getNickname()).getHandSize()==1) clientView.discardLeaderCard(hand.get(0));
+        else{
+            do {
+                System.out.print("Choose the number of the card that you want to discard: ");
+                input = scanner.nextLine();
+                try{
+                    cardSlot = Integer.parseInt(input);
+                    if(cardSlot < 1 || cardSlot > hand.size()) System.out.println("Wrong number");
+                    else{
+                        cardSlot = cardSlot -1;
+                        done=true;
+                    }
+                } catch (NumberFormatException e){
+                    System.out.println("Not a number!!");
                 }
-            } catch (NumberFormatException e){
-                System.out.println("Not a number!!");
-            }
-        } while(!done);
+            } while(!done);
 
-        clientView.discardLeaderCard(hand.get(cardSlot));
+            clientView.discardLeaderCard(hand.get(cardSlot));
+        }
     }
 
     /**

@@ -43,10 +43,6 @@ public class ClientPlayerBoard {
         return depotBuff;
     }
 
-    public void addDepotBuff(Resource res){
-        depotBuff.put(playedCards.get(playedCards.size()-1), res);
-    }
-
     public boolean isDepotEmpty(int depot){
         return warehouse.get(depot).isEmpty();
     }
@@ -143,14 +139,6 @@ public class ClientPlayerBoard {
         if(card!=null) card.getAbility().clientAbility(this);
     }
 
-    public void setPlayedCards(ArrayList<String> playedCards) {
-        this.playedCards = playedCards;
-    }
-
-    public void setVaticanReports(Integer pos, Boolean activated) {
-        this.vaticanReports.put(pos, activated);
-    }
-
     public void removeHandCard(String id){
         handSize--;
         hand.remove(id);
@@ -158,6 +146,14 @@ public class ClientPlayerBoard {
 
     public void setHand(ArrayList<String> hand) {
         this.hand = hand;
+    }
+
+    public void setPlayedCards(ArrayList<String> playedCards) {
+        this.playedCards = playedCards;
+    }
+
+    public void setVaticanReports(Integer pos, Boolean activated) {
+        this.vaticanReports.put(pos, activated);
     }
 
     public void setPlayerPosition(int playerPosition) {
@@ -212,5 +208,9 @@ public class ClientPlayerBoard {
 
     public void addProductionBuff(Resource buff){
         productionBuff.put(playedCards.get(playedCards.size()-1), buff);
+    }
+
+    public void addDepotBuff(Resource res){
+        depotBuff.put(playedCards.get(playedCards.size()-1), res);
     }
 }

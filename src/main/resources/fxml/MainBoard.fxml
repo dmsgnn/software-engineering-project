@@ -248,7 +248,7 @@
             <Image url="@../resources/punchboard/redCross.png" />
          </image>
       </ImageView>
-      <Button fx:id="coinChoice" layoutX="610.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickCoin" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+      <Button fx:id="coinChoice" layoutX="610.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickCoin" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
                <image>
@@ -257,7 +257,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="servantChoice" layoutX="660.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickServant" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+      <Button fx:id="servantChoice" layoutX="660.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickServant" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
                <image>
@@ -266,16 +266,16 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="shieldChoice" layoutX="710.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickShield" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+      <Button fx:id="shieldChoice" layoutX="710.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickShield" prefHeight="40.0" prefWidth="46.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="40.0" preserveRatio="true">
                <image>
                   <Image url="@../resources/punchboard/shields.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="stoneChoice" layoutX="760.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickStone" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+      <Button fx:id="stoneChoice" layoutX="760.0" layoutY="40.0" mnemonicParsing="false" onAction="#pickStone" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" preserveRatio="true">
                <image>
@@ -296,17 +296,17 @@
             <ImageView fx:id="manageImage1" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="manage2" layoutX="703.0" layoutY="91.0" mnemonicParsing="false" onAction="#manage2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
+      <Button fx:id="manage2" layoutX="710.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage2" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
             <ImageView fx:id="manageImage2" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="manage4" layoutX="600.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage4" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
+      <Button fx:id="manage4" layoutX="610.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage4" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
             <ImageView fx:id="manageImage4" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="manage3" layoutX="650.0" layoutY="91.0" mnemonicParsing="false" onAction="#manage3" opacity="0.97" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
+      <Button fx:id="manage3" layoutX="660.0" layoutY="90.0" mnemonicParsing="false" onAction="#manage3" opacity="0.97" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #C8C5C5;">
          <graphic>
             <ImageView fx:id="manageImage3" fitHeight="30.0" fitWidth="30.0" preserveRatio="true" />
          </graphic>
