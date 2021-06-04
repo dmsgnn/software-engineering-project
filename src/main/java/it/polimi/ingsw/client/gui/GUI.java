@@ -5,6 +5,7 @@ import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.playerboard.Warehouse;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static java.lang.System.exit;
@@ -218,6 +221,11 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void startingResources(int amount) {
+        if(amount==0) {
+            Map<Integer,ArrayList<Resource>> warehouse = new HashMap<>();
+            clientView.sendStartingResources(warehouse);
+            return;
+        }
         Platform.runLater(()-> {
             mainStage.getScene().setRoot(startingResourcesRoot);
             startingResources.setAmount(amount);
