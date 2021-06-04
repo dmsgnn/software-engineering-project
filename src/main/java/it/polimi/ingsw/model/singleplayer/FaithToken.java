@@ -13,6 +13,8 @@ public class FaithToken extends Token {
         this.faithGain = faithGain;
     }
 
+    public String getClientMessage(){return "Lorenzo Il Magnifico gained " + faithGain +  " faith points";}
+
     /**
      * increases the position of Lorenzo of a faithGain quantity.
      */

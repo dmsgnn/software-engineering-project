@@ -5,21 +5,19 @@ import it.polimi.ingsw.client.PingReceiver;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 
 public class LorenzoMessage implements ServerMessage {
-    private int position;
-    private int lorenzoPosition;
-    private String[][] firstGrid;
-    private String[][] newCardGrid;
+    private final int lorenzoPosition;
+    private final String[][] newCardGrid;
+    private final String message;
 
-    public LorenzoMessage(int position, int lorenzoPosition, String[][] firstGrid, String[][] secondGrid) {
-        this.position = position;
+    public LorenzoMessage(String message, int lorenzoPosition, String[][] newCardGrid) {
         this.lorenzoPosition = lorenzoPosition;
-        this.firstGrid = firstGrid;
-        this.newCardGrid = secondGrid;
+        this.newCardGrid = newCardGrid;
+        this.message = message;
     }
 
     @Override
     public void handleMessage(ClientView clientView) {
-        clientView.lorenzoUpdate(position, lorenzoPosition, firstGrid, newCardGrid);
+        clientView.lorenzoUpdate(message, lorenzoPosition, newCardGrid);
     }
 
     @Override

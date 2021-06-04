@@ -531,18 +531,16 @@ public class Controller implements Observer<ClientMessage> {
     }
 
     public void lorenzoAction(){
-        String[][] firstGrid = getDevCardGrid();
-        game.getLorenzo().drawToken();
-        String[][] secondGrid = getDevCardGrid();
+        String message = game.getLorenzo().drawToken();
+        String[][] newGrid = getDevCardGrid();
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             System.out.println("sleep error controller row 543");
         }
         faithTrackMessage();
-        Player player = game.getPlayers(0);
         LorenzoAI lorenzo = game.getLorenzo();
-        serverViews.get(0).lorenzoUpdate(player.getFaithTrack().getPosition(),lorenzo.getTrack().getPosition(),firstGrid,secondGrid);
+        serverViews.get(0).lorenzoUpdate(message, lorenzo.getTrack().getPosition(), newGrid);
         startTurn();
     }
 

@@ -16,6 +16,8 @@ public class DiscardCardToken extends Token {
         this.discardQuantity = discardQuantity;
     }
 
+    public String getClientMessage(){return "Lorenzo Il Magnifico removed " + discardQuantity + " " + color + " cards";}
+
     /**
      * discards as many development cards as discard quantity.
      * (the level of discarded card have to be lowest possible)

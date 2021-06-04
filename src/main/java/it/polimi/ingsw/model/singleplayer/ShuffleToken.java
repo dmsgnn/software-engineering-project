@@ -15,6 +15,8 @@ public class ShuffleToken extends Token {
         this.shuffle = shuffle;
     }
 
+    public String getClientMessage(){return "Lorenzo Il Magnifico gained " + faithGain +  " faith points and shuffled his token deck";}
+
     /**
      * increases the position of Lorenzo of a faithGain quantity
      * and shuffles the tokenDeck.

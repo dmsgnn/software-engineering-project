@@ -26,8 +26,10 @@ public class LorenzoAI {
     /**
      * activates the effect of the Token at the top of the Deck
      */
-    public void drawToken(){
+    public String drawToken(){
+        String message = tokens.pickTop().getClientMessage();
         tokens.pickTop().activateEffect();
+        return message;
     }
 
     /**

@@ -146,5 +146,5 @@ public interface UserInterface {
     /**
      * called to print the new board
      */
-    void updateBoard();
+    void updateBoard(String message);
 }

@@ -1276,7 +1276,7 @@ public class CLI implements UserInterface {
     }
 
     @Override
-    public void updateBoard() {
+    public void updateBoard(String message) {
         clearScreen();
         System.out.println(strBuilderGameboard());
         if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getLorenzoPosition() >= 0 ){
@@ -1284,5 +1284,7 @@ public class CLI implements UserInterface {
         }
         for(ClientPlayerBoard board : gameboard.getPlayerBoards())
             System.out.println(strBuilderPlayerboard(board));
+
+        if(!message.equals("")) System.out.println(message);
     }
 }

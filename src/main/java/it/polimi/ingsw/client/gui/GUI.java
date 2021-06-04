@@ -290,10 +290,11 @@ public class GUI extends Application implements UserInterface {
     }
 
     @Override
-    public void updateBoard() {
+    public void updateBoard(String message) {
         Platform.runLater(()-> {
             mainStage.getScene().setRoot(playerBoardRoot);
             playerBoard.update();
+            if(!message.equals("")) playerBoard.setMessage(message);
         });
     }
 

@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class ServerView extends Observable<ClientMessage> implements Observer<ServerMessage> {
 
-    public void lorenzoUpdate(int position, int lorenzoPos, String[][] firstGrid, String[][] secondGrid) {
-        sendMessage(new LorenzoMessage(position,lorenzoPos, firstGrid,secondGrid));
+    public void lorenzoUpdate(String message, int lorenzoPos, String[][] newGrid) {
+        sendMessage(new LorenzoMessage(message, lorenzoPos, newGrid));
     }
 
     public void disconnectionMessage(String username) {
@@ -29,7 +29,6 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
     }
 
     private class ClientMessageReceiver implements Observer<ClientMessage>{
-
         @Override
         public void update(ClientMessage message) {
             sendToController(message);

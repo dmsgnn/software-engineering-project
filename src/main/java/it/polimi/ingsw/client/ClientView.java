@@ -11,7 +11,9 @@ import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
+import it.polimi.ingsw.model.singleplayer.Token;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
+import it.polimi.ingsw.utility.TokensParserXML;
 
 import java.net.Socket;
 import java.util.*;
@@ -416,7 +418,7 @@ public class ClientView implements Observer<ServerMessage> {
             for (String nickname : faithTracks.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithTracks.get(nickname));
             }
-            uiType.updateBoard();
+            uiType.updateBoard("");
             uiType.endTurn();
         }
     }
@@ -454,8 +456,8 @@ public class ClientView implements Observer<ServerMessage> {
      * @param warehouse every warehouse
      */
     public void reconnectionUpdate(String username, Map<String, ArrayList<String>> devCardSlots, Map<String, Integer> faithPositions, Map<String,
-            ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource,
-            Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse){
+            ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource, Integer>> strongbox,
+                                   Map<String, Map<Integer, ArrayList<Resource>>> warehouse){
         synchronized (lock) {
             this.nickname=username;
             ArrayList<String> players = new ArrayList<>(devCardSlots.keySet());
@@ -476,23 +478,21 @@ public class ClientView implements Observer<ServerMessage> {
             for (String nickname : warehouse.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setWarehouse(warehouse.get(nickname));
             }
-            uiType.updateBoard();
+            uiType.updateBoard("Reconnected");
             uiType.endTurn();
         }
     }
 
     /**
      * called to update the board after Lorenzo's move
-     * @param position
      * @param lorenzoPosition new Lorenzo's position
-     * @param firstGrid
      * @param newCardGrid new development card grid
      */
-    public void lorenzoUpdate(int position, int lorenzoPosition, String[][] firstGrid, String[][] newCardGrid){
+    public void lorenzoUpdate(String message, int lorenzoPosition, String[][] newCardGrid){
         synchronized (lock) {
             gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(lorenzoPosition);
             getGameboard().initializeCards(newCardGrid);
-            uiType.updateBoard();
+            uiType.updateBoard(message);
         }
     }
 
@@ -532,7 +532,8 @@ public class ClientView implements Observer<ServerMessage> {
             playerBoard.setWarehouse(warehouse);
             playerBoard.setStrongbox(strongbox);
             gameboard.changeGridCard(gridId, color, level);
-            uiType.updateBoard();
+            if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + "bought the level " + level + " " + color + " card");
+            else uiType.updateBoard("");
         }
     }
 
@@ -545,7 +546,8 @@ public class ClientView implements Observer<ServerMessage> {
         synchronized (lock) {
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.removeHandCard(id);
-            uiType.updateBoard();
+            if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + " discarded a leader card");
+            else uiType.updateBoard("");
         }
     }
 
@@ -563,7 +565,9 @@ public class ClientView implements Observer<ServerMessage> {
             playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
             playerBoard.setWarehouse(warehouse);
             playerBoard.setStrongbox(strongbox);
-            uiType.updateBoard();
+            if(!nickname.equals(this.nickname))
+                uiType.updateBoard(nickname + " played a leader card");
+            else uiType.updateBoard("");
         }
     }
 
@@ -578,7 +582,9 @@ public class ClientView implements Observer<ServerMessage> {
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.setWarehouse(warehouse);
             playerBoard.setStrongbox(strongbox);
-            uiType.updateBoard();
+            if(!nickname.equals(this.nickname))
+                uiType.updateBoard(nickname + " activated the production");
+            else uiType.updateBoard("");
         }
     }
 
@@ -597,7 +603,9 @@ public class ClientView implements Observer<ServerMessage> {
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.setWarehouse(warehouse);
             gameboard.updateMarket(newMarbles, newFreeMarble, pos, rowOrCol);
-            uiType.updateBoard();
+            if(!nickname.equals(this.nickname))
+                uiType.updateBoard(nickname + " took resources from the market");
+            else uiType.updateBoard("");
         }
     }
 

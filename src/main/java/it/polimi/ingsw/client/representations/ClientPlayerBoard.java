@@ -145,6 +145,7 @@ public class ClientPlayerBoard {
     }
 
     public void setHand(ArrayList<String> hand) {
+        handSize = hand.size();
         this.hand = hand;
     }
 
