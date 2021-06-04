@@ -16,22 +16,22 @@
       </ImageView>
       <Button fx:id="button1" layoutX="300.0" layoutY="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#select1" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fx:id="leader1" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" />
+            <ImageView fx:id="leader1" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
       <Button fx:id="button2" layoutX="800.0" layoutY="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#select2" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fx:id="leader2" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" />
+            <ImageView fx:id="leader2" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
       <Button fx:id="button3" layoutX="300.0" layoutY="470.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#select3" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fx:id="leader3" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" />
+            <ImageView fx:id="leader3" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
       <Button fx:id="button4" layoutX="800.0" layoutY="470.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#select4" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fx:id="leader4" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" />
+            <ImageView fx:id="leader4" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
       <Label layoutX="502.0" layoutY="54.0" minHeight="-Infinity" prefHeight="42.0" prefWidth="397.0" text="Choose the leader cards">

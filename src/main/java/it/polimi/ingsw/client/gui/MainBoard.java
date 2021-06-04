@@ -1656,6 +1656,7 @@ public class MainBoard {
     public void marketAction(){
         clientView.sendAction(Actions.MARKETACTION);
         disableActions();
+        setMessage("pick a row or column in the market");
     }
 
     public void doMarketAction(){
