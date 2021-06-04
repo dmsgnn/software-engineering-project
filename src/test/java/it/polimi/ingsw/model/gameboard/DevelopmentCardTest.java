@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.gameboard.development.ProductionPower;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class DevelopmentCardTest {
         Map<Resource, Integer> playerRes = new HashMap<>();
         playerRes.put(Resource.STONES, 1);
 
-        assertFalse(card.checkCardRequirements(playerRes));
+        assertFalse(card.checkCardRequirements(playerRes, new ArrayList<>()));
     }
 
     @Test
@@ -48,7 +49,7 @@ public class DevelopmentCardTest {
         playerRes.put(Resource.STONES, 1);
         playerRes.put(Resource.SERVANTS, 1);
 
-        assertFalse(card.checkCardRequirements(playerRes));
+        assertFalse(card.checkCardRequirements(playerRes, new ArrayList<>()));
     }
 
     @Test
@@ -70,7 +71,7 @@ public class DevelopmentCardTest {
         playerRes.put(Resource.SERVANTS, 2);
         playerRes.put(Resource.COINS, 2);
 
-        assertFalse(card.checkCardRequirements(playerRes));
+        assertFalse(card.checkCardRequirements(playerRes, new ArrayList<>()));
     }
 
     @Test
@@ -88,10 +89,12 @@ public class DevelopmentCardTest {
         DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
 
         Map<Resource, Integer> playerRes = new HashMap<>();
-        playerRes.put(Resource.SHIELDS, 1);
         playerRes.put(Resource.SERVANTS, 2);
         playerRes.put(Resource.COINS, 1);
 
-        assertTrue(card.checkCardRequirements(playerRes));
+        ArrayList<Resource> discountBuff = new ArrayList<>();
+        discountBuff.add(Resource.SHIELDS);
+
+        assertTrue(card.checkCardRequirements(playerRes, discountBuff));
     }
 }

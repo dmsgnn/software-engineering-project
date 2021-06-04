@@ -45,7 +45,7 @@ public class BuyDevelopmentCard extends Actions {
         warehouseDepotResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
         cardDepotResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
         strongboxResources.forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
-        return (board.viewCard(color, level).checkCardRequirements(totalPayment) && playerBoard.getSlots().get(slotNumber).validAction(board.viewCard(color, level)));
+        return (board.viewCard(color, level).checkCardRequirements(totalPayment, playerBoard.getLeaderCardBuffs().getDiscountBuff()) && playerBoard.getSlots().get(slotNumber).validAction(board.viewCard(color, level)));
     }
 
     /**

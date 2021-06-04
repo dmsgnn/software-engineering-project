@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.CLI.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class DevelopmentCard {
@@ -53,14 +54,18 @@ public class DevelopmentCard {
      * @param playerResources total resources owned by the player
      * @return true if the player has selected the right resources to buy the card, false otherwise
      */
-    public boolean checkCardRequirements(Map<Resource, Integer> playerResources){
-
+    public boolean checkCardRequirements(Map<Resource, Integer> playerResources, ArrayList<Resource> discountBuff){
+        int discount;
         for (Map.Entry<Resource, Integer> entry : cardRequirements.entrySet()) {
             Resource key = entry.getKey();
             Integer value = entry.getValue();
-            if(!(playerResources.containsKey(key) && playerResources.get(key).equals(value))){
-                return false;
-            }
+
+            if(discountBuff.contains(key)) discount = 1;
+            else discount = 0;
+
+            if(!playerResources.containsKey(key) && discount ==0) return false;
+            else if(!playerResources.containsKey(key) && value-discount==0) break;
+            else if(!playerResources.get(key).equals(value-discount)) return false;
         }
 
         return true;
