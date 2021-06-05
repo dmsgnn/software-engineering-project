@@ -499,11 +499,7 @@ public class Controller implements Observer<ClientMessage> {
      */
     public void startTurn(){
         serverViews.get(currentServerView).startTurn();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            System.out.println("wait failed");
-        }
+
         serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
     }
 
@@ -533,11 +529,7 @@ public class Controller implements Observer<ClientMessage> {
     public void lorenzoAction(){
         String message = game.getLorenzo().drawToken();
         String[][] newGrid = getDevCardGrid();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            System.out.println("sleep error controller row 543");
-        }
+
         faithTrackMessage();
         LorenzoAI lorenzo = game.getLorenzo();
         serverViews.get(0).lorenzoUpdate(message, lorenzo.getTrack().getPosition(), newGrid);
@@ -584,14 +576,12 @@ public class Controller implements Observer<ClientMessage> {
             int points = faithPositions.get(username);
             faithPositions.put(username,points +1);
             faithTrackMessage();
-            TimeUnit.SECONDS.sleep(1);
             for (ServerView serverView : serverViews) {
                 serverView.sendDiscardLeaderCardUpdate(username, id);
-                TimeUnit.SECONDS.sleep(1);
             }
             // SEND POSSIBLE ACTIONS
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
-        } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException | InterruptedException e) {
+        } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
             currentAction.put(currentActivePlayer, null);
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
@@ -637,10 +627,9 @@ public class Controller implements Observer<ClientMessage> {
             for (ServerView serverView: serverViews) {
                 serverView.sendPlayLeaderCardUpdate(username, id, warehouse , strongbox);
             }
-            TimeUnit.SECONDS.sleep(1);
             // SEND POSSIBLE ACTIONS
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
-        } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException | InterruptedException e) {
+        } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
             currentAction.put(currentActivePlayer, null);
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
@@ -743,10 +732,9 @@ public class Controller implements Observer<ClientMessage> {
                     serverView.sendMarketActionUpdate(nickname, warehouse, marbleColorsArrayList, getFreeMarble(), marketIndex, isRowOrColumn);
                 }
                 marbleColorsArrayList=null;
-                TimeUnit.SECONDS.sleep(1);
                 //SEND POSSIBLE ACTIONS
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
-            } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException | InterruptedException e) {
+            } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException  e) {
                 serverViews.get(currentServerView).sendError(Error.MANAGE_RESOURCES);
                 serverViews.get(currentServerView).sendResourceManageRequest(resourceArrayList);
             }
@@ -791,10 +779,9 @@ public class Controller implements Observer<ClientMessage> {
                 for (ServerView serverView: serverViews){
                     serverView.sendBuyDevelopmentCardUpdate(username,id,slotNumber,newId,color,level,warehouse,strongbox);
                 }
-                TimeUnit.SECONDS.sleep(1);
                 // SEND POSSIBLE ACTIONS
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
-            } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException | InterruptedException e) {
+            } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
                 serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
                 currentAction.put(currentActivePlayer, null);
                 numOfActions.put(currentActivePlayer,false);
@@ -834,10 +821,9 @@ public class Controller implements Observer<ClientMessage> {
                 for (ServerView serverView: serverViews){
                     serverView.sendUseProductionUpdate(name,warehouse,strongbox);
                 }
-                TimeUnit.SECONDS.sleep(1);
                 //SEND POSSIBLE ACTION
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
-            } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException | InterruptedException e) {
+            } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
                 serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
                 currentAction.put(currentActivePlayer, null);
                 numOfActions.put(currentActivePlayer,false);

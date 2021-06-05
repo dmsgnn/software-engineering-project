@@ -170,7 +170,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="strongboxServantsCounter" alignment="CENTER" layoutX="762.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+      <Label fx:id="strongboxServantsCounter" alignment="CENTER" layoutX="762.0" layoutY="640.0" minHeight="2.0" minWidth="2.0" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: cc66ff; -fx-background-radius: 6;" textAlignment="CENTER">
          <font>
             <Font name="SansSerif Bold" size="11.0" />
          </font>

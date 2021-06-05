@@ -33,6 +33,7 @@ public class ClientView implements Observer<ServerMessage> {
     private ArrayList<Actions> possibleActions = new ArrayList<>();
 
     private final Object lock = new Object();
+    private boolean updated;
 
     ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
 
@@ -139,6 +140,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void errorManagement(Error errorType){
         synchronized (lock){
+            updated=true;
             uiType.manageError(errorType);
         }
     }
@@ -264,6 +266,13 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void pickAction(ArrayList<Actions> possibleActions){
         synchronized (lock){
+            while(!updated) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             uiType.chooseAction(possibleActions);
         }
     }
@@ -273,6 +282,7 @@ public class ClientView implements Observer<ServerMessage> {
      * @param action selected from the player
      */
     public void sendAction(Actions action){
+        updated=false;
         socket.sendMessage(new ActionReply(action));
     }
 
@@ -420,6 +430,8 @@ public class ClientView implements Observer<ServerMessage> {
             }
             uiType.updateBoard("");
             uiType.endTurn();
+            updated=true;
+            lock.notifyAll();
         }
     }
 
@@ -480,6 +492,8 @@ public class ClientView implements Observer<ServerMessage> {
             }
             uiType.updateBoard("Reconnected");
             uiType.endTurn();
+            updated=true;
+            lock.notifyAll();
         }
     }
 
@@ -510,6 +524,8 @@ public class ClientView implements Observer<ServerMessage> {
                     gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname), vaticanPosition.containsKey(nickname));
                 }
             }
+            updated=true;
+            lock.notifyAll();
         }
     }
 
@@ -534,6 +550,8 @@ public class ClientView implements Observer<ServerMessage> {
             gameboard.changeGridCard(gridId, color, level);
             if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + "bought the level " + level + " " + color + " card");
             else uiType.updateBoard("");
+            updated=true;
+            lock.notifyAll();
         }
     }
 
@@ -548,6 +566,8 @@ public class ClientView implements Observer<ServerMessage> {
             playerBoard.removeHandCard(id);
             if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + " discarded a leader card");
             else uiType.updateBoard("");
+            updated=true;
+            lock.notifyAll();
         }
     }
 
@@ -568,6 +588,8 @@ public class ClientView implements Observer<ServerMessage> {
             if(!nickname.equals(this.nickname))
                 uiType.updateBoard(nickname + " played a leader card");
             else uiType.updateBoard("");
+            updated=true;
+            lock.notifyAll();
         }
     }
 
@@ -585,6 +607,8 @@ public class ClientView implements Observer<ServerMessage> {
             if(!nickname.equals(this.nickname))
                 uiType.updateBoard(nickname + " activated the production");
             else uiType.updateBoard("");
+            updated=true;
+            lock.notifyAll();
         }
     }
 
@@ -606,6 +630,8 @@ public class ClientView implements Observer<ServerMessage> {
             if(!nickname.equals(this.nickname))
                 uiType.updateBoard(nickname + " took resources from the market");
             else uiType.updateBoard("");
+            updated=true;
+            lock.notifyAll();
         }
     }
 
