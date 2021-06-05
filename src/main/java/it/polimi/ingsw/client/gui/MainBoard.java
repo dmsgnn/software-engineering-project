@@ -395,15 +395,17 @@ public class MainBoard {
                 }
             }
         }
-        String color = null;
         Image marbleImage = new Image("/graphics/Marble/" + clientView.getGameboard().getFreeMarble().toString().toLowerCase() + ".png");
         marble0.setImage(marbleImage);
+        System.out.println(board.getHand());
+        System.out.println(board.getPlayedCards());
+        // leader cards
         if(board.getPlayedCards().size()==0) {
-            if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().size() > 0)
+            if (board.getHand().size() > 0)
                 leaderCard1.setImage(new Image("/graphics/leaderCards/" + board.getHand().get(0) + ".png"));
             else
                 leaderCardOne.setVisible(false);
-            if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().size() > 1)
+            if (board.getHand().size()  > 1)
                 leaderCard2.setImage(new Image("/graphics/leaderCards/" + board.getHand().get(1) + ".png"));
             else
                 leaderCardTwo.setVisible(false);
@@ -413,8 +415,10 @@ public class MainBoard {
             PlayLeaderActive1.setStyle("-fx-background-color: green; -fx-background-radius: 20;");
             PlayLeaderActive1.setText("ACTIVE");
 
-            if(board.getHandSize()==2)
+            if(board.getHand().size() >0)
                 leaderCard2.setImage(new Image("/graphics/leaderCards/" + board.getHand().get(0) + ".png"));
+            else
+                leaderCardTwo.setVisible(false);
         }
         else{
             leaderCard1.setImage(new Image("/graphics/leaderCards/" + board.getPlayedCards().get(0) + ".png"));
@@ -639,9 +643,9 @@ public class MainBoard {
         // leader buttons
         leaderCardOne.setMouseTransparent(true);
         leaderCardTwo.setMouseTransparent(true);
-        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHandSize()==1)
+        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHandSize()==1 && clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().size()==0)
             leaderCardTwo.setVisible(false);
-        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHandSize()==0) {
+        if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHandSize()==0 && clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().size()==0) {
             leaderCardOne.setVisible(false);
             leaderCardTwo.setVisible(false);
         }
@@ -1635,8 +1639,6 @@ public class MainBoard {
         String id = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(cardSlot);
         buttonStatus();
         clientView.playLeaderCard(id);
-
-
     }
 
     /**

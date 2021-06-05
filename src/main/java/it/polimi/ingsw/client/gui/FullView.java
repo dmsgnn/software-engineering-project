@@ -384,12 +384,12 @@ public class FullView {
         }
         // leader card
         if(board.getPlayedCards().size()==2){
-            leader1.get(playerNum).setImage(new Image("graphics/leaderCard/"+ board.getHand().get(0) +".png"));
-            leader2.get(playerNum).setImage(new Image("graphics/leaderCard/"+ board.getHand().get(1) +".png"));
+            leader1.get(playerNum).setImage(new Image("graphics/leaderCards/"+ board.getPlayedCards().get(0) +".png"));
+            leader2.get(playerNum).setImage(new Image("graphics/leaderCards/"+ board.getPlayedCards().get(1) +".png"));
         }
         else if(board.getPlayedCards().size()==1) {
-            leader1.get(playerNum).setImage(new Image("graphics/leaderCard/" + board.getHand().get(0) + ".png"));
-            if(board.getHandSize()==2)
+            leader1.get(playerNum).setImage(new Image("graphics/leaderCards/" + board.getPlayedCards().get(0) + ".png"));
+            if(board.getHandSize()==1)
                 leader2.get(playerNum).setImage(new Image("resources/back/leaderBack.png"));
             else
                 leader2.get(playerNum).setVisible(false);

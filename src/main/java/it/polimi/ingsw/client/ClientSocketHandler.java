@@ -2,8 +2,6 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
-import it.polimi.ingsw.messages.clientToServer.Pong;
-import it.polimi.ingsw.messages.serverToClient.Ping;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 
 import java.io.BufferedInputStream;
@@ -13,12 +11,12 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import static java.lang.System.exit;
 
+import static java.lang.System.exit;
+
 public class ClientSocketHandler extends Observable<ServerMessage> implements Runnable {
     Socket socket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    private PingReceiver pinger;
-    private Object lock = new Object();
 
     //constructor
     public ClientSocketHandler(Socket socket) {
@@ -37,7 +35,7 @@ public class ClientSocketHandler extends Observable<ServerMessage> implements Ru
         this.in = tempin;
         this.out = tempout;
 
-        this.pinger = new PingReceiver(this);
+        PingReceiver pinger = new PingReceiver(this);
     }
 
     /**
@@ -62,7 +60,6 @@ public class ClientSocketHandler extends Observable<ServerMessage> implements Ru
             e.getMessage();
             System.out.println("\n Server shut down \n ");
             exit(0);
-
             //e.printStackTrace();
         }
     }
