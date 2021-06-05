@@ -28,6 +28,13 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage(new Reconnection(username));
     }
 
+    public void endGameMessage() { sendMessage(new EndGameMessage());
+    }
+
+    public void finalScoreMessage(Map<String, Integer> score,boolean lorenzo) {
+        sendMessage(new FinalScoreMessage(score,lorenzo));
+    }
+
     private class ClientMessageReceiver implements Observer<ClientMessage>{
         @Override
         public void update(ClientMessage message) {

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import com.sun.security.ntlm.Server;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
@@ -62,6 +63,7 @@ public class Controller implements Observer<ClientMessage> {
     private int resourceCounter;
     private final Map<String,Map<Integer,Boolean>> playerStatus;
     private boolean gameStarted;
+    private boolean gameFinished;
 
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
@@ -131,6 +133,7 @@ public class Controller implements Observer<ClientMessage> {
             System.out.println(game.getPlayers(i).getNickname());
         }
         this.currentActivePlayer=0;
+        gameFinished = false;
     }
 
 
@@ -502,27 +505,54 @@ public class Controller implements Observer<ClientMessage> {
 
         serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
     }
+    public void finalScore(boolean lorenzo){
+        Map<String,Integer> score= new HashMap<>();
+        String name;
+        int playerPoints;
+        if (playersNumber==1){
+            playerPoints = game.getActivePlayer().getVictoryPoints();
+            name = game.getActivePlayer().getNickname();
+            score.put(name,playerPoints);
+            serverViews.get(0).finalScoreMessage(score,lorenzo);
+        }
+        else{
+            for (int i = 0; i < playersNumber; i++) {
+                Player player = game.getPlayers(i);
+                playerPoints = player.getVictoryPoints();
+                name = player.getNickname();
+                score.put(name,playerPoints);
+                for (ServerView serverView: serverViews){
+                    serverView.finalScoreMessage(score,lorenzo);
+                }
+            }
+
+        }
+    }
 
 
     /**
      * ends the player's turn and sets the new active player in the model
      */
     public void endTurn(){
-        numOfActions.put(currentActivePlayer,false);
-        newResources.put(serverViews.get(currentServerView).getUsername(),temp);
-        increaseActivePlayer(1);
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
-        for (int i = 0; i < playersNumber; i++) {
-            if (serverViews.get(i).getUsername().equals(game.getActivePlayer().getNickname())){
-                currentServerView=i;
-            }
-        }
-        if(playersNumber==1){
-            lorenzoAction();
+        if ((gameFinished && (currentActivePlayer == playersNumber -1)) || (gameFinished && (playersNumber==1))) {
+            finalScore(false);
         }
         else {
-            startTurn();
+            numOfActions.put(currentActivePlayer, false);
+            newResources.put(serverViews.get(currentServerView).getUsername(), temp);
+            increaseActivePlayer(1);
+            Player player = game.getPlayers(currentActivePlayer);
+            game.setActivePlayer(player);
+            for (int i = 0; i < playersNumber; i++) {
+                if (serverViews.get(i).getUsername().equals(game.getActivePlayer().getNickname())) {
+                    currentServerView = i;
+                }
+            }
+            if (playersNumber == 1) {
+                lorenzoAction();
+            } else {
+                startTurn();
+            }
         }
     }
 
@@ -533,7 +563,12 @@ public class Controller implements Observer<ClientMessage> {
         faithTrackMessage();
         LorenzoAI lorenzo = game.getLorenzo();
         serverViews.get(0).lorenzoUpdate(message, lorenzo.getTrack().getPosition(), newGrid);
-        startTurn();
+        if (endGame()) {
+            gameFinished = true;
+            serverViews.get(0).endGameMessage();
+            finalScore(true);
+        }
+        else startTurn();
     }
 
 
@@ -580,6 +615,12 @@ public class Controller implements Observer<ClientMessage> {
                 serverView.sendDiscardLeaderCardUpdate(username, id);
             }
             // SEND POSSIBLE ACTIONS
+            if (endGame()) {
+                for (ServerView serverView: serverViews){
+                    gameFinished = true;
+                    serverView.endGameMessage();
+                }
+            }
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
@@ -733,6 +774,12 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 marbleColorsArrayList=null;
                 //SEND POSSIBLE ACTIONS
+                if (endGame()){
+                    for (ServerView serverView: serverViews){
+                        gameFinished = true;
+                        serverView.endGameMessage();
+                    }
+                }
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException  e) {
                 serverViews.get(currentServerView).sendError(Error.MANAGE_RESOURCES);
@@ -780,6 +827,12 @@ public class Controller implements Observer<ClientMessage> {
                     serverView.sendBuyDevelopmentCardUpdate(username,id,slotNumber,newId,color,level,warehouse,strongbox);
                 }
                 // SEND POSSIBLE ACTIONS
+                if (endGame()){
+                    for (ServerView serverView: serverViews){
+                        gameFinished = true;
+                        serverView.endGameMessage();
+                    }
+                }
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
                 serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
@@ -822,6 +875,12 @@ public class Controller implements Observer<ClientMessage> {
                     serverView.sendUseProductionUpdate(name,warehouse,strongbox);
                 }
                 //SEND POSSIBLE ACTION
+                if (endGame()){
+                    for (ServerView serverView: serverViews){
+                        gameFinished = true;
+                        serverView.endGameMessage();
+                    }
+                }
                 serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
                 serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
@@ -868,6 +927,16 @@ public class Controller implements Observer<ClientMessage> {
         }
         Player player = game.getPlayers(currentActivePlayer);
         game.setActivePlayer(player);
+
+    }
+
+    public boolean endGame(){
+        boolean player = game.endGame();
+        if (playersNumber!=1) return player;
+        else {
+            boolean lorenzo = game.getLorenzo().checkEndGame();
+            return player||lorenzo;
+        }
 
     }
 
@@ -959,7 +1028,6 @@ public class Controller implements Observer<ClientMessage> {
         }
         else if (playersDisconnected.size()+1 == playersNumber){
             increaseActivePlayer(1);
-            Player player = game.getPlayers(currentActivePlayer);
             for (int k = 0; k < serverViews.size(); k++) {
                 if (serverViews.get(k).getUsername().equals(username)) currentServerView =k;
             }

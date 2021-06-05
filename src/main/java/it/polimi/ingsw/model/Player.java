@@ -27,6 +27,7 @@ public class Player {
     }
 
     public int getVictoryPoints() {
+        calcVictoryPoints();
         return victoryPoints;
     }
 
@@ -55,7 +56,7 @@ public class Player {
         cardsHand.add(leaderCards.get(1));
     }
 
-    public void calcVictoryPoints(){
+    private void calcVictoryPoints(){
         int counter=0;
         counter +=playerBoard.getWarehouse().resourceCounter();
         for (Resource resource: Resource.values()){

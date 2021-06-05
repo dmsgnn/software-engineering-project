@@ -101,5 +101,29 @@ public class Game {
         else throw new FullPlayerException();
     }
 
+    private boolean devCardEnd(){
+        for (Player player: players){
+            int counter =0;
+            for (int i = 0; i < player.getPlayerBoard().getSlots().size(); i++) {
+                counter += player.getPlayerBoard().getSlots().get(i).numOfCards();
+            }
+            if (counter >= 7) return true;
+        }
+        return false;
+    }
+
+    private boolean faithTrackEnd(){
+        for (Player player:players){
+            if (player.getFaithTrack().endOfTrack()) return true;
+        }
+        return false;
+    }
+
+    public boolean endGame(){
+        return  devCardEnd()||faithTrackEnd();
+    }
+
+
+
 
 }
