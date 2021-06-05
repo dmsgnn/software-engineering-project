@@ -6,7 +6,7 @@ import it.polimi.ingsw.client.PingReceiver;
 import java.util.Map;
 
 public class FinalScoreMessage implements ServerMessage{
-    private Map<String,Integer> finalScores;
+    private final Map<String,Integer> finalScores;
     boolean lorenzoWin;
 
     public FinalScoreMessage(Map<String, Integer> finalScores, boolean lorenzoWin) {
@@ -16,7 +16,7 @@ public class FinalScoreMessage implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) {
-
+        clientView.finalScoresUpdate(finalScores, lorenzoWin);
     }
 
     @Override

@@ -134,6 +134,11 @@ public class ClientPlayerBoard {
 
     //Setters or updates
 
+
+    public void setHandSize(int handSize) {
+        this.handSize = handSize;
+    }
+
     public void addPlayedCard(String id, LeaderCard card){
         playedCards.add(id);
         if(card!=null) card.getAbility().clientAbility(this);

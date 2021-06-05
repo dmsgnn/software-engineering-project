@@ -91,6 +91,20 @@ public class GUI extends Application implements UserInterface {
     }
 
 
+    @Override
+    public void lastRound(){
+        Platform.runLater(()->{
+            playerBoard.setMessage("Last round!");
+        });
+    }
+
+    @Override
+    public void scoreboard(Map<String, Integer> finalScores){
+    }
+
+    @Override
+    public void lorenzoScoreboard(int score, boolean lorenzoHasWon){
+    }
 
 
     @Override

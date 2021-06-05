@@ -38,7 +38,7 @@ public class ReConnectionUpdate implements ServerMessage {
 
     @Override
     public void handleMessage(ClientView clientView) {
-        clientView.reconnectionUpdate(username, devCardSlots, faithPositions, leaderCardsPlayed, leaderCards, strongbox, warehouse);
+        clientView.reconnectionUpdate(username, devCardSlots, faithPositions, leaderCardsPlayed, leaderCards, strongbox, warehouse, cardsInHand, playersConnected);
     }
 
     @Override

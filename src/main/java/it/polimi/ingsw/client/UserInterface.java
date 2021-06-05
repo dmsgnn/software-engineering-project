@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public interface UserInterface {
 
@@ -47,10 +48,28 @@ public interface UserInterface {
     void loser(String nickname);
 
     /**
-     * called to display the error message to the player
+     * called to manage the error message
      * @param errorType contains the error message
      */
     void manageError(Error errorType);
+
+    /**
+     * called to notify that this is the last round
+     */
+    void lastRound();
+
+    /**
+     * called to show the scores of each player
+     * @param finalScores score of each player
+     */
+    void scoreboard(Map<String, Integer> finalScores);
+
+    /**
+     * called to show the scores in single player
+     * @param score
+     * @param lorenzoHasWon
+     */
+    void lorenzoScoreboard(int score, boolean lorenzoHasWon);
 
     /**
      * Manages a winning player

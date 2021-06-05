@@ -145,14 +145,6 @@ public class ClientView implements Observer<ServerMessage> {
         }
     }
 
-    /**
-     * called when one player disconnects from the game
-     * @param nickname of who is disconnected
-     */
-    public void playerDisconnection(String nickname){
-        gameboard.getOnePlayerBoard(nickname).setConnected(false);
-    }
-
     //------------------GAME SETUP------------------
 
     /**
@@ -437,7 +429,7 @@ public class ClientView implements Observer<ServerMessage> {
 
     /**
      * called when a player disconnects from the game
-     * @param nickname
+     * @param nickname of the player
      */
     public void playerDisconnected(String nickname){
         synchronized (lock){
@@ -448,7 +440,7 @@ public class ClientView implements Observer<ServerMessage> {
 
     /**
      * called when a player reconnects to the game
-     * @param nickname
+     * @param nickname of the player
      */
     public void playerReconnected(String nickname){
         synchronized (lock){
@@ -466,10 +458,13 @@ public class ClientView implements Observer<ServerMessage> {
      * @param leaderCards player hand
      * @param strongbox every strongbox
      * @param warehouse every warehouse
+     * @param cardsInHand number of cards in each player's hand
+     * @param playersConnected connection status of each player
      */
     public void reconnectionUpdate(String username, Map<String, ArrayList<String>> devCardSlots, Map<String, Integer> faithPositions, Map<String,
             ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource, Integer>> strongbox,
-                                   Map<String, Map<Integer, ArrayList<Resource>>> warehouse){
+                                   Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String,Integer> cardsInHand,
+                                   Map<String,Boolean> playersConnected){
         synchronized (lock) {
             this.nickname=username;
             ArrayList<String> players = new ArrayList<>(devCardSlots.keySet());
@@ -489,6 +484,12 @@ public class ClientView implements Observer<ServerMessage> {
             }
             for (String nickname : warehouse.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setWarehouse(warehouse.get(nickname));
+            }
+            for (String nickname : cardsInHand.keySet()){
+                gameboard.getOnePlayerBoard(nickname).setHandSize(cardsInHand.get(nickname));
+            }
+            for (String nickname : playersConnected.keySet()){
+                gameboard.getOnePlayerBoard(nickname).setConnected(playersConnected.get(nickname));
             }
             uiType.updateBoard("Reconnected");
             uiType.endTurn();
@@ -632,6 +633,27 @@ public class ClientView implements Observer<ServerMessage> {
             else uiType.updateBoard("");
             updated=true;
             lock.notifyAll();
+        }
+    }
+
+    /**
+     * called to notify the players that this is the last round
+     */
+    public void endGame(){
+        synchronized (lock) {
+            uiType.lastRound();
+        }
+    }
+
+    /**
+     * called to notify the final scores and the winner to the players
+     * @param finalScores final victory points
+     * @param lorenzoWin true if lorenzo won the game, false if he lost or if the game is singleplayer
+     */
+    public void finalScoresUpdate(Map<String, Integer> finalScores, boolean lorenzoWin){
+        synchronized (lock){
+            if(gameboard.getNumOfPlayers()==1) uiType.lorenzoScoreboard(finalScores.get(nickname), lorenzoWin);
+            else uiType.scoreboard(finalScores);
         }
     }
 

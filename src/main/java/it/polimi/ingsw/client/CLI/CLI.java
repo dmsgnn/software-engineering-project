@@ -100,6 +100,8 @@ public class CLI implements UserInterface {
         return null;
     }
 
+
+
     @Override
     public void begin() {
         System.out.println("\nWelcome to..." + "\n");
@@ -119,6 +121,32 @@ public class CLI implements UserInterface {
         }
         clientView.login(); // the login method below could directly be called
     }
+
+    @Override
+    public void lastRound(){
+        System.out.println("------------------------------------");
+        System.out.println("             Last round!            ");
+        System.out.println("------------------------------------");
+    }
+
+    @Override
+    public void scoreboard(Map<String, Integer> finalScores){
+        String winner = null;
+        int temp=0;
+        for (String nickname : finalScores.keySet()){
+            System.out.println(nickname + " score: " + finalScores.get(nickname));
+            if(finalScores.get(nickname)>temp) winner = nickname;
+        }
+        System.out.println(winner + " won the game");
+    }
+
+    @Override
+    public void lorenzoScoreboard(int score, boolean lorenzoHasWon){
+        if(lorenzoHasWon) System.out.println("Lorenzo il Magnifico won the game");
+        else System.out.println("You won the game");
+        System.out.println("Score: " + score);
+    }
+
 
     @Override
     public void login() {

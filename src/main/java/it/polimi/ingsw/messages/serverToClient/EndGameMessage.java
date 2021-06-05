@@ -5,11 +5,10 @@ import it.polimi.ingsw.client.PingReceiver;
 
 public class EndGameMessage implements ServerMessage{
 
-
-
     @Override
-    public void handleMessage(ClientView clientView) { //clientView.winner(winner);
-        }
+    public void handleMessage(ClientView clientView) {
+        clientView.endGame();
+    }
 
     @Override
     public void handleMessage(PingReceiver pingManager) { }
