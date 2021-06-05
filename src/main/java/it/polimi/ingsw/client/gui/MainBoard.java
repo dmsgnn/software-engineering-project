@@ -986,7 +986,10 @@ public class MainBoard {
             buttonStatus();
         }
         else if (currentAction == Actions.PLAYLEADERCARD){
-            doPlayCard(1);
+            if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHandSize()==2)
+                doPlayCard(1);
+            else
+                doPlayCard(0);
         }
     }
 

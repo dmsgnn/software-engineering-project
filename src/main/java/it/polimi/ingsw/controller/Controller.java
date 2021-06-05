@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller;
 
-import com.sun.security.ntlm.Server;
+
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
@@ -505,29 +505,7 @@ public class Controller implements Observer<ClientMessage> {
 
         serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
     }
-    public void finalScore(boolean lorenzo){
-        Map<String,Integer> score= new HashMap<>();
-        String name;
-        int playerPoints;
-        if (playersNumber==1){
-            playerPoints = game.getActivePlayer().getVictoryPoints();
-            name = game.getActivePlayer().getNickname();
-            score.put(name,playerPoints);
-            serverViews.get(0).finalScoreMessage(score,lorenzo);
-        }
-        else{
-            for (int i = 0; i < playersNumber; i++) {
-                Player player = game.getPlayers(i);
-                playerPoints = player.getVictoryPoints();
-                name = player.getNickname();
-                score.put(name,playerPoints);
-                for (ServerView serverView: serverViews){
-                    serverView.finalScoreMessage(score,lorenzo);
-                }
-            }
 
-        }
-    }
 
 
     /**
@@ -940,6 +918,31 @@ public class Controller implements Observer<ClientMessage> {
 
     }
 
+
+    public void finalScore(boolean lorenzo){
+        Map<String,Integer> score= new HashMap<>();
+        String name;
+        int playerPoints;
+        if (playersNumber==1){
+            playerPoints = game.getActivePlayer().getVictoryPoints();
+            name = game.getActivePlayer().getNickname();
+            score.put(name,playerPoints);
+            serverViews.get(0).finalScoreMessage(score,lorenzo);
+        }
+        else{
+            for (int i = 0; i < playersNumber; i++) {
+                Player player = game.getPlayers(i);
+                playerPoints = player.getVictoryPoints();
+                name = player.getNickname();
+                score.put(name,playerPoints);
+                for (ServerView serverView: serverViews){
+                    serverView.finalScoreMessage(score,lorenzo);
+                }
+            }
+
+        }
+    }
+
     //------------------TOOLS------------------
 
     public synchronized void playerDisconnection(String username){
@@ -993,9 +996,32 @@ public class Controller implements Observer<ClientMessage> {
      */
     public synchronized void playerReconnection(ServerView serverView){
         int i;
-
-
+        Map<String,Integer> cardInHand = new HashMap<>();
+        Map<String,Boolean> playerConnected = new HashMap<>();
+        int number1;
+        String name;
+        Player temp;
+        boolean temp1;
+        for (int j = 0; j < playersNumber; j++) {
+            temp = game.getPlayers(j);
+            name = temp.getNickname();
+            number1 = temp.getCardsHand().size();
+            cardInHand.put(name,number1);
+        }
         playersDisconnected.remove(serverView.getUsername());
+
+        for (int k = 0; k < playersNumber; k++) {
+            name = game.getPlayers(k).getNickname();
+            temp1 = true;
+            for (String s : playersDisconnected) {
+                if (s.equals(name)) {
+                    temp1 = false;
+                    break;
+                }
+            }
+            playerConnected.put(name,temp1);
+        }
+
 
         String username = serverView.getUsername();
         for (ServerView s: serverViews){
@@ -1007,11 +1033,11 @@ public class Controller implements Observer<ClientMessage> {
                 break;
             }
         }
-        //??? chiedere a vittorio come vuole i messaggi, il problema è in queste 4 righe successive
+
         serverView.sendDevCardGrid(getDevCardGrid());
         serverView.sendMarket(getMarket(),getFreeMarble());
         serverView.sendReconnectionMessage(username,getDevCardSlots(),getFaithPositions(),getLeaderCardsPlayed(),
-                getLeaderCards(username), getStrongbox(), getWarehouse());
+                getLeaderCards(username), getStrongbox(), getWarehouse(),cardInHand,playerConnected);
 
         if (!playerStatus.get(username).get(0)){
             ArrayList<String> starting= new ArrayList<>();
