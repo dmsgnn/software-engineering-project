@@ -397,8 +397,6 @@ public class MainBoard {
         }
         Image marbleImage = new Image("/graphics/Marble/" + clientView.getGameboard().getFreeMarble().toString().toLowerCase() + ".png");
         marble0.setImage(marbleImage);
-        System.out.println(board.getHand());
-        System.out.println(board.getPlayedCards());
         // leader cards
         if(board.getPlayedCards().size()==0) {
             if (board.getHand().size() > 0)
@@ -798,11 +796,13 @@ public class MainBoard {
         if(boardResProd.isEmpty()){
             disableButton(boardProduction, false);
         }
-        if(!prodLeaderSlots.contains(0) && !board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(0))){
-            leaderCardOne.setMouseTransparent(false);
-        }
-        if(!prodLeaderSlots.contains(1) && !board.getPlayedCards().isEmpty() && board.getProductionBuff().containsKey(board.getPlayedCards().get(1))){
-            leaderCardTwo.setMouseTransparent(false);
+        if(!board.getPlayedCards().isEmpty()){
+            if(!prodLeaderSlots.contains(0) && board.getProductionBuff().containsKey(board.getPlayedCards().get(0))){
+                leaderCardOne.setMouseTransparent(false);
+            }
+            if(!prodLeaderSlots.contains(1) && board.getPlayedCards().size()>1 && board.getProductionBuff().containsKey(board.getPlayedCards().get(1))){
+                leaderCardTwo.setMouseTransparent(false);
+            }
         }
     }
 

@@ -27,9 +27,9 @@ public class LorenzoAI {
      * activates the effect of the Token at the top of the Deck
      */
     public String drawToken(){
-        String message = tokens.pickTop().getClientMessage();
-        tokens.pickTop().activateEffect();
-        return message;
+        Token token = tokens.pickTop();
+        token.activateEffect();
+        return token.getClientMessage();
     }
 
     /**
@@ -40,10 +40,7 @@ public class LorenzoAI {
         if(track.getPosition() == 24){
             return true;
         }
-        if(game.getBoard().isOneColumnEmpty()){
-            return true;
-        }
-        return false;
+        return game.getBoard().isOneColumnEmpty();
     }
 }
 

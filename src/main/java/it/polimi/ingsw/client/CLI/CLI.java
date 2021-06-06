@@ -430,10 +430,12 @@ public class CLI implements UserInterface {
                 try{
                     value = Integer.parseInt(input);
                     if(tempColRow.equals("column") && value > 0 && value<=gameboard.getMarketColumnsNum()){
+                        value=value-1;
                         done = true;
                         rowOrCol = false;
                     }
                     else if(tempColRow.equals("row") && value > 0 && value<=gameboard.getMarketRowsNum()){
+                        value=value-1;
                         done = true;
                         rowOrCol = true;
                     }
@@ -457,7 +459,7 @@ public class CLI implements UserInterface {
         if(activePlayerboard.getExchangeBuffsNum() > 1){
             System.out.println("Select what resources you want for the white marbles: ");
             while(whiteMarblesRes.size() < whiteMarblesNum){
-                System.out.println("Choose resources " + value + " times from: ");
+                System.out.println("Choose resources " + whiteMarblesNum + " times from: ");
                 for(Resource rss : activePlayerboard.getExchangeBuff())
                     System.out.print(rss);
                 input = scanner.nextLine().toUpperCase();
@@ -466,7 +468,7 @@ public class CLI implements UserInterface {
                     if(!activePlayerboard.getExchangeBuff().contains(resource)) System.out.println("You can't choose this resource");
                     else{
                        whiteMarblesRes.add(resource);
-                       value--;
+                       whiteMarblesNum--;
                     }
                 } catch ( IllegalArgumentException e ) {
                     System.err.println( "No such resource, please try again");
@@ -481,7 +483,7 @@ public class CLI implements UserInterface {
         }
 
 
-        clientView.marketAction(value-1, rowOrCol, whiteMarblesRes);
+        clientView.marketAction(value, rowOrCol, whiteMarblesRes);
     }
 
     @Override

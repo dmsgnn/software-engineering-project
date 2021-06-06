@@ -505,9 +505,13 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void lorenzoUpdate(String message, int lorenzoPosition, String[][] newCardGrid){
         synchronized (lock) {
+            System.out.println(lorenzoPosition);
+            System.out.println(message);
             gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(lorenzoPosition);
             getGameboard().initializeCards(newCardGrid);
             uiType.updateBoard(message);
+            updated=true;
+            lock.notifyAll();
         }
     }
 
@@ -519,12 +523,15 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report){
         synchronized (lock) {
+            System.out.println(vaticanPosition);
+            System.out.println(position);
             for (String nickname : position.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
                 if (report) {
                     gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname), vaticanPosition.containsKey(nickname));
                 }
             }
+            uiType.updateBoard("");
             updated=true;
             lock.notifyAll();
         }
@@ -648,7 +655,7 @@ public class ClientView implements Observer<ServerMessage> {
     /**
      * called to notify the final scores and the winner to the players
      * @param finalScores final victory points
-     * @param lorenzoWin true if lorenzo won the game, false if he lost or if the game is singleplayer
+     * @param lorenzoWin true if Lorenzo won the game, false if he lost or if the game is singleplayer
      */
     public void finalScoresUpdate(Map<String, Integer> finalScores, boolean lorenzoWin){
         synchronized (lock){

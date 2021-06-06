@@ -66,8 +66,8 @@ public interface UserInterface {
 
     /**
      * called to show the scores in single player
-     * @param score
-     * @param lorenzoHasWon
+     * @param score player score
+     * @param lorenzoHasWon true if Lorenzo won the game, false if he lost
      */
     void lorenzoScoreboard(int score, boolean lorenzoHasWon);
 
