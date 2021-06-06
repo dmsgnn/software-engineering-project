@@ -32,7 +32,9 @@ public abstract class FaithTrack {
         else {
             for (int i = 0; i < game.getPlayersNumber(); i++) {
                 if (!game.getPlayers(i).equals(game.getActivePlayer())) {
-                    game.getPlayers(i).getPlayerBoard().getFaithTrack().setPosition(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() + 1);
+                    if (!game.getPlayers(i).getFaithTrack().endOfTrack()) {
+                        game.getPlayers(i).getPlayerBoard().getFaithTrack().setPosition(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() + 1);
+                    }
                 }
             }
             for (int i = 0; i < game.getPlayersNumber(); i++) {
