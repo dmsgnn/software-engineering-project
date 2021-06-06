@@ -291,13 +291,11 @@ public class Controller implements Observer<ClientMessage> {
             faithTrackMessage();
             for (int i = 0; i < playersNumber; i++) {
                 String name = game.getPlayers(i).getNickname();
-                //if(playerStatus.get(name).get(0)) {
-                    ServerView serverView = getServerView(name);
-                    assert serverView != null;
-                    System.out.println(serverView.getUsername());
-                    int number = startingResources.get(name);
-                    Objects.requireNonNull(serverView).startingResourceMessage(number);
-                //}
+                ServerView serverView = getServerView(name);
+                assert serverView != null;
+                System.out.println(serverView.getUsername());
+                int number = startingResources.get(name);
+                Objects.requireNonNull(serverView).startingResourceMessage(number);
             }
         }
     }
@@ -513,7 +511,13 @@ public class Controller implements Observer<ClientMessage> {
      */
     public void endTurn(){
         if ((gameFinished && (currentActivePlayer == playersNumber -1)) || (gameFinished && (playersNumber==1))) {
-            finalScore(false);
+            if (playersNumber ==1) {
+                boolean lorenzo = game.getLorenzo().checkEndGame();
+                finalScore(lorenzo);
+            }
+            else {
+                finalScore(false);
+            }
         }
         else {
             numOfActions.put(currentActivePlayer, false);
@@ -541,7 +545,9 @@ public class Controller implements Observer<ClientMessage> {
         faithTrackMessage();
         LorenzoAI lorenzo = game.getLorenzo();
         serverViews.get(0).lorenzoUpdate(message, lorenzo.getTrack().getPosition(), newGrid);
-        if (endGame()) {
+        boolean end = endGame();
+        boolean lori = game.getLorenzo().checkEndGame();
+        if (lori) {
             gameFinished = true;
             serverViews.get(0).endGameMessage();
             finalScore(true);
@@ -909,12 +915,13 @@ public class Controller implements Observer<ClientMessage> {
     }
 
     public boolean endGame(){
-        boolean player = game.endGame();
-        if (playersNumber!=1) return player;
-        else {
+        return game.endGame();
+        /*else {
             boolean lorenzo = game.getLorenzo().checkEndGame();
             return player||lorenzo;
         }
+
+         */
 
     }
 

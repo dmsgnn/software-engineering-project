@@ -57,6 +57,8 @@ public class MainBoard {
     @FXML
     private Button manage4;
     @FXML
+    private Button trashManage;
+    @FXML
     private ImageView manageImage1;
     @FXML
     private ImageView manageImage2;
@@ -64,6 +66,8 @@ public class MainBoard {
     private ImageView manageImage3;
     @FXML
     private ImageView manageImage4;
+    @FXML
+    private ImageView trashManageImage;
 
     //marbles
     @FXML
@@ -287,15 +291,16 @@ public class MainBoard {
 
     //MARKET attributes
     private Map<Integer, ArrayList<Resource>> warehouse = new HashMap<>();
-    ArrayList<Resource> res;
+    private ArrayList<Resource> res;
     private Resource first= null;
     private int num= -1;
     private Resource second= null;
-    Resource depot1;
-    Resource[] depot2 = new Resource[2];
-    Resource[] depot3 = new Resource[3];
-    Resource[] newResources = new Resource[4];
-    Boolean isNullVolunteer = false;
+    private Resource depot1;
+    private Resource[] depot2 = new Resource[2];
+    private Resource[] depot3 = new Resource[3];
+    private Resource[] newResources = new Resource[4];
+    private Boolean isNullVolunteer = false;
+    private ArrayList<Resource> discardRes = new ArrayList<>();
 
 
     public static void setGui(GUI gui) {
@@ -741,6 +746,8 @@ public class MainBoard {
         manage3.setVisible(false);
         manage4.setVisible(false);
         disableMarketButtons();
+        trashManage.setVisible(false);
+        trashManage.setDisable(true);
     }
 
     /**
@@ -1054,6 +1061,7 @@ public class MainBoard {
             if (first==null) {
                 if (!isNullVolunteer){
                     first = depot1;
+                    depot1Resource1.setVisible(true);
                     num = 5;
                     if (first==null) isNullVolunteer = true;
                 }
@@ -1091,6 +1099,7 @@ public class MainBoard {
             if (first==null) {
                 if (!isNullVolunteer){
                     first = depot2[0];
+                    depot2Resource1.setVisible(true);
                     num = 6;
                     if (first==null) isNullVolunteer = true;
                 }
@@ -1128,6 +1137,7 @@ public class MainBoard {
             if (first==null) {
                 if (!isNullVolunteer){
                     first = depot2[1];
+                    depot2Resource2.setVisible(true);
                     num = 7;
                     if (first==null) isNullVolunteer = true;
                 }
@@ -1165,6 +1175,7 @@ public class MainBoard {
             if (first==null) {
                 if (!isNullVolunteer){
                     first = depot3[0];
+                    depot3Resource1.setVisible(true);
                     num = 8;
                     if (first==null) isNullVolunteer = true;
                 }
@@ -1201,6 +1212,7 @@ public class MainBoard {
             if (first==null) {
                 if (!isNullVolunteer){
                     first = depot3[1];
+                    depot3Resource2.setVisible(true);
                     num = 9;
                     if (first==null) isNullVolunteer = true;
                 }
@@ -1237,6 +1249,7 @@ public class MainBoard {
             if (first==null) {
                 if (!isNullVolunteer){
                     first = depot3[2];
+                    depot3Resource3.setVisible(true);
                     num = 10;
                     if (first==null) isNullVolunteer = true;
                 }
@@ -1644,17 +1657,7 @@ public class MainBoard {
         clientView.playLeaderCard(id);
     }
 
-    /**
-     * utility method to find a leadercard
-     * @param id card that I want to find
-     * @return the correct card
-     */
-    private LeaderCard findLeaderCard(String id){
-        for(LeaderCard card : leaderDeck){
-            if(card.getId().equals(id)) return card;
-        }
-        return null;
-    }
+
 
     // ---------- MARKET ACTION ----------
 
@@ -1903,6 +1906,8 @@ public class MainBoard {
     }
 
     private void activateWarehouseButton() {
+        trashManage.setVisible(true);
+        trashManage.setDisable(false);
         depotOneResourceOne.setMouseTransparent(false);
         depotOneResourceOne.setDisable(false);
         depotTwoResourceOne.setDisable(false);
@@ -1922,6 +1927,21 @@ public class MainBoard {
         depotThreeResourceTwo.setVisible(true);
         depotThreeResourceThree.setVisible(true);
 
+    }
+
+    public void trashManage(){
+        if (first != null){
+            second = null;
+            int a = discardRes.size();
+            discardRes.add(a,first);
+            first = null;
+            setSecondResource();
+        }
+        else{
+            if (isNullVolunteer){
+                isNullVolunteer = false;
+            }
+        }
     }
 
 
@@ -2082,7 +2102,6 @@ public class MainBoard {
                 else {
                     depot1Resource1.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
                 }
-                //da sistemare, sono arrivato qui -> poi mi mancano i bottoni ed infine anche il done per chiudere l'azione -> ricordati anche dei depot delle leader card
                 ArrayList<Resource> temp = new ArrayList<>();
                 depot1 = second;
                 second = null;
@@ -2186,6 +2205,11 @@ public class MainBoard {
         discardRes.put(Resource.SHIELDS,shields);
         discardRes.put(Resource.SERVANTS,servants);
         discardRes.put(Resource.STONES,stones);
+        for (Resource resource: this.discardRes){
+            int a =discardRes.get(resource);
+            discardRes.put(resource,a+1);
+
+        }
 
         ware.put(0,first);
         ware.put(1,second);
@@ -2208,6 +2232,7 @@ public class MainBoard {
         newResources[2] = null;
         newResources[3] = null;
         isNullVolunteer = false;
+        this.discardRes.clear();
         clientView.sendManageResourcesReply(ware,discardRes);
 
     }
@@ -2226,6 +2251,7 @@ public class MainBoard {
         manage3.setVisible(false);
         manage2.setVisible(false);
         manage1.setVisible(false);
+
 
 
 
