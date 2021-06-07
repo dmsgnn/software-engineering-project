@@ -1007,7 +1007,7 @@ public class MainBoard {
         if(strongboxPayment.containsKey(Resource.SHIELDS)) strongboxPayment.put(Resource.SHIELDS, strongboxPayment.get(Resource.SHIELDS)+1);
         else strongboxPayment.put(Resource.SHIELDS, 1);
         int diff = clientView.getMyStrongbox().get(Resource.SHIELDS)-strongboxPayment.get(Resource.SHIELDS);
-        strongboxStonesCounter.setText(String.valueOf(diff));
+        strongboxShieldsCounter.setText(String.valueOf(diff));
         if(diff==0) {
             strongboxShields.setDisable(true);
             strongboxShields.setMouseTransparent(true);
@@ -1021,7 +1021,7 @@ public class MainBoard {
         if(strongboxPayment.containsKey(Resource.COINS)) strongboxPayment.put(Resource.COINS, strongboxPayment.get(Resource.COINS)+1);
         else strongboxPayment.put(Resource.COINS, 1);
         int diff = clientView.getMyStrongbox().get(Resource.COINS)-strongboxPayment.get(Resource.COINS);
-        strongboxStonesCounter.setText(String.valueOf(diff));
+        strongboxCoinsCounter.setText(String.valueOf(diff));
         if(diff==0) {
             strongboxCoins.setDisable(true);
             strongboxCoins.setMouseTransparent(true);
@@ -1035,7 +1035,7 @@ public class MainBoard {
         if(strongboxPayment.containsKey(Resource.SERVANTS)) strongboxPayment.put(Resource.SERVANTS, strongboxPayment.get(Resource.SERVANTS)+1);
         else strongboxPayment.put(Resource.SERVANTS, 1);
         int diff = clientView.getMyStrongbox().get(Resource.SERVANTS)-strongboxPayment.get(Resource.SERVANTS);
-        strongboxStonesCounter.setText(String.valueOf(diff));
+        strongboxServantsCounter.setText(String.valueOf(diff));
         if(diff==0) {
             strongboxServants.setDisable(true);
             strongboxServants.setMouseTransparent(true);

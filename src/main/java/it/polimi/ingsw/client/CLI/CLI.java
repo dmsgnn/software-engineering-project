@@ -11,7 +11,6 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
-import it.polimi.ingsw.model.leadercard.Requirements.ResourceRequirements;
 import it.polimi.ingsw.utility.DevCardsParserXML;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
@@ -133,11 +132,13 @@ public class CLI implements UserInterface {
     public void scoreboard(Map<String, Integer> finalScores){
         String winner = null;
         int temp=0;
+        clearScreen();
         for (String nickname : finalScores.keySet()){
             System.out.println(nickname + " score: " + finalScores.get(nickname));
             if(finalScores.get(nickname)>temp) winner = nickname;
         }
-        System.out.println(winner + " won the game");
+        System.out.println(winner + " won the game\n\n");
+        playAgain();
     }
 
     @Override
@@ -145,6 +146,20 @@ public class CLI implements UserInterface {
         if(lorenzoHasWon) System.out.println("Lorenzo il Magnifico won the game");
         else System.out.println("You won the game");
         System.out.println("Score: " + score);
+        playAgain();
+    }
+
+    private void playAgain(){
+        String input;
+        System.out.println("Do you want to play again? (type 'yes' or 'no')");
+        do {
+            input = scanner.nextLine();
+            if (input.matches("(yes)")){
+                clearScreen();
+                clientView.login();
+            }
+            else if(input.matches("(no)")) System.exit(0);
+        }while(!input.matches("(yes)|(no)"));
     }
 
 

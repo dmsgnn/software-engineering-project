@@ -28,12 +28,10 @@ public class ClientView implements Observer<ServerMessage> {
     private final String ip;
     private final int port;
     private final ClientGameBoard gameboard;
-    
-
-    private ArrayList<Actions> possibleActions = new ArrayList<>();
 
     private final Object lock = new Object();
     private boolean updated;
+    private boolean faithUpdateReceived = false;
 
     ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
 
@@ -54,9 +52,6 @@ public class ClientView implements Observer<ServerMessage> {
         gameboard = new ClientGameBoard();
     }
 
-    public ArrayList<Actions> getPossibleActions() {
-        return possibleActions;
-    }
 
     public Map<Resource, Integer> getMyStrongbox(){
         return gameboard.getOnePlayerBoard(nickname).getStrongbox();
@@ -90,25 +85,11 @@ public class ClientView implements Observer<ServerMessage> {
         return nickname;
     }
 
-    public String getIp() {
-        return ip;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    /**
-     * Called when the game begins
-     */
-    public void startGame() {
-        uiType.startGame();
-    }
 
     /**
      * called to do the login
      */
-    public void login(){ // needed?
+    public void login(){
         uiType.login();
     }
 
@@ -278,15 +259,6 @@ public class ClientView implements Observer<ServerMessage> {
         socket.sendMessage(new ActionReply(action));
     }
 
-    /*public void setPossibleActions(ArrayList<Actions> possibleActions){
-        this.possibleActions=possibleActions;
-    }
-
-    public void selectAction(){
-        Actions action = uiType.chooseAction(this.possibleActions);
-        doAction(action);
-    }*/
-
     /**
      * called to make the player do the selected action
      * @param action what the player decided to do
@@ -403,6 +375,20 @@ public class ClientView implements Observer<ServerMessage> {
     //------------------UPDATES------------------
 
     /**
+     * method to block the action update if the faith update hasn't been received yet
+     */
+    private void waitForFaithUpdate(){
+        while (!faithUpdateReceived) {
+            try {
+                lock.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        faithUpdateReceived=false;
+    }
+
+    /**
      * called to setup all playerboard with initial values
      * @param leaderCards hand of each player
      * @param resources warehouse of each player
@@ -450,7 +436,7 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
-     * called after a player reconnects to the game, the parameters contains all the informations regarding the game
+     * called after a player reconnects to the game, the parameters contains all the information regarding the game
      * @param username of this client
      * @param devCardSlots all dev cards bought by all the player
      * @param faithPositions all player's faith track position
@@ -505,8 +491,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void lorenzoUpdate(String message, int lorenzoPosition, String[][] newCardGrid){
         synchronized (lock) {
-            System.out.println(lorenzoPosition);
-            System.out.println(message);
+            waitForFaithUpdate();
             gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(lorenzoPosition);
             getGameboard().initializeCards(newCardGrid);
             uiType.updateBoard(message);
@@ -523,8 +508,6 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report){
         synchronized (lock) {
-            System.out.println(vaticanPosition);
-            System.out.println(position);
             for (String nickname : position.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
                 if (report) {
@@ -532,7 +515,7 @@ public class ClientView implements Observer<ServerMessage> {
                 }
             }
             uiType.updateBoard("");
-            updated=true;
+            faithUpdateReceived=true;
             lock.notifyAll();
         }
     }
@@ -570,6 +553,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void discardLeaderCardUpdate(String nickname, String id){
         synchronized (lock) {
+            waitForFaithUpdate();
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.removeHandCard(id);
             if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + " discarded a leader card");
@@ -609,6 +593,7 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void useProductionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
+            waitForFaithUpdate();
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.setWarehouse(warehouse);
             playerBoard.setStrongbox(strongbox);
@@ -632,6 +617,7 @@ public class ClientView implements Observer<ServerMessage> {
     public void marketActionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse,
                                    ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol){
         synchronized (lock) {
+            waitForFaithUpdate();
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.setWarehouse(warehouse);
             gameboard.updateMarket(newMarbles, newFreeMarble, pos, rowOrCol);
