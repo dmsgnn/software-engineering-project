@@ -68,8 +68,9 @@ public interface UserInterface {
      * called to show the scores in single player
      * @param score player score
      * @param lorenzoHasWon true if Lorenzo won the game, false if he lost
+     * @param nickname the nickname of the player
      */
-    void lorenzoScoreboard(int score, boolean lorenzoHasWon);
+    void lorenzoScoreboard(String nickname, int score, boolean lorenzoHasWon);
 
     /**
      * Manages a winning player

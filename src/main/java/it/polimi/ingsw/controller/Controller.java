@@ -775,7 +775,6 @@ public class Controller implements Observer<ClientMessage> {
             currentAction.put(currentActivePlayer, null);
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
         }
-
     }
 
 
@@ -942,11 +941,11 @@ public class Controller implements Observer<ClientMessage> {
                 playerPoints = player.getVictoryPoints();
                 name = player.getNickname();
                 score.put(name,playerPoints);
-                for (ServerView serverView: serverViews){
-                    serverView.finalScoreMessage(score,lorenzo);
-                }
             }
-
+            System.out.println(score);
+            for (ServerView serverView: serverViews){
+                serverView.finalScoreMessage(score,lorenzo);
+            }
         }
     }
 

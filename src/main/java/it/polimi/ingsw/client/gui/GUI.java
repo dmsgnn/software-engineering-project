@@ -33,6 +33,7 @@ public class GUI extends Application implements UserInterface {
     private static LeaderCardSelection leaderCardSelection;
     private static MainBoard playerBoard;
     private static FullView fullView;
+    private static Winner winner;
 
 
     private static Stage mainStage;
@@ -43,6 +44,7 @@ public class GUI extends Application implements UserInterface {
     private static Parent leaderCardRoot;
     private static Parent playerBoardRoot;
     private static Parent fullViewRoot;
+    private static Parent winnerRoot;
 
 
     public GUI() {
@@ -80,6 +82,7 @@ public class GUI extends Application implements UserInterface {
         LeaderCardSelection.setGui(this);
         MainBoard.setGui(this);
         FullView.setGui(this);
+        Winner.setGui(this);
 
         startGui();
         fullView.initArray();
@@ -100,10 +103,18 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void scoreboard(Map<String, Integer> finalScores){
+        Platform.runLater(()->{
+            mainStage.getScene().setRoot(winnerRoot);
+            winner.multiEnd(finalScores);
+        });
     }
 
     @Override
-    public void lorenzoScoreboard(int score, boolean lorenzoHasWon){
+    public void lorenzoScoreboard(String nickname, int score, boolean lorenzoHasWon){
+        Platform.runLater(()->{
+            mainStage.getScene().setRoot(winnerRoot);
+            winner.singleEnd(nickname, score, lorenzoHasWon);
+        });
     }
 
 
@@ -112,6 +123,7 @@ public class GUI extends Application implements UserInterface {
         Platform.runLater(()->{
             mainStage.setScene(new Scene(loginRoot, 1400,800));
             mainStage.show();
+            logger.enableLogin();
         });
     }
 
@@ -134,7 +146,6 @@ public class GUI extends Application implements UserInterface {
     @Override
     public void handleDisconnection(String nickname) {
         Platform.runLater(()-> {
-            mainStage.getScene().setRoot(playerBoardRoot);
             playerBoard.setMessage("User " + nickname + " disconnected from the game");
         });
     }
@@ -361,5 +372,10 @@ public class GUI extends Application implements UserInterface {
         FXMLLoader fullViewLoader = new FXMLLoader(getClass().getResource("/fxml/FullView.fxml"));
         fullViewRoot = fullViewLoader.load();
         fullView = fullViewLoader.getController();
+
+        // winner
+        FXMLLoader winnerLoader = new FXMLLoader(getClass().getResource("/fxml/Winner.fxml"));
+        winnerRoot = winnerLoader.load();
+        winner = winnerLoader.getController();
     }
 }

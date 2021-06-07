@@ -20,26 +20,22 @@ public class PlayerFaithTrack extends FaithTrack {
     public void increasePosition(){
         if(!endOfTrack()) {
             position += 1;
-            if(position==3)
-                increaseVictoryPoints(1);
-            if(position==6)
-                increaseVictoryPoints(2);
-            if(position==9)
-                increaseVictoryPoints(4);
-            if(position==12)
-                increaseVictoryPoints(6);
-            if(position==15)
-                increaseVictoryPoints(9);
-            if(position==18)
-                increaseVictoryPoints(12);
-            if(position==21)
-                increaseVictoryPoints(16);
-            if(position==24)
-                increaseVictoryPoints(20);
+            addPoints();
             if(vaticanReportCheck()){
                 vaticanReportActivation();
             }
         }
+    }
+
+    public void addPoints(){
+        if(position==3 || position==6)
+            increaseVictoryPoints(1);
+        if(position==9 || position==12)
+            increaseVictoryPoints(2);
+        if(position==15 || position==18)
+            increaseVictoryPoints(3);
+        if(position==21 || position==24)
+            increaseVictoryPoints(4);
     }
 
     /**

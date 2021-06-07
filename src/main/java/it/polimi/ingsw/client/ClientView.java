@@ -17,6 +17,7 @@ import it.polimi.ingsw.utility.TokensParserXML;
 
 import java.net.Socket;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.lang.System.exit;
 
@@ -514,7 +515,7 @@ public class ClientView implements Observer<ServerMessage> {
                     gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname), vaticanPosition.containsKey(nickname));
                 }
             }
-            uiType.updateBoard("");
+            //uiType.updateBoard("");
             faithUpdateReceived=true;
             lock.notifyAll();
         }
@@ -645,8 +646,13 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void finalScoresUpdate(Map<String, Integer> finalScores, boolean lorenzoWin){
         synchronized (lock){
-            if(gameboard.getNumOfPlayers()==1) uiType.lorenzoScoreboard(finalScores.get(nickname), lorenzoWin);
-            else uiType.scoreboard(finalScores);
+            System.out.println(finalScores);
+            if(gameboard.getNumOfPlayers()==1) {
+                uiType.lorenzoScoreboard(nickname, finalScores.get(nickname), lorenzoWin);
+            }
+            else {
+                uiType.scoreboard(finalScores);
+            }
         }
     }
 

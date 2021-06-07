@@ -74,7 +74,7 @@ public class FaithTrackTest {
         // checks every victory points, players number 1 and 2 gained some victory points
         assertEquals(0, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
         assertEquals(5, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
-        assertEquals(3, game.getPlayers(2).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(5, game.getPlayers(2).getPlayerBoard().getFaithTrack().getVictoryPoints());
         // checks num of vatican report, two vatican reports activated
         assertEquals(2, game.getNumVaticanReports());
 
@@ -161,12 +161,12 @@ public class FaithTrackTest {
         game.getPlayers(1).getPlayerBoard().getFaithTrack().increasePosition();
         assertEquals(3, game.getNumVaticanReports());
         assertEquals(5, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
-        assertEquals(24, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(8, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
         game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(23);
         game.getPlayers(0).getPlayerBoard().getFaithTrack().increasePosition();
         assertEquals(3, game.getNumVaticanReports());
-        assertEquals(25, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
-        assertEquals(24, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(9, game.getPlayers(0).getPlayerBoard().getFaithTrack().getVictoryPoints());
+        assertEquals(8, game.getPlayers(1).getPlayerBoard().getFaithTrack().getVictoryPoints());
     }
 
     @Test
@@ -204,36 +204,36 @@ public class FaithTrackTest {
         for (int i = 0; i < 3; i++) {
             playerFaithTrack.increasePosition();
         }
-        assertEquals(3,playerFaithTrack.getVictoryPoints());
+        assertEquals(2,playerFaithTrack.getVictoryPoints());
         for (int i = 0; i < 3; i++) {
             playerFaithTrack.increasePosition();
         }
-        assertEquals(7,playerFaithTrack.getVictoryPoints());
+        assertEquals(4,playerFaithTrack.getVictoryPoints());
         for (int i = 0; i < 3; i++) {
             playerFaithTrack.increasePosition();
         }
-        assertEquals(13,playerFaithTrack.getVictoryPoints());
+        assertEquals(6,playerFaithTrack.getVictoryPoints());
         for (int i = 0; i < 3; i++) {
             playerFaithTrack.increasePosition();
         }
-        assertEquals(22,playerFaithTrack.getVictoryPoints());
+        assertEquals(9,playerFaithTrack.getVictoryPoints());
         for (int i = 0; i < 3; i++) {
             playerFaithTrack.increasePosition();
         }
-        assertEquals(34,playerFaithTrack.getVictoryPoints());
+        assertEquals(12,playerFaithTrack.getVictoryPoints());
         for (int i = 0; i < 3; i++) {
             playerFaithTrack.increasePosition();
         }
-        assertEquals(50,playerFaithTrack.getVictoryPoints());
+        assertEquals(16,playerFaithTrack.getVictoryPoints());
         for (int i = 0; i < 3; i++) {
             playerFaithTrack.increasePosition();
         }
-        assertEquals(70,playerFaithTrack.getVictoryPoints());
+        assertEquals(20,playerFaithTrack.getVictoryPoints());
 
         PlayerFaithTrack track = new PlayerFaithTrack(game);
         for (int i = 0; i < 25; i++) {
             playerFaithTrack.increasePosition();
         }
-        assertEquals(70,playerFaithTrack.getVictoryPoints());
+        assertEquals(20,playerFaithTrack.getVictoryPoints());
     }
 }

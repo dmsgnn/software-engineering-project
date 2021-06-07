@@ -34,6 +34,7 @@ public abstract class FaithTrack {
                 if (!game.getPlayers(i).equals(game.getActivePlayer())) {
                     if (!game.getPlayers(i).getFaithTrack().endOfTrack()) {
                         game.getPlayers(i).getPlayerBoard().getFaithTrack().setPosition(game.getPlayers(i).getPlayerBoard().getFaithTrack().getPosition() + 1);
+                        game.getPlayers(i).getPlayerBoard().getFaithTrack().addPoints();
                     }
                 }
             }

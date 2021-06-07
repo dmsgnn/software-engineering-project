@@ -23,6 +23,10 @@ public class Login {
         Login.clientView = gui.getClientView();
     }
 
+    public void enableLogin(){
+        button.setDisable(false);
+    }
+
     public void userLogin(){
         String user = username.getText();
 

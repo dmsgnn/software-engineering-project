@@ -82,7 +82,6 @@ public class ServerMain {
      * called when there is a winner, stops to ping the clients of the lobby and delete it
      * @param l is the lobby of the ending game
      */
-    //used also when all the players of the game disconnects (to modify if persistence FA)
     public void endGame (Lobby l){
         l.getLoggedPlayers().forEach((k,v)-> k.stopPing());
 

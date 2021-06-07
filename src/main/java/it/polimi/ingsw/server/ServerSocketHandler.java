@@ -7,6 +7,7 @@ import it.polimi.ingsw.messages.clientToServer.LoginMessage;
 import it.polimi.ingsw.messages.clientToServer.PlayerNumberReply;
 import it.polimi.ingsw.messages.serverToClient.ActionResponse;
 import it.polimi.ingsw.messages.serverToClient.EndGameMessage;
+import it.polimi.ingsw.messages.serverToClient.FinalScoreMessage;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 
 import java.io.BufferedInputStream;
@@ -28,7 +29,6 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
         return socket;
     }
 
-    private int messageCounter;
 
     private PingManager sender;
 
@@ -55,7 +55,6 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
         this.server = server;
         this.sender = new PingManager(this);
         this.lobby = null;
-        this.messageCounter = 0;
 
         try {
             in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
@@ -109,9 +108,9 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
         try {
             out.writeObject(message);
             out.flush();
-            if(message instanceof EndGameMessage)
-                messageCounter++;
-            if(messageCounter>=lobby.getLoggedPlayers().size()) {
+            if(message instanceof FinalScoreMessage)
+                lobby.increaseMessageCounter();
+            if(lobby.getMessageCouter() >= lobby.getLoggedPlayers().size()) {
                 System.out.println("there is a winner, game will end soon\n");
                 server.endGame(lobby);
             }

@@ -18,8 +18,21 @@ public class Lobby {
     private boolean isGameStarted;
     //number of disconnected users
     private int disconnectedUsers;
+    private int messageCouter = 0;
 
     private Controller controller;
+
+    public void setMessageCouter(int messageCouter) {
+        this.messageCouter = messageCouter;
+    }
+
+    public void increaseMessageCounter(){
+        messageCouter++;
+    }
+
+    public int getMessageCouter() {
+        return messageCouter;
+    }
 
     public int getDisconnectedUsers() {
         return disconnectedUsers;
