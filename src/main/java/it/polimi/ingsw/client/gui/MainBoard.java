@@ -296,11 +296,15 @@ public class MainBoard {
     private int num= -1;
     private Resource second= null;
     private Resource depot1;
-    private Resource[] depot2 = new Resource[2];
-    private Resource[] depot3 = new Resource[3];
-    private Resource[] newResources = new Resource[4];
-    private Boolean isNullVolunteer = false;
-    private ArrayList<Resource> discardRes = new ArrayList<>();
+    private final Resource[] depot2 = new Resource[2];
+    private final Resource[] depot3 = new Resource[3];
+    private final Resource[] newResources = new Resource[4];
+    private final Resource[] leaderDepot1 = new Resource[2];
+    private final Resource[] leaderDepot2 = new Resource[2];
+    private boolean firstLeaderDepotActive = false;
+    private boolean secondLeaderDepotActive = false;
+    private boolean isNullVolunteer = false;
+    private final ArrayList<Resource> discardRes = new ArrayList<>();
 
 
     public static void setGui(GUI gui) {
@@ -1706,43 +1710,218 @@ public class MainBoard {
         column4MarketButton.setVisible(false);
 
     }
+    private int currentMarketIndex =-1;
+    private boolean currentRowOrColumn;
+    private int numberOfWhiteMarbles =-1;
+    private ArrayList<Resource> exchange = new ArrayList<>();
+    private Resource leaderRes1;
+    private Resource leaderRes2;
+
+
+    private void activeExchangeBuff(Resource leaderResource1,Resource leaderResource2){
+        currentAction = Actions.MARKETACTION;
+        if (leaderResource1!=null){
+            manage1.setDisable(false);
+            manage1.setVisible(true);
+            manageImage1.setImage(new Image("resources/punchboard/" + leaderResource1.toString().toLowerCase() + ".png"));
+        }
+        if (leaderResource2!=null){
+            manage2.setDisable(false);
+            manage2.setVisible(true);
+            manageImage2.setImage(new Image("resources/punchboard/" + leaderResource2.toString().toLowerCase() + ".png"));
+        }
+
+    }
+
+    private void disableExchangeBuff(){
+        manageImage1.setImage(null);
+        manageImage2.setImage(null);
+        manage1.setVisible(false);
+        manage2.setVisible(false);
+        manage1.setDisable(true);
+        manage2.setDisable(true);
+        currentAction =null;
+        exchange.clear();
+        leaderRes1 = null;
+        leaderRes2=null;
+    }
 
     public void row1MarketButton(){
         ArrayList<Resource> resource = new ArrayList<>();
-        clientView.marketAction(0, true,resource);
-        disableMarketButtons();
+        if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
+            Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            leaderRes1 = leaderResource1;
+            leaderRes2 = leaderResource2;
+            numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountRow(0);
+            currentMarketIndex =0;
+            currentRowOrColumn = true;
+            disableMarketButtons();
+            activeExchangeBuff(leaderResource1,leaderResource2);
+        }
+        else if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()==1){
+            Resource exchange = gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            int num = clientView.getGameboard().getWhiteCountRow(0);
+            for (int i = 0; i < num; i++) {
+                resource.add(i,exchange);
+            }
+            clientView.marketAction(0, true, resource);
+            disableMarketButtons();
+        }
+        else {
+            clientView.marketAction(0, true, resource);
+            disableMarketButtons();
+        }
     }
     public void row2MarketButton(){
         ArrayList<Resource> resource = new ArrayList<>();
-        clientView.marketAction(1, true,resource);
-        disableMarketButtons();
+        if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
+            Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountRow(1);
+            currentMarketIndex =1;
+            currentRowOrColumn = true;
+            disableMarketButtons();
+            activeExchangeBuff(leaderResource1,leaderResource2);
+        }
+        else if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()==1){
+            Resource exchange = gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            int num = clientView.getGameboard().getWhiteCountRow(1);
+            for (int i = 0; i < num; i++) {
+                resource.add(i,exchange);
+            }
+            clientView.marketAction(1, true, resource);
+            disableMarketButtons();
+        }
+        else {
+            clientView.marketAction(1, true, resource);
+            disableMarketButtons();
+        }
     }
     public void row3MarketButton(){
         ArrayList<Resource> resource = new ArrayList<>();
-        clientView.marketAction(2, true,resource);
-        disableMarketButtons();
+        if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
+            Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountRow(2);
+            currentMarketIndex =2;
+            currentRowOrColumn = true;
+            disableMarketButtons();
+            activeExchangeBuff(leaderResource1,leaderResource2);
+        }
+        else if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()==1){
+            Resource exchange = gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            int num = clientView.getGameboard().getWhiteCountRow(2);
+            for (int i = 0; i < num; i++) {
+                resource.add(i,exchange);
+            }
+            clientView.marketAction(2, true, resource);
+            disableMarketButtons();
+        }
+        else {
+            clientView.marketAction(2, true, resource);
+            disableMarketButtons();
+        }
     }
     public void column1MarketButton(){
         ArrayList<Resource> resource = new ArrayList<>();
-        clientView.marketAction(0, false,resource);
-        disableMarketButtons();
+        if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
+            Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountColumn(0);
+            currentMarketIndex =0;
+            currentRowOrColumn = false;
+            disableMarketButtons();
+            activeExchangeBuff(leaderResource1,leaderResource2);
+        }
+        else if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()==1){
+            Resource exchange = gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            int num = clientView.getGameboard().getWhiteCountColumn(0);
+            for (int i = 0; i < num; i++) {
+                resource.add(i,exchange);
+            }
+            clientView.marketAction(0, false, resource);
+            disableMarketButtons();
+        }
+        else {
+            clientView.marketAction(0, false, resource);
+            disableMarketButtons();
+        }
     }
     public void column2MarketButton() {
         ArrayList<Resource> resource = new ArrayList<>();
-        clientView.marketAction(1, false, resource);
-        disableMarketButtons();
-        marketAction.setDisable(true);
-        marketAction.setVisible(false);
+        if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
+            Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountColumn(1);
+            currentMarketIndex =1;
+            currentRowOrColumn = false;
+            disableMarketButtons();
+            activeExchangeBuff(leaderResource1,leaderResource2);
+        }
+        else if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()==1){
+            Resource exchange = gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            int num = clientView.getGameboard().getWhiteCountColumn(1);
+            for (int i = 0; i < num; i++) {
+                resource.add(i,exchange);
+            }
+            clientView.marketAction(1, false, resource);
+            disableMarketButtons();
+        }
+        else {
+            clientView.marketAction(1, false, resource);
+            disableMarketButtons();
+        }
     }
     public void column3MarketButton(){
         ArrayList<Resource> resource = new ArrayList<>();
-        clientView.marketAction(2, false,resource);
-        disableMarketButtons();
+        if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
+            Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountColumn(2);
+            currentMarketIndex =2;
+            currentRowOrColumn = false;
+            disableMarketButtons();
+            activeExchangeBuff(leaderResource1,leaderResource2);
+        }
+        else if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()==1){
+            Resource exchange = gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            int num = clientView.getGameboard().getWhiteCountColumn(2);
+            for (int i = 0; i < num; i++) {
+                resource.add(i,exchange);
+            }
+            clientView.marketAction(2, false, resource);
+            disableMarketButtons();
+        }
+        else {
+            clientView.marketAction(2, false, resource);
+            disableMarketButtons();
+        }
     }
     public void column4MarketButton(){
         ArrayList<Resource> resource = new ArrayList<>();
-        clientView.marketAction(3, false,resource);
-        disableMarketButtons();
+        if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
+            Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountColumn(3);
+            currentMarketIndex =3;
+            currentRowOrColumn = false;
+            disableMarketButtons();
+            activeExchangeBuff(leaderResource1,leaderResource2);
+        }
+        else if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()==1){
+            Resource exchange = gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
+            int num = clientView.getGameboard().getWhiteCountColumn(3);
+            for (int i = 0; i < num; i++) {
+                resource.add(i,exchange);
+            }
+            clientView.marketAction(3, false, resource);
+            disableMarketButtons();
+        }
+        else {
+            clientView.marketAction(3, false, resource);
+            disableMarketButtons();
+        }
     }
 
     public void disableActions(){
@@ -1768,6 +1947,60 @@ public class MainBoard {
         changeEndButton();
         warehouse= clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouse();
         res= resources;
+
+
+        if (warehouse.size()==4){
+            firstLeaderDepotActive =true;
+            if (warehouse.get(3).isEmpty()){
+                leaderDepot1[0]=null;
+                leaderDepot1[1]=null;
+            }
+            else{
+                if (warehouse.get(3).size()==1){
+                    leaderDepot1[0] = warehouse.get(3).get(0);
+                    leaderDepot1[1] = null;
+                }
+                else{
+                    leaderDepot1[0] = warehouse.get(3).get(0);
+                    leaderDepot1[1] = warehouse.get(3).get(1);
+                }
+            }
+        }
+
+        if (warehouse.size() == 5){
+            firstLeaderDepotActive =true;
+            secondLeaderDepotActive =true;
+            if (warehouse.get(3).isEmpty()){
+                leaderDepot1[0]=null;
+                leaderDepot1[1]=null;
+            }
+            else{
+                if (warehouse.get(3).size()==1){
+                    leaderDepot1[0] = warehouse.get(3).get(0);
+                    leaderDepot1[1] = null;
+                }
+                else{
+                    leaderDepot1[0] = warehouse.get(3).get(0);
+                    leaderDepot1[1] = warehouse.get(3).get(1);
+                }
+            }
+
+            if (warehouse.get(4).isEmpty()){
+                leaderDepot2[0]=null;
+                leaderDepot2[1]=null;
+            }
+            else{
+                if (warehouse.get(4).size()==1){
+                    leaderDepot2[0] = warehouse.get(4).get(0);
+                    leaderDepot2[1] = null;
+                }
+                else{
+                    leaderDepot2[0] = warehouse.get(4).get(0);
+                    leaderDepot2[1] = warehouse.get(4).get(1);
+                }
+            }
+
+        }
 
         if (warehouse.get(0).isEmpty()){
             depot1 = null;
@@ -1951,54 +2184,70 @@ public class MainBoard {
 
 
     public void manage1(){
-        if (first==null) {
-            if (!isNullVolunteer) {
-                first = newResources[0];
-                num = 1;
-                if (first== null) isNullVolunteer= true;
-            }
-            else{
-                second = newResources[0] ;
-                manageImage1.setImage(null);
-                newResources[0] = null;
-                isNullVolunteer = false;
+        if (currentAction==Actions.MANAGE) {
+            if (first == null) {
+                if (!isNullVolunteer) {
+                    first = newResources[0];
+                    num = 1;
+                    if (first == null) isNullVolunteer = true;
+                } else {
+                    second = newResources[0];
+                    manageImage1.setImage(null);
+                    newResources[0] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            } else {
+                second = newResources[0];
+                manageImage1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                newResources[0] = first;
+                first = null;
                 setSecondResource();
+
             }
         }
-        else {
-            second = newResources[0];
-            manageImage1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
-            newResources[0] = first;
-            first = null;
-            setSecondResource();
-
+        else{
+            exchange.add(leaderRes1);
+            numberOfWhiteMarbles--;
+            if (numberOfWhiteMarbles ==0){
+                clientView.marketAction(currentMarketIndex, currentRowOrColumn, exchange);
+                disableExchangeBuff();
+            }
         }
     }
 
 
 
     public void manage2(){
-        if (first==null) {
-            if (!isNullVolunteer) {
-                first = newResources[1];
-                num = 2;
-                if (first == null) isNullVolunteer = true;
-            }
-            else{
-                second = newResources[1] ;
-                manageImage2.setImage(null);
-                newResources[1] = null;
-                isNullVolunteer = false;
+        if (currentAction ==Actions.MANAGE) {
+            if (first == null) {
+                if (!isNullVolunteer) {
+                    first = newResources[1];
+                    num = 2;
+                    if (first == null) isNullVolunteer = true;
+                } else {
+                    second = newResources[1];
+                    manageImage2.setImage(null);
+                    newResources[1] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            } else {
+                second = newResources[1];
+                manageImage2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                newResources[1] = first;
+                first = null;
                 setSecondResource();
+
             }
         }
-        else {
-            second = newResources[1];
-            manageImage2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
-            newResources[1] = first;
-            first = null;
-            setSecondResource();
-
+        else{
+            exchange.add(leaderRes2);
+            numberOfWhiteMarbles--;
+            if (numberOfWhiteMarbles ==0){
+                clientView.marketAction(currentMarketIndex, currentRowOrColumn, exchange);
+                disableExchangeBuff();
+            }
         }
     }
     public void manage3(){

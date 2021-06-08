@@ -14,7 +14,7 @@ public class PlayersNumber {
     }
 
     @FXML
-    private Button buttoneOne;
+    private Button buttonOne;
     @FXML
     private Button buttonTwo;
     @FXML

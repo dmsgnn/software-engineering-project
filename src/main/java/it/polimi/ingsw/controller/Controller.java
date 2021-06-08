@@ -665,16 +665,16 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * pick the marbles from the market and turn them into resources
      */
-    public void marketAction(int index, boolean isRow){
+    public void marketAction(int index, boolean isRow, ArrayList<Resource>exchange){
         if (currentAction.get(currentActivePlayer)==Actions.MARKETACTION) {
             ArrayList<Marbles> marbles = new ArrayList<>();
             ArrayList<Resource> resources = new ArrayList<>();
             if (isRow) {
                 PickRow pickRow = new PickRow(index, marbles, game.getBoard().getMarketBoard());
-                doActionMarketAction(pickRow, resources,index, true);
+                doActionMarketAction(pickRow, resources,index, true,exchange);
             } else {
                 PickColumn pickColumn = new PickColumn(index, marbles, game.getBoard().getMarketBoard());
-                doActionMarketAction(pickColumn, resources,index, false);
+                doActionMarketAction(pickColumn, resources,index, false,exchange);
             }
         }
         else{
@@ -685,7 +685,7 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
-    private void doActionMarketAction(MarketAction marketAction, ArrayList<Resource> resources, int index, boolean isRow){
+    private void doActionMarketAction(MarketAction marketAction, ArrayList<Resource> resources, int index, boolean isRow,ArrayList<Resource> exchange){
         try {
             //DO ACTION
             int currentPoints = game.getActivePlayer().getFaithTrack().getPosition();
@@ -694,7 +694,7 @@ public class Controller implements Observer<ClientMessage> {
             game.doAction(marketAction);
             //TAKE THE ARRAY OF MARBLES COLORS
             for (Marbles marble : marbles) {
-                marble.drawEffect(resources, game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().getExchangeBuff());
+                marble.drawEffect(resources, exchange);
             }
             if (currentPoints != game.getActivePlayer().getFaithTrack().getPosition()){
                 currentPoints = game.getActivePlayer().getFaithTrack().getPosition();
@@ -1146,12 +1146,10 @@ public class Controller implements Observer<ClientMessage> {
         Map<String, Map<Resource,Integer>> strongbox = new HashMap<>();
         for (int i=0;i<serverViews.size();i++) {
             Player player = game.getPlayers(i);
-            game.setActivePlayer(player);
-            Map<Resource,Integer> map = game.getActivePlayer().getPlayerBoard().getStrongbox().getResources();
-            strongbox.put(game.getActivePlayer().getNickname(), map);
+            Map<Resource,Integer> map = player.getPlayerBoard().getStrongbox().getResources();
+            strongbox.put(player.getNickname(), map);
         }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
+
         return strongbox;
     }
 

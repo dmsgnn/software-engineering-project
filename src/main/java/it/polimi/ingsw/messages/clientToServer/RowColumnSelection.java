@@ -20,7 +20,7 @@ public class RowColumnSelection implements ClientMessage {
 
     @Override
     public void handleMessage(Controller controller) {
-        controller.marketAction(index,rowOrCol);
+        controller.marketAction(index,rowOrCol, exchangeBuffResources);
     }
 
     @Override
