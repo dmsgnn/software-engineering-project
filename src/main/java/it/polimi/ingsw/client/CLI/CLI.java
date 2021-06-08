@@ -471,12 +471,13 @@ public class CLI implements UserInterface {
         if(input.equals("col")) whiteMarblesNum = gameboard.getWhiteCountColumn(value);
         else whiteMarblesNum = gameboard.getWhiteCountRow(value);
 
+
         if(activePlayerboard.getExchangeBuffsNum() > 1){
             System.out.println("Select what resources you want for the white marbles: ");
-            while(whiteMarblesRes.size() < whiteMarblesNum){
+            while(whiteMarblesNum>0){
                 System.out.println("Choose resources " + whiteMarblesNum + " times from: ");
                 for(Resource rss : activePlayerboard.getExchangeBuff())
-                    System.out.print(rss);
+                    System.out.print(rss + " ");
                 input = scanner.nextLine().toUpperCase();
                 try {
                     Resource resource = Resource.valueOf(input);
@@ -496,6 +497,9 @@ public class CLI implements UserInterface {
                 whiteMarblesRes.add(rss);
             }
         }
+
+        System.out.println(activePlayerboard.getExchangeBuff());
+        System.out.println(activePlayerboard.getExchangeBuffsNum());
 
 
         clientView.marketAction(value, rowOrCol, whiteMarblesRes);
@@ -598,6 +602,7 @@ public class CLI implements UserInterface {
             }while (!yesOrNo.matches("(yes)|(no)"));
         }
 
+
         int picked = 0;
         yesOrNo="no";
         do{
@@ -627,6 +632,8 @@ public class CLI implements UserInterface {
         warehouse = warehousePayment();
         leaderDepot = leaderdepotPayment();
         strongbox = strongboxPayment();
+
+        System.out.println(active.getProductionBuff());
 
         clientView.useProduction(devCardSlots, leaderCardSlots, leaderGain, boardProduction, warehouse, leaderDepot, strongbox);
     }
@@ -695,22 +702,23 @@ public class CLI implements UserInterface {
         boolean done = false;
         ArrayList<String> hand = gameboard.getOnePlayerBoard(clientView.getNickname()).getHand();
 
-        do {
-            System.out.print("Choose the number of the card that you want to play: ");
-            input = scanner.nextLine();
-            try{
-                cardSlot = Integer.parseInt(input);
-                if(cardSlot < 1 || cardSlot > hand.size()) System.out.println("Wrong level");
-                else{
-                    cardSlot = cardSlot -1;
-                    done=true;
+        if(gameboard.getOnePlayerBoard(clientView.getNickname()).getHandSize()==1) clientView.playLeaderCard(hand.get(0));
+        else {
+            do {
+                System.out.print("Choose the number of the card that you want to play: ");
+                input = scanner.nextLine();
+                try {
+                    cardSlot = Integer.parseInt(input);
+                    if (cardSlot < 1 || cardSlot > hand.size()) System.out.println("Wrong number");
+                    else {
+                        cardSlot = cardSlot - 1;
+                        done = true;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Not a number!!");
                 }
-            } catch (NumberFormatException e){
-                System.out.println("Not a number!!");
-            }
-        } while(!done);
-
-
+            } while (!done);
+        }
 
         clientView.playLeaderCard(hand.get(cardSlot));
     }
@@ -814,7 +822,7 @@ public class CLI implements UserInterface {
             if(i > 2){
                 depotCont=i-2;
                 done = false;
-                System.out.print("Choose your new leaderdepot" + depotCont + " resources amount: ");
+                System.out.print("Choose your new leaderdepot" + depotCont + " " + active.getWarehouseResource(i) + " amount: ");
                 do{
                     try {
                         input = scanner.nextLine();
@@ -826,7 +834,7 @@ public class CLI implements UserInterface {
                     }
                 }while (!done);
                 ArrayList<Resource> temp = new ArrayList<>();
-                for(int j = 0; j<value; j++) temp.add(active.getWarehouseResource(i));
+                for(int j = 0; j<value; j++) temp.add(active.getWarehouseResource(j));
                 newWarehouse.put(i, temp);
             }
         }

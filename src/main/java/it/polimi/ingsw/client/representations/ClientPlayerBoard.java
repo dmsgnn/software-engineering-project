@@ -26,7 +26,8 @@ public class ClientPlayerBoard {
     private final ArrayList<Resource> exchangeBuff = new ArrayList<>();
     private final ArrayList<Resource> discountBuff = new ArrayList<>();
     private final Map<String, Resource> productionBuff = new HashMap<>();
-    private final Map<String, Resource> depotBuff = new HashMap<>();
+    private final Map<Integer, Resource> depotBuff = new HashMap<>();
+    private final Map<Integer, String> depotBuffCard = new HashMap<>();
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;
@@ -39,8 +40,11 @@ public class ClientPlayerBoard {
         }
     }
 
-    public Map<String, Resource> getDepotBuff() {
+    public Map<Integer, Resource> getDepotBuffRes() {
         return depotBuff;
+    }
+    public Map<Integer, String> getDepotBuffCard(){
+        return depotBuffCard;
     }
 
     public boolean isDepotEmpty(int depot){
@@ -49,7 +53,8 @@ public class ClientPlayerBoard {
 
     public Resource getWarehouseResource(int depot){
         if(warehouse.containsKey(depot)){
-            return warehouse.get(depot).get(0);
+            if(depot<3) return warehouse.get(depot).get(0);
+            else return depotBuff.get(depot);
         }
         else return null;
     }
@@ -178,22 +183,6 @@ public class ClientPlayerBoard {
         this.strongbox = strongbox;
     }
 
-    public void updateWarehouse(Map<Integer, ArrayList<Resource>> warehouse) {
-        for(Map.Entry<Integer, ArrayList<Resource>> entry : warehouse.entrySet()){
-            Integer key = entry.getKey();
-            ArrayList<Resource> value = entry.getValue();
-            this.warehouse.put(key, value);
-        }
-    }
-
-    public void updateStrongbox(Map<Resource, Integer> strongbox) {
-        for(Map.Entry<Resource, Integer> entry : strongbox.entrySet()){
-            Resource key = entry.getKey();
-            Integer value = entry.getValue();
-            this.strongbox.put(key, value);
-        }
-    }
-
     public void setDevCardSlot(ArrayList<String> devCardSlot) {
        for(int i = 0; i< devCardSlot.size(); i++){
            this.devCardSlot.put(i, devCardSlot.get(i));
@@ -217,6 +206,7 @@ public class ClientPlayerBoard {
     }
 
     public void addDepotBuff(Resource res){
-        depotBuff.put(playedCards.get(playedCards.size()-1), res);
+        depotBuffCard.put(warehouse.size(), playedCards.get(playedCards.size()-1));
+        depotBuff.put(warehouse.size(), res);
     }
 }

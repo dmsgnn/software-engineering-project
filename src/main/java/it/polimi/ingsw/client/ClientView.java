@@ -462,9 +462,6 @@ public class ClientView implements Observer<ServerMessage> {
             for (String nickname : faithPositions.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithPositions.get(nickname));
             }
-            for (String nickname : leaderCardsPlayed.keySet()) {
-                gameboard.getOnePlayerBoard(nickname).setPlayedCards(leaderCardsPlayed.get(nickname));
-            }
             gameboard.getOnePlayerBoard(nickname).setHand(leaderCards);
             for (String nickname : strongbox.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setStrongbox(strongbox.get(nickname));
@@ -477,6 +474,15 @@ public class ClientView implements Observer<ServerMessage> {
             }
             for (String nickname : playersConnected.keySet()){
                 gameboard.getOnePlayerBoard(nickname).setConnected(playersConnected.get(nickname));
+            }
+            for (String nickname : leaderCardsPlayed.keySet()) {
+                if(nickname.equals(this.nickname)){
+                    for(int i=0; i<leaderCardsPlayed.get(this.nickname).size(); i++){
+                        String id = leaderCardsPlayed.get(nickname).get(i);
+                        gameboard.getOnePlayerBoard(this.nickname).addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
+                    }
+                }
+                else gameboard.getOnePlayerBoard(nickname).setPlayedCards(leaderCardsPlayed.get(nickname));
             }
             uiType.updateBoard("Reconnected");
             uiType.endTurn();
@@ -574,10 +580,10 @@ public class ClientView implements Observer<ServerMessage> {
     public void playLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
-            playerBoard.removeHandCard(id);
-            playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
             playerBoard.setWarehouse(warehouse);
             playerBoard.setStrongbox(strongbox);
+            playerBoard.removeHandCard(id);
+            playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
             if(!nickname.equals(this.nickname))
                 uiType.updateBoard(nickname + " played a leader card");
             else uiType.updateBoard("");
