@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ManageResources extends Actions {
+public class  ManageResources extends Actions {
 
     private final ArrayList<ArrayList<Resource>> resources;
     private final Map<Resource,Integer> newResources;
@@ -38,7 +38,9 @@ public class ManageResources extends Actions {
     public void doAction(PlayerBoard playerBoard) throws InvalidActionException {
         if(!validAction(playerBoard)) throw new InvalidActionException();
         else{
+
             manageResources(playerBoard);
+
         }
     }
 
@@ -51,8 +53,8 @@ public class ManageResources extends Actions {
     public boolean validAction(PlayerBoard playerBoard) {
         if (!initial) {
             Map<Resource, Integer> totalRes = new HashMap<>();
-            Map<Resource,Integer> stored;
-            stored = playerBoard.getWarehouse().storedResources();
+            Map<Resource,Integer> stored ;
+            stored = new HashMap<>(playerBoard.getWarehouse().storedResources());
             for (Resource resource : Resource.values()) {
                 totalRes.put(resource, stored.get(resource) + newResources.get(resource));
             }
@@ -63,14 +65,18 @@ public class ManageResources extends Actions {
 
                 //no cheat
                 if (resources.get(i).size()!=0){
-                    if ((resources.get(i).size() + discResources.get(resources.get(i).get(0))) != totalRes.get(resources.get(i).get(0)))
-                        return false;
+                    if (resources.size()==3) {
+                        if ((resources.get(i).size() + discResources.get(resources.get(i).get(0))) != totalRes.get(resources.get(i).get(0)))
+                            return false;
+                    }
                 }
 
                 //if the depots have the same resources
                 if (i != 0) {
                     if (resources.get(0).size() != 0 && resources.get(i).size() != 0) {
-                        if (resources.get(0).get(0).equals(resources.get(i).get(0))) return false;
+                        if (i<3) {
+                            if (resources.get(0).get(0).equals(resources.get(i).get(0))) return false;
+                        }
                     }
                 }
 
@@ -82,6 +88,19 @@ public class ManageResources extends Actions {
                     if (!(resources.get(i).get(0).equals(resources.get(i).get(j)))) return false;
                 }
 
+            }
+            if (resources.size()==4){
+                if (!resources.get(3).isEmpty()){
+                    if (!playerBoard.getWarehouse().getDepots().get(3).correctResource(resources.get(3).get(0))) return false;
+                }
+            }
+            if (resources.size()==5){
+                if (!resources.get(3).isEmpty()){
+                    if (!playerBoard.getWarehouse().getDepots().get(3).correctResource(resources.get(3).get(0))) return false;
+                }
+                if (!resources.get(4).isEmpty()){
+                    if (!playerBoard.getWarehouse().getDepots().get(4).correctResource(resources.get(4).get(0))) return false;
+                }
             }
 
         }

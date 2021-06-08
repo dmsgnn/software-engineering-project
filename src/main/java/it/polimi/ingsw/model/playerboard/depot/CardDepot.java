@@ -3,8 +3,11 @@ package it.polimi.ingsw.model.playerboard.depot;
 import it.polimi.ingsw.model.Resource;
 
 public class CardDepot extends BaseDepot {
+    private final Resource resource1;
     public CardDepot(int capacity, int occupied, Resource resource) {
         super(capacity, occupied, resource);
+        this.resource1 = resource;
+
     }
 
 
@@ -16,7 +19,7 @@ public class CardDepot extends BaseDepot {
      */
     public boolean addResources(Resource newResource) {
         //case capacity=0
-        if (getResource() == newResource) {
+        if (correctResource(newResource)) {
             //isFull or not
             if (!isFull()) {
                 setOccupied(getOccupied() + 1);
@@ -24,5 +27,15 @@ public class CardDepot extends BaseDepot {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean correctResource(Resource resource12){
+        return  (resource1.equals(resource12));
+    }
+
+    @Override
+    public void removeResource(int amount) {
+        setOccupied(getOccupied()-amount);
     }
 }

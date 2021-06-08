@@ -81,4 +81,7 @@ public class BaseDepot {
     public void setResource(Resource resource) {
         this.resource = resource;
     }
+    public boolean correctResource(Resource resource1){
+        return  true;
+    }
 }

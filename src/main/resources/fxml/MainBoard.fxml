@@ -314,7 +314,7 @@
       <ImageView fx:id="boardRes1" fitHeight="25.0" fitWidth="25.0" layoutX="834.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="boardRes2" fitHeight="25.0" fitWidth="25.0" layoutX="834.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="boardRes3" fitHeight="25.0" fitWidth="25.0" layoutX="879.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="PlayLeaderActive1" alignment="CENTER" layoutX="1220.0" layoutY="18.0" prefHeight="15.0" prefWidth="50.0" style="-fx-background-color: transparent;" textFill="WHITE">
+      <Label fx:id="PlayLeaderActive2" alignment="CENTER" layoutX="1220.0" layoutY="18.0" prefHeight="15.0" prefWidth="50.0" style="-fx-background-color: transparent;" textFill="WHITE">
          <font>
             <Font name="SansSerif Bold" size="9.0" />
          </font>
@@ -331,6 +331,26 @@
                   <Image url="@../graphics/trash.png" />
                </image>
             </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="depotOneLeader1" layoutX="1085.0" layoutY="187.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotOneLeader1Action" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot1Leader1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="depotTwoLeader1" layoutX="1130.0" layoutY="187.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotTwoLeader1Action" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot2Leader1" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="depotOneLeader2" layoutX="1225.0" layoutY="187.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotOneLeader2Action" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot1Leader2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="depotTwoLeader2" layoutX="1268.0" layoutY="187.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotTwoLeader2Action" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="depot2Leader2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
    </children>

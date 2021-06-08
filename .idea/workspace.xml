@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="fix endgame method">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="update exhcange leaderCard buff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/PlayersNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/PlayersNumber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/RowColumnSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/clientToServer/RowColumnSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/marketAction/ManageResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/marketAction/ManageResources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Warehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/depot/BaseDepot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/depot/BaseDepot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/depot/CardDepot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/depot/CardDepot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainBoard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainBoard.fxml" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -362,13 +364,6 @@
       <workItem from="1623144877876" duration="2620000" />
       <workItem from="1623152068543" duration="2173000" />
     </task>
-    <task id="LOCAL-00009" summary="Player fix">
-      <created>1620030513013</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1620030513013</updated>
-    </task>
     <task id="LOCAL-00010" summary="Message and Client updates">
       <created>1620292391286</created>
       <option name="number" value="00010" />
@@ -705,7 +700,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623153127159</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="update exhcange leaderCard buff">
+      <created>1623163270402</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1623163270409</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -725,7 +727,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="UseProduction additional condition, Client update and Error management" />
     <MESSAGE value="faithmessage update&#10;&#10;upload all images to use&#10;&#10;modified the controller and reconnecting" />
     <MESSAGE value="Multiple game start fix" />
     <MESSAGE value="client code cleanup" />
@@ -750,13 +751,16 @@
     <MESSAGE value="fix gui" />
     <MESSAGE value="Update endGame message" />
     <MESSAGE value="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update" />
+    <MESSAGE value="update exhcange leaderCard buff" />
+    <option name="LAST_COMMIT_MESSAGE" value="update exhcange leaderCard buff" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="it.polimi.ingsw.gameboard.LeaderDeck" memberName="deck" />
+        <PinnedItemInfo parentTag="it.polimi.ingsw.model.Game" memberName="activePlayer" />
         <PinnedItemInfo parentTag="it.polimi.ingsw.actions.BuyDevelopmentCard" memberName="totalPayment" />
+        <PinnedItemInfo parentTag="it.polimi.ingsw.controller.Controller" memberName="game" />
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>

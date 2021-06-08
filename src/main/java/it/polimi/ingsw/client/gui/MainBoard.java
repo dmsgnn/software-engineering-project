@@ -68,6 +68,22 @@ public class MainBoard {
     private ImageView manageImage4;
     @FXML
     private ImageView trashManageImage;
+    @FXML
+    private Button depotTwoLeader2;
+    @FXML
+    private Button depotOneLeader2;
+    @FXML
+    private Button depotOneLeader1;
+    @FXML
+    private Button depotTwoLeader1;
+    @FXML
+    private ImageView depot2Leader2;
+    @FXML
+    private ImageView depot2Leader1;
+    @FXML
+    private ImageView depot1Leader2;
+    @FXML
+    private ImageView depot1Leader1;
 
     //marbles
     @FXML
@@ -305,6 +321,12 @@ public class MainBoard {
     private boolean secondLeaderDepotActive = false;
     private boolean isNullVolunteer = false;
     private final ArrayList<Resource> discardRes = new ArrayList<>();
+    private int currentMarketIndex =-1;
+    private boolean currentRowOrColumn;
+    private int numberOfWhiteMarbles =-1;
+    private final ArrayList<Resource> exchange = new ArrayList<>();
+    private Resource leaderRes1;
+    private Resource leaderRes2;
 
 
     public static void setGui(GUI gui) {
@@ -551,6 +573,14 @@ public class MainBoard {
         depot3Resource1.setVisible(true);
         depot3Resource2.setVisible(true);
         depot3Resource3.setVisible(true);
+        if (firstLeaderDepotActive) {
+            depot1Leader1.setVisible(true);
+            depot2Leader1.setVisible(true);
+        }
+        if (secondLeaderDepotActive){
+            depot1Leader2.setVisible(true);
+            depot2Leader2.setVisible(true);
+        }
         ClientPlayerBoard board = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname());
         if(board.isDepotEmpty(0))
             depot1Resource1.setVisible(false);
@@ -590,6 +620,38 @@ public class MainBoard {
                 depot3Resource1.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
                 depot3Resource2.setVisible(false);
                 depot3Resource3.setVisible(false);
+            }
+            if (firstLeaderDepotActive){
+                if (board.isDepotEmpty(3)){
+                    depot1Leader1.setVisible(false);
+                    depot2Leader1.setVisible(false);
+                }
+                else{
+                    if (board.getWarehouse().get(3).size() == 2) {
+                        depot1Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                        depot2Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                    }
+                    else{
+                        depot1Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                        depot2Leader1.setVisible(false);
+                    }
+                }
+            }
+            if (secondLeaderDepotActive){
+                if (board.isDepotEmpty(4)){
+                    depot1Leader2.setVisible(false);
+                    depot2Leader2.setVisible(false);
+                }
+                else{
+                    if (board.getWarehouse().get(4).size() == 2) {
+                        depot1Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                        depot2Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                    }
+                    else{
+                        depot1Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                        depot2Leader2.setVisible(false);
+                    }
+                }
             }
         }
         //disable all
@@ -752,6 +814,14 @@ public class MainBoard {
         disableMarketButtons();
         trashManage.setVisible(false);
         trashManage.setDisable(true);
+        depotOneLeader2.setDisable(false);
+        depotOneLeader1.setDisable(false);
+        depotTwoLeader2.setDisable(false);
+        depotTwoLeader1.setDisable(false);
+        depotOneLeader1.setMouseTransparent(true);
+        depotOneLeader2.setMouseTransparent(true);
+        depotTwoLeader1.setMouseTransparent(true);
+        depotTwoLeader2.setMouseTransparent(true);
     }
 
     /**
@@ -1710,12 +1780,6 @@ public class MainBoard {
         column4MarketButton.setVisible(false);
 
     }
-    private int currentMarketIndex =-1;
-    private boolean currentRowOrColumn;
-    private int numberOfWhiteMarbles =-1;
-    private ArrayList<Resource> exchange = new ArrayList<>();
-    private Resource leaderRes1;
-    private Resource leaderRes2;
 
 
     private void activeExchangeBuff(Resource leaderResource1,Resource leaderResource2){
@@ -2128,7 +2192,6 @@ public class MainBoard {
             }
         }
 
-
         activateWarehouseButton();
         endTurn.setVisible(true);
         endTurn.setDisable(false);
@@ -2159,8 +2222,127 @@ public class MainBoard {
         depotThreeResourceOne.setVisible(true);
         depotThreeResourceTwo.setVisible(true);
         depotThreeResourceThree.setVisible(true);
+        if (firstLeaderDepotActive){
+            depotOneLeader1.setDisable(false);
+            depotTwoLeader1.setDisable(false);
+            depot2Leader1.setVisible(true);
+            depotTwoLeader1.setMouseTransparent(false);
+            depot1Leader1.setVisible(true);
+            depotOneLeader1.setMouseTransparent(false);
+        }
+        if (secondLeaderDepotActive){
+            depot2Leader2.setVisible(true);
+            depot1Leader2.setVisible(true);
+            depotOneLeader2.setDisable(false);
+            depotOneLeader2.setMouseTransparent(false);
+            depotTwoLeader2.setDisable(false);
+            depotTwoLeader2.setMouseTransparent(false);
+        }
 
     }
+
+    public void depotOneLeader1Action(){
+        if (currentAction==Actions.MANAGE) {
+            if (first == null) {
+                if (!isNullVolunteer) {
+                    first = leaderDepot1[0];
+                    depot1Leader1.setVisible(true);
+                    num = 11;
+                    if (first == null) isNullVolunteer = true;
+                } else {
+                    second = leaderDepot1[0];
+                    depot1Leader1.setImage(null);
+                    leaderDepot1[0] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            } else {
+                second = leaderDepot1[0];
+                depot1Leader1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot1Leader1.setVisible(true);
+                leaderDepot1[0] = first;
+                first = null;
+                setSecondResource();
+            }
+        }
+
+    }
+    public void depotTwoLeader1Action(){
+        if (currentAction==Actions.MANAGE) {
+            if (first == null) {
+                if (!isNullVolunteer) {
+                    first = leaderDepot1[1];
+                    depot2Leader1.setVisible(true);
+                    num = 12;
+                    if (first == null) isNullVolunteer = true;
+                } else {
+                    second = leaderDepot1[1];
+                    depot2Leader1.setImage(null);
+                    leaderDepot1[1] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            } else {
+                second = leaderDepot1[1];
+                depot2Leader1.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot2Leader1.setVisible(true);
+                leaderDepot1[1] = first;
+                first = null;
+                setSecondResource();
+            }
+        }
+    }
+    public void depotOneLeader2Action(){
+        if (currentAction==Actions.MANAGE) {
+            if (first == null) {
+                if (!isNullVolunteer) {
+                    first = leaderDepot2[0];
+                    depot1Leader2.setVisible(true);
+                    num = 13;
+                    if (first == null) isNullVolunteer = true;
+                } else {
+                    second = leaderDepot2[0];
+                    depot1Leader2.setImage(null);
+                    leaderDepot2[0] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            } else {
+                second = leaderDepot2[0];
+                depot1Leader2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot1Leader2.setVisible(true);
+                leaderDepot2[0] = first;
+                first = null;
+                setSecondResource();
+            }
+        }
+    }
+    public void depotTwoLeader2Action(){
+        if (currentAction==Actions.MANAGE) {
+            if (first == null) {
+                if (!isNullVolunteer) {
+                    first = leaderDepot2[1];
+                    depot2Leader2.setVisible(true);
+                    num = 14;
+                    if (first == null) isNullVolunteer = true;
+                } else {
+                    second = leaderDepot2[1];
+                    depot2Leader2.setImage(null);
+                    leaderDepot2[1] = null;
+                    isNullVolunteer = false;
+                    setSecondResource();
+                }
+            } else {
+                second = leaderDepot2[1];
+                depot2Leader2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                depot2Leader2.setVisible(true);
+                leaderDepot2[1] = first;
+                first = null;
+                setSecondResource();
+            }
+        }
+    }
+
 
     public void trashManage(){
         if (first != null){
@@ -2411,6 +2593,54 @@ public class MainBoard {
                 second = null;
                 break;
             }
+            case 11:{
+                if (second==null){
+                    depot1Leader1.setImage(null);
+                }
+                else {
+                    depot1Leader1.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                leaderDepot1[0] = second;
+                second = null;
+                break;
+
+            }
+            case 12:{
+                if (second==null){
+                    depot2Leader1.setImage(null);
+                }
+                else {
+                    depot2Leader1.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                leaderDepot1[1] = second;
+                second = null;
+                break;
+
+            }
+            case 13:{
+                if (second==null){
+                    depot1Leader2.setImage(null);
+                }
+                else {
+                    depot1Leader2.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                leaderDepot2[0] = second;
+                second = null;
+                break;
+
+            }
+            case 14:{
+                if (second==null){
+                    depot2Leader2.setImage(null);
+                }
+                else {
+                    depot2Leader2.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
+                }
+                leaderDepot2[1] = second;
+                second = null;
+                break;
+
+            }
         }
     }
 
@@ -2418,6 +2648,8 @@ public class MainBoard {
         ArrayList<Resource> first = new ArrayList<>();
         ArrayList<Resource> second = new ArrayList<>();
         ArrayList<Resource> third = new ArrayList<>();
+        ArrayList<Resource> leader1 = new ArrayList<>();
+        ArrayList<Resource> leader2 = new ArrayList<>();
         Map<Resource,Integer> discardRes = new HashMap<>();
         int coins=0;
         int stones=0;
@@ -2459,6 +2691,28 @@ public class MainBoard {
             discardRes.put(resource,a+1);
 
         }
+        if (firstLeaderDepotActive){
+            counter=0;
+            for (Resource resource: leaderDepot1){
+                if (resource != null) {
+                    leader1.add(counter, resource);
+                    counter++;
+                }
+            }
+            ware.put(3,leader1);
+        }
+
+        if (secondLeaderDepotActive){
+            counter=0;
+            for (Resource resource: leaderDepot2){
+                if (resource != null) {
+                    leader2.add(counter, resource);
+                    counter++;
+                }
+            }
+            ware.put(4,leader2);
+        }
+
 
         ware.put(0,first);
         ware.put(1,second);
@@ -2480,6 +2734,10 @@ public class MainBoard {
         newResources[1] = null;
         newResources[2] = null;
         newResources[3] = null;
+        leaderDepot1[0] = null;
+        leaderDepot1[1] = null;
+        leaderDepot2[0] = null;
+        leaderDepot2[1] = null;
         isNullVolunteer = false;
         this.discardRes.clear();
         clientView.sendManageResourcesReply(ware,discardRes);
@@ -2500,6 +2758,18 @@ public class MainBoard {
         manage3.setVisible(false);
         manage2.setVisible(false);
         manage1.setVisible(false);
+        if (firstLeaderDepotActive){
+            depot2Leader1.setVisible(false);
+            depot2Leader1.setMouseTransparent(true);
+            depot1Leader1.setVisible(false);
+            depot1Leader1.setMouseTransparent(true);
+        }
+        if (secondLeaderDepotActive){
+            depot1Leader2.setVisible(false);
+            depot2Leader2.setVisible(false);
+            depotOneLeader2.setMouseTransparent(true);
+            depotTwoLeader2.setMouseTransparent(true);
+        }
 
 
 
