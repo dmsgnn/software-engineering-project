@@ -206,7 +206,7 @@ public class ClientPlayerBoard {
     }
 
     public void addDepotBuff(Resource res){
-        depotBuffCard.put(warehouse.size(), playedCards.get(playedCards.size()-1));
-        depotBuff.put(warehouse.size(), res);
+        depotBuffCard.put(warehouse.size()-1, playedCards.get(playedCards.size()-1));
+        depotBuff.put(warehouse.size()-1, res);
     }
 }

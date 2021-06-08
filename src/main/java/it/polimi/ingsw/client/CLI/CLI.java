@@ -498,10 +498,6 @@ public class CLI implements UserInterface {
             }
         }
 
-        System.out.println(activePlayerboard.getExchangeBuff());
-        System.out.println(activePlayerboard.getExchangeBuffsNum());
-
-
         clientView.marketAction(value, rowOrCol, whiteMarblesRes);
     }
 
@@ -633,7 +629,6 @@ public class CLI implements UserInterface {
         leaderDepot = leaderdepotPayment();
         strongbox = strongboxPayment();
 
-        System.out.println(active.getProductionBuff());
 
         clientView.useProduction(devCardSlots, leaderCardSlots, leaderGain, boardProduction, warehouse, leaderDepot, strongbox);
     }
@@ -796,7 +791,7 @@ public class CLI implements UserInterface {
                         resource = Resource.valueOf(input);
                         done = true;
                     } catch (IllegalArgumentException e) {
-                        System.err.println( "No such resource, please try again");
+                        System.out.println( "No such resource, please try again");
                     }
                 }while (!done);
             }
@@ -822,7 +817,7 @@ public class CLI implements UserInterface {
             if(i > 2){
                 depotCont=i-2;
                 done = false;
-                System.out.print("Choose your new leaderdepot" + depotCont + " " + active.getWarehouseResource(i) + " amount: ");
+                System.out.print("Choose your new leaderdepot " + depotCont + " " + active.getWarehouseResource(i) + " amount: ");
                 do{
                     try {
                         input = scanner.nextLine();
@@ -834,7 +829,7 @@ public class CLI implements UserInterface {
                     }
                 }while (!done);
                 ArrayList<Resource> temp = new ArrayList<>();
-                for(int j = 0; j<value; j++) temp.add(active.getWarehouseResource(j));
+                for(int j = 0; j<value; j++) temp.add(active.getWarehouseResource(i));
                 newWarehouse.put(i, temp);
             }
         }
@@ -1156,13 +1151,13 @@ public class CLI implements UserInterface {
         playerboard.append("   ");
         if(board.getWarehouse().size()==4){
             if(board.getWarehouse().get(3).isEmpty()){
-                playerboard.append("| | |  ");
+                playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("| | |  ").append(ColorCLI.RESET);
             }
             else if(board.getWarehouse().get(3).size() == 1){
-                playerboard.append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("■").append(ColorCLI.RESET).append("|").append(" |  ");
+                playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("|").append("■").append("|").append(" |  ").append(ColorCLI.RESET);
             }
             else{
-                playerboard.append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("■").append(ColorCLI.RESET).append("|  ");
+                playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("|").append("■").append("|").append("■").append("|  ").append(ColorCLI.RESET);
             }
         }
         else{
@@ -1202,13 +1197,13 @@ public class CLI implements UserInterface {
         playerboard.append("  ");
         if(board.getWarehouse().size()==5){
             if(board.getWarehouse().get(4).isEmpty()){
-                playerboard.append("| | |  ");
+                playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(4))).append("| | |  ").append(ColorCLI.RESET);
             }
             else if(board.getWarehouse().get(4).size() == 1){
-                playerboard.append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(4))).append("■").append(ColorCLI.RESET).append("|").append(" |  ");
+                playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(4))).append("|").append("■").append("|").append(" |  ").append(ColorCLI.RESET);
             }
             else{
-                playerboard.append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(4))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(4))).append("■").append(ColorCLI.RESET).append("|  ");
+                playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(4))).append("|").append("■").append("|").append("■").append("|  ").append(ColorCLI.RESET);
             }
         }
         else {

@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Gui print fix, ClientView synchronization update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -129,6 +127,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -349,14 +360,7 @@
       <workItem from="1622892900065" duration="1096000" />
       <workItem from="1622907663929" duration="1376000" />
       <workItem from="1623144877876" duration="2620000" />
-      <workItem from="1623152068543" duration="930000" />
-    </task>
-    <task id="LOCAL-00008" summary="Game constructor update">
-      <created>1619874461101</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1619874461101</updated>
+      <workItem from="1623152068543" duration="2173000" />
     </task>
     <task id="LOCAL-00009" summary="Player fix">
       <created>1620030513013</created>
@@ -694,7 +698,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622905885253</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update">
+      <created>1623153127159</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1623153127159</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -714,7 +725,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="update FaithMessage" />
     <MESSAGE value="UseProduction additional condition, Client update and Error management" />
     <MESSAGE value="faithmessage update&#10;&#10;upload all images to use&#10;&#10;modified the controller and reconnecting" />
     <MESSAGE value="Multiple game start fix" />
@@ -739,7 +749,8 @@
     <MESSAGE value="CLI endTurn fix" />
     <MESSAGE value="fix gui" />
     <MESSAGE value="Update endGame message" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update endGame message" />
+    <MESSAGE value="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
