@@ -183,16 +183,9 @@ public class CLI implements UserInterface {
     }
 
     @Override
-    public void failedLogin(ArrayList<String> usedNames) {
-        boolean done = false;
-        String newNick;
+    public void failedLogin() {
         System.out.println("Nickname already taken");
-        //do{
         this.login();
-            //if(usedNames.contains(newNick)) System.out.println("Nickname already taken");
-            //else done = true;
-        //}while(!done);
-
     }
 
     @Override

@@ -773,9 +773,11 @@ public class MainBoard {
         }
 
 
-        //
         // board production button
         disableButton(boardProduction, true);
+        boardRes1.setDisable(true);
+        boardRes2.setDisable(true);
+        boardRes2.setDisable(true);
         // dev slots buttons
         devSlot1.setMouseTransparent(true);
         devSlot2.setMouseTransparent(true);
@@ -1008,6 +1010,9 @@ public class MainBoard {
         buttonStatus();
         setMessage("Select 2 resources that you want to pay and 1 resource that you want to gain");
         boardProduction.setDisable(true);
+        boardRes1.setDisable(false);
+        boardRes2.setDisable(false);
+        boardRes2.setDisable(false);
         boardOrLeaderChoice=true;
         disableButton(coinChoice, false);
         coinChoice.setStyle("-fx-background-color: #C8C5C5; ");

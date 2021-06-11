@@ -13,18 +13,16 @@ public class PlayLeaderCardUpdate implements ServerMessage {
     private String nickname;
     private String id;
     private Map<Integer, ArrayList<Resource>> warehouse;
-    private Map<Resource, Integer> strongbox;
 
-    public PlayLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox) {
+    public PlayLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse) {
         this.nickname = nickname;
         this.id = id;
         this.warehouse = warehouse;
-        this.strongbox = strongbox;
     }
 
     @Override
     public void handleMessage(ClientView clientView) {
-        clientView.playLeaderCardUpdate(nickname, id, warehouse, strongbox);
+        clientView.playLeaderCardUpdate(nickname, id, warehouse);
     }
 
     @Override

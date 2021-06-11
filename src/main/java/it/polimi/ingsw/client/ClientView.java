@@ -31,7 +31,7 @@ public class ClientView implements Observer<ServerMessage> {
     private final ClientGameBoard gameboard;
 
     private final Object lock = new Object();
-    private boolean updated;
+    private boolean updated=true;
     private boolean faithUpdateReceived = false;
 
     ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
@@ -99,6 +99,7 @@ public class ClientView implements Observer<ServerMessage> {
      * @param nickname selected from the player
      */
     public void sendLogin(String nickname){
+        updated=false;
         socket.sendMessage(new LoginMessage(nickname));
     }
 
@@ -106,13 +107,14 @@ public class ClientView implements Observer<ServerMessage> {
      * manages the Username Response message
      * @param nickname the player set
      */
-    public void manageUsernameResponse(boolean isFree, String nickname, ArrayList<String> usedNicknames){
+    public void manageUsernameResponse(boolean isFree, String nickname){
+        updated=true;
         if(isFree){
             this.nickname = nickname;
             uiType.loginDone();
         }
         else {
-            uiType.failedLogin(usedNicknames);
+            uiType.failedLogin();
         }
     }
 
@@ -166,6 +168,13 @@ public class ClientView implements Observer<ServerMessage> {
      * @param maxNum maximum number of players
      */
     public void numOfPlayers(int maxNum){
+        while(!updated) {
+            try {
+                lock.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         uiType.playersNumber(maxNum);
     }
 
@@ -295,6 +304,7 @@ public class ClientView implements Observer<ServerMessage> {
     public void endTurn(){
         uiType.endTurn();
         socket.sendMessage(new EndTurn());
+        updated=true;
     }
 
     /**
@@ -521,7 +531,6 @@ public class ClientView implements Observer<ServerMessage> {
                     gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname), vaticanPosition.containsKey(nickname));
                 }
             }
-            //uiType.updateBoard("");
             faithUpdateReceived=true;
             lock.notifyAll();
         }
@@ -575,13 +584,11 @@ public class ClientView implements Observer<ServerMessage> {
      * @param nickname of the player
      * @param id of the played card
      * @param warehouse new warehouse of the player
-     * @param strongbox new strongbox of the player
      */
-    public void playLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
+    public void playLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse){
         synchronized (lock) {
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.setWarehouse(warehouse);
-            playerBoard.setStrongbox(strongbox);
             playerBoard.removeHandCard(id);
             playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
             if(!nickname.equals(this.nickname))
@@ -652,7 +659,6 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void finalScoresUpdate(Map<String, Integer> finalScores, boolean lorenzoWin){
         synchronized (lock){
-            System.out.println(finalScores);
             if(gameboard.getNumOfPlayers()==1) {
                 uiType.lorenzoScoreboard(nickname, finalScores.get(nickname), lorenzoWin);
             }

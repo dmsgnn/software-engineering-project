@@ -648,9 +648,8 @@ public class Controller implements Observer<ClientMessage> {
             // SEND UPDATE
             String username = game.getActivePlayer().getNickname();
             Map<Integer, ArrayList<Resource>> warehouse = getWarehouse().get(username);
-            Map<Resource,Integer> strongbox = getStrongbox().get(username);
             for (ServerView serverView: serverViews) {
-                serverView.sendPlayLeaderCardUpdate(username, id, warehouse , strongbox);
+                serverView.sendPlayLeaderCardUpdate(username, id, warehouse);
             }
             // SEND POSSIBLE ACTIONS
             serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());

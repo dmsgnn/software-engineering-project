@@ -132,8 +132,8 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage(new ErrorMessage(invalid_starting_resources));
     }
 
-    public void sendPlayLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox) {
-        sendMessage(new PlayLeaderCardUpdate(nickname,id,warehouse,strongbox));
+    public void sendPlayLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse) {
+        sendMessage(new PlayLeaderCardUpdate(nickname,id,warehouse));
     }
 
     public void sendDiscardLeaderCardUpdate(String nickname, String id) {

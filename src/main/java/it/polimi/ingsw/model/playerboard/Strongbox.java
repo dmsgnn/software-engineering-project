@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Strongbox {
 
-    private Map<Resource, Integer> resources;
+    private final Map<Resource, Integer> resources;
 
     /**
      * initialize the strongbox
@@ -16,10 +16,10 @@ public class Strongbox {
      */
     public Strongbox() {
         resources = new HashMap<>();
-        resources.put(Resource.STONES, 50);
-        resources.put(Resource.COINS, 50);
-        resources.put(Resource.SERVANTS, 50);
-        resources.put(Resource.SHIELDS, 50);
+        resources.put(Resource.STONES, 0);
+        resources.put(Resource.COINS, 0);
+        resources.put(Resource.SERVANTS, 0);
+        resources.put(Resource.SHIELDS, 0);
 
     }
 

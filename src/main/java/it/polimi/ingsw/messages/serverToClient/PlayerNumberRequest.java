@@ -4,15 +4,15 @@ import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.PingReceiver;
 
 public class PlayerNumberRequest implements ServerMessage{
-    private int[] listOfInt;
+    private final int max;
 
     public PlayerNumberRequest() {
-        listOfInt = new int[]{1,2,3,4};
+        max=4;
     }
 
 
     @Override
-    public void handleMessage(ClientView clientView) { clientView.numOfPlayers(4); }
+    public void handleMessage(ClientView clientView) { clientView.numOfPlayers(max); }
 
     @Override
     public void handleMessage(PingReceiver pingManager) {

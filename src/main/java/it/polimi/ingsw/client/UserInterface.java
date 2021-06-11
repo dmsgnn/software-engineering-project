@@ -22,7 +22,7 @@ public interface UserInterface {
     /**
      * handles login errors
      */
-    void failedLogin(ArrayList<String> usedNames);
+    void failedLogin();
 
     /**
      * called when the login is done

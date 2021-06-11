@@ -128,7 +128,7 @@ public class GUI extends Application implements UserInterface {
     }
 
     @Override
-    public void failedLogin(ArrayList<String> usedNames) {
+    public void failedLogin() {
         Platform.runLater(()-> {
             mainStage.getScene().setRoot(loginRoot);
             logger.takenUsername();
@@ -152,7 +152,9 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void handleReconnection(String nickname) {
-
+        Platform.runLater(()-> {
+            playerBoard.setMessage("User " + nickname + " reconnected to the game");
+        });
     }
 
     @Override

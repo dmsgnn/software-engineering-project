@@ -112,7 +112,7 @@ public class ServerMain {
         }
         if(takenUsernames.contains(username)){
             System.out.print("Username " + username + " already taken");
-            connection.sendMessage(new UsernameResponse(false, null, takenUsernames));
+            connection.sendMessage(new UsernameResponse(false, null));
             return;
         }
 
@@ -137,7 +137,7 @@ public class ServerMain {
             lob.getLoggedPlayers().put(connection, username);
             connection.setLobby(lob);
             lobbies.add(lob);
-            connection.sendMessage(new UsernameResponse(true, username, new ArrayList<>()));
+            connection.sendMessage(new UsernameResponse(true, username));
             connection.sendMessage(new PlayerNumberRequest());
             System.out.println(username+" creo la prima lobby");
         }
@@ -145,7 +145,7 @@ public class ServerMain {
         else if (!lobbies.get(lobbies.size()-1).isFull()){
             lobbies.get(lobbies.size()-1).getLoggedPlayers().put(connection, username);
             connection.setLobby(lobbies.get(lobbies.size()-1));
-            connection.sendMessage(new UsernameResponse(true, username, new ArrayList<>()));
+            connection.sendMessage(new UsernameResponse(true, username));
             if(lobbies.get(lobbies.size()-1).isFull()) {
                 lobbies.get(lobbies.size()-1).startGame();
             }
@@ -159,7 +159,7 @@ public class ServerMain {
             lob.getLoggedPlayers().put(connection, username);
             connection.setLobby(lob);
             lobbies.add(lob);
-            connection.sendMessage(new UsernameResponse(true, username, new ArrayList<>()));
+            connection.sendMessage(new UsernameResponse(true, username));
             connection.sendMessage(new PlayerNumberRequest());
             System.out.println(username+" l'ultima lobby era piena e ne creo una nuova");
 

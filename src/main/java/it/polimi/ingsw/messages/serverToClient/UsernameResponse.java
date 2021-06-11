@@ -8,10 +8,8 @@ import java.util.ArrayList;
 public class UsernameResponse implements ServerMessage{
     private String nickname;
     private boolean isFree;
-    private ArrayList<String> usedNicknames;
 
-    public UsernameResponse(boolean isFree, String nickname, ArrayList<String> usedNicknames) {
-        this.usedNicknames = new ArrayList<>(usedNicknames);
+    public UsernameResponse(boolean isFree, String nickname) {
         this.isFree = isFree;
         this.nickname = nickname;
     }
@@ -19,7 +17,7 @@ public class UsernameResponse implements ServerMessage{
 
 
     @Override
-    public void handleMessage(ClientView clientView) { clientView.manageUsernameResponse(isFree, nickname, usedNicknames);}
+    public void handleMessage(ClientView clientView) { clientView.manageUsernameResponse(isFree, nickname);}
 
     @Override
     public void handleMessage(PingReceiver pingManager) {
