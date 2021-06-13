@@ -664,7 +664,7 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * pick the marbles from the market and turn them into resources
      */
-    public void marketAction(int index, boolean isRow, ArrayList<Resource>exchange){
+    public  synchronized void marketAction(int index, boolean isRow, ArrayList<Resource>exchange){
         if (currentAction.get(currentActivePlayer)==Actions.MARKETACTION) {
             ArrayList<Marbles> marbles = new ArrayList<>();
             ArrayList<Resource> resources = new ArrayList<>();
@@ -731,7 +731,16 @@ public class Controller implements Observer<ClientMessage> {
             ManageResources manageResources = new ManageResources(resources, newResources.get(username), discRes, false,faithTrack);
             try {
                 //DO ACTION
+                if (game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size()==4) {
+                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getResource());
+                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getOccupied());
+                }
                 game.doAction(manageResources);
+                System.out.println("action done");
+                if (game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size()==4) {
+                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getResource());
+                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getOccupied());
+                }
                 if (discRes!=null) {
                     int size = 0;
                     for (Resource resource : Resource.values()) {

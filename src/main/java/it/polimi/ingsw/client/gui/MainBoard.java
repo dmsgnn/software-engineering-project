@@ -638,18 +638,34 @@ public class MainBoard {
                 }
             }
             if (secondLeaderDepotActive){
-                if (board.isDepotEmpty(4)){
-                    depot1Leader2.setVisible(false);
-                    depot2Leader2.setVisible(false);
-                }
-                else{
-                    if (board.getWarehouse().get(4).size() == 2) {
-                        depot1Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
-                        depot2Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                if (!firstLeaderDepotActive){
+                    if (board.isDepotEmpty(3)){
+                        depot1Leader2.setVisible(false);
+                        depot2Leader2.setVisible(false);
                     }
                     else{
-                        depot1Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                        if (board.getWarehouse().get(3).size() == 2) {
+                            depot1Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                            depot2Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                        }
+                        else{
+                            depot1Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                            depot2Leader2.setVisible(false);
+                        }
+                    }
+                }
+                else {
+                    if (board.isDepotEmpty(4)) {
+                        depot1Leader2.setVisible(false);
                         depot2Leader2.setVisible(false);
+                    } else {
+                        if (board.getWarehouse().get(4).size() == 2) {
+                            depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                            depot2Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                        } else {
+                            depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                            depot2Leader2.setVisible(false);
+                        }
                     }
                 }
             }
@@ -2019,7 +2035,25 @@ public class MainBoard {
 
 
         if (warehouse.size()==4){
-            firstLeaderDepotActive =true;
+            if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().size()==2){
+                String cardId = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().get(0);
+                if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getDepotBuffCard().containsKey(cardId)){
+                    if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getDepotBuffCard().get(cardId)==3){
+                        firstLeaderDepotActive = true;
+
+                    }
+                    else {
+                        secondLeaderDepotActive = true;
+                    }
+                }
+                else{
+                    secondLeaderDepotActive = true;
+
+                }
+            }
+            else {
+                firstLeaderDepotActive = true;
+            }
             if (warehouse.get(3).isEmpty()){
                 leaderDepot1[0]=null;
                 leaderDepot1[1]=null;
@@ -2299,51 +2333,101 @@ public class MainBoard {
     }
     public void depotOneLeader2Action(){
         if (currentAction==Actions.MANAGE) {
-            if (first == null) {
-                if (!isNullVolunteer) {
-                    first = leaderDepot2[0];
-                    depot1Leader2.setVisible(true);
-                    num = 13;
-                    if (first == null) isNullVolunteer = true;
+            if (!firstLeaderDepotActive){
+                if (first == null) {
+                    if (!isNullVolunteer) {
+                        first = leaderDepot1[0];
+                        depot1Leader2.setVisible(true);
+                        num = 13;
+                        if (first == null) isNullVolunteer = true;
+                    } else {
+                        second = leaderDepot1[0];
+                        depot1Leader2.setImage(null);
+                        leaderDepot1[0] = null;
+                        isNullVolunteer = false;
+                        setSecondResource();
+                    }
                 } else {
-                    second = leaderDepot2[0];
-                    depot1Leader2.setImage(null);
-                    leaderDepot2[0] = null;
-                    isNullVolunteer = false;
+                    second = leaderDepot1[0];
+                    depot1Leader2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                    depot1Leader2.setVisible(true);
+                    leaderDepot1[0] = first;
+                    first = null;
                     setSecondResource();
                 }
-            } else {
-                second = leaderDepot2[0];
-                depot1Leader2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
-                depot1Leader2.setVisible(true);
-                leaderDepot2[0] = first;
-                first = null;
-                setSecondResource();
+            }
+            else {
+                if (first == null) {
+                    if (!isNullVolunteer) {
+                        first = leaderDepot2[0];
+                        depot1Leader2.setVisible(true);
+                        num = 13;
+                        if (first == null) isNullVolunteer = true;
+                    } else {
+                        second = leaderDepot2[0];
+                        depot1Leader2.setImage(null);
+                        leaderDepot2[0] = null;
+                        isNullVolunteer = false;
+                        setSecondResource();
+                    }
+                } else {
+                    second = leaderDepot2[0];
+                    depot1Leader2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                    depot1Leader2.setVisible(true);
+                    leaderDepot2[0] = first;
+                    first = null;
+                    setSecondResource();
+                }
             }
         }
     }
     public void depotTwoLeader2Action(){
         if (currentAction==Actions.MANAGE) {
-            if (first == null) {
-                if (!isNullVolunteer) {
-                    first = leaderDepot2[1];
-                    depot2Leader2.setVisible(true);
-                    num = 14;
-                    if (first == null) isNullVolunteer = true;
+            if (!firstLeaderDepotActive){
+                if (first == null) {
+                    if (!isNullVolunteer) {
+                        first = leaderDepot1[1];
+                        depot2Leader2.setVisible(true);
+                        num = 14;
+                        if (first == null) isNullVolunteer = true;
+                    } else {
+                        second = leaderDepot1[1];
+                        depot2Leader2.setImage(null);
+                        leaderDepot1[1] = null;
+                        isNullVolunteer = false;
+                        setSecondResource();
+                    }
                 } else {
-                    second = leaderDepot2[1];
-                    depot2Leader2.setImage(null);
-                    leaderDepot2[1] = null;
-                    isNullVolunteer = false;
+                    second = leaderDepot1[1];
+                    depot2Leader2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                    depot2Leader2.setVisible(true);
+                    leaderDepot1[1] = first;
+                    first = null;
                     setSecondResource();
                 }
-            } else {
-                second = leaderDepot2[1];
-                depot2Leader2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
-                depot2Leader2.setVisible(true);
-                leaderDepot2[1] = first;
-                first = null;
-                setSecondResource();
+            }
+            else {
+                if (first == null) {
+                    if (!isNullVolunteer) {
+                        first = leaderDepot2[1];
+                        depot2Leader2.setVisible(true);
+                        num = 14;
+                        if (first == null) isNullVolunteer = true;
+                    } else {
+                        second = leaderDepot2[1];
+                        depot2Leader2.setImage(null);
+                        leaderDepot2[1] = null;
+                        isNullVolunteer = false;
+                        setSecondResource();
+                    }
+                } else {
+                    second = leaderDepot2[1];
+                    depot2Leader2.setImage(new Image("resources/punchboard/" + first.toString().toLowerCase() + ".png"));
+                    depot2Leader2.setVisible(true);
+                    leaderDepot2[1] = first;
+                    first = null;
+                    setSecondResource();
+                }
             }
         }
     }
@@ -2629,7 +2713,8 @@ public class MainBoard {
                 else {
                     depot1Leader2.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
                 }
-                leaderDepot2[0] = second;
+                if (!firstLeaderDepotActive) leaderDepot1[0] = second;
+                else leaderDepot2[0] = second;
                 second = null;
                 break;
 
@@ -2641,7 +2726,8 @@ public class MainBoard {
                 else {
                     depot2Leader2.setImage(new Image("resources/punchboard/" + second.toString().toLowerCase() + ".png"));
                 }
-                leaderDepot2[1] = second;
+                if (!firstLeaderDepotActive) leaderDepot1[1] = second;
+                else leaderDepot2[1] = second;
                 second = null;
                 break;
 
@@ -2709,13 +2795,24 @@ public class MainBoard {
 
         if (secondLeaderDepotActive){
             counter=0;
-            for (Resource resource: leaderDepot2){
-                if (resource != null) {
-                    leader2.add(counter, resource);
-                    counter++;
+            if (!firstLeaderDepotActive) {
+                for (Resource resource : leaderDepot1) {
+                    if (resource != null) {
+                        leader2.add(counter, resource);
+                        counter++;
+                    }
                 }
+                ware.put(3,leader2);
             }
-            ware.put(4,leader2);
+            else {
+                for (Resource resource : leaderDepot2) {
+                    if (resource != null) {
+                        leader2.add(counter, resource);
+                        counter++;
+                    }
+                }
+                ware.put(4, leader2);
+            }
         }
 
 

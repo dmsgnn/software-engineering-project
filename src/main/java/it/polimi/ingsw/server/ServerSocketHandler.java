@@ -5,10 +5,7 @@ import it.polimi.ingsw.messages.clientToServer.ActionReply;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.messages.clientToServer.LoginMessage;
 import it.polimi.ingsw.messages.clientToServer.PlayerNumberReply;
-import it.polimi.ingsw.messages.serverToClient.ActionResponse;
-import it.polimi.ingsw.messages.serverToClient.EndGameMessage;
-import it.polimi.ingsw.messages.serverToClient.FinalScoreMessage;
-import it.polimi.ingsw.messages.serverToClient.ServerMessage;
+import it.polimi.ingsw.messages.serverToClient.*;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -74,11 +71,16 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
             while(true) {
                 ClientMessage message = (ClientMessage) in.readObject();
                 if(message instanceof PlayerNumberReply){
-                    lobby.setPlayerGameNumber(((PlayerNumberReply) message).getPlayerNum());
-                    if(lobby.getPlayerGameNumber()==1)
-                        lobby.startGame();
-                    synchronized (lock){
-                        lock.notifyAll();
+                    if(((PlayerNumberReply) message).getPlayerNum() > 0 && ((PlayerNumberReply) message).getPlayerNum() < 5) {
+                        lobby.setPlayerGameNumber(((PlayerNumberReply) message).getPlayerNum());
+                        if (lobby.getPlayerGameNumber() == 1)
+                            lobby.startGame();
+                        synchronized (lock) {
+                            lock.notifyAll();
+                        }
+                    }
+                    else{
+                        sendMessage(new PlayerNumberRequest());
                     }
                 }
                 else if(message instanceof LoginMessage) {

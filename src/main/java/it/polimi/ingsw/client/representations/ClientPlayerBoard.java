@@ -27,7 +27,7 @@ public class ClientPlayerBoard {
     private final ArrayList<Resource> discountBuff = new ArrayList<>();
     private final Map<String, Resource> productionBuff = new HashMap<>();
     private final Map<Integer, Resource> depotBuff = new HashMap<>();
-    private final Map<Integer, String> depotBuffCard = new HashMap<>();
+    private final Map<String, Integer> depotBuffCard = new HashMap<>();
 
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;
@@ -43,7 +43,7 @@ public class ClientPlayerBoard {
     public Map<Integer, Resource> getDepotBuffRes() {
         return depotBuff;
     }
-    public Map<Integer, String> getDepotBuffCard(){
+    public Map<String, Integer> getDepotBuffCard(){
         return depotBuffCard;
     }
 
@@ -206,7 +206,7 @@ public class ClientPlayerBoard {
     }
 
     public void addDepotBuff(Resource res){
-        depotBuffCard.put(warehouse.size()-1, playedCards.get(playedCards.size()-1));
+        depotBuffCard.put(playedCards.get(playedCards.size()-1),warehouse.size()-1);
         depotBuff.put(warehouse.size()-1, res);
     }
 }

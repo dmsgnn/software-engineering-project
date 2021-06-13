@@ -36,6 +36,7 @@ public class ClientMain {
             ClientView clientView = new ClientView(ip, port, cli);
             cli.setClientView(clientView);
             cli.begin();
+
         }
         else{
             System.out.println("You're going to play with the GUI interface");
@@ -43,6 +44,8 @@ public class ClientMain {
             ClientView clientView = new ClientView(ip, port, gui);
             gui.setClientView(clientView);
             new Thread(gui::begin).start();
+
+
         }
     }
 }
