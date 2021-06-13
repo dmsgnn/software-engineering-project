@@ -108,13 +108,14 @@ public class ClientView implements Observer<ServerMessage> {
      * @param nickname the player set
      */
     public void manageUsernameResponse(boolean isFree, String nickname){
-        updated=true;
-        if(isFree){
-            this.nickname = nickname;
-            uiType.loginDone();
-        }
-        else {
-            uiType.failedLogin();
+        synchronized (lock) {
+            updated = true;
+            if (isFree) {
+                this.nickname = nickname;
+                uiType.loginDone();
+            } else {
+                uiType.failedLogin();
+            }
         }
     }
 
@@ -168,14 +169,16 @@ public class ClientView implements Observer<ServerMessage> {
      * @param maxNum maximum number of players
      */
     public void numOfPlayers(int maxNum){
-        while(!updated) {
-            try {
-                lock.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        synchronized (lock) {
+            while (!updated) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            uiType.playersNumber(maxNum);
         }
-        uiType.playersNumber(maxNum);
     }
 
     /**

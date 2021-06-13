@@ -706,9 +706,8 @@ public class CLI implements UserInterface {
                     System.out.println("Not a number!!");
                 }
             } while (!done);
+            clientView.playLeaderCard(hand.get(cardSlot));
         }
-
-        clientView.playLeaderCard(hand.get(cardSlot));
     }
 
     @Override
@@ -1142,7 +1141,7 @@ public class CLI implements UserInterface {
         else
             playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(0))).append("■").append(ColorCLI.RESET).append("|");
         playerboard.append("   ");
-        if(board.getWarehouse().size()==4){
+        if(board.getWarehouse().size()>=4){
             if(board.getWarehouse().get(3).isEmpty()){
                 playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(3))).append("| | |  ").append(ColorCLI.RESET);
             }
