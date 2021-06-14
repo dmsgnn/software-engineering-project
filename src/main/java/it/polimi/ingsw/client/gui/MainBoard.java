@@ -7,7 +7,6 @@ import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
-import it.polimi.ingsw.model.leadercard.Requirements.ResourceRequirements;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +17,6 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class MainBoard {
     private static ClientView clientView;
@@ -621,51 +619,48 @@ public class MainBoard {
                 depot3Resource2.setVisible(false);
                 depot3Resource3.setVisible(false);
             }
-            if (firstLeaderDepotActive){
-                if (board.isDepotEmpty(3)){
-                    depot1Leader1.setVisible(false);
-                    depot2Leader1.setVisible(false);
+        }
+        if (firstLeaderDepotActive){
+            if (board.isDepotEmpty(3)){
+                depot1Leader1.setVisible(false);
+                depot2Leader1.setVisible(false);
+            }
+            else{
+                if (board.getWarehouse().get(3).size() == 2) {
+                    depot1Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                    depot2Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
                 }
                 else{
-                    if (board.getWarehouse().get(3).size() == 2) {
-                        depot1Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
-                        depot2Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
-                    }
-                    else{
-                        depot1Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
-                        depot2Leader1.setVisible(false);
-                    }
+                    depot1Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                    depot2Leader1.setVisible(false);
                 }
             }
-            if (secondLeaderDepotActive){
-                if (!firstLeaderDepotActive){
-                    if (board.isDepotEmpty(3)){
-                        depot1Leader2.setVisible(false);
+        }
+        if (secondLeaderDepotActive) {
+            if (!firstLeaderDepotActive) {
+                if (board.isDepotEmpty(3)) {
+                    depot1Leader2.setVisible(false);
+                    depot2Leader2.setVisible(false);
+                } else {
+                    if (board.getWarehouse().get(3).size() == 2) {
+                        depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                        depot2Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                    } else {
+                        depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
                         depot2Leader2.setVisible(false);
-                    }
-                    else{
-                        if (board.getWarehouse().get(3).size() == 2) {
-                            depot1Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
-                            depot2Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
-                        }
-                        else{
-                            depot1Leader2.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
-                            depot2Leader2.setVisible(false);
-                        }
                     }
                 }
-                else {
-                    if (board.isDepotEmpty(4)) {
-                        depot1Leader2.setVisible(false);
-                        depot2Leader2.setVisible(false);
+            } else {
+                if (board.isDepotEmpty(4)) {
+                    depot1Leader2.setVisible(false);
+                    depot2Leader2.setVisible(false);
+                } else {
+                    if (board.getWarehouse().get(4).size() == 2) {
+                        depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                        depot2Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
                     } else {
-                        if (board.getWarehouse().get(4).size() == 2) {
-                            depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
-                            depot2Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
-                        } else {
-                            depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
-                            depot2Leader2.setVisible(false);
-                        }
+                        depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                        depot2Leader2.setVisible(false);
                     }
                 }
             }
@@ -959,6 +954,40 @@ public class MainBoard {
             depotThreeResourceOne.setMouseTransparent(false);
             depotThreeResourceTwo.setMouseTransparent(false);
             depotThreeResourceThree.setMouseTransparent(false);
+        }
+
+        if(firstLeaderDepotActive){
+            int amount = board.getWarehouse().get(3).size();
+            if(amount >= 1){
+                depotOneLeader1.setMouseTransparent(false);
+                if(amount == 2){
+                    depotTwoLeader1.setMouseTransparent(false);
+                }
+            }
+            if(secondLeaderDepotActive){
+                int amount1 = board.getWarehouse().get(4).size();
+                if(amount1 >= 1){
+                    depotOneLeader2.setMouseTransparent(false);
+                    if(amount1 == 2){
+                        depotTwoLeader2.setMouseTransparent(false);
+                    }
+                }
+            }
+        }
+        else if(secondLeaderDepotActive){
+            int amount = board.getWarehouse().get(3).size();
+            if(amount >= 1){
+                depotOneLeader2.setMouseTransparent(false);
+                if(amount == 2){
+                    depotTwoLeader2.setMouseTransparent(false);
+                }
+            }
+        }
+
+        if(currentAction == Actions.USEPRODUCTION){
+            devSlot1.setDisable(false);
+            devSlot2.setDisable(false);
+            devSlot3.setDisable(false);
         }
 
         if(board.getStrongbox().get(Resource.COINS) > 0) strongboxCoins.setMouseTransparent(false);
@@ -1386,9 +1415,6 @@ public class MainBoard {
         }
         else if(currentAction == Actions.USEPRODUCTION){
             clientView.useProduction(prodDevSlots, prodLeaderSlots, leaderCardGains, boardResProd, warehousePayment, leaderDepotPayment, strongboxPayment);
-            devSlot1.setDisable(false);
-            devSlot2.setDisable(false);
-            devSlot3.setDisable(false);
             boardRes1.setVisible(false);
             boardRes2.setVisible(false);
             boardRes3.setVisible(false);
@@ -2304,6 +2330,12 @@ public class MainBoard {
                 setSecondResource();
             }
         }
+        else{
+            Resource res = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(3);
+            if(leaderDepotPayment.containsKey(res)) leaderDepotPayment.put(res, leaderDepotPayment.get(res)+1);
+            else leaderDepotPayment.put(res,1);
+            depotOneLeader1.setDisable(true);
+        }
 
     }
     public void depotTwoLeader1Action(){
@@ -2329,6 +2361,12 @@ public class MainBoard {
                 first = null;
                 setSecondResource();
             }
+        }
+        else{
+            Resource res = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(3);
+            if(leaderDepotPayment.containsKey(res)) leaderDepotPayment.put(res, leaderDepotPayment.get(res)+1);
+            else leaderDepotPayment.put(res,1);
+            depotTwoLeader1.setDisable(true);
         }
     }
     public void depotOneLeader2Action(){
@@ -2380,6 +2418,18 @@ public class MainBoard {
                 }
             }
         }
+        else{
+            Resource res;
+            if(firstLeaderDepotActive){
+                res = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(4);
+            } else {
+                res = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(3);
+            }
+
+            if(leaderDepotPayment.containsKey(res)) leaderDepotPayment.put(res, leaderDepotPayment.get(res)+1);
+            else leaderDepotPayment.put(res,1);
+            depotOneLeader2.setDisable(true);
+        }
     }
     public void depotTwoLeader2Action(){
         if (currentAction==Actions.MANAGE) {
@@ -2429,6 +2479,18 @@ public class MainBoard {
                     setSecondResource();
                 }
             }
+        }
+        else{
+            Resource res;
+            if(firstLeaderDepotActive){
+                res = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(4);
+            } else {
+                res = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouseResource(3);
+            }
+
+            if(leaderDepotPayment.containsKey(res)) leaderDepotPayment.put(res, leaderDepotPayment.get(res)+1);
+            else leaderDepotPayment.put(res,1);
+            depotTwoLeader2.setDisable(true);
         }
     }
 

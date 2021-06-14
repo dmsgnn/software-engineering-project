@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Messages updates, fixes with sync">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Client fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -107,7 +107,6 @@
     <configuration name="ClientMain" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.client.ClientMain" />
       <module name="AM5" />
-      <option name="PROGRAM_PARAMETERS" value="cli" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.polimi.ingsw.client.CLI.*" />
@@ -361,14 +360,9 @@
       <workItem from="1623152068543" duration="2173000" />
       <workItem from="1623333632246" duration="415000" />
       <workItem from="1623418763501" duration="1711000" />
-      <workItem from="1623610253953" duration="2788000" />
-    </task>
-    <task id="LOCAL-00011" summary="Setup Action fix">
-      <created>1620292421877</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1620292421877</updated>
+      <workItem from="1623610253953" duration="3572000" />
+      <workItem from="1623670272852" duration="4575000" />
+      <workItem from="1623697147431" duration="289000" />
     </task>
     <task id="LOCAL-00012" summary="Client and messages update">
       <created>1620302858958</created>
@@ -706,7 +700,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623420447448</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Client fix">
+      <created>1623613356822</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1623613356823</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -726,7 +727,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Multiple game start fix" />
     <MESSAGE value="client code cleanup" />
     <MESSAGE value="fix" />
     <MESSAGE value="some fixes and gui update" />
@@ -751,7 +751,8 @@
     <MESSAGE value="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update" />
     <MESSAGE value="update exhcange leaderCard buff" />
     <MESSAGE value="Messages updates, fixes with sync" />
-    <option name="LAST_COMMIT_MESSAGE" value="Messages updates, fixes with sync" />
+    <MESSAGE value="Client fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Client fix" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
