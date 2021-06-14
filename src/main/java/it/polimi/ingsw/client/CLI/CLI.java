@@ -137,8 +137,8 @@ public class CLI implements UserInterface {
             System.out.println(nickname + " score: " + finalScores.get(nickname));
             if(finalScores.get(nickname)>temp) winner = nickname;
         }
-        System.out.println(winner + " won the game\n\n");
-        playAgain();
+        System.out.println("\n\n" + winner + " won the game\n\n");
+        System.exit(0);
     }
 
     @Override
@@ -146,20 +146,7 @@ public class CLI implements UserInterface {
         if(lorenzoHasWon) System.out.println("Lorenzo il Magnifico won the game");
         else System.out.println("You won the game");
         System.out.println("Score: " + score);
-        playAgain();
-    }
-
-    private void playAgain(){
-        String input;
-        System.out.println("Do you want to play again? (type 'yes' or 'no')");
-        do {
-            input = scanner.nextLine();
-            if (input.matches("(yes)")){
-                clearScreen();
-                clientView.login();
-            }
-            else if(input.matches("(no)")) System.exit(0);
-        }while(!input.matches("(yes)|(no)"));
+        System.exit(0);
     }
 
 
