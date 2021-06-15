@@ -6,6 +6,11 @@ import it.polimi.ingsw.model.Resource;
 import java.util.ArrayList;
 
 public abstract class  Marbles {
+    /**
+     * activates the effect of the marble
+     * @param resources list to change accordingly to the effect of the marble
+     * @param exchangeResources used by white marbles
+     */
     public void drawEffect(ArrayList<Resource> resources, ArrayList<Resource> exchangeResources){}
 
     /**

@@ -109,6 +109,11 @@ public class Gameboard {
         return false;
     }
 
+    /**
+     * removes cards from the development card grid with the specified parameters
+     * @param color of the cards to remove
+     * @param amount number of cards to remove
+     */
     public void removeLowestLevel(Color color, int amount){
         int level = 1;
         int removed = 0;

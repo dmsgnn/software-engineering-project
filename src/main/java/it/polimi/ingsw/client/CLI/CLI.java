@@ -37,32 +37,6 @@ public class CLI implements UserInterface {
     }
 
     /**
-     * utility method to get the selected card level
-     * @param id of the card
-     * @return level of the card
-     */
-    private int getDevCardLevel(String id){
-        int level = 0;
-        for(DevelopmentCard card : devCardList){
-            if(card.getId().equals(id)) level = card.getLevel();
-        }
-        return level;
-    }
-
-    /**
-     * utility method to get the selected card color
-     * @param id of the card
-     * @return color of the card
-     */
-    private Color getDevCardColor(String id){
-        Color color = null;
-        for(DevelopmentCard card : devCardList){
-            if(card.getId().equals(id)) color = card.getColor();
-        }
-        return color;
-    }
-
-    /**
      * connects the CLI to ClientView
      * @param clientView of the client
      */
@@ -97,8 +71,9 @@ public class CLI implements UserInterface {
         return null;
     }
 
-
-
+    /**
+     * initialization
+     */
     @Override
     public void begin() {
         System.out.println("\nWelcome to..." + "\n");
@@ -119,6 +94,9 @@ public class CLI implements UserInterface {
         clientView.login(); // the login method below could directly be called
     }
 
+    /**
+     * called to notify that this is the last round
+     */
     @Override
     public void lastRound(){
         System.out.println("------------------------------------");
@@ -126,6 +104,10 @@ public class CLI implements UserInterface {
         System.out.println("------------------------------------");
     }
 
+    /**
+     * called to show the scores of each player
+     * @param finalScores score of each player
+     */
     @Override
     public void scoreboard(Map<String, Integer> finalScores){
         String winner = null;
@@ -142,6 +124,12 @@ public class CLI implements UserInterface {
         System.exit(0);
     }
 
+    /**
+     * called to show the scores in single player
+     * @param score player score
+     * @param lorenzoHasWon true if Lorenzo won the game, false if he lost
+     * @param nickname the nickname of the player
+     */
     @Override
     public void lorenzoScoreboard(String nickname, int score, boolean lorenzoHasWon){
         if(lorenzoHasWon) System.out.println("Lorenzo il Magnifico won the game");
@@ -151,7 +139,9 @@ public class CLI implements UserInterface {
         System.exit(0);
     }
 
-
+    /**
+     * login into a match
+     */
     @Override
     public void login() {
         String nickname;
@@ -171,23 +161,37 @@ public class CLI implements UserInterface {
         clientView.sendLogin(nickname);
     }
 
+    /**
+     * handles login errors
+     */
     @Override
     public void failedLogin() {
         System.out.println("Nickname already taken");
         this.login();
     }
 
+    /**
+     * called when the login is done
+     */
     @Override
     public void loginDone() {
         System.out.println("Correct nickname, other players are joining...");
         inputThread();
     }
 
+    /**
+     * Manages a losing player
+     * @param nickname Name of loser
+     */
     @Override
     public void loser(String nickname) {
 
     }
 
+    /**
+     * called to manage the error message
+     * @param errorType contains the error message
+     */
     @Override
     public void manageError(Error errorType) {
         switch (errorType){
@@ -209,6 +213,10 @@ public class CLI implements UserInterface {
         }
     }
 
+    /**
+     * Manages a winning player
+     * @param nickname Name of winner
+     */
     @Override
     public void winner(String nickname) {
         System.out.println(nickname + " won the game");
@@ -216,39 +224,62 @@ public class CLI implements UserInterface {
         clientView.disconnect();
     }
 
+    /**
+     * called if a player correctly joins a game
+     */
     @Override
     public void inGameLobby() {
 
     }
 
+    /**
+     * called if the player tries to join a full game
+     */
     @Override
     public void gameFull() {
 
     }
 
+    /**
+     * called when the player has correctly selected his starting cards
+     */
     @Override
     public void endLeadercardSetup() {
         System.out.println("Correct leader card selection, waiting for other players...");
         inputThread();
     }
 
+    /**
+     * called when the player has correctly selected his starting resources
+     */
     @Override
     public void endStartingResourcesSetup() {
         System.out.println("Correct starting resources selection, waiting for other players...");
         inputThread();
     }
 
+    /**
+     * called when the player ends their turn
+     */
     @Override
     public void endTurn() {
         if(clientView.getGameboard().getNumOfPlayers()>1)System.out.println("Waiting for other players...");
         inputThread();
     }
 
+    /**
+     * handles the disconnection of one player
+     * @param nickname of the player that disconnected
+     */
     @Override
     public void handleDisconnection(String nickname) {
         System.out.println(ColorCLI.RED + nickname + " disconnected from the game!" + ColorCLI.RESET);
     }
 
+    /**
+     * handles the reconnection of one player
+     * @param nickname of the player that reconnected
+     */
     @Override
     public void handleReconnection(String nickname) {
         System.out.println(ColorCLI.GREEN + nickname + " reconnected to the game!" + ColorCLI.RESET);
@@ -277,11 +308,18 @@ public class CLI implements UserInterface {
         t.start();
     }
 
+    /**
+     * called to begin a game, it displays the necessary information to begin a game
+     */
     @Override
     public void startGame() {
 
     }
 
+    /**
+     * called only for the first player to make him choose the number of players
+     * @param max possible number of players
+     */
     @Override
     public void playersNumber(int max) {
         myTurn=true;
@@ -303,6 +341,10 @@ public class CLI implements UserInterface {
         clientView.sendNumOfPlayers(value);
     }
 
+    /**
+     * called to allow the players to choose their starting leadercards
+     * @param leaderCardID list of the cards ID that the player can choose from
+     */
     @Override
     public void startingLeaderCardsSelection(ArrayList<String> leaderCardID) {
         myTurn=true;
@@ -346,6 +388,10 @@ public class CLI implements UserInterface {
 
     }
 
+    /**
+     * called to make the players chose their starting resources
+     * @param amount num of starting resources
+     */
     @Override
     public void startingResources(int amount) {
         myTurn=true;
@@ -370,6 +416,10 @@ public class CLI implements UserInterface {
 
     }
 
+    /**
+     * called to make the player choose the action to perform
+     * @param possibleActions list of possible actions
+     */
     @Override
     public void chooseAction(ArrayList<Actions> possibleActions) {
         myTurn=true;
@@ -404,6 +454,9 @@ public class CLI implements UserInterface {
         }
     }
 
+    /**
+     * called to make the player perform the market action
+     */
     @Override
     public void marketAction() {
         String input;
@@ -481,6 +534,9 @@ public class CLI implements UserInterface {
         clientView.marketAction(value, rowOrCol, whiteMarblesRes);
     }
 
+    /**
+     * called to make the player perform the production action
+     */
     @Override
     public void useProductionAction() {
         String input;
@@ -613,6 +669,9 @@ public class CLI implements UserInterface {
         clientView.useProduction(devCardSlots, leaderCardSlots, leaderGain, boardProduction, warehouse, leaderDepot, strongbox);
     }
 
+    /**
+     * called to make the player perform the buyDevCard action
+     */
     @Override
     public void buyCardAction() {
         String input;
@@ -670,6 +729,9 @@ public class CLI implements UserInterface {
         clientView.buyDevCard(cardColor, cardLevel, slot-1, warehouse, leaderDepot, strongbox);
     }
 
+    /**
+     * called to make the player perform the play leadercard action
+     */
     @Override
     public void playLeaderCardAction() {
         String input;
@@ -697,6 +759,9 @@ public class CLI implements UserInterface {
         }
     }
 
+    /**
+     * called to make the player perform the discard leadercard action
+     */
     @Override
     public void discardLeaderCardAction() {
         String input;
@@ -781,6 +846,10 @@ public class CLI implements UserInterface {
         return newWarehouse;
     }
 
+    /**
+     * called to make the player manage his resources during the market action
+     * @param resources list of resources to manage
+     */
     @Override
     public void manageResources(ArrayList<Resource> resources) {
         String input;
@@ -835,6 +904,10 @@ public class CLI implements UserInterface {
         clientView.sendManageResourcesReply(newWarehouse, discardMap);
     }
 
+    /**
+     * utility method to create the warehousePayment map
+     * @return map containing the resources that the player wants to pay from his warehouse
+     */
     private HashMap<Resource, Integer> warehousePayment(){
         HashMap<Resource, Integer> warehouse = new HashMap<>();
         String input;
@@ -871,6 +944,10 @@ public class CLI implements UserInterface {
         return warehouse;
     }
 
+    /**
+     * utility method to create the leaderdepotPayment map
+     * @return map containing the resources that the player wants to pay from his leadeDepot
+     */
     private HashMap<Resource, Integer> leaderdepotPayment(){
         HashMap<Resource, Integer> leaderdepot = new HashMap<>();
         String input;
@@ -908,6 +985,10 @@ public class CLI implements UserInterface {
         return leaderdepot;
     }
 
+    /**
+     * utility method to create the strongboxPayment map
+     * @return map containing the resources that the player wants to pay from his strongbox
+     */
     private HashMap<Resource, Integer> strongboxPayment(){
         HashMap<Resource, Integer> strongbox = new HashMap<>();
         String input;
@@ -933,6 +1014,10 @@ public class CLI implements UserInterface {
         return strongbox;
     }
 
+    /**
+     * utility method to draw the gameboard
+     * @return gameboard string
+     */
     private String strBuilderGameboard(){
         String[][] cardGrid = clientView.getGameboard().getCards();
         MarbleColors[][] market= clientView.getGameboard().getMarket();
@@ -1025,6 +1110,10 @@ public class CLI implements UserInterface {
         return builder.toString();
     }
 
+    /**
+     * utility method to draw lorenzo's faithtrack
+     * @return lorenzo's faithtrack string
+     */
     private String strBuilderLorenzo(){
         int position = clientView.getGameboard().getPlayerBoards().get(0).getLorenzoPosition();
         StringBuilder lorenzo = new StringBuilder();
@@ -1040,6 +1129,10 @@ public class CLI implements UserInterface {
         return lorenzo.toString();
     }
 
+    /**
+     * utility method to draw the playerboard
+     * @return playerboard string
+     */
     private String strBuilderPlayerboard(ClientPlayerBoard board){
         StringBuilder playerboard = new StringBuilder();
         if(board.getPlayerNickname().equals(clientView.getNickname()))
@@ -1297,11 +1390,17 @@ public class CLI implements UserInterface {
         return playerboard.toString();
     }
 
+    /**
+     * utility method to clear the screen
+     */
     private void clearScreen() {
         //for(int i=0; i<30; i++) System.out.println("\n");
         System.out.println("\033[H\033[2J");
     }
 
+    /**
+     * called to print the new board
+     */
     @Override
     public void updateBoard(String message) {
         clearScreen();

@@ -14,14 +14,37 @@ import java.util.Map;
 
 public abstract class Actions {
 
-
+    /**
+     * performs the action
+     * @param playerBoard playerBoard of the current player
+     * @throws InvalidActionException called if the player can't perform the action
+     * @throws InsufficientResourcesException
+     * @throws WrongLevelException
+     * @throws NoCardsLeftException
+     */
     public void doAction(PlayerBoard playerBoard) throws InvalidActionException, InsufficientResourcesException, WrongLevelException, NoCardsLeftException {
     }
 
+    /**
+     * controls if the action can be performed
+     * @param playerBoard of the current player
+     * @return
+     * @throws NoCardsLeftException
+     * @throws WrongLevelException
+     */
     public boolean validAction(PlayerBoard playerBoard) throws NoCardsLeftException, WrongLevelException {
         return true;
     }
 
+    /**
+     * called to pay the specified resources
+     * @param playerBoard of the current player
+     * @param warehouseResources resources to pay from the warehouse
+     * @param leaderDepotResources resources to pay from the leadercards depots
+     * @param strongboxResources resources to pay from the strongbox
+     * @throws InsufficientResourcesException if the player didn't select enough resources
+     * @throws CantPayException if the player can't pay what he declared
+     */
     public void payResources(PlayerBoard playerBoard, Map<Resource, Integer> warehouseResources, Map<Resource, Integer> leaderDepotResources, Map<Resource, Integer> strongboxResources) throws InsufficientResourcesException, CantPayException {
         if(!enoughResPossessed(playerBoard, warehouseResources, leaderDepotResources, strongboxResources)) {
             throw new CantPayException();
@@ -54,9 +77,17 @@ public abstract class Actions {
         }
     }
 
+    /**
+     * called to check if the player has enough resources
+     * @param playerBoard of the current player
+     * @param warehouseResources resources to pay from the warehouse
+     * @param leaderDepotResources resources to pay from the leadercards depots
+     * @param strongboxResources resources to pay from the strongbox
+     * @return true if he can pay, false otherwise
+     */
     private boolean enoughResPossessed(PlayerBoard playerBoard, Map<Resource, Integer> warehouseResources, Map<Resource, Integer> leaderDepotResources, Map<Resource, Integer> strongboxResources){
         ArrayList<BaseDepot> playerDepots =  playerBoard.getWarehouse().getDepots();
-        //controls if the player can pay the resources he said
+        //controls if the player can pay the resources he selected
         for(Map.Entry<Resource, Integer> entry : warehouseResources.entrySet()){
             Resource key = entry.getKey();
             Integer value = entry.getValue();

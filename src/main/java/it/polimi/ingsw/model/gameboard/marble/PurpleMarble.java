@@ -6,10 +6,11 @@ import it.polimi.ingsw.model.Resource;
 import java.util.ArrayList;
 
 public class PurpleMarble extends Marbles {
+
     /**
-     * @param resources
-     * adds SERVANTS when picked
-     * @param exchangeResources
+     * activates the effect of the marble
+     * @param resources adds SERVANTS when picked
+     * @param exchangeResources resources to exchange for white marbles, not use here
      */
     @Override
     public void drawEffect(ArrayList<Resource> resources, ArrayList<Resource> exchangeResources){

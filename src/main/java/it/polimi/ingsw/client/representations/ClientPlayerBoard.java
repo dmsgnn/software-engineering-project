@@ -29,6 +29,10 @@ public class ClientPlayerBoard {
     private final Map<Integer, Resource> depotBuff = new HashMap<>();
     private final Map<String, Integer> depotBuffCard = new HashMap<>();
 
+    /**
+     * constructor
+     * @param playerNickname nickname of the player
+     */
     public ClientPlayerBoard(String playerNickname) {
         this.playerNickname = playerNickname;
         this.connected=true;
@@ -43,14 +47,24 @@ public class ClientPlayerBoard {
     public Map<Integer, Resource> getDepotBuffRes() {
         return depotBuff;
     }
+
     public Map<String, Integer> getDepotBuffCard(){
         return depotBuffCard;
     }
 
+    /**
+     * @param depot selected depot
+     * @return true if empty, false otherwise
+     */
     public boolean isDepotEmpty(int depot){
         return warehouse.get(depot).isEmpty();
     }
 
+    /**
+     * called to know what resource is contained inside a specific depot
+     * @param depot selected depot
+     * @return resource contained inside the depot, null if empty
+     */
     public Resource getWarehouseResource(int depot){
         if(warehouse.containsKey(depot)){
             if(depot<3) return warehouse.get(depot).get(0);
@@ -59,6 +73,10 @@ public class ClientPlayerBoard {
         else return null;
     }
 
+    /**
+     * called to know the total resources owned by the player in his depot
+     * @return list of resources
+     */
     public ArrayList<Resource> storedWarehouseRes(){
         ArrayList<Resource> temp = new ArrayList<>();
         for(Integer i : warehouse.keySet()){
@@ -144,16 +162,29 @@ public class ClientPlayerBoard {
         this.handSize = handSize;
     }
 
+    /**
+     * adds one played card to playedCards and activates the effect of the leadercardd
+     * @param id id of the card
+     * @param card leadercard
+     */
     public void addPlayedCard(String id, LeaderCard card){
         playedCards.add(id);
         if(card!=null) card.getAbility().clientAbility(this);
     }
 
+    /**
+     * removes a card for the player's hand
+     * @param id of the card
+     */
     public void removeHandCard(String id){
         handSize--;
         hand.remove(id);
     }
 
+    /**
+     * sets the hand and changes the handsize accordingly
+     * @param hand to set
+     */
     public void setHand(ArrayList<String> hand) {
         handSize = hand.size();
         this.hand = hand;

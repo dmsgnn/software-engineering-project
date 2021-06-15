@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class YellowMarble extends Marbles {
     /**
-     * @param resources
-     * adds COINS when picked
-     * @param exchangeResources
+     * activates the effect of the marble
+     * @param resources adds COINS when picked
+     * @param exchangeResources resources to exchange for white marbles, not use here
      */
     @Override
     public void drawEffect(ArrayList<Resource> resources, ArrayList<Resource> exchangeResources) {

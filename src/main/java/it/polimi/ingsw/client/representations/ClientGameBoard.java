@@ -115,21 +115,31 @@ public class ClientGameBoard {
         return market[0].length;
     }
 
-    public int getWhiteCountRow(int pos){
+    /**
+     * counts the number of white marbles in one row
+     * @param row selected row
+     * @return num of white marbles
+     */
+    public int getWhiteCountRow(int row){
         int count = 0;
         for(int i = 0; i < getMarketRowsNum(); i++){
             for(int j = 0; j < getMarketColumnsNum(); j++){
-                if(i==pos && market[i][j]==MarbleColors.WHITE) count++;
+                if(i==row && market[i][j]==MarbleColors.WHITE) count++;
             }
         }
         return count;
     }
 
-    public int getWhiteCountColumn(int pos){
+    /**
+     * counts the number of white marbles in one column
+     * @param col selected column
+     * @return num of white marbles
+     */
+    public int getWhiteCountColumn(int col){
         int count = 0;
         for(int i = 0; i < getMarketRowsNum(); i++){
             for(int j = 0; j < getMarketColumnsNum(); j++){
-                if(j==pos && market[i][j]==MarbleColors.WHITE) count++;
+                if(j==col && market[i][j]==MarbleColors.WHITE) count++;
             }
         }
         return count;

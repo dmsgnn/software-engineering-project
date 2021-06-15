@@ -26,6 +26,10 @@ public enum ColorCLI {
         return code;
     }
 
+    /**
+     * @param col color of the card
+     * @return color code
+     */
     public static String cardColor(Color col){
         if(col == Color.BLUE) return CYAN.toString();
         else if(col == Color.GREEN) return GREEN.toString();
@@ -33,6 +37,10 @@ public enum ColorCLI {
         else return YELLOW.toString(); //Color = YELLOW
     }
 
+    /**
+     * @param rss color of the resource
+     * @return color code
+     */
     public static String resourceColor(Resource rss){
         if(rss==Resource.COINS) return YELLOW.toString();
         else if(rss==Resource.SERVANTS) return PURPLE.toString();
@@ -40,6 +48,10 @@ public enum ColorCLI {
         else return GREY.toString(); //STONES
     }
 
+    /**
+     * @param marble color of the marble
+     * @return color code
+     */
     public static String marbleColor(MarbleColors marble){
         if(marble==MarbleColors.BLUE ) return CYAN.toString();
         else if(marble==MarbleColors.RED) return RED.toString();

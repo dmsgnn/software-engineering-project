@@ -47,6 +47,10 @@ public class UseProduction extends Actions {
         }
     }
 
+    /**
+     * utility method that updates the strongbox of the player
+     * @param playerBoard playerboard that must be modified
+     */
     private void gainProduction(PlayerBoard playerBoard){
         Map<Resource, Integer> total = new HashMap<>();
 

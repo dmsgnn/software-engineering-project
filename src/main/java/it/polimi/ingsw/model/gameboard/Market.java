@@ -38,6 +38,12 @@ public class Market {
         }
     }
 
+    /**
+     * utility methods that returns a row or column of the market grid
+     * @param pos number of the column or row
+     * @param pickRow true if row, false if column
+     * @return list of marbles contained inside the specified row or column
+     */
     private ArrayList<Marbles> getRowOrCol(int pos, boolean pickRow){
         ArrayList<Marbles> temp = new ArrayList<>();
 
@@ -54,9 +60,20 @@ public class Market {
         return temp;
     }
 
+    /**
+     * called to obtain the marbles inside a column
+     * @param col column number
+     * @return list of marbles contained inside the specified column
+     */
     public ArrayList<Marbles> getOneColumn(int col){
         return getRowOrCol(col, false);
     }
+
+    /**
+     * called to obtain the marbles inside a row
+     * @param row row number
+     * @return list of marbles contained inside the specified row
+     */
     public ArrayList<Marbles> getOneRow(int row){
         return getRowOrCol(row, true);
     }
@@ -80,7 +97,7 @@ public class Market {
     /**
      * activates the effects of the marbles and modifies the market after a player chooses a column to get resources from
      * @param col it's the column chosen by the player
-     * @return array containing the resources gained from the market
+     * @return array containing the marbles gained from the market
      */
     public ArrayList<Marbles> pickColumn(int col) throws InvalidIndexException {
         if(col < 0 || col >= this.columns) throw new InvalidIndexException();
@@ -90,13 +107,19 @@ public class Market {
     /**
      * activates the effects of the marbles and modifies the market after a player chooses a row to get resources from
      * @param row it's the row chosen by the player
-     * @return array containing the resources gained from the market
+     * @return array containing the marbles gained from the market
      */
     public ArrayList<Marbles> pickRow(int row) throws InvalidIndexException{
         if(row < 0 || row >= this.rows) throw new InvalidIndexException();
         else return pickRowOrColumn(row, true);
     }
 
+    /**
+     * utility method to avoid code duplication, shifts a row or column
+     * @param pos number of the row or column
+     * @param pickRow true if row, false if column
+     * @return array containing the marbles gained from the market
+     */
     private ArrayList<Marbles> pickRowOrColumn(int pos, boolean pickRow){
         ArrayList<Marbles> output = new ArrayList<>();
         ArrayList<Marbles> temp = new ArrayList<>();
@@ -125,10 +148,20 @@ public class Market {
         return output;
     }
 
+    /**
+     * controls if the column exists
+     * @param col number of the column
+     * @return true if it exists, false otherwise
+     */
     public boolean validColumn(int col) {
         return col >= 0 && col < this.columns;
     }
 
+    /**
+     * controls if the row exists
+     * @param row number of the row
+     * @return true if it exists, false otherwise
+     */
     public boolean validRow(int row) {
         return row >= 0 && row < this.rows;
     }

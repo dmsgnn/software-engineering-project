@@ -12,6 +12,11 @@ public class RedMarble extends Marbles {
         this.game=game;
     }
 
+    /**
+     * activates the effect of the marble
+     * @param resources not used here
+     * @param exchangeResources resources to exchange for white marbles, not use here
+     */
     @Override
     public void drawEffect(ArrayList<Resource> resources, ArrayList<Resource> exchangeResources) {
         game.getActivePlayer().getFaithTrack().increasePosition();

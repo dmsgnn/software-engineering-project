@@ -6,10 +6,11 @@ import it.polimi.ingsw.model.Resource;
 import java.util.ArrayList;
 
 public class GreyMarble extends Marbles {
+
     /**
-     * @param resources
-     * adds STONES when picked
-     * @param exchangeResources
+     * activates the effect of the marble
+     * @param resources adds STONES when picked
+     * @param exchangeResources resources to exchange fort white marbles, not use here
      */
     @Override
     public void drawEffect(ArrayList<Resource> resources, ArrayList<Resource> exchangeResources) {

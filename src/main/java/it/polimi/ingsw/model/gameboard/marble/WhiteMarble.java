@@ -12,6 +12,12 @@ public class WhiteMarble extends Marbles {
     public WhiteMarble(Game game){
         this.game=game;
     }
+
+    /**
+     * activates the effect of the marble
+     * @param resources adds a resource to it if the player has the exchange buff active
+     * @param exchangeResources resources to exchange fort white marbles, not use here
+     */
     @Override
     public void drawEffect(ArrayList<Resource> resources, ArrayList<Resource> exchangeResources) {
         if(game.getActivePlayer().getPlayerBoard().getLeaderCardBuffs().isExchangeBuffActive()){
