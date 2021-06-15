@@ -20,8 +20,6 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.System.exit;
-
 public class CLI implements UserInterface {
 
     ClientView clientView;
@@ -137,7 +135,10 @@ public class CLI implements UserInterface {
             System.out.println(nickname + " score: " + finalScores.get(nickname));
             if(finalScores.get(nickname)>temp) winner = nickname;
         }
-        System.out.println("\n\n" + winner + " won the game\n\n");
+        System.out.println("------------------------------------");
+        System.out.println(" " + winner + " won the game      ");
+        System.out.println("------------------------------------");
+        clientView.disconnect();
         System.exit(0);
     }
 
@@ -145,7 +146,8 @@ public class CLI implements UserInterface {
     public void lorenzoScoreboard(String nickname, int score, boolean lorenzoHasWon){
         if(lorenzoHasWon) System.out.println("Lorenzo il Magnifico won the game");
         else System.out.println("You won the game");
-        System.out.println("Score: " + score);
+        System.out.println("\nScore: " + score);
+        clientView.disconnect();
         System.exit(0);
     }
 
@@ -199,8 +201,7 @@ public class CLI implements UserInterface {
                 System.out.println("Wrong starting resources placement!!!\n");
                 break;
             case INVALID_ACTION:
-                System.out.println("Invalid action!!\n");
-                //clientView.selectAction();
+                updateBoard("Invalid action!!\n");
                 break;
             case MANAGE_RESOURCES:
                 System.out.println("Wrong resources management!!!\n");
@@ -213,7 +214,6 @@ public class CLI implements UserInterface {
         System.out.println(nickname + " won the game");
 
         clientView.disconnect();
-        exit(0);
     }
 
     @Override
@@ -362,7 +362,7 @@ public class CLI implements UserInterface {
                 pickedResources.add(resource);
                 counter--;
             } catch ( IllegalArgumentException e ) {
-                System.err.println("No such resource, please try again");
+                System.out.println("No such resource, please try again");
             }
         }
 
@@ -467,7 +467,7 @@ public class CLI implements UserInterface {
                        whiteMarblesNum--;
                     }
                 } catch ( IllegalArgumentException e ) {
-                    System.err.println( "No such resource, please try again");
+                    System.out.println( "No such resource, please try again");
                 }
             }
         }
@@ -534,7 +534,7 @@ public class CLI implements UserInterface {
                                 resource = Resource.valueOf(input);
                                 leaderGain.add(resource);
                             } catch (IllegalArgumentException e) {
-                                System.err.println("No such resource, please try again");
+                                System.out.println("No such resource, please try again");
                             }
                         }
                         leaderCardSlots.add(0);
@@ -560,7 +560,7 @@ public class CLI implements UserInterface {
                                                 resource = Resource.valueOf(input);
                                                 leaderGain.add(resource);
                                             } catch ( IllegalArgumentException e ) {
-                                                System.err.println("No such resource, please try again");
+                                                System.out.println("No such resource, please try again");
                                             }
                                         }
                                         leaderCardSlots.add(value-1);
@@ -594,7 +594,7 @@ public class CLI implements UserInterface {
                         boardProduction.add(resource);
                         picked++;
                     } catch ( IllegalArgumentException e ) {
-                        System.err.println( "No such resource, please try again");
+                        System.out.println( "No such resource, please try again");
                     }
                 } while(picked < 3);
             }
@@ -817,22 +817,22 @@ public class CLI implements UserInterface {
             sum.addAll(newWarehouse.get(i));
         }
 
-        ArrayList<Resource> totalRes = new ArrayList<>();
-        totalRes.addAll(resources);
-        totalRes.addAll(active.storedWarehouseRes());
+        ArrayList<Resource> discardList = new ArrayList<>();
+        discardList.addAll(resources);
+        discardList.addAll(active.storedWarehouseRes());
         for (Resource resource : sum) {
-            totalRes.remove(resource);
+            discardList.remove(resource);
         }
 
-        Map<Resource, Integer> discard = new HashMap<>();
+        Map<Resource, Integer> discardMap = new HashMap<>();
         for(Resource rss: Resource.values()){
-            discard.put(rss, 0);
+            discardMap.put(rss, 0);
         }
-        for (Resource rss : totalRes) {
-            discard.put(rss, discard.get(rss) + 1);
+        for (Resource rss : discardList) {
+            discardMap.put(rss, discardMap.get(rss) + 1);
         }
 
-        clientView.sendManageResourcesReply(newWarehouse, discard);
+        clientView.sendManageResourcesReply(newWarehouse, discardMap);
     }
 
     private HashMap<Resource, Integer> warehousePayment(){
@@ -1298,8 +1298,8 @@ public class CLI implements UserInterface {
     }
 
     private void clearScreen() {
-        for(int i=0; i<30; i++)
-            System.out.println("\n");
+        //for(int i=0; i<30; i++) System.out.println("\n");
+        System.out.println("\033[H\033[2J");
     }
 
     @Override

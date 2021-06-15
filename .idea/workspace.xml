@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Payment using leader depots GUI">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="CLI colors updates, play again removed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/ColorCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/ColorCLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/CLITest.java" beforeDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -128,6 +129,17 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -355,14 +367,8 @@
       <workItem from="1623670272852" duration="4575000" />
       <workItem from="1623697147431" duration="2219000" />
       <workItem from="1623700824489" duration="1271000" />
-      <workItem from="1623702301364" duration="1213000" />
-    </task>
-    <task id="LOCAL-00013" summary="Development Card parser update">
-      <created>1620304302357</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1620304302357</updated>
+      <workItem from="1623702301364" duration="1261000" />
+      <workItem from="1623750346177" duration="1570000" />
     </task>
     <task id="LOCAL-00014" summary="Update of the controller and messages">
       <created>1620399456858</created>
@@ -700,7 +706,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623697769853</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="CLI colors updates, play again removed">
+      <created>1623703563193</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1623703563193</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -720,7 +733,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix" />
     <MESSAGE value="some fixes and gui update" />
     <MESSAGE value="Refactor, ClientView and UserInterface update" />
     <MESSAGE value="StartingResourcesScene" />
@@ -745,7 +757,8 @@
     <MESSAGE value="Messages updates, fixes with sync" />
     <MESSAGE value="Client fix" />
     <MESSAGE value="Payment using leader depots GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Payment using leader depots GUI" />
+    <MESSAGE value="CLI colors updates, play again removed" />
+    <option name="LAST_COMMIT_MESSAGE" value="CLI colors updates, play again removed" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

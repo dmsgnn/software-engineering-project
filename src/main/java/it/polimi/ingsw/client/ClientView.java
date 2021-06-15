@@ -25,7 +25,7 @@ public class ClientView implements Observer<ServerMessage> {
 
     private ClientSocketHandler socket;
     private final UserInterface uiType;
-    private String nickname; //nickname of the player owning this client
+    private String nickname; //nickname of the player who owns this client
     private final String ip;
     private final int port;
     private final ClientGameBoard gameboard;
@@ -36,15 +36,6 @@ public class ClientView implements Observer<ServerMessage> {
 
     ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
 
-    /**
-     * for testing
-     */
-    public ClientView(UserInterface ui){
-        this.uiType = ui;
-        gameboard = new ClientGameBoard();
-        ip = "";
-        port = 0;
-    }
 
     public ClientView(String ip, int port, UserInterface ui) {
         this.ip = ip;
@@ -433,8 +424,16 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void playerDisconnected(String nickname){
         synchronized (lock){
+            while (!gameboard.getOnePlayerBoard(nickname).isConnected()) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             gameboard.getOnePlayerBoard(nickname).setConnected(false);
             uiType.handleDisconnection(nickname);
+            lock.notifyAll();
         }
     }
 
@@ -444,8 +443,16 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void playerReconnected(String nickname){
         synchronized (lock){
+            while (gameboard.getOnePlayerBoard(nickname).isConnected()) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             gameboard.getOnePlayerBoard(nickname).setConnected(true);
             uiType.handleReconnection(nickname);
+            lock.notifyAll();
         }
     }
 
