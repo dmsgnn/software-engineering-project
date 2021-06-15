@@ -377,10 +377,11 @@ public class FullView {
                 resource2Depot3.get(playerNum).setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
                 resource3Depot3.get(playerNum).setVisible(false);
             }
-            else
-                resource1Depot3.get(playerNum).setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
+            else {
+                resource1Depot3.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(2).toString().toLowerCase() + ".png"));
                 resource2Depot3.get(playerNum).setVisible(false);
                 resource3Depot3.get(playerNum).setVisible(false);
+            }
         }
         // leader card
         if(board.getPlayedCards().size()==2){
