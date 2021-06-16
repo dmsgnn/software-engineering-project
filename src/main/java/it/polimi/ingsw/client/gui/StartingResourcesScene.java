@@ -42,6 +42,10 @@ public class StartingResourcesScene {
         StartingResourcesScene.clientView = gui.getClientView();
     }
 
+    public void setError(String error){
+        this.amount.setText(error);
+    }
+
     public void setAmount(int amount){
         numOfRes=amount;
         if(amount==0) send();

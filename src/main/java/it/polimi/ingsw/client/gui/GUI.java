@@ -164,30 +164,25 @@ public class GUI extends Application implements UserInterface {
 
     @Override
     public void manageError(Error errorType) {
-        String error;
         switch (errorType){
             case STARTING_RESOURCES:
-                error = "Wrong placement of starting resources!!!";
+                startingResources.setError("Wrong placement of starting resources!!!");
                 break;
             case STARTING_LEADER_CARD:
-                error = "Wrong cards selected!!!";
+                leaderCardSelection.setLabel("Wrong cards selected!!!");
                 break;
             case STARTING_MANAGE_RESOURCES:
-                error = "Wrong starting resources placement!!!";
+                startingResources.setError("Wrong starting resources placement!!!");
                 break;
             case INVALID_ACTION:
-                error = "Invalid action!!";
+                updateBoard("Invalid action!!");
                 break;
             case MANAGE_RESOURCES:
-                error = "Wrong resources management!!!";
+                updateBoard("Wrong resources management!!!");
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + errorType);
         }
-        Platform.runLater(()-> {
-            mainStage.getScene().setRoot(playerBoardRoot);
-            playerBoard.setMessage(error);
-        });
     }
 
     @Override

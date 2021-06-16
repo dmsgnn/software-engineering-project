@@ -34,7 +34,7 @@
             <ImageView fx:id="leader4" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Label layoutX="502.0" layoutY="54.0" minHeight="-Infinity" prefHeight="42.0" prefWidth="397.0" text="Choose the leader cards">
+      <Label fx:id="label" layoutX="502.0" layoutY="54.0" minHeight="-Infinity" prefHeight="42.0" prefWidth="397.0">
          <font>
             <Font name="SansSerif Regular" size="36.0" />
          </font>

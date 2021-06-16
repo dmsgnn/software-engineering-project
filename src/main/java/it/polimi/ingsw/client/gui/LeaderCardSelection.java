@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.gui;
 import it.polimi.ingsw.client.ClientView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -14,6 +15,7 @@ public class LeaderCardSelection {
     private static ClientView clientView;
     private static GUI gui;
     private static ArrayList<String> leaderSelection;
+    public Label label;
     private ArrayList<String> leaderId;
     private int numOfLeaderSelected;
 
@@ -42,13 +44,10 @@ public class LeaderCardSelection {
     private ImageView leader4;
 
 
-
-
-
-
     public void selectLeaderCards(ArrayList<String> leaderCardID) {
         this.leaderId = leaderCardID;
         this.numOfLeaderSelected =0;
+        setLabel("Choose the leader cards");
 
         for(int i=0; i<leaderId.size();i++){
             ImageView leader = new ImageView();
@@ -68,6 +67,10 @@ public class LeaderCardSelection {
             }
         }
 
+    }
+
+    public void setLabel(String message){
+        label.setText(message);
     }
 
     public void select1(){

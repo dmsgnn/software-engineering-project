@@ -565,7 +565,7 @@ public class ClientView implements Observer<ServerMessage> {
             playerBoard.setWarehouse(warehouse);
             playerBoard.setStrongbox(strongbox);
             gameboard.changeGridCard(gridId, color, level);
-            if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + "bought the level " + level + " " + color + " card");
+            if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + " bought the level " + level + " " + color + " card");
             else uiType.updateBoard("");
             updated=true;
             lock.notifyAll();

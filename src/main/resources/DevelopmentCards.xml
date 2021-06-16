@@ -413,8 +413,8 @@
         <level>2</level>
         <victoryPoints>6</victoryPoints>
         <requirements>
-            <COINS>3</COINS>
-            <SERVANTS>2</SERVANTS>
+            <COINS>2</COINS>
+            <SERVANTS>3</SERVANTS>
         </requirements>
         <cardProduction>
             <production>
