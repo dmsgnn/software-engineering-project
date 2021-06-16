@@ -68,8 +68,8 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         if (proxy!=null) proxy.sendMessage(message);
     }
 
-    public void startTurn(){
-        sendMessage(new StartTurn());
+    public void startTurn(String name){
+        sendMessage(new StartTurn(name));
     }
 
     public void numberOfPlayerSelection(){
@@ -90,10 +90,10 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
 
     public void sendReconnectionMessage(String username, Map<String, ArrayList<String>> devCardSlots, Map<String, Integer> faithPositions,
                                         Map<String, ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards,
-                                        Map<String, Map<Resource, Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse,Map<String,Integer>cardsInHand,Map<String,Boolean> playersConnected) {
+                                        Map<String, Map<Resource, Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand, Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated) {
 
 
-        sendMessage(new ReConnectionUpdate(username, devCardSlots,faithPositions,leaderCardsPlayed,leaderCards,strongbox,warehouse, cardsInHand, playersConnected));
+        sendMessage(new ReConnectionUpdate(username, devCardSlots,faithPositions,leaderCardsPlayed,leaderCards,strongbox,warehouse, cardsInHand, playersConnected,vaticanReportActivated));
 
 
     }

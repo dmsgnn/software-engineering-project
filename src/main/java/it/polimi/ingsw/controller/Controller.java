@@ -27,11 +27,9 @@ import it.polimi.ingsw.model.singleplayer.LorenzoAI;
 import it.polimi.ingsw.server.ServerView;
 
 import javax.naming.InsufficientResourcesException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class Controller implements Observer<ClientMessage> {
 
@@ -64,6 +62,7 @@ public class Controller implements Observer<ClientMessage> {
     private final Map<String,Map<Integer,Boolean>> playerStatus;
     private boolean gameStarted;
     private boolean gameFinished;
+    private Map<String, Map<Integer,Boolean>> vaticanReportActivated;
 
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
@@ -86,36 +85,24 @@ public class Controller implements Observer<ClientMessage> {
         selectedCards= new HashMap<>();
         leaderID = new HashMap<>();
         playersNumber = game.getPlayersNumber();
-        numOfActions= new HashMap<Integer,Boolean>(){{
-            for (int i = 0; i < playersNumber; i++) {
-                put(i,false);
-            }
-        }};
-        currentAction = new HashMap<Integer,Actions>(){{
-            for (int i = 0; i < playersNumber; i++) {
-                put(i,null);
-            }
-        }};
+        numOfActions= new HashMap<>();
+        currentAction = new HashMap<>();
         // PARAMETERS FOR MARKET ACTION
         resourceArrayList = new ArrayList<>();
         marbleColorsArrayList = new ArrayList<>();
 
         //PARAMETERS FOR FAITHTRACK
         numOfVaticanReport = game.getNumVaticanReports();
-        faithPositions = new HashMap<String,Integer>(){{
-            for (int i = 0; i < playersNumber; i++) {
-                String name = game.getPlayers(i).getNickname();
-              put(name,0);
-            }
-        }};
+        faithPositions = new HashMap<>();
+        vaticanReportActivated = new HashMap<>();
+        Map<Integer,Boolean> tempo = new HashMap<>();
+        tempo.put(8,false);
+        tempo.put(16,false);
+        tempo.put(24,false);
+
 
         //PARAMETERS FOR STARTING RESOURCES
-        this.startingResources = new HashMap<String,Integer>(){{
-            for (int i = 0; i < playersNumber; i++) {
-                String name = game.getPlayers(i).getNickname();
-                put(name,0);
-            }
-        }};
+        this.startingResources = new HashMap<>();
         this.resourceCounter=0;
         //PARAMETERS FOR DISCONNECTION
         playersDisconnected = new ArrayList<>();
@@ -123,17 +110,20 @@ public class Controller implements Observer<ClientMessage> {
         temp2.put(0,false);
         temp2.put(1,false);
         playerStatus = new HashMap<>();
-        for (int i = 0; i < playersNumber; i++) {
-            String name = game.getPlayers(i).getNickname();
-            playerStatus.put(name,temp2);
-        }
         System.out.println(playerStatus);
-        for(int i=0; i<playersNumber; i++) {
-            System.out.println("player number "+(i+1));
-            System.out.println(game.getPlayers(i).getNickname());
-        }
         this.currentActivePlayer=0;
         gameFinished = false;
+
+        for (int i = 0; i < playersNumber; i++) {
+            String name = game.getPlayers(i).getNickname();
+            System.out.println("player number " + (i+1) + ":" + name);
+            playerStatus.put(name,temp2);
+            startingResources.put(name,0);
+            vaticanReportActivated.put(name,tempo);
+            faithPositions.put(name,0);
+            currentAction.put(i,null);
+            numOfActions.put(i,false);
+        }
     }
 
 
@@ -499,7 +489,8 @@ public class Controller implements Observer<ClientMessage> {
      * changes the active player and sends him the possible actions to perform
      */
     public void startTurn(){
-        serverViews.get(currentServerView).startTurn();
+        String name = serverViews.get(currentServerView).getUsername();
+        serverViews.get(currentServerView).startTurn(name);
 
         serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
     }
@@ -887,6 +878,9 @@ public class Controller implements Observer<ClientMessage> {
         }
     }
 
+    /**
+     * this method checks the faithtrack status and sends the update message to the players
+     */
     private void faithTrackMessage() {
         boolean isActive = game.getNumVaticanReports() != numOfVaticanReport;
         Map<String,Integer> update = new HashMap<>();
@@ -894,17 +888,37 @@ public class Controller implements Observer<ClientMessage> {
             numOfVaticanReport = game.getNumVaticanReports();
             for (int i = 0; i < playersNumber; i++) {
                 Player player = game.getPlayers(i);
-                game.setActivePlayer(player);
-                int position = game.getActivePlayer().getFaithTrack().getPosition();
-                String username = game.getActivePlayer().getNickname();
-                if (position>=19){
-                    update.put(username,24);
-                }
-                else if (position>=12){
-                    update.put(username,16);
-                }
-                else if (position>=5){
-                    update.put(username,8);
+                int position = player.getFaithTrack().getPosition();
+                String username = player.getNickname();
+                switch (numOfVaticanReport){
+                    case 1: {
+                        if (position>=5){
+                            update.put(username,8);
+                            Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
+                            temp.put(8,true);
+                            vaticanReportActivated.put(username,temp);
+                        }
+                        break;
+                    }
+                    case 2: {
+                        if (position>=12){
+                            update.put(username,16);
+                            Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
+                            temp.put(16,true);
+                            vaticanReportActivated.put(username,temp);
+                        }
+                        break;
+                    }
+                    case 3:{
+                        if (position>=19){
+                            update.put(username,24);
+                            Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
+                            temp.put(24,true);
+                            vaticanReportActivated.put(username,temp);
+                        }
+                        break;
+                    }
+                    default: break;
                 }
                 faithPositions.put(username,position);
             }
@@ -916,11 +930,12 @@ public class Controller implements Observer<ClientMessage> {
         for (ServerView serverView: serverViews){
             serverView.sendFaithMessage(update,faith,isActive);
         }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
 
     }
 
+    /**
+     * @return true true if the game is over
+     */
     public boolean endGame(){
         return game.endGame();
         /*else {
@@ -933,6 +948,10 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
+    /**
+     * this method calculates the final scores of the players and sends a message to the client with the final ranking
+     * @param lorenzo is true when lorenzo wins
+     */
     public void finalScore(boolean lorenzo){
         Map<String,Integer> score= new HashMap<>();
         String name;
@@ -941,7 +960,11 @@ public class Controller implements Observer<ClientMessage> {
             playerPoints = game.getActivePlayer().getVictoryPoints();
             name = game.getActivePlayer().getNickname();
             score.put(name,playerPoints);
-            serverViews.get(0).finalScoreMessage(score,lorenzo);
+            Map<String,Integer>  sortedMapReverseOrder =  score.entrySet().
+                    stream().
+                    sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).
+                    collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+            serverViews.get(0).finalScoreMessage(sortedMapReverseOrder,lorenzo);
         }
         else{
             for (int i = 0; i < playersNumber; i++) {
@@ -950,15 +973,26 @@ public class Controller implements Observer<ClientMessage> {
                 name = player.getNickname();
                 score.put(name,playerPoints);
             }
-            System.out.println(score);
+            Map<String,Integer>  sortedMapReverseOrder =  score.entrySet().
+                    stream().
+                    sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).
+                    collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+            System.out.println(sortedMapReverseOrder);
             for (ServerView serverView: serverViews){
-                serverView.finalScoreMessage(score,lorenzo);
+                serverView.finalScoreMessage(sortedMapReverseOrder,lorenzo);
             }
         }
+
     }
 
     //------------------TOOLS------------------
 
+
+    /**
+     * This method communicates the disconnection of a player to all the others.
+     * The method then evaluates the player's status and, if applicable, passes the turn to the next player
+     * @param username of the player who logged out
+     */
     public synchronized void playerDisconnection(String username){
         for (ServerView s: serverViews){
             s.disconnectionMessage(username);
@@ -988,10 +1022,13 @@ public class Controller implements Observer<ClientMessage> {
         }
 
         // disconnection message
-        System.out.println("Disconnected players");
-        for (String s : playersDisconnected) System.out.println(s);
+        for (String s : playersDisconnected) System.out.println("Disconnected player" + s);
     }
 
+    /**
+     * this method increases the value referring to the active player recursively, until an unconnected player is found
+     * @param callNum is the number of times the method is called recursively
+     */
     private void increaseActivePlayer(int callNum){
         currentActivePlayer++;
         if (currentActivePlayer>=playersNumber)
@@ -1051,7 +1088,7 @@ public class Controller implements Observer<ClientMessage> {
         serverView.sendDevCardGrid(getDevCardGrid());
         serverView.sendMarket(getMarket(),getFreeMarble());
         serverView.sendReconnectionMessage(username,getDevCardSlots(),getFaithPositions(),getLeaderCardsPlayed(),
-                getLeaderCards(username), getStrongbox(), getWarehouse(),cardInHand,playerConnected);
+                getLeaderCards(username), getStrongbox(), getWarehouse(),cardInHand,playerConnected,vaticanReportActivated);
 
         if (!playerStatus.get(username).get(0)){
             ArrayList<String> starting= new ArrayList<>();

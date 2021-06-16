@@ -31,7 +31,7 @@ public class DevelopmentCardSlot {
     public boolean validAction(DevelopmentCard card){
         if(isEmpty() && card.getLevel()==1) return true;
         else {
-            return slots.get(cardCounter - 1).getLevel() < card.getLevel();
+            return slots.get(cardCounter - 1).getLevel() == card.getLevel()-1;
         }
     }
 
