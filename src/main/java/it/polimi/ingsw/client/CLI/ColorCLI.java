@@ -13,7 +13,7 @@ public enum ColorCLI {
     YELLOW("\u001B[33m"),
     CYAN("\u001b[36m"),
     PURPLE("\u001B[35m"),
-    GREY("\033[0;37m");
+    GREY("\033[90m");
 
     private final String code;
 

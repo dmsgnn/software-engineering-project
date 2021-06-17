@@ -166,19 +166,19 @@ public class GUI extends Application implements UserInterface {
     public void manageError(Error errorType) {
         switch (errorType){
             case STARTING_RESOURCES:
-                startingResources.setError("Wrong placement of starting resources!!!");
+                Platform.runLater(()-> startingResources.setError("Wrong placement of starting resources!!!"));
                 break;
             case STARTING_LEADER_CARD:
-                leaderCardSelection.setLabel("Wrong cards selected!!!");
+                Platform.runLater(()-> leaderCardSelection.setLabel("Wrong cards selected!!!"));
                 break;
             case STARTING_MANAGE_RESOURCES:
-                startingResources.setError("Wrong starting resources placement!!!");
+                Platform.runLater(()-> startingResources.setError("Wrong starting resources placement!!!"));
                 break;
             case INVALID_ACTION:
-                updateBoard("Invalid action!!");
+                Platform.runLater(()-> updateBoard("Invalid action!!"));
                 break;
             case MANAGE_RESOURCES:
-                updateBoard("Wrong resources management!!!");
+                Platform.runLater(()-> updateBoard("Wrong resources management!!!"));
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + errorType);
@@ -203,6 +203,16 @@ public class GUI extends Application implements UserInterface {
     @Override
     public void endTurn() {
 
+    }
+
+    /**
+     * called to tell the other player who is performing the current turn
+     */
+    @Override
+    public void startTurnNotification(String player) {
+        Platform.runLater(()-> {
+            playerBoard.setMessage(player + "'s turn");
+        });
     }
 
     @Override

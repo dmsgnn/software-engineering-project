@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="FullView print fix">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="GUI error management update, starting scenes update, DevelopmentCards.xml fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/ColorCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/ColorCLI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/UserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/LeaderCardSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/LeaderCardSelection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/StartingResourcesScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/StartingResourcesScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/StartTurn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/StartTurn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/BuyDevelopmentCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/BuyDevelopmentCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/DevelopmentCards.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/DevelopmentCards.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/LeaderCards.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/LeaderCards.fxml" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -146,17 +147,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -380,14 +370,11 @@
       <workItem from="1623827546727" duration="18000" />
       <workItem from="1623829688090" duration="437000" />
       <workItem from="1623846882364" duration="433000" />
-      <workItem from="1623847567507" duration="1181000" />
-    </task>
-    <task id="LOCAL-00017" summary="ClientView and messages updates">
-      <created>1620631309252</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1620631309252</updated>
+      <workItem from="1623847567507" duration="1485000" />
+      <workItem from="1623868357019" duration="293000" />
+      <workItem from="1623868953586" duration="1446000" />
+      <workItem from="1623870509325" duration="204000" />
+      <workItem from="1623936414325" duration="947000" />
     </task>
     <task id="LOCAL-00018" summary="Welcome message">
       <created>1620653382843</created>
@@ -725,7 +712,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623787762639</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="GUI error management update, starting scenes update, DevelopmentCards.xml fix">
+      <created>1623849029183</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1623849029184</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -745,7 +739,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="StartingResourcesScene fix" />
     <MESSAGE value="gui update, leaderCards selection bug fixed" />
     <MESSAGE value="Controller fix" />
     <MESSAGE value="Dev card slots GUI" />
@@ -770,7 +763,8 @@
     <MESSAGE value="Client view Disconnection and reconnection messages to other players synchronization, CLI graphic updates" />
     <MESSAGE value="JavaDoc" />
     <MESSAGE value="FullView print fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="FullView print fix" />
+    <MESSAGE value="GUI error management update, starting scenes update, DevelopmentCards.xml fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI error management update, starting scenes update, DevelopmentCards.xml fix" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

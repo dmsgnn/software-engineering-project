@@ -95,6 +95,14 @@ public class CLI implements UserInterface {
     }
 
     /**
+     * called to tell the other player who is performing the current turn
+     */
+    @Override
+    public void startTurnNotification(String player) {
+        System.out.println(player + "'s turn");
+    }
+
+    /**
      * called to notify that this is the last round
      */
     @Override

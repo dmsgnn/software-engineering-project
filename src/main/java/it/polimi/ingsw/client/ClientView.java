@@ -419,6 +419,15 @@ public class ClientView implements Observer<ServerMessage> {
     }
 
     /**
+     * called when another player begins his turn
+     */
+    public void turnNotification(String player){
+        synchronized (lock) {
+            if(!player.equals(nickname)) uiType.startTurnNotification(player);
+        }
+    }
+
+    /**
      * called when a player disconnects from the game
      * @param nickname of the player
      */

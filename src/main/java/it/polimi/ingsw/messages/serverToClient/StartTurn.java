@@ -13,8 +13,7 @@ public class StartTurn implements ServerMessage{
 
     @Override
     public void handleMessage(ClientView clientView) {
-
-
+        clientView.turnNotification(name);
     }
 
     @Override

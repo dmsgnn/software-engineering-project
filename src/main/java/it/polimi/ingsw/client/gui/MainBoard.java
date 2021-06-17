@@ -282,7 +282,7 @@ public class MainBoard {
 
 
     private Actions currentAction;
-    private ArrayList<LeaderCard>leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
+    private final ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
 
     //Production attributes
     private ArrayList<Integer> prodDevSlots;
@@ -692,7 +692,7 @@ public class MainBoard {
      */
     private void buttonStatus(){
         // message label
-        message.setVisible(false);
+        //message.setVisible(false);
         //change view
         if(clientView.getGameboard().getPlayerBoards().size()>1) {
             changeView.setVisible(true);

@@ -30,6 +30,11 @@ public interface UserInterface {
     void loginDone();
 
     /**
+     * called to tell the other player who is performing the current turn
+     */
+    void startTurnNotification(String player);
+
+    /**
      * handles the disconnection of one player
      * @param nickname of the player that disconnected
      */
