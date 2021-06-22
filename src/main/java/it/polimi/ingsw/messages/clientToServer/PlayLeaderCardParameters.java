@@ -1,23 +1,21 @@
 package it.polimi.ingsw.messages.clientToServer;
 
 import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.messages.clientToServer.ClientMessage;
-import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.server.PingManager;
 
-import java.util.HashMap;
-
 public class PlayLeaderCardParameters implements ClientMessage {
-    private String id;
+    private final String id;
+    private final String username;
 
-    public PlayLeaderCardParameters(String id) {
+    public PlayLeaderCardParameters(String id, String username) {
         this.id = id;
+        this.username = username;
     }
 
 
     @Override
     public void handleMessage(Controller controller) {
-        controller.playLeaderCard(id);
+        controller.playLeaderCard(id,username);
     }
 
     @Override

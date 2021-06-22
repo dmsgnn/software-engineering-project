@@ -550,8 +550,9 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * attempt to discard a leaderCard
      */
-    public void discardLeaderCard(String id ){
-        if (currentAction.get(currentActivePlayer)==Actions.DISCARDLEADERCARD) {
+    public void discardLeaderCard(String id,String playerId){
+        String username = game.getActivePlayer().getNickname();
+        if ((currentAction.get(currentActivePlayer)==Actions.DISCARDLEADERCARD)&&(playerId.equals(username))) {
             if (game.getActivePlayer().getCardsHand().get(0).getId().equals(id)) {
                 DiscardLeaderCard discardLeaderCard = new DiscardLeaderCard(game.getActivePlayer().getCardsHand().get(0), game.getActivePlayer().getCardsHand(), game.getActivePlayer().getFaithTrack());
                 doActionDiscardLeader(id,discardLeaderCard);
@@ -609,8 +610,9 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * attempt to play a leaderCard
      */
-    public void playLeaderCard(String id){
-        if (currentAction.get(currentActivePlayer)==Actions.PLAYLEADERCARD) {
+    public void playLeaderCard(String id,String playerId){
+        String username = game.getActivePlayer().getNickname();
+        if ((currentAction.get(currentActivePlayer)==Actions.PLAYLEADERCARD)&&(playerId.equals(username))) {
             if (game.getActivePlayer().getCardsHand().get(0).getId().equals(id)) {
                 PlayLeaderCard playLeaderCard = new PlayLeaderCard(game.getActivePlayer().getCardsHand(), game.getActivePlayer().getCardsHand().get(0));
                 doActionPlayLeader(id, playLeaderCard);
@@ -655,8 +657,9 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * pick the marbles from the market and turn them into resources
      */
-    public  synchronized void marketAction(int index, boolean isRow, ArrayList<Resource>exchange){
-        if (currentAction.get(currentActivePlayer)==Actions.MARKETACTION) {
+    public  synchronized void marketAction(int index, boolean isRow, ArrayList<Resource>exchange,String playerId){
+        String username = game.getActivePlayer().getNickname();
+        if ((currentAction.get(currentActivePlayer)==Actions.MARKETACTION)&&(playerId.equals(username))) {
             ArrayList<Marbles> marbles = new ArrayList<>();
             ArrayList<Resource> resources = new ArrayList<>();
             if (isRow) {
@@ -781,8 +784,9 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * attempt to buy a developmentCard
      */
-    public void buyDevelopmentCard(HashMap<Resource,Integer> depotResources, HashMap<Resource,Integer> strongboxResources, HashMap<Resource,Integer>cardDepotResources, Color color,int level,int slotNumber){
-        if (currentAction.get(currentActivePlayer)==Actions.BUYDEVELOPMENTCARD) {
+    public void buyDevelopmentCard(HashMap<Resource,Integer> depotResources, HashMap<Resource,Integer> strongboxResources, HashMap<Resource,Integer>cardDepotResources, Color color,int level,int slotNumber,String playerId){
+        String username = game.getActivePlayer().getNickname();
+        if ((currentAction.get(currentActivePlayer)==Actions.BUYDEVELOPMENTCARD)&&(playerId.equals(username))) {
             String id;
             try {
                 id = game.getBoard().viewCard(color, level).getId();
@@ -796,15 +800,18 @@ public class Controller implements Observer<ClientMessage> {
                 //RESET CURRENT ACTION TO NULL
                 currentAction.put(currentActivePlayer,null);
                 //UPDATE
-                String username = game.getActivePlayer().getNickname();
+
                 String newId;
                 try {
                     newId = game.getBoard().viewCard(color, level).getId();
                 } catch (NoCardsLeftException | WrongLevelException e) {
                     newId = null;
                 }
-                Map<Integer,ArrayList<Resource>> warehouse = getWarehouse().get(username);
-                Map<Resource,Integer> strongbox = getStrongbox().get(username);
+                Map<Integer,ArrayList<Resource>> warehouse = new HashMap<>(getWarehouse().get(username));
+                Map<Resource,Integer> strongbox =  new HashMap<>(getStrongbox().get(username));
+                for (Resource resource: Resource.values()){
+                    System.out.println( resource.toString() + strongbox.get(resource));
+                }
                 for (ServerView serverView: serverViews){
                     serverView.sendBuyDevelopmentCardUpdate(username,id,slotNumber,newId,color,level,warehouse,strongbox);
                 }
@@ -835,11 +842,11 @@ public class Controller implements Observer<ClientMessage> {
      * attempt to use the production
      */
     public void useProduction(HashMap<Resource,Integer> warehouseDepotRes,HashMap<Resource,Integer> cardDepotRes, HashMap<Resource,Integer> strongboxRes,
-                              ArrayList<Resource> boardGain, ArrayList<Resource> leaderGain, ArrayList<Integer> devSlotIndex, ArrayList<Integer> leaderCardProdIndex  ){
-        if (currentAction.get(currentActivePlayer)==Actions.USEPRODUCTION) {
+                              ArrayList<Resource> boardGain, ArrayList<Resource> leaderGain, ArrayList<Integer> devSlotIndex, ArrayList<Integer> leaderCardProdIndex, String playerId ){
+        String name = game.getActivePlayer().getNickname();
+        if ((currentAction.get(currentActivePlayer)==Actions.USEPRODUCTION)&&(playerId.equals(name))) {
             UseProduction useProduction = new UseProduction(devSlotIndex, leaderCardProdIndex, leaderGain, boardGain, warehouseDepotRes, cardDepotRes, strongboxRes);
             int currentPoints = game.getActivePlayer().getFaithTrack().getPosition();
-            String name = game.getActivePlayer().getNickname();
             try {
                 //DO ACTION
                 game.doAction(useProduction);

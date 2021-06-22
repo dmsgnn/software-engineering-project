@@ -11,13 +11,10 @@ import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
-import it.polimi.ingsw.model.singleplayer.Token;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
-import it.polimi.ingsw.utility.TokensParserXML;
 
 import java.net.Socket;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.lang.System.exit;
 
@@ -307,8 +304,8 @@ public class ClientView implements Observer<ServerMessage> {
      * @param rowOrCol true if pos is row, false if column
      * @param exchangeBuffResources resources obtained from white marbles if possible
      */
-    public void marketAction(int pos, boolean rowOrCol, ArrayList<Resource> exchangeBuffResources){
-        socket.sendMessage(new RowColumnSelection(pos, rowOrCol, exchangeBuffResources));
+    public void marketAction(int pos, boolean rowOrCol, ArrayList<Resource> exchangeBuffResources,String username){
+        socket.sendMessage(new RowColumnSelection(pos, rowOrCol, exchangeBuffResources, username));
     }
 
     /**
@@ -323,9 +320,9 @@ public class ClientView implements Observer<ServerMessage> {
      */
     public void useProduction(ArrayList<Integer> developmentCardSlotIndex, ArrayList<Integer> leaderCardProdIndex, ArrayList<Resource> leaderCardProdGain,
                               ArrayList<Resource> boardResources, HashMap<Resource, Integer> warehouseResources, HashMap<Resource, Integer> leaderDepotResources,
-                              HashMap<Resource, Integer> strongboxResources){
+                              HashMap<Resource, Integer> strongboxResources,String username){
         socket.sendMessage(new UseProductionParameters(warehouseResources, leaderDepotResources, strongboxResources,
-                boardResources, leaderCardProdGain, developmentCardSlotIndex, leaderCardProdIndex));
+                boardResources, leaderCardProdGain, developmentCardSlotIndex, leaderCardProdIndex, username));
     }
 
     /**
@@ -338,24 +335,24 @@ public class ClientView implements Observer<ServerMessage> {
      * @param strongboxRes resources inside the strongbox that the player wants to pay
      */
     public void buyDevCard(Color color, int level, int devCardSlot, HashMap<Resource, Integer> warehouseDepotRes,
-                           HashMap<Resource, Integer> cardDepotRes, HashMap<Resource, Integer> strongboxRes){
-        socket.sendMessage(new BuyDevelopmentCardParameters(color, level, devCardSlot, warehouseDepotRes, cardDepotRes, strongboxRes));
+                           HashMap<Resource, Integer> cardDepotRes, HashMap<Resource, Integer> strongboxRes,String username){
+        socket.sendMessage(new BuyDevelopmentCardParameters(color, level, devCardSlot, warehouseDepotRes, cardDepotRes, strongboxRes, username));
     }
 
     /**
      * called from UI to send the play leadercard action parameters to the server
      * @param id of the selected card
      */
-    public void playLeaderCard(String id){
-        socket.sendMessage(new PlayLeaderCardParameters(id));
+    public void playLeaderCard(String id,String username){
+        socket.sendMessage(new PlayLeaderCardParameters(id, username));
     }
 
     /**
      * called from UI to send the discard leadercard action parameters to the server
      * @param id of the selected card
      */
-    public void discardLeaderCard(String id){
-        socket.sendMessage(new DiscardLeaderCardParameters(id));
+    public void discardLeaderCard(String id,String username){
+        socket.sendMessage(new DiscardLeaderCardParameters(id, username));
     }
 
     /**
@@ -569,6 +566,9 @@ public class ClientView implements Observer<ServerMessage> {
     public void buyCardUpdate(String nickname, String id, int slot, String gridId, Color color, int level,
                               Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
+            for (Resource resource: Resource.values()){
+                System.out.println( resource.toString() + strongbox.get(resource));
+            }
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.updateDevCardSlot(slot, id);
             playerBoard.setWarehouse(warehouse);
@@ -627,6 +627,9 @@ public class ClientView implements Observer<ServerMessage> {
     public void useProductionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
             waitForFaithUpdate();
+            for (Resource resource: Resource.values()){
+                System.out.println( resource.toString() + strongbox.get(resource));
+            }
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.setWarehouse(warehouse);
             playerBoard.setStrongbox(strongbox);

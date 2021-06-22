@@ -1122,7 +1122,8 @@ public class MainBoard {
             disableButton(shieldChoice, false);
         }
         else if(currentAction == Actions.DISCARDLEADERCARD){
-            clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(0));
+            String username  = clientView.getNickname();
+            clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(0),username);
             buttonStatus();
         }
         else if (currentAction == Actions.PLAYLEADERCARD){
@@ -1147,10 +1148,11 @@ public class MainBoard {
             disableButton(shieldChoice, false);
         }
         else if(currentAction == Actions.DISCARDLEADERCARD){
+            String username = clientView.getNickname();
             if(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHandSize()==2)
-                clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(1));
+                clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(1),username);
             else
-                clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(0));
+                clientView.discardLeaderCard(clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(0),username);
             buttonStatus();
         }
         else if (currentAction == Actions.PLAYLEADERCARD){
@@ -1457,7 +1459,8 @@ public class MainBoard {
             startPayment();
         }
         else if(currentAction == Actions.USEPRODUCTION){
-            clientView.useProduction(prodDevSlots, prodLeaderSlots, leaderCardGains, boardResProd, warehousePayment, leaderDepotPayment, strongboxPayment);
+            String username = clientView.getNickname();
+            clientView.useProduction(prodDevSlots, prodLeaderSlots, leaderCardGains, boardResProd, warehousePayment, leaderDepotPayment, strongboxPayment,username);
             boardRes1.setVisible(false);
             boardRes2.setVisible(false);
             boardRes3.setVisible(false);
@@ -1467,7 +1470,8 @@ public class MainBoard {
             currentAction = null;
         }
         else if(currentAction == Actions.BUYDEVELOPMENTCARD){
-            clientView.buyDevCard(color, level, slot, warehousePayment, leaderDepotPayment, strongboxPayment);
+            String username = clientView.getNickname();
+            clientView.buyDevCard(color, level, slot, warehousePayment, leaderDepotPayment, strongboxPayment,username);
             resetEndButton();
             buttonStatus();
             currentAction = null;
@@ -1816,9 +1820,10 @@ public class MainBoard {
     }
 
     private void doPlayCard(int cardSlot) {
+        String username = clientView.getNickname();
         String id = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(cardSlot);
         buttonStatus();
-        clientView.playLeaderCard(id);
+        clientView.playLeaderCard(id,username);
     }
 
 
@@ -1901,6 +1906,7 @@ public class MainBoard {
     }
 
     public void row1MarketButton(){
+        String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
@@ -1919,15 +1925,16 @@ public class MainBoard {
             for (int i = 0; i < num; i++) {
                 resource.add(i,exchange);
             }
-            clientView.marketAction(0, true, resource);
+            clientView.marketAction(0, true, resource,username);
             disableMarketButtons();
         }
         else {
-            clientView.marketAction(0, true, resource);
+            clientView.marketAction(0, true, resource,username);
             disableMarketButtons();
         }
     }
     public void row2MarketButton(){
+        String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
@@ -1944,15 +1951,16 @@ public class MainBoard {
             for (int i = 0; i < num; i++) {
                 resource.add(i,exchange);
             }
-            clientView.marketAction(1, true, resource);
+            clientView.marketAction(1, true, resource,username);
             disableMarketButtons();
         }
         else {
-            clientView.marketAction(1, true, resource);
+            clientView.marketAction(1, true, resource,username);
             disableMarketButtons();
         }
     }
     public void row3MarketButton(){
+        String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
@@ -1969,15 +1977,16 @@ public class MainBoard {
             for (int i = 0; i < num; i++) {
                 resource.add(i,exchange);
             }
-            clientView.marketAction(2, true, resource);
+            clientView.marketAction(2, true, resource,username);
             disableMarketButtons();
         }
         else {
-            clientView.marketAction(2, true, resource);
+            clientView.marketAction(2, true, resource,username);
             disableMarketButtons();
         }
     }
     public void column1MarketButton(){
+        String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
@@ -1994,15 +2003,16 @@ public class MainBoard {
             for (int i = 0; i < num; i++) {
                 resource.add(i,exchange);
             }
-            clientView.marketAction(0, false, resource);
+            clientView.marketAction(0, false, resource,username);
             disableMarketButtons();
         }
         else {
-            clientView.marketAction(0, false, resource);
+            clientView.marketAction(0, false, resource,username);
             disableMarketButtons();
         }
     }
     public void column2MarketButton() {
+        String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
@@ -2019,15 +2029,16 @@ public class MainBoard {
             for (int i = 0; i < num; i++) {
                 resource.add(i,exchange);
             }
-            clientView.marketAction(1, false, resource);
+            clientView.marketAction(1, false, resource,username);
             disableMarketButtons();
         }
         else {
-            clientView.marketAction(1, false, resource);
+            clientView.marketAction(1, false, resource,username);
             disableMarketButtons();
         }
     }
     public void column3MarketButton(){
+        String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
@@ -2044,15 +2055,16 @@ public class MainBoard {
             for (int i = 0; i < num; i++) {
                 resource.add(i,exchange);
             }
-            clientView.marketAction(2, false, resource);
+            clientView.marketAction(2, false, resource,username);
             disableMarketButtons();
         }
         else {
-            clientView.marketAction(2, false, resource);
+            clientView.marketAction(2, false, resource,username);
             disableMarketButtons();
         }
     }
     public void column4MarketButton(){
+        String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
@@ -2069,11 +2081,11 @@ public class MainBoard {
             for (int i = 0; i < num; i++) {
                 resource.add(i,exchange);
             }
-            clientView.marketAction(3, false, resource);
+            clientView.marketAction(3, false, resource,username);
             disableMarketButtons();
         }
         else {
-            clientView.marketAction(3, false, resource);
+            clientView.marketAction(3, false, resource,username);
             disableMarketButtons();
         }
     }
@@ -2560,6 +2572,7 @@ public class MainBoard {
 
 
     public void manage1(){
+        String username = clientView.getNickname();
         if (currentAction==Actions.MANAGE) {
             if (first == null) {
                 if (!isNullVolunteer) {
@@ -2586,7 +2599,7 @@ public class MainBoard {
             exchange.add(leaderRes1);
             numberOfWhiteMarbles--;
             if (numberOfWhiteMarbles ==0){
-                clientView.marketAction(currentMarketIndex, currentRowOrColumn, exchange);
+                clientView.marketAction(currentMarketIndex, currentRowOrColumn, exchange,username);
                 disableExchangeBuff();
             }
         }
@@ -2595,6 +2608,7 @@ public class MainBoard {
 
 
     public void manage2(){
+        String username = clientView.getNickname();
         if (currentAction ==Actions.MANAGE) {
             if (first == null) {
                 if (!isNullVolunteer) {
@@ -2621,7 +2635,7 @@ public class MainBoard {
             exchange.add(leaderRes2);
             numberOfWhiteMarbles--;
             if (numberOfWhiteMarbles ==0){
-                clientView.marketAction(currentMarketIndex, currentRowOrColumn, exchange);
+                clientView.marketAction(currentMarketIndex, currentRowOrColumn, exchange,username);
                 disableExchangeBuff();
             }
         }

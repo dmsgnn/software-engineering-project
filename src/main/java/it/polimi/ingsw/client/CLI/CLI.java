@@ -536,8 +536,9 @@ public class CLI implements UserInterface {
                 whiteMarblesRes.add(rss);
             }
         }
+        String username = clientView.getNickname();
 
-        clientView.marketAction(value, rowOrCol, whiteMarblesRes);
+        clientView.marketAction(value, rowOrCol, whiteMarblesRes,username);
     }
 
     /**
@@ -670,9 +671,10 @@ public class CLI implements UserInterface {
         warehouse = warehousePayment();
         leaderDepot = leaderdepotPayment();
         strongbox = strongboxPayment();
+        String username = clientView.getNickname();
 
 
-        clientView.useProduction(devCardSlots, leaderCardSlots, leaderGain, boardProduction, warehouse, leaderDepot, strongbox);
+        clientView.useProduction(devCardSlots, leaderCardSlots, leaderGain, boardProduction, warehouse, leaderDepot, strongbox,username);
     }
 
     /**
@@ -731,8 +733,9 @@ public class CLI implements UserInterface {
         warehouse = warehousePayment();
         leaderDepot = leaderdepotPayment();
         strongbox = strongboxPayment();
+        String username = clientView.getNickname();
 
-        clientView.buyDevCard(cardColor, cardLevel, slot-1, warehouse, leaderDepot, strongbox);
+        clientView.buyDevCard(cardColor, cardLevel, slot-1, warehouse, leaderDepot, strongbox,username);
     }
 
     /**
@@ -740,12 +743,13 @@ public class CLI implements UserInterface {
      */
     @Override
     public void playLeaderCardAction() {
+        String username = clientView.getNickname();
         String input;
         int cardSlot = 0;
         boolean done = false;
         ArrayList<String> hand = gameboard.getOnePlayerBoard(clientView.getNickname()).getHand();
 
-        if(gameboard.getOnePlayerBoard(clientView.getNickname()).getHandSize()==1) clientView.playLeaderCard(hand.get(0));
+        if(gameboard.getOnePlayerBoard(clientView.getNickname()).getHandSize()==1) clientView.playLeaderCard(hand.get(0),username);
         else {
             do {
                 System.out.print("Choose the number of the card that you want to play: ");
@@ -761,7 +765,7 @@ public class CLI implements UserInterface {
                     System.out.println("Not a number!!");
                 }
             } while (!done);
-            clientView.playLeaderCard(hand.get(cardSlot));
+            clientView.playLeaderCard(hand.get(cardSlot),username);
         }
     }
 
@@ -770,12 +774,13 @@ public class CLI implements UserInterface {
      */
     @Override
     public void discardLeaderCardAction() {
+        String username = clientView.getNickname();
         String input;
         int cardSlot = 0;
         boolean done = false;
         ArrayList<String> hand = gameboard.getOnePlayerBoard(clientView.getNickname()).getHand();
 
-        if(gameboard.getOnePlayerBoard(clientView.getNickname()).getHandSize()==1) clientView.discardLeaderCard(hand.get(0));
+        if(gameboard.getOnePlayerBoard(clientView.getNickname()).getHandSize()==1) clientView.discardLeaderCard(hand.get(0),username);
         else{
             do {
                 System.out.print("Choose the number of the card that you want to discard: ");
@@ -792,7 +797,7 @@ public class CLI implements UserInterface {
                 }
             } while(!done);
 
-            clientView.discardLeaderCard(hand.get(cardSlot));
+            clientView.discardLeaderCard(hand.get(cardSlot),username);
         }
     }
 
