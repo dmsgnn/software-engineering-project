@@ -31,7 +31,7 @@ public class ClientView implements Observer<ServerMessage> {
     private final ClientGameBoard gameboard;
 
     private final Object lock = new Object();
-    private boolean updated=true;
+    private boolean updated = true;
     private boolean faithUpdateReceived = false;
 
     ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
@@ -485,9 +485,9 @@ public class ClientView implements Observer<ServerMessage> {
             this.nickname=username;
             ArrayList<String> players = new ArrayList<>(devCardSlots.keySet());
             gameboard.addPlayers(players);
-            for (String nickname : devCardSlots.keySet()) {
+            /*for (String nickname : devCardSlots.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setDevCardSlot(devCardSlots.get(nickname));
-            }
+            }*/
             for (String nickname : faithPositions.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithPositions.get(nickname));
             }

@@ -175,10 +175,13 @@ public class GUI extends Application implements UserInterface {
                 Platform.runLater(()-> startingResources.setError("Wrong starting resources placement!!!"));
                 break;
             case INVALID_ACTION:
-                Platform.runLater(()-> updateBoard("Invalid action!!"));
+                Platform.runLater(()-> playerBoard.setMessage("Invalid Action!!!"));
                 break;
             case MANAGE_RESOURCES:
-                Platform.runLater(()-> updateBoard("Wrong resources management!!!"));
+                Platform.runLater(()-> {
+                    playerBoard.update();
+                    playerBoard.setMessage("Wrong resources management!!!");
+                });
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + errorType);
@@ -326,7 +329,7 @@ public class GUI extends Application implements UserInterface {
         Platform.runLater(()-> {
             mainStage.getScene().setRoot(playerBoardRoot);
             playerBoard.update();
-            if(!message.equals("")) playerBoard.setMessage(message);
+            playerBoard.setMessage(message);
         });
     }
 

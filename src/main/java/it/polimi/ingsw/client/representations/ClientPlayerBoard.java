@@ -18,7 +18,7 @@ public class ClientPlayerBoard {
     private int playerPosition = 0;
     private final Map<Integer, Boolean> vaticanReports = new HashMap<>();
     private int lorenzoPosition = -1;
-    private final Map<Integer, String> devCardSlot = new HashMap<>();
+    private final Map<Integer, ArrayList<String>> devCardSlot = new HashMap<>();
 
     private Map<Integer, ArrayList<Resource>> warehouse = new HashMap<>();
     private Map<Resource, Integer> strongbox = new HashMap<>();
@@ -42,6 +42,35 @@ public class ClientPlayerBoard {
         for(Resource rss: Resource.values()){
             strongbox.put(rss, 0);
         }
+        for(int i=0; i<3; i++){
+            devCardSlot.put(i, new ArrayList<>());
+        }
+    }
+
+    /**
+     * controls if one slot is empty
+     * @param slot to check
+     * @return true if empty, false otherwise
+     */
+    public boolean isSlotEmpty(int slot){
+        return devCardSlot.get(slot).isEmpty();
+    }
+
+    /**
+     * @param slot requested
+     * @return size of the slot
+     */
+    public int slotSize(int slot){
+        return devCardSlot.get(slot).size();
+    }
+
+    /**
+     * @param slot requested
+     * @param level of the card
+     * @return the id of the requested card
+     */
+    public String slotCard(int slot, int level){
+        return devCardSlot.get(slot).get(level-1);
     }
 
     public Map<Integer, Resource> getDepotBuffRes() {
@@ -85,6 +114,23 @@ public class ClientPlayerBoard {
         return temp;
     }
 
+    /**
+     * @return true if the warehouse is empty, false otherwise
+     */
+    public boolean isWarehouseEmpty(){
+        return storedWarehouseRes().size() <= 0;
+    }
+
+    /**
+     * @return true if the strongbox is empty, false otherwise
+     */
+    public boolean isStrongboxEmpty(){
+        for(Resource rss: strongbox.keySet()){
+            if(strongbox.get(rss)>0) return false;
+        }
+        return true;
+    }
+
     public boolean isConnected() {
         return connected;
     }
@@ -119,7 +165,7 @@ public class ClientPlayerBoard {
         return handSize;
     }
 
-    public Map<Integer, String> getDevCardSlot() {
+    public Map<Integer, ArrayList<String>> getDevCardSlot() {
         return devCardSlot;
     }
 
@@ -214,14 +260,14 @@ public class ClientPlayerBoard {
         this.strongbox = strongbox;
     }
 
-    public void setDevCardSlot(ArrayList<String> devCardSlot) {
+    /*public void setDevCardSlot(ArrayList<String> devCardSlot) {
        for(int i = 0; i< devCardSlot.size(); i++){
            this.devCardSlot.put(i, devCardSlot.get(i));
        }
-    }
+    }*/
 
     public void updateDevCardSlot(int slot, String id) {
-        devCardSlot.put(slot, id);
+        devCardSlot.get(slot).add(id);
     }
 
     public void addExchangeBuff(Resource buff){

@@ -438,18 +438,18 @@ public class FullView {
             vatican3.get(playerNum).setImage(new Image("resources/punchboard/vatican3.png"));
         }
         // development card slots
-        if(board.getDevCardSlot().get(0) == null)
+        if(board.isSlotEmpty(0))
             slot1.get(playerNum).setVisible(false);
         else
-            slot1.get(playerNum).setImage(new Image("graphics/devCards/" + board.getDevCardSlot().get(0) + ".png"));
-        if(board.getDevCardSlot().get(1) == null)
+            slot1.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(0, board.slotSize(0)) + ".png"));
+        if(board.isSlotEmpty(1))
             slot2.get(playerNum).setVisible(false);
         else
-            slot2.get(playerNum).setImage(new Image("graphics/devCards/" + board.getDevCardSlot().get(1) + ".png"));
-        if(board.getDevCardSlot().get(2) == null)
+            slot2.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(1, board.slotSize(1)) + ".png"));
+        if(board.isSlotEmpty(2))
             slot3.get(playerNum).setVisible(false);
         else
-            slot3.get(playerNum).setImage(new Image("graphics/devCards/" + board.getDevCardSlot().get(2) + ".png"));
+            slot3.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(2, board.slotSize(2)) + ".png"));
         // cross
         double[] newPosition = getCrossPosition(board.getPlayerPosition());
         if(playerNum==0) {

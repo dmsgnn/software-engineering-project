@@ -264,6 +264,19 @@ public class MainBoard {
     @FXML
     public ImageView devSlot3Im;
 
+    @FXML
+    public ImageView devSlot1bot;
+    @FXML
+    public ImageView devSlot1mid;
+    @FXML
+    public ImageView devSlot2bot;
+    @FXML
+    public ImageView devSlot2mid;
+    @FXML
+    public ImageView devSlot3bot;
+    @FXML
+    public ImageView devSlot3mid;
+
     //vatican
     @FXML
     public ImageView vatican1;
@@ -360,11 +373,23 @@ public class MainBoard {
         String[][] grid = clientView.getGameboard().getCards();
 
         for(int i = 0; i<3; i++){
-            if(board.getDevCardSlot().get(i)!=null) {
-                Image devCardImage = new Image("/graphics/devCards/" + board.getDevCardSlot().get(i) + ".png");
+            if(!board.isSlotEmpty(i)) {
+                Image devCardImage = new Image("/graphics/devCards/" + board.slotCard(i, board.slotSize(i)) + ".png");
                 if (i == 0) devSlot1Im.setImage(devCardImage);
                 if (i == 1) devSlot2Im.setImage(devCardImage);
                 if (i == 2) devSlot3Im.setImage(devCardImage);
+            }
+            if(board.slotSize(i)>=2){
+                Image devCardImage = new Image("/graphics/devCards/" + board.slotCard(i, board.slotSize(i)-1) + ".png");
+                if (i == 0) devSlot1mid.setImage(devCardImage);
+                if (i == 1) devSlot2mid.setImage(devCardImage);
+                if (i == 2) devSlot3mid.setImage(devCardImage);
+            }
+            if(board.slotSize(i)==3){
+                Image devCardImage = new Image("/graphics/devCards/" + board.slotCard(i, board.slotSize(i)-2) + ".png");
+                if (i == 0) devSlot1bot.setImage(devCardImage);
+                if (i == 1) devSlot2bot.setImage(devCardImage);
+                if (i == 2) devSlot3bot.setImage(devCardImage);
             }
         }
 
@@ -793,6 +818,12 @@ public class MainBoard {
         devSlot1.setMouseTransparent(true);
         devSlot2.setMouseTransparent(true);
         devSlot3.setMouseTransparent(true);
+        devSlot1bot.setMouseTransparent(true);
+        devSlot1mid.setMouseTransparent(true);
+        devSlot2bot.setMouseTransparent(true);
+        devSlot2mid.setMouseTransparent(true);
+        devSlot3bot.setMouseTransparent(true);
+        devSlot3mid.setMouseTransparent(true);
         // depot buttons
         depotOneResourceOne.setDisable(false);
         depotOneResourceOne.setMouseTransparent(true);
@@ -1006,6 +1037,8 @@ public class MainBoard {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(0);
             devSlot1.setDisable(true);
+            devSlot1bot.setVisible(false);
+            devSlot1mid.setVisible(false);
         }
         else{
             slot = 0;
@@ -1023,6 +1056,8 @@ public class MainBoard {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(1);
             devSlot2.setDisable(true);
+            devSlot2bot.setVisible(false);
+            devSlot2mid.setVisible(false);
         }
         else{
             slot = 1;
@@ -1040,6 +1075,8 @@ public class MainBoard {
         if(currentAction == Actions.USEPRODUCTION){
             prodDevSlots.add(2);
             devSlot3.setDisable(true);
+            devSlot3bot.setVisible(false);
+            devSlot3mid.setVisible(false);
         }
         else{
             slot = 2;
@@ -1411,6 +1448,12 @@ public class MainBoard {
     public void endOrDoneButtonAction() {
         if(currentAction == Actions.USEPRODUCTION && !actionDone){
             actionDone = true;
+            devSlot1bot.setVisible(true);
+            devSlot1mid.setVisible(true);
+            devSlot2bot.setVisible(true);
+            devSlot2mid.setVisible(true);
+            devSlot3bot.setVisible(true);
+            devSlot3mid.setVisible(true);
             startPayment();
         }
         else if(currentAction == Actions.USEPRODUCTION){

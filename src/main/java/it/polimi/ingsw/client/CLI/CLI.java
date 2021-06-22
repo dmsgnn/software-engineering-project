@@ -128,7 +128,6 @@ public class CLI implements UserInterface {
         System.out.println("------------------------------------");
         System.out.println(" " + winner + " won the game      ");
         System.out.println("------------------------------------");
-        clientView.disconnect();
         System.exit(0);
     }
 
@@ -143,7 +142,6 @@ public class CLI implements UserInterface {
         if(lorenzoHasWon) System.out.println("Lorenzo il Magnifico won the game");
         else System.out.println("You won the game");
         System.out.println("\nScore: " + score);
-        clientView.disconnect();
         System.exit(0);
     }
 
@@ -922,32 +920,35 @@ public class CLI implements UserInterface {
         int value;
         boolean done = false;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
-
-        System.out.println("Warehouse: ");
-        int depotCont;
-        for(int i = 0; i < 3; i++){
-            depotCont=i+1;
-            do{
-                if (active.isDepotEmpty(i)) {
-                    done = true;
-                }
-                else {
-                    System.out.println("Depot " + depotCont + ": ");
-                    input = scanner.nextLine();
-                    try {
-                        value = Integer.parseInt(input);
-                        if (value < 0 || value > depotCont) System.out.println("Invalid num!");
-                        else if (value > active.getWarehouse().get(i).size())
-                            System.out.println("You don't have enough resources");
-                        else {
-                            warehouse.put(active.getWarehouseResource(i), value);
-                            done = true;
+        for(Resource rss: Resource.values()) {
+            warehouse.put(rss,0);
+        }
+        if(!active.isWarehouseEmpty()) {
+            System.out.println("Warehouse: ");
+            int depotCont;
+            for (int i = 0; i < 3; i++) {
+                depotCont = i + 1;
+                do {
+                    if (active.isDepotEmpty(i)) {
+                        done = true;
+                    } else {
+                        System.out.println("Depot " + depotCont + ": ");
+                        input = scanner.nextLine();
+                        try {
+                            value = Integer.parseInt(input);
+                            if (value < 0 || value > depotCont) System.out.println("Invalid num!");
+                            else if (value > active.getWarehouse().get(i).size())
+                                System.out.println("You don't have enough resources");
+                            else {
+                                warehouse.put(active.getWarehouseResource(i), value);
+                                done = true;
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Not a number!!");
                         }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Not a number!!");
                     }
-                }
-            }while (!done);
+                } while (!done);
+            }
         }
         return warehouse;
     }
@@ -962,7 +963,9 @@ public class CLI implements UserInterface {
         int value;
         boolean done = false;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
-
+        for(Resource rss: Resource.values()) {
+            leaderdepot.put(rss,0);
+        }
         int depotCont;
         for(Integer i : active.getWarehouse().keySet()){
             if(i > 2){
@@ -1002,21 +1005,26 @@ public class CLI implements UserInterface {
         String input;
         int value = 0;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
-
-        System.out.println("Strongbox: ");
-        for(Resource rss : active.getStrongbox().keySet()){
-            if(active.getStrongbox().get(rss)>0){
-                do{
-                    System.out.println(rss + ", amount: ");
-                    input = scanner.nextLine();
-                    try{
-                        value = Integer.parseInt(input);
-                        if(value < 0 || value > active.getStrongbox().get(rss)) System.out.println("Wrong amount!");
-                        else strongbox.put(rss, value);
-                    } catch (NumberFormatException e){
-                        System.out.println("Not a number!!");
-                    }
-                } while (value < 0 || value > active.getStrongbox().get(rss));
+        for(Resource rss: Resource.values()) {
+            strongbox.put(rss,0);
+        }
+        if(!active.isStrongboxEmpty()) {
+            System.out.println("Strongbox: ");
+            for (Resource rss : active.getStrongbox().keySet()) {
+                if (active.getStrongbox().get(rss) > 0) {
+                    do {
+                        System.out.println(rss + ", amount: ");
+                        input = scanner.nextLine();
+                        try {
+                            value = Integer.parseInt(input);
+                            if (value < 0 || value > active.getStrongbox().get(rss))
+                                System.out.println("Wrong amount!");
+                            else strongbox.put(rss, value);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Not a number!!");
+                        }
+                    } while (value < 0 || value > active.getStrongbox().get(rss));
+                }
             }
         }
         return strongbox;
@@ -1201,8 +1209,8 @@ public class CLI implements UserInterface {
         //playerBoard production and top of cards
         playerboard.append(" 1?+1? -> 1?   ");
         for(int i=0; i<3; i++){
-            if(board.getDevCardSlot().get(i)!=null)
-                playerboard.append(Objects.requireNonNull(findDevCard(board.getDevCardSlot().get(i))).drawTop()).append(ColorCLI.RESET);
+            if(!board.isSlotEmpty(i))
+                playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawTop()).append(ColorCLI.RESET);
             else
                 playerboard.append("          ").append(ColorCLI.RESET);
         }
@@ -1244,8 +1252,8 @@ public class CLI implements UserInterface {
             playerboard.append("       ");
         }
         for(int i=0; i<3; i++){
-            if(board.getDevCardSlot().get(i)!=null)
-            playerboard.append(Objects.requireNonNull(findDevCard(board.getDevCardSlot().get(i))).drawLevelAndPoints()).append(ColorCLI.RESET);
+            if(!board.isSlotEmpty(i))
+                playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawLevelAndPoints()).append(ColorCLI.RESET);
             else
                 playerboard.append("          ").append(ColorCLI.RESET);
         }
@@ -1290,8 +1298,8 @@ public class CLI implements UserInterface {
             playerboard.append("       ");
         }
         for(int i=0; i<3; i++){
-            if(board.getDevCardSlot().get(i)!=null)
-                playerboard.append(Objects.requireNonNull(findDevCard(board.getDevCardSlot().get(i))).drawRequirements()).append(ColorCLI.RESET);
+            if(!board.isSlotEmpty(i))
+                playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawRequirements()).append(ColorCLI.RESET);
             else
                 playerboard.append("          ").append(ColorCLI.RESET);
         }
@@ -1323,8 +1331,8 @@ public class CLI implements UserInterface {
         else
             playerboard.append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|").append(ColorCLI.resourceColor(board.getWarehouseResource(2))).append("■").append(ColorCLI.RESET).append("|        ");
         for(int i=0; i<3; i++){
-            if(board.getDevCardSlot().get(i)!=null)
-                playerboard.append(Objects.requireNonNull(findDevCard(board.getDevCardSlot().get(i))).drawProdCostAndGain()).append(ColorCLI.RESET);
+            if(!board.isSlotEmpty(i))
+                playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawProdCostAndGain()).append(ColorCLI.RESET);
             else
                 playerboard.append("          ").append(ColorCLI.RESET);
         }
@@ -1350,8 +1358,8 @@ public class CLI implements UserInterface {
         playerboard.append(" ").append(ColorCLI.resourceColor(Resource.SERVANTS)).append("■  ");
         playerboard.append(" ").append(ColorCLI.resourceColor(Resource.STONES)).append("■ ");
         for(int i=0; i<3; i++){
-            if(board.getDevCardSlot().get(i)!=null)
-            playerboard.append(Objects.requireNonNull(findDevCard(board.getDevCardSlot().get(i))).drawBottom()).append(ColorCLI.RESET);
+            if(!board.isSlotEmpty(i))
+                playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawBottom()).append(ColorCLI.RESET);
 
             else
                 playerboard.append("          ").append(ColorCLI.RESET);
@@ -1390,10 +1398,22 @@ public class CLI implements UserInterface {
         else
             playerboard.append("   ");
         playerboard.append(board.getStrongbox().get(Resource.STONES));
-        if(board.getStrongbox().get(Resource.STONES)>9)
-            playerboard.append("  ");
-        else
-            playerboard.append("   ");
+        if(board.getStrongbox().get(Resource.STONES)<9)
+            playerboard.append(" ");
+        for(int i=0; i<3; i++){
+            if(board.slotSize(i)>=2)
+                playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)-1))).drawLevelAndPoints()).append(ColorCLI.RESET);
+            else
+                playerboard.append("          ").append(ColorCLI.RESET);
+        }
+        playerboard.append("\n");
+        playerboard.append("               ");
+        for(int i=0; i<3; i++){
+            if(board.slotSize(i)==3)
+                playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)-2))).drawLevelAndPoints()).append(ColorCLI.RESET);
+            else
+                playerboard.append("          ").append(ColorCLI.RESET);
+        }
 
         return playerboard.toString();
     }

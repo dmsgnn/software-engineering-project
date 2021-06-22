@@ -219,21 +219,6 @@
             <ImageView fx:id="depot3Resource3" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <Button fx:id="devSlot1" layoutX="915.0" layoutY="485.0" mnemonicParsing="false" onAction="#slot1Action" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
-         <graphic>
-            <ImageView fx:id="devSlot1Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
-         </graphic>
-      </Button>
-      <Button fx:id="devSlot2" layoutX="1050.0" layoutY="485.0" mnemonicParsing="false" onAction="#slot2Action" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
-         <graphic>
-            <ImageView fx:id="devSlot2Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
-         </graphic>
-      </Button>
-      <Button fx:id="devSlot3" layoutX="1190.0" layoutY="485.0" mnemonicParsing="false" onAction="#slot3Action" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
-         <graphic>
-            <ImageView fx:id="devSlot3Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
-         </graphic>
-      </Button>
       <Button fx:id="boardProduction" layoutX="824.0" layoutY="589.0" mnemonicParsing="false" onAction="#useBoardProd" prefHeight="79.0" prefWidth="79.0" style="-fx-background-color: transparent;" />
       <ImageView fx:id="vatican1" fitHeight="35.0" fitWidth="35.0" layoutX="830.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="vatican2" fitHeight="35.0" fitWidth="35.0" layoutX="1000.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true" />
@@ -351,6 +336,27 @@
       <Button fx:id="depotTwoLeader2" layoutX="1268.0" layoutY="187.0" minHeight="2.0" minWidth="2.0" mnemonicParsing="false" onAction="#depotTwoLeader2Action" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fx:id="depot2Leader2" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <ImageView fx:id="devSlot1bot" fitHeight="174.5" fitWidth="115.5" layoutX="925.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="devSlot1mid" fitHeight="174.5" fitWidth="115.5" layoutX="925.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="devSlot2bot" fitHeight="174.5" fitWidth="115.5" layoutX="1060.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="devSlot2mid" fitHeight="174.5" fitWidth="115.5" layoutX="1060.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="devSlot3bot" fitHeight="174.5" fitWidth="115.5" layoutX="1200.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="devSlot3mid" fitHeight="174.5" fitWidth="115.5" layoutX="1200.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="devSlot1" layoutX="917.0" layoutY="458.0" mnemonicParsing="false" onAction="#slot1Action" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devSlot1Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="devSlot2" layoutX="1052.0" layoutY="458.0" mnemonicParsing="false" onAction="#slot2Action" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devSlot2Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button fx:id="devSlot3" layoutX="1192.0" layoutY="458.0" mnemonicParsing="false" onAction="#slot3Action" prefHeight="174.5" prefWidth="115.5" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fx:id="devSlot3Im" fitHeight="174.5" fitWidth="115.5" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
    </children>
