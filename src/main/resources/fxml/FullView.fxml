@@ -85,7 +85,7 @@
             <Image url="@../resources/punchboard/stones.png" />
          </image>
       </ImageView>
-      <Label fx:id="strongboxServantsCounterPlayer1" alignment="CENTER" layoutX="135.0" layoutY="330.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+      <Label fx:id="strongboxServantsCounterPlayer1" alignment="CENTER" layoutX="135.0" layoutY="330.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: cc66ff; -fx-background-radius: 6;" textAlignment="CENTER">
          <font>
             <Font name="SansSerif Bold" size="8.0" />
          </font>
@@ -130,7 +130,7 @@
             <Image url="@../resources/punchboard/servants.png" />
          </image>
       </ImageView>
-      <Label fx:id="strongboxServantsCounterPlayer2" alignment="CENTER" layoutX="815.0" layoutY="330.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+      <Label fx:id="strongboxServantsCounterPlayer2" alignment="CENTER" layoutX="815.0" layoutY="330.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: cc66ff; -fx-background-radius: 6;" textAlignment="CENTER">
          <font>
             <Font name="SansSerif Bold" size="8.0" />
          </font>
@@ -170,7 +170,7 @@
             <Image url="@../resources/punchboard/servants.png" />
          </image>
       </ImageView>
-      <Label fx:id="strongboxServantsCounterPlayer3" alignment="CENTER" layoutX="135.0" layoutY="710.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+      <Label fx:id="strongboxServantsCounterPlayer3" alignment="CENTER" layoutX="135.0" layoutY="710.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: cc66ff; -fx-background-radius: 6;" textAlignment="CENTER">
          <font>
             <Font name="SansSerif Bold" size="8.0" />
          </font>
@@ -210,7 +210,7 @@
             <Image url="@../resources/punchboard/servants.png" />
          </image>
       </ImageView>
-      <Label fx:id="strongboxServantsCounterPlayer4" alignment="CENTER" layoutX="815.0" layoutY="710.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: purple; -fx-background-radius: 6;" textAlignment="CENTER">
+      <Label fx:id="strongboxServantsCounterPlayer4" alignment="CENTER" layoutX="815.0" layoutY="710.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: cc66ff; -fx-background-radius: 6;" textAlignment="CENTER">
          <font>
             <Font name="SansSerif Bold" size="8.0" />
          </font>

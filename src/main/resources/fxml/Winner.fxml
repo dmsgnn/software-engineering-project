@@ -15,12 +15,7 @@
             <Image url="@../graphics/winner_background.png" />
          </image>
       </ImageView>
-      <Button fx:id="quit" alignment="CENTER" layoutX="630.0" layoutY="650.0" mnemonicParsing="false" onAction="#quit" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="QUIT">
-         <font>
-            <Font name="SansSerif Bold" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="restart" alignment="CENTER" layoutX="630.0" layoutY="600.0" mnemonicParsing="false" onAction="#newLogin" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: GREEN; -fx-background-radius: 20;" text="RESTART" textFill="WHITE">
+      <Button fx:id="quit" alignment="CENTER" layoutX="630.0" layoutY="625.0" mnemonicParsing="false" onAction="#quit" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="QUIT">
          <font>
             <Font name="SansSerif Bold" size="13.0" />
          </font>

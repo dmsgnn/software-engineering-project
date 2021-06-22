@@ -26,6 +26,25 @@ public class FaithTrackTest {
     }
 
     @Test
+    @DisplayName("Test that a user can't exceed the position of 24")
+    public void positionExceededTest() throws FullPlayerException {
+        Game game = new Game();
+        game.addPlayer("paolo");
+        game.addPlayer("luca");
+        game.setActivePlayer(game.getPlayers(0));
+        FaithTrack playerFaithTrack = game.getPlayers(1).getFaithTrack();
+        playerFaithTrack.setPosition(23);
+        playerFaithTrack.increasePosition();
+        assertEquals(24, playerFaithTrack.getPosition());
+        playerFaithTrack.increasePosition();
+        assertEquals(24, playerFaithTrack.getPosition());
+        game.getActivePlayer().getFaithTrack().increaseAllPositions();
+        game.getActivePlayer().getFaithTrack().increaseAllPositions();
+        game.getActivePlayer().getFaithTrack().increaseAllPositions();
+        assertEquals(24, playerFaithTrack.getPosition());
+    }
+
+    @Test
     @DisplayName("Test three cases and checks that in case every position get incremented, the vatican report check is correctly done")
     public void increaseAllPositionTest() throws FullPlayerException {
         Game game = new Game();

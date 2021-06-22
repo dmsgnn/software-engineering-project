@@ -96,8 +96,4 @@ public class Winner {
         exit(0);
     }
 
-    public void newLogin(){
-        gui.login();
-    }
-
 }
