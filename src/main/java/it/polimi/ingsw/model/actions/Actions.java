@@ -92,10 +92,14 @@ public abstract class Actions {
             Resource key = entry.getKey();
             Integer value = entry.getValue();
             boolean flag = false; //is false if the one resource isn't contained inside the depots
-            for (int i = 0; i < playerBoard.getWarehouse().getBaseDepotsNum(); i++) {
-                if(key == playerDepots.get(i).getResource()){
-                    flag = true;
-                    if(playerDepots.get(i).getOccupied()<value) return false;
+            if (value == 0) flag = true;
+            else if (value < 0) return false;
+            else {
+                for (int i = 0; i < playerBoard.getWarehouse().getBaseDepotsNum(); i++) {
+                    if (key == playerDepots.get(i).getResource()) {
+                        flag = true;
+                        if (playerDepots.get(i).getOccupied() < value) return false;
+                    }
                 }
             }
             if(!flag) return false;
@@ -103,11 +107,15 @@ public abstract class Actions {
         for(Map.Entry<Resource, Integer> entry : leaderDepotResources.entrySet()){
             Resource key = entry.getKey();
             Integer value = entry.getValue();
-            boolean flag = false; //is false if the one resource isn't containted inside the leaderDepot
-            for (int i = playerBoard.getWarehouse().getBaseDepotsNum(); i < playerBoard.getWarehouse().getDepotsNum(); i++) {
-                if(key == playerDepots.get(i).getResource()){
-                    flag = true;
-                    if(playerDepots.get(i).getOccupied()<value) return false;
+            boolean flag = false; //is false if the one resource isn't contained inside the leaderDepot
+            if (value == 0) flag = true;
+            else if (value < 0) return false;
+            else {
+                for (int i = playerBoard.getWarehouse().getBaseDepotsNum(); i < playerBoard.getWarehouse().getDepotsNum(); i++) {
+                    if (key == playerDepots.get(i).getResource()) {
+                        flag = true;
+                        if (playerDepots.get(i).getOccupied() < value) return false;
+                    }
                 }
             }
             if(!flag) return false;
@@ -115,6 +123,7 @@ public abstract class Actions {
         for(Map.Entry<Resource, Integer> entry : strongboxResources.entrySet()){
             Resource key = entry.getKey();
             Integer value = entry.getValue();
+            if (value < 0) return false;
             if(playerBoard.getStrongbox().getResources().get(key)<value) return false;
         }
 

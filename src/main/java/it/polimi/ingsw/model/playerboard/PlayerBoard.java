@@ -66,7 +66,6 @@ public class PlayerBoard {
      * @param cost1 to activate production
      * @param cost2 to activate production
      * @param gain obtained from production
-     * @throws InsufficientResourcesException
      */
     public void boardProduction(Resource cost1, Resource cost2, Resource gain) {
         Map<Resource, Integer> resources = warehouse.storedResources();
@@ -101,6 +100,17 @@ public class PlayerBoard {
 
     public void setColorRequirements(HashMap<Integer, HashMap<Color, Integer>> colorRequirements) {
         this.colorRequirements = colorRequirements;
+    }
+
+    /**
+     * @return map containing all cards ids contained inside each slot
+     */
+    public Map<Integer, ArrayList<String>> getDevSlotsCardId(){
+        Map<Integer, ArrayList<String>> slots = new HashMap<>();
+        for(int i=0; i<3; i++){
+            slots.put(i, this.slots.get(i).getCardsIds());
+        }
+        return slots;
     }
 
     public Warehouse getWarehouse() {

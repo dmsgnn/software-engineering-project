@@ -16,9 +16,9 @@ public class ClientPlayerBoard {
 
     private ArrayList<String> playedCards = new ArrayList<>();
     private int playerPosition = 0;
-    private final Map<Integer, Boolean> vaticanReports = new HashMap<>();
+    private Map<Integer, Boolean> vaticanReports = new HashMap<>();
     private int lorenzoPosition = -1;
-    private final Map<Integer, ArrayList<String>> devCardSlot = new HashMap<>();
+    private Map<Integer, ArrayList<String>> devCardSlot = new HashMap<>();
 
     private Map<Integer, ArrayList<Resource>> warehouse = new HashMap<>();
     private Map<Resource, Integer> strongbox = new HashMap<>();
@@ -240,7 +240,11 @@ public class ClientPlayerBoard {
         this.playedCards = playedCards;
     }
 
-    public void setVaticanReports(Integer pos, Boolean activated) {
+    public void setVaticanReports(Map<Integer, Boolean> reports){
+        this.vaticanReports = reports;
+    }
+
+    public void updateVaticanReports(Integer pos, Boolean activated) {
         this.vaticanReports.put(pos, activated);
     }
 
@@ -260,11 +264,9 @@ public class ClientPlayerBoard {
         this.strongbox = strongbox;
     }
 
-    /*public void setDevCardSlot(ArrayList<String> devCardSlot) {
-       for(int i = 0; i< devCardSlot.size(); i++){
-           this.devCardSlot.put(i, devCardSlot.get(i));
-       }
-    }*/
+    public void setDevCardSlot( Map<Integer, ArrayList<String>> devCardSlot) {
+       this.devCardSlot = devCardSlot;
+    }
 
     public void updateDevCardSlot(int slot, String id) {
         devCardSlot.get(slot).add(id);

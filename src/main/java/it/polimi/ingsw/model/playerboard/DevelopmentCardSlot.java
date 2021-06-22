@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DevelopmentCardSlot {
-    private ArrayList<DevelopmentCard> slots = new ArrayList<>();
+    private final ArrayList<DevelopmentCard> slots = new ArrayList<>();
     private int cardCounter=0;
     HashMap<Color,Integer> map;
     int count;
@@ -58,8 +58,7 @@ public class DevelopmentCardSlot {
      */
     public boolean isFull(){
         if (cardCounter==0) return false;
-        if (slots.get(cardCounter-1).getLevel()==3) return true;
-        else return false;
+        return slots.get(cardCounter - 1).getLevel() == 3;
     }
 
     /**
@@ -67,8 +66,7 @@ public class DevelopmentCardSlot {
      * @return true if the slot is empty
      */
     public boolean isEmpty(){
-        if (cardCounter==0) return true;
-        else return false;
+        return cardCounter == 0;
     }
 
     /**
@@ -77,4 +75,14 @@ public class DevelopmentCardSlot {
      */
     public int numOfCards(){return cardCounter;}
 
+    /**
+     * @return list of the ids ordered from level 1 to level 3
+     */
+    public ArrayList<String> getCardsIds(){
+        ArrayList<String> ids = new ArrayList<>();
+        for(int i = 0; i<cardCounter; i++){
+            ids.add(getCard(i).getId());
+        }
+        return ids;
+    }
 }

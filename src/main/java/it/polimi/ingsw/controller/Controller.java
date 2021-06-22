@@ -1125,24 +1125,12 @@ public class Controller implements Observer<ClientMessage> {
 
 
 
-    private Map<String,ArrayList<String>> getDevCardSlots(){
-        Map<String,ArrayList<String>> devCardSlots = new HashMap<>();
+    private Map<String, Map<Integer, ArrayList<String>>> getDevCardSlots(){
+        Map<String, Map<Integer, ArrayList<String>>> devCardSlots = new HashMap<>();
         for (int i=0;i<serverViews.size();i++){
             Player player = game.getPlayers(i);
-            game.setActivePlayer(player);
-            ArrayList<String> playerCards = new ArrayList<>();
-            for (int j=0;j<game.getActivePlayer().getPlayerBoard().getSlots().size();j++){
-                if (game.getActivePlayer().getPlayerBoard().getSlots().get(j).lookTop()==null){
-                    playerCards.add(j,null);
-                }
-                else{
-                    playerCards.add(j,game.getActivePlayer().getPlayerBoard().getSlots().get(j).lookTop().getId());
-                }
-            }
-            devCardSlots.put(game.getActivePlayer().getNickname(),playerCards);
+            devCardSlots.put(player.getNickname(), player.getPlayerBoard().getDevSlotsCardId());
         }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
         return devCardSlots;
     }
 

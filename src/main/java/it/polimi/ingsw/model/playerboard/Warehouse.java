@@ -27,16 +27,12 @@ public class Warehouse {
      * @return true if the warehouse is full
      */
     public boolean isFull(){
-        boolean value=true;
         for (BaseDepot depot : this.depots){
-            if (depot.isFull()){
-                if (value==true) value=true;
-            }
-            else {
-                value = false;
+            if (!depot.isFull()){
+                return false;
             }
         }
-        return value;
+        return true;
     }
 
     /**

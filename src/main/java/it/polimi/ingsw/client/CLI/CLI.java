@@ -925,9 +925,7 @@ public class CLI implements UserInterface {
         int value;
         boolean done = false;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
-        for(Resource rss: Resource.values()) {
-            warehouse.put(rss,0);
-        }
+
         if(!active.isWarehouseEmpty()) {
             System.out.println("Warehouse: ");
             int depotCont;
@@ -968,9 +966,7 @@ public class CLI implements UserInterface {
         int value;
         boolean done = false;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
-        for(Resource rss: Resource.values()) {
-            leaderdepot.put(rss,0);
-        }
+
         int depotCont;
         for(Integer i : active.getWarehouse().keySet()){
             if(i > 2){
@@ -1010,9 +1006,7 @@ public class CLI implements UserInterface {
         String input;
         int value = 0;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
-        for(Resource rss: Resource.values()) {
-            strongbox.put(rss,0);
-        }
+
         if(!active.isStrongboxEmpty()) {
             System.out.println("Strongbox: ");
             for (Resource rss : active.getStrongbox().keySet()) {

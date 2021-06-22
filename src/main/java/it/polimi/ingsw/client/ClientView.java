@@ -473,18 +473,19 @@ public class ClientView implements Observer<ServerMessage> {
      * @param warehouse every warehouse
      * @param cardsInHand number of cards in each player's hand
      * @param playersConnected connection status of each player
+     * @param vaticanReportActivated vatican report status for each player
      */
-    public void reconnectionUpdate(String username, Map<String, ArrayList<String>> devCardSlots, Map<String, Integer> faithPositions, Map<String,
+    public void reconnectionUpdate(String username, Map<String, Map<Integer, ArrayList<String>>> devCardSlots, Map<String, Integer> faithPositions, Map<String,
             ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource, Integer>> strongbox,
-                                   Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String,Integer> cardsInHand,
-                                   Map<String,Boolean> playersConnected){
+                                   Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand,
+                                   Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated){
         synchronized (lock) {
             this.nickname=username;
             ArrayList<String> players = new ArrayList<>(devCardSlots.keySet());
             gameboard.addPlayers(players);
-            /*for (String nickname : devCardSlots.keySet()) {
+            for (String nickname : devCardSlots.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setDevCardSlot(devCardSlots.get(nickname));
-            }*/
+            }
             for (String nickname : faithPositions.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithPositions.get(nickname));
             }
@@ -509,6 +510,9 @@ public class ClientView implements Observer<ServerMessage> {
                     }
                 }
                 else gameboard.getOnePlayerBoard(nickname).setPlayedCards(leaderCardsPlayed.get(nickname));
+            }
+            for (String nickname : vaticanReportActivated.keySet()){
+                gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanReportActivated.get(nickname));
             }
             uiType.updateBoard("Reconnected");
             uiType.endTurn();
@@ -544,7 +548,7 @@ public class ClientView implements Observer<ServerMessage> {
             for (String nickname : position.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
                 if (report) {
-                    gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanPosition.get(nickname), vaticanPosition.containsKey(nickname));
+                    gameboard.getOnePlayerBoard(nickname).updateVaticanReports(vaticanPosition.get(nickname), vaticanPosition.containsKey(nickname));
                 }
             }
             faithUpdateReceived=true;
