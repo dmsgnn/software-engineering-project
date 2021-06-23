@@ -175,7 +175,10 @@ public class GUI extends Application implements UserInterface {
                 Platform.runLater(()-> startingResources.setError("Wrong starting resources placement!!!"));
                 break;
             case INVALID_ACTION:
-                Platform.runLater(()-> playerBoard.setMessage("Invalid Action!!!"));
+                Platform.runLater(()-> {
+                    playerBoard.update();
+                    playerBoard.setMessage("Invalid Action!!!");
+                });
                 break;
             case MANAGE_RESOURCES:
                 Platform.runLater(()-> {

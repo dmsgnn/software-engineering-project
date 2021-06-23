@@ -187,6 +187,18 @@ public class FullView {
     private ImageView player1Slot2;
     @FXML
     private ImageView player1Slot3;
+    @FXML
+    public ImageView player1Slot1mid;
+    @FXML
+    public ImageView player1Slot2mid;
+    @FXML
+    public ImageView player1Slot3mid;
+    @FXML
+    public ImageView player1Slot1bot;
+    @FXML
+    public ImageView player1Slot2bot;
+    @FXML
+    public ImageView player1Slot3bot;
 
     //slots of player two
     @FXML
@@ -195,6 +207,18 @@ public class FullView {
     private ImageView player2Slot2;
     @FXML
     private ImageView player2Slot3;
+    @FXML
+    public ImageView player2Slot1mid;
+    @FXML
+    public ImageView player2Slot2mid;
+    @FXML
+    public ImageView player2Slot3mid;
+    @FXML
+    public ImageView player2Slot1bot;
+    @FXML
+    public ImageView player2Slot2bot;
+    @FXML
+    public ImageView player2Slot3bot;
 
     //slots of player three
     @FXML
@@ -203,6 +227,18 @@ public class FullView {
     private ImageView player3Slot2;
     @FXML
     private ImageView player3Slot3;
+    @FXML
+    public ImageView player3Slot1mid;
+    @FXML
+    public ImageView player3Slot2mid;
+    @FXML
+    public ImageView player3Slot3mid;
+    @FXML
+    public ImageView player3Slot1bot;
+    @FXML
+    public ImageView player3Slot2bot;
+    @FXML
+    public ImageView player3Slot3bot;
 
     //slots of player four
     @FXML
@@ -211,6 +247,18 @@ public class FullView {
     private ImageView player4Slot2;
     @FXML
     private ImageView player4Slot3;
+    @FXML
+    public ImageView player4Slot1mid;
+    @FXML
+    public ImageView player4Slot2mid;
+    @FXML
+    public ImageView player4Slot3mid;
+    @FXML
+    public ImageView player4Slot1bot;
+    @FXML
+    public ImageView player4Slot2bot;
+    @FXML
+    public ImageView player4Slot3bot;
 
     @FXML
     private Label player1Name;
@@ -263,8 +311,14 @@ public class FullView {
     private ArrayList<ImageView> vatican2;
     private ArrayList<ImageView> vatican3;
     private ArrayList<ImageView> slot1;
+    private ArrayList<ImageView> slot1Mid;
+    private ArrayList<ImageView> slot1Bot;
     private ArrayList<ImageView> slot2;
+    private ArrayList<ImageView> slot2Mid;
+    private ArrayList<ImageView> slot2Bot;
     private ArrayList<ImageView> slot3;
+    private ArrayList<ImageView> slot3Mid;
+    private ArrayList<ImageView> slot3Bot;
     private ArrayList<ImageView> cross;
 
 
@@ -298,8 +352,14 @@ public class FullView {
         vatican3 = new ArrayList<>(Arrays.asList(vatican3Player1, vatican3Player2, vatican3Player3, vatican3Player4));
         //dev slots
         slot1 = new ArrayList<>(Arrays.asList(player1Slot1, player2Slot1, player3Slot1, player4Slot1));
+        slot1Mid = new ArrayList<>(Arrays.asList(player1Slot1mid, player2Slot1mid, player3Slot1mid, player4Slot1mid));
+        slot1Bot = new ArrayList<>(Arrays.asList(player1Slot1bot, player2Slot1bot, player3Slot1bot, player4Slot1bot));
         slot2 = new ArrayList<>(Arrays.asList(player1Slot2, player2Slot2, player3Slot2, player4Slot2));
+        slot2Mid = new ArrayList<>(Arrays.asList(player1Slot2mid, player2Slot2mid, player3Slot2mid, player4Slot2mid));
+        slot2Bot = new ArrayList<>(Arrays.asList(player1Slot2bot, player2Slot2bot, player3Slot2bot, player4Slot2bot));
         slot3 = new ArrayList<>(Arrays.asList(player1Slot3, player2Slot3, player3Slot3, player4Slot3));
+        slot3Mid = new ArrayList<>(Arrays.asList(player1Slot3mid, player2Slot3mid, player3Slot3mid, player4Slot3mid));
+        slot3Bot = new ArrayList<>(Arrays.asList(player1Slot3bot, player2Slot3bot, player3Slot3bot, player4Slot3bot));
         cross = new ArrayList<>(Arrays.asList(cross1, cross2, cross3, cross4));
 
     }
@@ -450,6 +510,14 @@ public class FullView {
             slot3.get(playerNum).setVisible(false);
         else
             slot3.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(2, board.slotSize(2)) + ".png"));
+        //middle slots
+        if(board.slotSize(0)>=2) slot1Mid.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(0, board.slotSize(0)-1) + ".png"));
+        if(board.slotSize(1)>=2) slot2Mid.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(1, board.slotSize(1)-1) + ".png"));
+        if(board.slotSize(2)>=2) slot3Mid.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(2, board.slotSize(2)-1) + ".png"));
+        //bottom slots
+        if(board.slotSize(0)==3) slot1Bot.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(0, board.slotSize(0)-2) + ".png"));
+        if(board.slotSize(1)==3) slot2Bot.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(1, board.slotSize(1)-2) + ".png"));
+        if(board.slotSize(2)==3) slot3Bot.get(playerNum).setImage(new Image("graphics/devCards/" + board.slotCard(2, board.slotSize(2)-2) + ".png"));
         // cross
         double[] newPosition = getCrossPosition(board.getPlayerPosition());
         if(playerNum==0) {

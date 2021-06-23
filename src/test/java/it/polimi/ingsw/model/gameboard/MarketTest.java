@@ -46,8 +46,8 @@ public class MarketTest {
     }
 
     @Test
-    @DisplayName("Check correct marbles output for getColumn")
-    public void testGetColumn(){
+    @DisplayName("Check correct marbles output for pickColumn")
+    public void testPickColumn(){
         game.setActivePlayer(new Player("Giorgio", 1, game));
 
         ArrayList<Marbles> tempMarbles = new ArrayList<>();
@@ -67,8 +67,8 @@ public class MarketTest {
     }
 
     @Test
-    @DisplayName("Check correct marbles output for getRow")
-    public void testGetRow(){
+    @DisplayName("Check correct marbles output for pickRow")
+    public void testPickRow(){
         game.setActivePlayer(new Player("Giorgio", 1, game));
 
         ArrayList<Marbles> tempMarbles = new ArrayList<>();
@@ -88,7 +88,7 @@ public class MarketTest {
     }
 
     @Test
-    @DisplayName("Check correct market update for getColumn")
+    @DisplayName("Check correct market update for pickColumn")
     public void testShiftColumn(){
 
         game.setActivePlayer(new Player("Giorgio", 1, game));
@@ -122,8 +122,9 @@ public class MarketTest {
             }
         }
     }
+
     @Test
-    @DisplayName("Check correct market update for getRow")
+    @DisplayName("Check correct market update for pickRow")
     public void testShiftRow() {
 
         game.setActivePlayer(new Player("Giorgio", 1, game));
@@ -156,6 +157,40 @@ public class MarketTest {
                         assertEquals(market.getMarbleGrid()[row][col], grid[row][col]);
                 }
             }
+        }
+    }
+
+    @Test
+    @DisplayName("Check correct marbles output for getRow")
+    public void testGetRow(){
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+        ArrayList<Marbles> tempMarbles = new ArrayList<>();
+        ArrayList<Marbles> marbles;
+        for(int i=0; i < market.getRows(); i++) {
+            tempMarbles.removeAll(tempMarbles);
+            for(int k = 0; k < market.getColumns(); k++) {
+                tempMarbles.add(market.getMarbleGrid()[i][k]);
+            }
+            marbles = market.getOneRow(i);
+            assertEquals(marbles, tempMarbles);
+        }
+    }
+
+    @Test
+    @DisplayName("Check correct marbles output for getColumn")
+    public void testGetColumn(){
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+        ArrayList<Marbles> tempMarbles = new ArrayList<>();
+        ArrayList<Marbles> marbles;
+        for(int i = 0; i < market.getColumns(); i++) {
+            tempMarbles.removeAll(tempMarbles);
+            for(int k = 0; k < market.getRows(); k++) {
+                tempMarbles.add(market.getMarbleGrid()[k][i]);
+            }
+            marbles = market.getOneColumn(i);
+            assertEquals(marbles, tempMarbles);
         }
     }
 }

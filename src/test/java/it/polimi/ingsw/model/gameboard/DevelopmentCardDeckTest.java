@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model.gameboard;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.exceptions.NoCardsLeftException;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
@@ -139,6 +140,13 @@ public class DevelopmentCardDeckTest {
         } catch (NoCardsLeftException e){
             e.printStackTrace();
         }
+    }
 
+    @Test
+    @DisplayName("Draw 4 cards test")
+    public void draw4Test(){
+        Game game = new Game();
+        Gameboard gameboard = new Gameboard(game);
+        assertEquals(gameboard.getLeaderDeck().draw4().size(), 4);
     }
 }

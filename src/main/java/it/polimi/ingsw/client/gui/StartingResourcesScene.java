@@ -109,7 +109,11 @@ public class StartingResourcesScene {
     }
 
     public void send(){
-        if(numOfRes==0) clientView.sendStartingResources(newWarehouse);
+        if(numOfRes==0){
+            resButtonUpdate(true);
+            depotButtonUpdate(true);
+            clientView.sendStartingResources(newWarehouse);
+        }
     }
 
     private void resButtonUpdate(boolean change){
