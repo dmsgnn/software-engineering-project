@@ -3,7 +3,6 @@ package it.polimi.ingsw.client.representations;
 import it.polimi.ingsw.model.gameboard.Color;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class ClientGameBoard {
 
@@ -11,6 +10,7 @@ public class ClientGameBoard {
     private MarbleColors[][] market;
     private MarbleColors freeMarble;
     private String[][] cards;
+    private final ArrayList<String> players = new ArrayList<>();
 
     /**
      * creates a playerboard for each player inside the game
@@ -18,6 +18,7 @@ public class ClientGameBoard {
      */
     public void addPlayers(ArrayList<String> nicknames){
         nicknames.forEach(nickname -> playerBoards.add(new ClientPlayerBoard(nickname)));
+        players.addAll(nicknames);
     }
 
     /**
@@ -89,6 +90,10 @@ public class ClientGameBoard {
             else market[i][pos] = newMarbles.get(i);
         }
         freeMarble = newFreeMarble;
+    }
+
+    public ArrayList<String> getPlayers() {
+        return players;
     }
 
     public ArrayList<ClientPlayerBoard> getPlayerBoards() {

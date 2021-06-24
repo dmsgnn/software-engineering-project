@@ -486,11 +486,15 @@ public class Controller implements Observer<ClientMessage> {
 
 
     /**
-     * changes the active player and sends him the possible actions to perform
+     * changes the active player, sends a notification to the other players and sends to the active player the possible actions to perform
      */
     public void startTurn(){
         String name = serverViews.get(currentServerView).getUsername();
-        serverViews.get(currentServerView).startTurn(name);
+        for(int i=0; i<serverViews.size(); i++){
+            if(i!=currentServerView) {
+                serverViews.get(i).startTurn(name);
+            }
+        }
 
         serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
     }

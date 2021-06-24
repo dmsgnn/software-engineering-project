@@ -295,6 +295,7 @@ public class MainBoard {
 
 
     private Actions currentAction;
+    private String oldMessage = "";
     private final ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
 
     //Production attributes
@@ -873,7 +874,9 @@ public class MainBoard {
      * @param text new message
      */
     public void setMessage(String text){
-        message.setText(text);
+        if(text.equals("")) message.setText(text);
+        else message.setText(oldMessage + "\n\n" + text);
+        oldMessage=text;
         message.setVisible(true);
     }
 
@@ -956,7 +959,7 @@ public class MainBoard {
         disableButton(endTurn, false);
         changeEndButton();
         if(currentAction == Actions.BUYDEVELOPMENTCARD)
-            setMessage("You have selected the slot number "+slot+". Now choose the resources you want to use to pay.");
+            setMessage("You have selected the slot number "+ (slot+1) +". Now choose the resources you want to use to pay.");
         else if(currentAction == Actions.USEPRODUCTION)
             setMessage("Choose the resources you want to use to pay.");
 

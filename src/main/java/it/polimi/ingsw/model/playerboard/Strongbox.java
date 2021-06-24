@@ -16,10 +16,9 @@ public class Strongbox {
      */
     public Strongbox() {
         resources = new HashMap<>();
-        resources.put(Resource.STONES, 0);
-        resources.put(Resource.COINS, 0);
-        resources.put(Resource.SERVANTS, 0);
-        resources.put(Resource.SHIELDS, 0);
+        for(Resource rss: Resource.values()){
+            resources.put(rss, 0);
+        }
 
     }
 

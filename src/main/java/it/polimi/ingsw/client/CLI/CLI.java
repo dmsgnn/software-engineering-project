@@ -118,15 +118,13 @@ public class CLI implements UserInterface {
      */
     @Override
     public void scoreboard(Map<String, Integer> finalScores){
-        String winner = null;
-        int temp=0;
         clearScreen();
-        for (String nickname : finalScores.keySet()){
-            System.out.println(nickname + " score: " + finalScores.get(nickname));
-            if(finalScores.get(nickname)>temp) winner = nickname;
-        }
+        int counter = 1;
         System.out.println("------------------------------------");
-        System.out.println(" " + winner + " won the game      ");
+        for (String nickname : finalScores.keySet()){
+            System.out.println(counter + ") " + nickname + " score: " + finalScores.get(nickname));
+            counter++;
+        }
         System.out.println("------------------------------------");
         System.exit(0);
     }
@@ -214,7 +212,7 @@ public class CLI implements UserInterface {
                 updateBoard("Invalid action!!\n");
                 break;
             case MANAGE_RESOURCES:
-                System.out.println("Wrong resources management!!!\n");
+                updateBoard("Wrong resources management!!!\n");
                 break;
         }
     }
@@ -345,6 +343,7 @@ public class CLI implements UserInterface {
             }
         } while(!done);
         clientView.sendNumOfPlayers(value);
+        inputThread();
     }
 
     /**
@@ -1438,6 +1437,6 @@ public class CLI implements UserInterface {
         for(ClientPlayerBoard board : gameboard.getPlayerBoards())
             System.out.println(strBuilderPlayerboard(board));
 
-        if(!message.equals("")) System.out.println(message);
+        if(!message.equals("")) System.out.println(ColorCLI.YELLOW + message + ColorCLI.RESET);
     }
 }

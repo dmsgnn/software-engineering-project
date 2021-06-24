@@ -548,8 +548,15 @@ public class ClientView implements Observer<ServerMessage> {
         synchronized (lock) {
             for (String nickname : position.keySet()) {
                 gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
-                if (report) {
-                    gameboard.getOnePlayerBoard(nickname).updateVaticanReports(vaticanPosition.get(nickname), vaticanPosition.containsKey(nickname));
+            }
+            if (report) {
+                int reportPos = 0;
+                for(String nickname : vaticanPosition.keySet()){
+                    reportPos = vaticanPosition.get(nickname);
+                    gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, true);
+                }
+                for(String nickname : gameboard.getPlayers()){
+                    if(!vaticanPosition.containsKey(nickname)) gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, false);
                 }
             }
             faithUpdateReceived=true;
