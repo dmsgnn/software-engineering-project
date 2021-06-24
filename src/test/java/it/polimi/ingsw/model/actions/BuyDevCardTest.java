@@ -47,6 +47,61 @@ public class BuyDevCardTest {
     }
 
     @Test
+    @DisplayName("Test that the user can't buy the card if doesn't select right resources")
+    public void notRightRecourseTest() throws WrongLevelException, NoCardsLeftException, InsufficientResourcesException {
+        Game game = new Game();
+        game.setActivePlayer(new Player("tester", 1, game));
+        PlayerBoard board = game.getActivePlayer().getPlayerBoard();
+        HashMap<Resource, Integer> payment = new HashMap<>();
+        for (Map.Entry<Resource,Integer> entry : game.getBoard().viewCard(Color.GREEN, 1).getCardRequirements().entrySet()) {
+            board.getStrongbox().addResource(entry.getKey(), entry.getValue());
+        }
+        DevelopmentCard cardBefore = game.getBoard().viewCard(Color.GREEN, 1);
+        HashMap<Resource, Integer> depot = new HashMap<>();
+
+        HashMap<Resource, Integer> cardDepot = new HashMap<>();
+        // the payment map is empty, so a insufficient resource exception is caught
+        try{
+            game.doAction(new BuyDevelopmentCard(game.getBoard(), depot, payment, cardDepot, Color.GREEN, 1, 0));
+        } catch (InvalidActionException e) {
+            assertTrue(true);
+        }
+        DevelopmentCard cardAfter = game.getBoard().viewCard(Color.GREEN, 1);
+
+        assertEquals(cardBefore, cardAfter);
+        assertTrue(board.getSlots().get(0).isEmpty());
+
+    }
+
+    @Test
+    @DisplayName("Test that the user can't buy the card if he selects right resources but he doesn't have them")
+    public void notEnoughRecourseTest() throws WrongLevelException, NoCardsLeftException, InsufficientResourcesException {
+        Game game = new Game();
+        game.setActivePlayer(new Player("tester", 1, game));
+        PlayerBoard board = game.getActivePlayer().getPlayerBoard();
+        HashMap<Resource, Integer> payment = new HashMap<>();
+        for(Map.Entry<Resource,Integer> entry: game.getBoard().viewCard(Color.GREEN, 1).getCardRequirements().entrySet()){
+            if(entry.getValue()!=0)
+                payment.put(entry.getKey(), entry.getValue());
+        }
+        DevelopmentCard cardBefore = game.getBoard().viewCard(Color.GREEN, 1);
+        HashMap<Resource, Integer> depot = new HashMap<>();
+
+        HashMap<Resource, Integer> cardDepot = new HashMap<>();
+        // the payment map is empty, so a insufficient resource exception is caught
+        try{
+            game.doAction(new BuyDevelopmentCard(game.getBoard(), depot, payment, cardDepot, Color.GREEN, 1, 0));
+        } catch (InvalidActionException e) {
+            assertTrue(true);
+        }
+        DevelopmentCard cardAfter = game.getBoard().viewCard(Color.GREEN, 1);
+
+        assertEquals(cardBefore, cardAfter);
+        assertTrue(board.getSlots().get(0).isEmpty());
+
+    }
+
+    @Test
     @DisplayName("Test that the user can't place a card of level one over another card of level one")
     public void BuyDevCardInvalidTest1() throws WrongLevelException, NoCardsLeftException, InvalidActionException, InsufficientResourcesException {
         Game game = new Game();
@@ -80,7 +135,6 @@ public class BuyDevCardTest {
         for (Map.Entry<Resource,Integer> entry : game.getBoard().viewCard(Color.YELLOW, 1).getCardRequirements().entrySet()) {
             board.getStrongbox().addResource(entry.getKey(), entry.getValue());
         }
-        card = game.getBoard().viewCard(Color.YELLOW, 1);
         depot = new HashMap<>();
 
         cardDepot = new HashMap<>();
@@ -128,7 +182,6 @@ public class BuyDevCardTest {
         for (Map.Entry<Resource,Integer> entry : game.getBoard().viewCard(Color.YELLOW, 3).getCardRequirements().entrySet()) {
             board.getStrongbox().addResource(entry.getKey(), entry.getValue());
         }
-        card = game.getBoard().viewCard(Color.YELLOW, 3);
         depot = new HashMap<>();
 
         cardDepot = new HashMap<>();
@@ -176,7 +229,6 @@ public class BuyDevCardTest {
         for (Map.Entry<Resource,Integer> entry : game.getBoard().viewCard(Color.YELLOW, 2).getCardRequirements().entrySet()) {
             board.getStrongbox().addResource(entry.getKey(), entry.getValue());
         }
-        card = game.getBoard().viewCard(Color.YELLOW, 2);
         depot = new HashMap<>();
 
         cardDepot = new HashMap<>();

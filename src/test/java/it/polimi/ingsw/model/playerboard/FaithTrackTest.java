@@ -7,6 +7,8 @@ import it.polimi.ingsw.model.playerboard.faithTrack.PlayerFaithTrack;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FaithTrackTest {
@@ -43,6 +45,19 @@ public class FaithTrackTest {
         game.getActivePlayer().getFaithTrack().increaseAllPositions();
         assertEquals(24, playerFaithTrack.getPosition());
     }
+
+    @Test
+    @DisplayName("Test that the increase all position if in solo game increases the position of Lorenzo")
+    public void increaseAllSoloGameTest() {
+        ArrayList<String> users = new ArrayList<>();
+        users.add("George");
+        Game game = new Game(users);
+        game.setActivePlayer(game.getPlayers(0));
+        assertEquals(game.getLorenzo().getTrack().getPosition(), 0);
+        game.getActivePlayer().getFaithTrack().increaseAllPositions();
+        assertEquals(game.getLorenzo().getTrack().getPosition(), 1);
+    }
+
 
     @Test
     @DisplayName("Test three cases and checks that in case every position get incremented, the vatican report check is correctly done")
@@ -120,8 +135,8 @@ public class FaithTrackTest {
         playerFaithTrack.setPosition(4);
         playerFaithTrack.vaticanReportCheck();
         assertEquals(0, game.getNumVaticanReports());
-        playerFaithTrack.setPosition(8);
-        playerFaithTrack.vaticanReportCheck();
+        playerFaithTrack.setPosition(7);
+        playerFaithTrack.increasePosition();
         assertEquals(1, game.getNumVaticanReports());
         playerFaithTrack.setPosition(13);
         playerFaithTrack.vaticanReportCheck();
@@ -135,6 +150,58 @@ public class FaithTrackTest {
         playerFaithTrack.setPosition(24);
         playerFaithTrack.vaticanReportCheck();
         assertEquals(3, game.getNumVaticanReports());
+    }
+
+    @Test
+    @DisplayName("Test the correct activation of vatican reports in single player")
+    public void multipleVaticanActivationTest() {
+        ArrayList<String> users = new ArrayList<>();
+        users.add("George");
+        Game game = new Game(users);
+        //vatican report called when it shouldn't
+        assertEquals(game.getNumVaticanReports(), 0);
+        game.getLorenzo().getTrack().vaticanReportActivation();
+        assertEquals(game.getNumVaticanReports(), 0);
+        // first vatican report - failed
+        game.getLorenzo().getTrack().setPosition(7);
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 0);
+        game.getLorenzo().getTrack().increasePosition();
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 0);
+        // second vatican report - failed
+        game.getLorenzo().getTrack().setPosition(15);
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 0);
+        game.getLorenzo().getTrack().increasePosition();
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 0);
+        // third vatican report - failed
+        game.getLorenzo().getTrack().setPosition(23);
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 0);
+        game.getLorenzo().getTrack().increasePosition();
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 0);
+
+        game = new Game(users);
+        // first vatican report - taken
+        game.getLorenzo().getTrack().setPosition(7);
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(6);
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 0);
+        game.getLorenzo().getTrack().increasePosition();
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 2);
+        // second vatican report - taken
+        game.getLorenzo().getTrack().setPosition(15);
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(14);
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 2);
+        game.getLorenzo().getTrack().increasePosition();
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 5);
+        // third vatican report - taken
+        game.getLorenzo().getTrack().setPosition(23);
+        game.getPlayers(0).getPlayerBoard().getFaithTrack().setPosition(22);
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 5);
+        game.getLorenzo().getTrack().increasePosition();
+        assertEquals(game.getPlayers(0).getFaithTrack().getVictoryPoints(), 9);
+
+        assertEquals(game.getLorenzo().getTrack().getPosition(), 24);
+        game.getLorenzo().getTrack().increasePosition();
+        assertEquals(game.getLorenzo().getTrack().getPosition(), 24);
+
     }
 
     @Test
@@ -249,7 +316,6 @@ public class FaithTrackTest {
         }
         assertEquals(20,playerFaithTrack.getVictoryPoints());
 
-        PlayerFaithTrack track = new PlayerFaithTrack(game);
         for (int i = 0; i < 25; i++) {
             playerFaithTrack.increasePosition();
         }

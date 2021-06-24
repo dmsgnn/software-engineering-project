@@ -58,8 +58,8 @@ public class ClientSocketHandler extends Observable<ServerMessage> implements Ru
             }
         } catch(IOException | ClassNotFoundException e) {
             e.getMessage();
-            //System.out.println("\n Server shut down \n ");
-            //exit(0);
+            System.out.println("\nServer shut down \n ");
+            exit(0);
             //e.printStackTrace();
         }
     }
