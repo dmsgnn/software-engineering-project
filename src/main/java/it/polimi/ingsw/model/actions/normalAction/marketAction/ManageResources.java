@@ -99,7 +99,7 @@ public class  ManageResources extends Actions {
                     if (!playerBoard.getWarehouse().getDepots().get(3).correctResource(resources.get(3).get(0))) return false;
                 }
                 if (!resources.get(4).isEmpty()){
-                    if (!playerBoard.getWarehouse().getDepots().get(4).correctResource(resources.get(4).get(0))) return false;
+                    return playerBoard.getWarehouse().getDepots().get(4).correctResource(resources.get(4).get(0));
                 }
             }
 
