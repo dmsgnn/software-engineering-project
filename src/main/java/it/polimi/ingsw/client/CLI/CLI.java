@@ -465,7 +465,7 @@ public class CLI implements UserInterface {
     @Override
     public void marketAction() {
         String input;
-        String tempColRow;
+        String tempColRow = null;
         int value = 0;
         boolean done = false;
         boolean rowOrCol = false;
@@ -506,7 +506,7 @@ public class CLI implements UserInterface {
 
         ClientPlayerBoard activePlayerboard = gameboard.getOnePlayerBoard(clientView.getNickname());
 
-        if(input.equals("col")) whiteMarblesNum = gameboard.getWhiteCountColumn(value);
+        if(tempColRow.equals("column")) whiteMarblesNum = gameboard.getWhiteCountColumn(value);
         else whiteMarblesNum = gameboard.getWhiteCountRow(value);
 
 

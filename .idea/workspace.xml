@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="GUI label with 2 messages, Controller start turn method fix, Client faithtrack update fix, CLI graphic update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Reconnection fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Lobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientGameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientGameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -410,14 +413,9 @@
       <workItem from="1624524199439" duration="1603000" />
       <workItem from="1624526143132" duration="3003000" />
       <workItem from="1624536374605" duration="1866000" />
-      <workItem from="1624603261353" duration="3006000" />
-    </task>
-    <task id="LOCAL-00020" summary="card draw update">
-      <created>1620717965983</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1620717965983</updated>
+      <workItem from="1624603261353" duration="3271000" />
+      <workItem from="1624647892587" duration="1830000" />
+      <workItem from="1624653081657" duration="625000" />
     </task>
     <task id="LOCAL-00021" summary="CLI gameboard print and print methods for classes update">
       <created>1620736756101</created>
@@ -755,7 +753,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624389777636</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Reconnection fix">
+      <created>1624606551910</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1624606551910</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -775,7 +780,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Controller fix" />
     <MESSAGE value="Dev card slots GUI" />
     <MESSAGE value="boardProduction button" />
     <MESSAGE value="ClientPlayerBoard Map for production buff and methods for leadercards and develompent card slots GUI" />
@@ -800,7 +804,8 @@
     <MESSAGE value="FullView print fix" />
     <MESSAGE value="GUI error management update, starting scenes update, DevelopmentCards.xml fix" />
     <MESSAGE value="Reconnection message update to fit the client changes, Actions method resilience improved" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reconnection message update to fit the client changes, Actions method resilience improved" />
+    <MESSAGE value="Reconnection fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reconnection fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
