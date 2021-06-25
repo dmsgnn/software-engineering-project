@@ -1116,6 +1116,8 @@ public class Controller implements Observer<ClientMessage> {
         }
         else if (playersDisconnected.size()+1 == playersNumber){
             increaseActivePlayer(1);
+            Player player = game.getPlayers(currentActivePlayer);
+            game.setActivePlayer(player);
             for (int k = 0; k < serverViews.size(); k++) {
                 if (serverViews.get(k).getUsername().equals(username)) currentServerView =k;
             }
@@ -1123,8 +1125,7 @@ public class Controller implements Observer<ClientMessage> {
         }
         //reconnection message
         System.out.println(username + "reconnected from controller");
-        for(int j=0; j<playersDisconnected.size(); j++)
-            System.out.println(playersDisconnected.get(i));
+        for (String s : playersDisconnected) System.out.println(s);
     }
 
 

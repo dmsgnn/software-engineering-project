@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="GUI fullview update, fxml files update to remove the initial warning, new model tests, GUI starting scene button update,">
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientGameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientGameBoard.java" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="GUI label with 2 messages, Controller start turn method fix, Client faithtrack update fix, CLI graphic update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/Strongbox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Lobby.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -110,7 +107,44 @@
       <recent name="it.polimi.ingsw.model.actions" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.it.polimi.ingsw.model in AM5">
+  <component name="RunManager" selected="Application.ClientMain">
+    <configuration name="ClientMain" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.client.ClientMain" />
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerMain" />
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BuyDevCardTest.notEnoughRecourseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
@@ -143,37 +177,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FaithTrackTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.playerboard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.playerboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.playerboard.FaithTrackTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FaithTrackTest.multipleVaticanActivationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.playerboard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.playerboard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.playerboard.FaithTrackTest" />
-      <option name="METHOD_NAME" value="multipleVaticanActivationTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Gameboard" type="JUnit" factoryName="JUnit">
       <module name="AM5" />
       <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.gameboard" />
@@ -201,20 +204,20 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.ClientMain" />
+      <item itemvalue="Application.ServerMain" />
       <item itemvalue="JUnit.Gameboard" />
       <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
-      <item itemvalue="JUnit.FaithTrackTest" />
-      <item itemvalue="JUnit.FaithTrackTest.multipleVaticanActivationTest" />
       <item itemvalue="JUnit.BuyDevCardTest.notEnoughRecourseTest" />
       <item itemvalue="JUnit.BuyDevCardTest.notRightRecourseTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ServerMain" />
+        <item itemvalue="Application.ClientMain" />
         <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
         <item itemvalue="JUnit.BuyDevCardTest.notEnoughRecourseTest" />
         <item itemvalue="JUnit.BuyDevCardTest.notRightRecourseTest" />
-        <item itemvalue="JUnit.FaithTrackTest.multipleVaticanActivationTest" />
-        <item itemvalue="JUnit.FaithTrackTest" />
       </list>
     </recent_temporary>
   </component>
@@ -407,6 +410,7 @@
       <workItem from="1624524199439" duration="1603000" />
       <workItem from="1624526143132" duration="3003000" />
       <workItem from="1624536374605" duration="1866000" />
+      <workItem from="1624603261353" duration="3006000" />
     </task>
     <task id="LOCAL-00020" summary="card draw update">
       <created>1620717965983</created>
@@ -840,7 +844,7 @@
     <SUITE FILE_PATH="coverage/AM5$ClientMain.ic" NAME="ClientMain Coverage Results" MODIFIED="1624390077982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.client.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_model_in_AM5.ic" NAME="it.polimi.ingsw.model in AM5 Coverage Results" MODIFIED="1624449312821" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_model_in_AM5.ic" NAME="it.polimi.ingsw.model in AM5 Coverage Results" MODIFIED="1624561462460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/AM5$DevelopmentCardDeckTest_draw4Test.ic" NAME="DevelopmentCardDeckTest.draw4Test Coverage Results" MODIFIED="1624448824127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
