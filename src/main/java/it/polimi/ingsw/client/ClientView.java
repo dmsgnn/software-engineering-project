@@ -12,8 +12,6 @@ import it.polimi.ingsw.model.gameboard.Color;
 import java.net.Socket;
 import java.util.*;
 
-import static java.lang.System.exit;
-
 public class ClientView extends View implements Observer<ServerMessage>{
 
     private ClientSocketHandler socket;
@@ -77,6 +75,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void addPlayersToGameboard(ArrayList<String> players){
         synchronized (lock){
             super.addPlayersToGameboard(players);
+            lock.notifyAll();
         }
     }
 
@@ -106,7 +105,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param maxNum maximum number of players
      */
     public void numOfPlayers(int maxNum){
-        System.out.println(updated);
         synchronized (lock) {
             while (!updated) {
                 try {
@@ -394,15 +392,21 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param cardsInHand number of cards in each player's hand
      * @param playersConnected connection status of each player
      * @param vaticanReportActivated vatican report status for each player
+     * @param gameStarted true if the game already started, false if the player is reconnecting during the leadercard and starting resources selection
      */
     public void reconnectionUpdate(String username, Map<String, Map<Integer, ArrayList<String>>> devCardSlots, Map<String, Integer> faithPositions, Map<String,
             ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource, Integer>> strongbox,
                                    Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand,
-                                   Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated){
+                                   Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated, boolean gameStarted){
         synchronized (lock) {
             setNickname(username);
-            ArrayList<String> players = new ArrayList<>(devCardSlots.keySet());
-            getGameboard().addPlayers(players);
+            while(getGameboard().getPlayers().isEmpty()) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             for (String nickname : devCardSlots.keySet()) {
                 getGameboard().getOnePlayerBoard(nickname).setDevCardSlot(devCardSlots.get(nickname));
             }
@@ -434,10 +438,12 @@ public class ClientView extends View implements Observer<ServerMessage>{
             for (String nickname : vaticanReportActivated.keySet()){
                 getGameboard().getOnePlayerBoard(nickname).setVaticanReports(vaticanReportActivated.get(nickname));
             }
-            getUiType().updateBoard("Reconnected");
-            getUiType().endTurn();
-            updated=true;
-            lock.notifyAll();
+            if(gameStarted){
+                getUiType().updateBoard("Reconnected");
+                getUiType().endTurn();
+                updated=true;
+                lock.notifyAll();
+            }
         }
     }
 
@@ -598,7 +604,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
             socket = new Socket(ip, port);
         } catch (Exception e) {
             System.out.println("\n\nserver not available: ip or port number might be wrong\n\n");
-            exit(0);
+            System.exit(0);
         }
 
         ClientSocketHandler proxy = new ClientSocketHandler(socket);

@@ -5,27 +5,23 @@ import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.controller.Error;
-import it.polimi.ingsw.messages.clientToServer.*;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static java.lang.System.exit;
-
 public abstract class View {
 
 
-    private UserInterface uiType;
+    private final UserInterface uiType;
     private String nickname; //nickname of the player who owns this client
-    private ClientGameBoard gameboard;
+    private final ClientGameBoard gameboard;
 
     private final ArrayList<LeaderCard> leaderDeck;
 
@@ -39,22 +35,20 @@ public abstract class View {
         return uiType;
     }
 
-    public void setUiType(UserInterface uiType) {
-        this.uiType = uiType;
-    }
-
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    public void setGameboard(ClientGameBoard gameboard) {
-        this.gameboard = gameboard;
-    }
-
+    /**
+     * @return strongbox of the owner of this client
+     */
     public Map<Resource, Integer> getMyStrongbox(){
         return gameboard.getOnePlayerBoard(nickname).getStrongbox();
     }
 
+    /**
+     * @return warehouse of the owner of this client
+     */
     public Map<Integer, ArrayList<Resource>> getMyWarehouse(){
         return gameboard.getOnePlayerBoard(nickname).getWarehouse();
     }
@@ -73,10 +67,6 @@ public abstract class View {
 
     public ClientGameBoard getGameboard() {
         return gameboard;
-    }
-
-    public UserInterface getUi() {
-        return uiType;
     }
 
     public String getNickname() {

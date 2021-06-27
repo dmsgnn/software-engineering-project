@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.CLI;
 
-import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.client.UserInterface;
@@ -11,9 +10,7 @@ import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
-import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.utility.DevCardsParserXML;
-import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,14 +23,12 @@ public class CLI implements UserInterface {
     View clientView;
     ClientGameBoard gameboard;
     ArrayList<DevelopmentCard> devCardList;
-    ArrayList<LeaderCard> leaderDeck;
     private boolean myTurn;
     Scanner scanner;
 
     public CLI(){
         scanner = new Scanner(System.in);
         devCardList = new DevCardsParserXML().devCardsParser();
-        leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
         myTurn=false;
     }
 
@@ -56,18 +51,6 @@ public class CLI implements UserInterface {
             if(card.getId().equals(id)) {
                 return card;
             }
-        }
-        return null;
-    }
-
-    /**
-     * utility method to find a leadercard
-     * @param id card that I want to find
-     * @return the correct card
-     */
-    private LeaderCard findLeaderCard(String id){
-        for(LeaderCard card : leaderDeck){
-            if(card.getId().equals(id)) return card;
         }
         return null;
     }
@@ -359,15 +342,15 @@ public class CLI implements UserInterface {
         StringBuilder builder = new StringBuilder();
         System.out.print("\nSelect two starting cards, type 1, 2, 3 or 4: \n");
 
-        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawTop()).forEach(builder::append);
+        leaderCardID.stream().map(s -> Objects.requireNonNull(clientView.findLeaderCard(s)).drawTop()).forEach(builder::append);
         builder.append("\n");
-        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawRequirements()).forEach(builder::append);
+        leaderCardID.stream().map(s -> Objects.requireNonNull(clientView.findLeaderCard(s)).drawRequirements()).forEach(builder::append);
         builder.append("\n");
-        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawVictoryPoints()).forEach(builder::append);
+        leaderCardID.stream().map(s -> Objects.requireNonNull(clientView.findLeaderCard(s)).drawVictoryPoints()).forEach(builder::append);
         builder.append("\n");
-        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawAbility()).forEach(builder::append);
+        leaderCardID.stream().map(s -> Objects.requireNonNull(clientView.findLeaderCard(s)).drawAbility()).forEach(builder::append);
         builder.append("\n");
-        leaderCardID.stream().map(s -> Objects.requireNonNull(findLeaderCard(s)).drawBottom()).forEach(builder::append);
+        leaderCardID.stream().map(s -> Objects.requireNonNull(clientView.findLeaderCard(s)).drawBottom()).forEach(builder::append);
         System.out.println(builder);
 
         int counter=0;
@@ -1216,11 +1199,11 @@ public class CLI implements UserInterface {
         playerboard.append("   ");
         //leader card first line
         for(int i=0; i<board.getPlayedCards().size(); i++) {
-            playerboard.append(ColorCLI.GREEN).append("●").append(ColorCLI.RESET).append(Objects.requireNonNull(findLeaderCard(board.getPlayedCards().get(i))).drawTop());
+            playerboard.append(ColorCLI.GREEN).append("●").append(ColorCLI.RESET).append(Objects.requireNonNull(clientView.findLeaderCard(board.getPlayedCards().get(i))).drawTop());
         }
         if(board.getPlayerNickname().equals(clientView.getNickname())){
             for (int i = 0; i < board.getHand().size(); i++) {
-                playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawTop());
+                playerboard.append(Objects.requireNonNull(clientView.findLeaderCard(board.getHand().get(i))).drawTop());
             }
         }
         else{
@@ -1259,11 +1242,11 @@ public class CLI implements UserInterface {
         playerboard.append("   ");
         //leader card second line
         for(int i=0; i<board.getPlayedCards().size(); i++) {
-            playerboard.append(" ").append(Objects.requireNonNull(findLeaderCard(board.getPlayedCards().get(i))).drawRequirements());
+            playerboard.append(" ").append(Objects.requireNonNull(clientView.findLeaderCard(board.getPlayedCards().get(i))).drawRequirements());
         }
         if(board.getPlayerNickname().equals(clientView.getNickname())){
             for (int i = 0; i < board.getHand().size(); i++) {
-                playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawRequirements());
+                playerboard.append(Objects.requireNonNull(clientView.findLeaderCard(board.getHand().get(i))).drawRequirements());
             }
         }
         else{
@@ -1305,11 +1288,11 @@ public class CLI implements UserInterface {
         playerboard.append("   ");
         //leader card third line
         for(int i=0; i<board.getPlayedCards().size(); i++) {
-            playerboard.append(" ").append(Objects.requireNonNull(findLeaderCard(board.getPlayedCards().get(i))).drawVictoryPoints());
+            playerboard.append(" ").append(Objects.requireNonNull(clientView.findLeaderCard(board.getPlayedCards().get(i))).drawVictoryPoints());
         }
         if(board.getPlayerNickname().equals(clientView.getNickname())){
             for (int i = 0; i < board.getHand().size(); i++) {
-                playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawVictoryPoints());
+                playerboard.append(Objects.requireNonNull(clientView.findLeaderCard(board.getHand().get(i))).drawVictoryPoints());
             }
         }
         else{
@@ -1338,11 +1321,11 @@ public class CLI implements UserInterface {
         playerboard.append("   ");
         //leader card fourth line
         for(int i=0; i<board.getPlayedCards().size(); i++) {
-            playerboard.append(" ").append(Objects.requireNonNull(findLeaderCard(board.getPlayedCards().get(i))).drawAbility());
+            playerboard.append(" ").append(Objects.requireNonNull(clientView.findLeaderCard(board.getPlayedCards().get(i))).drawAbility());
         }
         if(board.getPlayerNickname().equals(clientView.getNickname())){
             for (int i = 0; i < board.getHand().size(); i++) {
-                playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawAbility());
+                playerboard.append(Objects.requireNonNull(clientView.findLeaderCard(board.getHand().get(i))).drawAbility());
             }
         }
         else{
@@ -1366,11 +1349,11 @@ public class CLI implements UserInterface {
         playerboard.append("   ");
         //leader card last line
         for(int i=0; i<board.getPlayedCards().size(); i++) {
-            playerboard.append(" ").append(Objects.requireNonNull(findLeaderCard(board.getPlayedCards().get(i))).drawBottom());
+            playerboard.append(" ").append(Objects.requireNonNull(clientView.findLeaderCard(board.getPlayedCards().get(i))).drawBottom());
         }
         if(board.getPlayerNickname().equals(clientView.getNickname())){
             for (int i = 0; i < board.getHand().size(); i++) {
-                playerboard.append(Objects.requireNonNull(findLeaderCard(board.getHand().get(i))).drawBottom());
+                playerboard.append(Objects.requireNonNull(clientView.findLeaderCard(board.getHand().get(i))).drawBottom());
             }
         }
         else{
