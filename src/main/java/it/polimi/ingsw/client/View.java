@@ -23,32 +23,40 @@ import static java.lang.System.exit;
 public abstract class View {
 
 
-    private ClientSocketHandler socket;
+    private UserInterface uiType;
     private String nickname; //nickname of the player who owns this client
+    private ClientGameBoard gameboard;
 
-    private final Object lock = new Object();
-    private boolean updated = true;
-    private boolean faithUpdateReceived = false;
+    private final ArrayList<LeaderCard> leaderDeck;
 
-    ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
+    public View(UserInterface uiType) {
+        this.uiType = uiType;
+        leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
+        gameboard = new ClientGameBoard();
+    }
 
+    public UserInterface getUiType() {
+        return uiType;
+    }
+
+    public void setUiType(UserInterface uiType) {
+        this.uiType = uiType;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setGameboard(ClientGameBoard gameboard) {
+        this.gameboard = gameboard;
+    }
 
     public Map<Resource, Integer> getMyStrongbox(){
-        return null;
-
+        return gameboard.getOnePlayerBoard(nickname).getStrongbox();
     }
 
     public Map<Integer, ArrayList<Resource>> getMyWarehouse(){
-        return null;
-
-    }
-
-    public ClientGameBoard getGameboard() {
-        return null;
-    }
-
-    public String getNickname() {
-        return null;
+        return gameboard.getOnePlayerBoard(nickname).getWarehouse();
     }
 
     /**
@@ -56,16 +64,30 @@ public abstract class View {
      * @param id card that I want to find
      * @return the correct card
      */
-    private LeaderCard findLeaderCard(String id){
+    public LeaderCard findLeaderCard(String id){
+        for(LeaderCard card : leaderDeck){
+            if(card.getId().equals(id)) return card;
+        }
         return null;
     }
 
+    public ClientGameBoard getGameboard() {
+        return gameboard;
+    }
 
+    public UserInterface getUi() {
+        return uiType;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
 
     /**
      * called to do the login
      */
     public void login(){
+        uiType.login();
     }
 
     /**
@@ -75,18 +97,13 @@ public abstract class View {
     public void sendLogin(String nickname){
     }
 
-    /**
-     * manages the Username Response message
-     * @param nickname the player set
-     */
-    public void manageUsernameResponse(boolean isFree, String nickname){
-    }
 
     /**
      * called when the server sends an error message to the client
      * @param errorType error to manage
      */
     public void errorManagement(Error errorType){
+        uiType.manageError(errorType);
     }
 
     //------------------GAME SETUP------------------
@@ -96,6 +113,8 @@ public abstract class View {
      * @param players nicknames of the players
      */
     public void addPlayersToGameboard(ArrayList<String> players){
+        gameboard.addPlayers(players);
+        if(players.size()==1) gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(0);
     }
 
     /**
@@ -104,6 +123,7 @@ public abstract class View {
      * @param free this is the free marble that has to be used to perform the market action
      */
     public void marketSetup(MarbleColors[][] grid, MarbleColors free) {
+        gameboard.initializeMarket(grid, free);
     }
 
     /**
@@ -111,13 +131,7 @@ public abstract class View {
      * @param cards initial card grid
      */
     public void developmentCardGridSetup(String[][] cards){
-    }
-
-    /**
-     * called if this is the first player, asks the game size
-     * @param maxNum maximum number of players
-     */
-    public void numOfPlayers(int maxNum){
+        gameboard.initializeCards(cards);
     }
 
     /**
@@ -132,6 +146,7 @@ public abstract class View {
      * @param leaderCardID IDs of the cards
      */
     public void selectStartingCards(ArrayList<String> leaderCardID){
+        uiType.startingLeaderCardsSelection(leaderCardID);
     }
 
     /**
@@ -140,18 +155,11 @@ public abstract class View {
      */
     public void sendStartingCards(ArrayList<String> cards){
     }
-
     /**
      * called if the leadercard selection was correct
      */
     public void leaderCardsDone(){
-    }
-
-    /**
-     * called to make the player chose the starting resources
-     * @param amount num of resources
-     */
-    public void startingResources(int amount){
+        uiType.endLeadercardSetup();
     }
 
     /**
@@ -159,12 +167,6 @@ public abstract class View {
      * @param warehouse configuration
      */
     public void sendStartingResources(Map<Integer, ArrayList<Resource>> warehouse){
-    }
-
-    /**
-     * called if the starting resources selection was correct
-     */
-    public void startingResDone(){
     }
 
 
@@ -175,6 +177,7 @@ public abstract class View {
      * @param possibleActions list of the actions the player can choose from
      */
     public void pickAction(ArrayList<Actions> possibleActions){
+        uiType.chooseAction(possibleActions);
     }
 
     /**
@@ -189,6 +192,26 @@ public abstract class View {
      * @param action what the player decided to do
      */
     public void doAction(Actions action){
+        switch (action) {
+            case MARKETACTION:
+                uiType.marketAction();
+                break;
+            case USEPRODUCTION:
+                uiType.useProductionAction();
+                break;
+            case BUYDEVELOPMENTCARD:
+                uiType.buyCardAction();
+                break;
+            case PLAYLEADERCARD:
+                uiType.playLeaderCardAction();
+                break;
+            case DISCARDLEADERCARD:
+                uiType.discardLeaderCardAction();
+                break;
+            case ENDTURN:
+                endTurn();
+                break;
+        }
     }
 
     /**
@@ -255,7 +278,9 @@ public abstract class View {
      * @param resources new resources
      */
     public void manageResources(ArrayList<Resource> resources){
+        uiType.manageResources(resources);
     }
+
 
     /**
      * called from UI to send the manage resources action parameters to the server
@@ -268,63 +293,24 @@ public abstract class View {
     //------------------UPDATES------------------
 
     /**
-     * method to block the action update if the faith update hasn't been received yet
-     */
-    private void waitForFaithUpdate(){
-
-    }
-
-    /**
      * called to setup all playerboard with initial values
      * @param leaderCards hand of each player
      * @param resources warehouse of each player
      * @param faithTracks faith track position of each player
      */
     public void setupGameUpdate(Map<String,ArrayList<String>> leaderCards, Map<String,Map<Integer, ArrayList<Resource>>> resources, Map<String,Integer> faithTracks){
-
-    }
-
-    /**
-     * called when another player begins his turn
-     */
-    public void turnNotification(String player){
-
-    }
-
-    /**
-     * called when a player disconnects from the game
-     * @param nickname of the player
-     */
-    public void playerDisconnected(String nickname){
-
-    }
-
-    /**
-     * called when a player reconnects to the game
-     * @param nickname of the player
-     */
-    public void playerReconnected(String nickname){
-
-    }
-
-    /**
-     * called after a player reconnects to the game, the parameters contains all the information regarding the game
-     * @param username of this client
-     * @param devCardSlots all dev cards bought by all the player
-     * @param faithPositions all player's faith track position
-     * @param leaderCardsPlayed all leader cards played by all player
-     * @param leaderCards player hand
-     * @param strongbox every strongbox
-     * @param warehouse every warehouse
-     * @param cardsInHand number of cards in each player's hand
-     * @param playersConnected connection status of each player
-     * @param vaticanReportActivated vatican report status for each player
-     */
-    public void reconnectionUpdate(String username, Map<String, Map<Integer, ArrayList<String>>> devCardSlots, Map<String, Integer> faithPositions, Map<String,
-            ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource, Integer>> strongbox,
-                                   Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand,
-                                   Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated){
-
+        for (String nickname : leaderCards.keySet()) {
+            if (nickname.equals(this.nickname))
+                gameboard.getOnePlayerBoard(nickname).setHand(leaderCards.get(nickname));
+        }
+        for (String nickname : resources.keySet()) {
+            gameboard.getOnePlayerBoard(nickname).setWarehouse(resources.get(nickname));
+        }
+        for (String nickname : faithTracks.keySet()) {
+            gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithTracks.get(nickname));
+        }
+        uiType.updateBoard("");
+        uiType.endTurn();
     }
 
     /**
@@ -333,7 +319,9 @@ public abstract class View {
      * @param newCardGrid new development card grid
      */
     public void lorenzoUpdate(String message, int lorenzoPosition, String[][] newCardGrid){
-
+        gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(lorenzoPosition);
+        getGameboard().initializeCards(newCardGrid);
+        uiType.updateBoard(message);
     }
 
     /**
@@ -343,7 +331,19 @@ public abstract class View {
      * @param report true if a vatican report has been activated, false otherwise
      */
     public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report){
-
+        for (String nickname : position.keySet()) {
+            gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
+        }
+        if (report) {
+            int reportPos = 0;
+            for(String nickname : vaticanPosition.keySet()){
+                reportPos = vaticanPosition.get(nickname);
+                gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, true);
+            }
+            for(String nickname : gameboard.getPlayers()){
+                if(!vaticanPosition.containsKey(nickname)) gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, false);
+            }
+        }
     }
 
     /**
@@ -359,7 +359,13 @@ public abstract class View {
      */
     public void buyCardUpdate(String nickname, String id, int slot, String gridId, Color color, int level,
                               Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
-
+        ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+        playerBoard.updateDevCardSlot(slot, id);
+        playerBoard.setWarehouse(warehouse);
+        playerBoard.setStrongbox(strongbox);
+        gameboard.changeGridCard(gridId, color, level);
+        if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + " bought the level " + level + " " + color + " card");
+        else uiType.updateBoard("");
     }
 
     /**
@@ -368,7 +374,10 @@ public abstract class View {
      * @param id discarded card
      */
     public void discardLeaderCardUpdate(String nickname, String id){
-
+        ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+        playerBoard.removeHandCard(id);
+        if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + " discarded a leader card");
+        else uiType.updateBoard("");
     }
 
     /**
@@ -378,7 +387,13 @@ public abstract class View {
      * @param warehouse new warehouse of the player
      */
     public void playLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse){
-
+        ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+        playerBoard.setWarehouse(warehouse);
+        playerBoard.removeHandCard(id);
+        playerBoard.addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
+        if(!nickname.equals(this.nickname))
+            uiType.updateBoard(nickname + " played a leader card");
+        else uiType.updateBoard("");
     }
 
     /**
@@ -388,7 +403,12 @@ public abstract class View {
      * @param strongbox new strongbox of the player
      */
     public void useProductionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
-
+        ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+        playerBoard.setWarehouse(warehouse);
+        playerBoard.setStrongbox(strongbox);
+        if(!nickname.equals(this.nickname))
+            uiType.updateBoard(nickname + " activated the production");
+        else uiType.updateBoard("");
     }
 
     /**
@@ -402,14 +422,19 @@ public abstract class View {
      */
     public void marketActionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse,
                                    ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol){
-
+        ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
+        playerBoard.setWarehouse(warehouse);
+        gameboard.updateMarket(newMarbles, newFreeMarble, pos, rowOrCol);
+        if(!nickname.equals(this.nickname))
+            uiType.updateBoard(nickname + " took resources from the market");
+        else uiType.updateBoard("");
     }
 
     /**
      * called to notify the players that this is the last round
      */
     public void endGame(){
-
+        uiType.lastRound();
     }
 
     /**
@@ -421,13 +446,6 @@ public abstract class View {
 
     }
 
-
-    /**
-     * called to show the winner nickname
-     * @param winner nickname of the winning player
-     */
-    public void winner(String winner){
-    }
 
     /**
      * Called when a {@link ServerMessage} is received. The package is extracted and the method on the incoming
