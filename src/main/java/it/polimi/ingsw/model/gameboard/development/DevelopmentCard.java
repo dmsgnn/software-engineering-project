@@ -60,12 +60,12 @@ public class DevelopmentCard {
             Resource key = entry.getKey();
             Integer value = entry.getValue();
 
-            if(discountBuff.contains(key)) discount = 1;
+            if(discountBuff.contains(key) && value != 0) discount = 1;
             else discount = 0;
 
-            if(!playerResources.containsKey(key) && discount ==0) return false;
-            else if(!playerResources.containsKey(key) && value-discount==0) break;
-            else if(!playerResources.get(key).equals(value-discount)) return false;
+            if(!playerResources.containsKey(key) && discount == 0) return false;
+            else if(!playerResources.containsKey(key) && (value-discount)==0) break;
+            else if(playerResources.get(key) != value-discount) return false;
         }
 
         return true;

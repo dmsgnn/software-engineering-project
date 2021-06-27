@@ -17,8 +17,10 @@ public class ClientGameBoard {
      * @param nicknames of the players in the game
      */
     public void addPlayers(ArrayList<String> nicknames){
-        nicknames.forEach(nickname -> playerBoards.add(new ClientPlayerBoard(nickname)));
-        players.addAll(nicknames);
+        for (String nickname : nicknames) {
+            if(!players.contains(nickname)) playerBoards.add(new ClientPlayerBoard(nickname));
+            players.add(nickname);
+        }
     }
 
     /**
