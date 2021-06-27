@@ -58,11 +58,13 @@ public class Controller implements Observer<ClientMessage> {
     private int numOfVaticanReport;
     private final Map<String,Integer> faithPositions;
     private final Map<String,Integer> startingResources;
+    // RECONNECTION TOOLS
     private int resourceCounter;
     private final Map<String,Map<Integer,Boolean>> playerStatus;
     private boolean gameStarted;
     private boolean gameFinished;
-    private Map<String, Map<Integer,Boolean>> vaticanReportActivated;
+    private final Map<String, Map<Integer,Boolean>> vaticanReportActivated;
+    private final Map<String,Boolean> resourceManageOk;
 
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
@@ -96,9 +98,6 @@ public class Controller implements Observer<ClientMessage> {
         faithPositions = new HashMap<>();
         vaticanReportActivated = new HashMap<>();
         Map<Integer,Boolean> tempo = new HashMap<>();
-        tempo.put(8,false);
-        tempo.put(16,false);
-        tempo.put(24,false);
 
 
         //PARAMETERS FOR STARTING RESOURCES
@@ -113,6 +112,7 @@ public class Controller implements Observer<ClientMessage> {
         System.out.println(playerStatus);
         this.currentActivePlayer=0;
         gameFinished = false;
+        resourceManageOk = new HashMap<>();
 
         for (int i = 0; i < playersNumber; i++) {
             String name = game.getPlayers(i).getNickname();
@@ -123,6 +123,7 @@ public class Controller implements Observer<ClientMessage> {
             faithPositions.put(name,0);
             currentAction.put(i,null);
             numOfActions.put(i,false);
+            resourceManageOk.put(name,false);
         }
     }
 
@@ -165,7 +166,13 @@ public class Controller implements Observer<ClientMessage> {
             game.setActivePlayer(player);
             ArrayList<LeaderCard> leaderCards = game.getActivePlayer().take4cards();
             ArrayList<String> leaderId = new ArrayList<>();
-            startingLeaderCards.put(game.getActivePlayer().getNickname(),leaderCards);
+            String name = game.getActivePlayer().getNickname();
+            if (name.equals("admin1")||name.equals("admin2")||name.equals("admin3")||name.equals("admin4")){
+                for (Resource resource: Resource.values()) {
+                    game.getActivePlayer().getPlayerBoard().getStrongbox().addResource(resource,50);
+                }
+            }
+            startingLeaderCards.put(name,leaderCards);
             for (LeaderCard l: leaderCards){
                 leaderId.add(l.getId());
             }
@@ -285,7 +292,13 @@ public class Controller implements Observer<ClientMessage> {
                 assert serverView != null;
                 System.out.println(serverView.getUsername());
                 int number = startingResources.get(name);
-                Objects.requireNonNull(serverView).startingResourceMessage(number);
+                if (!resourceManageOk.get(name)) {
+                    Objects.requireNonNull(serverView).startingResourceMessage(number);
+                    if (!playersDisconnected.contains(name)) {
+                        resourceManageOk.put(name, true);
+                    }
+                }
+
             }
         }
     }
@@ -388,7 +401,7 @@ public class Controller implements Observer<ClientMessage> {
             else{
                 ServerView serverView = getServerView(username);
                 assert serverView != null;
-                serverView.sendSetupGameUpdate(this.leaderID, getWarehouse(), getFaith());
+                serverView.sendSetupGameUpdate(this.leaderID, getWarehouse(), getFaithPositions());
             }
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             // MANAGE ERROR
@@ -408,7 +421,7 @@ public class Controller implements Observer<ClientMessage> {
         if (beginCounter + playersDisconnected.size() == playersNumber){
             gameStarted = true;
             for (ServerView serverView : serverViews) {
-                serverView.sendSetupGameUpdate(this.leaderID, getWarehouse(), getFaith());
+                serverView.sendSetupGameUpdate(this.leaderID, getWarehouse(), getFaithPositions());
             }
             Player player = game.getPlayers(currentActivePlayer);
             game.setActivePlayer(player);
@@ -540,7 +553,6 @@ public class Controller implements Observer<ClientMessage> {
         faithTrackMessage();
         LorenzoAI lorenzo = game.getLorenzo();
         serverViews.get(0).lorenzoUpdate(message, lorenzo.getTrack().getPosition(), newGrid);
-        boolean end = endGame();
         boolean lori = game.getLorenzo().checkEndGame();
         if (lori) {
             gameFinished = true;
@@ -556,7 +568,8 @@ public class Controller implements Observer<ClientMessage> {
      */
     public void discardLeaderCard(String id,String playerId){
         String username = game.getActivePlayer().getNickname();
-        if ((currentAction.get(currentActivePlayer)==Actions.DISCARDLEADERCARD)&&(playerId.equals(username))) {
+        boolean correctName = playerId.equals(username);
+        if ((currentAction.get(currentActivePlayer)==Actions.DISCARDLEADERCARD)&&(correctName)) {
             if (game.getActivePlayer().getCardsHand().get(0).getId().equals(id)) {
                 DiscardLeaderCard discardLeaderCard = new DiscardLeaderCard(game.getActivePlayer().getCardsHand().get(0), game.getActivePlayer().getCardsHand(), game.getActivePlayer().getFaithTrack());
                 doActionDiscardLeader(id,discardLeaderCard);
@@ -572,9 +585,11 @@ public class Controller implements Observer<ClientMessage> {
             }
         }
         else{
-            serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
-            currentAction.put(currentActivePlayer, null);
-            serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            if (correctName) {
+                serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
+                currentAction.put(currentActivePlayer, null);
+                serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            }
         }
     }
 
@@ -616,7 +631,8 @@ public class Controller implements Observer<ClientMessage> {
      */
     public void playLeaderCard(String id,String playerId){
         String username = game.getActivePlayer().getNickname();
-        if ((currentAction.get(currentActivePlayer)==Actions.PLAYLEADERCARD)&&(playerId.equals(username))) {
+        boolean correctName = playerId.equals(username);
+        if ((currentAction.get(currentActivePlayer)==Actions.PLAYLEADERCARD)&&(correctName)) {
             if (game.getActivePlayer().getCardsHand().get(0).getId().equals(id)) {
                 PlayLeaderCard playLeaderCard = new PlayLeaderCard(game.getActivePlayer().getCardsHand(), game.getActivePlayer().getCardsHand().get(0));
                 doActionPlayLeader(id, playLeaderCard);
@@ -630,9 +646,11 @@ public class Controller implements Observer<ClientMessage> {
             }
         }
         else{
-            serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
-            currentAction.put(currentActivePlayer, null);
-            serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            if (correctName) {
+                serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
+                currentAction.put(currentActivePlayer, null);
+                serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            }
         }
     }
 
@@ -663,7 +681,8 @@ public class Controller implements Observer<ClientMessage> {
      */
     public  synchronized void marketAction(int index, boolean isRow, ArrayList<Resource>exchange,String playerId){
         String username = game.getActivePlayer().getNickname();
-        if ((currentAction.get(currentActivePlayer)==Actions.MARKETACTION)&&(playerId.equals(username))) {
+        boolean correctName = playerId.equals(username);
+        if ((currentAction.get(currentActivePlayer)==Actions.MARKETACTION)&&(correctName)) {
             ArrayList<Marbles> marbles = new ArrayList<>();
             ArrayList<Resource> resources = new ArrayList<>();
             if (isRow) {
@@ -675,9 +694,11 @@ public class Controller implements Observer<ClientMessage> {
             }
         }
         else{
-            serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
-            currentAction.put(currentActivePlayer, null);
-            serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            if (correctName) {
+                serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
+                currentAction.put(currentActivePlayer, null);
+                serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            }
         }
     }
 
@@ -790,7 +811,8 @@ public class Controller implements Observer<ClientMessage> {
      */
     public void buyDevelopmentCard(HashMap<Resource,Integer> depotResources, HashMap<Resource,Integer> strongboxResources, HashMap<Resource,Integer>cardDepotResources, Color color,int level,int slotNumber,String playerId){
         String username = game.getActivePlayer().getNickname();
-        if ((currentAction.get(currentActivePlayer)==Actions.BUYDEVELOPMENTCARD)&&(playerId.equals(username))) {
+        boolean correctName = playerId.equals(username);
+        if ((currentAction.get(currentActivePlayer)==Actions.BUYDEVELOPMENTCARD)&&(correctName)) {
             String id;
             try {
                 id = game.getBoard().viewCard(color, level).getId();
@@ -835,9 +857,11 @@ public class Controller implements Observer<ClientMessage> {
             }
         }
         else {
-            serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
-            currentAction.put(currentActivePlayer, null);
-            serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            if (correctName) {
+                serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
+                currentAction.put(currentActivePlayer, null);
+                serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            }
         }
     }
 
@@ -848,7 +872,8 @@ public class Controller implements Observer<ClientMessage> {
     public void useProduction(HashMap<Resource,Integer> warehouseDepotRes,HashMap<Resource,Integer> cardDepotRes, HashMap<Resource,Integer> strongboxRes,
                               ArrayList<Resource> boardGain, ArrayList<Resource> leaderGain, ArrayList<Integer> devSlotIndex, ArrayList<Integer> leaderCardProdIndex, String playerId ){
         String name = game.getActivePlayer().getNickname();
-        if ((currentAction.get(currentActivePlayer)==Actions.USEPRODUCTION)&&(playerId.equals(name))) {
+        boolean correctName = playerId.equals(name);
+        if ((currentAction.get(currentActivePlayer)==Actions.USEPRODUCTION)&&(correctName)) {
             UseProduction useProduction = new UseProduction(devSlotIndex, leaderCardProdIndex, leaderGain, boardGain, warehouseDepotRes, cardDepotRes, strongboxRes);
             int currentPoints = game.getActivePlayer().getFaithTrack().getPosition();
             try {
@@ -883,9 +908,11 @@ public class Controller implements Observer<ClientMessage> {
             }
         }
         else{
-            serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
-            currentAction.put(currentActivePlayer, null);
-            serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            if (correctName) {
+                serverViews.get(currentServerView).sendError(Error.INVALID_ACTION);
+                currentAction.put(currentActivePlayer, null);
+                serverViews.get(currentServerView).sendPossibleActions(getPossibleAction());
+            }
         }
     }
 
@@ -901,32 +928,39 @@ public class Controller implements Observer<ClientMessage> {
                 Player player = game.getPlayers(i);
                 int position = player.getFaithTrack().getPosition();
                 String username = player.getNickname();
+                Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
                 switch (numOfVaticanReport){
                     case 1: {
                         if (position>=5){
                             update.put(username,8);
-                            Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
                             temp.put(8,true);
-                            vaticanReportActivated.put(username,temp);
                         }
+                        else {
+                            temp.put(8,false);
+                        }
+                        vaticanReportActivated.put(username,temp);
                         break;
                     }
                     case 2: {
                         if (position>=12){
                             update.put(username,16);
-                            Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
                             temp.put(16,true);
-                            vaticanReportActivated.put(username,temp);
                         }
+                        else {
+                            temp.put(16,false);
+                        }
+                        vaticanReportActivated.put(username,temp);
                         break;
                     }
                     case 3:{
                         if (position>=19){
                             update.put(username,24);
-                            Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
                             temp.put(24,true);
-                            vaticanReportActivated.put(username,temp);
                         }
+                        else {
+                            temp.put(24,false);
+                        }
+                        vaticanReportActivated.put(username,temp);
                         break;
                     }
                     default: break;
@@ -1096,11 +1130,17 @@ public class Controller implements Observer<ClientMessage> {
             }
         }
 
+        // standard reconnection messages
+        serverView.sendPlayers(getPlayers());
         serverView.sendDevCardGrid(getDevCardGrid());
         serverView.sendMarket(getMarket(),getFreeMarble());
-        serverView.sendReconnectionMessage(username,getDevCardSlots(),getFaithPositions(),getLeaderCardsPlayed(),
-                getLeaderCards(username), getStrongbox(), getWarehouse(),cardInHand,playerConnected,vaticanReportActivated);
+        Map<String, Map<Integer, Boolean>> tempo = new HashMap<>(vaticanReportActivated);
+        boolean gameStarted = isGameStarted();
+        serverView.sendReconnectionMessage(username, getDevCardSlots(), getFaithPositions(), getLeaderCardsPlayed(),
+                    getLeaderCards(username), getStrongbox(), getWarehouse(), cardInHand, playerConnected, tempo,gameStarted);
 
+
+        // starting leader cards not yet chosen
         if (!playerStatus.get(username).get(0)){
             ArrayList<String> starting= new ArrayList<>();
             for (int j = 0; j < startingLeaderCards.get(serverView.getUsername()).size(); j++) {
@@ -1109,11 +1149,13 @@ public class Controller implements Observer<ClientMessage> {
             serverView.sendLeaderCards(starting);
             return;
         }
+        //starting resources not yet chosen
         else if (!playerStatus.get(username).get(1)){
             int number= startingResources.get(username);
             serverView.startingResourceMessage(number);
             return;
         }
+        // if all players were disconnected
         else if (playersDisconnected.size()+1 == playersNumber){
             increaseActivePlayer(1);
             Player player = game.getPlayers(currentActivePlayer);
@@ -1129,7 +1171,9 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
-
+    /**
+     * @return a map containing the development cards of all the players
+     */
     private Map<String, Map<Integer, ArrayList<String>>> getDevCardSlots(){
         Map<String, Map<Integer, ArrayList<String>>> devCardSlots = new HashMap<>();
         for (int i=0;i<serverViews.size();i++){
@@ -1140,53 +1184,57 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
+    /**
+     * @return a map that contains the faith positions of all the players
+     */
     private Map<String,Integer> getFaithPositions(){
         Map<String,Integer> faithPositions = new HashMap<>();
         for (int i=0;i<serverViews.size();i++) {
             Player player = game.getPlayers(i);
-            game.setActivePlayer(player);
-            faithPositions.put(game.getActivePlayer().getNickname(),game.getActivePlayer().getFaithTrack().getPosition());
+            faithPositions.put(player.getNickname(),player.getFaithTrack().getPosition());
         }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
         return faithPositions;
     }
 
 
+    /**
+     * @return a map containing the leader cards played by all players
+     */
     private Map<String, ArrayList<String>> getLeaderCardsPlayed(){
         Map<String, ArrayList<String>> leaderCards = new HashMap<>();
         for (int i=0;i<serverViews.size();i++) {
             Player player = game.getPlayers(i);
-            game.setActivePlayer(player);
             ArrayList<String> id = new ArrayList<>();
-            for (int j=0;j<game.getActivePlayer().getPlayerBoard().getLeaderCards().size();j++){
-                id.add(j,game.getActivePlayer().getPlayerBoard().getLeaderCards().get(j).getId());
+            for (int j=0;j<player.getPlayerBoard().getLeaderCards().size();j++){
+                id.add(j,player.getPlayerBoard().getLeaderCards().get(j).getId());
             }
-            leaderCards.put(game.getActivePlayer().getNickname(),id);
+            leaderCards.put(player.getNickname(),id);
         }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
         return leaderCards;
     }
 
 
+    /**
+     * @param username of the player I want to know about
+     * @return the leader cards of the selected player
+     */
     private ArrayList<String> getLeaderCards(String username){
         ArrayList<String> leaderCards = new ArrayList<>();
         for (int i=0;i<serverViews.size();i++){
             if (game.getPlayers(i).getNickname().equals(username)){
                 Player player = game.getPlayers(i);
-                game.setActivePlayer(player);
-                for (int j=0;j<game.getActivePlayer().getCardsHand().size();j++){
-                    leaderCards.add(j,game.getActivePlayer().getCardsHand().get(j).getId());
+                for (int j=0;j<player.getCardsHand().size();j++){
+                    leaderCards.add(j,player.getCardsHand().get(j).getId());
                 }
             }
         }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
         return leaderCards;
     }
 
 
+    /**
+     * @return a map with the strongboxes of all the players
+     */
     private Map<String, Map<Resource,Integer>> getStrongbox(){
         Map<String, Map<Resource,Integer>> strongbox = new HashMap<>();
         for (int i=0;i<serverViews.size();i++) {
@@ -1199,38 +1247,24 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
+    /**
+     * @return a map with all players' warehouses
+     */
     private Map<String, Map<Integer, ArrayList<Resource>>> getWarehouse(){
         Map<String, Map<Integer, ArrayList<Resource>>> warehouse = new HashMap<>();
         for (int i=0;i<serverViews.size();i++) {
             Player player = game.getPlayers(i);
-            game.setActivePlayer(player);
             Map<Integer, ArrayList<Resource>> depots = new HashMap<>();
-            for (int j=0;j<game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size();j++){
+            for (int j=0;j<player.getPlayerBoard().getWarehouse().getDepots().size();j++){
                 ArrayList<Resource> resources = new ArrayList<>();
-                for (int k=0;k<game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(j).getOccupied();k++) {
-                   resources.add(k,game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(j).getResource());
+                for (int k=0;k<player.getPlayerBoard().getWarehouse().getDepots().get(j).getOccupied();k++) {
+                   resources.add(k,player.getPlayerBoard().getWarehouse().getDepots().get(j).getResource());
                 }
                 depots.put(j,resources);
             }
-            warehouse.put(game.getActivePlayer().getNickname(),depots);
+            warehouse.put(player.getNickname(),depots);
         }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
         return warehouse;
-    }
-
-
-    private Map<String,Integer> getFaith(){
-        Map<String,Integer> map = new HashMap<>();
-        for (int i = 0; i < serverViews.size(); i++) {
-            Player player = game.getPlayers(i);
-            game.setActivePlayer(player);
-            map.put(game.getActivePlayer().getNickname(),game.getActivePlayer().getFaithTrack().getPosition());
-
-        }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
-        return map;
     }
 
 
@@ -1239,8 +1273,9 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
-
-
+    /**
+     * @return the market
+     */
     private MarbleColors[][] getMarket(){
         MarbleColors[][] marbleColors = new MarbleColors[game.getBoard().getMarketBoard().getRows()][game.getBoard().getMarketBoard().getColumns()];
         Marbles[][] marbles = game.getBoard().getMarketBoard().getMarbleGrid();
@@ -1250,13 +1285,13 @@ public class Controller implements Observer<ClientMessage> {
             }
 
         }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
         return marbleColors;
     }
 
 
-
+    /**
+     * @return the free marble
+     */
     private MarbleColors getFreeMarble(){
         return game.getBoard().getMarketBoard().getFreeMarble().getColor();
     }
@@ -1275,8 +1310,6 @@ public class Controller implements Observer<ClientMessage> {
 
             }
         }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
         return devCardGrid;
     }
 

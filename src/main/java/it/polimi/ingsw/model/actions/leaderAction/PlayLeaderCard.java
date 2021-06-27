@@ -42,30 +42,6 @@ public class PlayLeaderCard extends Actions {
             }
         }
         if (!check) return false;
-        // checks that the received resources are the same of the cost of the card that the player wants to buy
-        /*if (!leaderCard.getRequirements().IsColor()) {
-            Map<Resource, Integer> totalPayment = new HashMap<>();
-            for (Resource resource : Resource.values()) {
-                totalPayment.put(resource, 0);
-            }
-            for (int i = 0; i < playerBoard.getWarehouse().getDepots().size(); i++) {
-                totalPayment.put(playerBoard.getWarehouse().getDepots().get(i).getResource(),playerBoard.getWarehouse().getDepots().get(i).getOccupied());
-
-            }
-            playerBoard.getStrongbox().getResources().forEach((key, value) -> totalPayment.merge(key, value, Integer::sum));
-            for (Resource resource : Resource.values()) {
-                if (totalPayment.get(resource)<(leaderCard.getRequirements().getRequirements(playerBoard).get(resource)))
-                    return false;
-            }
-            return true;
-
-
-        }
-        else {
-            return leaderCard.getRequirements().checkRequirements(playerBoard);
-        }
-
-         */
         return leaderCard.getRequirements().checkRequirements(playerBoard);
     }
 

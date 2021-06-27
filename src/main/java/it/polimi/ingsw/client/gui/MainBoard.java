@@ -337,6 +337,7 @@ public class MainBoard {
     private int currentMarketIndex =-1;
     private boolean currentRowOrColumn;
     private int numberOfWhiteMarbles =-1;
+    private int  exchangeCounter=0;
     private final ArrayList<Resource> exchange = new ArrayList<>();
     private Resource leaderRes1;
     private Resource leaderRes2;
@@ -1907,6 +1908,7 @@ public class MainBoard {
         exchange.clear();
         leaderRes1 = null;
         leaderRes2=null;
+        exchangeCounter=0;
     }
 
     public void row1MarketButton(){
@@ -1943,6 +1945,8 @@ public class MainBoard {
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
             Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            leaderRes1 = leaderResource1;
+            leaderRes2 = leaderResource2;
             numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountRow(1);
             currentMarketIndex =1;
             currentRowOrColumn = true;
@@ -1969,6 +1973,8 @@ public class MainBoard {
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
             Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            leaderRes1 = leaderResource1;
+            leaderRes2 = leaderResource2;
             numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountRow(2);
             currentMarketIndex =2;
             currentRowOrColumn = true;
@@ -1995,6 +2001,8 @@ public class MainBoard {
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
             Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            leaderRes1 = leaderResource1;
+            leaderRes2 = leaderResource2;
             numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountColumn(0);
             currentMarketIndex =0;
             currentRowOrColumn = false;
@@ -2021,6 +2029,8 @@ public class MainBoard {
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
             Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            leaderRes1 = leaderResource1;
+            leaderRes2 = leaderResource2;
             numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountColumn(1);
             currentMarketIndex =1;
             currentRowOrColumn = false;
@@ -2047,6 +2057,8 @@ public class MainBoard {
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
             Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            leaderRes1 = leaderResource1;
+            leaderRes2 = leaderResource2;
             numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountColumn(2);
             currentMarketIndex =2;
             currentRowOrColumn = false;
@@ -2073,6 +2085,8 @@ public class MainBoard {
         if (gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuffsNum()>1){
             Resource leaderResource1 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(0);
             Resource leaderResource2 =  gui.getClientView().getGameboard().getOnePlayerBoard(clientView.getNickname()).getExchangeBuff().get(1);
+            leaderRes1 = leaderResource1;
+            leaderRes2 = leaderResource2;
             numberOfWhiteMarbles = clientView.getGameboard().getWhiteCountColumn(3);
             currentMarketIndex =3;
             currentRowOrColumn = false;
@@ -2600,10 +2614,11 @@ public class MainBoard {
             }
         }
         else{
-            exchange.add(leaderRes1);
-            numberOfWhiteMarbles--;
-            if (numberOfWhiteMarbles ==0){
-                clientView.marketAction(currentMarketIndex, currentRowOrColumn, exchange,username);
+            exchange.add(exchangeCounter,leaderRes1);
+            exchangeCounter++;
+            if (numberOfWhiteMarbles == exchangeCounter){
+                ArrayList<Resource> temp= new ArrayList<>(exchange);
+                clientView.marketAction(currentMarketIndex, currentRowOrColumn, temp,username);
                 disableExchangeBuff();
             }
         }
@@ -2636,9 +2651,9 @@ public class MainBoard {
             }
         }
         else{
-            exchange.add(leaderRes2);
-            numberOfWhiteMarbles--;
-            if (numberOfWhiteMarbles ==0){
+            exchange.add(exchangeCounter,leaderRes2);
+            exchangeCounter++;
+            if (numberOfWhiteMarbles == exchangeCounter){
                 clientView.marketAction(currentMarketIndex, currentRowOrColumn, exchange,username);
                 disableExchangeBuff();
             }

@@ -20,7 +20,7 @@ public class ColorRequirements implements Requirements {
     @Override
     public boolean checkRequirements(PlayerBoard playerBoard) {
         for (Color color: colorCardRequirements.keySet()){
-
+            // se il livello della carta è diverso da 0 e se ho meno carte del livello della carta che voglio allora non posso attivarlo
             if (  (levelCardRequirements.get(color)!=0)  &&  (playerBoard.getColorRequirements().get(levelCardRequirements.get(color)).get(color)<colorCardRequirements.get(color))) return false;
 
         }
@@ -38,12 +38,6 @@ public class ColorRequirements implements Requirements {
         return null;
     }
 
-    public Map<Color, Integer> getColorCardRequirements() {
-        return colorCardRequirements;
-    }
-    public Map<Color, Integer> getLevelCardRequirements() {
-        return levelCardRequirements;
-    }
 
     public void setColorCardRequirements(Map<Color, Integer> cardRequirements) {
         this.colorCardRequirements = cardRequirements;

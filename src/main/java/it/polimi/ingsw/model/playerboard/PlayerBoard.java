@@ -82,19 +82,8 @@ public class PlayerBoard {
         strongbox.addResource(gain,1);
     }
 
-    /**
-     * check if seven development cards have been activated
-     * @return true/false
-     */
-    public boolean sevenCards(){
-        int a = slots.get(0).numOfCards();
-        int b = slots.get(1).numOfCards();
-        int c = slots.get(2).numOfCards();
-        return (a + b + c) == 7;
-
-    }
-
     public HashMap<Integer, HashMap<Color, Integer>> getColorRequirements() {
+        System.out.println(colorRequirements);
         return colorRequirements;
     }
 

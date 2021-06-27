@@ -88,12 +88,12 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
         sendMessage(new DevCardGrid(devCardGrid));
     }
 
-    public void sendReconnectionMessage(String username,  Map<String, Map<Integer, ArrayList<String>>> devCardSlots, Map<String, Integer> faithPositions,
+    public void sendReconnectionMessage(String username, Map<String, Map<Integer, ArrayList<String>>> devCardSlots, Map<String, Integer> faithPositions,
                                         Map<String, ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards,
-                                        Map<String, Map<Resource, Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand, Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated) {
+                                        Map<String, Map<Resource, Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand, Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated, boolean gameStarted) {
 
 
-        sendMessage(new ReConnectionUpdate(username, devCardSlots,faithPositions,leaderCardsPlayed,leaderCards,strongbox,warehouse, cardsInHand, playersConnected,vaticanReportActivated));
+        sendMessage(new ReConnectionUpdate(username, devCardSlots,faithPositions,leaderCardsPlayed,leaderCards,strongbox,warehouse, cardsInHand, playersConnected,vaticanReportActivated,gameStarted));
 
 
     }

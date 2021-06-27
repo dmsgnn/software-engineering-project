@@ -19,8 +19,8 @@ public class DevelopmentCardSlot {
     public void addCardOnTop(DevelopmentCard card, PlayerBoard playerBoard) {
         this.slots.add(card);
         this.cardCounter++;
-        HashMap<Integer, HashMap<Color, Integer>>  colorRequirements =  playerBoard.getColorRequirements();
-        map = colorRequirements.get(card.getLevel());
+        HashMap<Integer, HashMap<Color, Integer>>  colorRequirements =   new HashMap<>(playerBoard.getColorRequirements());
+        map = new HashMap<>(colorRequirements.get(card.getLevel()));
         count = map.get(card.getColor());
         map.put(card.getColor(),count+1);
         colorRequirements.put(card.getLevel(),map);

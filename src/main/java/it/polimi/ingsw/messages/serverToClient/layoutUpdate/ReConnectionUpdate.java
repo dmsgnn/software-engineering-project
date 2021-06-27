@@ -20,12 +20,13 @@ public class ReConnectionUpdate implements ServerMessage {
     private final Map<String,Integer> cardsInHand;
     private final Map<String,Boolean> playersConnected;
     private final Map<String, Map<Integer, Boolean>> vaticanReportActivated;
+    private final boolean gameStarted;
 
 
     public ReConnectionUpdate(String username, Map<String, Map<Integer, ArrayList<String>>> devCardSlots, Map<String,
             Integer> faithPositions, Map<String, ArrayList<String>> leaderCardsPlayed,
                               ArrayList<String> leaderCards, Map<String, Map<Resource,
-            Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand, Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated) {
+            Integer>> strongbox, Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand, Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated, boolean gameStarted) {
         this.username = username;
         this.devCardSlots = devCardSlots;
         this.faithPositions = faithPositions;
@@ -36,6 +37,7 @@ public class ReConnectionUpdate implements ServerMessage {
         this.cardsInHand = cardsInHand;
         this.playersConnected = playersConnected;
         this.vaticanReportActivated = vaticanReportActivated;
+        this.gameStarted = gameStarted;
     }
 
     @Override
