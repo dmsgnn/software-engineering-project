@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Reconnection fix">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="ClientView update to fit ReConnectionUpdate message update, code cleanup, some javadoc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/ReConnectionUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/messages/serverToClient/layoutUpdate/ReConnectionUpdate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/DevelopmentCardSlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/DevelopmentCardSlot.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -109,7 +107,7 @@
       <recent name="it.polimi.ingsw.model.actions" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientMain">
+  <component name="RunManager" selected="JUnit.All in AM5">
     <configuration name="ClientMain" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.client.ClientMain" />
       <module name="AM5" />
@@ -137,15 +135,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in AM5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -215,14 +219,15 @@
       <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
       <item itemvalue="JUnit.BuyDevCardTest.notEnoughRecourseTest" />
       <item itemvalue="JUnit.BuyDevCardTest.notRightRecourseTest" />
+      <item itemvalue="JUnit.All in AM5" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in AM5" />
         <item itemvalue="Application.ClientMain" />
         <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
         <item itemvalue="JUnit.BuyDevCardTest.notEnoughRecourseTest" />
-        <item itemvalue="JUnit.BuyDevCardTest.notRightRecourseTest" />
       </list>
     </recent_temporary>
   </component>
@@ -419,13 +424,9 @@
       <workItem from="1624647892587" duration="1830000" />
       <workItem from="1624653081657" duration="625000" />
       <workItem from="1624792218269" duration="4280000" />
-    </task>
-    <task id="LOCAL-00022" summary="CLI gameboard test">
-      <created>1620758055562</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1620758055562</updated>
+      <workItem from="1624820440658" duration="834000" />
+      <workItem from="1624822937857" duration="363000" />
+      <workItem from="1624824065713" duration="568000" />
     </task>
     <task id="LOCAL-00023" summary="Bug fix">
       <created>1620806887285</created>
@@ -763,7 +764,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624787832505</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="ClientView update to fit ReConnectionUpdate message update, code cleanup, some javadoc">
+      <created>1624811266208</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1624811266208</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -783,7 +791,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="boardProduction button" />
     <MESSAGE value="ClientPlayerBoard Map for production buff and methods for leadercards and develompent card slots GUI" />
     <MESSAGE value="depot and strongbox button's methods" />
     <MESSAGE value="GUI button actions update" />
@@ -808,7 +815,8 @@
     <MESSAGE value="Reconnection message update to fit the client changes, Actions method resilience improved" />
     <MESSAGE value="Reconnection fix" />
     <MESSAGE value="Dev card check requirements fix, ClientGameBoard fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dev card check requirements fix, ClientGameBoard fix" />
+    <MESSAGE value="ClientView update to fit ReConnectionUpdate message update, code cleanup, some javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="ClientView update to fit ReConnectionUpdate message update, code cleanup, some javadoc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

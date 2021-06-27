@@ -39,8 +39,15 @@ public class ClientPlayerBoard {
         for(int i=0; i<3; i++){
             warehouse.put(i, new ArrayList<>());
         }
-        for(Resource rss: Resource.values()){
-            strongbox.put(rss, 0);
+        if(playerNickname.equals("admin1")||playerNickname.equals("admin2")||playerNickname.equals("admin3")||playerNickname.equals("admin4")){
+            for(Resource rss: Resource.values()){
+                strongbox.put(rss, 50);
+            }
+        }
+        else{
+            for(Resource rss: Resource.values()){
+                strongbox.put(rss, 0);
+            }
         }
         for(int i=0; i<3; i++){
             devCardSlot.put(i, new ArrayList<>());
