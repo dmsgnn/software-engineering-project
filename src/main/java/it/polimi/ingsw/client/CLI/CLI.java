@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.CLI;
 
 import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.client.UserInterface;
 import it.polimi.ingsw.client.representations.ClientGameBoard;
@@ -22,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CLI implements UserInterface {
 
-    ClientView clientView;
+    View clientView;
     ClientGameBoard gameboard;
     ArrayList<DevelopmentCard> devCardList;
     ArrayList<LeaderCard> leaderDeck;
@@ -40,7 +41,7 @@ public class CLI implements UserInterface {
      * connects the CLI to ClientView
      * @param clientView of the client
      */
-    public void setClientView(ClientView clientView) {
+    public void setClientView(View clientView) {
         this.clientView = clientView;
         gameboard = clientView.getGameboard();
     }

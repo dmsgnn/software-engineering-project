@@ -1,42 +1,35 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.client.representations.ClientGameBoard;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.controller.Error;
+import it.polimi.ingsw.controller.LocalController;
 import it.polimi.ingsw.messages.clientToServer.*;
-import it.polimi.ingsw.messages.serverToClient.ServerMessage;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.utility.LeaderCardsParserXML;
 
-import java.net.Socket;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import static java.lang.System.exit;
 
-public class ClientView extends View implements Observer<ServerMessage>{
-
-    private ClientSocketHandler socket;
+public class LocalClientView extends View{
+    private LocalController controller;
     private final UserInterface uiType;
     private String nickname; //nickname of the player who owns this client
-    private final String ip;
-    private final int port;
     private final ClientGameBoard gameboard;
-
-    private final Object lock = new Object();
-    private boolean updated = true;
-    private boolean faithUpdateReceived = false;
 
     ArrayList<LeaderCard> leaderDeck = new LeaderCardsParserXML().leaderCardsParser();
 
 
-    public ClientView(String ip, int port, UserInterface ui) {
-        this.ip = ip;
-        this.port = port;
+    public LocalClientView(UserInterface ui) {
         this.uiType = ui;
         gameboard = new ClientGameBoard();
     }
@@ -87,24 +80,21 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param nickname selected from the player
      */
     public void sendLogin(String nickname){
-        updated=false;
-        socket.sendMessage(new LoginMessage(nickname));
+        this.nickname = nickname;
+        ArrayList<String> user = new ArrayList<>();
+        user.add(nickname);
+        Game game = new Game(user);
+        controller= new LocalController(game, user, this);
+        controller.startGame();
     }
 
     /**
-     * manages the Username Response message
-     * @param nickname the player set
+     * adds all the players to the game
+     * @param players nicknames of the players
      */
-    public void manageUsernameResponse(boolean isFree, String nickname){
-        synchronized (lock) {
-            updated = true;
-            if (isFree) {
-                this.nickname = nickname;
-                uiType.loginDone();
-            } else {
-                uiType.failedLogin();
-            }
-        }
+    public void addPlayersToGameboard(ArrayList<String> players){
+        gameboard.addPlayers(players);
+        if(players.size()==1) gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(0);
     }
 
     /**
@@ -112,25 +102,11 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param errorType error to manage
      */
     public void errorManagement(Error errorType){
-        synchronized (lock){
-            uiType.manageError(errorType);
-            updated=true;
-            lock.notifyAll();
-        }
+        uiType.manageError(errorType);
     }
 
     //------------------GAME SETUP------------------
 
-    /**
-     * adds all the players to the game
-     * @param players nicknames of the players
-     */
-    public void addPlayersToGameboard(ArrayList<String> players){
-        synchronized (lock){
-            gameboard.addPlayers(players);
-            if(players.size()==1) gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(0);
-        }
-    }
 
     /**
      * informs the client about the starting market configuration
@@ -138,9 +114,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param free this is the free marble that has to be used to perform the market action
      */
     public void marketSetup(MarbleColors[][] grid, MarbleColors free) {
-        synchronized (lock) {
-            gameboard.initializeMarket(grid, free);
-        }
+        gameboard.initializeMarket(grid, free);
     }
 
     /**
@@ -148,34 +122,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param cards initial card grid
      */
     public void developmentCardGridSetup(String[][] cards){
-        synchronized (lock) {
-            gameboard.initializeCards(cards);
-        }
-    }
-
-    /**
-     * called if this is the first player, asks the game size
-     * @param maxNum maximum number of players
-     */
-    public void numOfPlayers(int maxNum){
-        synchronized (lock) {
-            while (!updated) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            uiType.playersNumber(maxNum);
-        }
-    }
-
-    /**
-     * called to send the selected game size to the server
-     * @param num number of players
-     */
-    public void sendNumOfPlayers(int num){
-        socket.sendMessage(new PlayerNumberReply(num));
+        gameboard.initializeCards(cards);
     }
 
     /**
@@ -183,9 +130,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param leaderCardID IDs of the cards
      */
     public void selectStartingCards(ArrayList<String> leaderCardID){
-        synchronized (lock) {
-            uiType.startingLeaderCardsSelection(leaderCardID);
-        }
+        uiType.startingLeaderCardsSelection(leaderCardID);
     }
 
     /**
@@ -193,44 +138,16 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param cards selected from the player
      */
     public void sendStartingCards(ArrayList<String> cards){
-        socket.sendMessage(new LeaderCardsReply(cards, nickname));
+        controller.pickStartingLeaderCards(cards, nickname);
     }
 
     /**
      * called if the leadercard selection was correct
      */
     public void leaderCardsDone(){
-        synchronized (lock) {
-            uiType.endLeadercardSetup();
-        }
+        uiType.endLeadercardSetup();
     }
 
-    /**
-     * called to make the player chose the starting resources
-     * @param amount num of resources
-     */
-    public void startingResources(int amount){
-        synchronized (lock) {
-             uiType.startingResources(amount);
-        }
-    }
-
-    /**
-     * called to send the starting resources to the server
-     * @param warehouse configuration
-     */
-    public void sendStartingResources(Map<Integer, ArrayList<Resource>> warehouse){
-        socket.sendMessage(new ResourcesReply(warehouse, nickname));
-    }
-
-    /**
-     * called if the starting resources selection was correct
-     */
-    public void startingResDone(){
-        synchronized (lock) {
-            uiType.endStartingResourcesSetup();
-        }
-    }
 
 
     //------------------ACTIONS------------------
@@ -240,16 +157,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param possibleActions list of the actions the player can choose from
      */
     public void pickAction(ArrayList<Actions> possibleActions){
-        synchronized (lock){
-            while(!updated) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            uiType.chooseAction(possibleActions);
-        }
+        uiType.chooseAction(possibleActions);
     }
 
     /**
@@ -257,8 +165,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param action selected from the player
      */
     public void sendAction(Actions action){
-        updated=false;
-        socket.sendMessage(new ActionReply(action));
+        controller.selectAction(action);
     }
 
     /**
@@ -266,7 +173,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param action what the player decided to do
      */
     public void doAction(Actions action){
-        synchronized (lock) {
             switch (action) {
                 case MARKETACTION:
                     uiType.marketAction();
@@ -287,7 +193,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
                     endTurn();
                     break;
             }
-        }
     }
 
     /**
@@ -295,8 +200,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void endTurn(){
         uiType.endTurn();
-        socket.sendMessage(new EndTurn());
-        updated=true;
+        controller.endTurn();
     }
 
     /**
@@ -306,7 +210,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param exchangeBuffResources resources obtained from white marbles if possible
      */
     public void marketAction(int pos, boolean rowOrCol, ArrayList<Resource> exchangeBuffResources, String username){
-        socket.sendMessage(new RowColumnSelection(pos, rowOrCol, exchangeBuffResources, username));
+        controller.marketAction(pos, rowOrCol, exchangeBuffResources, username);
     }
 
     /**
@@ -322,8 +226,8 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void useProduction(ArrayList<Integer> developmentCardSlotIndex, ArrayList<Integer> leaderCardProdIndex, ArrayList<Resource> leaderCardProdGain,
                               ArrayList<Resource> boardResources, HashMap<Resource, Integer> warehouseResources, HashMap<Resource, Integer> leaderDepotResources,
                               HashMap<Resource, Integer> strongboxResources, String username){
-        socket.sendMessage(new UseProductionParameters(warehouseResources, leaderDepotResources, strongboxResources,
-                boardResources, leaderCardProdGain, developmentCardSlotIndex, leaderCardProdIndex, username));
+        controller.useProduction(warehouseResources, leaderDepotResources, strongboxResources,
+                boardResources, leaderCardProdGain, developmentCardSlotIndex, leaderCardProdIndex, username);
     }
 
     /**
@@ -337,7 +241,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void buyDevCard(Color color, int level, int devCardSlot, HashMap<Resource, Integer> warehouseDepotRes,
                            HashMap<Resource, Integer> cardDepotRes, HashMap<Resource, Integer> strongboxRes, String username){
-        socket.sendMessage(new BuyDevelopmentCardParameters(color, level, devCardSlot, warehouseDepotRes, cardDepotRes, strongboxRes, username));
+        controller.buyDevelopmentCard(warehouseDepotRes,strongboxRes, cardDepotRes, color, level, devCardSlot, username);
     }
 
     /**
@@ -345,7 +249,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param id of the selected card
      */
     public void playLeaderCard(String id,String username){
-        socket.sendMessage(new PlayLeaderCardParameters(id, username));
+        controller.playLeaderCard(id, username);
     }
 
     /**
@@ -353,7 +257,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param id of the selected card
      */
     public void discardLeaderCard(String id,String username){
-        socket.sendMessage(new DiscardLeaderCardParameters(id, username));
+        controller.discardLeaderCard(id, username);
     }
 
     /**
@@ -361,9 +265,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param resources new resources
      */
     public void manageResources(ArrayList<Resource> resources){
-        synchronized (lock) {
-            uiType.manageResources(resources);
-        }
+        uiType.manageResources(resources);
     }
 
     /**
@@ -372,24 +274,11 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param discard resources that the player wants to discard
      */
     public void sendManageResourcesReply(Map<Integer, ArrayList<Resource>> newWarehouse, Map<Resource,Integer> discard){
-        socket.sendMessage(new ResourcesManageReply(newWarehouse, discard));
+        controller.manageResources(newWarehouse, discard);
     }
 
     //------------------UPDATES------------------
 
-    /**
-     * method to block the action update if the faith update hasn't been received yet
-     */
-    private void waitForFaithUpdate(){
-        while (!faithUpdateReceived) {
-            try {
-                lock.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        faithUpdateReceived=false;
-    }
 
     /**
      * called to setup all playerboard with initial values
@@ -398,7 +287,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param faithTracks faith track position of each player
      */
     public void setupGameUpdate(Map<String,ArrayList<String>> leaderCards, Map<String,Map<Integer, ArrayList<Resource>>> resources, Map<String,Integer> faithTracks){
-        synchronized (lock) {
             for (String nickname : leaderCards.keySet()) {
                 if (nickname.equals(this.nickname))
                     gameboard.getOnePlayerBoard(nickname).setHand(leaderCards.get(nickname));
@@ -411,115 +299,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
             }
             uiType.updateBoard("");
             uiType.endTurn();
-            updated=true;
-            lock.notifyAll();
-        }
-    }
-
-    /**
-     * called when another player begins his turn
-     */
-    public void turnNotification(String player){
-        synchronized (lock) {
-            if(!player.equals(nickname)) uiType.startTurnNotification(player);
-        }
-    }
-
-    /**
-     * called when a player disconnects from the game
-     * @param nickname of the player
-     */
-    public void playerDisconnected(String nickname){
-        synchronized (lock){
-            while (!gameboard.getOnePlayerBoard(nickname).isConnected()) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            gameboard.getOnePlayerBoard(nickname).setConnected(false);
-            uiType.handleDisconnection(nickname);
-            lock.notifyAll();
-        }
-    }
-
-    /**
-     * called when a player reconnects to the game
-     * @param nickname of the player
-     */
-    public void playerReconnected(String nickname){
-        synchronized (lock){
-            while (gameboard.getOnePlayerBoard(nickname).isConnected()) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            gameboard.getOnePlayerBoard(nickname).setConnected(true);
-            uiType.handleReconnection(nickname);
-            lock.notifyAll();
-        }
-    }
-
-    /**
-     * called after a player reconnects to the game, the parameters contains all the information regarding the game
-     * @param username of this client
-     * @param devCardSlots all dev cards bought by all the player
-     * @param faithPositions all player's faith track position
-     * @param leaderCardsPlayed all leader cards played by all player
-     * @param leaderCards player hand
-     * @param strongbox every strongbox
-     * @param warehouse every warehouse
-     * @param cardsInHand number of cards in each player's hand
-     * @param playersConnected connection status of each player
-     * @param vaticanReportActivated vatican report status for each player
-     */
-    public void reconnectionUpdate(String username, Map<String, Map<Integer, ArrayList<String>>> devCardSlots, Map<String, Integer> faithPositions, Map<String,
-            ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource, Integer>> strongbox,
-                                   Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand,
-                                   Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated){
-        synchronized (lock) {
-            this.nickname=username;
-            ArrayList<String> players = new ArrayList<>(devCardSlots.keySet());
-            gameboard.addPlayers(players);
-            for (String nickname : devCardSlots.keySet()) {
-                gameboard.getOnePlayerBoard(nickname).setDevCardSlot(devCardSlots.get(nickname));
-            }
-            for (String nickname : faithPositions.keySet()) {
-                gameboard.getOnePlayerBoard(nickname).setPlayerPosition(faithPositions.get(nickname));
-            }
-            gameboard.getOnePlayerBoard(nickname).setHand(leaderCards);
-            for (String nickname : strongbox.keySet()) {
-                gameboard.getOnePlayerBoard(nickname).setStrongbox(strongbox.get(nickname));
-            }
-            for (String nickname : warehouse.keySet()) {
-                gameboard.getOnePlayerBoard(nickname).setWarehouse(warehouse.get(nickname));
-            }
-            for (String nickname : cardsInHand.keySet()){
-                gameboard.getOnePlayerBoard(nickname).setHandSize(cardsInHand.get(nickname));
-            }
-            for (String nickname : playersConnected.keySet()){
-                gameboard.getOnePlayerBoard(nickname).setConnected(playersConnected.get(nickname));
-            }
-            for (String nickname : leaderCardsPlayed.keySet()) {
-                if(nickname.equals(this.nickname)){
-                    for(int i=0; i<leaderCardsPlayed.get(this.nickname).size(); i++){
-                        String id = leaderCardsPlayed.get(nickname).get(i);
-                        gameboard.getOnePlayerBoard(this.nickname).addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
-                    }
-                }
-                else gameboard.getOnePlayerBoard(nickname).setPlayedCards(leaderCardsPlayed.get(nickname));
-            }
-            for (String nickname : vaticanReportActivated.keySet()){
-                gameboard.getOnePlayerBoard(nickname).setVaticanReports(vaticanReportActivated.get(nickname));
-            }
-            uiType.updateBoard("Reconnected");
-            uiType.endTurn();
-            updated=true;
-            lock.notifyAll();
-        }
     }
 
     /**
@@ -528,14 +307,9 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param newCardGrid new development card grid
      */
     public void lorenzoUpdate(String message, int lorenzoPosition, String[][] newCardGrid){
-        synchronized (lock) {
-            waitForFaithUpdate();
             gameboard.getOnePlayerBoard(nickname).setLorenzoPosition(lorenzoPosition);
             getGameboard().initializeCards(newCardGrid);
             uiType.updateBoard(message);
-            updated=true;
-            lock.notifyAll();
-        }
     }
 
     /**
@@ -545,22 +319,18 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param report true if a vatican report has been activated, false otherwise
      */
     public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report){
-        synchronized (lock) {
-            for (String nickname : position.keySet()) {
-                gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
+        for (String nickname : position.keySet()) {
+            gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
+        }
+        if (report) {
+            int reportPos = 0;
+            for(String nickname : vaticanPosition.keySet()){
+                reportPos = vaticanPosition.get(nickname);
+                gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, true);
             }
-            if (report) {
-                int reportPos = 0;
-                for(String nickname : vaticanPosition.keySet()){
-                    reportPos = vaticanPosition.get(nickname);
-                    gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, true);
-                }
-                for(String nickname : gameboard.getPlayers()){
-                    if(!vaticanPosition.containsKey(nickname)) gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, false);
-                }
+            for(String nickname : gameboard.getPlayers()){
+                if(!vaticanPosition.containsKey(nickname)) gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, false);
             }
-            faithUpdateReceived=true;
-            lock.notifyAll();
         }
     }
 
@@ -577,7 +347,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void buyCardUpdate(String nickname, String id, int slot, String gridId, Color color, int level,
                               Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
-        synchronized (lock) {
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.updateDevCardSlot(slot, id);
             playerBoard.setWarehouse(warehouse);
@@ -585,9 +354,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
             gameboard.changeGridCard(gridId, color, level);
             if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + " bought the level " + level + " " + color + " card");
             else uiType.updateBoard("");
-            updated=true;
-            lock.notifyAll();
-        }
     }
 
     /**
@@ -596,15 +362,10 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param id discarded card
      */
     public void discardLeaderCardUpdate(String nickname, String id){
-        synchronized (lock) {
-            waitForFaithUpdate();
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.removeHandCard(id);
             if(!nickname.equals(this.nickname)) uiType.updateBoard(nickname + " discarded a leader card");
             else uiType.updateBoard("");
-            updated=true;
-            lock.notifyAll();
-        }
     }
 
     /**
@@ -614,7 +375,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param warehouse new warehouse of the player
      */
     public void playLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse){
-        synchronized (lock) {
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.setWarehouse(warehouse);
             playerBoard.removeHandCard(id);
@@ -622,9 +382,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
             if(!nickname.equals(this.nickname))
                 uiType.updateBoard(nickname + " played a leader card");
             else uiType.updateBoard("");
-            updated=true;
-            lock.notifyAll();
-        }
     }
 
     /**
@@ -634,17 +391,12 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param strongbox new strongbox of the player
      */
     public void useProductionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
-        synchronized (lock) {
-            waitForFaithUpdate();
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.setWarehouse(warehouse);
             playerBoard.setStrongbox(strongbox);
             if(!nickname.equals(this.nickname))
                 uiType.updateBoard(nickname + " activated the production");
             else uiType.updateBoard("");
-            updated=true;
-            lock.notifyAll();
-        }
     }
 
     /**
@@ -658,26 +410,19 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void marketActionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse,
                                    ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol){
-        synchronized (lock) {
-            waitForFaithUpdate();
             ClientPlayerBoard playerBoard = gameboard.getOnePlayerBoard(nickname);
             playerBoard.setWarehouse(warehouse);
             gameboard.updateMarket(newMarbles, newFreeMarble, pos, rowOrCol);
             if(!nickname.equals(this.nickname))
                 uiType.updateBoard(nickname + " took resources from the market");
             else uiType.updateBoard("");
-            updated=true;
-            lock.notifyAll();
-        }
     }
 
     /**
      * called to notify the players that this is the last round
      */
     public void endGame(){
-        synchronized (lock) {
             uiType.lastRound();
-        }
     }
 
     /**
@@ -686,14 +431,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param lorenzoWin true if Lorenzo won the game, false if he lost or if the game is singleplayer
      */
     public void finalScoresUpdate(Map<String, Integer> finalScores, boolean lorenzoWin){
-        synchronized (lock){
-            if(gameboard.getNumOfPlayers()==1) {
-                uiType.lorenzoScoreboard(nickname, finalScores.get(nickname), lorenzoWin);
-            }
-            else {
-                uiType.scoreboard(finalScores);
-            }
-        }
+        uiType.lorenzoScoreboard(nickname, finalScores.get(nickname), lorenzoWin);
     }
 
 
@@ -705,41 +443,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
         uiType.winner(winner);
     }
 
-    /**
-     * Called when a {@link ServerMessage} is received. The package is extracted and the method on the incoming
-     * event overrides a method on ClientView
-     * @param message Incoming message
-     */
-    @Override
-    public void update(ServerMessage message) {
-        message.handleMessage(this);
-    }
 
-    //------------------SOCKET------------------
-
-    /**
-     * starts the connection of the client
-     */
-    public void startConnection() {
-        Socket socket = null;
-        try {
-            socket = new Socket(ip, port);
-        } catch (Exception e) {
-            System.out.println("\n\nserver not available: ip or port number might be wrong\n\n");
-            exit(0);
-        }
-
-        ClientSocketHandler proxy = new ClientSocketHandler(socket);
-        proxy.addObserver(this);
-        this.socket = proxy;
-        new Thread(proxy).start();
-    }
-
-    /**
-     * closes the socket of the client
-     */
-    public void disconnect() {
-        socket.close();
-    }
 
 }

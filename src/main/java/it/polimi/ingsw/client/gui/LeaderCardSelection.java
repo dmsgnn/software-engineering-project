@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.View;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 
 public class LeaderCardSelection {
 
-    private static ClientView clientView;
+    private static View clientView;
     private static GUI gui;
     private static ArrayList<String> leaderSelection;
     public Label label;

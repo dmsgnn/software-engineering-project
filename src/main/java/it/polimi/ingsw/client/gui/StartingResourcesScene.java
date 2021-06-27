@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.model.Resource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,7 +31,7 @@ public class StartingResourcesScene {
     @FXML
     private Button depot3;
 
-    private static ClientView clientView;
+    private static View clientView;
     private static GUI gui;
 
     private final Map<Integer, ArrayList<Resource>> newWarehouse;

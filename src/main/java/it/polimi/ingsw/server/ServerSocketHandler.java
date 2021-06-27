@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.Observable;
-import it.polimi.ingsw.messages.clientToServer.ActionReply;
 import it.polimi.ingsw.messages.clientToServer.ClientMessage;
 import it.polimi.ingsw.messages.clientToServer.LoginMessage;
 import it.polimi.ingsw.messages.clientToServer.PlayerNumberReply;
@@ -22,10 +21,6 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
     private ObjectOutputStream out;
     private Lobby lobby;
 
-    public Socket getSocket() {
-        return socket;
-    }
-
 
     private PingManager sender;
 
@@ -45,7 +40,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
     /**
      * Opens a channel between the client and the server and start the pinging process
      * @param socket client connection
-     * @param server 
+     * @param server server to be connected with
      */
     public ServerSocketHandler(Socket socket, ServerMain server) {
         this.socket = socket;
@@ -104,7 +99,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
 
     /**
      * Sends a message to the client
-     * @param message
+     * @param message is the message to send
      */
     public synchronized void sendMessage(ServerMessage message) {
         try {
@@ -112,7 +107,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
             out.flush();
             if(message instanceof FinalScoreMessage)
                 lobby.increaseMessageCounter();
-            if(lobby.getMessageCouter() >= lobby.getLoggedPlayers().size()) {
+            if(lobby.getMessageCounter() >= lobby.getLoggedPlayers().size()) {
                 System.out.println("there is a winner, game will end soon\n");
                 server.endGame(lobby);
             }
@@ -124,9 +119,9 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
 
     /**
      * Makes the login of the user on the server
-     * @param message
+     * @param message is the login message which contains the nickname of the user
      */
-    private void login(LoginMessage message) throws InterruptedException, IOException {
+    private void login(LoginMessage message) {
         synchronized (lock) {
             while(server.getLobbies().size() > 0 && server.getLobbies().get(server.getLobbies().size()-1).getPlayerGameNumber() == 0) {
                 try {

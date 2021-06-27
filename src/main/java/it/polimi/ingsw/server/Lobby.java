@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.Game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
 
 public class Lobby {
     //map to save the nickname and the socket of the player
@@ -18,20 +17,16 @@ public class Lobby {
     private boolean isGameStarted;
     //number of disconnected users
     private int disconnectedUsers;
-    private int messageCouter = 0;
+    private int messageCounter = 0;
 
     private Controller controller;
 
-    public void setMessageCouter(int messageCouter) {
-        this.messageCouter = messageCouter;
-    }
-
     public void increaseMessageCounter(){
-        messageCouter++;
+        messageCounter++;
     }
 
-    public int getMessageCouter() {
-        return messageCouter;
+    public int getMessageCounter() {
+        return messageCounter;
     }
 
     public int getDisconnectedUsers() {
@@ -118,6 +113,23 @@ public class Lobby {
         ServerView reconnectedUser = new ServerView(username, connection);
         reconnectedUser.addObserver(controller);
         controller.playerReconnection(reconnectedUser);
+    }
+
+    /**
+     * remove a player from logged player map
+     * @param connection is the connection to remove
+     */
+    public void remove(ServerSocketHandler connection){
+        loggedPlayers.remove(connection);
+    }
+
+    /**
+     * add a player to the logged player map
+     * @param connection is the connection to add
+     * @param user is the nickname to add
+     */
+    public void addLogged(ServerSocketHandler connection, String user){
+        loggedPlayers.put(connection, user);
     }
 
     /**

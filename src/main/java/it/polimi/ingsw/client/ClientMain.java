@@ -9,11 +9,14 @@ public class ClientMain {
         String ui = null;
         //ip entered by the user from command line
         String ip = null;
+        boolean localGame = false;
         int port = -1;
 
         for (String arg : args) {
             if (arg.toLowerCase().matches("(cli)|(gui)"))
                 ui = arg.toLowerCase();
+            else if (arg.toLowerCase().matches("(local)"))
+                localGame = true;
             else if (arg.matches("^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\\.(?!$)|$)){4}$"))
                 ip = arg;
             else if (arg.contains("ngrok"))
@@ -33,21 +36,37 @@ public class ClientMain {
 
         //ui initialization
         if(ui!=null && ui.equals("cli")) {
-            System.out.println("You're going to play with the CLI interface");
-            CLI cli = new CLI();
-            ClientView clientView = new ClientView(ip, port, cli);
-            cli.setClientView(clientView);
-            cli.begin();
+            if(localGame){
+                System.out.println("You're going to play a Local game with the CLI interface");
+                CLI cli = new CLI();
+                View localClientView = new LocalClientView(cli);
+                cli.setClientView(localClientView);
+                cli.begin();
+            }
+            else {
+                System.out.println("You're going to play with the CLI interface");
+                CLI cli = new CLI();
+                ClientView clientView = new ClientView(ip, port, cli);
+                cli.setClientView(clientView);
+                cli.begin();
+            }
 
         }
         else{
-            System.out.println("You're going to play with the GUI interface");
-            GUI gui = new GUI();
-            ClientView clientView = new ClientView(ip, port, gui);
-            gui.setClientView(clientView);
-            new Thread(gui::begin).start();
-
-
+            if(localGame){
+                System.out.println("You're going to play a Local game with the GUI interface");
+                GUI gui = new GUI();
+                View clientView = new LocalClientView(gui);
+                gui.setClientView(clientView);
+                new Thread(gui::begin).start();
+            }
+            else {
+                System.out.println("You're going to play with the GUI interface");
+                GUI gui = new GUI();
+                ClientView clientView = new ClientView(ip, port, gui);
+                gui.setClientView(clientView);
+                new Thread(gui::begin).start();
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.model.Resource;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FullView {
-    private static ClientView clientView;
+    private static View clientView;
     private static GUI gui;
 
     public static void setGui(GUI gui) {

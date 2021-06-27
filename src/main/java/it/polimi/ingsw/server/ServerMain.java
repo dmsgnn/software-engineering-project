@@ -121,7 +121,7 @@ public class ServerMain {
             Lobby lob = disconnectedUsers.get(username);
             lob.decreaseDisconnectedUsers();
             takenUsernames.add(username);
-            lob.getLoggedPlayers().put(connection, username);
+            lob.addLogged(connection, username);
             disconnectedUsers.remove(username);
             connection.setLobby(lob);
             lob.reConnection(username, connection);
@@ -134,7 +134,7 @@ public class ServerMain {
         if(lobbies.size()==0) {
             Lobby lob;
             lob = new Lobby();
-            lob.getLoggedPlayers().put(connection, username);
+            lob.addLogged(connection, username);
             connection.setLobby(lob);
             lobbies.add(lob);
             connection.sendMessage(new UsernameResponse(true, username));
@@ -143,7 +143,7 @@ public class ServerMain {
         }
         //checks if the last created lobby has a free place
         else if (!lobbies.get(lobbies.size()-1).isFull()){
-            lobbies.get(lobbies.size()-1).getLoggedPlayers().put(connection, username);
+            lobbies.get(lobbies.size()-1).addLogged(connection, username);
             connection.setLobby(lobbies.get(lobbies.size()-1));
             connection.sendMessage(new UsernameResponse(true, username));
             if(lobbies.get(lobbies.size()-1).isFull()) {
@@ -156,7 +156,7 @@ public class ServerMain {
         else{
             Lobby lob;
             lob = new Lobby();
-            lob.getLoggedPlayers().put(connection, username);
+            lob.addLogged(connection, username);
             connection.setLobby(lob);
             lobbies.add(lob);
             connection.sendMessage(new UsernameResponse(true, username));
@@ -177,7 +177,7 @@ public class ServerMain {
         System.out.println("User " + username + " disconnected from game");
         disconnectedUsers.put(username, lobby);
         takenUsernames.remove(username);
-        lobby.getLoggedPlayers().remove(connection);
+        lobby.remove(connection);
         lobby.disconnectedPlayer(username);
     }
 
@@ -188,7 +188,7 @@ public class ServerMain {
      */
     public void disconnect(ServerSocketHandler connection, Lobby lobby){
         System.out.println("User " + lobby.getLoggedPlayers().get(connection) + " disconnected from lobby");
-        lobby.getLoggedPlayers().remove(connection);
+        lobby.remove(connection);
         if(lobby.getLoggedPlayers().size()==0)
             lobbies.remove(lobby);
     }

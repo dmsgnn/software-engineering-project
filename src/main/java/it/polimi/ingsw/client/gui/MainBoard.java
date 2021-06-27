@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientView;
+import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.controller.Actions;
@@ -19,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainBoard {
-    private static ClientView clientView;
+    private static View clientView;
     private static GUI gui;
 
     @FXML

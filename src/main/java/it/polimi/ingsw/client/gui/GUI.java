@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.UserInterface;
+import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.controller.Actions;
 import it.polimi.ingsw.controller.Error;
 import it.polimi.ingsw.model.Resource;
@@ -24,7 +25,7 @@ import java.util.Objects;
 import static java.lang.System.exit;
 
 public class GUI extends Application implements UserInterface {
-    private static ClientView clientView;
+    private static View clientView;
 
     private static Login logger;
     private static PlayersNumber players;
@@ -50,11 +51,11 @@ public class GUI extends Application implements UserInterface {
     public GUI() {
     }
 
-    public void setClientView(ClientView clientView) {
+    public void setClientView(View clientView) {
         GUI.clientView = clientView;
     }
 
-    public ClientView getClientView() {
+    public View getClientView() {
         return clientView;
     }
 
