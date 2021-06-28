@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard;
 
+import it.polimi.ingsw.client.CLI.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
 import it.polimi.ingsw.model.gameboard.development.ProductionPower;
@@ -97,4 +98,32 @@ public class DevelopmentCardTest {
 
         assertTrue(card.checkCardRequirements(playerRes, discountBuff));
     }
+
+    @Test
+    @DisplayName("Controls if the CLI strings are correctly built")
+    public void CLICardDrawing(){
+
+        Map<Resource, Integer> prodCost = new HashMap<>();
+        prodCost.put(Resource.STONES, 2);
+        Map<Resource, Integer> resGain = new HashMap<>();
+        resGain.put(Resource.SERVANTS, 1);
+        ProductionPower power = new ProductionPower(prodCost, resGain, 2);
+
+        String powerString = ColorCLI.GREY + "2" + ColorCLI.RESET + ColorCLI.RESET + "»" +
+                ColorCLI.PURPLE + "1" + ColorCLI.RESET + "," + ColorCLI.RED + "2    ";
+        assertEquals(powerString, power.drawProduction());
+
+        Map<Resource, Integer> requirements = new HashMap<>();
+        requirements.put(Resource.SHIELDS, 1);
+
+        DevelopmentCard card = new DevelopmentCard(requirements, Color.GREEN,"",1, 1, power);
+
+        String levelString = ColorCLI.GREEN + "║" + ColorCLI.RESET + "lv1  vp" + ColorCLI.RESET + "1 " + ColorCLI.GREEN + "║";
+        assertEquals(levelString, card.drawLevelAndPoints());
+
+        String requirementsString = ColorCLI.GREEN + "║" + ColorCLI.CYAN + "1        " + ColorCLI.GREEN + "║";
+
+        assertEquals(requirementsString, card.drawRequirements());
+    }
+
 }

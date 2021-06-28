@@ -30,7 +30,7 @@ public class ProductionPower {
 
     /**
      * CLI method
-     * @return production of the card
+     * @return string to draw production of the card
      */
     public String drawProduction(){
         StringBuilder builder = new StringBuilder();

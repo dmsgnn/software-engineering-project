@@ -24,7 +24,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ActionsTest {
-    public class ActionTest extends Actions{
+    public static class ActionTest extends Actions{
 
     }
 
@@ -37,7 +37,7 @@ public class ActionsTest {
         game.setActivePlayer(new Player("Giorgio", 1, game));
 
         //cost doesn't matter for this test
-        ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
+        ArrayList<LeaderCard> cards = new ArrayList<>();
         LeaderCard card11 = new LeaderCard("1",2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS);
         LeaderCard card22 = new LeaderCard("2",2, new ProductionAbility(), new ColorRequirements(), Resource.SERVANTS);
 
@@ -161,7 +161,7 @@ public class ActionsTest {
 
         game.setActivePlayer(new Player("Giorgio", 1, game));
 
-        ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
+        ArrayList<LeaderCard> cards = new ArrayList<>();
         LeaderCard card11 = new LeaderCard("1",2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS);
         LeaderCard card22 = new LeaderCard("2",2, new ProductionAbility(), new ColorRequirements(), Resource.SERVANTS);
 
@@ -222,7 +222,7 @@ public class ActionsTest {
         Actions action = new ActionTest();
 
         game.setActivePlayer(new Player("Giorgio", 1, game));
-        ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
+        ArrayList<LeaderCard> cards = new ArrayList<>();
         LeaderCard card11 = new LeaderCard("1",2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS);
         cards.add(0,card11);
 
@@ -311,7 +311,7 @@ public class ActionsTest {
         Actions action = new ActionTest();
 
         game.setActivePlayer(new Player("Giorgio", 1, game));
-        ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
+        ArrayList<LeaderCard> cards = new ArrayList<>();
         LeaderCard card11 = new LeaderCard("1",2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS);
         cards.add(0,card11);
 

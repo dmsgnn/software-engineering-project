@@ -20,10 +20,6 @@ public class LeaderDeck {
         }
     }
 
-    public ArrayList<LeaderCard> getDeck() {
-        return deck;
-    }
-
     /**
      * removes 4 cards from the deck and gives them to the player
      */

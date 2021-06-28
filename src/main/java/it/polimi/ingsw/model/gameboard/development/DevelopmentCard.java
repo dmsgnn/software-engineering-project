@@ -73,7 +73,7 @@ public class DevelopmentCard {
 
     /**
      * CLI method
-     * @return string of the card border
+     * @return string to draw string of the card border
      */
     private String border(){
         return ColorCLI.cardColor(getColor()) + "║";
@@ -81,7 +81,7 @@ public class DevelopmentCard {
 
     /**
      * CLI method
-     * @return top border of the card
+     * @return string to draw top border of the card
      */
     public String drawTop(){
         return ColorCLI.cardColor(color) + "╔═════════╗";
@@ -89,7 +89,7 @@ public class DevelopmentCard {
 
     /**
      * CLI method
-     * @return bottom border of the card
+     * @return string to draw bottom border of the card
      */
     public String drawBottom(){
         return ColorCLI.cardColor(color) + "╚═════════╝";
@@ -98,7 +98,7 @@ public class DevelopmentCard {
 
     /**
      * CLI method
-     * @return level and victory points of the card
+     * @return string to draw level and victory points of the card
      */
     public String drawLevelAndPoints(){
         int length;
@@ -114,7 +114,7 @@ public class DevelopmentCard {
 
     /**
      * CLI method
-     * @return requirements of the card
+     * @return string to draw requirements of the card
      */
     public String drawRequirements(){
         int length=0;
@@ -135,7 +135,7 @@ public class DevelopmentCard {
 
     /**
      * CLI method
-     * @return production cost and gains of the card
+     * @return string to draw production cost and gains of the card
      */
     public String drawProdCostAndGain(){
         return border() + "" + production.drawProduction() + "" + border();

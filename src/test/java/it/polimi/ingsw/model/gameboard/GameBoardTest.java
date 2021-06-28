@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.exceptions.NoCardsLeftException;
 import it.polimi.ingsw.model.exceptions.WrongLevelException;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -104,6 +105,15 @@ public class GameBoardTest {
 
         gameboard.removeLowestLevel(Color.BLUE, 2); //test
         assertTrue(gameboard.getCardGrid()[0][Color.BLUE.ordinal()].isEmpty());
+
+    }
+
+    @Test
+    public void InvalidLevelTest(){
+        Gameboard gameboard = new Gameboard(game);
+        Assertions.assertThrows(WrongLevelException.class, () -> gameboard.buyCard(Color.BLUE, 0));
+        Assertions.assertThrows(WrongLevelException.class, () -> gameboard.buyCard(Color.BLUE, 4));
+
 
     }
 }

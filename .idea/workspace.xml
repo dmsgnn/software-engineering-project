@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="client admin accounts, DevelopmentCardSlot valid action update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/Actions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/Actions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/DevelopmentCardSlot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/DevelopmentCardSlot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/LeaderDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/LeaderDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/development/DevelopmentCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/development/DevelopmentCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/development/ProductionPower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/gameboard/development/ProductionPower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/actions/ActionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/actions/ActionsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/actions/UseProductionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/actions/UseProductionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/DevelopmentCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/DevelopmentCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/GameBoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/GameBoardTest.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -124,60 +127,77 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ActionsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AM5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.model.actions.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.actions" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.actions.ActionsTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ActionsTest.doesntOwnTheResourceLeadercard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DevelopmentCardTest.CLICardDrawing" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.actions.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.model.gameboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.actions.ActionsTest" />
-      <option name="METHOD_NAME" value="doesntOwnTheResourceLeadercard" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.gameboard.DevelopmentCardTest" />
+      <option name="METHOD_NAME" value="CLICardDrawing" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ActionsTest.payResources0AndLessThan0Selection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DevelopmentCardTest.productionPowerCLITest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.actions.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.model.gameboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.actions.ActionsTest" />
-      <option name="METHOD_NAME" value="payResources0AndLessThan0Selection" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.gameboard.DevelopmentCardTest" />
+      <option name="METHOD_NAME" value="productionPowerCLITest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ActionsTest.payResourcesLessThan0LeaderDepot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameBoardTest.InvalidLevelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.actions.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.model.gameboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.actions.ActionsTest" />
-      <option name="METHOD_NAME" value="payResourcesLessThan0LeaderDepot" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.gameboard.GameBoardTest" />
+      <option name="METHOD_NAME" value="InvalidLevelTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -189,22 +209,6 @@
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.gameboard.MarbleTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UseProductionTest.noSelection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AM5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.actions.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.actions" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.actions.UseProductionTest" />
-      <option name="METHOD_NAME" value="noSelection" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -229,18 +233,18 @@
       <item itemvalue="Application.ClientMain" />
       <item itemvalue="JUnit.Gameboard" />
       <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
-      <item itemvalue="JUnit.UseProductionTest.noSelection" />
-      <item itemvalue="JUnit.ActionsTest.payResources0AndLessThan0Selection" />
-      <item itemvalue="JUnit.ActionsTest.payResourcesLessThan0LeaderDepot" />
-      <item itemvalue="JUnit.ActionsTest.doesntOwnTheResourceLeadercard" />
+      <item itemvalue="JUnit.ActionsTest" />
+      <item itemvalue="JUnit.GameBoardTest.InvalidLevelTest" />
+      <item itemvalue="JUnit.DevelopmentCardTest.productionPowerCLITest" />
+      <item itemvalue="JUnit.DevelopmentCardTest.CLICardDrawing" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
-        <item itemvalue="JUnit.ActionsTest.doesntOwnTheResourceLeadercard" />
-        <item itemvalue="JUnit.ActionsTest.payResourcesLessThan0LeaderDepot" />
-        <item itemvalue="JUnit.ActionsTest.payResources0AndLessThan0Selection" />
-        <item itemvalue="JUnit.UseProductionTest.noSelection" />
+        <item itemvalue="JUnit.DevelopmentCardTest.CLICardDrawing" />
+        <item itemvalue="JUnit.DevelopmentCardTest.productionPowerCLITest" />
+        <item itemvalue="JUnit.GameBoardTest.InvalidLevelTest" />
+        <item itemvalue="JUnit.ActionsTest" />
       </list>
     </recent_temporary>
   </component>
@@ -441,14 +445,8 @@
       <workItem from="1624822937857" duration="363000" />
       <workItem from="1624824065713" duration="814000" />
       <workItem from="1624825080463" duration="768000" />
-      <workItem from="1624868422934" duration="2918000" />
-    </task>
-    <task id="LOCAL-00024" summary="Market getOneColumn and getOneRow methods">
-      <created>1620816989546</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1620816989546</updated>
+      <workItem from="1624868422934" duration="3172000" />
+      <workItem from="1624883741501" duration="2846000" />
     </task>
     <task id="LOCAL-00025" summary="LeaderCard drawing methods, Clientview endturn and CLI buyCardAction update">
       <created>1620821942975</created>
@@ -786,7 +784,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624824879035</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Tests">
+      <created>1624871407349</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1624871407349</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -806,7 +811,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="depot and strongbox button's methods" />
     <MESSAGE value="GUI button actions update" />
     <MESSAGE value="GUI: full view implemented" />
     <MESSAGE value="CLI print fix, Actions toString method, production &amp; payment Mainboard" />
@@ -831,7 +835,8 @@
     <MESSAGE value="Dev card check requirements fix, ClientGameBoard fix" />
     <MESSAGE value="ClientView update to fit ReConnectionUpdate message update, code cleanup, some javadoc" />
     <MESSAGE value="client admin accounts, DevelopmentCardSlot valid action update" />
-    <option name="LAST_COMMIT_MESSAGE" value="client admin accounts, DevelopmentCardSlot valid action update" />
+    <MESSAGE value="Tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -882,6 +887,9 @@
     <SUITE FILE_PATH="coverage/AM5$ClientMain.ic" NAME="ClientMain Coverage Results" MODIFIED="1624390077982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.client.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/AM5$DevelopmentCardTest_productionPowerCLITest.ic" NAME="DevelopmentCardTest.productionPowerCLITest Coverage Results" MODIFIED="1624885112463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.model.gameboard.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/AM5$DevelopmentCardDeckTest_draw4Test.ic" NAME="DevelopmentCardDeckTest.draw4Test Coverage Results" MODIFIED="1624448824127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.model.gameboard.*</FILTER>
     </SUITE>
@@ -891,14 +899,20 @@
     <SUITE FILE_PATH="coverage/AM5$UseProductionTest_wrongPaymentTest.ic" NAME="UseProductionTest.wrongPaymentTest Coverage Results" MODIFIED="1624869205973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.model.actions.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/AM5$GameBoardTest_InvalidLevelTest.ic" NAME="GameBoardTest.InvalidLevelTest Coverage Results" MODIFIED="1624883999600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.model.gameboard.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_controller_in_AM5.ic" NAME="it.polimi.ingsw.controller in AM5 Coverage Results" MODIFIED="1622060222633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.controller.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_model_in_AM5.ic" NAME="it.polimi.ingsw.model in AM5 Coverage Results" MODIFIED="1624871195974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_model_in_AM5.ic" NAME="it.polimi.ingsw.model in AM5 Coverage Results" MODIFIED="1624886562858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/AM5$ActionsTest_payResources0AndLessThan0Selection.ic" NAME="ActionsTest.payResources0AndLessThan0Selection Coverage Results" MODIFIED="1624870373274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.model.actions.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/AM5$DevelopmentCardTest_CLICardDrawing.ic" NAME="DevelopmentCardTest.CLICardDrawing Coverage Results" MODIFIED="1624886280109" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.model.gameboard.*</FILTER>
     </SUITE>
   </component>
 </project>

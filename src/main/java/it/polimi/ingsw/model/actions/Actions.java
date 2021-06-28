@@ -18,9 +18,6 @@ public abstract class Actions {
      * performs the action
      * @param playerBoard playerBoard of the current player
      * @throws InvalidActionException called if the player can't perform the action
-     * @throws InsufficientResourcesException
-     * @throws WrongLevelException
-     * @throws NoCardsLeftException
      */
     public void doAction(PlayerBoard playerBoard) throws InvalidActionException, InsufficientResourcesException, WrongLevelException, NoCardsLeftException {
     }
@@ -28,9 +25,6 @@ public abstract class Actions {
     /**
      * controls if the action can be performed
      * @param playerBoard of the current player
-     * @return
-     * @throws NoCardsLeftException
-     * @throws WrongLevelException
      */
     public boolean validAction(PlayerBoard playerBoard) throws NoCardsLeftException, WrongLevelException {
         return true;
