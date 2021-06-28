@@ -573,8 +573,7 @@ public class CLI implements UserInterface {
                     if (active.getProductionBuff().size() == 1) {
                         Resource resource = null;
                         while (resource == null) {
-                            System.out.print("Choose what resource you want to obtain");
-                            System.out.print("Options: COINS, STONES, SERVANTS, SHIELDS: ");
+                            System.out.print("Choose what resource you want to obtain: ");
                             input = scanner.nextLine().toUpperCase();
                             try {
                                 resource = Resource.valueOf(input);
@@ -675,7 +674,7 @@ public class CLI implements UserInterface {
         HashMap<Resource, Integer> strongbox;
 
         do {
-            System.out.print("Choose the color of the card that you want to buy: \n");
+            System.out.print("Choose the color of the card that you want to buy: ");
             input = scanner.nextLine().toUpperCase();
             try {
                 cardColor = Color.valueOf(input);
@@ -987,13 +986,14 @@ public class CLI implements UserInterface {
     private HashMap<Resource, Integer> strongboxPayment(){
         HashMap<Resource, Integer> strongbox = new HashMap<>();
         String input;
-        int value = 0;
+        int value;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
         if(!active.isStrongboxEmpty()) {
             System.out.println("Strongbox: ");
             for (Resource rss : active.getStrongbox().keySet()) {
                 if (active.getStrongbox().get(rss) > 0) {
+                    value = -1;
                     do {
                         System.out.println(rss + ", amount: ");
                         input = scanner.nextLine();
@@ -1386,7 +1386,7 @@ public class CLI implements UserInterface {
             if(board.slotSize(i)>=2)
                 playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)-1))).drawLevelAndPoints()).append(ColorCLI.RESET);
             else
-                playerboard.append("          ").append(ColorCLI.RESET);
+                playerboard.append("           ").append(ColorCLI.RESET);
         }
         playerboard.append("\n");
         playerboard.append("               ");
@@ -1394,7 +1394,7 @@ public class CLI implements UserInterface {
             if(board.slotSize(i)==3)
                 playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)-2))).drawLevelAndPoints()).append(ColorCLI.RESET);
             else
-                playerboard.append("          ").append(ColorCLI.RESET);
+                playerboard.append("           ").append(ColorCLI.RESET);
         }
 
         return playerboard.toString();
