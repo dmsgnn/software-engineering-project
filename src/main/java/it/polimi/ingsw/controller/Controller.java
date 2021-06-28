@@ -517,7 +517,7 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * ends the player's turn and sets the new active player in the model
      */
-    public void endTurn(){
+    public synchronized void endTurn(){
         if ((gameFinished && (currentActivePlayer == playersNumber -1)) || (gameFinished && (playersNumber==1))) {
             if (playersNumber ==1) {
                 boolean lorenzo = game.getLorenzo().checkEndGame();

@@ -14,6 +14,10 @@ public class ProductionAbility implements Ability {
         this.cost = cost;
     }
 
+    public Resource getCost() {
+        return cost;
+    }
+
     @Override
     public String drawAbility() {
         StringBuilder builder = new StringBuilder();

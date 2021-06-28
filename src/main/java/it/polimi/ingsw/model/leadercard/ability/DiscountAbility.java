@@ -13,6 +13,10 @@ public class DiscountAbility implements Ability{
         this.resource = cost;
     }
 
+    public Resource getResource() {
+        return resource;
+    }
+
     @Override
     public String drawAbility() {
         StringBuilder builder = new StringBuilder();

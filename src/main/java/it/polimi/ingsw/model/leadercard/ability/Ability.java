@@ -5,8 +5,8 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
 
 public interface Ability {
-    public void useAbility(PlayerBoard playerBoard);
-    public void setResource(Resource resource);
+    void useAbility(PlayerBoard playerBoard);
+    void setResource(Resource resource);
     String drawAbility();
     void clientAbility(ClientPlayerBoard playerBoard);
 }

@@ -14,6 +14,10 @@ public class ExchangeAbility implements Ability {
         this.gain = gain;
     }
 
+    public Resource getGain() {
+        return gain;
+    }
+
     @Override
     public String drawAbility() {
         StringBuilder builder = new StringBuilder();

@@ -11,12 +11,11 @@ public class CardBuffs {
     private Resource activeExchangeBuff;
 
     public CardBuffs() {
-        this.exchangeBuff = new ArrayList<Resource>();
-        this.discountBuff = new ArrayList<Resource>();
-        this.productionBuff = new ArrayList<Resource>();
+        this.exchangeBuff = new ArrayList<>();
+        this.discountBuff = new ArrayList<>();
+        this.productionBuff = new ArrayList<>();
     }
 
-    //public void useLeaderCardProduction(Resource gain){}
 
     /**
      * these methods provide the buff currently selected as active
@@ -29,12 +28,6 @@ public class CardBuffs {
     }
 
 
-    public void setActiveDiscountBuff(Resource activeDiscountBuff) {
-        this.activeDiscountBuff = activeDiscountBuff;
-    }
-    public void setActiveExchangeBuff(Resource activeExchangeBuff) {
-        this.activeExchangeBuff = activeExchangeBuff;
-    }
 
     /**
      * these methods add the resource parameter to the specific buff
@@ -49,7 +42,7 @@ public class CardBuffs {
     }
     public void addDiscountBuff(Resource resource) {
         int first =0;
-        if (exchangeBuff.isEmpty()) {
+        if (discountBuff.isEmpty()) {
             first = 1;
         }
         discountBuff.add(resource);
