@@ -29,7 +29,7 @@ public class DevelopmentCardSlot {
     }
 
     public boolean validAction(DevelopmentCard card){
-        if(card.getLevel()<0 || card.getLevel()>3) return false;
+        if(card.getLevel()<1 || card.getLevel()>3) return false;
 
         if(isEmpty() && card.getLevel()==1) return true;
         else if (isEmpty() && card.getLevel()>1) return false;

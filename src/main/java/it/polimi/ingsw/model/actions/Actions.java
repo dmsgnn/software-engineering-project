@@ -49,27 +49,28 @@ public abstract class Actions {
         if(!enoughResPossessed(playerBoard, warehouseResources, leaderDepotResources, strongboxResources)) {
             throw new CantPayException();
         }
+        //removes the resources that the player wants to pay from the warehouse
         ArrayList<BaseDepot> playerDepots =  playerBoard.getWarehouse().getDepots();
         for(Map.Entry<Resource, Integer> entry : warehouseResources.entrySet()){
             Resource key = entry.getKey();
             Integer value = entry.getValue();
-            for (int i = 0; i < playerBoard.getWarehouse().getBaseDepotsNum(); i++) { //cambia il 3 quando avrò metodo
+            for (int i = 0; i < playerBoard.getWarehouse().getBaseDepotsNum(); i++) {
                 if(key == playerDepots.get(i).getResource()){
                     playerDepots.get(i).removeResource(value);
                 }
             }
         }
+        //removes the resources that the player wants to pay from the leadercards
         for(Map.Entry<Resource, Integer> entry : leaderDepotResources.entrySet()){
             Resource key = entry.getKey();
             Integer value = entry.getValue();
-            for (int i = playerBoard.getWarehouse().getBaseDepotsNum(); i < playerBoard.getWarehouse().getDepotsNum(); i++) { //cambia il 3 quando avrò metodo
-
+            for (int i = playerBoard.getWarehouse().getBaseDepotsNum(); i < playerBoard.getWarehouse().getDepotsNum(); i++) {
                 if(key == playerDepots.get(i).getResource()){
-
                     playerDepots.get(i).removeResource(value);
                 }
             }
         }
+        //removes the resources that the player wants to pay from the strongbox
         for(Map.Entry<Resource, Integer> entry : strongboxResources.entrySet()){
             Resource key = entry.getKey();
             Integer value = entry.getValue();

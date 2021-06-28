@@ -12,6 +12,7 @@ import it.polimi.ingsw.model.leadercard.ability.StoreAbility;
 import it.polimi.ingsw.model.playerboard.Strongbox;
 import it.polimi.ingsw.model.playerboard.depot.BaseDepot;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import javax.naming.InsufficientResourcesException;
@@ -28,6 +29,7 @@ public class ActionsTest {
     }
 
     @Test
+    @DisplayName("correct payment")
     public void payResourcesTest() {
         Game game = new Game();
         Actions action = new ActionTest();
@@ -99,6 +101,7 @@ public class ActionsTest {
 
 
     @Test
+    @DisplayName("wrong strongbox payment")
     public void payResourcesWrongStrongboxTest() {
         Game game = new Game();
         Actions action = new ActionTest();
@@ -123,6 +126,7 @@ public class ActionsTest {
 
     }
     @Test
+    @DisplayName("wrong warehouse payment")
     public void payResourcesWrongWarehouseTest() {
         Game game = new Game();
         Actions action = new ActionTest();
@@ -150,6 +154,7 @@ public class ActionsTest {
     }
 
     @Test
+    @DisplayName("wrong leaderdepot payment")
     public void payResourcesWrongLeaderDepotTest() {
         Game game = new Game();
         Actions action = new ActionTest();
@@ -187,5 +192,146 @@ public class ActionsTest {
 
     }
 
+    @Test
+    @DisplayName("test with negative warehouse value")
+    public void payResourcesLessThan0Warehouse() {
+        Game game = new Game();
+        Actions action = new ActionTest();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+        ArrayList<BaseDepot> depots = game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots();
+        depots.get(0).addResources(Resource.COINS);
+        depots.get(1).addResources(Resource.STONES);
+        depots.get(2).addResources(Resource.SERVANTS);
+
+        //payment to do
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        wareHouse.put(Resource.SERVANTS, -1);
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+
+        Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
+
+    }
+
+    @Test
+    @DisplayName("test with negative leaderdepot value")
+    public void payResourcesLessThan0LeaderDepot() {
+        Game game = new Game();
+        Actions action = new ActionTest();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+        ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
+        LeaderCard card11 = new LeaderCard("1",2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS);
+        cards.add(0,card11);
+
+        PlayLeaderCard play = new PlayLeaderCard(cards, card11);
+        game.getActivePlayer().setCardsHand(cards);
+        try {
+            play.doAction(game.getActivePlayer().getPlayerBoard());
+        } catch (InvalidActionException e) {
+            e.printStackTrace();
+        }
+        ArrayList<BaseDepot> depots = game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots();
+        depots.get(3).addResources(Resource.SERVANTS);
+
+        //payment to do
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        leaderDepotResources.put(Resource.SERVANTS, -1);
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+
+        Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
+
+    }
+
+    @Test
+    @DisplayName("test with negative strongbox value")
+    public void payResourcesLessThan0Strongbox() {
+        Game game = new Game();
+        Actions action = new ActionTest();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+        game.getActivePlayer().getPlayerBoard().getStrongbox().addResource(Resource.SERVANTS, 1);
+
+        //payment to do
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+        strongboxResources.put(Resource.SERVANTS, -1);
+
+        Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
+
+    }
+
+    @Test
+    @DisplayName("test when the player pays a strongbox resource that he doesn't have")
+    public void doesntOwnTheResourceStrongbox() {
+        Game game = new Game();
+        Actions action = new ActionTest();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+
+        //payment to do
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+        strongboxResources.put(Resource.SERVANTS, 1);
+
+        Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
+
+    }
+
+    @Test
+    @DisplayName("test when the player pays a warehouse resource that he doesn't have")
+    public void doesntOwnTheResourceWarehouse() {
+        Game game = new Game();
+        Actions action = new ActionTest();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+
+        //payment to do
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        wareHouse.put(Resource.SHIELDS, 1);
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+
+        Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
+
+    }
+
+    @Test
+    @DisplayName("test when the player pays a leaderdepot resource that he doesn't have")
+    public void doesntOwnTheResourceLeadercard() {
+        Game game = new Game();
+        Actions action = new ActionTest();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+        ArrayList<LeaderCard> cards = new ArrayList<LeaderCard>();
+        LeaderCard card11 = new LeaderCard("1",2, new StoreAbility(), new ColorRequirements(), Resource.SERVANTS);
+        cards.add(0,card11);
+
+        PlayLeaderCard play = new PlayLeaderCard(cards, card11);
+        game.getActivePlayer().setCardsHand(cards);
+        try {
+            play.doAction(game.getActivePlayer().getPlayerBoard());
+        } catch (InvalidActionException e) {
+            e.printStackTrace();
+        }
+
+        //payment to do
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        wareHouse.put(Resource.COINS, 0);
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        leaderDepotResources.put(Resource.SHIELDS, 1);
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+
+        Assertions.assertThrows(CantPayException.class, () -> action.payResources(game.getActivePlayer().getPlayerBoard(), wareHouse, leaderDepotResources, strongboxResources));
+
+    }
 
 }

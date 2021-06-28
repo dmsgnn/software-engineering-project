@@ -16,6 +16,8 @@ import it.polimi.ingsw.model.leadercard.ability.StoreAbility;
 import it.polimi.ingsw.model.playerboard.DevelopmentCardSlot;
 import it.polimi.ingsw.model.playerboard.Strongbox;
 import it.polimi.ingsw.model.playerboard.depot.BaseDepot;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -25,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UseProductionTest {
 
    @Test
+   @DisplayName("tests a correct production action")
     public void correctActionTest() {
         Game game = new Game();
         game.setActivePlayer(new Player("Giorgio", 1, game));
@@ -136,6 +139,7 @@ public class UseProductionTest {
 
 
     @Test
+    @DisplayName("tests that if the players selects the wrong resources to pay valid action returns false")
     public void validActionTestWrongPayment(){
         Game game = new Game();
 
@@ -169,6 +173,7 @@ public class UseProductionTest {
     }
 
     @Test
+    @DisplayName("tests that valid action returns false if the player tries to select a dev card that he doesn't have")
     public void noDevCardTest(){
         Game game = new Game();
 
@@ -187,6 +192,7 @@ public class UseProductionTest {
     }
 
     @Test
+    @DisplayName("tests that valid action returns false if the player tries to select a laeder card that he doesn't have")
     public void noLeaderCardTest(){
         Game game = new Game();
 
@@ -204,4 +210,76 @@ public class UseProductionTest {
         assertFalse(production.validAction(game.getActivePlayer().getPlayerBoard()));
     }
 
+    @Test
+    @DisplayName("tests valid action response if the player doesn't have enough resources")
+    public void wrongPaymentTest() {
+        Game game = new Game();
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+
+
+        //create devCards to use as test
+        Map<Resource, Integer> prodCost = new HashMap<>();
+        prodCost.put(Resource.SERVANTS, 1);
+        prodCost.put(Resource.STONES, 1);
+        Map<Resource, Integer> resGain = new HashMap<>();
+        resGain.put(Resource.SERVANTS, 1);
+        resGain.put(Resource.STONES, 1);
+        ProductionPower power = new ProductionPower(prodCost, resGain, 2);
+        DevelopmentCard card = new DevelopmentCard(new HashMap<>(), Color.GREEN,"",1, 1, power);
+
+        ArrayList<DevelopmentCardSlot> playerSlot = game.getActivePlayer().getPlayerBoard().getSlots();
+
+        playerSlot.get(0).addCardOnTop(card, game.getActivePlayer().getPlayerBoard());
+
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+        strongboxResources.put(Resource.SERVANTS, 1);
+        strongboxResources.put(Resource.STONES, 1);
+
+        UseProduction production = new UseProduction(new ArrayList<>(Collections.singletonList(0)), new ArrayList<>(),
+                new ArrayList<>(),  new ArrayList<>(), wareHouse, leaderDepotResources, strongboxResources);
+
+        Assertions.assertThrows(InvalidActionException.class, () -> production.doAction(game.getActivePlayer().getPlayerBoard()));
+
+    }
+
+    @Test
+    @DisplayName("tests that valid action returns false if boardresources isn't correct")
+    public void wrongConstructionOfBoardProd(){
+        Game game = new Game();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+        ArrayList<Resource> boardResources = new ArrayList<>();
+        boardResources.add(Resource.SHIELDS);
+
+
+        UseProduction production = new UseProduction(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
+                boardResources, wareHouse, leaderDepotResources, strongboxResources);
+
+        assertFalse(production.validAction(game.getActivePlayer().getPlayerBoard()));
+    }
+
+    @Test
+    @DisplayName("tests that valid action returns false if the player doesn't select anything to produce")
+    public void noSelection(){
+        Game game = new Game();
+
+        game.setActivePlayer(new Player("Giorgio", 1, game));
+
+        Map<Resource, Integer> wareHouse = new HashMap<>();
+        Map<Resource, Integer> leaderDepotResources = new HashMap<>();
+        Map<Resource, Integer> strongboxResources = new HashMap<>();
+
+
+        UseProduction production = new UseProduction(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
+                new ArrayList<>(), wareHouse, leaderDepotResources, strongboxResources);
+
+        assertFalse(production.validAction(game.getActivePlayer().getPlayerBoard()));
+    }
 }
