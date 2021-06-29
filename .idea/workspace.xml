@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Tests and ClientView sync update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Javadoc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/LocalClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/LocalClientView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/View.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -118,17 +116,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -427,14 +414,8 @@
       <workItem from="1624883741501" duration="2846000" />
       <workItem from="1624906546033" duration="391000" />
       <workItem from="1624948174028" duration="40000" />
-      <workItem from="1624955953859" duration="2599000" />
-    </task>
-    <task id="LOCAL-00027" summary="ClientPlayerBoard fix">
-      <created>1620822305985</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1620822305985</updated>
+      <workItem from="1624955953859" duration="2619000" />
+      <workItem from="1624960202124" duration="86000" />
     </task>
     <task id="LOCAL-00028" summary="fixes">
       <created>1620849796721</created>
@@ -772,7 +753,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624957596252</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Javadoc">
+      <created>1624958594343</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1624958594343</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -792,7 +780,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="CLI print fix, Actions toString method, production &amp; payment Mainboard" />
     <MESSAGE value="GUI payment fix" />
     <MESSAGE value="EndorDone button fix" />
     <MESSAGE value="Buy card fix, dev slots cards images added" />
@@ -817,7 +804,8 @@
     <MESSAGE value="Tests" />
     <MESSAGE value="CLI visual update" />
     <MESSAGE value="Tests and ClientView sync update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests and ClientView sync update" />
+    <MESSAGE value="Javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Javadoc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

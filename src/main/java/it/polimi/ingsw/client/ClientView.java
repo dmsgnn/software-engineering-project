@@ -224,7 +224,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void endTurn(){
         getUiType().endTurn();
         socket.sendMessage(new EndTurn());
-        updated = false;
+        if(getGameboard().getNumOfPlayers()==1) updated = false;
     }
 
     /**
