@@ -77,6 +77,40 @@ public class FullView {
     @FXML
     private ImageView resource3Depot3Player4;
 
+    //leadercards depots
+    @FXML
+    public ImageView res1lead1Player1;
+    @FXML
+    public ImageView res2lead1Player1;
+    @FXML
+    public ImageView res1lead2Player1;
+    @FXML
+    public ImageView res2lead2Player1;
+    @FXML
+    public ImageView res1lead1Player3;
+    @FXML
+    public ImageView res2lead1Player3;
+    @FXML
+    public ImageView res1lead2Player3;
+    @FXML
+    public ImageView res2lead2Player3;
+    @FXML
+    public ImageView res1lead1Player2;
+    @FXML
+    public ImageView res2lead1Player2;
+    @FXML
+    public ImageView res1lead2Player2;
+    @FXML
+    public ImageView res2lead2Player2;
+    @FXML
+    public ImageView res1lead1Player4;
+    @FXML
+    public ImageView res2lead1Player4;
+    @FXML
+    public ImageView res1lead2Player4;
+    @FXML
+    public ImageView res2lead2Player4;
+
     //strongbox counter player one
     @FXML
     private Label strongboxShieldsCounterPlayer1;
@@ -321,7 +355,10 @@ public class FullView {
     private ArrayList<ImageView> slot3Mid;
     private ArrayList<ImageView> slot3Bot;
     private ArrayList<ImageView> cross;
-
+    private ArrayList<ImageView> leader1Depot1;
+    private ArrayList<ImageView> leader1Depot2;
+    private ArrayList<ImageView> leader2Depot1;
+    private ArrayList<ImageView> leader2Depot2;
 
 
 
@@ -343,10 +380,14 @@ public class FullView {
         strongboxStonesCounter = new ArrayList<>(Arrays.asList(strongboxStonesCounterPlayer1, strongboxStonesCounterPlayer2, strongboxStonesCounterPlayer3, strongboxStonesCounterPlayer4));
 
         playerName = new ArrayList<>(Arrays.asList(player1Name, player2Name, player3Name, player4Name));
-
         //leader
         leader1 = new ArrayList<>(Arrays.asList(player1Leader1, player2Leader1, player3Leader1, player4Leader1));
         leader2 = new ArrayList<>(Arrays.asList(player1Leader2, player2Leader2, player3Leader2, player4Leader2));
+        leader1Depot1 = new ArrayList<>(Arrays.asList(res1lead1Player1, res1lead1Player2, res1lead1Player3, res1lead1Player4));
+        leader1Depot2 = new ArrayList<>(Arrays.asList(res2lead1Player1, res2lead1Player2, res2lead1Player3, res2lead1Player4));
+        leader2Depot1 = new ArrayList<>(Arrays.asList(res1lead2Player1, res1lead2Player2, res1lead2Player3, res1lead2Player4));
+        leader2Depot2 = new ArrayList<>(Arrays.asList(res2lead2Player1, res2lead2Player2, res2lead2Player3, res2lead2Player4));
+
         //vatican
         vatican1 = new ArrayList<>(Arrays.asList(vatican1Player1, vatican1Player2, vatican1Player3, vatican1Player4));
         vatican2 = new ArrayList<>(Arrays.asList(vatican2Player1, vatican2Player2, vatican2Player3, vatican2Player4));
@@ -468,6 +509,67 @@ public class FullView {
             else{
                 leader1.get(playerNum).setVisible(false);
                 leader2.get(playerNum).setVisible(false);
+            }
+        }
+        //only 1 depot card
+        if(!board.getPlayedCards().isEmpty() && board.getWarehouse().containsKey(3) && !board.getWarehouse().containsKey(4)){
+            //first card activated
+            if (board.getDepotBuffCard().containsKey(board.getPlayedCards().get(0))) {
+                if(board.getWarehouse().get(3).isEmpty()){
+                    leader2Depot1.get(playerNum).setVisible(false);
+                    leader2Depot2.get(playerNum).setVisible(false);
+                }
+                else if(board.getWarehouse().get(3).size()==1) {
+                    leader2Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                    leader2Depot2.get(playerNum).setVisible(false);
+                }
+                else if(board.getWarehouse().get(3).size()==2) {
+                    leader2Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                    leader2Depot2.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                }
+            }
+            //second card activated
+            if (board.getPlayedCards().size()>1 && board.getDepotBuffCard().containsKey(board.getPlayedCards().get(1))) {
+                if(board.getWarehouse().get(3).isEmpty()){
+                    leader1Depot1.get(playerNum).setVisible(false);
+                    leader1Depot2.get(playerNum).setVisible(false);
+                }
+                else if(board.getWarehouse().get(3).size()==1) {
+                    leader1Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                    leader1Depot2.get(playerNum).setVisible(false);
+                }
+                else if(board.getWarehouse().get(3).size()==2) {
+                    leader1Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                    leader1Depot2.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                }
+            }
+        }
+        //2 depot cards
+        if(!board.getPlayedCards().isEmpty() && board.getWarehouse().containsKey(4)) {
+            if(board.getWarehouse().get(3).isEmpty()){
+                leader2Depot1.get(playerNum).setVisible(false);
+                leader2Depot2.get(playerNum).setVisible(false);
+            }
+            else if(board.getWarehouse().get(3).size()>=1) {
+                leader2Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                leader2Depot2.get(playerNum).setVisible(false);
+            }
+            else if(board.getWarehouse().get(3).size()==2){
+                leader2Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+                leader2Depot2.get(playerNum).setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
+            }
+
+            if(board.getWarehouse().get(4).isEmpty()){
+                leader1Depot1.get(playerNum).setVisible(false);
+                leader1Depot2.get(playerNum).setVisible(false);
+            }
+            else if(board.getWarehouse().get(4).size()>=1) {
+                leader1Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                leader1Depot2.get(playerNum).setVisible(false);
+            }
+            else if(board.getWarehouse().get(4).size()==2) {
+                leader1Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
+                leader1Depot2.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
             }
         }
         //vatican report
@@ -708,6 +810,19 @@ public class FullView {
         }
 
         for (ImageView image : leader2) {
+            image.setVisible(true);
+        }
+
+        for(ImageView image : leader1Depot1){
+            image.setVisible(true);
+        }
+        for(ImageView image : leader1Depot2){
+            image.setVisible(true);
+        }
+        for(ImageView image : leader2Depot1){
+            image.setVisible(true);
+        }
+        for(ImageView image : leader2Depot2){
             image.setVisible(true);
         }
 

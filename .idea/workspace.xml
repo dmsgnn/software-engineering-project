@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Javadoc">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="ClientView sync fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/FullView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/FullView.fxml" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -106,7 +108,7 @@
       <recent name="it.polimi.ingsw.model.actions" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.it.polimi.ingsw.model in AM5">
+  <component name="RunManager" selected="Application.ClientMain">
     <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerMain" />
       <module name="AM5" />
@@ -116,6 +118,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -205,11 +220,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
         <item itemvalue="JUnit.ResourceRequirementsTest.CLIDrawingTest" />
         <item itemvalue="JUnit.ColorRequirementsTest.CLIDrawingTest" />
         <item itemvalue="JUnit.ResourceRequirementsTest.CLITests" />
-        <item itemvalue="Application.ServerMain" />
       </list>
     </recent_temporary>
   </component>
@@ -415,14 +430,9 @@
       <workItem from="1624906546033" duration="391000" />
       <workItem from="1624948174028" duration="40000" />
       <workItem from="1624955953859" duration="2619000" />
-      <workItem from="1624960202124" duration="86000" />
-    </task>
-    <task id="LOCAL-00028" summary="fixes">
-      <created>1620849796721</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1620849796722</updated>
+      <workItem from="1624960202124" duration="808000" />
+      <workItem from="1624983015606" duration="3590000" />
+      <workItem from="1624991417914" duration="110000" />
     </task>
     <task id="LOCAL-00029" summary="market action works and modified some methods of the model">
       <created>1620900478508</created>
@@ -760,7 +770,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624958594343</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="ClientView sync fix">
+      <created>1624960394364</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1624960394365</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -780,7 +797,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="GUI payment fix" />
     <MESSAGE value="EndorDone button fix" />
     <MESSAGE value="Buy card fix, dev slots cards images added" />
     <MESSAGE value="CLI endTurn fix" />
@@ -805,7 +821,8 @@
     <MESSAGE value="CLI visual update" />
     <MESSAGE value="Tests and ClientView sync update" />
     <MESSAGE value="Javadoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Javadoc" />
+    <MESSAGE value="ClientView sync fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="ClientView sync fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

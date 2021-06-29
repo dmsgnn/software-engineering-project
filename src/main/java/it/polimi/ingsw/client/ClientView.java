@@ -332,6 +332,13 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void setupGameUpdate(Map<String,ArrayList<String>> leaderCards, Map<String,Map<Integer, ArrayList<Resource>>> resources, Map<String,Integer> faithTracks){
         synchronized (lock) {
+            while(getGameboard().getPlayers().isEmpty()) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             super.setupGameUpdate(leaderCards, resources, faithTracks);
             updated=true;
             lock.notifyAll();

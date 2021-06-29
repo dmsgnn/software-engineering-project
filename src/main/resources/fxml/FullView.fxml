@@ -73,7 +73,7 @@
       <ImageView fx:id="player3Leader2" fitHeight="150.0" fitWidth="110.0" layoutX="580.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="player3Leader1" fitHeight="150.0" fitWidth="110.0" layoutX="580.0" layoutY="638.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="player4Leader2" fitHeight="150.0" fitWidth="110.0" layoutX="1260.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="player4Leader1" fitHeight="150.0" fitWidth="110.0" layoutX="1260.0" layoutY="638.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="player4Leader1" fitHeight="150.0" fitWidth="110.0" layoutX="1260.0" layoutY="643.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="strongboxStonesCounterPlayer1" alignment="CENTER" layoutX="135.0" layoutY="350.0" minHeight="2.0" minWidth="2.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: grey; -fx-background-radius: 6;" textAlignment="CENTER">
          <font>
             <Font name="SansSerif Bold" size="8.0" />
@@ -326,5 +326,21 @@
       <ImageView fx:id="player4Slot2" fitHeight="130.0" fitWidth="110.0" layoutX="1020.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="player4Slot3mid" fitHeight="130.0" fitWidth="110.0" layoutX="1118.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="player4Slot3" fitHeight="130.0" fitWidth="110.0" layoutX="1118.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res1lead1Player1" fitHeight="16.0" fitWidth="16.0" layoutX="603.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res2lead1Player1" fitHeight="16.0" fitWidth="16.0" layoutX="641.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res1lead2Player1" fitHeight="16.0" fitWidth="16.0" layoutX="603.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res2lead2Player1" fitHeight="16.0" fitWidth="16.0" layoutX="641.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res1lead1Player3" fitHeight="16.0" fitWidth="16.0" layoutX="603.0" layoutY="601.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res2lead1Player3" fitHeight="16.0" fitWidth="16.0" layoutX="641.0" layoutY="601.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res1lead2Player3" fitHeight="16.0" fitWidth="16.0" layoutX="603.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res2lead2Player3" fitHeight="16.0" fitWidth="16.0" layoutX="641.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res1lead1Player2" fitHeight="16.0" fitWidth="16.0" layoutX="1283.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res2lead1Player2" fitHeight="16.0" fitWidth="16.0" layoutX="1321.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res1lead2Player2" fitHeight="16.0" fitWidth="16.0" layoutX="1283.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res2lead2Player2" fitHeight="16.0" fitWidth="16.0" layoutX="1321.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res1lead1Player4" fitHeight="16.0" fitWidth="16.0" layoutX="1283.0" layoutY="601.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res2lead1Player4" fitHeight="16.0" fitWidth="16.0" layoutX="1321.0" layoutY="601.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res1lead2Player4" fitHeight="16.0" fitWidth="16.0" layoutX="1283.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res2lead2Player4" fitHeight="16.0" fitWidth="16.0" layoutX="1321.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
