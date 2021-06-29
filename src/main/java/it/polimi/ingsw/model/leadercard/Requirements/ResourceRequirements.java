@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResourceRequirements implements Requirements{
-    Map<Resource, Integer> cardRequirements;
+    private Map<Resource, Integer> cardRequirements;
 
     public ResourceRequirements() {
         cardRequirements = new HashMap<Resource, Integer>();
@@ -20,20 +20,6 @@ public class ResourceRequirements implements Requirements{
             if (cardRequirements.get(resource)>((playerBoard.getWarehouse().storedResources().get(resource))+(playerBoard.getStrongbox().getValue(resource)))) return false;
         }
         return true;
-    }
-
-    @Override
-    public Map<Resource, Integer> getRequirements(PlayerBoard playerBoard) {
-        return cardRequirements;
-    }
-
-    @Override
-    public boolean IsColor() {
-        return false;
-    }
-
-    public Map<Resource, Integer> getCardRequirements() {
-        return cardRequirements;
     }
 
     public void setCardRequirements(Map<Resource, Integer> cardRequirements) {

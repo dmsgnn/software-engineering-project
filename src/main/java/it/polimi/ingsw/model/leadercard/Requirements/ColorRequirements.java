@@ -35,17 +35,6 @@ public class ColorRequirements implements Requirements {
         return true;
     }
 
-    @Override
-    public boolean IsColor() {
-        return true;
-    }
-
-    @Override
-    public Map<Resource, Integer> getRequirements(PlayerBoard playerBoard) {
-        return null;
-    }
-
-
     public void setColorCardRequirements(Map<Color, Integer> cardRequirements) {
         this.colorCardRequirements = cardRequirements;
     }

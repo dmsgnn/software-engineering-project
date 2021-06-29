@@ -14,17 +14,6 @@ public interface Requirements {
      */
     public boolean checkRequirements(PlayerBoard playerBoard);
 
-    /**
-     * @param playerBoard of the player
-     * @return the resource requirements
-     */
-    public Map<Resource, Integer> getRequirements(PlayerBoard playerBoard);
-
-    /**
-     *
-     * @return true if the card has color requirements, false if has resource requirements
-     */
-    public boolean IsColor();
 
     /**
      * method to draw the card's requirements

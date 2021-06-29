@@ -1,15 +1,18 @@
 package it.polimi.ingsw.model.leadercard;
 
+import it.polimi.ingsw.client.CLI.ColorCLI;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.gameboard.Color;
 import it.polimi.ingsw.model.gameboard.development.DevelopmentCard;
 import it.polimi.ingsw.model.leadercard.Requirements.ColorRequirements;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ColorRequirementsTest {
@@ -48,7 +51,28 @@ public class ColorRequirementsTest {
         assertTrue(colorRequirements.checkRequirements(playerBoard));
     }
 
+    @Test
+    @DisplayName("controls that the string for the CLI is built correctly")
+    public void CLIDrawingTest(){
+        ColorRequirements requirements = new ColorRequirements();
+        Map<Color, Integer> colorRequirements = new HashMap<>();
+        colorRequirements.put(Color.BLUE, 2);
+        colorRequirements.put(Color.YELLOW, 0);
+        Map<Color, Integer> levelCardRequirements = new HashMap<>();
+        levelCardRequirements.put(Color.BLUE, 1);
+        levelCardRequirements.put(Color.YELLOW, 0);
+        requirements.setColorCardRequirements(colorRequirements);
+        requirements.setLevelCardRequirements(levelCardRequirements);
 
+        String output = "  " + ColorCLI.RESET + "2" + ColorCLI.CYAN + "■     ";
+        assertEquals(output, requirements.drawRequirements());
 
+        colorRequirements.put(Color.BLUE, 1);
+        levelCardRequirements.put(Color.BLUE,2);
+        requirements.setColorCardRequirements(colorRequirements);
+        requirements.setLevelCardRequirements(levelCardRequirements);
+        String output2 = "  " + ColorCLI.RESET + "1" + ColorCLI.CYAN + "■■    ";
+        assertEquals(output2, requirements.drawRequirements());
+    }
 
 }

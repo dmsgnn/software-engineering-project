@@ -224,7 +224,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void endTurn(){
         getUiType().endTurn();
         socket.sendMessage(new EndTurn());
-        updated = getGameboard().getNumOfPlayers() > 1;
+        updated = false;
     }
 
     /**
@@ -339,6 +339,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void turnNotification(String player){
         synchronized (lock) {
             if(!player.equals(getNickname())) getUiType().startTurnNotification(player);
+            updated=false;
         }
     }
 
@@ -357,6 +358,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
             }
             getGameboard().getOnePlayerBoard(nickname).setConnected(false);
             getUiType().handleDisconnection(nickname);
+            updated=true;
             lock.notifyAll();
         }
     }
