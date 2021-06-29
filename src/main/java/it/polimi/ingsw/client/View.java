@@ -216,6 +216,7 @@ public abstract class View {
      * @param pos column or row picked by the player
      * @param rowOrCol true if pos is row, false if column
      * @param exchangeBuffResources resources obtained from white marbles if possible
+     * @param username of this client
      */
     public void marketAction(int pos, boolean rowOrCol, ArrayList<Resource> exchangeBuffResources, String username){
     }
@@ -229,6 +230,7 @@ public abstract class View {
      * @param warehouseResources resources inside the warehouse that the player wants to pay
      * @param leaderDepotResources resources inside the leadercard depots that the player wants to pay
      * @param strongboxResources resources inside the strongbox that the player wants to pay
+     * @param username of this client
      */
     public void useProduction(ArrayList<Integer> developmentCardSlotIndex, ArrayList<Integer> leaderCardProdIndex, ArrayList<Resource> leaderCardProdGain,
                               ArrayList<Resource> boardResources, HashMap<Resource, Integer> warehouseResources, HashMap<Resource, Integer> leaderDepotResources,
@@ -244,6 +246,7 @@ public abstract class View {
      * @param warehouseDepotRes resources inside the warehouse that the player wants to pay
      * @param cardDepotRes resources inside the leadercard depots that the player wants to pay
      * @param strongboxRes resources inside the strongbox that the player wants to pay
+     * @param username of this client
      */
     public void buyDevCard(Color color, int level, int devCardSlot, HashMap<Resource, Integer> warehouseDepotRes,
                            HashMap<Resource, Integer> cardDepotRes, HashMap<Resource, Integer> strongboxRes, String username){
@@ -259,6 +262,7 @@ public abstract class View {
     /**
      * called from UI to send the discard leadercard action parameters to the server
      * @param id of the selected card
+     * @param username of this client
      */
     public void discardLeaderCard(String id,String username){
     }

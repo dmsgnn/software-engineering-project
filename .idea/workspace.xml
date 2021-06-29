@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="CLI visual update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Tests and ClientView sync update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/leadercard/Requirements/ColorRequirements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/leadercard/Requirements/ColorRequirements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/leadercard/Requirements/Requirements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/leadercard/Requirements/Requirements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/leadercard/Requirements/ResourceRequirements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/leadercard/Requirements/ResourceRequirements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/leadercard/ColorRequirementsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/leadercard/ColorRequirementsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/leadercard/ResourceRequirementsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/leadercard/ResourceRequirementsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/LocalClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/LocalClientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/View.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -430,14 +427,7 @@
       <workItem from="1624883741501" duration="2846000" />
       <workItem from="1624906546033" duration="391000" />
       <workItem from="1624948174028" duration="40000" />
-      <workItem from="1624955953859" duration="1561000" />
-    </task>
-    <task id="LOCAL-00026" summary="CLI payment fix">
-      <created>1620822060190</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1620822060190</updated>
+      <workItem from="1624955953859" duration="2599000" />
     </task>
     <task id="LOCAL-00027" summary="ClientPlayerBoard fix">
       <created>1620822305985</created>
@@ -775,7 +765,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624897154666</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Tests and ClientView sync update">
+      <created>1624957596251</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1624957596252</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -795,7 +792,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="GUI: full view implemented" />
     <MESSAGE value="CLI print fix, Actions toString method, production &amp; payment Mainboard" />
     <MESSAGE value="GUI payment fix" />
     <MESSAGE value="EndorDone button fix" />
@@ -820,7 +816,8 @@
     <MESSAGE value="client admin accounts, DevelopmentCardSlot valid action update" />
     <MESSAGE value="Tests" />
     <MESSAGE value="CLI visual update" />
-    <option name="LAST_COMMIT_MESSAGE" value="CLI visual update" />
+    <MESSAGE value="Tests and ClientView sync update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests and ClientView sync update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
