@@ -29,6 +29,8 @@ public class ClientPlayerBoard {
     private final Map<Integer, Resource> depotBuff = new HashMap<>();
     private final Map<String, Integer> depotBuffCard = new HashMap<>();
 
+    private int currWarehouseSize = 3;
+
     /**
      * constructor
      * @param playerNickname nickname of the player
@@ -292,7 +294,8 @@ public class ClientPlayerBoard {
     }
 
     public void addDepotBuff(Resource res){
-        depotBuffCard.put(playedCards.get(playedCards.size()-1),warehouse.size()-1);
-        depotBuff.put(warehouse.size()-1, res);
+        currWarehouseSize++;
+        depotBuffCard.put(playedCards.get(playedCards.size()-1),currWarehouseSize-1);
+        depotBuff.put(currWarehouseSize-1, res);
     }
 }

@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="ClientView sync fix">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Fullview leader depots">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/FullView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/FullView.fxml" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
@@ -432,14 +433,9 @@
       <workItem from="1624955953859" duration="2619000" />
       <workItem from="1624960202124" duration="808000" />
       <workItem from="1624983015606" duration="3590000" />
-      <workItem from="1624991417914" duration="110000" />
-    </task>
-    <task id="LOCAL-00029" summary="market action works and modified some methods of the model">
-      <created>1620900478508</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1620900478508</updated>
+      <workItem from="1624991417914" duration="319000" />
+      <workItem from="1625044834555" duration="2600000" />
+      <workItem from="1625049562094" duration="1800000" />
     </task>
     <task id="LOCAL-00030" summary="modified some methods of the Controller.java">
       <created>1620939805902</created>
@@ -777,7 +773,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624960394365</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="Fullview leader depots">
+      <created>1624991724863</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1624991724863</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -797,7 +800,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="EndorDone button fix" />
     <MESSAGE value="Buy card fix, dev slots cards images added" />
     <MESSAGE value="CLI endTurn fix" />
     <MESSAGE value="fix gui" />
@@ -822,7 +824,8 @@
     <MESSAGE value="Tests and ClientView sync update" />
     <MESSAGE value="Javadoc" />
     <MESSAGE value="ClientView sync fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="ClientView sync fix" />
+    <MESSAGE value="Fullview leader depots" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fullview leader depots" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

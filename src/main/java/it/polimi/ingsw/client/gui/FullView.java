@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.gui;
 
-import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.model.Resource;
@@ -13,12 +12,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FullView {
-    private static View clientView;
+    private static View view;
     private static GUI gui;
 
     public static void setGui(GUI gui) {
         FullView.gui = gui;
-        FullView.clientView = gui.getClientView();
+        FullView.view = gui.getClientView();
     }
 
     // depot of player one
@@ -411,11 +410,11 @@ public class FullView {
      */
     public void showView(){
         allVisible();
-        for(int i=0; i<clientView.getGameboard().getPlayerBoards().size(); i++)
+        for(int i = 0; i< view.getGameboard().getPlayerBoards().size(); i++)
             showPlayer(i);
-        if(!(clientView.getGameboard().getPlayerBoards().size()>2))
+        if(!(view.getGameboard().getPlayerBoards().size()>2))
             hideThirdPlayer();
-        if(!(clientView.getGameboard().getPlayerBoards().size()>3))
+        if(!(view.getGameboard().getPlayerBoards().size()>3))
             hideFourthPlayer();
     }
 
@@ -431,12 +430,15 @@ public class FullView {
      * @param playerNum is the number of the player
      */
     private void showPlayer(int playerNum){
-        ClientPlayerBoard board = clientView.getGameboard().getPlayerBoards().get(playerNum);
+        ClientPlayerBoard board = view.getGameboard().getPlayerBoards().get(playerNum);
         playerName.get(playerNum).setText("Playerboard of "+ board.getPlayerNickname());
-        if(board.isConnected())
-            playerName.get(playerNum).setStyle("-fx-background-color: green; -fx-background-radius: 20;");
-        else
-            playerName.get(playerNum).setStyle("-fx-background-color: red; -fx-background-radius: 20;");
+        if(board.getPlayerNickname().equals(view.getNickname ()))  playerName.get(playerNum).setStyle("-fx-background-color: green; -fx-background-radius: 20;");
+        else {
+            if (board.isConnected())
+                playerName.get(playerNum).setStyle("-fx-background-color: white; -fx-background-radius: 20;");
+            else
+                playerName.get(playerNum).setStyle("-fx-background-color: red; -fx-background-radius: 20;");
+        }
         //
 
         // set strongbox counter

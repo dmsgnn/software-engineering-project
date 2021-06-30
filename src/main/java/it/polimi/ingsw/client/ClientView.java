@@ -204,7 +204,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param action selected from the player
      */
     public void sendAction(Actions action){
-        updated=false;
+        if(!action.equals(Actions.ENDTURN)) updated=false;
         socket.sendMessage(new ActionReply(action));
     }
 
@@ -351,8 +351,10 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void turnNotification(String player){
         synchronized (lock) {
-            if(!player.equals(getNickname())) getUiType().startTurnNotification(player);
-            updated=false;
+            if(!player.equals(getNickname())) {
+                getUiType().startTurnNotification(player);
+                updated=false;
+            }
         }
     }
 
@@ -442,13 +444,11 @@ public class ClientView extends View implements Observer<ServerMessage>{
                 getGameboard().getOnePlayerBoard(nickname).setConnected(playersConnected.get(nickname));
             }
             for (String nickname : leaderCardsPlayed.keySet()) {
-                if(nickname.equals(getNickname())){
-                    for(int i=0; i<leaderCardsPlayed.get(getNickname()).size(); i++){
-                        String id = leaderCardsPlayed.get(nickname).get(i);
-                        getGameboard().getOnePlayerBoard(getNickname()).addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
-                    }
+                for(String id : leaderCardsPlayed.get(nickname)){
+                    System.out.println(nickname);
+                    System.out.println(leaderCardsPlayed.get(nickname));
+                    getGameboard().getOnePlayerBoard(nickname).addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
                 }
-                else getGameboard().getOnePlayerBoard(nickname).setPlayedCards(leaderCardsPlayed.get(nickname));
             }
             for (String nickname : vaticanReportActivated.keySet()){
                 getGameboard().getOnePlayerBoard(nickname).setVaticanReports(vaticanReportActivated.get(nickname));
