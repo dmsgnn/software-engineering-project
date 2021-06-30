@@ -44,10 +44,11 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void manageUsernameResponse(boolean isFree, String nickname){
         synchronized (lock) {
-            updated = true;
             if (isFree) {
                 setNickname(nickname);
                 getUiType().loginDone();
+                updated=true;
+                lock.notifyAll();
             } else {
                 getUiType().failedLogin();
             }

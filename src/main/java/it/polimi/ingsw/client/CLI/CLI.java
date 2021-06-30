@@ -1194,7 +1194,7 @@ public class CLI implements UserInterface {
             if(!board.isSlotEmpty(i))
                 playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawTop()).append(ColorCLI.RESET);
             else
-                playerboard.append("          ").append(ColorCLI.RESET);
+                playerboard.append("           ").append(ColorCLI.RESET);
         }
         playerboard.append("   ");
         //leader card first line
@@ -1237,7 +1237,7 @@ public class CLI implements UserInterface {
             if(!board.isSlotEmpty(i))
                 playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawLevelAndPoints()).append(ColorCLI.RESET);
             else
-                playerboard.append("          ").append(ColorCLI.RESET);
+                playerboard.append("           ").append(ColorCLI.RESET);
         }
         playerboard.append("   ");
         //leader card second line
@@ -1283,7 +1283,7 @@ public class CLI implements UserInterface {
             if(!board.isSlotEmpty(i))
                 playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawRequirements()).append(ColorCLI.RESET);
             else
-                playerboard.append("          ").append(ColorCLI.RESET);
+                playerboard.append("           ").append(ColorCLI.RESET);
         }
         playerboard.append("   ");
         //leader card third line
@@ -1316,7 +1316,7 @@ public class CLI implements UserInterface {
             if(!board.isSlotEmpty(i))
                 playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawProdCostAndGain()).append(ColorCLI.RESET);
             else
-                playerboard.append("          ").append(ColorCLI.RESET);
+                playerboard.append("           ").append(ColorCLI.RESET);
         }
         playerboard.append("   ");
         //leader card fourth line
@@ -1344,7 +1344,7 @@ public class CLI implements UserInterface {
                 playerboard.append(Objects.requireNonNull(findDevCard(board.slotCard(i, board.slotSize(i)))).drawBottom()).append(ColorCLI.RESET);
 
             else
-                playerboard.append("          ").append(ColorCLI.RESET);
+                playerboard.append("           ").append(ColorCLI.RESET);
         }
         playerboard.append("   ");
         //leader card last line

@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Reconnection Update fix, FullView fix &amp; update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="FullView fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/MarbleColors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/MarbleColors.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -120,15 +123,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -432,14 +433,10 @@
       <workItem from="1624983015606" duration="3590000" />
       <workItem from="1624991417914" duration="319000" />
       <workItem from="1625044834555" duration="2600000" />
-      <workItem from="1625049562094" duration="2165000" />
-    </task>
-    <task id="LOCAL-00031" summary="updated management of client update messages">
-      <created>1620983970191</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1620983970191</updated>
+      <workItem from="1625049562094" duration="2230000" />
+      <workItem from="1625067716752" duration="1595000" />
+      <workItem from="1625070351741" duration="322000" />
+      <workItem from="1625078225147" duration="1152000" />
     </task>
     <task id="LOCAL-00032" summary="missing class updates from last commit">
       <created>1620984626148</created>
@@ -777,7 +774,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625051487730</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="FullView fix">
+      <created>1625051810575</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1625051810575</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -797,7 +801,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="CLI endTurn fix" />
     <MESSAGE value="fix gui" />
     <MESSAGE value="Update endGame message" />
     <MESSAGE value="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update" />
@@ -822,7 +825,8 @@
     <MESSAGE value="ClientView sync fix" />
     <MESSAGE value="Fullview leader depots" />
     <MESSAGE value="Reconnection Update fix, FullView fix &amp; update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reconnection Update fix, FullView fix &amp; update" />
+    <MESSAGE value="FullView fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="FullView fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

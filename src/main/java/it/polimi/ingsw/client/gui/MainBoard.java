@@ -599,6 +599,7 @@ public class MainBoard {
         depot3Resource1.setVisible(true);
         depot3Resource2.setVisible(true);
         depot3Resource3.setVisible(true);
+        leaderDepotButtons();
         if (firstLeaderDepotActive) {
             depot1Leader1.setVisible(true);
             depot2Leader1.setVisible(true);
@@ -651,7 +652,9 @@ public class MainBoard {
         if (firstLeaderDepotActive){
             if (board.isDepotEmpty(3)){
                 depot1Leader1.setVisible(false);
+                depot1Leader1.setImage(null);
                 depot2Leader1.setVisible(false);
+                depot2Leader1.setImage(null);
             }
             else{
                 if (board.getWarehouse().get(3).size() == 2) {
@@ -661,6 +664,7 @@ public class MainBoard {
                 else{
                     depot1Leader1.setImage(new Image("resources/punchboard/"+ board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
                     depot2Leader1.setVisible(false);
+                    depot2Leader1.setImage(null);
                 }
             }
         }
@@ -668,7 +672,9 @@ public class MainBoard {
             if (!firstLeaderDepotActive) {
                 if (board.isDepotEmpty(3)) {
                     depot1Leader2.setVisible(false);
+                    depot1Leader2.setImage(null);
                     depot2Leader2.setVisible(false);
+                    depot2Leader2.setImage(null);
                 } else {
                     if (board.getWarehouse().get(3).size() == 2) {
                         depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
@@ -676,6 +682,7 @@ public class MainBoard {
                     } else {
                         depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
                         depot2Leader2.setVisible(false);
+                        depot2Leader2.setImage(null);
                     }
                 }
             } else {
@@ -2123,6 +2130,32 @@ public class MainBoard {
         endTurn.setDisable(true);
     }
 
+    private void leaderDepotButtons(){
+        warehouse= clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouse();
+        if (warehouse.size()==4) {
+            if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().size() == 2) {
+                String cardId = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().get(0);
+                if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getDepotBuffCard().containsKey(cardId)) {
+                    if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getDepotBuffCard().get(cardId) == 3) {
+                        firstLeaderDepotActive = true;
+
+                    } else {
+                        secondLeaderDepotActive = true;
+                    }
+                } else {
+                    secondLeaderDepotActive = true;
+
+                }
+            } else {
+                firstLeaderDepotActive = true;
+            }
+        }
+        if (warehouse.size() == 5) {
+            firstLeaderDepotActive = true;
+            secondLeaderDepotActive = true;
+        }
+    }
+
     public void manageResources(ArrayList<Resource> resources) {
         buttonStatus();
         setMessage("choose your new warehouse configuration");
@@ -2134,25 +2167,6 @@ public class MainBoard {
 
 
         if (warehouse.size()==4){
-            if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().size()==2){
-                String cardId = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getPlayedCards().get(0);
-                if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getDepotBuffCard().containsKey(cardId)){
-                    if (clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getDepotBuffCard().get(cardId)==3){
-                        firstLeaderDepotActive = true;
-
-                    }
-                    else {
-                        secondLeaderDepotActive = true;
-                    }
-                }
-                else{
-                    secondLeaderDepotActive = true;
-
-                }
-            }
-            else {
-                firstLeaderDepotActive = true;
-            }
             if (warehouse.get(3).isEmpty()){
                 leaderDepot1[0]=null;
                 leaderDepot1[1]=null;
@@ -2170,8 +2184,6 @@ public class MainBoard {
         }
 
         if (warehouse.size() == 5){
-            firstLeaderDepotActive =true;
-            secondLeaderDepotActive =true;
             if (warehouse.get(3).isEmpty()){
                 leaderDepot1[0]=null;
                 leaderDepot1[1]=null;
@@ -2281,11 +2293,6 @@ public class MainBoard {
             }
 
         }
-
-
-
-
-
 
 
         if(newResources[0] == null){
