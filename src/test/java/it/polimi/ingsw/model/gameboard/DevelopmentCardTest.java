@@ -97,6 +97,12 @@ public class DevelopmentCardTest {
         discountBuff.add(Resource.SHIELDS);
 
         assertTrue(card.checkCardRequirements(playerRes, discountBuff));
+
+        assertEquals(1,card.getVictoryPoints());
+        card.drawBottom();
+        card.drawTop();
+        card.drawProdCostAndGain();
+        assertTrue(true);
     }
 
     @Test
@@ -124,6 +130,8 @@ public class DevelopmentCardTest {
         String requirementsString = ColorCLI.GREEN + "║" + ColorCLI.CYAN + "1        " + ColorCLI.GREEN + "║";
 
         assertEquals(requirementsString, card.drawRequirements());
+
+
     }
 
 }

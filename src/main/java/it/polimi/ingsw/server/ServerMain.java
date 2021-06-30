@@ -17,15 +17,13 @@ import static java.lang.System.*;
 
 public class ServerMain {
     //needed
-    private int portNumber;
-    private ExecutorService executor;
-    private ArrayList<Lobby> lobbies;
+    private final int portNumber;
+    private final ExecutorService executor;
+    private final ArrayList<Lobby> lobbies;
 
-    private ArrayList<String> takenUsernames;
-    private Map<String, Lobby> disconnectedUsers;
+    private final ArrayList<String> takenUsernames;
+    private final Map<String, Lobby> disconnectedUsers;
 
-    //private int playerID;
-    private Timer timer;
 
 
     //constructor
@@ -36,7 +34,6 @@ public class ServerMain {
         this.disconnectedUsers = new HashMap<>();
         executor = Executors.newCachedThreadPool();
         //playerId = 0;
-        timer = new Timer();
     }
 
     /**

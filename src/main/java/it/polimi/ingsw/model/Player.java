@@ -6,11 +6,11 @@ import it.polimi.ingsw.model.playerboard.faithTrack.PlayerFaithTrack;
 import java.util.ArrayList;
 
 public class Player {
-    private Game game;
-    private String nickname;
+    private final Game game;
+    private final String nickname;
     private int victoryPoints;
-    private int turnOrder;
-    private PlayerBoard playerBoard;
+    private final int turnOrder;
+    private final PlayerBoard playerBoard;
     private ArrayList<LeaderCard> cardsHand;
 
     public Player(String nickname, int turnOrder, Game game) {
@@ -76,9 +76,6 @@ public class Player {
 
     public PlayerBoard getPlayerBoard() {
         return playerBoard;
-    }
-    public int getTurnOrder() {
-        return turnOrder;
     }
     public ArrayList<LeaderCard> getCardsHand() {
         return cardsHand;

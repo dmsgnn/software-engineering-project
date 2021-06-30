@@ -109,7 +109,7 @@
       <recent name="it.polimi.ingsw.model.actions" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientMain">
+  <component name="RunManager" selected="JUnit.it.polimi.ingsw.model in AM5">
     <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerMain" />
       <module name="AM5" />
@@ -123,13 +123,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -209,7 +211,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ClientMain" />
       <item itemvalue="Application.ServerMain" />
       <item itemvalue="JUnit.Gameboard" />
       <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
@@ -219,8 +220,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
+        <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.ResourceRequirementsTest.CLIDrawingTest" />
         <item itemvalue="JUnit.ColorRequirementsTest.CLIDrawingTest" />
         <item itemvalue="JUnit.ResourceRequirementsTest.CLITests" />

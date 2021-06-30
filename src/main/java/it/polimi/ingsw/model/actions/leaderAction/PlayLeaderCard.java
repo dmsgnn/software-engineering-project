@@ -25,7 +25,6 @@ public class PlayLeaderCard extends Actions {
     public void doAction(PlayerBoard playerBoard) throws InvalidActionException {
         if (!validAction(playerBoard)) throw new InvalidActionException();
         else{
-            //payResources(playerBoard,warehouseDepotResources,cardDepotResources,strongboxResources);
             playLeaderCard(playerBoard);
 
         }

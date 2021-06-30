@@ -23,6 +23,7 @@ import it.polimi.ingsw.model.gameboard.marble.Marbles;
 import it.polimi.ingsw.model.leadercard.LeaderCard;
 import it.polimi.ingsw.model.playerboard.faithTrack.FaithTrack;
 import it.polimi.ingsw.model.singleplayer.LorenzoAI;
+import it.polimi.ingsw.server.ServerView;
 
 import javax.naming.InsufficientResourcesException;
 import java.util.*;
@@ -40,8 +41,6 @@ public class LocalController {
     private final Map<String,Map<Resource,Integer>> newResources;
     private final Map<Resource,Integer> temp;
     private int playersNumber;
-    private int beginCounter =0;
-    private int currentServerView =0;
     private int currentActivePlayer;
     private final ArrayList<String> playersDisconnected;
     // ACTION TOOLS
@@ -56,9 +55,7 @@ public class LocalController {
     private int numOfVaticanReport;
     private final Map<String,Integer> faithPositions;
     private final Map<String,Integer> startingResources;
-    private int resourceCounter;
     private final Map<String,Map<Integer,Boolean>> playerStatus;
-    private boolean gameStarted;
     private boolean gameFinished;
     private Map<String, Map<Integer,Boolean>> vaticanReportActivated;
 
@@ -97,7 +94,6 @@ public class LocalController {
 
         //PARAMETERS FOR STARTING RESOURCES
         this.startingResources = new HashMap<>();
-        this.resourceCounter=0;
         //PARAMETERS FOR DISCONNECTION
         playersDisconnected = new ArrayList<>();
         Map<Integer,Boolean> temp2 = new HashMap<>();
@@ -118,10 +114,6 @@ public class LocalController {
             currentAction.put(i,null);
             numOfActions.put(i,false);
         }
-    }
-
-    public boolean isGameStarted() {
-        return gameStarted;
     }
 
     /**
@@ -195,7 +187,6 @@ public class LocalController {
      * starts the first player's turn and sends him the possible actions to perform
      */
     public void begin(){
-            gameStarted = true;
             clientView.setupGameUpdate(this.leaderID, getWarehouse(), getFaith());
             Player player = game.getPlayers(currentActivePlayer);
             game.setActivePlayer(player);
@@ -297,7 +288,6 @@ public class LocalController {
         faithTrackMessage();
         LorenzoAI lorenzo = game.getLorenzo();
         clientView.lorenzoUpdate(message, lorenzo.getTrack().getPosition(), newGrid);
-        boolean end = endGame();
         boolean lori = game.getLorenzo().checkEndGame();
         if (lori) {
             gameFinished = true;
@@ -519,6 +509,11 @@ public class LocalController {
                 }
                 clientView.pickAction(getPossibleAction());
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException  e) {
+                for (Resource resource: Resource.values()){
+                    for (int i = 0; i < newResources.get(username).get(resource); i++) {
+                        resourceArrayList.add(resource);
+                    }
+                }
                 clientView.errorManagement(Error.MANAGE_RESOURCES);
                 clientView.manageResources(resourceArrayList);
             }
@@ -734,62 +729,6 @@ public class LocalController {
         }
     }
 
-    private Map<String, Map<Integer, ArrayList<String>>> getDevCardSlots(){
-        Map<String, Map<Integer, ArrayList<String>>> devCardSlots = new HashMap<>();
-        for (int i=0;i<playersNumber;i++){
-            Player player = game.getPlayers(i);
-            devCardSlots.put(player.getNickname(), player.getPlayerBoard().getDevSlotsCardId());
-        }
-        return devCardSlots;
-    }
-
-
-    private Map<String,Integer> getFaithPositions(){
-        Map<String,Integer> faithPositions = new HashMap<>();
-        for (int i=0;i<playersNumber;i++) {
-            Player player = game.getPlayers(i);
-            game.setActivePlayer(player);
-            faithPositions.put(game.getActivePlayer().getNickname(),game.getActivePlayer().getFaithTrack().getPosition());
-        }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
-        return faithPositions;
-    }
-
-
-    private Map<String, ArrayList<String>> getLeaderCardsPlayed(){
-        Map<String, ArrayList<String>> leaderCards = new HashMap<>();
-        for (int i=0;i<playersNumber;i++) {
-            Player player = game.getPlayers(i);
-            game.setActivePlayer(player);
-            ArrayList<String> id = new ArrayList<>();
-            for (int j=0;j<game.getActivePlayer().getPlayerBoard().getLeaderCards().size();j++){
-                id.add(j,game.getActivePlayer().getPlayerBoard().getLeaderCards().get(j).getId());
-            }
-            leaderCards.put(game.getActivePlayer().getNickname(),id);
-        }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
-        return leaderCards;
-    }
-
-
-    private ArrayList<String> getLeaderCards(String username){
-        ArrayList<String> leaderCards = new ArrayList<>();
-        for (int i=0;i<playersNumber;i++){
-            if (game.getPlayers(i).getNickname().equals(username)){
-                Player player = game.getPlayers(i);
-                game.setActivePlayer(player);
-                for (int j=0;j<game.getActivePlayer().getCardsHand().size();j++){
-                    leaderCards.add(j,game.getActivePlayer().getCardsHand().get(j).getId());
-                }
-            }
-        }
-        Player player = game.getPlayers(currentActivePlayer);
-        game.setActivePlayer(player);
-        return leaderCards;
-    }
-
 
     private Map<String, Map<Resource,Integer>> getStrongbox(){
         Map<String, Map<Resource,Integer>> strongbox = new HashMap<>();
@@ -836,13 +775,6 @@ public class LocalController {
         game.setActivePlayer(player);
         return map;
     }
-
-
-    public void setPlayersNumber(int playersNumber) {
-        this.playersNumber = playersNumber;
-    }
-
-
 
 
     private MarbleColors[][] getMarket(){

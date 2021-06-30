@@ -24,9 +24,9 @@ public class DevelopmentCardSlotTest {
     private static final List<Color> VALUES = Collections.unmodifiableList(Arrays.asList(Color.values()));
     private static final int SIZE = VALUES.size();
     static Random random = new Random();
-    private DevelopmentCard developmentCard1 = gameboard.buyCard(randomColor(),1);
-    private DevelopmentCard developmentCard2 = gameboard.buyCard(randomColor(),2);
-    private DevelopmentCard developmentCard3 = gameboard.buyCard(randomColor(),3);
+    private final DevelopmentCard developmentCard1 = gameboard.buyCard(randomColor(),1);
+    private final DevelopmentCard developmentCard2 = gameboard.buyCard(randomColor(),2);
+    private final DevelopmentCard developmentCard3 = gameboard.buyCard(randomColor(),3);
 
     public DevelopmentCardSlotTest() throws WrongLevelException, NoCardsLeftException {
     }
@@ -36,6 +36,9 @@ public class DevelopmentCardSlotTest {
         developmentCardSlot.addCardOnTop(developmentCard1,playerBoard);
         developmentCardSlot.addCardOnTop(developmentCard2,playerBoard);
         developmentCardSlot.addCardOnTop(developmentCard3,playerBoard);
+
+        developmentCardSlot.getCardsIds();
+        assertTrue(true);
 
         assertEquals(developmentCard1,developmentCardSlot.getCard(0));
         assertEquals(developmentCard2,developmentCardSlot.getCard(1));

@@ -518,12 +518,22 @@ public class Controller implements Observer<ClientMessage> {
      * ends the player's turn and sets the new active player in the model
      */
     public synchronized void endTurn(){
-        if ((gameFinished && (currentActivePlayer == playersNumber -1)) || (gameFinished && (playersNumber==1))) {
+        int counter =0;
+        for (String username : playersDisconnected) {
+            for (int j = 0; j < playersNumber; j++) {
+                String name = game.getPlayers(j).getNickname();
+                if (name.equals(username)) {
+                    if (currentActivePlayer < j) counter++;
+                }
+            }
+        }
+        if ((gameFinished && (currentActivePlayer == playersNumber - (counter +1))) || (gameFinished && (playersNumber==1))) {
             if (playersNumber ==1) {
                 boolean lorenzo = game.getLorenzo().checkEndGame();
                 finalScore(lorenzo);
             }
             else {
+                System.out.println("entrato nel final score");
                 finalScore(false);
             }
         }
@@ -786,8 +796,8 @@ public class Controller implements Observer<ClientMessage> {
                 marbleColorsArrayList=null;
                 //SEND POSSIBLE ACTIONS
                 if (endGame()){
+                    gameFinished = true;
                     for (ServerView serverView: serverViews){
-                        gameFinished = true;
                         serverView.endGameMessage();
                     }
                 }
@@ -983,13 +993,6 @@ public class Controller implements Observer<ClientMessage> {
      */
     public boolean endGame(){
         return game.endGame();
-        /*else {
-            boolean lorenzo = game.getLorenzo().checkEndGame();
-            return player||lorenzo;
-        }
-
-         */
-
     }
 
 
