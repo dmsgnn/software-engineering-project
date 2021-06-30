@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Fullview leader depots">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Reconnection Update fix, FullView fix &amp; update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/FullView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/representations/ClientPlayerBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/FullView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/FullView.fxml" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -435,14 +432,7 @@
       <workItem from="1624983015606" duration="3590000" />
       <workItem from="1624991417914" duration="319000" />
       <workItem from="1625044834555" duration="2600000" />
-      <workItem from="1625049562094" duration="1800000" />
-    </task>
-    <task id="LOCAL-00030" summary="modified some methods of the Controller.java">
-      <created>1620939805902</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1620939805902</updated>
+      <workItem from="1625049562094" duration="2165000" />
     </task>
     <task id="LOCAL-00031" summary="updated management of client update messages">
       <created>1620983970191</created>
@@ -780,7 +770,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624991724863</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Reconnection Update fix, FullView fix &amp; update">
+      <created>1625051487730</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1625051487730</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -800,7 +797,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Buy card fix, dev slots cards images added" />
     <MESSAGE value="CLI endTurn fix" />
     <MESSAGE value="fix gui" />
     <MESSAGE value="Update endGame message" />
@@ -825,7 +821,8 @@
     <MESSAGE value="Javadoc" />
     <MESSAGE value="ClientView sync fix" />
     <MESSAGE value="Fullview leader depots" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fullview leader depots" />
+    <MESSAGE value="Reconnection Update fix, FullView fix &amp; update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reconnection Update fix, FullView fix &amp; update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

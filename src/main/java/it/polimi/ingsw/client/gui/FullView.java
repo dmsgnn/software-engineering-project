@@ -552,7 +552,7 @@ public class FullView {
                 leader2Depot1.get(playerNum).setVisible(false);
                 leader2Depot2.get(playerNum).setVisible(false);
             }
-            else if(board.getWarehouse().get(3).size()>=1) {
+            else if(board.getWarehouse().get(3).size()==1) {
                 leader2Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(3).toString().toLowerCase() + ".png"));
                 leader2Depot2.get(playerNum).setVisible(false);
             }
@@ -565,7 +565,7 @@ public class FullView {
                 leader1Depot1.get(playerNum).setVisible(false);
                 leader1Depot2.get(playerNum).setVisible(false);
             }
-            else if(board.getWarehouse().get(4).size()>=1) {
+            else if(board.getWarehouse().get(4).size()==1) {
                 leader1Depot1.get(playerNum).setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
                 leader1Depot2.get(playerNum).setVisible(false);
             }
