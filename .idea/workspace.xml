@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="marbles images and local controller manage fix">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="starting phase disconnection fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerSocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerSocketHandler.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -134,17 +131,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -439,14 +425,7 @@
       <workItem from="1625119033463" duration="392000" />
       <workItem from="1625121563575" duration="2527000" />
       <workItem from="1625139380436" duration="120000" />
-      <workItem from="1625141599213" duration="4570000" />
-    </task>
-    <task id="LOCAL-00033" summary="update FaithMessage">
-      <created>1621004332338</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1621004332338</updated>
+      <workItem from="1625141599213" duration="5104000" />
     </task>
     <task id="LOCAL-00034" summary="UseProduction additional condition, Client update and Error management">
       <created>1621332103205</created>
@@ -784,7 +763,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625124379215</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="starting phase disconnection fixes">
+      <created>1625147193260</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1625147193260</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -804,7 +790,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update endGame message" />
     <MESSAGE value="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update" />
     <MESSAGE value="update exhcange leaderCard buff" />
     <MESSAGE value="Messages updates, fixes with sync" />
@@ -829,7 +814,8 @@
     <MESSAGE value="Reconnection Update fix, FullView fix &amp; update" />
     <MESSAGE value="FullView fix" />
     <MESSAGE value="marbles images and local controller manage fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="marbles images and local controller manage fix" />
+    <MESSAGE value="starting phase disconnection fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="starting phase disconnection fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

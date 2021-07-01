@@ -107,7 +107,7 @@ public class ServerSocketHandler extends Observable<ClientMessage> implements Ru
             out.flush();
             if(message instanceof FinalScoreMessage)
                 lobby.increaseMessageCounter();
-            if(lobby.getMessageCounter() >= lobby.getLoggedPlayers().size()) {
+            if(lobby.getMessageCounter() >= lobby.getLoggedPlayers().size() && lobby.getLoggedPlayers().size() != 0) {
                 System.out.println("there is a winner, game will end soon\n");
                 server.endGame(lobby);
             }
