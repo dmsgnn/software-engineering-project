@@ -175,10 +175,6 @@ public class LocalController {
             begin();
         }    catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             clientView.errorManagement(Error.STARTING_LEADER_CARD);
-            ArrayList<String> id = new ArrayList<>();
-            for (int i = 0; i < startingLeaderCards.size(); i++) {
-                id.add(i,startingLeaderCards.get(username).get(i).getId());
-            }
         }
     }
 
@@ -201,7 +197,7 @@ public class LocalController {
      * check if the player has already performed any actions
      * @return the player's list of possible actions
      */
-    private ArrayList<Actions> getPossibleAction() {
+    public ArrayList<Actions> getPossibleAction() {
         ArrayList<Actions> actions = new ArrayList<>();
         //IF NO ACTION HAS BEEN TAKEN YET
         if ((!numOfActions.get(currentActivePlayer))){
@@ -241,7 +237,6 @@ public class LocalController {
      */
     public void selectAction(Actions action){
         currentAction.put(currentActivePlayer,action);
-        clientView.doAction(action);
         switch (action){
             case MARKETACTION:
             case USEPRODUCTION:
@@ -254,6 +249,7 @@ public class LocalController {
                 break;
             }
         }
+        clientView.doAction(action);
     }
 
     /**
@@ -284,15 +280,14 @@ public class LocalController {
     public void lorenzoAction(){
         String message = game.getLorenzo().drawToken();
         String[][] newGrid = getDevCardGrid();
-
         faithTrackMessage();
         LorenzoAI lorenzo = game.getLorenzo();
         clientView.lorenzoUpdate(message, lorenzo.getTrack().getPosition(), newGrid);
         boolean lori = game.getLorenzo().checkEndGame();
         if (lori) {
             gameFinished = true;
-            clientView.endGame();
             finalScore(true);
+            clientView.endGame();
         }
         else startTurn();
     }
@@ -475,7 +470,6 @@ public class LocalController {
                     System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getOccupied());
                 }
                 game.doAction(manageResources);
-                System.out.println("action done");
                 if (game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size()==4) {
                     System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getResource());
                     System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getOccupied());
@@ -550,10 +544,7 @@ public class LocalController {
                 }
                 Map<Integer,ArrayList<Resource>> warehouse = new HashMap<>(getWarehouse().get(username));
                 Map<Resource,Integer> strongbox =  new HashMap<>(getStrongbox().get(username));
-                for (Resource resource: Resource.values()){
-                    System.out.println( resource.toString() + strongbox.get(resource));
-                }
-                    clientView.buyCardUpdate(username,id,slotNumber,newId,color,level,warehouse,strongbox);
+                clientView.buyCardUpdate(username,id,slotNumber,newId,color,level,warehouse,strongbox);
                 // SEND POSSIBLE ACTIONS
                 if (endGame()){
                         gameFinished = true;
@@ -600,7 +591,7 @@ public class LocalController {
                 clientView.useProductionUpdate(name,warehouse,strongbox);
                 //SEND POSSIBLE ACTION
                 if (endGame()){
-                        gameFinished = true;
+                    gameFinished = true;
                     clientView.endGame();
                 }
                 clientView.pickAction(getPossibleAction());
@@ -664,8 +655,12 @@ public class LocalController {
             }
 
         }
-        System.out.println(update);
-        System.out.println(faithPositions);
+        for (int i = 0; i < playersNumber; i++) {
+            String name = game.getPlayers(i).getNickname();
+            int position = game.getPlayers(i).getVictoryPoints();
+            faithPositions.put(name,position);
+        }
+
         Map<String,Integer> faith = new HashMap<>(faithPositions);
         clientView.faithTrackUpdate(update,faith,isActive);
 
@@ -676,13 +671,6 @@ public class LocalController {
      */
     public boolean endGame(){
         return game.endGame();
-        /*else {
-            boolean lorenzo = game.getLorenzo().checkEndGame();
-            return player||lorenzo;
-        }
-
-         */
-
     }
 
 
@@ -732,7 +720,6 @@ public class LocalController {
             Map<Resource,Integer> map = player.getPlayerBoard().getStrongbox().getResources();
             strongbox.put(player.getNickname(), map);
         }
-
         return strongbox;
     }
 

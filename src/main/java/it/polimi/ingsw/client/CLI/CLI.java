@@ -1174,7 +1174,7 @@ public class CLI implements UserInterface {
             if (board.getVaticanReports().get(16))
                 playerboard.append(ColorCLI.GREEN).append("3").append(ColorCLI.RESET);
             else
-                playerboard.append(ColorCLI.RED).append("2").append(ColorCLI.RESET);
+                playerboard.append(ColorCLI.RED).append("3").append(ColorCLI.RESET);
         }
         else {
             playerboard.append(ColorCLI.RESET).append("3");

@@ -40,6 +40,11 @@ public class ControllerTest {
         public void pickAction(ArrayList<Actions> possibleActions) {
 
         }
+
+        @Override
+        public void doAction(Actions action) {
+
+        }
     }
 
 
@@ -60,11 +65,8 @@ public class ControllerTest {
         localController = new LocalController(game,player,view);
     }
 
-    @Test
-    public void nextPlayer(){
-        String username = game.getActivePlayer().getNickname();
-        localController.endTurn();
-        String username1 = game.getActivePlayer().getNickname();
-        assertEquals(username,username1);
-    }
+
+
+
+
 }
