@@ -104,8 +104,23 @@ public class  ManageResources extends Actions {
             }
 
         }
+        for (int i = 0; i < resources.size(); i++) {
+            //if the depots have the same resources
+            if (i != 0) {
+                if (resources.get(0).size() != 0 && resources.get(i).size() != 0) {
+                    if (i<3) {
+                        if (resources.get(0).get(0).equals(resources.get(i).get(0))) return false;
+                    }
+                }
+            }
+            //if the resources of the depot are wrong
+            for (int j = 0; j < resources.get(i).size(); j++) {
+                if (!(resources.get(i).get(0).equals(resources.get(i).get(j)))) return false;
+            }
+        }
 
-        return true;
+
+            return true;
     }
 
 

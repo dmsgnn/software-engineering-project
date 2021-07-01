@@ -982,6 +982,11 @@ public class Controller implements Observer<ClientMessage> {
 
         }
         System.out.println(update);
+        for (int i = 0; i < playersNumber; i++) {
+            String name = game.getPlayers(i).getNickname();
+            int position = game.getPlayers(i).getVictoryPoints();
+            faithPositions.put(name,position);
+        }
         System.out.println(faithPositions);
         Map<String,Integer> faith = new HashMap<>(faithPositions);
         for (ServerView serverView: serverViews){

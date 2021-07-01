@@ -40,7 +40,7 @@ public class LocalController {
     private final Map<String,ArrayList<String>> leaderID;
     private final Map<String,Map<Resource,Integer>> newResources;
     private final Map<Resource,Integer> temp;
-    private int playersNumber;
+    private final int playersNumber;
     private int currentActivePlayer;
     private final ArrayList<String> playersDisconnected;
     // ACTION TOOLS
