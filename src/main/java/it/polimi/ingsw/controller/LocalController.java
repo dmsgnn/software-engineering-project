@@ -31,10 +31,10 @@ import java.util.stream.Collectors;
 
 public class LocalController {
 
-    private LocalClientView clientView;
+    private final LocalClientView clientView;
 
     private final Game game;
-    private final ArrayList<String> nicknames;
+
     private final Map<String,ArrayList<LeaderCard>> startingLeaderCards;
     private final Map<String,ArrayList<LeaderCard>> selectedCards;
     private final Map<String,ArrayList<String>> leaderID;
@@ -42,7 +42,6 @@ public class LocalController {
     private final Map<Resource,Integer> temp;
     private final int playersNumber;
     private int currentActivePlayer;
-    private final ArrayList<String> playersDisconnected;
     // ACTION TOOLS
     private final Map<Integer,Boolean> numOfActions;
     private final Map<Integer,Actions> currentAction;
@@ -71,7 +70,6 @@ public class LocalController {
         this.game = game;
 
         this.newResources = new HashMap<>();
-        nicknames= new ArrayList<>();
         startingLeaderCards= new HashMap<>();
         selectedCards= new HashMap<>();
         leaderID = new HashMap<>();
@@ -95,7 +93,6 @@ public class LocalController {
         //PARAMETERS FOR STARTING RESOURCES
         this.startingResources = new HashMap<>();
         //PARAMETERS FOR DISCONNECTION
-        playersDisconnected = new ArrayList<>();
         Map<Integer,Boolean> temp2 = new HashMap<>();
         temp2.put(0,false);
         temp2.put(1,false);
@@ -277,6 +274,10 @@ public class LocalController {
         clientView.pickAction(getPossibleAction());
     }
 
+
+    /**
+     * this method makes lorenzo draw the token in the model and invokes the serverview method to communicate it to the client
+     */
     public void lorenzoAction(){
         String message = game.getLorenzo().drawToken();
         String[][] newGrid = getDevCardGrid();
@@ -707,12 +708,12 @@ public class LocalController {
         if(callNum==playersNumber)
             return;
         Player player = game.getPlayers(currentActivePlayer);
-        if (playersDisconnected.contains(player.getNickname())) {
-            increaseActivePlayer(callNum+1);
-        }
+
     }
 
-
+    /**
+     * @return a map with the strongboxes of all the players
+     */
     private Map<String, Map<Resource,Integer>> getStrongbox(){
         Map<String, Map<Resource,Integer>> strongbox = new HashMap<>();
         for (int i=0;i<playersNumber;i++) {
@@ -723,7 +724,9 @@ public class LocalController {
         return strongbox;
     }
 
-
+    /**
+     * @return a map with all players' warehouses
+     */
     private Map<String, Map<Integer, ArrayList<Resource>>> getWarehouse(){
         Map<String, Map<Integer, ArrayList<Resource>>> warehouse = new HashMap<>();
         for (int i=0;i<playersNumber;i++) {
@@ -744,7 +747,9 @@ public class LocalController {
         return warehouse;
     }
 
-
+    /**
+     * @return a map that contains the faith positions of all the players
+     */
     private Map<String,Integer> getFaith(){
         Map<String,Integer> map = new HashMap<>();
         for (int i = 0; i < playersNumber; i++) {
@@ -758,7 +763,9 @@ public class LocalController {
         return map;
     }
 
-
+    /**
+     * @return the market
+     */
     private MarbleColors[][] getMarket(){
         MarbleColors[][] marbleColors = new MarbleColors[game.getBoard().getMarketBoard().getRows()][game.getBoard().getMarketBoard().getColumns()];
         Marbles[][] marbles = game.getBoard().getMarketBoard().getMarbleGrid();
@@ -774,13 +781,17 @@ public class LocalController {
     }
 
 
-
+    /**
+     * @return the free marble
+     */
     private MarbleColors getFreeMarble(){
         return game.getBoard().getMarketBoard().getFreeMarble().getColor();
     }
 
 
-
+    /**
+     * @return the matrix of dev card
+     */
     private String[][] getDevCardGrid(){
         String[][] devCardGrid= new String[game.getBoard().getCardRows()][game.getBoard().getCardColumns()];
         for (int i=0;i<game.getBoard().getCardRows();i++){
@@ -798,7 +809,9 @@ public class LocalController {
         return devCardGrid;
     }
 
-
+    /**
+     * @return the players of the game
+     */
     private ArrayList<String> getPlayers(){
         ArrayList<String> players = new ArrayList<>();
         for (int i = 0; i < game.getPlayersNumber(); i++) {
@@ -807,7 +820,11 @@ public class LocalController {
         return players;
     }
 
-
+    /**
+     * @param index of the market
+     * @param isRow true row false column
+     * @return the marbles selected
+     */
     private ArrayList<MarbleColors> getRowOrColumn(int index, boolean isRow){
         ArrayList<Marbles> marbles;
         ArrayList<MarbleColors> resources = new ArrayList<>();

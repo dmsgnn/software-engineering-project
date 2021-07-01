@@ -565,6 +565,10 @@ public class MainBoard {
         }
     }
 
+    /**
+     * method that updates the vaticans based on the information sent by the server
+     * @param board of the player
+     */
     private void showVatican(ClientPlayerBoard board){
         if(board.getVaticanReports().containsKey(8)) {
             if (board.getVaticanReports().get(8))
@@ -595,6 +599,9 @@ public class MainBoard {
         }
     }
 
+    /**
+     * method that updates the resources based on the information sent by the server
+     */
     private void showDepots(){
         depot1Resource1.setVisible(true);
         depot2Resource1.setVisible(true);
@@ -892,6 +899,10 @@ public class MainBoard {
         message.setVisible(true);
     }
 
+    /**
+     * method that activates the buttons relating to the choice of the action to be performed
+     * @param actions that can be performed
+     */
     public void showActions(ArrayList<Actions> actions){
         if(actions.contains(Actions.USEPRODUCTION)) {
             productionAction.setVisible(true);
@@ -1234,6 +1245,9 @@ public class MainBoard {
         }
     }
 
+    /**
+     * button method used for the manage resources and for the payment of resources
+     */
     public void depotOneResourceOneAction() {
         if (currentAction==Actions.MANAGE){
             if (first==null) {
@@ -1272,6 +1286,9 @@ public class MainBoard {
         }
     }
 
+    /**
+     * button method used for the manage resources and for the payment of resources
+     */
     public void depotTwoResourceOneAction() {
         if (currentAction==Actions.MANAGE){
             if (first==null) {
@@ -1310,6 +1327,9 @@ public class MainBoard {
         }
     }
 
+    /**
+     * button method used for the manage resources and for the payment of resources
+     */
     public void depotTwoResourceTwoAction() {
         if (currentAction==Actions.MANAGE){
             if (first==null) {
@@ -1348,6 +1368,9 @@ public class MainBoard {
         }
     }
 
+    /**
+     * button method used for the manage resources and for the payment of resources
+     */
     public void depotThreeResourceOneAction() {
         if (currentAction==Actions.MANAGE){
             if (first==null) {
@@ -1385,6 +1408,9 @@ public class MainBoard {
         }
     }
 
+    /**
+     * button method used for the manage resources and for the payment of resources
+     */
     public void depotThreeResourceTwoAction() {
         if (currentAction==Actions.MANAGE){
             if (first==null) {
@@ -1422,6 +1448,9 @@ public class MainBoard {
         }
     }
 
+    /**
+     * button method used for the manage resources and for the payment of resources
+     */
     public void depotThreeResourceThreeAction() {
         if (currentAction==Actions.MANAGE){
             if (first==null) {
@@ -1835,6 +1864,10 @@ public class MainBoard {
         }
     }
 
+    /**
+     * button to play a leader card
+     * @param cardSlot  card number
+     */
     private void doPlayCard(int cardSlot) {
         String username = clientView.getNickname();
         String id = clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getHand().get(cardSlot);
@@ -1846,16 +1879,25 @@ public class MainBoard {
 
     // ---------- MARKET ACTION ----------
 
+    /**
+     * button to make a market action
+     */
     public void marketAction(){
         clientView.sendAction(Actions.MARKETACTION);
         disableActions();
     }
 
+    /**
+     * method called by the visitor pattern to initiate the market action
+     */
     public void doMarketAction(){
         setMessage("pick a row or column in the market");
         activeMarketButtons();
     }
 
+    /**
+     * method to activate all the buttons that allow you to select a row or a column of the market
+     */
     private void activeMarketButtons(){
         row1MarketButton.setDisable(false);
         row2MarketButton.setDisable(false);
@@ -1873,6 +1915,10 @@ public class MainBoard {
         column4MarketButton.setVisible(true);
     }
 
+
+    /**
+     * method to disable all the buttons that allow you to select a row or a column of the market
+     */
     private void disableMarketButtons(){
         row1MarketButton.setDisable(true);
         row2MarketButton.setDisable(true);
@@ -1892,6 +1938,11 @@ public class MainBoard {
     }
 
 
+    /**
+     * method to initialize the choice of resources for the exchange buff
+     * @param leaderResource1 first leader resource
+     * @param leaderResource2 second leader resource
+     */
     private void activeExchangeBuff(Resource leaderResource1,Resource leaderResource2){
         currentAction = Actions.MARKETACTION;
         if (leaderResource1!=null){
@@ -1907,6 +1958,9 @@ public class MainBoard {
 
     }
 
+    /**
+     *      * method to disable the choice of resources for the exchange buff
+     */
     private void disableExchangeBuff(){
         manageImage1.setImage(null);
         manageImage2.setImage(null);
@@ -1921,6 +1975,9 @@ public class MainBoard {
         exchangeCounter=0;
     }
 
+    /**
+     * method that selects the market row for a market action
+     */
     public void row1MarketButton(){
         String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
@@ -1949,6 +2006,10 @@ public class MainBoard {
             disableMarketButtons();
         }
     }
+
+    /**
+     * method that selects the market row for a market action
+     */
     public void row2MarketButton(){
         String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
@@ -1977,6 +2038,10 @@ public class MainBoard {
             disableMarketButtons();
         }
     }
+
+    /**
+     * method that selects the market row for a market action
+     */
     public void row3MarketButton(){
         String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
@@ -2005,6 +2070,10 @@ public class MainBoard {
             disableMarketButtons();
         }
     }
+
+    /**
+     * method that selects the market column for a market action
+     */
     public void column1MarketButton(){
         String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
@@ -2033,6 +2102,10 @@ public class MainBoard {
             disableMarketButtons();
         }
     }
+
+    /**
+     * method that selects the market column for a market action
+     */
     public void column2MarketButton() {
         String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
@@ -2061,6 +2134,10 @@ public class MainBoard {
             disableMarketButtons();
         }
     }
+
+    /**
+     * method that selects the market column for a market action
+     */
     public void column3MarketButton(){
         String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
@@ -2089,6 +2166,10 @@ public class MainBoard {
             disableMarketButtons();
         }
     }
+
+    /**
+     * method that selects the market column for a market action
+     */
     public void column4MarketButton(){
         String username = clientView.getNickname();
         ArrayList<Resource> resource = new ArrayList<>();
@@ -2118,6 +2199,9 @@ public class MainBoard {
         }
     }
 
+    /**
+     * method that deactivates the action buttons after selecting one
+     */
     public void disableActions(){
         marketAction.setDisable(true);
         marketAction.setVisible(false);
@@ -2133,6 +2217,9 @@ public class MainBoard {
         endTurn.setDisable(true);
     }
 
+    /**
+     * method to activate the buttons and images of the depot buff
+     */
     private void leaderDepotButtons(){
         warehouse= clientView.getGameboard().getOnePlayerBoard(clientView.getNickname()).getWarehouse();
         if (warehouse.size()==4) {
@@ -2159,6 +2246,10 @@ public class MainBoard {
         }
     }
 
+    /**
+     * method that starts the manage resources in the gui
+     * @param resources to organize
+     */
     public void manageResources(ArrayList<Resource> resources) {
         buttonStatus();
         setMessage("choose your new warehouse configuration");
@@ -2349,6 +2440,9 @@ public class MainBoard {
 
     }
 
+    /**
+     * method used to activate the buttons that can be used during a manage resources
+     */
     private void activateWarehouseButton() {
         trashManage.setVisible(true);
         trashManage.setDisable(false);
@@ -2389,6 +2483,9 @@ public class MainBoard {
 
     }
 
+    /**
+     * button used for manage resources and for payment in other actions
+     */
     public void depotOneLeader1Action(){
         if (currentAction==Actions.MANAGE) {
             if (first == null) {
@@ -2421,6 +2518,10 @@ public class MainBoard {
         }
 
     }
+
+    /**
+     * button used for manage resources and for payment in other actions
+     */
     public void depotTwoLeader1Action(){
         if (currentAction==Actions.MANAGE) {
             if (first == null) {
@@ -2452,6 +2553,10 @@ public class MainBoard {
             depotTwoLeader1.setDisable(true);
         }
     }
+
+    /**
+     * button used for manage resources and for payment in other actions
+     */
     public void depotOneLeader2Action(){
         if (currentAction==Actions.MANAGE) {
             if (!firstLeaderDepotActive){
@@ -2514,6 +2619,10 @@ public class MainBoard {
             depotOneLeader2.setDisable(true);
         }
     }
+
+    /**
+     * button used for manage resources and for payment in other actions
+     */
     public void depotTwoLeader2Action(){
         if (currentAction==Actions.MANAGE) {
             if (!firstLeaderDepotActive){
@@ -2578,6 +2687,9 @@ public class MainBoard {
     }
 
 
+    /**
+     * button used for manage resources
+     */
     public void trashManage(){
         if (first != null){
             second = null;
@@ -2594,11 +2706,9 @@ public class MainBoard {
     }
 
 
-
-
-
-
-
+    /**
+     * button used for manage resources
+     */
     public void manage1(){
         String username = clientView.getNickname();
         if (currentAction==Actions.MANAGE) {
@@ -2635,7 +2745,9 @@ public class MainBoard {
     }
 
 
-
+    /**
+     * button used for manage resources
+     */
     public void manage2(){
         String username = clientView.getNickname();
         if (currentAction ==Actions.MANAGE) {
@@ -2669,6 +2781,10 @@ public class MainBoard {
             }
         }
     }
+
+    /**
+     * button used for manage resources
+     */
     public void manage3(){
         if (first==null) {
             if (!isNullVolunteer) {
@@ -2693,6 +2809,10 @@ public class MainBoard {
 
         }
     }
+
+    /**
+     * button used for manage resources
+     */
     public void manage4(){
         if (first==null) {
             if (!isNullVolunteer) {
@@ -2717,6 +2837,10 @@ public class MainBoard {
 
         }
     }
+
+    /**
+     * button used for manage resources
+     */
     private void setSecondResource(){
         switch (num){
             case 1:{
@@ -2883,6 +3007,10 @@ public class MainBoard {
         }
     }
 
+    /**
+     * method used when the manage resource is completed,
+     * prepares the message to be sent to the server
+     */
     private void manageActionDone(){
         ArrayList<Resource> first = new ArrayList<>();
         ArrayList<Resource> second = new ArrayList<>();
@@ -2993,6 +3121,10 @@ public class MainBoard {
         clientView.sendManageResourcesReply(ware,discardRes);
 
     }
+
+    /**
+     * method used to disable the manage buttons
+     */
     private void disableWarehouseButtons(){
         depotOneResourceOne.setMouseTransparent(true);
         depotTwoResourceOne.setMouseTransparent(true);

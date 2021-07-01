@@ -101,6 +101,10 @@ public class Game {
         else throw new FullPlayerException();
     }
 
+    /**
+     * this method checks if the current active player has 7 active cards
+     * @return true if he has them
+     */
     private boolean devCardEnd(){
         for (Player player: players){
             if (player != null) {
@@ -114,6 +118,10 @@ public class Game {
         return false;
     }
 
+    /**
+     * this method checks if a player has made it to the end of the faithtrack
+     * @returnand true if he has made it
+     */
     private boolean faithTrackEnd(){
         for (Player player:players){
             if (player != null) {
@@ -123,6 +131,9 @@ public class Game {
         return false;
     }
 
+    /**
+     * @return true if the player has finished the game
+     */
     public boolean endGame(){
         boolean dev = devCardEnd();
         boolean faith = faithTrackEnd();

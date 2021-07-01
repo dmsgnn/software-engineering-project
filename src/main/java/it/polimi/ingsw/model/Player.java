@@ -51,11 +51,18 @@ public class Player {
         return game.getBoard().getLeaderDeck().draw4();
     }
 
+    /**
+     * method used for the choice of initial cards
+     * @param leaderCards starting
+     */
     public void pickStartingLeaderCards(ArrayList<LeaderCard> leaderCards) {
         cardsHand.add(leaderCards.get(0));
         cardsHand.add(leaderCards.get(1));
     }
 
+    /**
+     * method that calculates a player's total victory points
+     */
     private void calcVictoryPoints(){
         int counter=0;
         counter +=playerBoard.getWarehouse().resourceCounter();
@@ -80,11 +87,9 @@ public class Player {
     public ArrayList<LeaderCard> getCardsHand() {
         return cardsHand;
     }
-
     public String getNickname() {
         return nickname;
     }
-
     public void setCardsHand(ArrayList<LeaderCard> cardsHand) {
         this.cardsHand = cardsHand;
     }

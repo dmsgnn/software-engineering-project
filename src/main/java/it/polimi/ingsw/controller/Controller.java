@@ -566,6 +566,10 @@ public class Controller implements Observer<ClientMessage> {
         }
     }
 
+
+    /**
+     * this method makes lorenzo draw the token in the model and invokes the serverview method to communicate it to the client
+     */
     public void lorenzoAction(){
         String message = game.getLorenzo().drawToken();
         String[][] newGrid = getDevCardGrid();
@@ -1318,7 +1322,9 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
-
+    /**
+     * @return the matrix of dev card
+     */
     private String[][] getDevCardGrid(){
         String[][] devCardGrid= new String[game.getBoard().getCardRows()][game.getBoard().getCardColumns()];
         for (int i=0;i<game.getBoard().getCardRows();i++){
@@ -1335,6 +1341,10 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
+    /**
+     * @param username  of the player
+     * @return return the serverview of the player
+     */
     private ServerView getServerView(String username){
         for (ServerView serverView: serverViews){
             if (serverView.getUsername().equals(username)) return serverView;
@@ -1342,6 +1352,9 @@ public class Controller implements Observer<ClientMessage> {
         return null;
     }
 
+    /**
+     * @return the players of the game
+     */
     private ArrayList<String> getPlayers(){
         ArrayList<String> players = new ArrayList<>();
         for (int i = 0; i < game.getPlayersNumber(); i++) {
@@ -1351,6 +1364,11 @@ public class Controller implements Observer<ClientMessage> {
     }
 
 
+    /**
+     * @param index of the market
+     * @param isRow true row false column
+     * @return the marbles selected
+     */
     private ArrayList<MarbleColors> getRowOrColumn(int index, boolean isRow){
         ArrayList<Marbles> marbles;
         ArrayList<MarbleColors> resources = new ArrayList<>();
