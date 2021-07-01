@@ -341,6 +341,7 @@ public class MainBoard {
     private final ArrayList<Resource> exchange = new ArrayList<>();
     private Resource leaderRes1;
     private Resource leaderRes2;
+    Image marbleImage;
 
 
     public static void setGui(GUI gui) {
@@ -398,7 +399,9 @@ public class MainBoard {
 
         for(int i=0; i<3; i++) {
             for (int j = 0; j < 4; j++) {
-                Image marbleImage = new Image("/graphics/Marble/" + market[i][j].toString().toLowerCase() + ".png");
+                if(market[i][j]!=null) {
+                    marbleImage = new Image("/graphics/marbles/" + market[i][j].toString() + ".png");
+                }
                 if (grid[i][j]!=null) {
                     devCardImage = new Image("/graphics/devCards/" + grid[i][j] + ".png");
                 }
@@ -452,7 +455,7 @@ public class MainBoard {
                 }
             }
         }
-        Image marbleImage = new Image("/graphics/Marble/" + clientView.getGameboard().getFreeMarble().toString().toLowerCase() + ".png");
+        marbleImage = new Image("/graphics/marbles/" + clientView.getGameboard().getFreeMarble().toString().toLowerCase() + ".png");
         marble0.setImage(marbleImage);
         // leader cards
         if(board.getPlayedCards().size()==0) {

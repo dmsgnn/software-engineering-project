@@ -445,13 +445,13 @@ public class LocalController {
                 temp1.put(resource, count + 1);
             }
             newResources.put(game.getActivePlayer().getNickname(), temp1);
-            // SEND THE MANAGE RESOURCES
-            clientView.manageResources(resources);
             //SAVE PARAMETERS FOR MANAGE RESOURCES
             resourceArrayList = resources;
             marbleColorsArrayList = getRowOrColumn(index, isRow);
             marketIndex= index;
             isRowOrColumn= isRow;
+            // SEND THE MANAGE RESOURCES
+            clientView.manageResources(resources);
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             clientView.errorManagement(Error.INVALID_ACTION);
             currentAction.put(currentActivePlayer, null);
@@ -509,11 +509,6 @@ public class LocalController {
                 }
                 clientView.pickAction(getPossibleAction());
             } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException  e) {
-                for (Resource resource: Resource.values()){
-                    for (int i = 0; i < newResources.get(username).get(resource); i++) {
-                        resourceArrayList.add(resource);
-                    }
-                }
                 clientView.errorManagement(Error.MANAGE_RESOURCES);
                 clientView.manageResources(resourceArrayList);
             }
