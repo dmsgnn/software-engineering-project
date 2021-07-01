@@ -1510,6 +1510,7 @@ public class MainBoard {
      */
     public void sendProduction() {
         clientView.sendAction(Actions.USEPRODUCTION);
+        disableActions();
     }
 
     /**
@@ -1848,12 +1849,11 @@ public class MainBoard {
     public void marketAction(){
         clientView.sendAction(Actions.MARKETACTION);
         disableActions();
-        setMessage("pick a row or column in the market");
     }
 
     public void doMarketAction(){
+        setMessage("pick a row or column in the market");
         activeMarketButtons();
-
     }
 
     private void activeMarketButtons(){

@@ -19,9 +19,10 @@ public class ClientView extends View implements Observer<ServerMessage>{
     private final int port;
 
     private final Object lock = new Object();
-    private boolean updated = true;
+    private boolean updated = false;
     private boolean faithUpdateReceived = false;
     private boolean setupDone = false;
+    private boolean numOfPlayers = false;
 
 
     public ClientView(String ip, int port, UserInterface ui) {
@@ -35,7 +36,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param nickname selected from the player
      */
     public void sendLogin(String nickname){
-        updated=false;
+        numOfPlayers=false;
         socket.sendMessage(new LoginMessage(nickname));
     }
 
@@ -45,7 +46,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void numOfPlayers(int maxNum){
         synchronized (lock) {
-            while (!updated) {
+            while (!numOfPlayers) {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {
@@ -73,7 +74,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
             if (isFree) {
                 setNickname(nickname);
                 getUiType().loginDone();
-                updated=true;
+                numOfPlayers=true;
                 lock.notifyAll();
             } else {
                 getUiType().failedLogin();
@@ -191,7 +192,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void pickAction(ArrayList<Actions> possibleActions){
         synchronized (lock){
-            while(!updated && !setupDone) {
+            while(!updated || !setupDone) {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {
@@ -450,8 +451,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
             }
             for (String nickname : leaderCardsPlayed.keySet()) {
                 for(String id : leaderCardsPlayed.get(nickname)){
-                    System.out.println(nickname);
-                    System.out.println(leaderCardsPlayed.get(nickname));
                     getGameboard().getOnePlayerBoard(nickname).addPlayedCard(id, Objects.requireNonNull(findLeaderCard(id)));
                 }
             }
@@ -475,6 +474,13 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void lorenzoUpdate(String message, int lorenzoPosition, String[][] newCardGrid){
         synchronized (lock) {
             waitForFaithUpdate();
+            while (!setupDone){
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             super.lorenzoUpdate(message, lorenzoPosition, newCardGrid);
             updated=true;
             lock.notifyAll();
@@ -509,6 +515,13 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void buyCardUpdate(String nickname, String id, int slot, String gridId, Color color, int level,
                               Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
+            while (!setupDone){
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             super.buyCardUpdate(nickname, id, slot, gridId, color, level, warehouse, strongbox);
             updated=true;
             lock.notifyAll();
@@ -523,6 +536,13 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void discardLeaderCardUpdate(String nickname, String id){
         synchronized (lock) {
             waitForFaithUpdate();
+            while (!setupDone){
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             super.discardLeaderCardUpdate(nickname, id);
             updated=true;
             lock.notifyAll();
@@ -537,6 +557,13 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void playLeaderCardUpdate(String nickname, String id, Map<Integer, ArrayList<Resource>> warehouse){
         synchronized (lock) {
+            while (!setupDone){
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             super.playLeaderCardUpdate(nickname, id, warehouse);
             updated=true;
             lock.notifyAll();
@@ -552,6 +579,13 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void useProductionUpdate(String nickname, Map<Integer, ArrayList<Resource>> warehouse, Map<Resource, Integer> strongbox){
         synchronized (lock) {
             waitForFaithUpdate();
+            while (!setupDone){
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             super.useProductionUpdate(nickname, warehouse, strongbox);
             updated=true;
             lock.notifyAll();
@@ -571,6 +605,13 @@ public class ClientView extends View implements Observer<ServerMessage>{
                                    ArrayList<MarbleColors> newMarbles, MarbleColors newFreeMarble, int pos, boolean rowOrCol){
         synchronized (lock) {
             waitForFaithUpdate();
+            while (!setupDone){
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             super.marketActionUpdate(nickname, warehouse, newMarbles, newFreeMarble, pos, rowOrCol);
             updated=true;
             lock.notifyAll();

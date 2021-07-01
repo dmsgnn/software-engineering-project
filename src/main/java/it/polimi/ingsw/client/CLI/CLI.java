@@ -121,9 +121,11 @@ public class CLI implements UserInterface {
      */
     @Override
     public void lorenzoScoreboard(String nickname, int score, boolean lorenzoHasWon){
+        System.out.println("------------------------------------");
         if(lorenzoHasWon) System.out.println("Lorenzo il Magnifico won the game");
         else System.out.println("You won the game");
         System.out.println("\nScore: " + score);
+        System.out.println("------------------------------------");
         System.exit(0);
     }
 

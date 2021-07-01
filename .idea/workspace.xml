@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Reconnection client side fix">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Javadoc update, refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/StartingResourcesScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/StartingResourcesScene.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -123,13 +127,23 @@
     <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerMain" />
       <module name="AM5" />
-      <option name="PROGRAM_PARAMETERS" value="3100" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.polimi.ingsw.server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -202,8 +216,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientMain" />
         <item itemvalue="Application.ServerMain" />
+        <item itemvalue="Application.ClientMain" />
         <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
         <item itemvalue="JUnit.ResourceRequirementsTest.CLIDrawingTest" />
         <item itemvalue="JUnit.ColorRequirementsTest.CLIDrawingTest" />
@@ -425,13 +439,8 @@
       <workItem from="1625121563575" duration="2527000" />
       <workItem from="1625139380436" duration="120000" />
       <workItem from="1625141599213" duration="5104000" />
-    </task>
-    <task id="LOCAL-00034" summary="UseProduction additional condition, Client update and Error management">
-      <created>1621332103205</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1621332103205</updated>
+      <workItem from="1625148299188" duration="68000" />
+      <workItem from="1625164348779" duration="5301000" />
     </task>
     <task id="LOCAL-00035" summary="faithmessage update&#10;&#10;upload all images to use&#10;&#10;modified the controller and reconnecting">
       <created>1621516192768</created>
@@ -769,7 +778,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625147193260</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Javadoc update, refactor">
+      <created>1625148357736</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1625148357736</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -789,7 +805,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update" />
     <MESSAGE value="update exhcange leaderCard buff" />
     <MESSAGE value="Messages updates, fixes with sync" />
     <MESSAGE value="Client fix" />
@@ -814,7 +829,8 @@
     <MESSAGE value="FullView fix" />
     <MESSAGE value="marbles images and local controller manage fix" />
     <MESSAGE value="starting phase disconnection fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="starting phase disconnection fixes" />
+    <MESSAGE value="Javadoc update, refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Javadoc update, refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
