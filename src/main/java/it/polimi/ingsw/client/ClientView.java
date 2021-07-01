@@ -21,6 +21,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
     private final Object lock = new Object();
     private boolean updated = true;
     private boolean faithUpdateReceived = false;
+    private boolean setupDone = false;
 
 
     public ClientView(String ip, int port, UserInterface ui) {
@@ -36,6 +37,31 @@ public class ClientView extends View implements Observer<ServerMessage>{
     public void sendLogin(String nickname){
         updated=false;
         socket.sendMessage(new LoginMessage(nickname));
+    }
+
+    /**
+     * called if this is the first player, asks the game size
+     * @param maxNum maximum number of players
+     */
+    public void numOfPlayers(int maxNum){
+        synchronized (lock) {
+            while (!updated) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            getUiType().playersNumber(maxNum);
+        }
+    }
+
+    /**
+     * called to send the selected game size to the server
+     * @param num number of players
+     */
+    public void sendNumOfPlayers(int num){
+        socket.sendMessage(new PlayerNumberReply(num));
     }
 
     /**
@@ -101,30 +127,6 @@ public class ClientView extends View implements Observer<ServerMessage>{
         }
     }
 
-    /**
-     * called if this is the first player, asks the game size
-     * @param maxNum maximum number of players
-     */
-    public void numOfPlayers(int maxNum){
-        synchronized (lock) {
-            while (!updated) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            getUiType().playersNumber(maxNum);
-        }
-    }
-
-    /**
-     * called to send the selected game size to the server
-     * @param num number of players
-     */
-    public void sendNumOfPlayers(int num){
-        socket.sendMessage(new PlayerNumberReply(num));
-    }
 
     /**
      * called to make the player chose the starting leadercards
@@ -189,7 +191,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      */
     public void pickAction(ArrayList<Actions> possibleActions){
         synchronized (lock){
-            while(!updated) {
+            while(!updated && !setupDone) {
                 try {
                     lock.wait();
                 } catch (InterruptedException e) {
@@ -341,6 +343,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
                 }
             }
             super.setupGameUpdate(leaderCards, resources, faithTracks);
+            setupDone=true;
             updated=true;
             lock.notifyAll();
         }
@@ -417,6 +420,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
                                    Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand,
                                    Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated, boolean gameStarted){
         synchronized (lock) {
+            setupDone=gameStarted;
             setNickname(username);
             while(getGameboard().getPlayers().isEmpty()) {
                 try {
