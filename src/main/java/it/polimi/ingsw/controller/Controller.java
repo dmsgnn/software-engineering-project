@@ -418,6 +418,9 @@ public class Controller implements Observer<ClientMessage> {
      * starts the first player's turn and sends him the possible actions to perform
      */
     public void begin(){
+        if(playersDisconnected.size() == playersNumber) {
+            return;
+        }
         if (beginCounter + playersDisconnected.size() == playersNumber){
             gameStarted = true;
             for (ServerView serverView : serverViews) {
@@ -1068,6 +1071,9 @@ public class Controller implements Observer<ClientMessage> {
                 endTurn();
             }
         }
+        if(!isGameStarted()) {
+            begin();
+        }
 
         // disconnection message
         for (String s : playersDisconnected) System.out.println("Disconnected player" + s);
@@ -1138,7 +1144,7 @@ public class Controller implements Observer<ClientMessage> {
         serverView.sendDevCardGrid(getDevCardGrid());
         serverView.sendMarket(getMarket(),getFreeMarble());
         Map<String, Map<Integer, Boolean>> tempo = new HashMap<>(vaticanReportActivated);
-        boolean gameStarted = isGameStarted();
+        boolean gameStarted = playerStatus.get(username).get(0) && playerStatus.get(username).get(1);
         serverView.sendReconnectionMessage(username, getDevCardSlots(), getFaithPositions(), getLeaderCardsPlayed(),
                     getLeaderCards(username), getStrongbox(), getWarehouse(), cardInHand, playerConnected, tempo,gameStarted);
 

@@ -19,8 +19,6 @@ public class ClientMain {
                 localGame = true;
             else if (arg.matches("^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\\.(?!$)|$)){4}$"))
                 ip = arg;
-            else if (arg.contains("ngrok"))
-                ip = arg;
             else if (arg.matches("(6553[0-5]|655[0-2][0-9]|65[0-4][0-9][0-9]|6[0-4][0-9][0-9][0-9]|[1-5](\\d){4}|[1-9](\\d){0,3})"))
                 port = Integer.parseInt(arg);
         }
@@ -31,8 +29,10 @@ public class ClientMain {
         if (port <= 1024)
             port = 4000;
 
-        System.out.println("ip: " + ip);
-        System.out.println("port number: " + port);
+        if(!localGame) {
+            System.out.println("ip: " + ip);
+            System.out.println("port number: " + port);
+        }
 
         //ui initialization
         if(ui!=null && ui.equals("cli")) {

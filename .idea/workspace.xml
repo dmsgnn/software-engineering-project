@@ -4,23 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="FullView fix">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/graphics/marbles/blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/graphics/marbles/grey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/graphics/marbles/purple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/graphics/marbles/red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/graphics/marbles/white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/graphics/marbles/yellow.png" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="marbles images and local controller manage fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/MainBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/LocalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/LocalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/graphics/Marble/blue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/graphics/Marble/grey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/graphics/Marble/purple.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/graphics/Marble/red.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/graphics/Marble/white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/graphics/Marble/yellow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -120,11 +109,11 @@
       <recent name="it.polimi.ingsw.model.actions" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.it.polimi.ingsw.model in AM5">
-    <configuration name="ClientMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.ClientMain">
+    <configuration name="ClientMain" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.client.ClientMain" />
       <module name="AM5" />
-      <option name="PROGRAM_PARAMETERS" value="local cli" />
+      <option name="PROGRAM_PARAMETERS" value=" cli 3100" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.polimi.ingsw.client.*" />
@@ -138,6 +127,7 @@
     <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerMain" />
       <module name="AM5" />
+      <option name="PROGRAM_PARAMETERS" value="3100" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.polimi.ingsw.server.*" />
@@ -229,9 +219,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
         <item itemvalue="Application.ClientMain" />
         <item itemvalue="Application.ServerMain" />
+        <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
         <item itemvalue="JUnit.ResourceRequirementsTest.CLIDrawingTest" />
         <item itemvalue="JUnit.ColorRequirementsTest.CLIDrawingTest" />
       </list>
@@ -449,14 +439,9 @@
       <workItem from="1625078225147" duration="1152000" />
       <workItem from="1625086606788" duration="34000" />
       <workItem from="1625119033463" duration="392000" />
-      <workItem from="1625121563575" duration="2263000" />
-    </task>
-    <task id="LOCAL-00032" summary="missing class updates from last commit">
-      <created>1620984626148</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1620984626148</updated>
+      <workItem from="1625121563575" duration="2527000" />
+      <workItem from="1625139380436" duration="120000" />
+      <workItem from="1625141599213" duration="4570000" />
     </task>
     <task id="LOCAL-00033" summary="update FaithMessage">
       <created>1621004332338</created>
@@ -794,7 +779,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625051810575</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="marbles images and local controller manage fix">
+      <created>1625124379214</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1625124379215</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -814,7 +806,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix gui" />
     <MESSAGE value="Update endGame message" />
     <MESSAGE value="Reconnection leadercard fix, CLI fix, leadercard depot buff representation update" />
     <MESSAGE value="update exhcange leaderCard buff" />
@@ -839,7 +830,8 @@
     <MESSAGE value="Fullview leader depots" />
     <MESSAGE value="Reconnection Update fix, FullView fix &amp; update" />
     <MESSAGE value="FullView fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="FullView fix" />
+    <MESSAGE value="marbles images and local controller manage fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="marbles images and local controller manage fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -911,7 +903,7 @@
     <SUITE FILE_PATH="coverage/AM5$DevelopmentCardTest_productionPowerCLITest.ic" NAME="DevelopmentCardTest.productionPowerCLITest Coverage Results" MODIFIED="1624885112463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.model.gameboard.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_model_in_AM5.ic" NAME="it.polimi.ingsw.model in AM5 Coverage Results" MODIFIED="1624957197101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_model_in_AM5.ic" NAME="it.polimi.ingsw.model in AM5 Coverage Results" MODIFIED="1625124332162" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/AM5$ActionsTest_payResources0AndLessThan0Selection.ic" NAME="ActionsTest.payResources0AndLessThan0Selection Coverage Results" MODIFIED="1624870373274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
