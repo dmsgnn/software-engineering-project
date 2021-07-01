@@ -413,14 +413,14 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param cardsInHand number of cards in each player's hand
      * @param playersConnected connection status of each player
      * @param vaticanReportActivated vatican report status for each player
-     * @param gameStarted true if the game already started, false if the player is reconnecting during the leadercard and starting resources selection
+     * @param setupDone true if the player has already selected the starting resources and leader cards, false otherwise
      */
     public void reconnectionUpdate(String username, Map<String, Map<Integer, ArrayList<String>>> devCardSlots, Map<String, Integer> faithPositions, Map<String,
             ArrayList<String>> leaderCardsPlayed, ArrayList<String> leaderCards, Map<String, Map<Resource, Integer>> strongbox,
                                    Map<String, Map<Integer, ArrayList<Resource>>> warehouse, Map<String, Integer> cardsInHand,
-                                   Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated, boolean gameStarted){
+                                   Map<String, Boolean> playersConnected, Map<String, Map<Integer, Boolean>> vaticanReportActivated, boolean setupDone){
         synchronized (lock) {
-            setupDone=gameStarted;
+            this.setupDone = setupDone;
             setNickname(username);
             while(getGameboard().getPlayers().isEmpty()) {
                 try {
@@ -458,7 +458,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
             for (String nickname : vaticanReportActivated.keySet()){
                 getGameboard().getOnePlayerBoard(nickname).setVaticanReports(vaticanReportActivated.get(nickname));
             }
-            if(gameStarted){
+            if(setupDone){
                 getUiType().updateBoard("Reconnected");
                 getUiType().endTurn();
                 updated=true;

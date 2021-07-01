@@ -28,7 +28,6 @@ import it.polimi.ingsw.server.ServerView;
 
 import javax.naming.InsufficientResourcesException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class Controller implements Observer<ClientMessage> {
@@ -1144,9 +1143,9 @@ public class Controller implements Observer<ClientMessage> {
         serverView.sendDevCardGrid(getDevCardGrid());
         serverView.sendMarket(getMarket(),getFreeMarble());
         Map<String, Map<Integer, Boolean>> tempo = new HashMap<>(vaticanReportActivated);
-        boolean gameStarted = playerStatus.get(username).get(0) && playerStatus.get(username).get(1);
+        boolean setupDone = playerStatus.get(username).get(0) && playerStatus.get(username).get(1);
         serverView.sendReconnectionMessage(username, getDevCardSlots(), getFaithPositions(), getLeaderCardsPlayed(),
-                    getLeaderCards(username), getStrongbox(), getWarehouse(), cardInHand, playerConnected, tempo,gameStarted);
+                    getLeaderCards(username), getStrongbox(), getWarehouse(), cardInHand, playerConnected, tempo, setupDone);
 
 
         // starting leader cards not yet chosen
