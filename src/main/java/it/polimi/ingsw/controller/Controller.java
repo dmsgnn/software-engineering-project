@@ -229,6 +229,11 @@ public class Controller implements Observer<ClientMessage> {
         }
     }
 
+
+
+
+
+
     /**
      * sends the starting resources to the player according to his turn
      * @param username of the current player
@@ -236,8 +241,8 @@ public class Controller implements Observer<ClientMessage> {
     public synchronized void sendStartingResource(String username) {
         int i;
         int j=0;
-        int number = game.getPlayersNumber();
-        for (i=0; i< number;i++){
+
+        for (i=0; i< playersNumber;i++){
             String name = game.getPlayers(i).getNickname();
             if (name.equals(username) ) break;
         }
@@ -323,8 +328,9 @@ public class Controller implements Observer<ClientMessage> {
         switch (i){
             case 0: {
                 if (size!=0){
-                    sendStartingResource(username);
                     Objects.requireNonNull(serverView).sendError(Error.STARTING_RESOURCES);
+                    int number = startingResources.get(username);
+                    serverView.startingResourceMessage(number);
                 }
                 else{
                     manageStartingResource(resources,username);
@@ -337,8 +343,9 @@ public class Controller implements Observer<ClientMessage> {
             case 1:
             case 2: {
                 if (((resources.get(0).size())+(resources.get(1).size())+(resources.get(2).size()))!=1) {
-                    sendStartingResource(username);
                     Objects.requireNonNull(serverView).sendError(Error.STARTING_RESOURCES);
+                    int number = startingResources.get(username);
+                    serverView.startingResourceMessage(number);
                 }
                 else{
                     manageStartingResource(resources,username);
@@ -351,8 +358,9 @@ public class Controller implements Observer<ClientMessage> {
             }
             case 3:{
                 if ((resources.get(0).size())+(resources.get(1).size())+(resources.get(2).size())!=2) {
-                    sendStartingResource(username);
                     Objects.requireNonNull(serverView).sendError(Error.STARTING_RESOURCES);
+                    int number = startingResources.get(username);
+                    serverView.startingResourceMessage(number);
                 }
                 else{
                     manageStartingResource(resources,username);
@@ -364,7 +372,8 @@ public class Controller implements Observer<ClientMessage> {
             }
             default: {
                 Objects.requireNonNull(serverView).sendError(Error.STARTING_RESOURCES);
-                sendStartingResource(username);
+                int number = startingResources.get(username);
+                serverView.startingResourceMessage(number);
                 break;
             }
 
@@ -391,8 +400,6 @@ public class Controller implements Observer<ClientMessage> {
             map.put(0,true);
             map.put(1,true);
             playerStatus.put(username, map);
-            System.out.println(playerStatus);
-
             beginCounter++;
             if(!isGameStarted()) {
                 begin();
@@ -406,8 +413,9 @@ public class Controller implements Observer<ClientMessage> {
             // MANAGE ERROR
             ServerView serverView= getServerView(username);
             assert serverView != null;
-            serverView.sendError(Error.STARTING_MANAGE_RESOURCES);
-            sendStartingResource(username);
+            serverView.sendError(Error.STARTING_RESOURCES);
+            int number = startingResources.get(username);
+            serverView.startingResourceMessage(number);
         }
 
     }

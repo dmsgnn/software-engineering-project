@@ -161,6 +161,7 @@ public class ClientView extends View implements Observer<ServerMessage>{
      * @param amount num of resources
      */
     public void startingResources(int amount){
+        System.out.println("sono dentro  " +amount);
         synchronized (lock) {
             getUiType().startingResources(amount);
         }

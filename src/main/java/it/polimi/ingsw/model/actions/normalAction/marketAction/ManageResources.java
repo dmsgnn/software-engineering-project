@@ -80,6 +80,7 @@ public class  ManageResources extends Actions {
                     }
                 }
 
+
                 //if the capacity is wrong
                 if (playerBoard.getWarehouse().getDepots().get(i).getCapacity() < resources.get(i).size()) return false;
 
@@ -104,7 +105,21 @@ public class  ManageResources extends Actions {
             }
 
         }
-        for (int i = 0; i < resources.size(); i++) {
+        else {
+
+            if (resources.size()>0 && resources.get(1).size() != 0 && resources.get(2).size() != 0) {
+                if (resources.get(1).get(0).equals(resources.get(2).get(0))) return false;
+            }
+            if (resources.size()>0 && resources.get(1).size()== 2) {
+                if ( !resources.get(1).get(0).equals(resources.get(1).get(1))) return false;
+            }
+            if (resources.size()>0 && resources.get(2).size()== 2) {
+                if (!resources.get(2).get(0).equals(resources.get(2).get(1))) return false;
+            }
+        }
+
+
+            for (int i = 0; i < resources.size(); i++) {
             //if the depots have the same resources
             if (i != 0) {
                 if (resources.get(0).size() != 0 && resources.get(i).size() != 0) {
