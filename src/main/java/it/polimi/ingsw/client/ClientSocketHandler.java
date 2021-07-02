@@ -41,8 +41,6 @@ public class ClientSocketHandler extends Observable<ServerMessage> implements Ru
      */
     @Override
     public void run() {
-        System.out.println("running...");
-
         try {
             while (true) {
                 ServerMessage message = (ServerMessage) in.readObject();

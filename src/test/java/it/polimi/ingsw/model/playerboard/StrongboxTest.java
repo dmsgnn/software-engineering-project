@@ -24,15 +24,15 @@ public class StrongboxTest {
 
 
     @Test
-    @DisplayName("Controllo aggiunta risorse")
+    @DisplayName("Added resource check")
     public void addResourceTest(){
         strongbox.addResource(Resource.SHIELDS, 5);
-        assertEquals(strongbox.getValue(Resource.SHIELDS), 5, "Valore errato");
+        assertEquals(strongbox.getValue(Resource.SHIELDS), 5);
     }
 
 
     @Test
-    @DisplayName("Controllo rimozione risorse")
+    @DisplayName("resource remove check")
     public void RemoveResourceTest(){
         int min=0, a, max=0, current=0;
         for (a=0; a< 1001; a++ ) {
@@ -61,18 +61,16 @@ public class StrongboxTest {
             }
             strongbox.addResource(Resource.STONES, max);
 
-            //assertThrows(InsufficientResourcesException.class, () -> strongbox.removeResource(Resource.STONES, finalMin));
-
             try {
                 strongbox.removeResource(Resource.STONES, min);
             } catch (InsufficientResourcesException e) {
                 assertTrue(true);
             }
 
-            assertEquals(current, strongbox.getValue(Resource.SHIELDS), "valore errato");
-            assertEquals(current, strongbox.getValue(Resource.COINS), "valore errato");
-            assertEquals(current, strongbox.getValue(Resource.SERVANTS), "valore errato");
-            assertEquals(current, strongbox.getValue(Resource.STONES), "valore errato");
+            assertEquals(current, strongbox.getValue(Resource.SHIELDS));
+            assertEquals(current, strongbox.getValue(Resource.COINS));
+            assertEquals(current, strongbox.getValue(Resource.SERVANTS));
+            assertEquals(current, strongbox.getValue(Resource.STONES));
         }
 
     }

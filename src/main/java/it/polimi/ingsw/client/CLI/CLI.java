@@ -61,21 +61,19 @@ public class CLI implements UserInterface {
      */
     @Override
     public void begin() {
-        System.out.println("\nWelcome to..." + "\n");
-        System.out.println("8b   d8            w                             d8b ");
-        System.out.println("8YbmdP8 .d88 d88b w8ww .d88b 8d8b d88b    .d8b.  8'  ");
-        System.out.println("8  \"  8 8  8 `Yb.  8   8.dP' 8P   `Yb.    8' .8 w8ww ");
-        System.out.println("8     8 `Y88 Y88P  Y8P `Y88P 8    Y88P    `Y8P'  8   \n");
-        System.out.println("                      w                                ");
-        System.out.println("8d8b .d88b 8d8b. .d88 w d88b d88b .d88 8d8b. .d8b .d88b");
-        System.out.println("8P   8.dP' 8P Y8 8  8 8 `Yb. `Yb. 8  8 8P Y8 8    8.dP'");
-        System.out.println("8    `Y88P 8   8 `Y88 8 Y88P Y88P `Y88 8   8 `Y8P `Y88P");
+        System.out.println("\nWelcome to..." + "\n\n");
+        System.out.println("@@@@@@@@@@   @@@@@@   @@@@@@ @@@@@@@ @@@@@@@@ @@@@@@@   @@@@@@     @@@@@@  @@@@@@@@");
+        System.out.println("@@! @@! @@! @@!  @@@ !@@       @!!   @@!      @@!  @@@ !@@        @@!  @@@ @@!     ");
+        System.out.println("@!! !!@ @!@ @!@!@!@!  !@@!!    @!!   @!!!:!   @!@!!@!   !@@!!     @!@  !@! @!!!:!  ");
+        System.out.println("!!:     !!: !!:  !!!     !:!   !!:   !!:      !!: :!!      !:!    !!:  !!! !!:     ");
+        System.out.println(" :      :    :   : : ::.: :     :    : :: ::   :   : : ::.: :      : :. :   :      \n");
+        System.out.println("@@@@@@@  @@@@@@@@ @@@  @@@  @@@@@@  @@@  @@@@@@  @@@@@@  @@@@@@  @@@  @@@  @@@@@@@ @@@@@@@@");
+        System.out.println("@@!  @@@ @@!      @@!@!@@@ @@!  @@@ @@! !@@     !@@     @@!  @@@ @@!@!@@@ !@@      @@!     ");
+        System.out.println("@!@!!@!  @!!!:!   @!@@!!@! @!@!@!@! !!@  !@@!!   !@@!!  @!@!@!@! @!@@!!@! !@!      @!!!:!   ");
+        System.out.println("!!: :!!  !!:      !!:  !!! !!:  !!! !!:     !:!     !:! !!:  !!! !!:  !!! :!!      !!:      ");
+        System.out.println(" :   : : : :: ::  ::    :   :   : : :   ::.: :  ::.: :   :   : : ::    :   :: :: : : :: ::  ");
+
         clientView.startConnection();
-        try {
-            TimeUnit.MILLISECONDS.sleep(20);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         clientView.login(); // the login method below could directly be called
     }
 

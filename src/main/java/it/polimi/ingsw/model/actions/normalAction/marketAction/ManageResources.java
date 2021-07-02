@@ -51,6 +51,7 @@ public class  ManageResources extends Actions {
      */
     @Override
     public boolean validAction(PlayerBoard playerBoard) {
+        
         if (!initial) {
             Map<Resource, Integer> totalRes = new HashMap<>();
             Map<Resource,Integer> stored ;
@@ -70,6 +71,8 @@ public class  ManageResources extends Actions {
                             return false;
                     }
                 }
+
+
 
                 //if the depots have the same resources
                 if (i != 0) {

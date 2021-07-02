@@ -11,7 +11,7 @@ The final result completely covers the rules defined by the game and allows us t
 
 ## Documentation
 The following documentation includes documents made for the design of the problem.
-Ú
+
 ### UML
 The following class diagrams represent, respectively, the initial model according to which the game should have been implemented, and the final implementation diagrams.
 - [Initial UML](deliveries/UML/Initial_UML)
@@ -40,7 +40,7 @@ You can find Test Coverage files in [Test Coverage](/deliveries/Coverage).
 
 |__Class__|__Method__|__Line__|__Branch__|
 |---------|---------|---------|---------|
-|90%|90%|90%|90%|
+|100%|88%|94%|81%|
 
 ### Jars
 The following jars allow the launch of the game according to the features described in the introduction. The features built according to the project specification are listed in the next section while the details on how to launch them will be defined in the section called __How to run JAR__.\
@@ -59,6 +59,10 @@ The following jars allow the launch of the game according to the features descri
 - Multiple games
 - Resilience to disconnections
 - Local game
+
+### Exam demo cheats
+If you will choose one of these nicknames: `admin1`, `admin2`, `admin3`, `admin4` you will start with an amount of fifty for every resources type in the strongbox.
+
 
 
 <!--

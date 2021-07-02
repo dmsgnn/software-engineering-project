@@ -83,7 +83,6 @@ public class PlayerBoard {
     }
 
     public HashMap<Integer, HashMap<Color, Integer>> getColorRequirements() {
-        System.out.println(colorRequirements);
         return colorRequirements;
     }
 
