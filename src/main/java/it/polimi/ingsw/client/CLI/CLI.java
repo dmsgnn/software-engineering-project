@@ -666,14 +666,13 @@ public class CLI implements UserInterface {
 
 
         int picked = 0;
-        yesOrNo="no";
         do{
             System.out.print("Do you want to use the your board production? (type 'yes' or 'no'): ");
-            input = scanner.nextLine();
-            if(input.matches("(yes)")){
+            yesOrNo = scanner.nextLine();
+            if(yesOrNo.matches("(yes)")){
                 yesOrNo = "yes";
                 do {
-                    System.out.print((picked<2) ? "Choose the resources you want to pay ": "Choose what resource you want to gain ");
+                    System.out.print((picked<2) ? "Choose the resources you want to pay: ": "Choose what resource you want to gain: ");
                     input = scanner.nextLine().toUpperCase();
                     try {
                         Resource resource = Resource.valueOf(input);
@@ -684,7 +683,7 @@ public class CLI implements UserInterface {
                     }
                 } while(picked < 3);
             }
-            else if(!input.matches("(yes)|(no)")){
+            else if(!yesOrNo.matches("(yes)|(no)")){
                 System.out.println("WRONG INPUT, type 'yes' or 'no'");
             }
         }while (!yesOrNo.matches("(yes)|(no)"));
