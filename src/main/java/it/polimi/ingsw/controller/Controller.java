@@ -64,7 +64,7 @@ public class Controller implements Observer<ClientMessage> {
     private boolean gameFinished;
     private final Map<String, Map<Integer,Boolean>> vaticanReportActivated;
     private final Map<String,Boolean> resourceManageOk;
-
+    //STARTING MANAGE RESOURCES
     private boolean validStartingManage;
 
 
@@ -778,12 +778,7 @@ public class Controller implements Observer<ClientMessage> {
             ManageResources manageResources = new ManageResources(resources, newResources.get(username), discRes, false,faithTrack);
             try {
                 //DO ACTION
-                if (game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size()==4) {
-                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getResource());
-                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getOccupied());
-                }
                 game.doAction(manageResources);
-                System.out.println("action done");
                 if (game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size()==4) {
                     System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getResource());
                     System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getOccupied());
@@ -995,12 +990,11 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 faithPositions.put(username,position);
             }
-
         }
 
         for (int i = 0; i < playersNumber; i++) {
             String name = game.getPlayers(i).getNickname();
-            int position = game.getPlayers(i).getVictoryPoints();
+            int position = game.getPlayers(i).getFaithTrack().getPosition();
             faithPositions.put(name,position);
         }
 

@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Client sync update">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Starting resources fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/StartingResourcesScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/gui/StartingResourcesScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/marketAction/ManageResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/actions/normalAction/marketAction/ManageResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/faithTrack/FaithTrack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/playerboard/faithTrack/FaithTrack.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -216,8 +214,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerMain" />
         <item itemvalue="Application.ClientMain" />
+        <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
         <item itemvalue="JUnit.ResourceRequirementsTest.CLIDrawingTest" />
         <item itemvalue="JUnit.ColorRequirementsTest.CLIDrawingTest" />
@@ -442,13 +440,6 @@
       <workItem from="1625148299188" duration="68000" />
       <workItem from="1625164348779" duration="5301000" />
       <workItem from="1625173280655" duration="7635000" />
-    </task>
-    <task id="LOCAL-00038" summary="fix">
-      <created>1621596269013</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1621596269013</updated>
     </task>
     <task id="LOCAL-00039" summary="some fixes and gui update">
       <created>1621953551763</created>
@@ -786,7 +777,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625176617714</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="Starting resources fix">
+      <created>1625209304731</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1625209304731</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -806,7 +804,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Payment using leader depots GUI" />
     <MESSAGE value="CLI colors updates, play again removed" />
     <MESSAGE value="Client view Disconnection and reconnection messages to other players synchronization, CLI graphic updates" />
     <MESSAGE value="JavaDoc" />
@@ -831,7 +828,8 @@
     <MESSAGE value="Controller fix and test update" />
     <MESSAGE value="Controller fix" />
     <MESSAGE value="ManageResources bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="ManageResources bug fix" />
+    <MESSAGE value="Starting resources fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Starting resources fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
