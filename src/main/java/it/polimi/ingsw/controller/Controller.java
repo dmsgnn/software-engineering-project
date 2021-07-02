@@ -193,6 +193,7 @@ public class Controller implements Observer<ClientMessage> {
      * assign the starting cards to the player
      */
     public synchronized void pickStartingLeaderCards(ArrayList<String> leaderId, String username){
+        Player active = game.getActivePlayer();
         ArrayList<LeaderCard> trueCards = new ArrayList<>();
         int counter=0;
         ServerView serverView1= getServerView(username);
@@ -229,6 +230,9 @@ public class Controller implements Observer<ClientMessage> {
                 id.add(i,startingLeaderCards.get(username).get(i).getId());
             }
             Objects.requireNonNull(serverView1).sendLeaderCards(id);
+        }
+        if(isGameStarted()){
+            game.setActivePlayer(active);
         }
     }
 
@@ -316,6 +320,7 @@ public class Controller implements Observer<ClientMessage> {
         int i;
         int size=0;
         ServerView serverView = getServerView(username);
+        Player active = game.getActivePlayer();
         for (i=0;i<game.getPlayersNumber();i++) {
             if (game.getPlayers(i).getNickname().equals(username)) {
                 Player player = game.getPlayers(i);
@@ -378,6 +383,9 @@ public class Controller implements Observer<ClientMessage> {
                 break;
             }
 
+        }
+        if(isGameStarted()) {
+            game.setActivePlayer(active);
         }
     }
 
