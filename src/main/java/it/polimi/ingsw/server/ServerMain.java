@@ -48,7 +48,7 @@ public class ServerMain {
             try{
                 serverSocket = new ServerSocket(portNumber);
             } catch (IOException e) {
-                //System.out.println("\nPort already in use!\n");
+                System.out.println("\nPort already in use!\n");
                 exit(0);
                 //e.printStackTrace();
             }
@@ -136,7 +136,7 @@ public class ServerMain {
             lobbies.add(lob);
             connection.sendMessage(new UsernameResponse(true, username));
             connection.sendMessage(new PlayerNumberRequest());
-            System.out.println(username+" creo la prima lobby");
+            System.out.println(username+" created first lobby");
         }
         //checks if the last created lobby has a free place
         else if (!lobbies.get(lobbies.size()-1).isFull()){
@@ -146,7 +146,7 @@ public class ServerMain {
             if(lobbies.get(lobbies.size()-1).isFull()) {
                 lobbies.get(lobbies.size()-1).startGame();
             }
-            System.out.println(username + " l'ultima lobby non è piena");
+            System.out.println(username + " joined an existing lobby");
 
         }
         // if all lobbies are full a new one is created
@@ -158,7 +158,7 @@ public class ServerMain {
             lobbies.add(lob);
             connection.sendMessage(new UsernameResponse(true, username));
             connection.sendMessage(new PlayerNumberRequest());
-            System.out.println(username+" l'ultima lobby era piena e ne creo una nuova");
+            System.out.println("last lobby was full, " +username+ " created a new lobby");
 
         }
     }

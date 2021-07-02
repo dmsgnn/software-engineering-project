@@ -110,14 +110,12 @@ public class Controller implements Observer<ClientMessage> {
         temp2.put(0,false);
         temp2.put(1,false);
         playerStatus = new HashMap<>();
-        System.out.println(playerStatus);
         this.currentActivePlayer=0;
         gameFinished = false;
         resourceManageOk = new HashMap<>();
 
         for (int i = 0; i < playersNumber; i++) {
             String name = game.getPlayers(i).getNickname();
-            System.out.println("player number " + (i+1) + ":" + name);
             playerStatus.put(name,temp2);
             startingResources.put(name,0);
             vaticanReportActivated.put(name,tempo);
@@ -218,8 +216,6 @@ public class Controller implements Observer<ClientMessage> {
             map.put(0,true);
             map.put(1,false);
             playerStatus.put(username, map);
-            System.out.println(playerStatus);
-
         }    catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             assert serverView1 != null;
             serverView1.sendError(Error.STARTING_LEADER_CARD);
@@ -274,7 +270,6 @@ public class Controller implements Observer<ClientMessage> {
                 break;
             }
             default:{
-                System.out.println("error");
                 break;
             }
         }
@@ -296,7 +291,6 @@ public class Controller implements Observer<ClientMessage> {
                 String name = game.getPlayers(i).getNickname();
                 ServerView serverView = getServerView(name);
                 assert serverView != null;
-                System.out.println(serverView.getUsername());
                 int number = startingResources.get(name);
                 if (!resourceManageOk.get(name)) {
                     Objects.requireNonNull(serverView).startingResourceMessage(number);
@@ -547,7 +541,6 @@ public class Controller implements Observer<ClientMessage> {
                 finalScore(lorenzo);
             }
             else {
-                System.out.println("entrato nel final score");
                 finalScore(false);
             }
         }
@@ -779,10 +772,6 @@ public class Controller implements Observer<ClientMessage> {
             try {
                 //DO ACTION
                 game.doAction(manageResources);
-                if (game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size()==4) {
-                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getResource());
-                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getOccupied());
-                }
                 if (discRes!=null) {
                     int size = 0;
                     for (Resource resource : Resource.values()) {
@@ -858,9 +847,6 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 Map<Integer,ArrayList<Resource>> warehouse = new HashMap<>(getWarehouse().get(username));
                 Map<Resource,Integer> strongbox =  new HashMap<>(getStrongbox().get(username));
-                for (Resource resource: Resource.values()){
-                    System.out.println( resource.toString() + strongbox.get(resource));
-                }
                 for (ServerView serverView: serverViews){
                     serverView.sendBuyDevelopmentCardUpdate(username,id,slotNumber,newId,color,level,warehouse,strongbox);
                 }
@@ -1046,7 +1032,6 @@ public class Controller implements Observer<ClientMessage> {
                     stream().
                     sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).
                     collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-            System.out.println(sortedMapReverseOrder);
             for (ServerView serverView: serverViews){
                 serverView.finalScoreMessage(sortedMapReverseOrder,lorenzo);
             }
@@ -1079,7 +1064,6 @@ public class Controller implements Observer<ClientMessage> {
             if (name.equals(username)) {
                 currentAction.put(currentActivePlayer, null);
                 increaseActivePlayer(1);
-                System.out.println(currentActivePlayer);
             }
             if(resourceCounter+playersDisconnected.size()==playersNumber)
                 sendStartingCounter();
@@ -1093,8 +1077,6 @@ public class Controller implements Observer<ClientMessage> {
             begin();
         }
 
-        // disconnection message
-        for (String s : playersDisconnected) System.out.println("Disconnected player" + s);
     }
 
     /**
@@ -1192,9 +1174,6 @@ public class Controller implements Observer<ClientMessage> {
             }
             startTurn();
         }
-        //reconnection message
-        System.out.println(username + "reconnected from controller");
-        for (String s : playersDisconnected) System.out.println(s);
     }
 
 

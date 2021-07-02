@@ -97,13 +97,11 @@ public class LocalController {
         temp2.put(0,false);
         temp2.put(1,false);
         playerStatus = new HashMap<>();
-        System.out.println(playerStatus);
         this.currentActivePlayer=0;
         gameFinished = false;
 
         for (int i = 0; i < playersNumber; i++) {
             String name = game.getPlayers(i).getNickname();
-            System.out.println("player number " + (i+1) + ":" + name);
             playerStatus.put(name,temp2);
             startingResources.put(name,0);
             vaticanReportActivated.put(name,tempo);
@@ -133,6 +131,12 @@ public class LocalController {
             ArrayList<LeaderCard> leaderCards = game.getActivePlayer().take4cards();
             ArrayList<String> leaderId = new ArrayList<>();
             startingLeaderCards.put(game.getActivePlayer().getNickname(),leaderCards);
+            String name = game.getActivePlayer().getNickname();
+            if (name.equals("admin1")||name.equals("admin2")||name.equals("admin3")||name.equals("admin4")){
+                for (Resource resource: Resource.values()) {
+                    game.getActivePlayer().getPlayerBoard().getStrongbox().addResource(resource,50);
+                }
+            }
             for (LeaderCard l: leaderCards){
                 leaderId.add(l.getId());
             }
@@ -163,7 +167,6 @@ public class LocalController {
             map.put(0,true);
             map.put(1,true);
             playerStatus.put(username, map);
-            System.out.println(playerStatus);
             ArrayList<String> leaderID= new ArrayList<>();
             for (int i=0; i<selectedCards.get(game.getActivePlayer().getNickname()).size();i++) {
                 leaderID.add(i, selectedCards.get(game.getActivePlayer().getNickname()).get(i).getId());
@@ -466,15 +469,7 @@ public class LocalController {
             ManageResources manageResources = new ManageResources(resources, newResources.get(username), discRes, false,faithTrack);
             try {
                 //DO ACTION
-                if (game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size()==4) {
-                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getResource());
-                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getOccupied());
-                }
                 game.doAction(manageResources);
-                if (game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().size()==4) {
-                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getResource());
-                    System.out.println(game.getActivePlayer().getPlayerBoard().getWarehouse().getDepots().get(3).getOccupied());
-                }
                 if (discRes!=null) {
                     int size = 0;
                     for (Resource resource : Resource.values()) {

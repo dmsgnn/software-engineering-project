@@ -101,7 +101,6 @@ public class Lobby {
         }
         //connections.stream().forEach(x -> x.sendEvent(new GameStartEvent()));
         controller.startGame();
-        printUsers();
 
     }
 

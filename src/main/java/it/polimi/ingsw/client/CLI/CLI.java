@@ -25,6 +25,7 @@ public class CLI implements UserInterface {
     ArrayList<DevelopmentCard> devCardList;
     private boolean myTurn;
     Scanner scanner;
+    boolean threadActive = false;
 
     public CLI(){
         scanner = new Scanner(System.in);
@@ -280,22 +281,25 @@ public class CLI implements UserInterface {
      */
     private void inputThread(){
         myTurn=false;
-        Thread t = new Thread(() -> {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        if(!threadActive) {
+            Thread t = new Thread(() -> {
+                threadActive=true;
+                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-            while (!myTurn){
-                try {
-                    if(reader.ready()){
-                        reader.readLine();
-                        System.out.println("Not your turn!");
+                while (!myTurn) {
+                    try {
+                        if (reader.ready()) {
+                            reader.readLine();
+                            System.out.println("Not your turn!");
+                        } else Thread.sleep(100);
+                    } catch (IOException | InterruptedException e) {
+                        //e.printStackTrace();
                     }
-                    else Thread.sleep(500);
-                } catch (IOException | InterruptedException e) {
-                    //e.printStackTrace();
                 }
-            }
-        });
-        t.start();
+                threadActive = false;
+            });
+            t.start();
+        }
     }
 
     /**
@@ -409,7 +413,7 @@ public class CLI implements UserInterface {
             depotCont=i+1;
             done = false;
             do{
-                System.out.println("Depot " + depotCont + " new amount: ");
+                System.out.print("Depot " + depotCont + " new amount: ");
                 try {
                     input = scanner.nextLine();
                     value = Integer.parseInt(input);
@@ -422,7 +426,7 @@ public class CLI implements UserInterface {
             if(value>0){
                 done = false;
                 do{
-                    System.out.println("Depot " + depotCont + " new resource: ");
+                    System.out.print("Depot " + depotCont + " new resource: ");
                     try {
                         input = scanner.nextLine().toUpperCase();
                         resource = Resource.valueOf(input);
@@ -533,7 +537,7 @@ public class CLI implements UserInterface {
         if(activePlayerboard.getExchangeBuffsNum() > 1){
             System.out.println("Select what resources you want for the white marbles: ");
             while(whiteMarblesNum>0){
-                System.out.println("Choose resources " + whiteMarblesNum + " times from: ");
+                System.out.print("Choose resources " + whiteMarblesNum + " times from: ");
                 for(Resource rss : activePlayerboard.getExchangeBuff())
                     System.out.print(rss + " ");
                 input = scanner.nextLine().toUpperCase();
@@ -602,7 +606,7 @@ public class CLI implements UserInterface {
 
         if(active.isProductionBuffActive()){
             do {
-                System.out.println("Do you want to use your leader cards production? (type 'yes' or 'no'): ");
+                System.out.print("Do you want to use your leader cards production? (type 'yes' or 'no'): ");
                 input = scanner.nextLine();
                 if (input.matches("(yes)")) {
                     yesOrNo = "yes";
@@ -722,7 +726,7 @@ public class CLI implements UserInterface {
 
         done = false;
         do{
-            System.out.println("Choose the level of the card that you want to buy: ");
+            System.out.print("Choose the level of the card that you want to buy: ");
             input = scanner.nextLine();
             try{
                 cardLevel = Integer.parseInt(input);
@@ -735,7 +739,7 @@ public class CLI implements UserInterface {
 
         done = false;
         do{
-            System.out.println("Select what slot you want to place your card in: ");
+            System.out.print("Select what slot you want to place your card in: ");
             input = scanner.nextLine();
             try{
                 slot = Integer.parseInt(input);
@@ -822,10 +826,9 @@ public class CLI implements UserInterface {
     /**
      * method to arrange the resources inside the warehouse
      * @param resources new resources to place
-     * @param manage true if manage resources action, false if starting resources action
      * @return new warehouse configuration
      */
-    private Map<Integer, ArrayList<Resource>> placeWarehouseRes(ArrayList<Resource> resources, boolean manage){
+    private Map<Integer, ArrayList<Resource>> placeWarehouseRes(ArrayList<Resource> resources){
         String input;
         Resource resource = null;
         boolean done;
@@ -836,16 +839,15 @@ public class CLI implements UserInterface {
             newWarehouse.put(i, new ArrayList<>());
         }
 
-        if(resources.size()==0 && !manage) return newWarehouse;
 
-        System.out.print("Choose your new warehouse configuration, you have these " + (manage? "additional resources: " : "starting resources: "));
+        System.out.print("Choose your new warehouse configuration, you have these additional resources: ");
         System.out.println(resources);
         int depotCont;
         for(int i = 0; i < 3; i++){
             depotCont=i+1;
             done = false;
             do{
-                System.out.println("Depot " + depotCont + " new amount: ");
+                System.out.print("Depot " + depotCont + " new amount: ");
                 try {
                     input = scanner.nextLine();
                     value = Integer.parseInt(input);
@@ -858,7 +860,7 @@ public class CLI implements UserInterface {
             if(value>0){
                 done = false;
                 do{
-                    System.out.println("Depot " + depotCont + " new resource: ");
+                    System.out.print("Depot " + depotCont + " new resource: ");
                     try {
                         input = scanner.nextLine().toUpperCase();
                         resource = Resource.valueOf(input);
@@ -887,7 +889,7 @@ public class CLI implements UserInterface {
         Map<Integer, ArrayList<Resource>> newWarehouse;
         ClientPlayerBoard active = gameboard.getOnePlayerBoard(clientView.getNickname());
 
-        newWarehouse = placeWarehouseRes(resources, true);
+        newWarehouse = placeWarehouseRes(resources);
 
         int depotCont;
         for(Integer i : active.getWarehouse().keySet()){
@@ -953,7 +955,7 @@ public class CLI implements UserInterface {
                     if (active.isDepotEmpty(i)) {
                         done = true;
                     } else {
-                        System.out.println("Depot " + depotCont + ": ");
+                        System.out.print("Depot " + depotCont + ": ");
                         input = scanner.nextLine();
                         try {
                             value = Integer.parseInt(input);
@@ -994,7 +996,7 @@ public class CLI implements UserInterface {
                         done=true;
                     }
                     else {
-                        System.out.println("Leaderdepot " + depotCont + ": ");
+                        System.out.print("Leaderdepot " + depotCont + ": ");
                         input = scanner.nextLine();
                         try {
                             value = Integer.parseInt(input);
@@ -1031,7 +1033,7 @@ public class CLI implements UserInterface {
                 if (active.getStrongbox().get(rss) > 0) {
                     value = -1;
                     do {
-                        System.out.println(rss + ", amount: ");
+                        System.out.print(rss + ", amount: ");
                         input = scanner.nextLine();
                         try {
                             value = Integer.parseInt(input);
