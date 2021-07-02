@@ -658,7 +658,7 @@ public class LocalController {
         }
         for (int i = 0; i < playersNumber; i++) {
             String name = game.getPlayers(i).getNickname();
-            int position = game.getPlayers(i).getVictoryPoints();
+            int position = game.getPlayers(i).getFaithTrack().getPosition();
             faithPositions.put(name,position);
         }
 
