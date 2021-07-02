@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.serverToClient;
 import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.PingReceiver;
 
+/**
+ * this class tells the client the maximum number of players in a game
+ */
 public class PlayerNumberRequest implements ServerMessage{
     private final int max;
 

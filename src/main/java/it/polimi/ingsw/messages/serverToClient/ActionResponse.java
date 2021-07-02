@@ -4,6 +4,9 @@ import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.PingReceiver;
 import it.polimi.ingsw.controller.Actions;
 
+/**
+ * this class tells the client the action to be performed
+ */
 public class ActionResponse implements ServerMessage{
     private Actions action;
 

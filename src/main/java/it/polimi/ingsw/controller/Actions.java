@@ -1,5 +1,8 @@
 package it.polimi.ingsw.controller;
 
+/**
+ * this enum contains the actions that a player can perform
+ */
 public enum Actions {
     PLAYLEADERCARD("Play a leader card"),
     DISCARDLEADERCARD("Discard a leader card"),

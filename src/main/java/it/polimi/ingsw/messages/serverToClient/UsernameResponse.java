@@ -5,9 +5,13 @@ import it.polimi.ingsw.client.PingReceiver;
 
 import java.util.ArrayList;
 
+/**
+ * this class sends to the client the chosen username
+ * and whether or not it has been set as active
+ */
 public class UsernameResponse implements ServerMessage{
-    private String nickname;
-    private boolean isFree;
+    private final String nickname;
+    private final boolean isFree;
 
     public UsernameResponse(boolean isFree, String nickname) {
         this.isFree = isFree;

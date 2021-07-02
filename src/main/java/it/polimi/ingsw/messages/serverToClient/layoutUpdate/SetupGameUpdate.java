@@ -8,6 +8,10 @@ import it.polimi.ingsw.model.Resource;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * this class sends an update to the client
+ * when the initial choice of resources and leader cards is completed
+ */
 public class SetupGameUpdate implements ServerMessage {
     private final Map<String,ArrayList<String>> leaderCards;
     private final Map<String,Map<Integer, ArrayList<Resource>>> resources;

@@ -5,6 +5,9 @@ import it.polimi.ingsw.client.PingReceiver;
 
 import java.util.Map;
 
+/**
+ * this class informs the client that the game is over and the final scores
+ */
 public class FinalScoreMessage implements ServerMessage{
     private final Map<String,Integer> finalScores;
     boolean lorenzoWin;

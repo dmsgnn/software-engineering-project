@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * this class communicates the parameters to the server to perform a manage resources
+ */
 public class ResourcesManageReply implements ClientMessage{
     private final Map<Integer,ArrayList<Resource>> resources;
     private final Map<Resource,Integer> discardRes;

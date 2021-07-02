@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.Resource;
 
 import java.util.ArrayList;
 
+/**
+ * this class sends the request for a manage resources to the client
+ */
 public class ResourcesManageRequest implements  ServerMessage{
     private ArrayList<Resource> resources;
 

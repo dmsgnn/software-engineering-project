@@ -6,6 +6,9 @@ import it.polimi.ingsw.client.PingReceiver;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * this class tells the client that there has been an increase in faith
+ */
 public class FaithTrackMessage implements ServerMessage{
     private final ArrayList<String> activatedVatican;
     private final Map<String,Integer> position;

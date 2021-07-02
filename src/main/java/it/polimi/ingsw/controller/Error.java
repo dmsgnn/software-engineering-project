@@ -1,5 +1,8 @@
 package it.polimi.ingsw.controller;
 
+/**
+ * this enum contains the possible errors that the controller reports to the client
+ */
 public enum Error {
 
     /**

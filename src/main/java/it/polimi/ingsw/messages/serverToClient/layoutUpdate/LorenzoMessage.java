@@ -4,6 +4,9 @@ import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.PingReceiver;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 
+/**
+ * this class sends an update to the client after lorenzo has drawn a token
+ */
 public class LorenzoMessage implements ServerMessage {
     private final int lorenzoPosition;
     private final String[][] newCardGrid;

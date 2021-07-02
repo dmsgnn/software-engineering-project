@@ -7,6 +7,9 @@ import it.polimi.ingsw.server.PingManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * this class communicates the player's choice to make a production
+ */
 public class UseProductionParameters implements ClientMessage{
 
     private final HashMap<Resource,Integer> warehouseDepotRes;

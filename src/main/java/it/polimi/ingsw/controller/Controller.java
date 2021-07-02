@@ -30,6 +30,11 @@ import javax.naming.InsufficientResourcesException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * this class allows the correct execution of a game,
+ * obtains information from the server about what is happening in the client
+ * and then updates and modifies the model accordingly
+ */
 public class Controller implements Observer<ClientMessage> {
 
     private final Game game;
@@ -570,7 +575,6 @@ public class Controller implements Observer<ClientMessage> {
     public void lorenzoAction(){
         String message = game.getLorenzo().drawToken();
         String[][] newGrid = getDevCardGrid();
-
         faithTrackMessage();
         LorenzoAI lorenzo = game.getLorenzo();
         serverViews.get(0).lorenzoUpdate(message, lorenzo.getTrack().getPosition(), newGrid);

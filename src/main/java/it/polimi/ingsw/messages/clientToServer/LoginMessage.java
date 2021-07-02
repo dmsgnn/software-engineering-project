@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.clientToServer;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.server.PingManager;
 
+/**
+ * this class allows the addition of a player to a game
+ */
 public class LoginMessage implements ClientMessage{
     private String username;
 

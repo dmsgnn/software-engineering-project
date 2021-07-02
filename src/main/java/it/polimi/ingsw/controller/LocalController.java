@@ -28,7 +28,11 @@ import it.polimi.ingsw.server.ServerView;
 import javax.naming.InsufficientResourcesException;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * this class allows the correct execution of a game,
+ * obtains information from the client about what is happening
+ * and then updates and modifies the model accordingly
+ */
 public class LocalController {
 
     private final LocalClientView clientView;

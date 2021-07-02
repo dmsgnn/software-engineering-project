@@ -4,6 +4,9 @@ import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.PingReceiver;
 import it.polimi.ingsw.controller.Error;
 
+/**
+ * this class tells the client that an error has been made
+ */
 public class ErrorMessage implements ServerMessage{
     private final Error error;
 

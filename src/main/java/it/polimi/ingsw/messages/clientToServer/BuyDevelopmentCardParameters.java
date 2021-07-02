@@ -7,6 +7,9 @@ import it.polimi.ingsw.server.PingManager;
 
 import java.util.HashMap;
 
+/**
+ * this class sends the parameters of a dev card to be activated to the controller
+ */
 public class BuyDevelopmentCardParameters implements ClientMessage {
     private final Color color;
     private final int level;

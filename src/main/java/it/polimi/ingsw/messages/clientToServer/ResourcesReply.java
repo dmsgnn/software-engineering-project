@@ -7,6 +7,9 @@ import it.polimi.ingsw.server.PingManager;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * this class communicates the parameters to the server to perform a starting manage resources
+ */
 public class ResourcesReply implements ClientMessage{
     private final Map<Integer,ArrayList<Resource>> resources;
     private final String username;

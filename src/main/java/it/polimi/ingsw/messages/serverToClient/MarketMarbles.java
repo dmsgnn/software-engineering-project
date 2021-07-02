@@ -4,6 +4,9 @@ import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.client.PingReceiver;
 
+/**
+ * this class sends the market to the client
+ */
 public class MarketMarbles implements ServerMessage{
     private MarbleColors[][] marbles;
     private MarbleColors freeMarble;

@@ -6,6 +6,9 @@ import it.polimi.ingsw.server.PingManager;
 
 import java.util.ArrayList;
 
+/**
+ * this class communicates the player's choice to carry out a market action
+ */
 public class RowColumnSelection implements ClientMessage {
     private final int index;
     private final boolean rowOrCol;

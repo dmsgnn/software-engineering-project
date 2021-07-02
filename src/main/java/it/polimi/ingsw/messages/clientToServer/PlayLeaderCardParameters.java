@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.clientToServer;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.server.PingManager;
 
+/**
+ * this class gives the server the parameters to be able to play a leader card
+ */
 public class PlayLeaderCardParameters implements ClientMessage {
     private final String id;
     private final String username;

@@ -6,6 +6,9 @@ import it.polimi.ingsw.controller.Actions;
 
 import java.util.ArrayList;
 
+/**
+ * this class sends the client the choice of executable actions
+ */
 public class ActionRequest implements ServerMessage{
     private ArrayList<Actions> possibleActions;
 

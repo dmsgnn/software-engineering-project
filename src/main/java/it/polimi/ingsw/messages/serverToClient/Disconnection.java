@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.serverToClient;
 import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.PingReceiver;
 
+/**
+ * this class tells the client that a player has logged out
+ */
 public class Disconnection implements ServerMessage {
     private String username;
 

@@ -5,6 +5,9 @@ import it.polimi.ingsw.client.PingReceiver;
 
 import java.util.ArrayList;
 
+/**
+ * this class communicates the initial leader cards to the client
+ */
 public class LeaderCardsRequest implements ServerMessage{
     private ArrayList<String> leaderCardsId;
 

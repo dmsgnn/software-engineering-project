@@ -5,6 +5,9 @@ import it.polimi.ingsw.server.PingManager;
 
 import java.util.ArrayList;
 
+/**
+ * this class communicates to the server the leader cards chosen by a player
+ */
 public class LeaderCardsReply implements ClientMessage{
     private final ArrayList<String> leaderCardsId;
     private final String username;

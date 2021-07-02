@@ -3,6 +3,9 @@ package it.polimi.ingsw.messages.clientToServer;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.server.PingManager;
 
+/**
+ * this class communicates the parameters related to the action "discard a leader card"
+ */
 public class DiscardLeaderCardParameters implements ClientMessage {
     private final String id;
     private final String username;

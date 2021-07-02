@@ -9,6 +9,9 @@ import it.polimi.ingsw.model.gameboard.Color;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * this class sends the client an update after a buy dev card has been made
+ */
 public class BuyDevelopmentCardUpdate implements ServerMessage {
 
     private final String nickname;

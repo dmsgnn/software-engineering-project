@@ -8,6 +8,9 @@ import it.polimi.ingsw.model.Resource;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * this class sends an update to the client when a player has reconnected to the game
+ */
 public class ReConnectionUpdate implements ServerMessage {
 
     private final String username;

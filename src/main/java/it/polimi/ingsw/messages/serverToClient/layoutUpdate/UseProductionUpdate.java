@@ -8,6 +8,9 @@ import it.polimi.ingsw.model.Resource;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * this class sends an update to the client after a use production has been made
+ */
 public class UseProductionUpdate implements ServerMessage{
 
     private final String nickname;
