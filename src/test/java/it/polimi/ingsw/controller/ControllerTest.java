@@ -28,7 +28,7 @@ public class ControllerTest {
         }
 
         @Override
-        public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report) {
+        public void faithTrackUpdate(ArrayList<String> vaticanActivated, Map<String, Integer> position, boolean report, int vaticanPosition) {
 
         }
 

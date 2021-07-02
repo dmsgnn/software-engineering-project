@@ -320,22 +320,18 @@ public abstract class View {
 
     /**
      * called to update every player faithtrack
-     * @param vaticanPosition map of the players who activated the report in the specified position
+     * @param vaticanActivated list of the players who activated the report
      * @param position new faith track position of each player
      * @param report true if a vatican report has been activated, false otherwise
+     * @param vaticanPosition position of the report
      */
-    public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report){
+    public void faithTrackUpdate(ArrayList<String> vaticanActivated, Map<String, Integer> position, boolean report, int vaticanPosition){
         for (String nickname : position.keySet()) {
             gameboard.getOnePlayerBoard(nickname).setPlayerPosition(position.get(nickname));
         }
         if (report) {
-            int reportPos = 0;
-            for(String nickname : vaticanPosition.keySet()){
-                reportPos = vaticanPosition.get(nickname);
-                gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, true);
-            }
             for(String nickname : gameboard.getPlayers()){
-                if(!vaticanPosition.containsKey(nickname)) gameboard.getOnePlayerBoard(nickname).updateVaticanReports(reportPos, false);
+                gameboard.getOnePlayerBoard(nickname).updateVaticanReports(vaticanPosition, vaticanActivated.contains(nickname));
             }
         }
     }

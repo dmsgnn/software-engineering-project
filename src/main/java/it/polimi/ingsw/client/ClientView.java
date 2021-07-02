@@ -489,13 +489,14 @@ public class ClientView extends View implements Observer<ServerMessage>{
 
     /**
      * called to update every player faithtrack
-     * @param vaticanPosition map of the players who activated the report in the specified position
+     * @param vaticanActivated list of the players who activated the report
      * @param position new faith track position of each player
      * @param report true if a vatican report has been activated, false otherwise
+     * @param vaticanPosition position of the report
      */
-    public void faithTrackUpdate(Map<String, Integer> vaticanPosition, Map<String, Integer> position, boolean report){
+    public void faithTrackUpdate(ArrayList<String> vaticanActivated, Map<String, Integer> position, boolean report, int vaticanPosition){
         synchronized (lock) {
-            super.faithTrackUpdate(vaticanPosition, position, report);
+            super.faithTrackUpdate(vaticanActivated, position, report, vaticanPosition);
             faithUpdateReceived=true;
             lock.notifyAll();
         }

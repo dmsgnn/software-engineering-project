@@ -240,8 +240,8 @@ public class ServerView extends Observable<ClientMessage> implements Observer<Se
      * @param faithPositions of all player
      * @param isActive if a Vatican report has been activated
      */
-    public void sendFaithMessage(Map<String, Integer> update, Map<String, Integer> faithPositions, boolean isActive) {
-        sendMessage(new FaithTrackMessage(update,faithPositions,isActive));
+    public void sendFaithMessage(ArrayList<String> update, Map<String, Integer> faithPositions, boolean isActive, int vaticanReportPos) {
+        sendMessage(new FaithTrackMessage(update,faithPositions,isActive, vaticanReportPos));
     }
 
 

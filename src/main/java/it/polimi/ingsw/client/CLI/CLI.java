@@ -386,24 +386,58 @@ public class CLI implements UserInterface {
     @Override
     public void startingResources(int amount) {
         myTurn=true;
-        ArrayList<Resource> pickedResources = new ArrayList<>();
-        String input;
-        int counter=amount;
 
-        while(pickedResources.size() < amount){
-            System.out.print("Choose your starting resource, amount " + counter + "\n");
-            System.out.print("Options: COINS, STONES, SERVANTS, SHIELDS: ");
-            input = scanner.nextLine().toUpperCase();
-            try {
-                Resource resource = Resource.valueOf(input);
-                pickedResources.add(resource);
-                counter--;
-            } catch ( IllegalArgumentException e ) {
-                System.out.println("No such resource, please try again");
-            }
+        String input;
+        Resource resource = null;
+        boolean done;
+        int value = 0;
+        Map<Integer, ArrayList<Resource>> newWarehouse = new HashMap<>();
+
+        for(int i= 0; i < 3; i++){
+            newWarehouse.put(i, new ArrayList<>());
         }
 
-        clientView.sendStartingResources(placeWarehouseRes(pickedResources, false));
+        if (amount == 0) {
+            clientView.sendStartingResources(newWarehouse);
+            return;
+        }
+
+
+        System.out.print("Choose your starting resource, amount " + amount + "\n");
+        int depotCont;
+        for(int i = 0; i < 3; i++){
+            depotCont=i+1;
+            done = false;
+            do{
+                System.out.println("Depot " + depotCont + " new amount: ");
+                try {
+                    input = scanner.nextLine();
+                    value = Integer.parseInt(input);
+                    if(value<0 || value > depotCont) System.out.println("Invalid number!");
+                    else done= true;
+                } catch (NumberFormatException e) {
+                    System.out.println("Not a number!!");
+                }
+            }while (!done);
+            if(value>0){
+                done = false;
+                do{
+                    System.out.println("Depot " + depotCont + " new resource: ");
+                    try {
+                        input = scanner.nextLine().toUpperCase();
+                        resource = Resource.valueOf(input);
+                        done = true;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println( "No such resource, please try again");
+                    }
+                }while (!done);
+            }
+            ArrayList<Resource> temp = new ArrayList<>();
+            for(int j = 0; j<value; j++) temp.add(resource);
+            newWarehouse.put(i, temp);
+        }
+
+        clientView.sendStartingResources(newWarehouse);
 
     }
 

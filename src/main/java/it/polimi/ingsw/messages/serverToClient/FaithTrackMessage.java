@@ -3,23 +3,26 @@ package it.polimi.ingsw.messages.serverToClient;
 import it.polimi.ingsw.client.ClientView;
 import it.polimi.ingsw.client.PingReceiver;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class FaithTrackMessage implements ServerMessage{
-    private final Map<String, Integer> vaticanPosition;
+    private final ArrayList<String> activatedVatican;
     private final Map<String,Integer> position;
     private final boolean report;
+    private final int vaticanReportPos;
 
-    public FaithTrackMessage(Map<String, Integer> takeReport, Map<String, Integer> position, boolean report) {
-        this.vaticanPosition = takeReport;
+    public FaithTrackMessage(ArrayList<String> takeReport, Map<String, Integer> position, boolean report, int vaticanReportPos) {
+        this.activatedVatican = takeReport;
         this.position = position;
         this.report = report;
+        this.vaticanReportPos=vaticanReportPos;
     }
 
 
     @Override
     public void handleMessage(ClientView clientView) {
-        clientView.faithTrackUpdate(vaticanPosition, position, report);
+        clientView.faithTrackUpdate(activatedVatican, position, report, vaticanReportPos);
 
     }
 

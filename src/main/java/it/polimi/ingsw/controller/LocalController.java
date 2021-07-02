@@ -615,7 +615,8 @@ public class LocalController {
      */
     private void faithTrackMessage() {
         boolean isActive = game.getNumVaticanReports() != numOfVaticanReport;
-        Map<String,Integer> update = new HashMap<>();
+        ArrayList<String> update = new ArrayList<>();
+        int vaticanReportPos = 0;
         if (isActive){
             numOfVaticanReport = game.getNumVaticanReports();
             for (int i = 0; i < playersNumber; i++) {
@@ -625,29 +626,32 @@ public class LocalController {
                 switch (numOfVaticanReport){
                     case 1: {
                         if (position>=5){
-                            update.put(username,8);
+                            update.add(username);
                             Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
                             temp.put(8,true);
                             vaticanReportActivated.put(username,temp);
                         }
+                        vaticanReportPos=8;
                         break;
                     }
                     case 2: {
                         if (position>=12){
-                            update.put(username,16);
+                            update.add(username);
                             Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
                             temp.put(16,true);
                             vaticanReportActivated.put(username,temp);
                         }
+                        vaticanReportPos=16;
                         break;
                     }
                     case 3:{
                         if (position>=19){
-                            update.put(username,24);
+                            update.add(username);
                             Map<Integer,Boolean> temp = vaticanReportActivated.get(username);
                             temp.put(24,true);
                             vaticanReportActivated.put(username,temp);
                         }
+                        vaticanReportPos=24;
                         break;
                     }
                     default: break;
@@ -663,7 +667,7 @@ public class LocalController {
         }
 
         Map<String,Integer> faith = new HashMap<>(faithPositions);
-        clientView.faithTrackUpdate(update,faith,isActive);
+        clientView.faithTrackUpdate(update,faith,isActive, vaticanReportPos);
 
     }
 
