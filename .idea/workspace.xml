@@ -7,16 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Client javadoc update">
-      <change afterPath="$PROJECT_DIR$/deliveries/Coverage/model.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deliveries/Coverage/model_packages.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deliveries/JAR/Client.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deliveries/JAR/Server.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="JavaDoc update">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Game.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -465,13 +457,6 @@
       <workItem from="1625231036544" duration="2850000" />
       <workItem from="1625241176966" duration="3532000" />
     </task>
-    <task id="LOCAL-00043" summary="Controller fix">
-      <created>1622297844164</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1622297844164</updated>
-    </task>
     <task id="LOCAL-00044" summary="Dev card slots GUI">
       <created>1622374532829</created>
       <option name="number" value="00044" />
@@ -808,7 +793,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625247181082</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="deliveries update">
+      <created>1625249079730</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1625249079730</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -828,8 +820,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="GUI error management update, starting scenes update, DevelopmentCards.xml fix" />
-    <MESSAGE value="Reconnection message update to fit the client changes, Actions method resilience improved" />
     <MESSAGE value="Reconnection fix" />
     <MESSAGE value="Dev card check requirements fix, ClientGameBoard fix" />
     <MESSAGE value="ClientView update to fit ReConnectionUpdate message update, code cleanup, some javadoc" />
@@ -853,7 +843,9 @@
     <MESSAGE value="GUI visual update &amp; sync in controller faith message method" />
     <MESSAGE value="Code cleanup" />
     <MESSAGE value="Client javadoc update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Client javadoc update" />
+    <MESSAGE value="deliveries update" />
+    <MESSAGE value="JavaDoc update" />
+    <option name="LAST_COMMIT_MESSAGE" value="JavaDoc update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

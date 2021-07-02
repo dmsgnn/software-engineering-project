@@ -21,9 +21,6 @@ The following class diagrams represent, respectively, the initial model accordin
 The following file represents the design of the communication architecture. It shows and describes all the interactions between Server and Client.
 You can consult it here [Communication design](/deliveries/Communication_design).
 
-### JavaDoc
-The following documentation includes a description for most of the classes and methods used, follows the Java documentation techniques and can be consulted at the following address: [Javadoc](/deliveries/JavaDoc)
-
 ### Libraries and Plugins
 |Library/Plugin|Description|
 |---------------|-----------|
