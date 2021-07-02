@@ -942,7 +942,7 @@ public class Controller implements Observer<ClientMessage> {
     /**
      * this method checks the faithtrack status and sends the update message to the players
      */
-    private void faithTrackMessage() {
+    private synchronized void faithTrackMessage() {
         boolean isActive = game.getNumVaticanReports() != numOfVaticanReport;
         ArrayList<String> update = new ArrayList<>();
         int vaticanReportPos = 0;

@@ -698,7 +698,9 @@ public class MainBoard {
             } else {
                 if (board.isDepotEmpty(4)) {
                     depot1Leader2.setVisible(false);
+                    depot1Leader2.setImage(null);
                     depot2Leader2.setVisible(false);
+                    depot2Leader2.setImage(null);
                 } else {
                     if (board.getWarehouse().get(4).size() == 2) {
                         depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
@@ -706,6 +708,7 @@ public class MainBoard {
                     } else {
                         depot1Leader2.setImage(new Image("resources/punchboard/" + board.getWarehouseResource(4).toString().toLowerCase() + ".png"));
                         depot2Leader2.setVisible(false);
+                        depot2Leader2.setImage(null);
                     }
                 }
             }

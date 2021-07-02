@@ -50,7 +50,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="amount" layoutX="556.0" layoutY="130.0" prefHeight="23.0" prefWidth="300.0">
+      <Label fx:id="amount" layoutX="556.0" layoutY="130.0" prefHeight="23.0" prefWidth="367.0">
          <font>
             <Font name="SansSerif Bold" size="20.0" />
          </font></Label>
@@ -81,5 +81,10 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label fx:id="errorMessage" layoutX="510.0" layoutY="83.0" prefHeight="23.0" prefWidth="450.0" textFill="#f80000">
+         <font>
+            <Font name="SansSerif Bold" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -15,6 +15,8 @@ import java.util.Map;
 public class StartingResourcesScene {
 
     @FXML
+    public Label errorMessage;
+    @FXML
     private Label amount;
     @FXML
     private Button servants;
@@ -44,7 +46,7 @@ public class StartingResourcesScene {
     }
 
     public void setError(String error){
-        this.amount.setText(error);
+        this.errorMessage.setText(error);
     }
 
     public void setAmount(int amount){
