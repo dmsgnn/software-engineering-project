@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.leadercard.LeaderCard;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * deck of leadercards
+ */
 public class LeaderDeck {
     private final ArrayList<LeaderCard> deck = new ArrayList<>();
 

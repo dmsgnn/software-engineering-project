@@ -6,7 +6,9 @@ import it.polimi.ingsw.model.gameboard.marble.Marbles;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
 
 import java.util.ArrayList;
-
+/**
+ * market action if the player selected a row
+ */
 public class PickRow extends MarketAction {
     public PickRow(int index, ArrayList<Marbles> marbles, Market market) {
         super(index, marbles,market);

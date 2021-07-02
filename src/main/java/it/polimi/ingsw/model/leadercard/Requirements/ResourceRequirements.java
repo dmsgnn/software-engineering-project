@@ -5,7 +5,9 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * color requirements of the leadercards
+ */
 public class ResourceRequirements implements Requirements{
     private Map<Resource, Integer> cardRequirements;
 

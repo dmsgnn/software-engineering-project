@@ -11,6 +11,9 @@ import it.polimi.ingsw.model.playerboard.PlayerBoard;
 
 import java.util.ArrayList;
 
+/**
+ * market action
+ */
 public abstract class MarketAction extends Actions {
     protected int index;
     protected ArrayList<Marbles> marbles;

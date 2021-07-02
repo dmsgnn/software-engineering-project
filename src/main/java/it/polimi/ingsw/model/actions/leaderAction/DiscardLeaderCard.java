@@ -6,7 +6,9 @@ import it.polimi.ingsw.model.playerboard.PlayerBoard;
 import it.polimi.ingsw.model.playerboard.faithTrack.FaithTrack;
 
 import java.util.ArrayList;
-
+/**
+ * discard leader card action
+ */
 public class DiscardLeaderCard extends Actions {
     private final LeaderCard leaderCard;
     private final ArrayList<LeaderCard> cardsHand;

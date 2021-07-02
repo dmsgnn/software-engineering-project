@@ -4,7 +4,9 @@ import it.polimi.ingsw.client.CLI.ColorCLI;
 import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
-
+/**
+ * represents the production ability of the leadercards
+ */
 public class ProductionAbility implements Ability {
     private Resource cost;
 

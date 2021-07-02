@@ -5,7 +5,9 @@ import it.polimi.ingsw.model.gameboard.Color;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * class that represents a deck of up to 4 development cards
+ */
 public class DevelopmentCardDeck {
     private final ArrayList<DevelopmentCard> deck = new ArrayList<>();
     private final int level;

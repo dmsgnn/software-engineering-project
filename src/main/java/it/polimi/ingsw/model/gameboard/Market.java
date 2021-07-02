@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.gameboard.marble.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * represents the market
+ */
 public class Market {
     private final Marbles[][] marbleGrid;
     private Marbles freeMarble;

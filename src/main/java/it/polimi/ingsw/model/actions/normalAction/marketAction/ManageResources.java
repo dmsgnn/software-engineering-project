@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * manage resources action
+ */
 public class  ManageResources extends Actions {
 
     private final ArrayList<ArrayList<Resource>> resources;

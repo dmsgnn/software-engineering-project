@@ -10,7 +10,9 @@ import it.polimi.ingsw.model.playerboard.PlayerBoard;
 import javax.naming.InsufficientResourcesException;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * buy development card action
+ */
 public class BuyDevelopmentCard extends Actions {
     private Map<Resource, Integer> warehouseDepotResources;
     private Map<Resource, Integer> strongboxResources;

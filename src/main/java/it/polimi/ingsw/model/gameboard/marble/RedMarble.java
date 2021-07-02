@@ -5,7 +5,9 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.ArrayList;
-
+/**
+ * class that represents the red marble
+ */
 public class RedMarble extends Marbles {
     private final Game game;
     public RedMarble(Game game){

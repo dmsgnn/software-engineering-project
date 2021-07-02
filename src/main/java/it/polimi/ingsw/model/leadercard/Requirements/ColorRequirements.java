@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.playerboard.PlayerBoard;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * color requirements of the leadercards
+ */
 public class ColorRequirements implements Requirements {
     private Map<Color, Integer> colorCardRequirements;
     private Map<Color, Integer> levelCardRequirements;

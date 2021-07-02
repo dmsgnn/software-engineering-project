@@ -10,7 +10,9 @@ import it.polimi.ingsw.utility.LeaderCardsParserXML;
 import it.polimi.ingsw.utility.MarketParserXML;
 
 import java.util.ArrayList;
-
+/**
+ * class that represents the gameboard common to every player, contains the market, the development card grid and the deck of leadercards
+ */
 public class Gameboard {
     private final Market marketBoard;
     private final DevelopmentCardDeck[][] cardGrid;

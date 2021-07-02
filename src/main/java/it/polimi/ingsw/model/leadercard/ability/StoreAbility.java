@@ -5,7 +5,9 @@ import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.playerboard.depot.CardDepot;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
-
+/**
+ * represents the extra depots ability of the leadercards
+ */
 public class StoreAbility implements Ability {
     private Resource resource;
 

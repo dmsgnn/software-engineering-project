@@ -4,7 +4,9 @@ import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.ArrayList;
-
+/**
+ * class that represents the blue marble
+ */
 public class BlueMarble extends Marbles {
 
     /**

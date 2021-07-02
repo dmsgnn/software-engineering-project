@@ -12,6 +12,9 @@ import javax.naming.InsufficientResourcesException;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * abstract class extended by all the actions
+ */
 public abstract class Actions {
 
     /**

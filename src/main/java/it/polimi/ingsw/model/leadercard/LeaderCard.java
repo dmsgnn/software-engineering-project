@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.leadercard.Requirements.Requirements;
 import it.polimi.ingsw.model.leadercard.ability.Ability;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
 
+/**
+ * represents the leadercards
+ */
 public class LeaderCard {
     private final int victoryPoints;
     private final Ability ability;

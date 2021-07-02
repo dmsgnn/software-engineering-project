@@ -4,7 +4,9 @@ import it.polimi.ingsw.client.CLI.ColorCLI;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.Map;
-
+/**
+ * class that represents the development cards production
+ */
 public class ProductionPower {
     private final Map<Resource, Integer> prodCost;
     private final Map<Resource, Integer> resourceGain;

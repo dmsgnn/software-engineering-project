@@ -5,6 +5,9 @@ import it.polimi.ingsw.client.representations.ClientPlayerBoard;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.playerboard.PlayerBoard;
 
+/**
+ * represents the resource discount ability of the leadercards
+ */
 public class DiscountAbility implements Ability{
     private Resource resource;
 

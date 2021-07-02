@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * production action
+ */
 public class UseProduction extends Actions {
     private final ArrayList<Integer> developmentCardSlotIndex;
     private final ArrayList<Integer> leaderCardProdIndex;

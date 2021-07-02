@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * play leader card action
+ */
 public class PlayLeaderCard extends Actions {
     private final LeaderCard leaderCard;
     private final ArrayList<LeaderCard> cardsHand;

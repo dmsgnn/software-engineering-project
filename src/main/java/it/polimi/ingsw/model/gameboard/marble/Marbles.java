@@ -4,7 +4,9 @@ import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.model.Resource;
 
 import java.util.ArrayList;
-
+/**
+ * abstract class that represents a marble
+ */
 public abstract class  Marbles {
     /**
      * activates the effect of the marble

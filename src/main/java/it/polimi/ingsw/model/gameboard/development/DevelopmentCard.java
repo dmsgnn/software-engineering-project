@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.gameboard.Color;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * class that represents the development cards
+ */
 public class DevelopmentCard {
     private final Map<Resource, Integer> cardRequirements;
     private final Color color;

@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.playerboard.PlayerBoard;
 
 import java.util.Map;
 
+/**
+ * contais the methods common to all leadercards requirements
+ */
 public interface Requirements {
 
     /**
