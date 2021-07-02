@@ -7,6 +7,9 @@ import it.polimi.ingsw.messages.serverToClient.Ping;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Class that manages a ping to verify that a client is still active.
+ */
 public class PingManager implements Observer<ClientMessage>{
     private final ServerSocketHandler connection;
     private boolean ping;

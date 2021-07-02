@@ -6,6 +6,10 @@ import javax.naming.InsufficientResourcesException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represents the strongbox where a player
+ * can stores his resources.
+ */
 public class Strongbox {
 
     private final Map<Resource, Integer> resources;

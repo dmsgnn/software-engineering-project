@@ -5,6 +5,10 @@ import it.polimi.ingsw.model.playerboard.faithTrack.PlayerFaithTrack;
 
 import java.util.ArrayList;
 
+/**
+ * The class to manage a player, saving his username, his board,
+ * his leader cards not already played and victory points;
+ */
 public class Player {
     private final Game game;
     private final String nickname;

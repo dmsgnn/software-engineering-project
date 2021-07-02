@@ -6,6 +6,11 @@ import it.polimi.ingsw.utility.TokensParserXML;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Contains all the token of the game.
+ * The ArrayList deck contains all the tokens, when one is used
+ * it is moved from the deck to the usedTokens ArrayList.
+ */
 public class TokenDeck {
     private final ArrayList<Token> deck;
     private final ArrayList<Token> usedTokens;

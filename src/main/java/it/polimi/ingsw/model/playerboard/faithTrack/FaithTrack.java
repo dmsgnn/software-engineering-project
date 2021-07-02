@@ -2,6 +2,10 @@ package it.polimi.ingsw.model.playerboard.faithTrack;
 
 import it.polimi.ingsw.model.Game;
 
+
+/**
+ * It represents the concept of the faith track of the game.
+ */
 public abstract class FaithTrack {
     protected int position;
     private final Game game;

@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.singleplayer;
 
 import it.polimi.ingsw.model.Game;
 
+/**
+ * Contains the gain of faith track position.
+ */
 public class FaithToken extends Token {
     private final String id;
     private final Game game;

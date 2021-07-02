@@ -3,6 +3,9 @@ package it.polimi.ingsw.model.singleplayer;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.gameboard.Color;
 
+/**
+ * Contains the color and amount of development card to discard.
+ */
 public class DiscardCardToken extends Token {
     private final String id;
     private final Color color;

@@ -12,6 +12,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+/**
+ * Helps to manage each client connection, pairing it with the server. It holds the input stream to
+ * receive {@link ClientMessage} and holds an output stream to send {@link ServerMessage}
+ */
 public class ServerSocketHandler extends Observable<ClientMessage> implements Runnable{
     private static final Object lock = new Object();
 

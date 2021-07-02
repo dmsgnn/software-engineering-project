@@ -2,7 +2,9 @@ package it.polimi.ingsw.model.playerboard.depot;
 
 import it.polimi.ingsw.model.Resource;
 
-
+/**
+ * Represents the concept of the Depot of the game.
+ */
 public class BaseDepot {
     private int capacity;
     private int occupied;

@@ -2,6 +2,10 @@ package it.polimi.ingsw.model.playerboard.faithTrack;
 
 import it.polimi.ingsw.model.Game;
 
+/**
+ * This class represents the Faith Track of the player
+ * and contains his faith track points and position.
+ */
 public class PlayerFaithTrack extends FaithTrack {
     private int victoryPoints;
 

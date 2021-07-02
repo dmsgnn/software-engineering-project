@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.singleplayer;
 
 import it.polimi.ingsw.model.Game;
 
+/**
+ * Contains how many times the token must be shuffled.
+ */
 public class ShuffleToken extends Token {
     private final String id;
     private final Game game;

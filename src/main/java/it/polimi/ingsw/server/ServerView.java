@@ -14,6 +14,9 @@ import it.polimi.ingsw.model.gameboard.Color;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * Class with a role similar to a proxy that speaks to the client sending messages
+ */
 public class ServerView extends Observable<ClientMessage> implements Observer<ServerMessage> {
 
     private class ClientMessageReceiver implements Observer<ClientMessage>{

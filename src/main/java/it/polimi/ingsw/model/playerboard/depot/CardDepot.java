@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.playerboard.depot;
 
 import it.polimi.ingsw.model.Resource;
 
+/**
+ * This class represents the Depot of the activated Leader Card Depot.
+ */
 public class CardDepot extends BaseDepot {
     private final Resource resource1;
     public CardDepot(int capacity, int occupied, Resource resource) {

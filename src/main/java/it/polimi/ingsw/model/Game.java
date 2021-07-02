@@ -8,6 +8,12 @@ import it.polimi.ingsw.model.singleplayer.LorenzoAI;
 import javax.naming.InsufficientResourcesException;
 import java.util.ArrayList;
 
+/**
+ * Core class of the game logic in the model.
+ * This class holds the list of the  players.
+ * It initializes everything necessary to start a game
+ * and to follow its evolution.
+ */
 public class Game {
     private Player[] players;
     private int numVaticanReports;

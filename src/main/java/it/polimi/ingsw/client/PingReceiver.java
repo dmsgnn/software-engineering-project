@@ -4,6 +4,11 @@ import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.messages.clientToServer.Pong;
 import it.polimi.ingsw.messages.serverToClient.ServerMessage;
 
+/**
+ * Class to verify that a user is still active. Once a ping is received from the server,
+ * a {@link Pong} is sent to prove that the connection is working.
+ * It extends the class observer to effectively update and override the method when a Pong (a ServerMessage) is received.
+ */
 public class PingReceiver implements Observer<ServerMessage> {
     private ClientSocketHandler connection;
 

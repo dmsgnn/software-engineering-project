@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represents the slot of the board where
+ * a player place it after a Buy Development Card Action.
+ */
 public class DevelopmentCardSlot {
     private final ArrayList<DevelopmentCard> slots = new ArrayList<>();
     private int cardCounter=0;

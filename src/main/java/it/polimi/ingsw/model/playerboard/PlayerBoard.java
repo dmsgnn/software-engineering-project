@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This is the board of the player and contains
+ * his bought development cards, his warehouse with resources,
+ * the faith track, the leader cards buffs and the strongbox.
+ */
 public class PlayerBoard {
     private Warehouse warehouse;
     private ArrayList<LeaderCard> leaderCards;

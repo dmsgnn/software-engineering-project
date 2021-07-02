@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class that manages a game, it contains all the informations related to it.
+ */
 public class Lobby {
     //map to save the nickname and the socket of the player
     //a player is added when connected to the game and deleted when he disconnects

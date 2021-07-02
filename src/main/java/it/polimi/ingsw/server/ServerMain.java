@@ -14,6 +14,9 @@ import java.util.concurrent.Executors;
 
 import static java.lang.System.*;
 
+/**
+ * Class that manages a ping to verify that a client is still active.
+ */
 public class ServerMain {
     //needed
     private final int portNumber;

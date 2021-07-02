@@ -3,6 +3,12 @@ package it.polimi.ingsw.model.playerboard;
 import it.polimi.ingsw.model.Resource;
 import java.util.ArrayList;
 
+/**
+ * Used when a Leader Card is activated.
+ * It contains the activated Leader Card
+ * ability of the player and it is used
+ * when a player do a Leader Card Action.
+ */
 public class CardBuffs {
     private final ArrayList<Resource> exchangeBuff;
     private final ArrayList<Resource> discountBuff;

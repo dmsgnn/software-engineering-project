@@ -4,6 +4,10 @@ import it.polimi.ingsw.model.playerboard.faithTrack.FaithTrack;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.playerboard.faithTrack.LorenzoFaithTrack;
 
+/**
+ * This class is like an AI of Lorenzo Il Magnifico and activates
+ * the token using the drawToken method.
+ */
 public class LorenzoAI {
     private final Game game;
     private final FaithTrack track;

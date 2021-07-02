@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class represents the warehouse of the game
+ * and it contains the depots with resource.
+ */
 public class Warehouse {
     private ArrayList<BaseDepot> depots;
     private int depotsNum;
