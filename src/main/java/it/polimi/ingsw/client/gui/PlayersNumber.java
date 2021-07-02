@@ -5,6 +5,9 @@ import it.polimi.ingsw.client.View;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+/**
+ * scene that allows the first player to select the number of players to play with
+ */
 public class PlayersNumber {
     private static View clientView;
     private static GUI gui;

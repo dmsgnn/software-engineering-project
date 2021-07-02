@@ -11,7 +11,9 @@ import it.polimi.ingsw.model.gameboard.Color;
 
 import java.net.Socket;
 import java.util.*;
-
+/**
+ * Client controller for multiplayer games
+ */
 public class ClientView extends View implements Observer<ServerMessage>{
 
     private ClientSocketHandler socket;

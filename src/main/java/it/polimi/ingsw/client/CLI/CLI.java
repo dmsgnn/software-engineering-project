@@ -18,6 +18,9 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * CLI, implements the methods of {@link it.polimi.ingsw.client.UserInterface}
+ */
 public class CLI implements UserInterface {
 
     View clientView;

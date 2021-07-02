@@ -11,6 +11,9 @@ import java.util.Map;
 
 import static java.lang.System.exit;
 
+/**
+ * Scene that displays the points of each player when the game ends
+ */
 public class Winner {
     private static View clientView;
     private static GUI gui;

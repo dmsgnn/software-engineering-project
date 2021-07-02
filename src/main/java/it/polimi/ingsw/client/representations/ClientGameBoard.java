@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.gameboard.Color;
 
 import java.util.ArrayList;
 
+/**
+ * simplified version of gameboard
+ */
 public class ClientGameBoard {
 
     private final ArrayList<ClientPlayerBoard> playerBoards = new ArrayList<>();

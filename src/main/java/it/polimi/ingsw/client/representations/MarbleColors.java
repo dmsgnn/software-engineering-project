@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.representations;
-
+/**
+ * simplified version of the marbles
+ */
 public enum MarbleColors {
     WHITE("white"),
     RED("red"),

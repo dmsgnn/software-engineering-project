@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * scene that shows the playerboard of the owner of this client and the gameboard
+ */
 public class MainBoard {
     private static View clientView;
     private static GUI gui;

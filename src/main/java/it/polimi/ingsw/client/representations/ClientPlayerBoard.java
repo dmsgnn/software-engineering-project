@@ -6,7 +6,9 @@ import it.polimi.ingsw.model.leadercard.LeaderCard;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * simplified version of playerboard
+ */
 public class ClientPlayerBoard {
 
     private final String playerNickname;

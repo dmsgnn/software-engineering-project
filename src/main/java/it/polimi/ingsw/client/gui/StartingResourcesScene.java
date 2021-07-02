@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * scene that allows the player to select the starting resources
+ */
 public class StartingResourcesScene {
 
     @FXML

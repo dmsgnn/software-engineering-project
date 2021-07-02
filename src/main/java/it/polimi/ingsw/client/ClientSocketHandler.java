@@ -11,6 +11,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import static java.lang.System.exit;
 
+/**
+ * client socket
+ */
 public class ClientSocketHandler extends Observable<ServerMessage> implements Runnable {
     Socket socket;
     private ObjectInputStream in;

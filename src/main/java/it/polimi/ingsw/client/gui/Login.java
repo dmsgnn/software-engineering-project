@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
+/**
+ * scene that allows the player to login
+ */
 public class Login {
 
     private static View clientView;

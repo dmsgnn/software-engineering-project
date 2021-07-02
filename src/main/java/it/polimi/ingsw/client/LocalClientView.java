@@ -10,7 +10,9 @@ import it.polimi.ingsw.model.gameboard.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Client controller for local games
+ */
 public class LocalClientView extends View{
     private LocalController controller;
 

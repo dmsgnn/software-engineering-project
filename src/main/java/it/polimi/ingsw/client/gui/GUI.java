@@ -23,7 +23,9 @@ import java.util.Map;
 import java.util.Objects;
 
 import static java.lang.System.exit;
-
+/**
+ * GUI, implements the methods of {@link it.polimi.ingsw.client.UserInterface}
+ */
 public class GUI extends Application implements UserInterface {
     private static View clientView;
 

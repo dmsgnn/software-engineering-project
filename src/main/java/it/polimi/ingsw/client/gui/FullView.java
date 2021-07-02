@@ -10,7 +10,9 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * scene that shows the playerboard of all the players inside the game
+ */
 public class FullView {
     private static View view;
     private static GUI gui;

@@ -4,6 +4,9 @@ import it.polimi.ingsw.client.representations.MarbleColors;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.gameboard.Color;
 
+/**
+ * used by {@link it.polimi.ingsw.client.CLI.CLI} to print colors
+ */
 public enum ColorCLI {
     //Color end string, color reset
     RESET("\033[0m"),

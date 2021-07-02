@@ -10,7 +10,9 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
-
+/**
+ * scene that allows the player to select the starting leadercards
+ */
 public class LeaderCardSelection {
 
     private static View clientView;

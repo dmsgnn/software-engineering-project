@@ -7,6 +7,9 @@ import it.polimi.ingsw.model.Resource;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * contains all the method used from both CLI and GUI
+ */
 public interface UserInterface {
 
     /**
