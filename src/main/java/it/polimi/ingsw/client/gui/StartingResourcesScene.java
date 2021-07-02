@@ -34,7 +34,7 @@ public class StartingResourcesScene {
     private static View clientView;
     private static GUI gui;
 
-    private final Map<Integer, ArrayList<Resource>> newWarehouse;
+    private Map<Integer, ArrayList<Resource>> newWarehouse;
     private Resource currentRes;
     private int numOfRes;
 
@@ -48,17 +48,16 @@ public class StartingResourcesScene {
     }
 
     public void setAmount(int amount){
-        numOfRes=amount;
-        if(amount==0) send();
-        depotButtonUpdate(true);
-        this.amount.setText("You must choose " + numOfRes + " resource");
-    }
-
-    public StartingResourcesScene(){
         newWarehouse = new HashMap<>();
         for(int i=0; i<3; i++){
             newWarehouse.put(i, new ArrayList<>());
         }
+        resButtonUpdate(false);
+        depotButtonUpdate(false);
+        numOfRes=amount;
+        if(amount==0) send();
+        depotButtonUpdate(true);
+        this.amount.setText("You must choose " + numOfRes + " resource");
     }
 
     public void addShields() {

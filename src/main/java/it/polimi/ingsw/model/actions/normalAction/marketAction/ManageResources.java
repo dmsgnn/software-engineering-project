@@ -106,36 +106,36 @@ public class  ManageResources extends Actions {
 
         }
         else {
-
-            if (resources.size()>0 && resources.get(1).size() != 0 && resources.get(2).size() != 0) {
-                if (resources.get(1).get(0).equals(resources.get(2).get(0))) return false;
-            }
-            if (resources.size()>0 && resources.get(1).size()== 2) {
-                if ( !resources.get(1).get(0).equals(resources.get(1).get(1))) return false;
-            }
-            if (resources.size()>0 && resources.get(2).size()== 2) {
-                if (!resources.get(2).get(0).equals(resources.get(2).get(1))) return false;
-            }
-        }
-
-
-            for (int i = 0; i < resources.size(); i++) {
-            //if the depots have the same resources
-            if (i != 0) {
-                if (resources.get(0).size() != 0 && resources.get(i).size() != 0) {
-                    if (i<3) {
-                        if (resources.get(0).get(0).equals(resources.get(i).get(0))) return false;
+            for(int i = 0; i< resources.size()-1; i++){
+                for(int j = i+1; j<resources.size(); j++){
+                    if(resources.get(i).size()>0 && resources.get(j).size()>0){
+                        if(resources.get(i).equals(resources.get(j))) return false;
                     }
                 }
             }
-            //if the resources of the depot are wrong
-            for (int j = 0; j < resources.get(i).size(); j++) {
-                if (!(resources.get(i).get(0).equals(resources.get(i).get(j)))) return false;
+
+
+            for (ArrayList<Resource> resource : resources) {
+                if (resource.size() == 2) {
+                    if (!resource.get(0).equals(resource.get(1))) {
+                        return false;
+                    }
+                }
+                if (resource.size() == 3) {
+                    if (!resource.get(0).equals(resource.get(1))) {
+                        return false;
+                    }
+                    if (!resource.get(1).equals(resource.get(2))) {
+                        return false;
+                    }
+                    if (!resource.get(0).equals(resource.get(2))) {
+                        return false;
+                    }
+                }
             }
         }
 
-
-            return true;
+        return true;
     }
 
 
@@ -164,6 +164,7 @@ public class  ManageResources extends Actions {
             for (int i = 0; i < size; i++) {
                 faithTrack.increaseAllPositions();
             }
+
         }
 
     }

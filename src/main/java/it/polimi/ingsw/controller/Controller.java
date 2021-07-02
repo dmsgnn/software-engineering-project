@@ -65,6 +65,8 @@ public class Controller implements Observer<ClientMessage> {
     private final Map<String, Map<Integer,Boolean>> vaticanReportActivated;
     private final Map<String,Boolean> resourceManageOk;
 
+    private boolean validStartingManage;
+
 
     public Controller(Game game, ArrayList<ServerView> serverViews) {
         this.temp = new HashMap<Resource,Integer>(){{
@@ -334,7 +336,7 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
-                    if(!gameStarted && playersNumber>1) {
+                    if(!gameStarted && playersNumber>1 && validStartingManage) {
                         Objects.requireNonNull(serverView).startingResourceOk();
                     }
                 }
@@ -349,7 +351,7 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
-                    if(!gameStarted && playersNumber>1) {
+                    if(!gameStarted && playersNumber>1 && validStartingManage) {
                         Objects.requireNonNull(serverView).startingResourceOk();
                     }
 
@@ -364,7 +366,7 @@ public class Controller implements Observer<ClientMessage> {
                 }
                 else{
                     manageStartingResource(resources,username);
-                    if(!gameStarted && playersNumber>1) {
+                    if(!gameStarted && playersNumber>1 && validStartingManage) {
                         Objects.requireNonNull(serverView).startingResourceOk();
                     }
                 }
@@ -390,6 +392,7 @@ public class Controller implements Observer<ClientMessage> {
         ManageResources manageResources = new ManageResources(resources, null,null,true, null);
         try {
             game.doAction(manageResources);
+            validStartingManage = true;
             // LAYOUT UPDATE
             ArrayList<String> leaderID= new ArrayList<>();
             for (int i=0; i<selectedCards.get(game.getActivePlayer().getNickname()).size();i++) {
@@ -411,6 +414,7 @@ public class Controller implements Observer<ClientMessage> {
             }
         } catch (InvalidActionException | InsufficientResourcesException | WrongLevelException | NoCardsLeftException e) {
             // MANAGE ERROR
+            validStartingManage = false;
             ServerView serverView= getServerView(username);
             assert serverView != null;
             serverView.sendError(Error.STARTING_RESOURCES);
