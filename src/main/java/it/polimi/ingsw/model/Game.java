@@ -118,7 +118,7 @@ public class Game {
 
     /**
      * this method checks if a player has made it to the end of the faithtrack
-     * @returnand true if he has made it
+     * @return true if he has made it
      */
     private boolean faithTrackEnd(){
         for (Player player:players){

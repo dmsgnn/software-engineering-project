@@ -40,7 +40,7 @@ You can find Test Coverage files in [Test Coverage](/deliveries/Coverage).
 
 |__Class__|__Method__|__Line__|__Branch__|
 |---------|---------|---------|---------|
-|100%|88%|94%|81%|
+|100%|89%|94%|81%|
 
 ### Jars
 The following jars allow the launch of the game according to the features described in the introduction. The features built according to the project specification are listed in the next section while the details on how to launch them will be defined in the section called __How to run JAR__.\
