@@ -131,6 +131,9 @@ public class DevelopmentCardTest {
 
         assertEquals(requirementsString, card.drawRequirements());
 
+        DevelopmentCard card2 = new DevelopmentCard(requirements, Color.GREEN,"",1, 10, power);
+        String levelString2 = ColorCLI.GREEN + "║" + ColorCLI.RESET + "lv1  vp" + ColorCLI.RESET + "10" + ColorCLI.GREEN + "║";
+        assertEquals(levelString2, card2.drawLevelAndPoints());
 
     }
 

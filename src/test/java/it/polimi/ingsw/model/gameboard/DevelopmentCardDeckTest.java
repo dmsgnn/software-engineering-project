@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DevelopmentCardDeckTest {
     @Test
+    @DisplayName("Tests the empty method when the deck is empty")
     public void isEmptyTrueTest(){
         Map<Resource, Integer> prodCost = new HashMap<>();
         Map<Resource, Integer> resGain = new HashMap<>();
@@ -40,6 +41,7 @@ public class DevelopmentCardDeckTest {
         assertTrue(deck.isEmpty());
     }
     @Test
+    @DisplayName("Tests the empty method when the deck isn't empty")
     public void isEmptyFalseTest(){
         Map<Resource, Integer> prodCost = new HashMap<>();
         Map<Resource, Integer> resGain = new HashMap<>();
@@ -59,6 +61,7 @@ public class DevelopmentCardDeckTest {
     }
 
     @Test
+    @DisplayName("tests lookFirst method when the deck is empty")
     public void lookFirstEmptyTest(){
         ArrayList<DevelopmentCard> list = new ArrayList<>();
         DevelopmentCardDeck deck = new DevelopmentCardDeck(list, 1, Color.GREEN);
@@ -66,6 +69,7 @@ public class DevelopmentCardDeckTest {
     }
 
     @Test
+    @DisplayName("tests removeFirst method when the deck is empty")
     public void removeFirstEmptyTest(){
         ArrayList<DevelopmentCard> list = new ArrayList<>();
         DevelopmentCardDeck deck = new DevelopmentCardDeck(list, 1, Color.GREEN);
@@ -74,6 +78,7 @@ public class DevelopmentCardDeckTest {
     }
 
     @Test
+    @DisplayName("tests that lookFirst works correctly when the deck isn't empty")
     public void lookFirstTest(){
         Map<Resource, Integer> prodCost = new HashMap<>();
         Map<Resource, Integer> resGain = new HashMap<>();

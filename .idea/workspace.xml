@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="GUI visual update &amp; sync in controller faith message method">
+    <list default="true" id="47b8ecba-4036-4ffc-b3e8-52fe1cc1f08d" name="Default Changelist" comment="Code cleanup">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/CLI/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/LocalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/LocalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Lobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/DevelopmentCardDeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/DevelopmentCardDeckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/DevelopmentCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/DevelopmentCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/GameBoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/model/gameboard/GameBoardTest.java" afterDir="false" />
     </list>
     <list id="32ae585d-7e62-4a1a-8d80-ffd3756112d6" name="Changes by Windows" comment="" />
     <list id="10b1b4cc-7b28-487e-be57-49a17e14f966" name="Revert &quot;production update fix&quot;" comment="fix" />
@@ -111,7 +109,7 @@
       <recent name="it.polimi.ingsw.model.actions" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientMain">
+  <component name="RunManager" selected="JUnit.it.polimi.ingsw.model in AM5">
     <configuration name="ClientMain" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.client.ClientMain" />
       <module name="AM5" />
@@ -160,17 +158,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ColorRequirementsTest.CLIDrawingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DevelopmentCardTest.CLICardDrawing" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AM5" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.model.leadercard.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.model.gameboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.leadercard" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.leadercard.ColorRequirementsTest" />
-      <option name="METHOD_NAME" value="CLIDrawingTest" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.model.gameboard" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.model.gameboard.DevelopmentCardTest" />
+      <option name="METHOD_NAME" value="CLICardDrawing" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -223,17 +221,17 @@
       <item itemvalue="Application.ServerMain" />
       <item itemvalue="JUnit.Gameboard" />
       <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
-      <item itemvalue="JUnit.ColorRequirementsTest.CLIDrawingTest" />
       <item itemvalue="JUnit.ResourceRequirementsTest.CLIDrawingTest" />
       <item itemvalue="JUnit.All in AM5" />
+      <item itemvalue="JUnit.DevelopmentCardTest.CLICardDrawing" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.it.polimi.ingsw.model in AM5" />
+        <item itemvalue="JUnit.DevelopmentCardTest.CLICardDrawing" />
+        <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.All in AM5" />
         <item itemvalue="Application.ClientMain" />
-        <item itemvalue="JUnit.ResourceRequirementsTest.CLIDrawingTest" />
       </list>
     </recent_temporary>
   </component>
@@ -458,14 +456,7 @@
       <workItem from="1625219655225" duration="61000" />
       <workItem from="1625226870332" duration="4073000" />
       <workItem from="1625231036544" duration="2850000" />
-      <workItem from="1625241176966" duration="2073000" />
-    </task>
-    <task id="LOCAL-00041" summary="StartingResourcesScene fix">
-      <created>1622198994313</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1622198994313</updated>
+      <workItem from="1625241176966" duration="3532000" />
     </task>
     <task id="LOCAL-00042" summary="gui update, leaderCards selection bug fixed">
       <created>1622295034198</created>
@@ -803,7 +794,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625231204937</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Code cleanup">
+      <created>1625243413876</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1625243413877</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -823,7 +821,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="JavaDoc" />
     <MESSAGE value="FullView print fix" />
     <MESSAGE value="GUI error management update, starting scenes update, DevelopmentCards.xml fix" />
     <MESSAGE value="Reconnection message update to fit the client changes, Actions method resilience improved" />
@@ -848,7 +845,8 @@
     <MESSAGE value="Starting resources fix" />
     <MESSAGE value="faith update message changed" />
     <MESSAGE value="GUI visual update &amp; sync in controller faith message method" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI visual update &amp; sync in controller faith message method" />
+    <MESSAGE value="Code cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code cleanup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -926,7 +924,7 @@
     <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_controller_in_AM5.ic" NAME="it.polimi.ingsw.controller in AM5 Coverage Results" MODIFIED="1622060222633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.controller.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_model_in_AM5.ic" NAME="it.polimi.ingsw.model in AM5 Coverage Results" MODIFIED="1625219703533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/AM5$it_polimi_ingsw_model_in_AM5.ic" NAME="it.polimi.ingsw.model in AM5 Coverage Results" MODIFIED="1625243787513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
       <FILTER>it.polimi.ingsw.model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/AM5$ActionsTest_payResources0AndLessThan0Selection.ic" NAME="ActionsTest.payResources0AndLessThan0Selection Coverage Results" MODIFIED="1624870373274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
