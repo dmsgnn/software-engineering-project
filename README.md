@@ -1,13 +1,14 @@
-# Final Software Engineering Test 2021
+# Software Engineering Project
 
-The aim of the project is to implement the board game Masters of Renaissance following the Model View Controller architectural pattern for the realization of the model according to the object-oriented programming paradigm.\
-The final result completely covers the rules defined by the game and allows us to interact with both a command line interface (CLI) and graphical (GUI), the network has been managed with the traditional socket approach.
+This project has been developed as part of the BSc thesis and represents the final exam of the course "Ingegneria del Software" ("Software Engineering") attended during my Bachelor's Degree (A.Y. 2020/21) at the Polytechnic University of Milan. The highest possible final grade has been achieved: 30 cum Laude.
 
-### Group AM05
+## Description
 
-- #### Alessandro Curti - alessandro3.curti@mail.polimi.it
-- #### Giovanni Demasi - giovanni.demasi@mail.polimi.it
-- #### Vittorio Antigio Dall'Oglio - vittorioantigio.dalloglio@mail.polimi.it
+Aim of the project was to design, develop, test and deploy a digital version of the board game "Master of Renaissance" by Cranio Creations in Java using the MVC pattern.\
+The final result completely covers the rules defined by the game and it can be used with both a command line interface (CLI) or a graphical user interface (GUI), the network has been managed with the traditional socket approach.
+
+### Group
+The project has been developed by me and two other students: Alessandro Curti and Vittorio Antigio Dall'Oglio.
 
 ## Documentation
 The following documentation includes documents made for the design of the problem.
@@ -19,7 +20,7 @@ The following class diagrams represent, respectively, the initial model accordin
 
 ### Communication design
 The following file represents the design of the communication architecture. It shows and describes all the interactions between Server and Client.
-You can consult it here [Communication design](/deliveries/Communication_design).
+It can be consulted here [Communication design](/deliveries/Communication_design).
 
 ### Libraries and Plugins
 |Library/Plugin|Description|
@@ -31,8 +32,8 @@ You can consult it here [Communication design](/deliveries/Communication_design)
 
 ### Test Coverage
 
-Here you can see an overview of the test coverage of the model.\
-You can find Test Coverage files in [Test Coverage](/deliveries/Coverage).
+Here there is an overview of the test coverage of the model.\
+Test Coverage files can be found in [Test Coverage](/deliveries/Coverage) folder.
 
 
 |__Class__|__Method__|__Line__|__Branch__|
@@ -58,7 +59,7 @@ The following jars allow the launch of the game according to the features descri
 - Local game
 
 ### Exam demo cheats
-If you will choose one of these nicknames: `admin1`, `admin2`, `admin3`, `admin4` you will start with an amount of fifty for every resources type in the strongbox.
+If one of these nicknames is chosen: `admin1`, `admin2`, `admin3`, `admin4` the user will start with an amount of fifty for every resources type in the strongbox.
 
 
 
@@ -69,7 +70,7 @@ GREEN -> [![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+)](#)
 
 ## How to run JAR
 
-### [Server.jar](/deliverables/JAR/Server.jar)
+### [Server.jar](/deliveries/JAR/Server.jar)
 Run the file from the terminal by typing:
 ```
 java -jar Server.jar
@@ -85,7 +86,7 @@ If the selected port number is less than 1024, the default port number will be u
 
 
 
-### [Client.jar](/deliverables/JAR/Client.jar)
+### [Client.jar](/deliveries/JAR/Client.jar)
 Run the file from the terminal by typing
 ```
 java -jar Client.jar
